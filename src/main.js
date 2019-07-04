@@ -20,7 +20,7 @@ pkg.initGettext();
 pkg.initFormat();
 pkg.require({
   'Gio': '2.0',
-  'Gtk': '3.0'
+  'Gtk': '3.0',
 });
 
 const { Gio, Gtk } = imports.gi;

@@ -1,2 +1,9 @@
+# Meson/ninja
+
 build/
 install/
+
+# Flatpak
+.flatpak-builder/
+flatpak/
+repo/
