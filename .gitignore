@@ -1,5 +1,4 @@
 # Meson/ninja
-
 build/
 install/
 
@@ -7,3 +6,6 @@ install/
 .flatpak-builder/
 flatpak/
 repo/
+
+# Dev
+src/re.sonny.gigagram.data.gresource

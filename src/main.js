@@ -19,8 +19,8 @@
 pkg.initGettext();
 pkg.initFormat();
 pkg.require({
-  'Gio': '2.0',
-  'Gtk': '3.0',
+  Gio: "2.0",
+  Gtk: "3.0"
 });
 
 const { Gio, Gtk } = imports.gi;
@@ -28,20 +28,20 @@ const { Gio, Gtk } = imports.gi;
 const { GigagramWindow } = imports.window;
 
 function main(argv) {
-    const application = new Gtk.Application({
-        application_id: 're.sonny.gigagram',
-        flags: Gio.ApplicationFlags.FLAGS_NONE,
-    });
+  const application = new Gtk.Application({
+    application_id: "re.sonny.gigagram",
+    flags: Gio.ApplicationFlags.FLAGS_NONE
+  });
 
-    application.connect('activate', app => {
-        let activeWindow = app.activeWindow;
-        
-        if (!activeWindow) {
-            activeWindow = new GigagramWindow(app);
-        }
+  application.connect("activate", app => {
+    let activeWindow = app.activeWindow;
 
-        activeWindow.present();
-    });
+    if (!activeWindow) {
+      activeWindow = new GigagramWindow(app);
+    }
 
-    return application.run(argv);
+    activeWindow.present();
+  });
+
+  return application.run(argv);
 }

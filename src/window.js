@@ -18,13 +18,15 @@
 
 const { GObject, Gtk } = imports.gi;
 
-var GigagramWindow = GObject.registerClass({
-    GTypeName: 'GigagramWindow',
-    Template: 'resource:///re/sonny/gigagram/window.ui',
-    InternalChildren: ['label']
-}, class GigagramWindow extends Gtk.ApplicationWindow {
+var GigagramWindow = GObject.registerClass(
+  {
+    GTypeName: "GigagramWindow",
+    Template: "resource:///re/sonny/gigagram/window.ui",
+    InternalChildren: ["label"]
+  },
+  class GigagramWindow extends Gtk.ApplicationWindow {
     _init(application) {
-        super._init({ application });
+      super._init({ application });
     }
-});
-
+  }
+);

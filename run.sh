@@ -1,5 +1,3 @@
-#!/bin/sh
-
-meson --reconfigure --prefix $PWD/install build
-ninja -C build install
-./install/bin/re.sonny.gigagram
+#!/usr/bin/sh
+glib-compile-resources --sourcedir=src/ src/re.sonny.gigagram.data.gresource.xml
+gjs ./src/dev.js

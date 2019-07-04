@@ -3,6 +3,12 @@
 ## Dev
 
 ```sh
+./run.sh
+```
+
+## Meson
+
+```sh
 cd gigagram
 meson --reconfigure --prefix $PWD/install build
 ninja -C build install
