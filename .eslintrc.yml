@@ -8,4 +8,13 @@ globals:
   print: readonly
 parserOptions:
   ecmaVersion: 2018
-rules: {}
+rules:
+  # https://eslint.org/docs/rules/#strict-mode
+  strict: [error, function] # https://eslint.org/docs/rules/strict
+  # https://eslint.org/docs/rules/#best-practices
+  eqeqeq: [error, always] # https://eslint.org/docs/rules/eqeqeq
+  no-implicit-globals: error
+  # https://eslint.org/docs/rules/#ecmascript-6
+  no-var: error # https://eslint.org/docs/rules/no-var
+  prefer-arrow-callback: error # https://eslint.org/docs/rules/prefer-arrow-callback
+  prefer-const: error # https://eslint.org/docs/rules/prefer-const

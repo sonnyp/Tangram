@@ -1,62 +1,68 @@
-const { Gtk, GLib, GdkPixbuf } = imports.gi;
+(() => {
+  "use strict";
 
-// function enableService(service) {
-//   log(service);
-// }
+  const { Gtk, GLib, GdkPixbuf } = imports.gi;
 
-let [ok, contents] = GLib.file_get_contents("./src/services.json");
+  // function enableService(service) {
+  //   log(service);
+  // }
 
-let services;
+  const [ok, contents] = GLib.file_get_contents("./src/services.json");
 
-if (ok) {
-  services = JSON.parse(contents);
-}
+  let services;
 
-/* exported buildHomePage */
-function buildHomePage({ onAddService }) {
-  const scrolledWindow = new Gtk.ScrolledWindow();
-  const viewPort = new Gtk.Viewport();
-  scrolledWindow.add(viewPort);
-  const flowBox = new Gtk.FlowBox({
-    homogeneous: true,
-    halign: Gtk.Align.CENTER,
-    valign: Gtk.Align.START,
-    max_children_per_line: 10
-  });
-  viewPort.add(flowBox);
+  if (ok) {
+    services = JSON.parse(contents);
+  }
 
-  services.forEach(service => {
-    const flowBoxChild = new Gtk.FlowBoxChild({
-      width_request: 200,
-      height_request: 200
-    });
-
-    let pixbuf = GdkPixbuf.Pixbuf.new_from_file(`./src/icons/${service.logo}`);
-    pixbuf = pixbuf.scale_simple(48, 48, GdkPixbuf.InterpType.BILINEAR);
-    const image = new Gtk.Image({
-      pixbuf
-    });
-
-    const button = new Gtk.Button({
-      width_request: 200,
-      height_request: 200,
+  /* exported buildHomePage */
+  this.buildHomePage = function buildHomePage({ onAddService }) {
+    const scrolledWindow = new Gtk.ScrolledWindow();
+    const viewPort = new Gtk.Viewport();
+    scrolledWindow.add(viewPort);
+    const flowBox = new Gtk.FlowBox({
+      homogeneous: true,
       halign: Gtk.Align.CENTER,
-      valign: Gtk.Align.CENTER,
-      image,
-      always_show_image: true,
-      label: service.name,
-      image_position: Gtk.PositionType.TOP,
-      relief: Gtk.ReliefStyle.NONE
+      valign: Gtk.Align.START,
+      max_children_per_line: 10
+    });
+    viewPort.add(flowBox);
+
+    services.forEach(service => {
+      const flowBoxChild = new Gtk.FlowBoxChild({
+        width_request: 200,
+        height_request: 200
+      });
+
+      let pixbuf = GdkPixbuf.Pixbuf.new_from_file(
+        `./src/icons/${service.logo}`
+      );
+      pixbuf = pixbuf.scale_simple(48, 48, GdkPixbuf.InterpType.BILINEAR);
+      const image = new Gtk.Image({
+        pixbuf
+      });
+
+      const button = new Gtk.Button({
+        width_request: 200,
+        height_request: 200,
+        halign: Gtk.Align.CENTER,
+        valign: Gtk.Align.CENTER,
+        image,
+        always_show_image: true,
+        label: service.name,
+        image_position: Gtk.PositionType.TOP,
+        relief: Gtk.ReliefStyle.NONE
+      });
+
+      button.connect("clicked", () => {
+        onAddService(service);
+        //   enableService(service);
+      });
+
+      flowBoxChild.add(button);
+      flowBox.add(flowBoxChild);
     });
 
-    button.connect("clicked", () => {
-      onAddService(service);
-      //   enableService(service);
-    });
-
-    flowBoxChild.add(button);
-    flowBox.add(flowBoxChild);
-  });
-
-  return scrolledWindow;
-}
+    return scrolledWindow;
+  };
+})();

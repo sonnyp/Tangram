@@ -16,32 +16,35 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-pkg.initGettext();
-pkg.initFormat();
-pkg.require({
-  Gio: "2.0",
-  Gtk: "3.0"
-});
+(() => {
+  "use strict";
 
-const { Gio, Gtk } = imports.gi;
-const { GigagramWindow } = imports.window;
-
-/* exported main */
-function main(argv) {
-  const application = new Gtk.Application({
-    application_id: "re.sonny.gigagram",
-    flags: Gio.ApplicationFlags.FLAGS_NONE
+  pkg.initGettext();
+  pkg.initFormat();
+  pkg.require({
+    Gio: "2.0",
+    Gtk: "3.0"
   });
 
-  application.connect("activate", app => {
-    let activeWindow = app.activeWindow;
+  const { Gio, Gtk } = imports.gi;
+  const { GigagramWindow } = imports.window;
 
-    if (!activeWindow) {
-      activeWindow = new GigagramWindow(app);
-    }
+  this.main = function main(argv) {
+    const application = new Gtk.Application({
+      application_id: "re.sonny.gigagram",
+      flags: Gio.ApplicationFlags.FLAGS_NONE
+    });
 
-    activeWindow.present();
-  });
+    application.connect("activate", app => {
+      let activeWindow = app.activeWindow;
 
-  return application.run(argv);
-}
+      if (!activeWindow) {
+        activeWindow = new GigagramWindow(app);
+      }
+
+      activeWindow.present();
+    });
+
+    return application.run(argv);
+  };
+})();

@@ -16,138 +16,151 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-const { GObject, Gtk, GLib, Gio } = imports.gi;
+(() => {
+  "use strict";
 
-const { buildHomePage } = imports.homePage;
-const { buildTab } = imports.tab;
+  const { GObject, Gtk, GLib, Gio } = imports.gi;
 
-const db = [];
+  const { buildHomePage } = imports.homePage;
+  const { buildTab } = imports.tab;
 
-const dbPath = GLib.build_filenamev([
-  GLib.get_user_config_dir(),
-  "Gigagram.json"
-]);
-const dbFile = Gio.File.new_for_path(dbPath);
+  const db = [];
 
-const { once } = imports.util;
+  const dbPath = GLib.build_filenamev([
+    GLib.get_user_config_dir(),
+    "Gigagram.json"
+  ]);
+  const dbFile = Gio.File.new_for_path(dbPath);
 
-function save() {
-  dbFile.replace_contents(
-    JSON.stringify(db, null, 2),
-    null,
-    false,
-    Gio.FileCreateFlags.REPLACE_DESTINATION,
-    null
-  );
-}
+  const { once } = imports.util;
 
-function load() {
-  let success;
-  let content;
+  function save() {
+    dbFile.replace_contents(
+      JSON.stringify(db, null, 2),
+      null,
+      false,
+      Gio.FileCreateFlags.REPLACE_DESTINATION,
+      null
+    );
+  }
 
-  try {
-    [success, content] = dbFile.load_contents(null);
-  } catch (err) {
-    if (err.code === Gio.IOErrorEnum.NOT_FOUND) {
+  function load() {
+    let success;
+    let content;
+
+    try {
+      [success, content] = dbFile.load_contents(null);
+    } catch (err) {
+      if (err.code === Gio.IOErrorEnum.NOT_FOUND) {
+        return;
+      }
+      throw err;
+    }
+    if (!success) {
       return;
     }
-    throw err;
-  }
-  if (!success) {
-    return;
+
+    db.push(...JSON.parse(content));
   }
 
-  db.push(...JSON.parse(content));
-}
+  load();
 
-load();
+  this.GigagramWindow = GObject.registerClass(
+    {
+      // GTypeName: "GigagramWindow",
+      // Template: "resource:///re/sonny/gigagram/window.ui",
+      // InternalChildren: ["label"]
+    },
+    class GigagramWindow extends Gtk.ApplicationWindow {
+      _init(application) {
+        super._init({
+          application,
+          title: "Gigagram",
+          default_height: 620,
+          default_width: 840
+        });
 
-/* exported GigagramWindow */
-var GigagramWindow = GObject.registerClass(
-  {
-    // GTypeName: "GigagramWindow",
-    // Template: "resource:///re/sonny/gigagram/window.ui",
-    // InternalChildren: ["label"]
-  },
-  class GigagramWindow extends Gtk.ApplicationWindow {
-    _init(application) {
-      super._init({ application });
+        // this.add(homePage);
+        // this.show_all();
 
-      // this.add(homePage);
-      // this.show_all();
+        // this._header = this._getHeader();
+        // this._window.set_titlebar(this._header);
 
-      // this._header = this._getHeader();
-      // this._window.set_titlebar(this._header);
+        // tabs = services.map(service => {
+        //   const tab = new Tab(service, this);
+        //   this._notebook.append_page(tab.page, tab.label);
+        //   return tab;
+        // });
 
-      // tabs = services.map(service => {
-      //   const tab = new Tab(service, this);
-      //   this._notebook.append_page(tab.page, tab.label);
-      //   return tab;
-      // });
+        async function onAddService(service) {
+          const dialog = new Gtk.Dialog();
+          dialog.add_button("Cancel", Gtk.ResponseType.CANCEL);
+          dialog.add_button("Confirm", Gtk.ResponseType.APPLY);
+          dialog.set_modal(true);
 
-      async function onAddService(service) {
-        const dialog = new Gtk.Dialog();
-        dialog.add_button("Cancel", Gtk.ResponseType.CANCEL);
-        dialog.add_button("Confirm", Gtk.ResponseType.APPLY);
-        dialog.set_modal(true);
+          const box = new Gtk.HBox();
+          const label = new Gtk.Label({ label: "Name" });
+          box.add(label);
+          const entry = new Gtk.Entry({ text: service.name });
+          box.add(entry);
+          dialog.get_content_area().add(box);
 
-        const box = new Gtk.HBox();
-        const label = new Gtk.Label({ label: "Name" });
-        box.add(label);
-        const entry = new Gtk.Entry({ text: service.name });
-        box.add(entry);
-        dialog.get_content_area().add(box);
+          dialog.show_all();
 
-        dialog.show_all();
+          const [response_id] = await once(dialog, "response");
+          if (response_id === Gtk.ResponseType.DELETE_EVENT) {
+            return;
+          }
 
-        const [response_id] = await once(dialog, "response");
-        dialog.close();
-        if (response_id !== Gtk.ResponseType.APPLY) {
-          return;
+          const name = entry.text;
+          dialog.destroy();
+          if (response_id !== Gtk.ResponseType.APPLY || !name) {
+            return;
+          }
+
+          db.push({ url: service.url, id: service.id, title: name });
+          save();
+
+          const instancePage = buildTab(service.url, name);
+          const instanceLabel = new Gtk.Label({ label: name, margin: 10 });
+          const idx = notebook.append_page(instancePage, instanceLabel);
+          notebook.show_all();
+          notebook.set_current_page(idx);
         }
 
-        db.push({ url: service.url, id: service.id, title: entry.text });
-        save();
+        const homePage = buildHomePage({ onAddService });
+        const notebook = new Gtk.Notebook({ tab_pos: Gtk.PositionType.LEFT });
+        notebook.append_page(
+          homePage,
+          new Gtk.Label({ label: "Gigagram", margin: 10 })
+        );
+        // notebook.expand = true;
+        // notebook.connect("switch-page", (self, page, page_num) => {
+        //   const tab = tabs[page_num];
+        //   log(tab);
+        //   // this._header.set_subtitle(tab.getTitle());
+        // });
 
-        const instancePage = buildTab(service.url, entry.text);
-        const instanceLabel = new Gtk.Label({ label: entry.text, margin: 10 });
-        const idx = notebook.append_page(instancePage, instanceLabel);
-        notebook.show_all();
-        notebook.set_current_page(idx);
+        this.add(notebook);
+
+        db.forEach(instance => {
+          const { title, url } = instance;
+          const instancePage = buildTab(url, title);
+          const label = new Gtk.Label({ label: title, margin: 10 });
+          notebook.append_page(instancePage, label);
+        });
+
+        this.show_all();
+
+        // this.connect("activate", () => log("activate"));
+        // this.connect("startup", () => log("startup"));
+
+        // this._notebook.connect("switch-page", (self, page, page_num) => {
+        //   const tab = tabs[page_num];
+        //   this._header.set_subtitle(tab.getTitle());
+        // });
+        // log("truc");
       }
-
-      const homePage = buildHomePage({ onAddService });
-      const notebook = new Gtk.Notebook({ tab_pos: Gtk.PositionType.LEFT });
-      notebook.append_page(
-        homePage,
-        new Gtk.Label({ label: "Gigagram", margin: 10 })
-      );
-      // notebook.expand = true;
-      // notebook.connect("switch-page", (self, page, page_num) => {
-      //   const tab = tabs[page_num];
-      //   log(tab);
-      //   // this._header.set_subtitle(tab.getTitle());
-      // });
-
-      this.add(notebook);
-
-      db.forEach(instance => {
-        const { title, url } = instance;
-        const instancePage = buildTab(url, title);
-        const label = new Gtk.Label({ label: title, margin: 10 });
-        notebook.append_page(instancePage, label);
-      });
-
-      this.show_all();
-
-      // this.connect("activate", () => log("activate"));
-      // this.connect("startup", () => log("startup"));
-
-      // this._notebook.connect("switch-page", (self, page, page_num) => {
-      //   const tab = tabs[page_num];
-      //   this._header.set_subtitle(tab.getTitle());
-      // });
-      // log("truc");
     }
-  }
-);
+  );
+})();
