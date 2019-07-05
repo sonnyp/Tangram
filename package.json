@@ -1,0 +1,9 @@
+{
+  "private": true,
+  "scripts": {
+    "test": "eslint src/"
+  },
+  "devDependencies": {
+    "eslint": "^6.0.1"
+  }
+}

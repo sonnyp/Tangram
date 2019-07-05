@@ -6,6 +6,13 @@
 ./run.sh
 ```
 
+## Test
+
+```
+npm install
+npm test
+```
+
 ## Meson
 
 ```sh

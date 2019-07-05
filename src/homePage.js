@@ -12,6 +12,7 @@ if (ok) {
   services = JSON.parse(contents);
 }
 
+/* exported buildHomePage */
 function buildHomePage({ onAddService }) {
   const scrolledWindow = new Gtk.ScrolledWindow();
   const viewPort = new Gtk.Viewport();

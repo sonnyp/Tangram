@@ -1,0 +1,11 @@
+env:
+  es6: true
+extends: "eslint:recommended"
+globals:
+  imports: readonly
+  pkg: readonly
+  log: readonly
+  print: readonly
+parserOptions:
+  ecmaVersion: 2018
+rules: {}

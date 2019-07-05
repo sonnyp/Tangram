@@ -1,21 +1,18 @@
-const { GObject, Gtk, GLib, Gio, Gdk, GdkPixbuf } = imports.gi;
+const { Gtk } = imports.gi;
 const {
   WebsiteDataManager,
   WebView,
   WebContext,
   CookiePersistentStorage,
   CookieAcceptPolicy,
-  Settings,
-  CookieManager,
-  LoadEvent,
-  PolicyDecisionType
+  Settings
 } = imports.gi.WebKit2;
 
-const { buildHomePage } = imports.homePage;
+const { get_user_cache_dir, build_filenamev } = imports.gi.GLib;
 
-function buildTab(service) {
-  const { name, url } = service;
-  const path = `${GLib.get_user_data_dir()}/gigagram/${name}`;
+/* exported buildTab */
+function buildTab(url, title) {
+  const path = build_filenamev([get_user_cache_dir(), "gigagram", title]);
 
   // https://gjs-docs.gnome.org/webkit240~4.0_api/webkit2.websitedatamanager
   const websiteDataManager = new WebsiteDataManager({

@@ -16,27 +16,55 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-const { byteArray } = imports;
-const { GObject, Gtk, GLib, Gio, Gdk, GdkPixbuf } = imports.gi;
-const {
-  WebsiteDataManager,
-  WebView,
-  WebContext,
-  CookiePersistentStorage,
-  CookieAcceptPolicy,
-  Settings,
-  CookieManager,
-  LoadEvent,
-  PolicyDecisionType
-} = imports.gi.WebKit2;
+const { GObject, Gtk, GLib, Gio } = imports.gi;
 
 const { buildHomePage } = imports.homePage;
 const { buildTab } = imports.tab;
 
+const db = [];
+
+const dbPath = GLib.build_filenamev([
+  GLib.get_user_config_dir(),
+  "Gigagram.json"
+]);
+const dbFile = Gio.File.new_for_path(dbPath);
+
+const { once } = imports.util;
+
+function save() {
+  dbFile.replace_contents(
+    JSON.stringify(db, null, 2),
+    null,
+    false,
+    Gio.FileCreateFlags.REPLACE_DESTINATION,
+    null
+  );
+}
+
+function load() {
+  let success;
+  let content;
+
+  try {
+    [success, content] = dbFile.load_contents(null);
+  } catch (err) {
+    if (err.code === Gio.IOErrorEnum.NOT_FOUND) {
+      return;
+    }
+    throw err;
+  }
+  if (!success) {
+    return;
+  }
+
+  db.push(...JSON.parse(content));
+}
+
+load();
+
+/* exported GigagramWindow */
 var GigagramWindow = GObject.registerClass(
   {
-    // default_width: 600,
-    // default_height: 300
     // GTypeName: "GigagramWindow",
     // Template: "resource:///re/sonny/gigagram/window.ui",
     // InternalChildren: ["label"]
@@ -57,8 +85,7 @@ var GigagramWindow = GObject.registerClass(
       //   return tab;
       // });
 
-      function onAddService(service) {
-        log(service.name);
+      async function onAddService(service) {
         const dialog = new Gtk.Dialog();
         dialog.add_button("Cancel", Gtk.ResponseType.CANCEL);
         dialog.add_button("Confirm", Gtk.ResponseType.APPLY);
@@ -71,21 +98,22 @@ var GigagramWindow = GObject.registerClass(
         box.add(entry);
         dialog.get_content_area().add(box);
 
-        dialog.connect("response", (self, response_id) => {
-          dialog.close();
-          if (response_id !== Gtk.ResponseType.APPLY) {
-            return;
-          }
-
-          const servicePage = buildTab(service);
-          const label = new Gtk.Label({ label: entry.text, margin: 10 });
-          const idx = notebook.append_page(servicePage, label);
-          log(idx);
-          notebook.show_all();
-          notebook.set_current_page(idx);
-        });
-
         dialog.show_all();
+
+        const [response_id] = await once(dialog, "response");
+        dialog.close();
+        if (response_id !== Gtk.ResponseType.APPLY) {
+          return;
+        }
+
+        db.push({ url: service.url, id: service.id, title: entry.text });
+        save();
+
+        const instancePage = buildTab(service.url, entry.text);
+        const instanceLabel = new Gtk.Label({ label: entry.text, margin: 10 });
+        const idx = notebook.append_page(instancePage, instanceLabel);
+        notebook.show_all();
+        notebook.set_current_page(idx);
       }
 
       const homePage = buildHomePage({ onAddService });
@@ -102,6 +130,14 @@ var GigagramWindow = GObject.registerClass(
       // });
 
       this.add(notebook);
+
+      db.forEach(instance => {
+        const { title, url } = instance;
+        const instancePage = buildTab(url, title);
+        const label = new Gtk.Label({ label: title, margin: 10 });
+        notebook.append_page(instancePage, label);
+      });
+
       this.show_all();
 
       // this.connect("activate", () => log("activate"));

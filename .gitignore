@@ -9,3 +9,4 @@ repo/
 
 # Dev
 src/re.sonny.gigagram.data.gresource
+node_modules

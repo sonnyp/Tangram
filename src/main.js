@@ -24,9 +24,9 @@ pkg.require({
 });
 
 const { Gio, Gtk } = imports.gi;
-
 const { GigagramWindow } = imports.window;
 
+/* exported main */
 function main(argv) {
   const application = new Gtk.Application({
     application_id: "re.sonny.gigagram",
