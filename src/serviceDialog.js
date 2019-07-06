@@ -67,52 +67,49 @@
     let getURL = () => {
       return service.url;
     };
+    let URLEntry;
 
     if (service.url === "___" || !service.url.includes("___")) {
-      const URLEntry = new Entry({ text: service.url, hexpand: true });
+      URLEntry = new Entry({ text: service.url, hexpand: true });
       grid.attach(URLEntry, 2, 2, 1, 1);
     } else {
-      const urlBox = new Box({
+      const URLBox = new Box({
         orientation: Orientation.HORIZONTAL,
       });
       const [prefix, suffix] = service.url.split("___");
       const prefixLabel = new Label({ label: prefix });
-      urlBox.add(prefixLabel);
+      URLBox.add(prefixLabel);
       const interfixEntry = new Entry({ text: "", hexpand: true });
-      urlBox.add(interfixEntry);
+      URLBox.add(interfixEntry);
       const suffixLabel = new Label({ label: suffix });
-      urlBox.add(suffixLabel);
-      grid.attach(urlBox, 2, 2, 1, 1);
+      URLBox.add(suffixLabel);
+      grid.attach(URLBox, 2, 2, 1, 1);
       getURL = () => {
         return service.url.replace("___", interfixEntry.text);
       };
+      URLEntry = interfixEntry;
     }
 
-    nameEntry.set_icon_activatable(EntryIconPosition.SECONDARY, false);
-
-    let isNameValid = true;
-    nameEntry.connect("changed", () => {
-      const { text } = nameEntry;
-      isNameValid = text && !db.find(({ title }) => title === text);
-      if (!isNameValid) {
-        showNameError();
-      } else {
-        hideNameError();
+    addButton.set_sensitive(!!URLEntry.text);
+    URLEntry.set_icon_tooltip_text(
+      EntryIconPosition.SECONDARY,
+      "Cannot be empty"
+    );
+    URLEntry.set_icon_activatable(EntryIconPosition.SECONDARY, false);
+    URLEntry.connect("changed", () => {
+      const isValid = !!URLEntry.text;
+      if (isValid) {
+        URLEntry.set_icon_from_icon_name(EntryIconPosition.SECONDARY, null);
+        addButton.set_sensitive(true);
+        return;
       }
-    });
 
-    function showNameError() {
-      nameEntry.set_icon_activatable(EntryIconPosition.SECONDARY, false);
-      nameEntry.set_icon_from_icon_name(
+      addButton.set_sensitive(false);
+      URLEntry.set_icon_from_icon_name(
         EntryIconPosition.SECONDARY,
         "face-sick-symbolic"
       );
-      nameEntry.set_icon_tooltip_text(EntryIconPosition.SECONDARY, "foobar");
-    }
-    function hideNameError() {
-      nameEntry.set_icon_from_icon_name(EntryIconPosition.SECONDARY, null);
-      nameEntry.set_icon_tooltip_text(EntryIconPosition.SECONDARY, null);
-    }
+    });
 
     dialog.show_all();
 
@@ -126,11 +123,6 @@
     }
 
     const name = nameEntry.text;
-    if (!name || db.find(({ title }) => title === name)) {
-      showNameError();
-      return;
-    }
-
     const url = getURL();
 
     dialog.destroy();
