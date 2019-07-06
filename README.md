@@ -6,9 +6,16 @@
 ./run.sh
 ```
 
+## Inspect
+
+```sh
+gsettings set org.gtk.Settings.Debug enable-inspector-keybinding true
+GTK_DEBUG=interactive ./run.sh
+```
+
 ## Test
 
-```
+```sh
 npm install
 npm test
 ```

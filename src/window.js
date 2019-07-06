@@ -98,12 +98,12 @@
         // });
 
         async function onAddService(service) {
-          const result = await promptServiceDialog({ db, window, service });
-          if (!result) return;
+          const instance = await promptServiceDialog({ window, service });
+          if (!instance) return;
 
-          const { name, url } = result;
+          const { name, url, id } = instance;
 
-          db.push({ url, service_id: service.id, title: name });
+          db.push({ url, service_id: service.id, id, title: name });
           save();
 
           const instancePage = buildTab(service.url, name);

@@ -49,7 +49,7 @@
         image_position: Gtk.PositionType.TOP,
         relief: Gtk.ReliefStyle.NONE,
       });
-      // FIXME get_data/set_data do not work in gjs
+      // FIXME get_data/set_data does not work in gjs
       // open issue.
       button.service_id = service.id;
       button.connect("clicked", onButtonclicked);

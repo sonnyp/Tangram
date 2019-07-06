@@ -3,7 +3,7 @@ imports.package.init({
   version: "1.0.0",
   prefix: ".",
   libdir: ".",
-  datadir: "."
+  datadir: ".",
 });
 
 const { Gio } = imports.gi;

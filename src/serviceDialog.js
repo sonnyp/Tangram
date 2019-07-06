@@ -15,11 +15,11 @@
     EntryIconPosition,
     Orientation,
   } = imports.gi.Gtk;
+  const { uuid_string_random } = imports.gi.GLib;
 
   this.promptServiceDialog = async function promptServiceDialog({
     window,
     service,
-    db,
   }) {
     // FIXME Gtk.Dialog.new_with_buttons
     // is undefined in gjs, open issue.
@@ -133,6 +133,6 @@
 
     dialog.destroy();
 
-    return { name, url };
+    return { name, url, id: uuid_string_random() };
   };
 })();
