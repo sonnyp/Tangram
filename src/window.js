@@ -23,16 +23,15 @@
 
   const { buildHomePage } = imports.homePage;
   const { buildTab } = imports.tab;
+  const { promptServiceDialog } = imports.serviceDialog;
 
   const db = [];
 
   const dbPath = GLib.build_filenamev([
     GLib.get_user_config_dir(),
-    "Gigagram.json"
+    "Gigagram.json",
   ]);
   const dbFile = Gio.File.new_for_path(dbPath);
-
-  const { once } = imports.util;
 
   function save() {
     dbFile.replace_contents(
@@ -60,7 +59,11 @@
       return;
     }
 
-    db.push(...JSON.parse(content));
+    try {
+      db.push(...JSON.parse(content));
+    } catch (err) {
+      logError(err);
+    }
   }
 
   load();
@@ -77,8 +80,10 @@
           application,
           title: "Gigagram",
           default_height: 620,
-          default_width: 840
+          default_width: 840,
         });
+
+        const window = this;
 
         // this.add(homePage);
         // this.show_all();
@@ -93,32 +98,12 @@
         // });
 
         async function onAddService(service) {
-          const dialog = new Gtk.Dialog();
-          dialog.add_button("Cancel", Gtk.ResponseType.CANCEL);
-          dialog.add_button("Confirm", Gtk.ResponseType.APPLY);
-          dialog.set_modal(true);
+          const result = await promptServiceDialog({ db, window, service });
+          if (!result) return;
 
-          const box = new Gtk.HBox();
-          const label = new Gtk.Label({ label: "Name" });
-          box.add(label);
-          const entry = new Gtk.Entry({ text: service.name });
-          box.add(entry);
-          dialog.get_content_area().add(box);
+          const { name, url } = result;
 
-          dialog.show_all();
-
-          const [response_id] = await once(dialog, "response");
-          if (response_id === Gtk.ResponseType.DELETE_EVENT) {
-            return;
-          }
-
-          const name = entry.text;
-          dialog.destroy();
-          if (response_id !== Gtk.ResponseType.APPLY || !name) {
-            return;
-          }
-
-          db.push({ url: service.url, id: service.id, title: name });
+          db.push({ url, service_id: service.id, title: name });
           save();
 
           const instancePage = buildTab(service.url, name);

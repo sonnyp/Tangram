@@ -1,14 +1,14 @@
 (() => {
   "use strict";
 
-  const { Gtk } = imports.gi;
+  const { show_uri_on_window } = imports.gi.Gtk;
   const {
     WebsiteDataManager,
     WebView,
     WebContext,
     CookiePersistentStorage,
     CookieAcceptPolicy,
-    Settings
+    Settings,
   } = imports.gi.WebKit2;
 
   const { get_user_cache_dir, build_filenamev } = imports.gi.GLib;
@@ -19,7 +19,7 @@
     // https://gjs-docs.gnome.org/webkit240~4.0_api/webkit2.websitedatamanager
     const websiteDataManager = new WebsiteDataManager({
       base_data_directory: path,
-      disk_cache_directory: path
+      disk_cache_directory: path,
     });
 
     // https://gjs-docs.gnome.org/webkit240~4.0_api/webkit2.webcontext
@@ -59,7 +59,7 @@
 
     webView.connect("create", (self, navigation_action) => {
       const uri = navigation_action.get_request().get_uri();
-      Gtk.show_uri_on_window(this.window, uri, null);
+      show_uri_on_window(this.window, uri, null);
     });
 
     webView.load_uri(url);

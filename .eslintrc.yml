@@ -5,7 +5,10 @@ globals:
   imports: readonly
   pkg: readonly
   log: readonly
+  logError: readonly
   print: readonly
+  printError: readonly
+  ARGV: readonly
 parserOptions:
   ecmaVersion: 2018
 rules:
