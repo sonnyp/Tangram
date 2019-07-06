@@ -68,27 +68,33 @@
       return service.url;
     };
     let URLEntry;
+    let URLCell;
 
-    if (service.url === "___" || !service.url.includes("___")) {
+    if (service.url === "___") {
+      URLEntry = new Entry({ text: "", hexpand: true });
+      URLCell = URLEntry;
+    } else if (!service.url.includes("___")) {
       URLEntry = new Entry({ text: service.url, hexpand: true });
-      grid.attach(URLEntry, 2, 2, 1, 1);
+      URLCell = URLEntry;
     } else {
-      const URLBox = new Box({
+      URLCell = new Box({
         orientation: Orientation.HORIZONTAL,
       });
       const [prefix, suffix] = service.url.split("___");
       const prefixLabel = new Label({ label: prefix });
-      URLBox.add(prefixLabel);
+      URLCell.add(prefixLabel);
       const interfixEntry = new Entry({ text: "", hexpand: true });
-      URLBox.add(interfixEntry);
+      URLCell.add(interfixEntry);
       const suffixLabel = new Label({ label: suffix });
-      URLBox.add(suffixLabel);
-      grid.attach(URLBox, 2, 2, 1, 1);
+      URLCell.add(suffixLabel);
+      grid.attach(URLCell, 2, 2, 1, 1);
       getURL = () => {
         return service.url.replace("___", interfixEntry.text);
       };
       URLEntry = interfixEntry;
     }
+
+    grid.attach(URLCell, 2, 2, 1, 1);
 
     addButton.set_sensitive(!!URLEntry.text);
     URLEntry.set_icon_tooltip_text(
