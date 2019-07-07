@@ -13,7 +13,7 @@
 
   const { get_user_cache_dir, build_filenamev } = imports.gi.GLib;
 
-  this.buildTab = function buildTab(url, title) {
+  this.buildTab = function buildTab({ url, title, window }) {
     const path = build_filenamev([get_user_cache_dir(), "gigagram", title]);
 
     // https://gjs-docs.gnome.org/webkit240~4.0_api/webkit2.websitedatamanager
@@ -61,7 +61,7 @@
 
     webView.connect("create", (self, navigation_action) => {
       const uri = navigation_action.get_request().get_uri();
-      show_uri_on_window(this.window, uri, null);
+      show_uri_on_window(window, uri, null);
     });
 
     webView.load_uri(url);

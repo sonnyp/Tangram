@@ -106,7 +106,11 @@
           db.push({ url, service_id: service.id, id, title: name });
           save();
 
-          const instancePage = buildTab(service.url, name);
+          const instancePage = buildTab({
+            url: service.url,
+            title: name,
+            window,
+          });
           const instanceLabel = new Gtk.Label({ label: name, margin: 10 });
           const idx = notebook.append_page(instancePage, instanceLabel);
           notebook.show_all();
@@ -130,7 +134,7 @@
 
         db.forEach(instance => {
           const { title, url } = instance;
-          const instancePage = buildTab(url, title);
+          const instancePage = buildTab({ url, title, window });
           const label = new Gtk.Label({ label: title, margin: 10 });
           notebook.append_page(instancePage, label);
         });
