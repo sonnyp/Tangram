@@ -1,5 +1,7 @@
 # Gigagram
 
+![screenshot](screenshot.png)
+
 ## Dev
 
 ```sh
