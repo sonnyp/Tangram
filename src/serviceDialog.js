@@ -73,6 +73,9 @@
     if (service.url === "___") {
       URLEntry = new Entry({ text: "", hexpand: true });
       URLCell = URLEntry;
+      getURL = () => {
+        return URLEntry.text;
+      };
     } else if (!service.url.includes("___")) {
       URLEntry = new Entry({ text: service.url, hexpand: true });
       URLCell = URLEntry;
