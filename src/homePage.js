@@ -1,15 +1,9 @@
 (() => {
   "use strict";
 
-  const { Gtk, GLib, GdkPixbuf } = imports.gi;
+  const { Gtk } = imports.gi;
 
-  const [ok, contents] = GLib.file_get_contents("./src/services.json");
-
-  let services;
-
-  if (ok) {
-    services = JSON.parse(contents);
-  }
+  const { services } = imports.serviceManager;
 
   this.buildHomePage = function buildHomePage({ onAddService }) {
     const scrolledWindow = new Gtk.ScrolledWindow();
@@ -30,12 +24,8 @@
         can_focus: false,
       });
 
-      let pixbuf = GdkPixbuf.Pixbuf.new_from_file(
-        `./src/icons/${service.logo}`
-      );
-      pixbuf = pixbuf.scale_simple(48, 48, GdkPixbuf.InterpType.BILINEAR);
       const image = new Gtk.Image({
-        pixbuf,
+        resource: service.icon,
       });
 
       const button = new Gtk.Button({

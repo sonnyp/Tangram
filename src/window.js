@@ -1,72 +1,12 @@
-/* window.js
- *
- * Copyright 2019 Sonny Piers
- *
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with this program.  If not, see <http://www.gnu.org/licenses/>.
- */
-
 (() => {
   "use strict";
 
-  const { GObject, Gtk, GLib, Gio } = imports.gi;
+  const { GObject, Gtk } = imports.gi;
 
+  const { instances, addInstance } = imports.instanceManager;
   const { buildHomePage } = imports.homePage;
   const { buildTab } = imports.tab;
   const { promptServiceDialog } = imports.serviceDialog;
-
-  const db = [];
-
-  const dbPath = GLib.build_filenamev([
-    GLib.get_user_config_dir(),
-    "Gigagram.json",
-  ]);
-  const dbFile = Gio.File.new_for_path(dbPath);
-
-  function save() {
-    dbFile.replace_contents(
-      JSON.stringify(db, null, 2),
-      null,
-      false,
-      Gio.FileCreateFlags.REPLACE_DESTINATION,
-      null
-    );
-  }
-
-  function load() {
-    let success;
-    let content;
-
-    try {
-      [success, content] = dbFile.load_contents(null);
-    } catch (err) {
-      if (err.code === Gio.IOErrorEnum.NOT_FOUND) {
-        return;
-      }
-      throw err;
-    }
-    if (!success) {
-      return;
-    }
-
-    try {
-      db.push(...JSON.parse(content));
-    } catch (err) {
-      logError(err);
-    }
-  }
-
-  load();
 
   this.GigagramWindow = GObject.registerClass(
     {
@@ -103,8 +43,7 @@
 
           const { name, url, id } = instance;
 
-          db.push({ url, service_id: service.id, id, title: name });
-          save();
+          addInstance({ url, service_id: service.id, id, title: name });
 
           const instancePage = buildTab({
             url: service.url,
@@ -132,7 +71,7 @@
 
         this.add(notebook);
 
-        db.forEach(instance => {
+        instances.forEach(instance => {
           const { title, url } = instance;
           const instancePage = buildTab({ url, title, window });
           const label = new Gtk.Label({ label: title, margin: 10 });

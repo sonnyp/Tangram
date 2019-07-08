@@ -7,7 +7,9 @@ imports.package.init({
 });
 
 const { Gio } = imports.gi;
-const resource = Gio.Resource.load("./src/re.sonny.gigagram.data.gresource");
+const resource = Gio.Resource.load(
+  "./src/re.sonny.gigagram.services.gresource"
+);
 resource._register();
 
 imports.package.run(imports.main);

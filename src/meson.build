@@ -8,8 +8,15 @@ src_res = gnome.compile_resources('re.sonny.gigagram.src',
   install_dir: pkgdatadir,
 )
 
-data_res = gnome.compile_resources('re.sonny.gigagram.data',
-  're.sonny.gigagram.data.gresource.xml',
+# data_res = gnome.compile_resources('re.sonny.gigagram.data',
+#   're.sonny.gigagram.data.gresource.xml',
+#   gresource_bundle: true,
+#   install: true,
+#   install_dir: pkgdatadir,
+# )
+
+data_res = gnome.compile_resources('re.sonny.gigagram.services',
+  're.sonny.gigagram.services.gresource.xml',
   gresource_bundle: true,
   install: true,
   install_dir: pkgdatadir,

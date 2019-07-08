@@ -1,1 +1,2 @@
+pixdata is deprecated
   'AppIndicator3': '0.1'
