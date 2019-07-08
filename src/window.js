@@ -7,6 +7,7 @@
   const { buildHomePage } = imports.homePage;
   const { buildTab } = imports.tab;
   const { promptServiceDialog } = imports.serviceDialog;
+  const { Notification, NotificationPriority, SimpleAction } = imports.gi.Gio;
 
   this.GigagramWindow = GObject.registerClass(
     {
@@ -24,6 +25,21 @@
         });
 
         const window = this;
+
+        const action = new SimpleAction({
+          name: "selectTab",
+          parameter_type: imports.gi.GLib.VariantType.new("s"),
+        });
+        action.connect("activate", (self, parameters) => {
+          const [idx] = parameters.deep_unpack();
+          notebook.set_current_page(idx);
+          window.present();
+        });
+        application.add_action(action);
+
+        function presentWindow() {
+          window.present_with_time(0);
+        }
 
         // this.add(homePage);
         // this.show_all();
@@ -49,6 +65,10 @@
             url: service.url,
             title: name,
             window,
+            onNotification() {
+              notebook.set_current_page(idx);
+              presentWindow();
+            },
           });
           const instanceLabel = new Gtk.Label({ label: name, margin: 10 });
           const idx = notebook.append_page(instancePage, instanceLabel);
@@ -73,9 +93,22 @@
 
         instances.forEach(instance => {
           const { title, url } = instance;
-          const instancePage = buildTab({ url, title, window });
+          const instancePage = buildTab({
+            url,
+            title,
+            window,
+            onNotification({ title, body }) {
+              // https://gjs-docs.gnome.org/gio20~2.0_api/gio.notification
+              const notification = new Notification();
+              if (title) notification.set_title(title);
+              if (body) notification.set_body(body);
+              notification.set_priority(NotificationPriority.HIGH);
+              notification.set_default_action(`app.selectTab('${idx}')`);
+              application.send_notification(null, notification);
+            },
+          });
           const label = new Gtk.Label({ label: title, margin: 10 });
-          notebook.append_page(instancePage, label);
+          const idx = notebook.append_page(instancePage, label);
         });
 
         this.show_all();

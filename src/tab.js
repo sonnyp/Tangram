@@ -9,11 +9,13 @@
     CookiePersistentStorage,
     CookieAcceptPolicy,
     Settings,
+    NotificationPermissionRequest,
+    SecurityOrigin,
   } = imports.gi.WebKit2;
 
   const { get_user_cache_dir, build_filenamev } = imports.gi.GLib;
 
-  this.buildTab = function buildTab({ url, title, window }) {
+  this.buildTab = function buildTab({ url, title, window, onNotification }) {
     const path = build_filenamev([get_user_cache_dir(), "gigagram", title]);
 
     // https://gjs-docs.gnome.org/webkit240~4.0_api/webkit2.websitedatamanager
@@ -27,6 +29,19 @@
       websiteDataManager
     );
     webContext.set_favicon_database_directory(path);
+
+    /*
+     * Notifications
+     */
+    // https://gjs-docs.gnome.org/webkit240~4.0_api/webkit2.webcontext#signal-initialize-notification-permissions
+    webContext.connect("initialize-notification-permissions", () => {
+      log(`initialize notification permissions ${url}`);
+      // https://gjs-docs.gnome.org/webkit240~4.0_api/webkit2.webcontext#method-initialize_notification_permissions
+      webContext.initialize_notification_permissions(
+        [SecurityOrigin.new_for_uri(url)],
+        []
+      );
+    });
 
     // https://gjs-docs.gnome.org/webkit240~4.0_api/webkit2.cookiemanager
     // not sure why but must be done after new_with_website_data_manager
@@ -59,9 +74,35 @@
     //   log(decision_policy);
     // });
 
+    // https://gjs-docs.gnome.org/webkit240~4.0_api/webkit2.webview#signal-create
     webView.connect("create", (self, navigation_action) => {
       const uri = navigation_action.get_request().get_uri();
       show_uri_on_window(window, uri, null);
+    });
+
+    /*
+     * Notifications
+     */
+    // https://gjs-docs.gnome.org/webkit240~4.0_api/webkit2.webview#signal-permission-request
+    webView.connect("permission-request", (self, request) => {
+      log("permission request");
+      if (request instanceof NotificationPermissionRequest) {
+        request.allow();
+        return;
+      }
+      request.deny();
+    });
+
+    // https://gjs-docs.gnome.org/webkit240~4.0_api/webkit2.webview#signal-show-notification
+    webView.connect("show-notification", (self, notification) => {
+      // https://gjs-docs.gnome.org/webkit240~4.0_api/webkit2.notification#signal-clicked
+      // notification.connect("clicked", () => {
+      //   onNotificationClicked(notification);
+      // });
+      // notification.clicked();
+      // notification.close();
+      onNotification(notification);
+      return true;
     });
 
     webView.load_uri(url);

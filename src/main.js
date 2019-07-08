@@ -19,8 +19,11 @@
       flags: Gio.ApplicationFlags.FLAGS_NONE,
     });
 
-    application.connect("activate", app => {
+    application.connect("activate", (app, variant) => {
       let activeWindow = app.activeWindow;
+
+      log(app);
+      log(variant);
 
       if (!activeWindow) {
         activeWindow = new GigagramWindow(app);
