@@ -8,8 +8,6 @@
     Gtk: "3.0",
   });
 
-  // for (const i in pkg) log(`${i}: ${pkg[i]}`);
-
   const { Gio, Gtk } = imports.gi;
   const { GigagramWindow } = imports.window;
 

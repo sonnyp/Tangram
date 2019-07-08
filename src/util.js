@@ -2,9 +2,19 @@
   "use strict";
 
   this.connect = function connect(object, signal, handler) {
-    return object.connect(signal, (self, ...params) => {
-      handler(...params);
+    if (typeof signal === "string") {
+      return object.connect(signal, (self, ...params) => {
+        return handler(...params);
+      });
+    }
+
+    const ids = {};
+    Object.entries(signal).forEach(([signal, handler]) => {
+      ids[signal] = object.connect(signal, (self, ...params) => {
+        return handler(...params);
+      });
     });
+    return ids;
   };
 
   this.once = function once(object, signal) {
@@ -13,7 +23,7 @@
 
       function handler(self, ...params) {
         object.disconnect(handlerId);
-        resolve(params);
+        return resolve(params);
       }
     });
   };
