@@ -8,14 +8,7 @@
     build_filenamev([get_user_config_dir(), "Gigagram.json"])
   );
 
-  const instances = [
-    {
-      url: "https://jhmux.codesandbox.io/",
-      service_id: "custom",
-      id: "test-gigagram",
-      title: "Tests",
-    },
-  ];
+  const instances = [];
   this.instances = instances;
 
   function load() {

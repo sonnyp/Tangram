@@ -11,12 +11,20 @@
     Settings,
     // NotificationPermissionRequest,
     SecurityOrigin,
+    UserContentManager,
   } = imports.gi.WebKit2;
   const { connect } = imports.util;
+  const { stylesheets } = imports.serviceManager;
 
   const { get_user_cache_dir, build_filenamev } = imports.gi.GLib;
 
-  this.buildTab = function buildTab({ url, title, window, onNotification }) {
+  this.buildTab = function buildTab({
+    url,
+    service_id,
+    title,
+    window,
+    onNotification,
+  }) {
     const path = build_filenamev([get_user_cache_dir(), "gigagram", title]);
 
     // https://gjs-docs.gnome.org/webkit240~4.0_api/webkit2.websitedatamanager
@@ -26,19 +34,18 @@
     });
 
     // https://gjs-docs.gnome.org/webkit240~4.0_api/webkit2.webcontext
-    const webContext = WebContext.new_with_website_data_manager(
+    const web_context = WebContext.new_with_website_data_manager(
       websiteDataManager
     );
-    webContext.set_favicon_database_directory(path);
+    web_context.set_favicon_database_directory(path);
 
     /*
      * Notifications
      */
     // https://gjs-docs.gnome.org/webkit240~4.0_api/webkit2.webcontext#signal-initialize-notification-permissions
-    webContext.connect("initialize-notification-permissions", () => {
-      log(`initialize notification permissions ${url}`);
+    web_context.connect("initialize-notification-permissions", () => {
       // https://gjs-docs.gnome.org/webkit240~4.0_api/webkit2.webcontext#method-initialize_notification_permissions
-      webContext.initialize_notification_permissions(
+      web_context.initialize_notification_permissions(
         [SecurityOrigin.new_for_uri(url)],
         []
       );
@@ -53,15 +60,24 @@
       CookiePersistentStorage.SQLITE
     );
 
-    // https://gjs-docs.gnome.org/webkit240~4.0_api/webkit2.webcontext
-    const webView = WebView.new_with_context(webContext);
-    webView.expand = true;
+    // https://gjs-docs.gnome.org/webkit240~4.0_api/webkit2.usercontentmanager
+    const user_content_manager = new UserContentManager();
+    if (stylesheets[service_id]) {
+      user_content_manager.add_style_sheet(stylesheets[service_id]);
+    }
 
     // https://gjs-docs.gnome.org/webkit240~4.0_api/webkit2.settings
     const settings = new Settings({
       enable_developer_extras: true,
     });
-    webView.set_settings(settings);
+
+    // https://gjs-docs.gnome.org/webkit240~4.0_api/webkit2.webcontext
+    const webView = new WebView({
+      web_context,
+      user_content_manager,
+      expand: true,
+      settings,
+    });
 
     // https://gjs-docs.gnome.org/webkit240~4.0_api/webkit2.webinspector
     // const webInspector = webView.get_inspector();

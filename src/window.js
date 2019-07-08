@@ -49,11 +49,12 @@
         //   return tab;
         // });
 
-        function buildInstance({ url, name }) {
+        function buildInstance({ url, name, service_id }) {
           const instancePage = buildTab({
             url: url,
             title: name,
             window,
+            service_id,
             onNotification({ title, body }) {
               // https://gjs-docs.gnome.org/gio20~2.0_api/gio.notification
               const notification = new Notification();
@@ -77,7 +78,7 @@
 
           addInstance({ url, service_id: service.id, id, title: name });
 
-          const idx = buildInstance({ url, name });
+          const idx = buildInstance({ url, name, service_id: service.id });
           notebook.show_all();
           notebook.set_current_page(idx);
         }
@@ -97,9 +98,17 @@
 
         this.add(notebook);
 
-        instances.forEach(instance => {
-          const { title, url } = instance;
-          buildInstance({ url, name: title });
+        [
+          {
+            url: "https://jhmux.codesandbox.io/",
+            service_id: "custom",
+            id: "test-gigagram",
+            title: "Tests",
+          },
+          ...instances,
+        ].forEach(instance => {
+          const { title, url, service_id } = instance;
+          buildInstance({ url, name: title, service_id });
         });
 
         this.show_all();

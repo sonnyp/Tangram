@@ -6,10 +6,20 @@
     ResourceLookupFlags,
     resources_enumerate_children,
     resources_lookup_data,
+    File,
+    IOErrorEnum,
   } = imports.gi.Gio;
+  const {
+    UserStyleSheet,
+    UserContentInjectedFrames,
+    UserStyleLevel,
+  } = imports.gi.WebKit2;
 
   const services = [];
   this.services = services;
+
+  const stylesheets = {};
+  this.stylesheets = stylesheets;
 
   function register() {
     const resource = imports.gi.Gio.Resource.load(
@@ -34,6 +44,30 @@
           )
         );
         info.icon = `/re/sonny/gigagram/services/${child}icon.svg`;
+
+        const styleFile = File.new_for_uri(
+          `resource:///re/sonny/gigagram/services/${child}style.css`
+        );
+        let success;
+        let content;
+        try {
+          [success, content] = styleFile.load_contents(null);
+        } catch (err) {
+          if (err.code !== IOErrorEnum.NOT_FOUND) {
+            logError(err);
+            throw err;
+          }
+        }
+        if (success) {
+          stylesheets[child.slice(0, -1)] = new UserStyleSheet(
+            content.toString(),
+            UserContentInjectedFrames.TOP_FRAME,
+            UserStyleLevel.USER,
+            null,
+            null
+          );
+        }
+
         return info;
       })
     );

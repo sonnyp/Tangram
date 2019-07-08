@@ -13,7 +13,9 @@
     <file>services/steam-chat/service.json</file>
     <file>services/telegram/icon.svg</file>
     <file>services/telegram/service.json</file>
+    <file>services/telegram/style.css</file>
     <file>services/whatsapp/icon.svg</file>
     <file>services/whatsapp/service.json</file>
+    <file>services/whatsapp/style.css</file>
   </gresource>
 </gresources>
