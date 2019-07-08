@@ -11,6 +11,14 @@
   const services = [];
   this.services = services;
 
+  function register() {
+    const resource = imports.gi.Gio.Resource.load(
+      `${pkg.pkgdatadir}/re.sonny.gigagram.services.gresource`
+    );
+    resource._register();
+  }
+  register();
+
   function load() {
     services.push(
       ...resources_enumerate_children(

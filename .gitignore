@@ -8,5 +8,5 @@ flatpak/
 repo/
 
 # Dev
-src/re.sonny.gigagram.data.gresource
+*.gresource
 node_modules

@@ -4,8 +4,9 @@
   const { build_filenamev, get_user_config_dir } = imports.gi.GLib;
   const { File, IOErrorEnum, FileCreateFlags } = imports.gi.Gio;
 
-  const dbPath = build_filenamev([get_user_config_dir(), "Gigagram.json"]);
-  const dbFile = File.new_for_path(dbPath);
+  const configFile = File.new_for_path(
+    build_filenamev([get_user_config_dir(), "Gigagram.json"])
+  );
 
   const instances = [];
   this.instances = instances;
@@ -15,7 +16,7 @@
     let content;
 
     try {
-      [success, content] = dbFile.load_contents(null);
+      [success, content] = configFile.load_contents(null);
     } catch (err) {
       if (err.code === IOErrorEnum.NOT_FOUND) {
         return;
@@ -26,8 +27,6 @@
       return;
     }
 
-    log(content);
-
     try {
       instances.push(...JSON.parse(content));
     } catch (err) {
@@ -36,7 +35,7 @@
   }
 
   function save() {
-    dbFile.replace_contents(
+    configFile.replace_contents(
       JSON.stringify(instances, null, 2),
       null,
       false,
