@@ -1,19 +1,40 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <gresources>
   <gresource prefix="/re/sonny/gigagram">
+    <!-- custom -->
+    <file>services/custom/icon.svg</file>
+    <file>services/custom/service.json</file>
+
+    <!-- discord -->
     <file>services/discord/icon.svg</file>
     <file>services/discord/service.json</file>
+
+    <!-- messenger -->
     <file>services/messenger/icon.svg</file>
     <file>services/messenger/service.json</file>
-    <!-- <file preprocess="to-pixdata">services/skype/icon.svg</file> -->
-    <!-- <file>services/skype/service.json</file> -->
+
+    <!-- skype
+      https://www.skype.com/en/unsupported-browser/
+      Maybe?
+      https://support.skype.com/en/faq/FA34704/what-is-skype-web-control
+      <file>services/skype/icon.svg</file>
+      <file>services/skype/service.json</file>
+    -->
+
+    <!-- slack -->
     <file>services/slack/icon.svg</file>
     <file>services/slack/service.json</file>
+
+    <!-- steam-chat -->
     <file>services/steam-chat/icon.svg</file>
     <file>services/steam-chat/service.json</file>
+
+    <!-- telegram -->
     <file>services/telegram/icon.svg</file>
     <file>services/telegram/service.json</file>
     <file>services/telegram/style.css</file>
+
+    <!-- whatsapp -->
     <file>services/whatsapp/icon.svg</file>
     <file>services/whatsapp/service.json</file>
     <file>services/whatsapp/style.css</file>
