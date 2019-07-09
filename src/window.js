@@ -3,12 +3,21 @@
 
   const { getenv, VariantType } = imports.gi.GLib;
   const { ApplicationWindow, Label, PositionType, Notebook } = imports.gi.Gtk;
-  const { Notification, NotificationPriority, SimpleAction } = imports.gi.Gio;
+  const {
+    Notification,
+    NotificationPriority,
+    SimpleAction,
+    Settings,
+  } = imports.gi.Gio;
 
   const { instances, addInstance } = imports.instanceManager;
   const { buildHomePage } = imports.homePage;
   const { Tab } = imports.tab;
   const { promptServiceDialog } = imports.serviceDialog;
+
+  const settings = new Settings({
+    schema_id: "re.sonny.gigagram",
+  });
 
   this.Window = function Window(application) {
     // https://gjs-docs.gnome.org/gtk30~3.24.8/gtk.applicationwindow
@@ -63,8 +72,12 @@
       notebook.set_current_page(idx);
     }
 
+    const tab_pos = settings.get_enum("tabs-position");
+    log(tab_pos);
     // https://gjs-docs.gnome.org/gtk30~3.24.8/gtk.notebook
-    const notebook = new Notebook({ tab_pos: PositionType.LEFT });
+    const notebook = new Notebook({
+      tab_pos,
+    });
     notebook.append_page(
       buildHomePage({ onAddService }),
       new Label({ label: "Gigagram", margin: 10 })

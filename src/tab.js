@@ -38,8 +38,8 @@
     if (service && service.icon) {
       const pixbuf = Pixbuf.new_from_resource_at_scale(
         service.icon,
-        32,
-        32,
+        28,
+        28,
         true
       );
       box.add(new Image({ pixbuf, margin_end: 6 }));

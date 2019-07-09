@@ -1,5 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <schemalist gettext-domain="gigagram">
-	<schema id="re.sonny.gigagram" path="/re/sonny/gigagram/">
-	</schema>
+  <!-- https://gjs-docs.gnome.org/gtk30~3.24.8/gtk.positiontype -->
+  <enum id="re.sonny.gigagram.PositionType">
+    <value nick="left" value="0"/>
+    <value nick="right" value="1"/>
+    <value nick="top" value="2"/>
+    <value nick="bottom" value="3"/>
+  </enum>
+
+  <schema id="re.sonny.gigagram" path="/re/sonny/gigagram/">
+    <key name="tabs-position" enum='re.sonny.gigagram.PositionType'>
+      <default>"top"</default>
+      <summary>Tabs position</summary>
+      <description>Sets the position of the tabs</description>
+    </key>
+  </schema>
 </schemalist>

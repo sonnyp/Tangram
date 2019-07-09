@@ -10,3 +10,4 @@ repo/
 # Dev
 *.gresource
 node_modules
+gschemas.compiled
