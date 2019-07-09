@@ -14,6 +14,11 @@
       <summary>Tabs position</summary>
       <description>Sets the position of the tabs</description>
     </key>
+    <key name="instances" type="as">
+      <default>[]</default>
+      <summary>Instances</summary>
+      <description>Identifiers of instances to be found in /re/sonny/gigagram/instances/</description>
+    </key>
   </schema>
 
   <schema id="re.sonny.gigagram.Instance">

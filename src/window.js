@@ -11,7 +11,6 @@
     SettingsBindFlags,
   } = imports.gi.Gio;
 
-  const { instances, addInstance } = imports.instanceManager;
   const { buildHomePage } = imports.homePage;
   const { Tab, TabLabel } = imports.tab;
   const { promptServiceDialog } = imports.serviceDialog;
@@ -66,7 +65,9 @@
       if (!instance) return;
 
       const { name, url, id, service_id } = instance;
-      addInstance(id);
+      const instances = settings.get_strv("instances");
+      instances.push(id);
+      settings.set_strv("instances", instances);
 
       const idx = buildInstance({ url, name, service_id, id });
       notebook.show_all();
@@ -91,7 +92,7 @@
         service_id: "custom",
       });
     }
-    instances.forEach(id => {
+    settings.get_strv("instances").forEach(id => {
       const settings = new Settings({
         schema_id: "re.sonny.gigagram.Instance",
         path: `/re/sonny/gigagram/instances/${id}/`,
