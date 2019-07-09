@@ -1,7 +1,7 @@
 (() => {
   "use strict";
 
-  const { show_uri_on_window } = imports.gi.Gtk;
+  const { show_uri_on_window, Label, Image, Box } = imports.gi.Gtk;
   const {
     WebsiteDataManager,
     WebView,
@@ -15,17 +15,43 @@
   } = imports.gi.WebKit2;
   const { connect } = imports.util;
   const { stylesheets } = imports.serviceManager;
-  const { getenv } = imports.gi.GLib;
+  const { getenv, get_user_cache_dir, build_filenamev } = imports.gi.GLib;
+  const { Pixbuf } = imports.gi.GdkPixbuf;
 
-  const { get_user_cache_dir, build_filenamev } = imports.gi.GLib;
+  const { services } = imports.serviceManager;
 
-  this.buildTab = function buildTab({
-    url,
-    service_id,
-    title,
-    window,
-    onNotification,
-  }) {
+  this.Tab = function Tab(...params) {
+    return {
+      label: label(...params),
+      page: page(...params),
+    };
+  };
+
+  function label({ title, service_id }) {
+    const box = new Box({
+      margin_top: 6,
+      margin_bottom: 6,
+    });
+
+    const service = services.find(service => service.id === service_id);
+
+    if (service && service.icon) {
+      const pixbuf = Pixbuf.new_from_resource_at_scale(
+        service.icon,
+        32,
+        32,
+        true
+      );
+      box.add(new Image({ pixbuf, margin_end: 6 }));
+    }
+
+    box.add(new Label({ label: title }));
+
+    box.show_all();
+    return box;
+  }
+
+  function page({ url, service_id, title, window, onNotification }) {
     const path = build_filenamev([get_user_cache_dir(), "gigagram", title]);
 
     // https://gjs-docs.gnome.org/webkit240~4.0_api/webkit2.websitedatamanager
@@ -120,5 +146,5 @@
     webView.load_uri(url);
 
     return webView;
-  };
+  }
 })();

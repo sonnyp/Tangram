@@ -7,7 +7,7 @@
 
   const { instances, addInstance } = imports.instanceManager;
   const { buildHomePage } = imports.homePage;
-  const { buildTab } = imports.tab;
+  const { Tab } = imports.tab;
   const { promptServiceDialog } = imports.serviceDialog;
 
   this.Window = function Window(application) {
@@ -31,7 +31,7 @@
     application.add_action(action);
 
     function buildInstance({ url, name, service_id }) {
-      const instancePage = buildTab({
+      const { label, page } = Tab({
         url: url,
         title: name,
         window,
@@ -46,8 +46,7 @@
           application.send_notification(null, notification);
         },
       });
-      const instanceLabel = new Label({ label: name, margin: 10 });
-      const idx = notebook.append_page(instancePage, instanceLabel);
+      const idx = notebook.append_page(page, label);
       return idx;
     }
 
