@@ -5,12 +5,13 @@
   const { File, IOErrorEnum, FileCreateFlags } = imports.gi.Gio;
 
   const configFile = File.new_for_path(
-    build_filenamev([get_user_config_dir(), "Gigagram.json"])
+    build_filenamev([get_user_config_dir(), "gigagram.json"])
   );
 
   const instances = [];
   this.instances = instances;
 
+  load();
   function load() {
     let success;
     let content;
@@ -28,7 +29,7 @@
     }
 
     try {
-      instances.push(...JSON.parse(content));
+      instances.push(...(JSON.parse(content).instances || []));
     } catch (err) {
       logError(err);
     }
@@ -36,7 +37,7 @@
 
   function save() {
     configFile.replace_contents(
-      JSON.stringify(instances, null, 2),
+      JSON.stringify({ instances }, null, 2),
       null,
       false,
       FileCreateFlags.REPLACE_DESTINATION,
@@ -48,6 +49,4 @@
     instances.push(instance);
     save();
   };
-
-  load();
 })();

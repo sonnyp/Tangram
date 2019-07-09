@@ -15,25 +15,32 @@
   } = imports.gi.WebKit2;
   const { connect } = imports.util;
   const { stylesheets } = imports.serviceManager;
-  const { getenv, get_user_cache_dir, build_filenamev } = imports.gi.GLib;
+  const {
+    getenv,
+    get_user_cache_dir,
+    get_user_data_dir,
+    build_filenamev,
+  } = imports.gi.GLib;
   const { Pixbuf } = imports.gi.GdkPixbuf;
 
   const { services } = imports.serviceManager;
 
   this.Tab = function Tab(...params) {
     return {
-      label: label(...params),
-      page: page(...params),
+      label: TabLabel(...params),
+      page: TabPage(...params),
     };
   };
 
-  function label({ title, service_id }) {
+  this.TabLabel = TabLabel;
+  function TabLabel({ name, service_id }) {
     const box = new Box({
       margin_top: 6,
       margin_bottom: 6,
     });
 
-    const service = services.find(service => service.id === service_id);
+    const service =
+      service_id && services.find(service => service.id === service_id);
 
     if (service && service.icon) {
       const pixbuf = Pixbuf.new_from_resource_at_scale(
@@ -45,26 +52,30 @@
       box.add(new Image({ pixbuf, margin_end: 6 }));
     }
 
-    box.add(new Label({ label: title }));
+    box.add(new Label({ label: name }));
 
     box.show_all();
     return box;
   }
 
-  function page({ url, service_id, title, window, onNotification }) {
-    const path = build_filenamev([get_user_cache_dir(), "gigagram", title]);
+  this.TabPage = TabPage;
+  function TabPage({ url, service_id, id, window, onNotification }) {
+    const dataPath = build_filenamev([get_user_data_dir(), "gigagram", id]);
+    const cachePath = build_filenamev([get_user_cache_dir(), "gigagram", id]);
 
     // https://gjs-docs.gnome.org/webkit240~4.0_api/webkit2.websitedatamanager
     const website_data_manager = new WebsiteDataManager({
-      base_data_directory: path,
-      disk_cache_directory: path,
+      base_data_directory: dataPath,
+      disk_cache_directory: cachePath,
     });
 
     // https://gjs-docs.gnome.org/webkit240~4.0_api/webkit2.webcontext
     const web_context = new WebContext({
       website_data_manager,
     });
-    web_context.set_favicon_database_directory(path);
+    web_context.set_favicon_database_directory(
+      build_filenamev([cachePath, "icondatabase"])
+    );
 
     /*
      * Notifications
@@ -83,7 +94,7 @@
     const cookieManager = website_data_manager.get_cookie_manager();
     cookieManager.set_accept_policy(CookieAcceptPolicy.NO_THIRD_PARTY);
     cookieManager.set_persistent_storage(
-      `${path}/cookies.sqlite`,
+      `${dataPath}/cookies.sqlite`,
       CookiePersistentStorage.SQLITE
     );
 

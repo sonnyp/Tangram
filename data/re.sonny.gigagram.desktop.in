@@ -3,5 +3,5 @@ Name=gigagram
 Exec=re.sonny.gigagram
 Terminal=false
 Type=Application
-Categories=GTK;
+Categories=Network;GNOME;GTK;
 StartupNotify=true

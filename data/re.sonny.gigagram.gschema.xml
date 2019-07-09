@@ -15,4 +15,23 @@
       <description>Sets the position of the tabs</description>
     </key>
   </schema>
+
+  <schema id="re.sonny.gigagram.Instance">
+    <key type="s" name="name">
+      <default>""</default>
+      <summary>Name</summary>
+      <description>Name to display</description>
+    </key>
+    <key type="s" name="url">
+      <default>""</default>
+      <summary>URL</summary>
+      <description>URL to load</description>
+    </key>
+    <key type="s" name="service">
+      <default>"custom"</default>
+      <summary>Service</summary>
+      <description>Service identifier</description>
+    </key>
+  </schema>
+
 </schemalist>

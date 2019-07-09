@@ -2,17 +2,18 @@
   "use strict";
 
   const { getenv, VariantType } = imports.gi.GLib;
-  const { ApplicationWindow, Label, PositionType, Notebook } = imports.gi.Gtk;
+  const { ApplicationWindow, Notebook } = imports.gi.Gtk;
   const {
     Notification,
     NotificationPriority,
     SimpleAction,
     Settings,
+    SettingsBindFlags,
   } = imports.gi.Gio;
 
   const { instances, addInstance } = imports.instanceManager;
   const { buildHomePage } = imports.homePage;
-  const { Tab } = imports.tab;
+  const { Tab, TabLabel } = imports.tab;
   const { promptServiceDialog } = imports.serviceDialog;
 
   const settings = new Settings({
@@ -39,12 +40,13 @@
     });
     application.add_action(action);
 
-    function buildInstance({ url, name, service_id }) {
+    function buildInstance({ url, name, service_id, id }) {
       const { label, page } = Tab({
-        url: url,
-        title: name,
+        url,
+        name,
         window,
         service_id,
+        id,
         onNotification({ title, body }) {
           // https://gjs-docs.gnome.org/gio20~2.0_api/gio.notification
           const notification = new Notification();
@@ -63,24 +65,20 @@
       const instance = await promptServiceDialog({ window, service });
       if (!instance) return;
 
-      const { name, url, id } = instance;
+      const { name, url, id, service_id } = instance;
+      addInstance(id);
 
-      addInstance({ url, service_id: service.id, id, title: name });
-
-      const idx = buildInstance({ url, name, service_id: service.id });
+      const idx = buildInstance({ url, name, service_id, id });
       notebook.show_all();
       notebook.set_current_page(idx);
     }
 
-    const tab_pos = settings.get_enum("tabs-position");
-    log(tab_pos);
     // https://gjs-docs.gnome.org/gtk30~3.24.8/gtk.notebook
-    const notebook = new Notebook({
-      tab_pos,
-    });
+    const notebook = new Notebook();
+    settings.bind("tabs-position", notebook, "tab_pos", SettingsBindFlags.GET);
     notebook.append_page(
       buildHomePage({ onAddService }),
-      new Label({ label: "Gigagram", margin: 10 })
+      TabLabel({ name: "Gigagram" })
     );
 
     window.add(notebook);
@@ -93,9 +91,16 @@
         service_id: "custom",
       });
     }
-    instances.forEach(instance => {
-      const { title, url, service_id } = instance;
-      buildInstance({ url, name: title, service_id });
+    instances.forEach(id => {
+      const settings = new Settings({
+        schema_id: "re.sonny.gigagram.Instance",
+        path: `/re/sonny/gigagram/instances/${id}/`,
+      });
+      const name = settings.get_string("name");
+      const url = settings.get_string("url");
+      const service_id = settings.get_string("service");
+
+      buildInstance({ url, name, id, service_id });
     });
 
     window.show_all();

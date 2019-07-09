@@ -15,6 +15,10 @@
     Orientation,
   } = imports.gi.Gtk;
   const { uuid_string_random } = imports.gi.GLib;
+  const {
+    Settings,
+    // SettingsBindFlags,
+  } = imports.gi.Gio;
 
   this.promptServiceDialog = async function promptServiceDialog({
     window,
@@ -54,7 +58,7 @@
       halign: Align.END,
     });
     grid.attach(nameLabel, 1, 1, 1, 1);
-    const nameEntry = new Entry({ text: service.name, hexpand: true });
+    const nameEntry = new Entry({ hexpand: true, text: service.name });
     grid.attach(nameEntry, 2, 1, 1, 1);
 
     const URLLabel = new Label({
@@ -133,8 +137,20 @@
     const name = nameEntry.text;
     const url = getURL();
 
+    const id = `${name}-${uuid_string_random().replace(/-/g, "")}`;
+    // https://gjs-docs.gnome.org/gio20~2.0_api/gio.settings
+    const settings = new Settings({
+      schema_id: "re.sonny.gigagram.Instance",
+      path: `/re/sonny/gigagram/instances/${id}/`,
+    });
+    settings.set_string("name", name);
+    settings.set_string("url", url);
+    settings.set_string("service", service.id);
+    // binding example
+    // settings.bind("name", nameEntry, "text", SettingsBindFlags.DEFAULT);
+
     dialog.destroy();
 
-    return { name, url, id: uuid_string_random() };
+    return { name, url, id, service_id: service.id };
   };
 })();
