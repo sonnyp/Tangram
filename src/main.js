@@ -8,20 +8,22 @@
     Gtk: "3.0",
   });
 
-  const { Gio, Gtk } = imports.gi;
-  const { GigagramWindow } = imports.window;
+  const { Application } = imports.gi.Gtk;
+  const { ApplicationFlags } = imports.gi.Gio;
+
+  const { Window } = imports.window;
 
   this.main = function main(argv) {
-    const application = new Gtk.Application({
+    const application = new Application({
       application_id: "re.sonny.gigagram",
-      flags: Gio.ApplicationFlags.FLAGS_NONE,
+      flags: ApplicationFlags.FLAGS_NONE,
     });
 
     application.connect("activate", app => {
       let activeWindow = app.activeWindow;
 
       if (!activeWindow) {
-        activeWindow = new GigagramWindow(app);
+        activeWindow = Window(app);
       }
 
       activeWindow.present();

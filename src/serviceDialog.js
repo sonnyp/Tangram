@@ -21,7 +21,7 @@
     window,
     service,
   }) {
-    // FIXME Gtk.Dialog.new_with_buttons
+    // FIXME Dialog.new_with_buttons
     // is undefined in gjs, open issue.
     // https://developer.gnome.org/hig/stable/dialogs.html.en#Action
     // "Action Dialogs"

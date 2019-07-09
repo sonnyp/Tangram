@@ -8,6 +8,7 @@
     resources_lookup_data,
     File,
     IOErrorEnum,
+    Resource,
   } = imports.gi.Gio;
   const {
     UserStyleSheet,
@@ -22,7 +23,7 @@
   this.stylesheets = stylesheets;
 
   function register() {
-    const resource = imports.gi.Gio.Resource.load(
+    const resource = Resource.load(
       `${pkg.pkgdatadir}/re.sonny.gigagram.services.gresource`
     );
     resource._register();

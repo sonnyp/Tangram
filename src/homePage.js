@@ -1,43 +1,53 @@
 (() => {
   "use strict";
 
-  const { Gtk } = imports.gi;
+  const {
+    FlowBoxChild,
+    ScrolledWindow,
+    Viewport,
+    FlowBox,
+    Align,
+    Image,
+    Button,
+    PositionType,
+    ReliefStyle,
+  } = imports.gi.Gtk;
 
   const { services } = imports.serviceManager;
 
   this.buildHomePage = function buildHomePage({ onAddService }) {
-    const scrolledWindow = new Gtk.ScrolledWindow();
-    const viewPort = new Gtk.Viewport();
+    const scrolledWindow = new ScrolledWindow();
+    const viewPort = new Viewport();
     scrolledWindow.add(viewPort);
-    const flowBox = new Gtk.FlowBox({
+    const flowBox = new FlowBox({
       homogeneous: true,
-      halign: Gtk.Align.CENTER,
-      valign: Gtk.Align.START,
+      halign: Align.CENTER,
+      valign: Align.START,
       max_children_per_line: 10,
     });
     viewPort.add(flowBox);
 
     services.forEach(service => {
-      const flowBoxChild = new Gtk.FlowBoxChild({
+      const flowBoxChild = new FlowBoxChild({
         width_request: 200,
         height_request: 200,
         can_focus: false,
       });
 
-      const image = new Gtk.Image({
+      const image = new Image({
         resource: service.icon,
       });
 
-      const button = new Gtk.Button({
+      const button = new Button({
         width_request: 200,
         height_request: 200,
-        halign: Gtk.Align.CENTER,
-        valign: Gtk.Align.CENTER,
+        halign: Align.CENTER,
+        valign: Align.CENTER,
         image,
         always_show_image: true,
         label: service.name,
-        image_position: Gtk.PositionType.TOP,
-        relief: Gtk.ReliefStyle.NONE,
+        image_position: PositionType.TOP,
+        relief: ReliefStyle.NONE,
       });
       // FIXME get_data/set_data does not work in gjs
       // open issue.
