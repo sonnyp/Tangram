@@ -11,6 +11,7 @@
   const { promptServiceDialog } = imports.serviceDialog;
 
   this.Window = function Window(application) {
+    // https://gjs-docs.gnome.org/gtk30~3.24.8/gtk.applicationwindow
     const window = new ApplicationWindow({
       application,
       title: "Gigagram",

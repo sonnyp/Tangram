@@ -2,7 +2,6 @@
   "use strict";
 
   const { WindowTypeHint } = imports.gi.Gdk;
-  // const { getEnum, connect } = imports.util;
   const { once } = imports.util;
   const {
     Box,

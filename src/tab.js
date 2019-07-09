@@ -15,6 +15,7 @@
   } = imports.gi.WebKit2;
   const { connect } = imports.util;
   const { stylesheets } = imports.serviceManager;
+  const { getenv } = imports.gi.GLib;
 
   const { get_user_cache_dir, build_filenamev } = imports.gi.GLib;
 
@@ -28,15 +29,15 @@
     const path = build_filenamev([get_user_cache_dir(), "gigagram", title]);
 
     // https://gjs-docs.gnome.org/webkit240~4.0_api/webkit2.websitedatamanager
-    const websiteDataManager = new WebsiteDataManager({
+    const website_data_manager = new WebsiteDataManager({
       base_data_directory: path,
       disk_cache_directory: path,
     });
 
     // https://gjs-docs.gnome.org/webkit240~4.0_api/webkit2.webcontext
-    const web_context = WebContext.new_with_website_data_manager(
-      websiteDataManager
-    );
+    const web_context = new WebContext({
+      website_data_manager,
+    });
     web_context.set_favicon_database_directory(path);
 
     /*
@@ -53,7 +54,7 @@
 
     // https://gjs-docs.gnome.org/webkit240~4.0_api/webkit2.cookiemanager
     // not sure why but must be done after new_with_website_data_manager
-    const cookieManager = websiteDataManager.get_cookie_manager();
+    const cookieManager = website_data_manager.get_cookie_manager();
     cookieManager.set_accept_policy(CookieAcceptPolicy.NO_THIRD_PARTY);
     cookieManager.set_persistent_storage(
       `${path}/cookies.sqlite`,
@@ -68,7 +69,7 @@
 
     // https://gjs-docs.gnome.org/webkit240~4.0_api/webkit2.settings
     const settings = new Settings({
-      enable_developer_extras: true,
+      enable_developer_extras: getenv("DEV") === "true",
     });
 
     // https://gjs-docs.gnome.org/webkit240~4.0_api/webkit2.webcontext
@@ -119,20 +120,5 @@
     webView.load_uri(url);
 
     return webView;
-    //   this.webView = webView;
-    // this.webView.connect("load-changed", (self, load_event) => {
-    //   if (load_event === LoadEvent.FINISHED) {
-    //     log("finished");
-    //   }
-    // });
-    // this.webView.connect("ready-to-show", () => {
-    //   log("ready to show");
-    // });
-    //   this.page = this.webView;
-    // this.webView.connect("notify::title", () => {
-    //   this.title = this.webView.title;
-    //   log(this.title);
-
-    // });
   };
 })();

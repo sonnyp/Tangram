@@ -17,6 +17,17 @@
     return ids;
   };
 
+  this.disconnect = function disconnect(object, signal) {
+    if (typeof signal !== "object") {
+      object.disconnect(signal, signal);
+      return;
+    }
+
+    Object.entries(signal).forEach(([signal, id]) => {
+      object.disconnect(signal, id);
+    });
+  };
+
   this.once = function once(object, signal) {
     return new Promise(resolve => {
       const handlerId = object.connect(signal, handler);
