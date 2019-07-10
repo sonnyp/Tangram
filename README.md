@@ -61,7 +61,7 @@ ninja -C build install
 
 ```sh
 cd gigagram
-flatpak-builder flatpak re.sonny.gigagram.json
+flatpak-builder --user --force-clean --install-deps-from=flathub flatpak re.sonny.gigagram.json
 flatpak-builder --run flatpak re.sonny.gigagram.json re.sonny.gigagram
 ```
 
@@ -78,6 +78,7 @@ flatpak run re.sonny.gigagram
 ### Inspect
 
 ```sh
+cd gigagrram
 gsettings set org.gtk.Settings.Debug enable-inspector-keybinding true
 GTK_DEBUG=interactive ./run.sh
 ```
