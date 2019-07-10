@@ -1,7 +1,17 @@
 (() => {
   "use strict";
 
-  const { show_uri_on_window, Label, Image, Box } = imports.gi.Gtk;
+  const {
+    show_uri_on_window,
+    Label,
+    Image,
+    Box,
+    EventBox,
+    Popover,
+  } = imports.gi.Gtk;
+  const { EventMask } = imports.gi.Gdk;
+  const { Menu, SettingsBindFlags } = imports.gi.Gio;
+
   const {
     WebsiteDataManager,
     WebView,
@@ -33,11 +43,8 @@
   };
 
   this.TabLabel = TabLabel;
-  function TabLabel({ name, service_id }) {
-    const box = new Box({
-      margin_top: 6,
-      margin_bottom: 6,
-    });
+  function TabLabel({ name, service_id, id }, settings) {
+    const box = new Box({});
 
     const service =
       service_id && services.find(service => service.id === service_id);
@@ -54,8 +61,38 @@
 
     box.add(new Label({ label: name }));
 
-    box.show_all();
-    return box;
+    box.add_events(EventMask.BUTTON_PRESS_MASK);
+
+    const eventBox = new EventBox({
+      // margin_top: 6,
+      // margin_bottom: 6,
+    });
+    eventBox.add(box);
+
+    if (service && id) {
+      const menu = new Menu();
+      menu.append("Remove", `app.removeInstance("${id}")`);
+
+      const popover = new Popover();
+      popover.bind_model(menu, null);
+      popover.set_relative_to(box);
+      settings.bind(
+        "tabs-position",
+        popover,
+        "position",
+        SettingsBindFlags.GET
+      );
+
+      eventBox.connect("button-press-event", (self, eventButton) => {
+        const [, button] = eventButton.get_button();
+        if (button !== 3) return;
+
+        popover.popup();
+      });
+    }
+
+    eventBox.show_all();
+    return eventBox;
   }
 
   this.TabPage = TabPage;
