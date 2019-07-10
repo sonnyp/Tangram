@@ -54,15 +54,35 @@
         schema_id: "re.sonny.gigagram.Instance",
         path: `/re/sonny/gigagram/instances/${id}/`,
       });
-      // Undocumented?, removes the path
-      instanceSettings.reset("");
+
+      // instanceSettings.reset("");
+      // https://gitlab.gnome.org/GNOME/glib/merge_requests/981#note_551625
+      // so instead
+      instanceSettings.reset("name");
+      instanceSettings.reset("url");
+      instanceSettings.reset("service");
 
       onRemoveInstance(id);
     });
     application.add_action(removeInstanceAction);
 
+    const editInstanceAction = new SimpleAction({
+      name: "editInstance",
+      parameter_type: VariantType.new("s"),
+    });
+    editInstanceAction.connect("activate", (self, parameters) => {
+      const id = parameters.deep_unpack();
+      onEditInstance(id);
+    });
+    application.add_action(editInstanceAction);
+
     function buildInstance({ url, name, service_id, id }) {
       notebook.set_show_tabs(true);
+      const instanceSettings = new Settings({
+        schema_id: "re.sonny.gigagram.Instance",
+        path: `/re/sonny/gigagram/instances/${id}/`,
+      });
+
       const { label, page } = Tab(
         {
           url,
@@ -80,7 +100,8 @@
             application.send_notification(null, notification);
           },
         },
-        settings
+        settings,
+        instanceSettings
       );
       const idx = notebook.append_page(page, label);
       notebook.set_tab_reorderable(page, true);
@@ -101,10 +122,14 @@
       notebook.set_current_page(idx);
     }
 
-    async function onRemoveInstance(id) {
+    function onRemoveInstance(id) {
       const instances = settings.get_strv("instances");
       const idx = instances.indexOf(id);
       notebook.remove_page(idx);
+    }
+
+    async function onEditInstance(id) {
+      await promptServiceDialog({ window, id });
     }
 
     // https://gjs-docs.gnome.org/gtk30~3.24.8/gtk.notebook

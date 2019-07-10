@@ -4,7 +4,7 @@
   const { WindowTypeHint } = imports.gi.Gdk;
   const { once } = imports.util;
   const {
-    Box,
+    // Box,
     Dialog,
     Align,
     Grid,
@@ -12,7 +12,7 @@
     Entry,
     ResponseType,
     EntryIconPosition,
-    Orientation,
+    // Orientation,
   } = imports.gi.Gtk;
   const { uuid_string_random } = imports.gi.GLib;
   const {
@@ -23,7 +23,20 @@
   this.promptServiceDialog = async function promptServiceDialog({
     window,
     service,
+    id,
   }) {
+    let settings;
+
+    if (id) {
+      // https://gjs-docs.gnome.org/gio20~2.0_api/gio.settings
+      settings = new Settings({
+        schema_id: "re.sonny.gigagram.Instance",
+        path: `/re/sonny/gigagram/instances/${id}/`,
+      });
+    }
+    const showName = settings ? settings.get_string("name") : service.name;
+    const showURL = settings ? settings.get_string("url") : service.url;
+
     // FIXME Dialog.new_with_buttons
     // is undefined in gjs, open issue.
     // https://developer.gnome.org/hig/stable/dialogs.html.en#Action
@@ -31,7 +44,7 @@
     // and
     // https://developer.gnome.org/hig/stable/visual-layout.html.en
     const dialog = new Dialog({
-      title: `Add ${service.name}`,
+      title: `${settings ? "Edit" : "Add"} ${showName}`,
       modal: true,
       type_hint: WindowTypeHint.DIALOG,
       use_header_bar: true,
@@ -40,9 +53,12 @@
     });
 
     dialog.add_button("Cancel", ResponseType.CANCEL);
-    const addButton = dialog.add_button("Add", ResponseType.APPLY);
-    addButton.get_style_context().add_class("suggested-action");
-    addButton.grab_focus();
+    const primaryButton = dialog.add_button(
+      id ? "Edit" : "Add",
+      ResponseType.APPLY
+    );
+    primaryButton.get_style_context().add_class("suggested-action");
+    primaryButton.grab_focus();
 
     const contentArea = dialog.get_content_area();
     contentArea.margin = 18;
@@ -58,7 +74,10 @@
       halign: Align.END,
     });
     grid.attach(nameLabel, 1, 1, 1, 1);
-    const nameEntry = new Entry({ hexpand: true, text: service.name });
+    const nameEntry = new Entry({
+      hexpand: true,
+      text: showName,
+    });
     grid.attach(nameEntry, 2, 1, 1, 1);
 
     const URLLabel = new Label({
@@ -67,42 +86,47 @@
     });
     grid.attach(URLLabel, 1, 2, 1, 1);
 
-    let getURL = () => {
-      return service.url;
-    };
-    let URLEntry;
-    let URLCell;
+    const URLEntry = new Entry({
+      text: showURL,
+      hexpand: true,
+    });
+    grid.attach(URLEntry, 2, 2, 1, 1);
 
-    if (service.url === "___") {
-      URLEntry = new Entry({ text: "", hexpand: true });
-      URLCell = URLEntry;
-      getURL = () => {
-        return URLEntry.text;
-      };
-    } else if (!service.url.includes("___")) {
-      URLEntry = new Entry({ text: service.url, hexpand: true });
-      URLCell = URLEntry;
-    } else {
-      URLCell = new Box({
-        orientation: Orientation.HORIZONTAL,
-      });
-      const [prefix, suffix] = service.url.split("___");
-      const prefixLabel = new Label({ label: prefix });
-      URLCell.add(prefixLabel);
-      const interfixEntry = new Entry({ text: "", hexpand: true });
-      URLCell.add(interfixEntry);
-      const suffixLabel = new Label({ label: suffix });
-      URLCell.add(suffixLabel);
-      grid.attach(URLCell, 2, 2, 1, 1);
-      getURL = () => {
-        return service.url.replace("___", interfixEntry.text);
-      };
-      URLEntry = interfixEntry;
-    }
+    // probably trying to be too smart
+    // let getURL = () => {
+    //   return service.url;
+    // };
+    // let URLCell;
+    // let URLEntry
+    // if (service.url === "___") {
+    //   URLEntry = new Entry({ text: "", hexpand: true });
+    //   URLCell = URLEntry;
+    //   getURL = () => {
+    //     return URLEntry.text;
+    //   };
+    // } else if (!service.url.includes("___")) {
+    //   URLEntry = new Entry({ text: service.url, hexpand: true });
+    //   URLCell = URLEntry;
+    // } else {
+    //   URLCell = new Box({
+    //     orientation: Orientation.HORIZONTAL,
+    //   });
+    //   const [prefix, suffix] = service.url.split("___");
+    //   const prefixLabel = new Label({ label: prefix });
+    //   URLCell.add(prefixLabel);
+    //   const interfixEntry = new Entry({ text: "", hexpand: true });
+    //   URLCell.add(interfixEntry);
+    //   const suffixLabel = new Label({ label: suffix });
+    //   URLCell.add(suffixLabel);
+    //   grid.attach(URLCell, 2, 2, 1, 1);
+    //   getURL = () => {
+    //     return service.url.replace("___", interfixEntry.text);
+    //   };
+    //   URLEntry = interfixEntry;
+    // }
+    // grid.attach(URLCell, 2, 2, 1, 1);
 
-    grid.attach(URLCell, 2, 2, 1, 1);
-
-    addButton.set_sensitive(!!URLEntry.text);
+    primaryButton.set_sensitive(!!URLEntry.text);
     URLEntry.set_icon_tooltip_text(
       EntryIconPosition.SECONDARY,
       "Cannot be empty"
@@ -112,11 +136,11 @@
       const isValid = !!URLEntry.text;
       if (isValid) {
         URLEntry.set_icon_from_icon_name(EntryIconPosition.SECONDARY, null);
-        addButton.set_sensitive(true);
+        primaryButton.set_sensitive(true);
         return;
       }
 
-      addButton.set_sensitive(false);
+      primaryButton.set_sensitive(false);
       URLEntry.set_icon_from_icon_name(
         EntryIconPosition.SECONDARY,
         "face-sick-symbolic"
@@ -135,22 +159,31 @@
     }
 
     const name = nameEntry.text;
-    const url = getURL();
+    const url = URLEntry.text;
 
-    const id = `${name}-${uuid_string_random().replace(/-/g, "")}`;
-    // https://gjs-docs.gnome.org/gio20~2.0_api/gio.settings
-    const settings = new Settings({
-      schema_id: "re.sonny.gigagram.Instance",
-      path: `/re/sonny/gigagram/instances/${id}/`,
-    });
+    if (!settings) {
+      id = `${name}-${uuid_string_random().replace(/-/g, "")}`;
+      settings = new Settings({
+        schema_id: "re.sonny.gigagram.Instance",
+        path: `/re/sonny/gigagram/instances/${id}/`,
+      });
+    }
+
     settings.set_string("name", name);
     settings.set_string("url", url);
-    settings.set_string("service", service.id);
+    if (service) {
+      settings.set_string("service", service.id);
+    }
     // binding example
     // settings.bind("name", nameEntry, "text", SettingsBindFlags.DEFAULT);
 
     dialog.destroy();
 
-    return { name, url, id, service_id: service.id };
+    return {
+      name,
+      url,
+      id,
+      service_id: service ? service.id : "",
+    };
   };
 })();

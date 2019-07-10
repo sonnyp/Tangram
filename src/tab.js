@@ -43,7 +43,7 @@
   };
 
   this.TabLabel = TabLabel;
-  function TabLabel({ name, service_id, id }, settings) {
+  function TabLabel({ service_id, id, name }, settings, instanceSettings) {
     const box = new Box({});
 
     const service =
@@ -59,7 +59,13 @@
       box.add(new Image({ pixbuf, margin_end: 6 }));
     }
 
-    box.add(new Label({ label: name }));
+    const label = new Label();
+    if (instanceSettings) {
+      instanceSettings.bind("name", label, "label", SettingsBindFlags.GET);
+    } else {
+      label.label = name;
+    }
+    box.add(label);
 
     box.add_events(EventMask.BUTTON_PRESS_MASK);
 
@@ -71,6 +77,7 @@
 
     if (service && id) {
       const menu = new Menu();
+      menu.append("Edit", `app.editInstance("${id}")`);
       menu.append("Remove", `app.removeInstance("${id}")`);
 
       const popover = new Popover();
