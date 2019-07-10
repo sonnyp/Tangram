@@ -156,6 +156,8 @@
 
     webView.load_uri(url);
 
+    webView.instance_id = id;
+
     return webView;
   }
 })();

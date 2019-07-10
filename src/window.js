@@ -40,6 +40,7 @@
     application.add_action(action);
 
     function buildInstance({ url, name, service_id, id }) {
+      notebook.set_show_tabs(true);
       const { label, page } = Tab({
         url,
         name,
@@ -57,6 +58,7 @@
         },
       });
       const idx = notebook.append_page(page, label);
+      notebook.set_tab_reorderable(page, true);
       return idx;
     }
 
@@ -75,12 +77,25 @@
     }
 
     // https://gjs-docs.gnome.org/gtk30~3.24.8/gtk.notebook
-    const notebook = new Notebook();
+    const notebook = new Notebook({ scrollable: true, show_tabs: false });
+    function onPageReordered() {
+      const number_of_pages = notebook.get_n_pages();
+
+      const instances = settings.get_strv("instances");
+      const reordered = [];
+
+      for (let i = 0; i < number_of_pages; i++) {
+        const id = notebook.get_nth_page(i).instance_id;
+        if (!instances.includes(id)) continue;
+        reordered.push(id);
+      }
+
+      settings.set_strv("instances", reordered);
+    }
+    notebook.connect("page-reordered", onPageReordered);
     settings.bind("tabs-position", notebook, "tab_pos", SettingsBindFlags.GET);
-    notebook.append_page(
-      buildHomePage({ onAddService }),
-      TabLabel({ name: "Gigagram" })
-    );
+    const page = buildHomePage({ onAddService });
+    notebook.append_page(page, TabLabel({ name: "Gigagram" }));
 
     window.add(notebook);
 

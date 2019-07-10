@@ -48,3 +48,7 @@ flatpak --user remote-add --no-gpg-verify gigagram-repo repo
 flatpak --user install gigagram-repo re.sonny.gigagram
 flatpak run re.sonny.gigagram
 ```
+
+## Credits
+
+Service icons from [papirus-icon-theme](https://github.com/PapirusDevelopmentTeam/papirus-icon-theme).
