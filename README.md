@@ -18,6 +18,11 @@ Gigagram is powered by [WebKitGTK](https://webkitgtk.org/).
 
 ## Install
 
+### Arch Linux
+
+https://aur.archlinux.org/packages/gigagram-git/
+
+
 ### Flatpak
 
 [Install flatpak](https://flatpak.org/setup/)
