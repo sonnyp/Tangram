@@ -10,8 +10,8 @@ finish-args:
   - "--socket=wayland"
   # x11 fallback
   - "--socket=fallback-x11"
-  # - "--share=ipc" needed?
-  # - "--socket=x11" needed?
+  # - "--share=ipc" only required for older flatpak
+  # - "--socket=x11" only required for older flatpak
   # audio
   - "--socket=pulseaudio"
   # dconf support https://github.com/flatpak/flatpak/issues/78
@@ -40,4 +40,4 @@ modules:
     buildsystem: meson
     sources:
       - type: git
-        url: file:///home/sonny/Projects/gigagram
+        url: https://github.com/sonnyp/gigagram.git

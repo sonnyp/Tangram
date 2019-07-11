@@ -16,6 +16,20 @@ Gigagram is powered by [WebKitGTK](https://webkitgtk.org/).
 * Re-order tabs by drag'n drop
 * Desktop/audio notifications (if supported by the service)
 
+## Install
+
+### Flatpak
+
+[Install flatpak](https://flatpak.org/setup/)
+
+```sh
+git clone https://github.com/sonnyp/gigagram.git
+flatpak-builder --repo=repo --install-deps-from=flathub flatpak re.sonny.gigagram.yaml
+flatpak --user remote-add --no-gpg-verify gigagram repo
+flatpak --user install gigagram re.sonny.gigagram
+flatpak run re.sonny.gigagram
+```
+
 ## Services
 
 Only a limited number of services but adding a new service is quite easy.
@@ -70,8 +84,8 @@ flatpak-builder --run flatpak re.sonny.gigagram.yaml re.sonny.gigagram
 ```sh
 cd gigagram
 flatpak-builder --repo=repo --force-clean flatpak re.sonny.gigagram.yaml
-flatpak --user remote-add --no-gpg-verify gigagram-repo repo
-flatpak --user install gigagram-repo re.sonny.gigagram
+flatpak --user remote-add --no-gpg-verify gigagram repo
+flatpak --user install gigagram re.sonny.gigagram
 flatpak run re.sonny.gigagram
 ```
 
