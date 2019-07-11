@@ -10,7 +10,8 @@ finish-args:
   - "--socket=wayland"
   # x11 fallback
   - "--socket=fallback-x11"
-  - "--share=ipc"
+  # - "--share=ipc" needed?
+  # - "--socket=x11" needed?
   # audio
   - "--socket=pulseaudio"
   # dconf support https://github.com/flatpak/flatpak/issues/78

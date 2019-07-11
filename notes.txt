@@ -3,3 +3,5 @@ should I send a PR to notice about preprocess=to-pixdata being deprecated in htt
 Yes please!
 
   'AppIndicator3': '0.1'
+
+isflatpak = !!getenv('FLATPAK_ID')

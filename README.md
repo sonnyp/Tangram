@@ -54,7 +54,7 @@ npm test
 cd gigagram
 meson --reconfigure --prefix $PWD/install build
 ninja -C build install
-./install/bin/re.sonny.gigagram
+GSETTINGS_SCHEMA_DIR=./install/share/glib-2.0/schemas/ ./install/bin/re.sonny.gigagram
 ```
 
 ### Flatpak
