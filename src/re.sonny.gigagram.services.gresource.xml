@@ -29,6 +29,10 @@
       <file>services/skype/service.json</file>
     -->
 
+    <!-- riot -->
+    <file>services/riot/icon.svg</file>
+    <file>services/riot/service.json</file>
+
     <!-- slack -->
     <file>services/slack/icon.svg</file>
     <file>services/slack/service.json</file>
