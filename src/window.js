@@ -2,7 +2,7 @@
   "use strict";
 
   const { getenv, VariantType } = imports.gi.GLib;
-  const { ApplicationWindow, Notebook } = imports.gi.Gtk;
+  const { ApplicationWindow, Notebook, HeaderBar } = imports.gi.Gtk;
   const {
     Notification,
     NotificationPriority,
@@ -14,12 +14,20 @@
   const { buildHomePage } = imports.homePage;
   const { Tab, TabLabel } = imports.tab;
   const { promptServiceDialog } = imports.serviceDialog;
+  const { connect } = imports.util;
 
   const settings = new Settings({
     schema_id: "re.sonny.gigagram",
   });
 
   this.Window = function Window(application) {
+    // https://gjs-docs.gnome.org/gtk30~3.24.8/gtk.headerbar
+    const headerBar = new HeaderBar({
+      title: "Gigagram",
+      subtitle: "Add tab",
+      show_close_button: true,
+    });
+
     // https://gjs-docs.gnome.org/gtk30~3.24.8/gtk.applicationwindow
     const window = new ApplicationWindow({
       application,
@@ -27,6 +35,7 @@
       default_height: 620,
       default_width: 840,
     });
+    window.set_titlebar(headerBar);
 
     const selectTabAction = new SimpleAction({
       name: "selectTab",
@@ -118,7 +127,7 @@
       settings.set_strv("instances", instances);
 
       const idx = buildInstance({ url, name, service_id, id });
-      notebook.show_all();
+      // notebook.show_all();
       notebook.set_current_page(idx);
     }
 
@@ -132,25 +141,63 @@
       await promptServiceDialog({ window, id });
     }
 
+    function onNotifyTitle(webView) {
+      headerBar.set_title(webView.title);
+    }
+    function onNotifyUri(webView) {
+      headerBar.set_subtitle(webView.uri);
+    }
+    let notifyTitleId = null;
+    let notifyUriId = null;
+    let webView = null;
+
     // https://gjs-docs.gnome.org/gtk30~3.24.8/gtk.notebook
     const notebook = new Notebook({ scrollable: true, show_tabs: false });
-    function onPageReordered() {
-      const number_of_pages = notebook.get_n_pages();
+    connect(
+      notebook,
+      {
+        ["page-reordered"]() {
+          const number_of_pages = notebook.get_n_pages();
 
-      const instances = settings.get_strv("instances");
-      const reordered = [];
+          const instances = settings.get_strv("instances");
+          const reordered = [];
 
-      for (let i = 0; i < number_of_pages; i++) {
-        const id = notebook.get_nth_page(i).instance_id;
-        if (!instances.includes(id)) continue;
-        reordered.push(id);
+          for (let i = 0; i < number_of_pages; i++) {
+            const id = notebook.get_nth_page(i).instance_id;
+            if (!instances.includes(id)) continue;
+            reordered.push(id);
+          }
+
+          settings.set_strv("instances", reordered);
+        },
+        ["switch-page"](page) {
+          if (webView) {
+            if (notifyTitleId) {
+              webView.disconnect("notify::title", notifyTitleId);
+              notifyTitleId = null;
+            }
+            if (notifyUriId) {
+              webView.disconnect("notify::uri", onNotifyUri);
+              notifyUriId = null;
+            }
+            webView = null;
+          }
+          // log(page.title);
+          if (page instanceof imports.gi.WebKit2.WebView) {
+            webView = page;
+            notifyTitleId = webView.connect("notify::title", onNotifyTitle);
+            notifyUriId = webView.connect("notify::uri", onNotifyUri);
+          }
+
+          headerBar.set_title(page.title);
+          headerBar.set_subtitle(page.uri);
+        },
       }
+    );
 
-      settings.set_strv("instances", reordered);
-    }
-    notebook.connect("page-reordered", onPageReordered);
     settings.bind("tabs-position", notebook, "tab_pos", SettingsBindFlags.GET);
     const page = buildHomePage({ onAddService });
+    page.title = "Add Application";
     notebook.append_page(page, TabLabel({ name: "Gigagram" }, settings));
     notebook.set_tab_reorderable(page, true);
 
