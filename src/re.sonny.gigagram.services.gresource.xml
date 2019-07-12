@@ -63,8 +63,13 @@
     <file>services/groupme/icon.svg</file>
     <file>services/groupme/service.json</file>
 
-    <!--Outlook-->
+    <!--outlook-->
     <file>services/outlook/icon.svg</file>
     <file>services/outlook/service.json</file>
+
+    <!--trello-->
+    <file>services/trello/icon.svg</file>
+    <file>services/trello/service.json</file>
+  
   </gresource>
 </gresources>
