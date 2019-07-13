@@ -41,7 +41,7 @@
     <file>services/steam-chat/icon.svg</file>
     <file>services/steam-chat/service.json</file>
 
-       <!-- telegram -->
+    <!-- telegram -->
     <file>services/telegram/icon.svg</file>
     <file>services/telegram/service.json</file>
     <file>services/telegram/style.css</file>
@@ -70,6 +70,6 @@
     <!--trello-->
     <file>services/trello/icon.svg</file>
     <file>services/trello/service.json</file>
-  
+
   </gresource>
 </gresources>
