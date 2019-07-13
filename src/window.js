@@ -17,7 +17,6 @@
   const { Settings } = imports.util;
 
   // https://github.com/flatpak/flatpak/issues/78#issuecomment-511158618
-  // log(imports.gi.GLib.getenv("GSETTINGS_BACKEND"));
   // log(imports.gi.Gio.SettingsBackend.get_default());
 
   const { buildHomePage } = imports.homePage;

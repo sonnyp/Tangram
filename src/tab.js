@@ -150,7 +150,7 @@
 
     // https://gjs-docs.gnome.org/webkit240~4.0_api/webkit2.settings
     const settings = new Settings({
-      enable_developer_extras: getenv("DEV") === "true",
+      enable_developer_extras: !!getenv("DEV"),
     });
 
     // https://gjs-docs.gnome.org/webkit240~4.0_api/webkit2.webcontext

@@ -1,4 +1,4 @@
-.PHONY: test
+.PHONY: test clean
 
 test:
 	flatpak-builder --user  --force-clean --repo=repo --install-deps-from=flathub flatpak re.sonny.gigagram.yaml
@@ -6,3 +6,6 @@ test:
 	flatpak --user install --reinstall --assumeyes gigagram re.sonny.gigagram
 	flatpak run re.sonny.gigagram
 	./node_modules/.bin/eslint src/
+
+clean:
+	rm -rf .flatpak-builder build flatpak install repo

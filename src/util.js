@@ -2,10 +2,15 @@
   "use strict";
 
   const Gio = imports.gi.Gio;
-  const { getenv } = imports.gi.GLib;
+  const { getenv, build_filenamev, get_user_config_dir } = imports.gi.GLib;
 
+  const FLATPAK_ID = getenv("FLATPAK_ID");
+
+  // https://github.com/flatpak/flatpak/issues/78#issuecomment-511160975
   const keyfileBackend = Gio.keyfile_settings_backend_new(
-    "settings.ini",
+    FLATPAK_ID
+      ? build_filenamev([get_user_config_dir(), "glib-2.0/settings/keyfile"])
+      : "settings.ini",
     "/",
     null
   );
