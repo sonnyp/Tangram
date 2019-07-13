@@ -4,15 +4,11 @@ runtime-version: "3.32"
 sdk: org.gnome.Sdk
 command: re.sonny.gigagram
 finish-args:
-  # network
   - "--share=network"
-  # wayland
   - "--socket=wayland"
-  # x11 fallback
   - "--socket=fallback-x11"
-  # - "--share=ipc" only required for older flatpak
-  # - "--socket=x11" only required for older flatpak
-  # audio
+  # - "--share=ipc" # only required for older flatpak ?
+  # - "--socket=x11" # only required for older flatpak ?
   - "--socket=pulseaudio"
   # dconf support https://github.com/flatpak/flatpak/issues/78
   # https://blogs.gnome.org/mclasen/2019/07/12/settings-in-a-sandbox-world/
@@ -20,21 +16,6 @@ finish-args:
   - "--filesystem=~/.config/dconf:ro"
   - "--talk-name=ca.desrt.dconf"
   - "--env=DCONF_USER_CONFIG_DIR=.config/dconf"
-build-options:
-  cflags: "-O2 -g"
-  cxxflags: "-O2 -g"
-  env:
-    V: "1"
-cleanup:
-  - "/include"
-  - "/lib/pkgconfig"
-  - "/man"
-  - "/share/doc"
-  - "/share/gtk-doc"
-  - "/share/man"
-  - "/share/pkgconfig"
-  - "*.la"
-  - "*.a"
 modules:
   - name: gigagram
     builddir: true

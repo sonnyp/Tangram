@@ -1,11 +1,7 @@
 (() => {
   "use strict";
 
-  const {
-    // getenv,
-    VariantType,
-    Variant,
-  } = imports.gi.GLib;
+  const { VariantType, Variant } = imports.gi.GLib;
   const {
     ApplicationWindow,
     Notebook,
@@ -16,9 +12,13 @@
     Notification,
     NotificationPriority,
     SimpleAction,
-    Settings,
     SettingsBindFlags,
   } = imports.gi.Gio;
+  const { Settings } = imports.util;
+
+  // https://github.com/flatpak/flatpak/issues/78#issuecomment-511158618
+  // log(imports.gi.GLib.getenv("GSETTINGS_BACKEND"));
+  // log(imports.gi.Gio.SettingsBackend.get_default());
 
   const { buildHomePage } = imports.homePage;
   const { Tab } = imports.tab;
@@ -223,7 +223,7 @@
 
     settings.bind("tabs-position", notebook, "tab_pos", SettingsBindFlags.GET);
 
-    // if (getenv("DEV") === "true") {
+    // if (getenv("DEV")) {
     //   buildInstance({
     //     url: "https://jhmux.codesandbox.io/",
     //     name: "Tests",

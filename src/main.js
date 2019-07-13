@@ -10,8 +10,15 @@
 
   const { Application } = imports.gi.Gtk;
   const { ApplicationFlags } = imports.gi.Gio;
+  const { getenv, listenv } = imports.gi.GLib;
 
   const { Window } = imports.window;
+
+  if (getenv("DEV")) {
+    listenv().forEach(name => {
+      log(`${name}: ${getenv(name)}`);
+    });
+  }
 
   this.main = function main(argv) {
     const application = new Application({

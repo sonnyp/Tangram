@@ -2,7 +2,7 @@
   "use strict";
 
   const { WindowTypeHint } = imports.gi.Gdk;
-  const { once } = imports.util;
+  const { once, Settings } = imports.util;
   const {
     // Box,
     Dialog,
@@ -15,10 +15,6 @@
     // Orientation,
   } = imports.gi.Gtk;
   const { uuid_string_random } = imports.gi.GLib;
-  const {
-    Settings,
-    // SettingsBindFlags,
-  } = imports.gi.Gio;
 
   this.promptServiceDialog = async function promptServiceDialog({
     window,

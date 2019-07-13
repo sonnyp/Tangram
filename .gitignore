@@ -11,3 +11,4 @@ repo/
 *.gresource
 node_modules
 gschemas.compiled
+settings.ini

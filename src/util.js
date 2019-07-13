@@ -1,6 +1,21 @@
 (() => {
   "use strict";
 
+  const Gio = imports.gi.Gio;
+  const { getenv } = imports.gi.GLib;
+
+  const keyfileBackend = Gio.keyfile_settings_backend_new(
+    "settings.ini",
+    "/",
+    null
+  );
+  this.Settings = function Settings(props) {
+    return new Gio.Settings({
+      backend: getenv("DEV") ? keyfileBackend : null,
+      ...props,
+    });
+  };
+
   this.connect = function connect(object, signal, handler) {
     if (typeof signal === "string") {
       return object.connect(signal, (self, ...params) => {
