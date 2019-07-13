@@ -100,6 +100,14 @@ flatpak --user install gigagram re.sonny.gigagram
 flatpak run re.sonny.gigagram
 ```
 
+### Ubuntu dependencies
+
+```
+sudo apt update && sudo apt upgrade
+sudo apt install libglib2.0-dev
+sudo apt install libglib2.0
+```
+
 ### Inspect
 
 ```sh
@@ -112,4 +120,4 @@ GTK_DEBUG=interactive ./run.sh
 
 Inspired by [GNOME Web](https://wiki.gnome.org/Apps/Web), [Rambox](https://rambox.pro/#home), [Station](https://getstation.com/) and [Franz](https://meetfranz.com/).
 
-Service icons from [papirus-icon-theme](https://github.com/PapirusDevelopmentTeam/papirus-icon-theme).
+Service icons from [papirus-icon-theme](https://github.com/PapirusDevelopmentTeam/papirus-icon-theme) and [Flaticon.com](https://www.flaticon.com/)
