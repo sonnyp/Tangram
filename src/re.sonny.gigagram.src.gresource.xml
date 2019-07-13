@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <gresources>
   <gresource prefix="/re/sonny/gigagram/js">
+    <file>header.js</file>
     <file>homePage.js</file>
     <file>main.js</file>
     <file>serviceDialog.js</file>
