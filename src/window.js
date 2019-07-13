@@ -1,8 +1,16 @@
 (() => {
   "use strict";
 
-  const { getenv, VariantType } = imports.gi.GLib;
-  const { ApplicationWindow, Notebook, HeaderBar } = imports.gi.Gtk;
+  const {
+    // getenv,
+    VariantType,
+  } = imports.gi.GLib;
+  const {
+    ApplicationWindow,
+    Notebook,
+    Stack,
+    StackTransitionType,
+  } = imports.gi.Gtk;
   const {
     Notification,
     NotificationPriority,
@@ -12,20 +20,17 @@
   } = imports.gi.Gio;
 
   const { buildHomePage } = imports.homePage;
-  const { Tab, TabLabel } = imports.tab;
+  const { Tab } = imports.tab;
   const { promptServiceDialog } = imports.serviceDialog;
   const { connect } = imports.util;
+  const { Header } = imports.header;
 
   const settings = new Settings({
     schema_id: "re.sonny.gigagram",
   });
 
   this.Window = function Window(application) {
-    // https://gjs-docs.gnome.org/gtk30~3.24.8/gtk.headerbar
-    const headerBar = new HeaderBar({
-      title: "Gigagram",
-      show_close_button: true,
-    });
+    const header = Header({ onAddTab: showServices, onCancel: showTabs });
 
     // https://gjs-docs.gnome.org/gtk30~3.24.8/gtk.applicationwindow
     const window = new ApplicationWindow({
@@ -34,7 +39,16 @@
       default_height: 620,
       default_width: 840,
     });
-    window.set_titlebar(headerBar);
+    window.set_titlebar(header.titlebar);
+    header.titlebar.show_all();
+
+    // https://gjs-docs.gnome.org/gtk30~3.24.8/gtk.stack
+    const stack = new Stack();
+    stack.set_transition_type(StackTransitionType.CROSSFADE);
+    window.add(stack);
+    const addTabPage = buildHomePage({ onAddService });
+    stack.add_named(addTabPage, "services");
+    stack.show_all();
 
     const selectTabAction = new SimpleAction({
       name: "selectTab",
@@ -42,7 +56,7 @@
     });
     selectTabAction.connect("activate", (self, parameters) => {
       const idx = parameters.deep_unpack();
-      notebook.set_current_page(idx);
+      showTabs(idx);
       window.present();
     });
     application.add_action(selectTabAction);
@@ -54,9 +68,14 @@
     removeInstanceAction.connect("activate", (self, parameters) => {
       const id = parameters.deep_unpack();
 
-      const instances = new Set(settings.get_strv("instances"));
-      instances.delete(id);
-      settings.set_strv("instances", [...instances]);
+      const instances = settings.get_strv("instances");
+      const idx = instances.indexOf(id);
+
+      if (idx < 0) return;
+
+      instances.splice(idx, 1);
+
+      settings.set_strv("instances", instances);
 
       const instanceSettings = new Settings({
         schema_id: "re.sonny.gigagram.Instance",
@@ -70,9 +89,30 @@
       instanceSettings.reset("url");
       instanceSettings.reset("service");
 
-      onRemoveInstance(id);
+      notebook.remove_page(idx);
+
+      if (instances.length < 1) {
+        showServices();
+      }
     });
     application.add_action(removeInstanceAction);
+
+    function showTabs(idx) {
+      if (idx) {
+        notebook.set_current_page(idx);
+      }
+      header.stack.set_visible_child_name("tabs");
+      stack.set_visible_child_name("tabs");
+    }
+    function showServices() {
+      const instances = settings.get_strv("instances");
+      stack.set_visible_child_name("services");
+      if (instances.length > 0) {
+        header.stack.set_visible_child_name("services");
+      } else {
+        header.stack.set_visible_child_name("none");
+      }
+    }
 
     const editInstanceAction = new SimpleAction({
       name: "editInstance",
@@ -80,7 +120,8 @@
     });
     editInstanceAction.connect("activate", (self, parameters) => {
       const id = parameters.deep_unpack();
-      onEditInstance(id);
+      // showTabs(idx); FIXME
+      promptServiceDialog({ window, id }).catch(logError);
     });
     application.add_action(editInstanceAction);
 
@@ -111,6 +152,8 @@
         settings,
         instanceSettings
       );
+      label.show_all();
+      page.show_all();
       const idx = notebook.append_page(page, label);
       notebook.set_tab_reorderable(page, true);
       return idx;
@@ -122,28 +165,17 @@
 
       const { name, url, id, service_id } = instance;
       const instances = settings.get_strv("instances");
-      log(instances);
       instances.push(id);
       settings.set_strv("instances", instances);
-      log(settings.get_strv("instances"));
 
       const idx = buildInstance({ url, name, service_id, id });
-      notebook.show_all();
-      notebook.set_current_page(idx);
-    }
-
-    function onRemoveInstance(id) {
-      const instances = settings.get_strv("instances");
-      const idx = instances.indexOf(id);
-      notebook.remove_page(idx);
-    }
-
-    async function onEditInstance(id) {
-      await promptServiceDialog({ window, id });
+      showTabs(idx);
     }
 
     // https://gjs-docs.gnome.org/gtk30~3.24.8/gtk.notebook
     const notebook = new Notebook({ scrollable: true, show_tabs: false });
+    notebook.show_all();
+    stack.add_named(notebook, "tabs");
     connect(
       notebook,
       {
@@ -165,35 +197,34 @@
     );
 
     settings.bind("tabs-position", notebook, "tab_pos", SettingsBindFlags.GET);
-    const page = buildHomePage({ onAddService });
-    page.title = "Add Application";
-    notebook.append_page(page, TabLabel({ name: "Gigagram" }, settings));
-    notebook.set_tab_reorderable(page, true);
 
-    window.add(notebook);
+    // if (getenv("DEV") === "true") {
+    //   buildInstance({
+    //     url: "https://jhmux.codesandbox.io/",
+    //     name: "Tests",
+    //     id: "gigagram-tests",
+    //     service_id: "custom",
+    //   });
+    // }
 
-    if (getenv("DEV") === "true") {
-      buildInstance({
-        url: "https://jhmux.codesandbox.io/",
-        name: "Tests",
-        id: "gigagram-tests",
-        service_id: "custom",
+    const instances = settings.get_strv("instances");
+    if (instances.length > 0) {
+      showTabs();
+      instances.forEach(id => {
+        const settings = new Settings({
+          schema_id: "re.sonny.gigagram.Instance",
+          path: `/re/sonny/gigagram/instances/${id}/`,
+        });
+        const name = settings.get_string("name");
+        const url = settings.get_string("url");
+        const service_id = settings.get_string("service");
+        if (!url || !service_id) return;
+
+        buildInstance({ url, name, id, service_id });
       });
+    } else {
+      showServices();
     }
-    settings.get_strv("instances").forEach(id => {
-      const settings = new Settings({
-        schema_id: "re.sonny.gigagram.Instance",
-        path: `/re/sonny/gigagram/instances/${id}/`,
-      });
-      const name = settings.get_string("name");
-      const url = settings.get_string("url");
-      const service_id = settings.get_string("service");
-      if (!url || !service_id) return;
-
-      buildInstance({ url, name, id, service_id });
-    });
-
-    window.show_all();
 
     return window;
   };
