@@ -10,11 +10,12 @@ Gigagram is powered by [WebKitGTK](https://webkitgtk.org/).
 
 ## Features
 
-* Add an instance by clicking on a service
-* Edit an instance by right clicking on the tab
-* Remove an instance by right clicking on the tab
+* Add a tab
+* Edit a tab by right clicking on it
+* Remove a tab by right clicking on it
 * Re-order tabs by drag'n drop
 * Desktop/audio notifications (if supported by the service)
+* Choose tabs position (top, left, right, bottom) via the menu
 
 ## Install
 

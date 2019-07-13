@@ -4,6 +4,7 @@
   const {
     // getenv,
     VariantType,
+    Variant,
   } = imports.gi.GLib;
   const {
     ApplicationWindow,
@@ -50,6 +51,29 @@
     stack.add_named(addTabPage, "services");
     stack.show_all();
 
+    // https://gjs-docs.gnome.org/gio20~2.0_api/gio.simpleaction
+    // FIXME, is there a better way to bind setting to action?
+    // or even better bind menu to setting, see header.js
+    const tabsPosition = SimpleAction.new_stateful(
+      "tabsPosition",
+      VariantType.new("s"),
+      Variant.new_string(settings.get_string("tabs-position"))
+    );
+    settings.connect("changed", (self, key) => {
+      if (key !== "tabs-position") {
+        return;
+      }
+      tabsPosition.set_state(
+        Variant.new_string(settings.get_string("tabs-position"))
+      );
+    });
+    tabsPosition.connect("change-state", (self, value) => {
+      const position = value.get_string()[0];
+      settings.set_string("tabs-position", position);
+    });
+    application.add_action(tabsPosition);
+
+    // https://gjs-docs.gnome.org/gio20~2.0_api/gio.simpleaction
     const selectTabAction = new SimpleAction({
       name: "selectTab",
       parameter_type: VariantType.new("s"),
@@ -61,6 +85,7 @@
     });
     application.add_action(selectTabAction);
 
+    // https://gjs-docs.gnome.org/gio20~2.0_api/gio.simpleaction
     const removeInstanceAction = new SimpleAction({
       name: "removeInstance",
       parameter_type: VariantType.new("s"),
