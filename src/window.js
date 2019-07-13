@@ -24,7 +24,6 @@
     // https://gjs-docs.gnome.org/gtk30~3.24.8/gtk.headerbar
     const headerBar = new HeaderBar({
       title: "Gigagram",
-      subtitle: "Add tab",
       show_close_button: true,
     });
 
@@ -123,11 +122,13 @@
 
       const { name, url, id, service_id } = instance;
       const instances = settings.get_strv("instances");
+      log(instances);
       instances.push(id);
       settings.set_strv("instances", instances);
+      log(settings.get_strv("instances"));
 
       const idx = buildInstance({ url, name, service_id, id });
-      // notebook.show_all();
+      notebook.show_all();
       notebook.set_current_page(idx);
     }
 
@@ -140,16 +141,6 @@
     async function onEditInstance(id) {
       await promptServiceDialog({ window, id });
     }
-
-    function onNotifyTitle(webView) {
-      headerBar.set_title(webView.title);
-    }
-    function onNotifyUri(webView) {
-      headerBar.set_subtitle(webView.uri);
-    }
-    let notifyTitleId = null;
-    let notifyUriId = null;
-    let webView = null;
 
     // https://gjs-docs.gnome.org/gtk30~3.24.8/gtk.notebook
     const notebook = new Notebook({ scrollable: true, show_tabs: false });
@@ -169,28 +160,6 @@
           }
 
           settings.set_strv("instances", reordered);
-        },
-        ["switch-page"](page) {
-          if (webView) {
-            if (notifyTitleId) {
-              webView.disconnect("notify::title", notifyTitleId);
-              notifyTitleId = null;
-            }
-            if (notifyUriId) {
-              webView.disconnect("notify::uri", onNotifyUri);
-              notifyUriId = null;
-            }
-            webView = null;
-          }
-          // log(page.title);
-          if (page instanceof imports.gi.WebKit2.WebView) {
-            webView = page;
-            notifyTitleId = webView.connect("notify::title", onNotifyTitle);
-            notifyUriId = webView.connect("notify::uri", onNotifyUri);
-          }
-
-          headerBar.set_title(page.title);
-          headerBar.set_subtitle(page.uri);
         },
       }
     );
