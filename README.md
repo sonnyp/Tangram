@@ -10,19 +10,18 @@ Gigagram is powered by [WebKitGTK](https://webkitgtk.org/).
 
 ## Features
 
-* Add a tab
-* Edit a tab by right clicking on it
-* Remove a tab by right clicking on it
-* Re-order tabs by drag'n drop
-* Desktop/audio notifications (if supported by the service)
-* Choose tabs position (top, left, right, bottom) via the menu
+- Add a tab
+- Edit a tab by right clicking on it
+- Remove a tab by right clicking on it
+- Re-order tabs by drag'n drop
+- Desktop/audio notifications (if supported by the service)
+- Choose tabs position (top, left, right, bottom) via the menu
 
 ## Install
 
 ### Arch Linux
 
 https://aur.archlinux.org/packages/gigagram-git/
-
 
 ### Flatpak
 
@@ -51,10 +50,16 @@ Otherwise feel free to [open an issue](https://github.com/sonnyp/gigagram/issues
 
 Similar to [GNOME Web standalone](https://fedoramagazine.org/standalone-web-applications-gnome-web/):
 
-* WebKit data is stored under `~/.local/share/gigagram/{instance-id}/`
-* WebKit cache is stored under `~/.cache/gigagram/{instance-id}/`
+- WebKit data is stored under `~/.local/share/gigagram/{instance-id}/`
+- WebKit cache is stored under `~/.cache/gigagram/{instance-id}/`
 
 ## Development
+
+### Install development dependencies
+
+```sh
+npm install
+```
 
 ### Run
 
@@ -65,8 +70,7 @@ Similar to [GNOME Web standalone](https://fedoramagazine.org/standalone-web-appl
 ### Test
 
 ```sh
-npm install
-npm test
+make test
 ```
 
 ### Meson

@@ -39,5 +39,7 @@ modules:
     builddir: true
     buildsystem: meson
     sources:
-      - type: git
-        url: https://github.com/sonnyp/gigagram.git
+      - type: dir
+        path: ./
+      # - type: git
+      #   url: https://github.com/sonnyp/gigagram.git
