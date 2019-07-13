@@ -55,7 +55,21 @@ Similar to [GNOME Web standalone](https://fedoramagazine.org/standalone-web-appl
 
 ## Development
 
-### Install development dependencies
+### Install dependencies
+
+<details>
+ <summary>Ubuntu</summary>
+ <code>
+ sudo apt install npm libglib2.0-dev-bin
+ </code>
+</details>
+
+<details>
+ <summary>Arch Linux</summary>
+ <code>
+ sudo pacman -S npm glib2
+ </code>
+</details>
 
 ```sh
 npm install
@@ -98,14 +112,6 @@ flatpak-builder --repo=repo --force-clean flatpak re.sonny.gigagram.yaml
 flatpak --user remote-add --no-gpg-verify gigagram repo
 flatpak --user install gigagram re.sonny.gigagram
 flatpak run re.sonny.gigagram
-```
-
-### Ubuntu dependencies
-
-```
-sudo apt update && sudo apt upgrade
-sudo apt install libglib2.0-dev
-sudo apt install libglib2.0
 ```
 
 ### Inspect
