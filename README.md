@@ -28,12 +28,8 @@ https://aur.archlinux.org/packages/gigagram-git/
 [Install flatpak](https://flatpak.org/setup/)
 
 ```sh
-git clone https://github.com/sonnyp/gigagram.git
-cd gigagram
-flatpak-builder --repo=repo --install-deps-from=flathub flatpak re.sonny.gigagram.yaml
-flatpak --user remote-add --no-gpg-verify gigagram repo
-flatpak --user install gigagram re.sonny.gigagram
-flatpak run re.sonny.gigagram
+wget https://github.com/sonnyp/gigagram/releases/download/v0.1.0/gigagram.flatpak
+flatpak install gigagram.flatpak
 ```
 
 ## Services
