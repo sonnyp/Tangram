@@ -6,6 +6,7 @@ command: re.sonny.gigagram
 finish-args:
   - "--share=network"
   - "--socket=wayland"
+  - "--device=dri"
   - "--socket=fallback-x11"
   # - "--share=ipc" # only required for older flatpak ?
   # - "--socket=x11" # only required for older flatpak ?
