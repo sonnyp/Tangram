@@ -71,5 +71,16 @@
     <file>services/trello/icon.svg</file>
     <file>services/trello/service.json</file>
   
+    <!--tweet-deck-->
+    <file>services/tweetdeck/icon.svg</file>
+    <file>services/tweetdeck/service.json</file>
+
+    <!--simplenote-->
+    <file>services/simplenote/icon.svg</file>
+    <file>services/simplenote/service.json</file>
+
+    <!--keepnote-->
+    <file>services/keepnote/icon.svg</file>
+    <file>services/keepnote/service.json</file>
   </gresource>
 </gresources>

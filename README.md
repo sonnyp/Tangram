@@ -99,10 +99,14 @@ flatpak run re.sonny.gigagram
 
 ```
 sudo apt update && sudo apt upgrade
-sudo apt install libglib2.0-dev
-sudo apt install libglib2.0
+sudo apt install libglib2.0-dev libglib2.0 -y
 ```
 
+### Fedora dependencies
+
+```
+sudo dnf install npm glib2-devel
+```
 ### Inspect
 
 ```sh
