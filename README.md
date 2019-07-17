@@ -56,15 +56,22 @@ Similar to [GNOME Web standalone](https://fedoramagazine.org/standalone-web-appl
 <details>
  <summary>Ubuntu</summary>
  <code>
- sudo apt install npm libglib2.0-dev-bin
+ sudo apt install npm libglib2.0-dev-bin flatpak-builder
  </code>
 </details>
 
 <details>
  <summary>Arch Linux</summary>
  <code>
- sudo pacman -S npm glib2
+ sudo pacman -S npm glib2 flatpak-builder
  </code>
+</details>
+
+<details>
+  <summary>Fedora</summary>
+  <code>
+  sudo dnf install npm glib2-devel flatpak-builder
+  </code>
 </details>
 
 ```sh
