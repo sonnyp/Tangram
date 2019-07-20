@@ -13,6 +13,10 @@
     <file>services/facebook/icon.svg</file>
     <file>services/facebook/service.json</file>
 
+    <!-- fastmail -->
+    <file>services/fastmail/icon.svg</file>
+    <file>services/fastmail/service.json</file>
+
     <!-- mastodon -->
     <file>services/mastodon/icon.svg</file>
     <file>services/mastodon/service.json</file>
