@@ -108,7 +108,7 @@
       "tab-new-symbolic",
       IconSize.BUTTON
     );
-    // addTabButton.set_label("Add");
+
     addTabButton.set_always_show_image(true);
     addTabButton.connect("clicked", onAddTab);
     stack.add_named(addTabButton, "tabs");
