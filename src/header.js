@@ -80,7 +80,7 @@
     const popover = builder.get_object("app-menu");
 
     const image = new Image({
-      icon_name: "open-menu-symbolic",
+      icon_name: "go-previous-symbolic",
       icon_size: IconSize.BUTTON,
     });
     const button = new MenuButton({
