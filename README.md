@@ -128,5 +128,3 @@ GTK_DEBUG=interactive ./run.sh
 ## Credits
 
 Inspired by [GNOME Web](https://wiki.gnome.org/Apps/Web), [Rambox](https://rambox.pro/#home), [Station](https://getstation.com/) and [Franz](https://meetfranz.com/).
-
-Service icons from [papirus-icon-theme](https://github.com/PapirusDevelopmentTeam/papirus-icon-theme) and [Flaticon.com](https://www.flaticon.com/)
