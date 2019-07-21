@@ -80,7 +80,7 @@
     const popover = builder.get_object("app-menu");
 
     const image = new Image({
-      icon_name: "open-menu-symbolic",
+      icon_name: "go-previous-symbolic",
       icon_size: IconSize.BUTTON,
     });
     const button = new MenuButton({
@@ -105,12 +105,17 @@
       "tab-new-symbolic",
       IconSize.BUTTON
     );
-    addTabButton.set_label("Add");
+    // addTabButton.set_label("Add");
     addTabButton.set_always_show_image(true);
     addTabButton.connect("clicked", onAddTab);
     stack.add_named(addTabButton, "tabs");
 
-    const cancelButton = Button.new_with_label("Cancel");
+    const cancelButton = new Button();
+
+    cancelButton.add(new Image({
+      icon_name: "pan-start-symbolic",
+      icon_size: IconSize.BUTTON,
+    }));
     cancelButton.connect("clicked", onCancel);
     stack.add_named(cancelButton, "services");
 
