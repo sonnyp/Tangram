@@ -1,5 +1,5 @@
-project('gigagram',  
-        version: '0.1.0',
+project('gigagram',
+        version: '0.2.0',
   meson_version: '>= 0.50.0',
 )
 
