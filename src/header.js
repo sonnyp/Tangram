@@ -80,7 +80,7 @@
     const popover = builder.get_object("app-menu");
 
     const image = new Image({
-      icon_name: "go-previous-symbolic",
+      icon_name: "open-menu-symbolic",
       icon_size: IconSize.BUTTON,
     });
     const button = new MenuButton({
@@ -112,10 +112,12 @@
 
     const cancelButton = new Button();
 
-    cancelButton.add(new Image({
-      icon_name: "pan-start-symbolic",
-      icon_size: IconSize.BUTTON,
-    }));
+    cancelButton.add(
+      new Image({
+        icon_name: "go-previous-symbolic",
+        icon_size: IconSize.BUTTON,
+      })
+    );
     cancelButton.connect("clicked", onCancel);
     stack.add_named(cancelButton, "services");
 
