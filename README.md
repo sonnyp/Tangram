@@ -16,6 +16,7 @@ Gigagram is powered by [WebKitGTK](https://webkitgtk.org/).
 - Re-order tabs by drag'n drop
 - Desktop/audio notifications (if supported by the service)
 - Choose tabs position (top, left, right, bottom) via the menu
+- Navigation controls (go back, forward, reload)
 
 ## Install
 
