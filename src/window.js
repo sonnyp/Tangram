@@ -39,20 +39,17 @@
     });
 
     function onReload() {
-      const current = notebook.get_current_page();
-      const child = notebook.get_nth_page(current);
+      const child = notebook.get_nth_page(notebook.page);
       child.reload();
     }
 
     function onGoBack() {
-      const current = notebook.get_current_page();
-      const child = notebook.get_nth_page(current);
+      const child = notebook.get_nth_page(notebook.page);
       child.go_back();
     }
 
     function onGoForward() {
-      const current = notebook.get_current_page();
-      const child = notebook.get_nth_page(current);
+      const child = notebook.get_nth_page(notebook.page);
       child.go_forward();
     }
 
