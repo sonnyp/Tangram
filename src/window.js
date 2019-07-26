@@ -30,7 +30,31 @@
   });
 
   this.Window = function Window(application) {
-    const header = Header({ onAddTab: showServices, onCancel: showTabs });
+    const header = Header({
+      onAddTab: showServices,
+      onCancel: showTabs,
+      onReload,
+      onGoBack,
+      onGoForward,
+    });
+
+    function onReload() {
+      const current = notebook.get_current_page();
+      const child = notebook.get_nth_page(current);
+      child.reload();
+    }
+
+    function onGoBack() {
+      const current = notebook.get_current_page();
+      const child = notebook.get_nth_page(current);
+      child.go_back();
+    }
+
+    function onGoForward() {
+      const current = notebook.get_current_page();
+      const child = notebook.get_nth_page(current);
+      child.go_forward();
+    }
 
     // https://gjs-docs.gnome.org/gtk30~3.24.8/gtk.applicationwindow
     const window = new ApplicationWindow({
