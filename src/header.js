@@ -37,6 +37,13 @@
                 <property name="action-name">app.about</property>
               </object>
             </child>
+            <child>
+            <object class="GtkModelButton">
+              <property name="visible">True</property>
+              <property name="text" translatable="yes">Quit</property>
+              <property name="action-name">app.quit</property>
+            </object>
+          </child>
           </object>
         </child>
         <child>

@@ -192,6 +192,16 @@
     });
     application.add_action(showAboutDialog);
 
+    const quit = new SimpleAction({
+      name: "quit",
+      parameter_type: null,
+    });
+    quit.connect("activate", () => {
+      application.quit();
+    });
+    application.add_action(quit);
+    application.set_accels_for_action("app.quit", ["<Ctrl>Q"]);
+
     function buildInstance({ url, name, service_id, id }) {
       notebook.set_show_tabs(true);
       const instanceSettings = new Settings({
