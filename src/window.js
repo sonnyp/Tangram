@@ -1,6 +1,8 @@
 (() => {
   "use strict";
 
+  // FIXME KeyFile is not documented
+  // https://gjs-docs.gnome.org/glib20~2.60.1/glib.keyfile 404
   const { VariantType, Variant } = imports.gi.GLib;
   const {
     ApplicationWindow,
@@ -28,6 +30,7 @@
   const { promptServiceDialog } = imports.serviceDialog;
   const { connect } = imports.util;
   const { Header } = imports.header;
+  const { promptNewApplicationDialog } = imports.applicationDialog;
 
   const settings = new Settings({
     schema_id: "re.sonny.gigagram",
@@ -252,6 +255,13 @@
       }
     });
     application.add_action(removeInstanceAction);
+
+    // https://gjs-docs.gnome.org/gio20~2.0_api/gio.simpleaction
+    const newApplication = SimpleAction.new("newApplication", null);
+    newApplication.connect("activate", () => {
+      promptNewApplicationDialog({ window }).catch(log);
+    });
+    application.add_action(newApplication);
 
     function showTabs(idx) {
       if (idx) {
