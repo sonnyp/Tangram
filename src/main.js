@@ -8,9 +8,16 @@
     Gtk: "3.0",
   });
 
+  const { programInvocationName } = imports.system;
   const { Application, AboutDialog, License } = imports.gi.Gtk;
   const { ApplicationFlags, SimpleAction } = imports.gi.Gio;
-  const { getenv, listenv, set_prgname } = imports.gi.GLib;
+  const {
+    getenv,
+    listenv,
+    set_prgname,
+    spawn_async,
+    SpawnFlags,
+  } = imports.gi.GLib;
 
   const { Window } = imports.window;
 
@@ -69,6 +76,20 @@
     });
     application.add_action(quit);
     application.set_accels_for_action("app.quit", ["<Ctrl>Q"]);
+
+    if (getenv("DEV")) {
+      const restart = new SimpleAction({
+        name: "restart",
+        parameter_type: null,
+      });
+      restart.connect("activate", () => {
+        const argv = [getenv("_"), programInvocationName, ...ARGV];
+        application.quit();
+        spawn_async(null, argv, null, SpawnFlags.DEFAULT, null);
+      });
+      application.add_action(restart);
+      application.set_accels_for_action("app.restart", ["<Ctrl>R"]);
+    }
 
     return application.run(argv);
   };

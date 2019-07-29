@@ -85,6 +85,8 @@ npm install
 ./run.sh
 ```
 
+Hit <Ctrl>R to restart the application with changes.
+
 ### Test
 
 ```sh
