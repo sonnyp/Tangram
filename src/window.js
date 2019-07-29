@@ -7,8 +7,6 @@
     Notebook,
     Stack,
     StackTransitionType,
-    AboutDialog,
-    License,
   } = imports.gi.Gtk;
   const {
     Notification,
@@ -171,36 +169,6 @@
       promptServiceDialog({ window, id }).catch(logError);
     });
     application.add_action(editInstanceAction);
-
-    const showAboutDialog = new SimpleAction({
-      name: "about",
-      parameter_type: null,
-    });
-    showAboutDialog.connect("activate", () => {
-      const aboutDialog = new AboutDialog({
-        authors: ["Sonny Piers <sonny@fastmail.net>"],
-        comments: "Web applications runner/manager",
-        copyright: "Copyright © 2019 Gigagram authors",
-        license_type: License.GPL_3_0_ONLY,
-        version: pkg.version,
-        website_label: "Learn more about Gigagram",
-        website: "https://github.com/sonnyp/gigagram",
-        transient_for: window,
-        modal: true,
-      });
-      aboutDialog.present();
-    });
-    application.add_action(showAboutDialog);
-
-    const quit = new SimpleAction({
-      name: "quit",
-      parameter_type: null,
-    });
-    quit.connect("activate", () => {
-      application.quit();
-    });
-    application.add_action(quit);
-    application.set_accels_for_action("app.quit", ["<Ctrl>Q"]);
 
     function buildInstance({ url, name, service_id, id }) {
       notebook.set_show_tabs(true);

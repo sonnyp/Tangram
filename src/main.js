@@ -8,8 +8,8 @@
     Gtk: "3.0",
   });
 
-  const { Application } = imports.gi.Gtk;
-  const { ApplicationFlags } = imports.gi.Gio;
+  const { Application, AboutDialog, License } = imports.gi.Gtk;
+  const { ApplicationFlags, SimpleAction } = imports.gi.Gio;
   const { getenv, listenv, set_prgname } = imports.gi.GLib;
 
   const { Window } = imports.window;
@@ -28,15 +28,47 @@
 
     set_prgname("Gigagram");
 
-    application.connect("activate", app => {
-      let activeWindow = app.activeWindow;
+    let window;
 
-      if (!activeWindow) {
-        activeWindow = Window(app);
+    application.connect("activate", app => {
+      window = app.activeWindow;
+
+      if (!window) {
+        window = Window(app);
       }
 
-      activeWindow.present();
+      window.present();
     });
+
+    const showAboutDialog = new SimpleAction({
+      name: "about",
+      parameter_type: null,
+    });
+    showAboutDialog.connect("activate", () => {
+      const aboutDialog = new AboutDialog({
+        authors: ["Sonny Piers <sonny@fastmail.net>"],
+        comments: "Web applications runner/manager",
+        copyright: "Copyright © 2019 Gigagram authors",
+        license_type: License.GPL_3_0_ONLY,
+        version: pkg.version,
+        website_label: "Learn more about Gigagram",
+        website: "https://github.com/sonnyp/gigagram",
+        transient_for: window,
+        modal: true,
+      });
+      aboutDialog.present();
+    });
+    application.add_action(showAboutDialog);
+
+    const quit = new SimpleAction({
+      name: "quit",
+      parameter_type: null,
+    });
+    quit.connect("activate", () => {
+      application.quit();
+    });
+    application.add_action(quit);
+    application.set_accels_for_action("app.quit", ["<Ctrl>Q"]);
 
     return application.run(argv);
   };
