@@ -22,11 +22,19 @@
           <object class="GtkBox">
             <property name="visible">True</property>
             <property name="margin">10</property>
+            <property name="orientation">1</property>
             <child>
               <object class="GtkModelButton">
                 <property name="visible">True</property>
                 <property name="menu-name">tabs-position</property>
                 <property name="text" translatable="yes">Tabs position</property>
+              </object>
+            </child>
+            <child>
+              <object class="GtkModelButton">
+                <property name="visible">True</property>
+                <property name="text" translatable="yes">About</property>
+                <property name="action-name">app.about</property>
               </object>
             </child>
           </object>

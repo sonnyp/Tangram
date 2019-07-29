@@ -10,7 +10,7 @@
 
   const { Application } = imports.gi.Gtk;
   const { ApplicationFlags } = imports.gi.Gio;
-  const { getenv, listenv } = imports.gi.GLib;
+  const { getenv, listenv, set_prgname } = imports.gi.GLib;
 
   const { Window } = imports.window;
 
@@ -25,6 +25,8 @@
       application_id: "re.sonny.gigagram",
       flags: ApplicationFlags.FLAGS_NONE,
     });
+
+    set_prgname("Gigagram");
 
     application.connect("activate", app => {
       let activeWindow = app.activeWindow;
