@@ -2,6 +2,9 @@
 
 export DEV=true
 
+# data
+glib-compile-resources --target=data/re.sonny.gigagram.data.gresource --sourcedir=data/ data/re.sonny.gigagram.data.gresource.xml
+
 # services
 glib-compile-resources --target=data/re.sonny.gigagram.services.gresource --sourcedir=src/ src/re.sonny.gigagram.services.gresource.xml
 
