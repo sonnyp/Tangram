@@ -7,7 +7,11 @@
     Notebook,
     Stack,
     StackTransitionType,
+    AccelGroup,
+    AccelFlags,
+    accelerator_parse,
   } = imports.gi.Gtk;
+  const { ModifierType, keyval_name } = imports.gi.Gdk;
   const {
     Notification,
     NotificationPriority,
@@ -38,19 +42,31 @@
       onGoForward,
     });
 
-    function onReload() {
-      const child = notebook.get_nth_page(notebook.page);
-      child.reload();
+    function getCurrentTab() {
+      return notebook.get_nth_page(notebook.page);
+    }
+
+    function onStop() {
+      getCurrentTab().stop_loading();
+    }
+
+    function onReload(bypass_cache) {
+      const tab = getCurrentTab();
+      if (bypass_cache) {
+        tab.reload_bypass_cache();
+      } else {
+        tab.reload();
+      }
     }
 
     function onGoBack() {
-      const child = notebook.get_nth_page(notebook.page);
-      child.go_back();
+      getCurrentTab().go_back();
+      return true;
     }
 
     function onGoForward() {
-      const child = notebook.get_nth_page(notebook.page);
-      child.go_forward();
+      getCurrentTab().go_forward();
+      return true;
     }
 
     // https://gjs-docs.gnome.org/gtk30~3.24.8/gtk.applicationwindow
@@ -70,6 +86,101 @@
     const addTabPage = buildHomePage({ onAddService });
     stack.add_named(addTabPage, "services");
     stack.show_all();
+
+    // https://gjs-docs.gnome.org/gtk30~3.24.8/gtk.accelgroup
+    const accelGroup = new AccelGroup();
+    window.add_accel_group(accelGroup);
+    const shortcuts = [
+      [["Escape"], onStop],
+      [["<Primary>R", "F5"], onReload],
+      [["<Primary><Shift>R", "<Shift>F5"], () => onReload(true)],
+      [["<Alt>Left"], onGoBack],
+      [["<Alt>Right"], onGoForward],
+      [
+        ["<Primary><Shift>I"],
+        () => {
+          getCurrentTab()
+            .get_inspector()
+            .show();
+        },
+      ],
+    ];
+    shortcuts.forEach(([accels, fn]) => {
+      accels.forEach(accel => {
+        const [accelerator_key, accelerator_mods] = accelerator_parse(accel);
+        accelGroup.connect(
+          accelerator_key,
+          accelerator_mods,
+          AccelFlags.VISIBLE,
+          fn
+        );
+      });
+    });
+
+    function nextPage() {
+      if (notebook.page === notebook.get_n_pages() - 1) {
+        notebook.page = 0;
+      } else {
+        notebook.next_page();
+      }
+    }
+    function prevPage() {
+      if (notebook.page === 0) {
+        notebook.page = notebook.get_n_pages() - 1;
+      } else {
+        notebook.prev_page();
+      }
+    }
+
+    window.connect("key-press-event", (self, event) => {
+      const [, modifier] = event.get_state();
+      const [, keyval] = event.get_keyval();
+      const name = keyval_name(keyval);
+
+      // CTRL + Page_Down
+      if (name === "Page_Down" && modifier === ModifierType.CONTROL_MASK) {
+        nextPage();
+        return true;
+      }
+      // CTRL + Tab
+      if (
+        ["Tab", "ISO_Left_Tab", "KP_Tab"].includes(name) &&
+        modifier === ModifierType.CONTROL_MASK
+      ) {
+        nextPage();
+        return true;
+      }
+
+      // CTRL + Page_Up
+      if (name === "Page_Up" && modifier === ModifierType.CONTROL_MASK) {
+        prevPage();
+        return true;
+      }
+      // CTRL+SHIFT + Tab
+      if (
+        ["Tab", "ISO_Left_Tab", "KP_Tab"].includes(name) &&
+        modifier === ModifierType.CONTROL_MASK + 1
+      ) {
+        prevPage();
+        return true;
+      }
+
+      // CTRL+SHIFT + PageUp
+      if (name === "Page_Up" && modifier === ModifierType.CONTROL_MASK + 1) {
+        if (notebook.page === 0) return true;
+        notebook.reorder_child(getCurrentTab(), notebook.page - 1);
+        return true;
+      }
+
+      // CTRL+SHIFT + PageDown
+      if (name === "Page_Down" && modifier === ModifierType.CONTROL_MASK + 1) {
+        if (notebook.page === notebook.get_n_pages() - 1) return true;
+        notebook.reorder_child(getCurrentTab(), notebook.page + 1);
+        return true;
+      }
+
+      return false;
+    });
 
     // https://gjs-docs.gnome.org/gio20~2.0_api/gio.simpleaction
     // FIXME, is there a better way to bind setting to action?
@@ -169,6 +280,19 @@
       promptServiceDialog({ window, id }).catch(logError);
     });
     application.add_action(editInstanceAction);
+
+    const nthTab = new SimpleAction({
+      name: "nth-tab",
+      parameter_type: VariantType.new("i"),
+    });
+    for (let i = 1; i < 10; i++) {
+      application.set_accels_for_action(`app.nth-tab(${i})`, [`<Alt>${i}`]);
+    }
+    nthTab.connect("activate", (self, parameters) => {
+      const idx = parameters.deep_unpack();
+      notebook.page = idx - 1;
+    });
+    application.add_action(nthTab);
 
     function buildInstance({ url, name, service_id, id }) {
       notebook.set_show_tabs(true);

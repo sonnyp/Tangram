@@ -13,10 +13,11 @@ Gigagram is powered by [WebKitGTK](https://webkitgtk.org/).
 - Add a tab
 - Edit a tab by right clicking on it
 - Remove a tab by right clicking on it
-- Re-order tabs by drag'n drop
+- Re-order tabs via drag'n drop or shortcut
 - Desktop/audio notifications (if supported by the service)
-- Choose tabs position (top, left, right, bottom) via the menu
+- Change tabs position (top, left, right, bottom) via the menu
 - Navigation controls (go back, forward, reload)
+- Shortcuts
 
 ## Install
 
@@ -85,7 +86,7 @@ npm install
 ./run.sh
 ```
 
-Hit <Ctrl>R to restart the application with changes.
+Hit <Ctrl><Shift>Q to restart the application with changes.
 
 ### Test
 

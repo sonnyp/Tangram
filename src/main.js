@@ -9,7 +9,7 @@
   });
 
   const { programInvocationName } = imports.system;
-  const { Application, AboutDialog, License } = imports.gi.Gtk;
+  const { Application, AboutDialog, License, Builder } = imports.gi.Gtk;
   const { ApplicationFlags, SimpleAction } = imports.gi.Gio;
   const {
     getenv,
@@ -56,7 +56,7 @@
         authors: ["Sonny Piers <sonny@fastmail.net>"],
         comments: "Web applications runner/manager",
         copyright: "Copyright © 2019 Gigagram authors",
-        license_type: License.GPL_3_0_ONLY,
+        license_type: License.GPL_3_0,
         version: pkg.version,
         website_label: "Learn more about Gigagram",
         website: "https://github.com/sonnyp/gigagram",
@@ -66,6 +66,24 @@
       aboutDialog.present();
     });
     application.add_action(showAboutDialog);
+
+    const showShortcutsDialog = new SimpleAction({
+      name: "shortcuts",
+      parameter_type: null,
+    });
+    showShortcutsDialog.connect("activate", () => {
+      const builder = Builder.new_from_resource(
+        "/re/sonny/gigagram/data/shortcuts.xml.ui"
+      );
+      const shortcutsWindow = builder.get_object("shortcuts-window");
+      shortcutsWindow.set_transient_for(window);
+      shortcutsWindow.present();
+    });
+    application.add_action(showShortcutsDialog);
+    application.set_accels_for_action("app.shortcuts", [
+      "<Ctrl>F1",
+      "<Ctrl>question",
+    ]);
 
     const quit = new SimpleAction({
       name: "quit",
@@ -88,7 +106,7 @@
         spawn_async(null, argv, null, SpawnFlags.DEFAULT, null);
       });
       application.add_action(restart);
-      application.set_accels_for_action("app.restart", ["<Ctrl>R"]);
+      application.set_accels_for_action("app.restart", ["<Ctrl><Shift>Q"]);
     }
 
     return application.run(argv);
