@@ -13,3 +13,4 @@ gigagram.flatpak
 node_modules
 gschemas.compiled
 settings.ini
+config/

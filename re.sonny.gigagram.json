@@ -1,0 +1,22 @@
+{
+  "app-id": "re.sonny.gigagram",
+  "runtime": "org.gnome.Platform",
+  "runtime-version": "3.32",
+  "sdk": "org.gnome.Sdk",
+  "command": "re.sonny.gigagram",
+  "finish-args": [
+    "--share=network",
+    "--socket=wayland",
+    "--device=dri",
+    "--socket=fallback-x11",
+    "--socket=pulseaudio"
+  ],
+  "modules": [
+    {
+      "name": "gigagram",
+      "builddir": true,
+      "buildsystem": "meson",
+      "sources": [{ "type": "dir", "path": "./" }]
+    }
+  ]
+}

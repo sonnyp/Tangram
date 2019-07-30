@@ -107,15 +107,15 @@ GSETTINGS_SCHEMA_DIR=./install/share/glib-2.0/schemas/ ./install/bin/re.sonny.gi
 
 ```sh
 cd gigagram
-flatpak-builder --user --force-clean --install-deps-from=flathub flatpak re.sonny.gigagram.yaml
-flatpak-builder --run flatpak re.sonny.gigagram.yaml re.sonny.gigagram
+flatpak-builder --user --force-clean --install-deps-from=flathub flatpak re.sonny.gigagram.json
+flatpak-builder --run flatpak re.sonny.gigagram.json re.sonny.gigagram
 ```
 
 ### Flatpak sandboxed
 
 ```sh
 cd gigagram
-flatpak-builder --repo=repo --force-clean flatpak re.sonny.gigagram.yaml
+flatpak-builder --repo=repo --force-clean flatpak re.sonny.gigagram.json
 flatpak --user remote-add --no-gpg-verify gigagram repo
 flatpak --user install gigagram re.sonny.gigagram
 flatpak run re.sonny.gigagram
