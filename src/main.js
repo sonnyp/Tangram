@@ -53,7 +53,7 @@
     });
     showAboutDialog.connect("activate", () => {
       const aboutDialog = new AboutDialog({
-        authors: ["Sonny Piers <sonny@fastmail.net>"],
+        authors: ["Sonny Piers https://sonny.re"],
         comments: "Web applications runner/manager",
         copyright: "Copyright © 2019 Gigagram authors",
         license_type: License.GPL_3_0,
@@ -63,6 +63,15 @@
         transient_for: window,
         modal: true,
       });
+      aboutDialog.add_credit_section("Contributors", [
+        // Add yourself as
+        // "John Doe",
+        // or
+        // "John Doe <john@example.com>",
+        // or
+        // "John Doe https://john.com",
+      ]);
+
       aboutDialog.present();
     });
     application.add_action(showAboutDialog);
