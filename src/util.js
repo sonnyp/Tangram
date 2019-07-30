@@ -2,9 +2,19 @@
   "use strict";
 
   const Gio = imports.gi.Gio;
-  const { getenv, build_filenamev, get_user_config_dir } = imports.gi.GLib;
+  const {
+    getenv,
+    build_filenamev,
+    get_user_config_dir,
+    // FIXME KeyFile is not documented
+    // https://gjs-docs.gnome.org/glib20~2.60.1/glib.keyfile 404
+    KeyFile,
+    KEY_FILE_DESKTOP_GROUP,
+    KEY_FILE_DESKTOP_KEY_VERSION,
+  } = imports.gi.GLib;
 
   const FLATPAK_ID = getenv("FLATPAK_ID");
+
   let backend = null; // default
   // https://github.com/flatpak/flatpak/issues/78#issuecomment-511160975
   if (FLATPAK_ID) {
@@ -69,5 +79,27 @@
     return Object.keys(enums).find(key => {
       return enums[key] === idx;
     });
+  };
+
+  this.desktopEntry = function desktopEntry(fields) {
+    const keyFile = new KeyFile();
+    // https://developer.gnome.org/integration-guide/stable/desktop-files.html.en
+    // https://standards.freedesktop.org/desktop-entry-spec/desktop-entry-spec-latest.html
+    // https://specifications.freedesktop.org/menu-spec/menu-spec-1.0.html
+    keyFile.set_value(
+      KEY_FILE_DESKTOP_GROUP,
+      KEY_FILE_DESKTOP_KEY_VERSION,
+      "1.0"
+    );
+    for (const key in fields) {
+      keyFile.set_value(
+        KEY_FILE_DESKTOP_GROUP,
+        key,
+        Array.isArray(fields[key])
+          ? fields[key].join(";")
+          : fields[key].toString()
+      );
+    }
+    return keyFile;
   };
 })();

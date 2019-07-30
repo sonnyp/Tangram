@@ -35,7 +35,7 @@
   });
 
   this.Window = function Window({ application, profile }) {
-    log(profile);
+    log(`profile: ${profile}`);
     const header = Header({
       onAddTab: showServices,
       onCancel: showTabs,

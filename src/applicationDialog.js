@@ -2,31 +2,19 @@
   "use strict";
 
   const { WindowTypeHint } = imports.gi.Gdk;
-  const { once } = imports.util;
-  const {
-    // Box,
-    Dialog,
-    Align,
-    Grid,
-    Label,
-    Entry,
-    ResponseType,
-    // Orientation,
-  } = imports.gi.Gtk;
+  const { once, desktopEntry } = imports.util;
+  const { programInvocationName } = imports.system;
+  const { Dialog, Align, Grid, Label, Entry, ResponseType } = imports.gi.Gtk;
 
   const {
-    // FIXME KeyFile is not documented
-    // https://gjs-docs.gnome.org/glib20~2.60.1/glib.keyfile 404
-    KeyFile,
     get_user_data_dir,
     build_filenamev,
     spawn_async,
     SpawnFlags,
-  } = imports.gi.GLib;
-  const {
-    KEY_FILE_DESKTOP_GROUP,
+    getenv,
+    path_is_absolute,
+    get_current_dir,
     KEY_FILE_DESKTOP_KEY_CATEGORIES,
-    KEY_FILE_DESKTOP_KEY_VERSION,
     KEY_FILE_DESKTOP_KEY_NAME,
     KEY_FILE_DESKTOP_KEY_EXEC,
     KEY_FILE_DESKTOP_KEY_TERMINAL,
@@ -34,6 +22,16 @@
     KEY_FILE_DESKTOP_KEY_STARTUP_NOTIFY,
     KEY_FILE_DESKTOP_TYPE_APPLICATION,
   } = imports.gi.GLib;
+
+  let bin;
+  if (getenv("FLATPAK_ID")) {
+    bin = pkg.name;
+  } else {
+    bin = path_is_absolute(programInvocationName)
+      ? programInvocationName
+      : build_filenamev([get_current_dir(), programInvocationName]);
+  }
+  log(`bin: ${bin}`);
 
   this.promptNewApplicationDialog = async function promptNewApplicationDialog({
     window,
@@ -97,48 +95,18 @@
 
     dialog.destroy();
 
-    const keyFile = new KeyFile();
-    // https://developer.gnome.org/integration-guide/stable/desktop-files.html.en
-    // https://standards.freedesktop.org/desktop-entry-spec/desktop-entry-spec-latest.html
-    // https://specifications.freedesktop.org/menu-spec/menu-spec-1.0.html
-    keyFile.set_value(
-      KEY_FILE_DESKTOP_GROUP,
-      KEY_FILE_DESKTOP_KEY_VERSION,
-      "1.0"
-    );
-    keyFile.set_value(KEY_FILE_DESKTOP_GROUP, KEY_FILE_DESKTOP_KEY_NAME, name);
-    keyFile.set_value(
-      KEY_FILE_DESKTOP_GROUP,
-      KEY_FILE_DESKTOP_KEY_EXEC,
+    const argv = [bin, `--application=${name}`];
+    const keyFile = desktopEntry({
+      [KEY_FILE_DESKTOP_KEY_NAME]: name,
       // FIXME %k is not supported by GNOME Shell so we use a cli argument
       // https://specifications.freedesktop.org/desktop-entry-spec/latest/ar01s07.html
-      `re.sonny.gigagram --application=${name}`
-    );
-    keyFile.set_value(
-      KEY_FILE_DESKTOP_GROUP,
-      KEY_FILE_DESKTOP_KEY_TERMINAL,
-      "false"
-    );
-    keyFile.set_value(
-      KEY_FILE_DESKTOP_GROUP,
-      KEY_FILE_DESKTOP_KEY_TYPE,
-      KEY_FILE_DESKTOP_TYPE_APPLICATION
-    );
-    keyFile.set_value(
-      KEY_FILE_DESKTOP_GROUP,
-      KEY_FILE_DESKTOP_KEY_CATEGORIES,
-      "Network;GNOME;GTK"
-    );
-    keyFile.set_value(
-      KEY_FILE_DESKTOP_GROUP,
-      KEY_FILE_DESKTOP_KEY_STARTUP_NOTIFY,
-      "true"
-    );
-    keyFile.set_value(
-      KEY_FILE_DESKTOP_GROUP,
-      "X-GNOME-UsesNotifications",
-      "true"
-    );
+      [KEY_FILE_DESKTOP_KEY_EXEC]: argv.join(" "),
+      [KEY_FILE_DESKTOP_KEY_TERMINAL]: false,
+      [KEY_FILE_DESKTOP_KEY_TYPE]: KEY_FILE_DESKTOP_TYPE_APPLICATION,
+      [KEY_FILE_DESKTOP_KEY_CATEGORIES]: ["Network", "GNOME", "GTK"],
+      [KEY_FILE_DESKTOP_KEY_STARTUP_NOTIFY]: true,
+      "X-GNOME-UsesNotifications": true,
+    });
 
     const filePath = build_filenamev([
       get_user_data_dir(),
@@ -147,12 +115,6 @@
     ]);
     keyFile.save_to_file(filePath);
 
-    spawn_async(
-      null,
-      ["/usr/bin/gtk-launch", name],
-      null,
-      SpawnFlags.DEFAULT,
-      null
-    );
+    spawn_async(null, argv, null, SpawnFlags.DEFAULT, null);
   };
 })();

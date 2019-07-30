@@ -13,8 +13,7 @@
   const { ApplicationFlags, SimpleAction } = imports.gi.Gio;
   const {
     getenv,
-    listenv,
-    set_prgname,
+    // listenv,
     spawn_async,
     SpawnFlags,
     OptionFlags,
@@ -24,10 +23,19 @@
 
   const { Window } = imports.window;
 
-  if (getenv("DEV")) {
-    listenv().forEach(name => {
-      log(`${name}: ${getenv(name)}`);
-    });
+  // if (getenv("DEV")) {
+  // listenv().forEach(name => {
+  //   log(`env ${name}: ${getenv(name)}`);
+  // });
+  // }
+
+  // Debug
+  log(`programInvocationName: ${programInvocationName}`);
+  log(`_: ${getenv("_")}`);
+  for (const i in pkg) {
+    if (typeof pkg[i] === "string") {
+      log(`pkg.${i}: ${pkg[i]}`);
+    }
   }
 
   this.main = function main(argv) {
@@ -35,8 +43,6 @@
       application_id: "re.sonny.gigagram",
       flags: ApplicationFlags.NON_UNIQUE | ApplicationFlags.CAN_OVERRIDE_APP_ID,
     });
-
-    set_prgname("Gigagram");
 
     application.add_main_option(
       "application",
@@ -132,7 +138,7 @@
         parameter_type: null,
       });
       restart.connect("activate", () => {
-        const argv = [getenv("_"), programInvocationName, ...ARGV];
+        const argv = [programInvocationName, ...ARGV];
         application.quit();
         spawn_async(null, argv, null, SpawnFlags.DEFAULT, null);
       });
