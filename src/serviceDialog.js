@@ -88,40 +88,6 @@
     });
     grid.attach(URLEntry, 2, 2, 1, 1);
 
-    // probably trying to be too smart
-    // let getURL = () => {
-    //   return service.url;
-    // };
-    // let URLCell;
-    // let URLEntry
-    // if (service.url === "___") {
-    //   URLEntry = new Entry({ text: "", hexpand: true });
-    //   URLCell = URLEntry;
-    //   getURL = () => {
-    //     return URLEntry.text;
-    //   };
-    // } else if (!service.url.includes("___")) {
-    //   URLEntry = new Entry({ text: service.url, hexpand: true });
-    //   URLCell = URLEntry;
-    // } else {
-    //   URLCell = new Box({
-    //     orientation: Orientation.HORIZONTAL,
-    //   });
-    //   const [prefix, suffix] = service.url.split("___");
-    //   const prefixLabel = new Label({ label: prefix });
-    //   URLCell.add(prefixLabel);
-    //   const interfixEntry = new Entry({ text: "", hexpand: true });
-    //   URLCell.add(interfixEntry);
-    //   const suffixLabel = new Label({ label: suffix });
-    //   URLCell.add(suffixLabel);
-    //   grid.attach(URLCell, 2, 2, 1, 1);
-    //   getURL = () => {
-    //     return service.url.replace("___", interfixEntry.text);
-    //   };
-    //   URLEntry = interfixEntry;
-    // }
-    // grid.attach(URLCell, 2, 2, 1, 1);
-
     primaryButton.set_sensitive(!!URLEntry.text);
     URLEntry.set_icon_tooltip_text(
       EntryIconPosition.SECONDARY,
