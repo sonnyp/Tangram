@@ -9,7 +9,8 @@
     "--socket=wayland",
     "--device=dri",
     "--socket=fallback-x11",
-    "--socket=pulseaudio"
+    "--socket=pulseaudio",
+    "--filesystem=xdg-data/applications:create"
   ],
   "modules": [
     {

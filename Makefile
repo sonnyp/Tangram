@@ -1,4 +1,8 @@
-.PHONY: test clean
+.PHONY: build test clean
+
+build:
+	meson --reconfigure --prefix $(shell pwd)/install build
+	ninja -C build install
 
 test:
 	flatpak-builder --user  --force-clean --repo=repo --install-deps-from=flathub flatpak re.sonny.gigagram.json

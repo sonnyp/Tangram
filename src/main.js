@@ -17,6 +17,9 @@
     set_prgname,
     spawn_async,
     SpawnFlags,
+    OptionFlags,
+    OptionArg,
+    VariantType,
   } = imports.gi.GLib;
 
   const { Window } = imports.window;
@@ -30,10 +33,29 @@
   this.main = function main(argv) {
     const application = new Application({
       application_id: "re.sonny.gigagram",
-      flags: ApplicationFlags.FLAGS_NONE,
+      flags: ApplicationFlags.NON_UNIQUE | ApplicationFlags.CAN_OVERRIDE_APP_ID,
     });
 
     set_prgname("Gigagram");
+
+    application.add_main_option(
+      "application",
+      "a".charCodeAt(0),
+      OptionFlags.OPTIONAL_ARG,
+      OptionArg.STRING,
+      "Application id to use",
+      "application-id"
+    );
+
+    let profile;
+    application.connect("handle-local-options", (self, dict) => {
+      const variant = dict.lookup_value("application", new VariantType("s"));
+      if (variant) {
+        [profile] = variant.get_string();
+      }
+
+      return -1;
+    });
 
     let window;
 
@@ -41,7 +63,7 @@
       window = app.activeWindow;
 
       if (!window) {
-        window = Window(app);
+        window = Window({ application, profile });
       }
 
       window.present();

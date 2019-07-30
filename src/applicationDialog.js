@@ -15,6 +15,8 @@
   } = imports.gi.Gtk;
 
   const {
+    // FIXME KeyFile is not documented
+    // https://gjs-docs.gnome.org/glib20~2.60.1/glib.keyfile 404
     KeyFile,
     get_user_data_dir,
     build_filenamev,
@@ -108,7 +110,9 @@
     keyFile.set_value(
       KEY_FILE_DESKTOP_GROUP,
       KEY_FILE_DESKTOP_KEY_EXEC,
-      "re.sonny.gigagram"
+      // FIXME %k is not supported by GNOME Shell so we use a cli argument
+      // https://specifications.freedesktop.org/desktop-entry-spec/latest/ar01s07.html
+      `re.sonny.gigagram --application=${name}`
     );
     keyFile.set_value(
       KEY_FILE_DESKTOP_GROUP,

@@ -1,8 +1,6 @@
 (() => {
   "use strict";
 
-  // FIXME KeyFile is not documented
-  // https://gjs-docs.gnome.org/glib20~2.60.1/glib.keyfile 404
   const { VariantType, Variant } = imports.gi.GLib;
   const {
     ApplicationWindow,
@@ -36,7 +34,8 @@
     schema_id: "re.sonny.gigagram",
   });
 
-  this.Window = function Window(application) {
+  this.Window = function Window({ application, profile }) {
+    log(profile);
     const header = Header({
       onAddTab: showServices,
       onCancel: showTabs,

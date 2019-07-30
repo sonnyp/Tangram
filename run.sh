@@ -17,4 +17,4 @@ export GSETTINGS_SCHEMA_DIR=./data
 # cp data/re.sonny.gigagram.desktop.in ~/.local/share/applications/re.sonny.gigagram.desktop
 # update-desktop-database
 
-gjs ./src/dev.js
+gjs ./src/dev.js "$@"

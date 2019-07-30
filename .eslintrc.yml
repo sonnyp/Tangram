@@ -9,6 +9,7 @@ globals:
   print: readonly
   printError: readonly
   ARGV: readonly
+  window: readonly
 parserOptions:
   ecmaVersion: 2018
 rules:
