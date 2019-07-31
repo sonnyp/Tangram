@@ -6,6 +6,10 @@
   pkg.require({
     Gio: "2.0",
     Gtk: "3.0",
+    GLib: "2.0",
+    WebKit2: "4.0",
+    Gdk: "3.0",
+    GdkPixbuf: "2.0",
   });
 
   const { programInvocationName } = imports.system;
@@ -18,11 +22,11 @@
     SpawnFlags,
     OptionFlags,
     OptionArg,
-    VariantType,
     set_prgname,
   } = imports.gi.GLib;
 
   const { Window } = imports.window;
+  const { lookup } = imports.util;
 
   // if (getenv("DEV")) {
   // listenv().forEach(name => {
@@ -46,24 +50,43 @@
     });
 
     application.add_main_option(
-      "application",
-      "a".charCodeAt(0),
+      "name",
+      null,
+      OptionFlags.OPTIONAL_ARG,
+      OptionArg.STRING,
+      "Display name to use",
+      "name"
+    );
+    application.add_main_option(
+      "id",
+      null,
       OptionFlags.OPTIONAL_ARG,
       OptionArg.STRING,
       "Application id to use",
       "application-id"
     );
 
-    let profile;
+    const profile = {
+      title: "Gigagram",
+      application_id: "re.sonny.gigagram",
+    };
+    function setupProfile() {
+      application.set_application_id(profile.application_id);
+      set_prgname(profile.title);
+    }
     application.connect("handle-local-options", (self, dict) => {
-      const variant = dict.lookup_value("application", new VariantType("s"));
-      if (variant) {
-        [profile] = variant.get_string();
+      const name = lookup(dict, "name");
+      const id = lookup(dict, "id");
 
-        application.set_application_id("re.sonny.gigagram." + profile);
+      if (name) {
+        profile.name = name;
+        profile.title = name;
       }
-
-      set_prgname(profile || "Gigagram");
+      if (id) {
+        profile.id = id;
+        profile.application_id += `.${id}`;
+      }
+      setupProfile();
 
       return -1;
     });

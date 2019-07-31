@@ -7,7 +7,7 @@ globals:
   log: readonly
   logError: readonly
   print: readonly
-  printError: readonly
+  printerr: readonly
   ARGV: readonly
   window: readonly
 parserOptions:

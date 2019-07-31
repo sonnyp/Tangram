@@ -9,8 +9,6 @@
   const {
     get_user_data_dir,
     build_filenamev,
-    spawn_async,
-    SpawnFlags,
     getenv,
     path_is_absolute,
     get_current_dir,
@@ -21,7 +19,10 @@
     KEY_FILE_DESKTOP_KEY_TYPE,
     KEY_FILE_DESKTOP_KEY_STARTUP_NOTIFY,
     KEY_FILE_DESKTOP_TYPE_APPLICATION,
+    uuid_string_random,
+    unlink,
   } = imports.gi.GLib;
+  const { DesktopAppInfo } = imports.gi.Gio;
 
   let bin;
   if (getenv("FLATPAK_ID")) {
@@ -92,35 +93,42 @@
     }
 
     const name = nameEntry.text;
+    const id = `${name}-${uuid_string_random().replace(/-/g, "")}`;
 
     dialog.destroy();
 
-    const argv = [bin, `--application=${name}`];
-    const keyFile = desktopEntry({
+    const desktopKeyFile = desktopEntry({
       [KEY_FILE_DESKTOP_KEY_NAME]: name,
       // FIXME %k is not supported by GNOME Shell so we use a cli argument
       // https://specifications.freedesktop.org/desktop-entry-spec/latest/ar01s07.html
-      [KEY_FILE_DESKTOP_KEY_EXEC]: argv.join(" "),
+      [KEY_FILE_DESKTOP_KEY_EXEC]: [bin, `--name=%c`, `--id=${id}`].join(" "),
       [KEY_FILE_DESKTOP_KEY_TERMINAL]: false,
       [KEY_FILE_DESKTOP_KEY_TYPE]: KEY_FILE_DESKTOP_TYPE_APPLICATION,
-      [KEY_FILE_DESKTOP_KEY_CATEGORIES]: ["Network", "GNOME", "GTK"],
+      [KEY_FILE_DESKTOP_KEY_CATEGORIES]: ["Network", "GNOME", "GTK"].join(";"),
       [KEY_FILE_DESKTOP_KEY_STARTUP_NOTIFY]: true,
       "X-GNOME-UsesNotifications": true,
     });
+    desktopKeyFile.set_comment(null, null, "Created by Gigagram");
 
-    const filePath = build_filenamev([
+    const desktopFilePath = build_filenamev([
       get_user_data_dir(),
       "applications",
-      `${name}.desktop`,
+      `${id}.desktop`,
     ]);
-    keyFile.save_to_file(filePath);
+    desktopKeyFile.save_to_file(desktopFilePath);
 
-    spawn_async(
-      null,
-      argv,
-      null,
-      path_is_absolute(bin) ? SpawnFlags.DEFAULT : SpawnFlags.SEARCH_PATH,
-      null
-    );
+    const desktopAppInfo = DesktopAppInfo.new_from_filename(desktopFilePath);
+
+    try {
+      const success = desktopAppInfo.launch([], null);
+      if (!success) {
+        throw new Error("Failure");
+      }
+    } catch (err) {
+      printerr(err);
+      unlink(desktopFilePath);
+      // TODO show error
+      return;
+    }
   };
 })();

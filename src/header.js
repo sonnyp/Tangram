@@ -37,11 +37,11 @@
     onReload,
     onGoBack,
     onGoForward,
-    title,
+    profile,
   }) {
     // https://gjs-docs.gnome.org/gtk30~3.24.8/gtk.headerbar
     const titlebar = new HeaderBar({
-      title,
+      title: profile.title,
       show_close_button: true,
     });
 

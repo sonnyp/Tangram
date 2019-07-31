@@ -92,14 +92,14 @@
       "1.0"
     );
     for (const key in fields) {
-      keyFile.set_value(
-        KEY_FILE_DESKTOP_GROUP,
-        key,
-        Array.isArray(fields[key])
-          ? fields[key].join(";")
-          : fields[key].toString()
-      );
+      keyFile.set_value(KEY_FILE_DESKTOP_GROUP, key, fields[key].toString());
     }
     return keyFile;
+  };
+
+  this.lookup = function lookup(dict, key, type = null) {
+    const variant = dict.lookup_value(key, type);
+    if (!variant) return null;
+    return variant.get_string()[0];
   };
 })();

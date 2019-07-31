@@ -31,13 +31,16 @@
   const { promptNewApplicationDialog } = imports.applicationDialog;
 
   this.Window = function Window({ application, profile }) {
-    log(`profile: ${profile}`);
+    profile.settings =
+      "/re/sonny/gigagram/" + (profile.id ? `applications/${profile.id}/` : "");
 
-    const profilePathPrefix =
-      "/re/sonny/gigagram/" + (profile ? `applications/${profile}/` : "");
+    for (const key in profile) {
+      log(`profile.${key}: ${profile[key]}`);
+    }
+
     const settings = new Settings({
       schema_id: "re.sonny.gigagram",
-      path: profilePathPrefix,
+      path: profile.settings,
     });
 
     const header = Header({
@@ -46,19 +49,23 @@
       onReload,
       onGoBack,
       onGoForward,
-      title: profile || "Gigagram",
+      profile,
     });
 
     function getCurrentTab() {
-      return notebook.get_nth_page(notebook.page);
+      const idx = notebook.get_current_page();
+      if (idx < 0) return null;
+      return notebook.get_nth_page(idx);
     }
 
     function onStop() {
-      getCurrentTab().stop_loading();
+      const tab = getCurrentTab();
+      tab && tab.stop_loading();
     }
 
     function onReload(bypass_cache) {
       const tab = getCurrentTab();
+      if (!tab) return;
       if (bypass_cache) {
         tab.reload_bypass_cache();
       } else {
@@ -67,13 +74,13 @@
     }
 
     function onGoBack() {
-      getCurrentTab().go_back();
-      return true;
+      const tab = getCurrentTab();
+      tab && tab.go_back();
     }
 
     function onGoForward() {
-      getCurrentTab().go_forward();
-      return true;
+      const tab = getCurrentTab();
+      tab && tab.go_forward();
     }
 
     // https://gjs-docs.gnome.org/gtk30~3.24.8/gtk.applicationwindow
@@ -101,8 +108,23 @@
       [["Escape"], onStop],
       [["<Primary>R", "F5"], onReload],
       [["<Primary><Shift>R", "<Shift>F5"], () => onReload(true)],
-      [["<Alt>Left"], onGoBack],
-      [["<Alt>Right"], onGoForward],
+      [
+        ["<Alt>Left"],
+        () => {
+          onGoBack();
+          // prevents default notebook behavior
+          return true;
+        },
+      ],
+      [
+        ["<Alt>Right"],
+
+        () => {
+          onGoForward();
+          // prevents default notebook behavior
+          return true;
+        },
+      ],
       [
         ["<Primary><Shift>I"],
         () => {
@@ -242,7 +264,7 @@
 
       const instanceSettings = new Settings({
         schema_id: "re.sonny.gigagram.Instance",
-        path: profilePathPrefix + `instances/${id}/`,
+        path: profile.settings + `instances/${id}/`,
       });
 
       // instanceSettings.reset("");
@@ -291,7 +313,7 @@
     editInstanceAction.connect("activate", (self, parameters) => {
       const id = parameters.deep_unpack();
       // showTabs(idx); FIXME
-      promptServiceDialog({ window, id, profilePathPrefix }).catch(logError);
+      promptServiceDialog({ window, id, profile }).catch(logError);
     });
     application.add_action(editInstanceAction);
 
@@ -312,7 +334,7 @@
       notebook.set_show_tabs(true);
       const instanceSettings = new Settings({
         schema_id: "re.sonny.gigagram.Instance",
-        path: profilePathPrefix + `instances/${id}/`,
+        path: profile.settings + `instances/${id}/`,
       });
 
       const { label, page } = Tab(
@@ -344,7 +366,7 @@
 
     async function onAddService(service) {
       const instance = await promptServiceDialog({
-        profilePathPrefix,
+        profile,
         window,
         service,
       });
@@ -400,7 +422,7 @@
       instances.forEach(id => {
         const settings = new Settings({
           schema_id: "re.sonny.gigagram.Instance",
-          path: profilePathPrefix + `instances/${id}/`,
+          path: profile.settings + `instances/${id}/`,
         });
         const name = settings.get_string("name");
         const url = settings.get_string("url");
