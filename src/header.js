@@ -37,10 +37,11 @@
     onReload,
     onGoBack,
     onGoForward,
+    title,
   }) {
     // https://gjs-docs.gnome.org/gtk30~3.24.8/gtk.headerbar
     const titlebar = new HeaderBar({
-      title: "Gigagram",
+      title,
       show_close_button: true,
     });
 

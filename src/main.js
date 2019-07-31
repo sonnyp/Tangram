@@ -19,6 +19,7 @@
     OptionFlags,
     OptionArg,
     VariantType,
+    set_prgname,
   } = imports.gi.GLib;
 
   const { Window } = imports.window;
@@ -41,7 +42,7 @@
   this.main = function main(argv) {
     const application = new Application({
       application_id: "re.sonny.gigagram",
-      flags: ApplicationFlags.NON_UNIQUE | ApplicationFlags.CAN_OVERRIDE_APP_ID,
+      flags: ApplicationFlags.NON_UNIQUE,
     });
 
     application.add_main_option(
@@ -58,7 +59,11 @@
       const variant = dict.lookup_value("application", new VariantType("s"));
       if (variant) {
         [profile] = variant.get_string();
+
+        application.set_application_id("re.sonny.gigagram." + profile);
       }
+
+      set_prgname(profile || "Gigagram");
 
       return -1;
     });

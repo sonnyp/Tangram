@@ -46,6 +46,7 @@
       onReload,
       onGoBack,
       onGoForward,
+      title: profile || "Gigagram",
     });
 
     function getCurrentTab() {
