@@ -15,7 +15,7 @@
 
   const FLATPAK_ID = getenv("FLATPAK_ID");
 
-  let backend = null; // default
+  let backend = null; // dconf - default
   // https://github.com/flatpak/flatpak/issues/78#issuecomment-511160975
   if (FLATPAK_ID) {
     backend = Gio.keyfile_settings_backend_new(

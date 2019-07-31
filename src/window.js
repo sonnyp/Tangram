@@ -30,12 +30,16 @@
   const { Header } = imports.header;
   const { promptNewApplicationDialog } = imports.applicationDialog;
 
-  const settings = new Settings({
-    schema_id: "re.sonny.gigagram",
-  });
-
   this.Window = function Window({ application, profile }) {
     log(`profile: ${profile}`);
+
+    const profilePathPrefix =
+      "/re/sonny/gigagram/" + (profile ? `applications/${profile}/` : "");
+    const settings = new Settings({
+      schema_id: "re.sonny.gigagram",
+      path: profilePathPrefix,
+    });
+
     const header = Header({
       onAddTab: showServices,
       onCancel: showTabs,
@@ -237,7 +241,7 @@
 
       const instanceSettings = new Settings({
         schema_id: "re.sonny.gigagram.Instance",
-        path: `/re/sonny/gigagram/instances/${id}/`,
+        path: profilePathPrefix + `instances/${id}/`,
       });
 
       // instanceSettings.reset("");
@@ -286,7 +290,7 @@
     editInstanceAction.connect("activate", (self, parameters) => {
       const id = parameters.deep_unpack();
       // showTabs(idx); FIXME
-      promptServiceDialog({ window, id }).catch(logError);
+      promptServiceDialog({ window, id, profilePathPrefix }).catch(logError);
     });
     application.add_action(editInstanceAction);
 
@@ -307,7 +311,7 @@
       notebook.set_show_tabs(true);
       const instanceSettings = new Settings({
         schema_id: "re.sonny.gigagram.Instance",
-        path: `/re/sonny/gigagram/instances/${id}/`,
+        path: profilePathPrefix + `instances/${id}/`,
       });
 
       const { label, page } = Tab(
@@ -338,7 +342,11 @@
     }
 
     async function onAddService(service) {
-      const instance = await promptServiceDialog({ window, service });
+      const instance = await promptServiceDialog({
+        profilePathPrefix,
+        window,
+        service,
+      });
       if (!instance) return;
 
       const { name, url, id, service_id } = instance;
@@ -391,7 +399,7 @@
       instances.forEach(id => {
         const settings = new Settings({
           schema_id: "re.sonny.gigagram.Instance",
-          path: `/re/sonny/gigagram/instances/${id}/`,
+          path: profilePathPrefix + `instances/${id}/`,
         });
         const name = settings.get_string("name");
         const url = settings.get_string("url");

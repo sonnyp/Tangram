@@ -4,7 +4,6 @@
   const { WindowTypeHint } = imports.gi.Gdk;
   const { once, Settings } = imports.util;
   const {
-    // Box,
     Dialog,
     Align,
     Grid,
@@ -12,7 +11,6 @@
     Entry,
     ResponseType,
     EntryIconPosition,
-    // Orientation,
   } = imports.gi.Gtk;
   const { uuid_string_random } = imports.gi.GLib;
 
@@ -20,6 +18,7 @@
     window,
     service,
     id,
+    profilePathPrefix,
   }) {
     let settings;
 
@@ -27,7 +26,7 @@
       // https://gjs-docs.gnome.org/gio20~2.0_api/gio.settings
       settings = new Settings({
         schema_id: "re.sonny.gigagram.Instance",
-        path: `/re/sonny/gigagram/instances/${id}/`,
+        path: profilePathPrefix + `instances/${id}/`,
       });
     }
     const showName = settings ? settings.get_string("name") : service.name;
@@ -127,7 +126,7 @@
       id = `${name}-${uuid_string_random().replace(/-/g, "")}`;
       settings = new Settings({
         schema_id: "re.sonny.gigagram.Instance",
-        path: `/re/sonny/gigagram/instances/${id}/`,
+        path: profilePathPrefix + `instances/${id}/`,
       });
     }
 
