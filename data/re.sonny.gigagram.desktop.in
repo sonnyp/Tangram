@@ -1,9 +1,10 @@
 [Desktop Entry]
 Version=1.0
-Name=gigagram
+Name=Gigagram
 Exec=re.sonny.gigagram
 Terminal=false
 Type=Application
 Categories=Network;GNOME;GTK;
 StartupNotify=true
 X-GNOME-UsesNotifications=true
+StartupWMClass=re.sonny.gigagram

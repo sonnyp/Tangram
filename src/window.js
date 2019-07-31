@@ -86,7 +86,7 @@
     // https://gjs-docs.gnome.org/gtk30~3.24.8/gtk.applicationwindow
     const window = new ApplicationWindow({
       application,
-      title: "Gigagram",
+      title: profile.title,
       default_height: 620,
       default_width: 840,
     });

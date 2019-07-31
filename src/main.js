@@ -17,7 +17,7 @@
   const { ApplicationFlags, SimpleAction } = imports.gi.Gio;
   const {
     getenv,
-    // listenv,
+    listenv,
     spawn_async,
     SpawnFlags,
     OptionFlags,
@@ -29,9 +29,9 @@
   const { lookup } = imports.util;
 
   // if (getenv("DEV")) {
-  // listenv().forEach(name => {
-  //   log(`env ${name}: ${getenv(name)}`);
-  // });
+  listenv().forEach(name => {
+    log(`env ${name}: ${getenv(name)}`);
+  });
   // }
 
   // Debug
@@ -44,6 +44,7 @@
   }
 
   this.main = function main(argv) {
+    log(`argv: ${argv.join(" ")}`);
     const application = new Application({
       application_id: "re.sonny.gigagram",
       flags: ApplicationFlags.NON_UNIQUE,
@@ -72,7 +73,8 @@
     };
     function setupProfile() {
       application.set_application_id(profile.application_id);
-      set_prgname(profile.title);
+      // FIXME useful?
+      set_prgname(profile.application_id);
     }
     application.connect("handle-local-options", (self, dict) => {
       const name = lookup(dict, "name");
@@ -166,7 +168,6 @@
         parameter_type: null,
       });
       restart.connect("activate", () => {
-        const argv = [programInvocationName, ...ARGV];
         application.quit();
         spawn_async(null, argv, null, SpawnFlags.DEFAULT, null);
       });

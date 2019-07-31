@@ -108,12 +108,12 @@
       [KEY_FILE_DESKTOP_KEY_STARTUP_NOTIFY]: true,
       "X-GNOME-UsesNotifications": true,
     });
-    desktopKeyFile.set_comment(null, null, "Created by Gigagram");
+    desktopKeyFile.set_comment(null, null, " Created by Gigagram");
 
     const desktopFilePath = build_filenamev([
       get_user_data_dir(),
       "applications",
-      `${id}.desktop`,
+      `re.sonny.gigagram.${id}.desktop`,
     ]);
     desktopKeyFile.save_to_file(desktopFilePath);
 
