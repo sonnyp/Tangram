@@ -115,6 +115,12 @@
     ]);
     keyFile.save_to_file(filePath);
 
-    spawn_async(null, argv, null, SpawnFlags.DEFAULT, null);
+    spawn_async(
+      null,
+      argv,
+      null,
+      path_is_absolute(bin) ? SpawnFlags.DEFAULT : SpawnFlags.SEARCH_PATH,
+      null
+    );
   };
 })();
