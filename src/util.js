@@ -6,8 +6,6 @@
     getenv,
     build_filenamev,
     get_user_config_dir,
-    // FIXME KeyFile is not documented
-    // https://gjs-docs.gnome.org/glib20~2.60.1/glib.keyfile 404
     KeyFile,
     KEY_FILE_DESKTOP_GROUP,
   } = imports.gi.GLib;

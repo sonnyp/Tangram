@@ -140,6 +140,7 @@
         website: "https://github.com/sonnyp/gigagram",
         transient_for: window,
         modal: true,
+        logo_icon_name: "re.sonny.gigagram",
       });
       aboutDialog.add_credit_section("Contributors", [
         // Add yourself as

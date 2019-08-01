@@ -8,3 +8,4 @@ Categories=Network;GNOME;GTK;
 StartupNotify=true
 X-GNOME-UsesNotifications=true
 StartupWMClass=gigagram
+Icon=re.sonny.gigagram

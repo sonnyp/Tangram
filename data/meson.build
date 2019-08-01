@@ -1,3 +1,5 @@
+subdir('icons')
+
 pkgdatadir = join_paths(get_option('datadir'), meson.project_name())
 gnome = import('gnome')
 
