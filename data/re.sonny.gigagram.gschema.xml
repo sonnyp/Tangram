@@ -8,7 +8,7 @@
     <value nick="bottom" value="3"/>
   </enum>
 
-  <schema id="re.sonny.gigagram" path="/re/sonny/gigagram/">
+  <schema id="re.sonny.gigagram">
     <key name="tabs-position" enum='re.sonny.gigagram.PositionType'>
       <default>"top"</default>
       <summary>Tabs position</summary>

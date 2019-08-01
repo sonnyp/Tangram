@@ -9,6 +9,13 @@
         <child>
           <object class="GtkModelButton">
             <property name="visible">True</property>
+            <property name="action-name">app.newApplication</property>
+            <property name="text" translatable="yes">New application</property>
+          </object>
+        </child>
+        <child>
+          <object class="GtkModelButton">
+            <property name="visible">True</property>
             <property name="menu-name">tabs-position</property>
             <property name="text" translatable="yes">Tabs position</property>
           </object>

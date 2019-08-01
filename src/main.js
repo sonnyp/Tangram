@@ -6,6 +6,10 @@
   pkg.require({
     Gio: "2.0",
     Gtk: "3.0",
+    GLib: "2.0",
+    WebKit2: "4.0",
+    Gdk: "3.0",
+    GdkPixbuf: "2.0",
   });
 
   const { programInvocationName } = imports.system;
@@ -14,26 +18,100 @@
   const {
     getenv,
     listenv,
-    set_prgname,
     spawn_async,
     SpawnFlags,
+    OptionFlags,
+    OptionArg,
+    set_prgname,
+    set_application_name,
   } = imports.gi.GLib;
+  const { set_program_class } = imports.gi.Gdk;
 
   const { Window } = imports.window;
+  const { lookup } = imports.util;
 
-  if (getenv("DEV")) {
-    listenv().forEach(name => {
-      log(`${name}: ${getenv(name)}`);
-    });
+  // if (getenv("DEV")) {
+  listenv().forEach(name => {
+    log(`env ${name}: ${getenv(name)}`);
+  });
+  // }
+
+  // Debug
+  log(`programInvocationName: ${programInvocationName}`);
+  log(`_: ${getenv("_")}`);
+  for (const i in pkg) {
+    if (typeof pkg[i] === "string") {
+      log(`pkg.${i}: ${pkg[i]}`);
+    }
   }
 
   this.main = function main(argv) {
+    log(`argv: ${argv.join(" ")}`);
     const application = new Application({
       application_id: "re.sonny.gigagram",
-      flags: ApplicationFlags.FLAGS_NONE,
+      flags: ApplicationFlags.NON_UNIQUE,
     });
 
-    set_prgname("Gigagram");
+    application.add_main_option(
+      "name",
+      null,
+      OptionFlags.OPTIONAL_ARG,
+      OptionArg.STRING,
+      "Display name to use",
+      "name"
+    );
+    application.add_main_option(
+      "id",
+      null,
+      OptionFlags.OPTIONAL_ARG,
+      OptionArg.STRING,
+      "Application id to use",
+      "application-id"
+    );
+
+    const profile = {
+      title: "Gigagram",
+      application_id: "re.sonny.gigagram",
+    };
+    // https://gitlab.gnome.org/GNOME/epiphany/blob/master/lib/ephy-web-app-utils.c#L484
+    function setupProfile() {
+      application.set_application_id(profile.application_id);
+      // On X11 and wayland Shows in about dialog
+      set_application_name("Gigagram");
+
+      if (profile.id) {
+        // On X11 does not show anywhere
+        // I think this is supposed to be proc name
+        // but does not work in gjs?
+        // On wayland shows in GNOME Shell header bar
+        // and task bar
+        // On wayland is the wmclass
+        set_prgname(profile.id);
+        // On X11 shows in GNOME Shell header bar
+        // on X11 is the wmclass
+        // on Wayland does not show anywhere
+        set_program_class(profile.id);
+      } else {
+        set_prgname("gigagram");
+        set_program_class("Gigagram");
+      }
+    }
+    application.connect("handle-local-options", (self, dict) => {
+      const name = lookup(dict, "name");
+      const id = lookup(dict, "id");
+
+      if (name) {
+        profile.name = name;
+        profile.title = name;
+      }
+      if (id) {
+        profile.id = id;
+        profile.application_id += `.${id}`;
+      }
+      setupProfile();
+
+      return -1;
+    });
 
     let window;
 
@@ -41,7 +119,7 @@
       window = app.activeWindow;
 
       if (!window) {
-        window = Window(app);
+        window = Window({ application, profile });
       }
 
       window.present();
@@ -110,7 +188,6 @@
         parameter_type: null,
       });
       restart.connect("activate", () => {
-        const argv = [getenv("_"), programInvocationName, ...ARGV];
         application.quit();
         spawn_async(null, argv, null, SpawnFlags.DEFAULT, null);
       });

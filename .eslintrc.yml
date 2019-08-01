@@ -6,9 +6,10 @@ globals:
   pkg: readonly
   log: readonly
   logError: readonly
-  print: readonly
-  printError: readonly
+  # print: readonly # use log
+  # printerr: readonly # use logError
   ARGV: readonly
+  window: readonly
 parserOptions:
   ecmaVersion: 2018
 rules:
