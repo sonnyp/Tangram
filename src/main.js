@@ -23,7 +23,9 @@
     OptionFlags,
     OptionArg,
     set_prgname,
+    set_application_name,
   } = imports.gi.GLib;
+  const { set_program_class } = imports.gi.Gdk;
 
   const { Window } = imports.window;
   const { lookup } = imports.util;
@@ -71,10 +73,12 @@
       title: "Gigagram",
       application_id: "re.sonny.gigagram",
     };
+    // https://gitlab.gnome.org/GNOME/epiphany/blob/master/lib/ephy-web-app-utils.c#L484
     function setupProfile() {
       application.set_application_id(profile.application_id);
-      // FIXME useful?
       set_prgname(profile.application_id);
+      set_application_name(profile.title);
+      set_program_class(profile.application_id);
     }
     application.connect("handle-local-options", (self, dict) => {
       const name = lookup(dict, "name");

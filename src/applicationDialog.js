@@ -107,6 +107,7 @@
       [KEY_FILE_DESKTOP_KEY_CATEGORIES]: ["Network", "GNOME", "GTK"].join(";"),
       [KEY_FILE_DESKTOP_KEY_STARTUP_NOTIFY]: true,
       "X-GNOME-UsesNotifications": true,
+      StartupWMClass: id,
     });
     desktopKeyFile.set_comment(null, null, " Created by Gigagram");
 
@@ -125,7 +126,7 @@
         throw new Error("Failure");
       }
     } catch (err) {
-      printerr(err);
+      logError(err);
       unlink(desktopFilePath);
       // TODO show error
       return;

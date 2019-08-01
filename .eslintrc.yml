@@ -6,8 +6,8 @@ globals:
   pkg: readonly
   log: readonly
   logError: readonly
-  print: readonly
-  printerr: readonly
+  # print: readonly # use log
+  # printerr: readonly # use logError
   ARGV: readonly
   window: readonly
 parserOptions:
