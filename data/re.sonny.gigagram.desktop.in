@@ -7,4 +7,4 @@ Type=Application
 Categories=Network;GNOME;GTK;
 StartupNotify=true
 X-GNOME-UsesNotifications=true
-StartupWMClass=re.sonny.gigagram
+StartupWMClass=gigagram

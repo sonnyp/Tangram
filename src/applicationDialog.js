@@ -108,13 +108,14 @@
       [KEY_FILE_DESKTOP_KEY_STARTUP_NOTIFY]: true,
       "X-GNOME-UsesNotifications": true,
       StartupWMClass: id,
+      // "X-Flatpak": "re.sonny.gigagram",
     });
     desktopKeyFile.set_comment(null, null, " Created by Gigagram");
 
     const desktopFilePath = build_filenamev([
       get_user_data_dir(),
       "applications",
-      `re.sonny.gigagram.${id}.desktop`,
+      `${id}.desktop`,
     ]);
     desktopKeyFile.save_to_file(desktopFilePath);
 

@@ -76,9 +76,25 @@
     // https://gitlab.gnome.org/GNOME/epiphany/blob/master/lib/ephy-web-app-utils.c#L484
     function setupProfile() {
       application.set_application_id(profile.application_id);
-      set_prgname(profile.application_id);
-      set_application_name(profile.title);
-      set_program_class(profile.application_id);
+      // On X11 and wayland Shows in about dialog
+      set_application_name("Gigagram");
+
+      if (profile.id) {
+        // On X11 does not show anywhere
+        // I think this is supposed to be proc name
+        // but does not work in gjs?
+        // On wayland shows in GNOME Shell header bar
+        // and task bar
+        // On wayland is the wmclass
+        set_prgname(profile.id);
+        // On X11 shows in GNOME Shell header bar
+        // on X11 is the wmclass
+        // on Wayland does not show anywhere
+        set_program_class(profile.id);
+      } else {
+        set_prgname("gigagram");
+        set_program_class("Gigagram");
+      }
     }
     application.connect("handle-local-options", (self, dict) => {
       const name = lookup(dict, "name");
