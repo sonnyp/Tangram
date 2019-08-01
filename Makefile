@@ -1,4 +1,4 @@
-.PHONY: build flatpak test clean
+.PHONY: build flatpak bundle test clean
 
 build:
 	meson --reconfigure --prefix $(shell pwd)/install build
@@ -12,7 +12,6 @@ flatpak:
 
 bundle:
 	flatpak build-bundle repo gigagram.flatpak re.sonny.gigagram --runtime-repo=https://flathub.org/repo/flathub.flatpakrepo
-
 
 test:
 	./node_modules/.bin/eslint src/
