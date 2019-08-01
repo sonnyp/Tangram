@@ -10,7 +10,6 @@
     // https://gjs-docs.gnome.org/glib20~2.60.1/glib.keyfile 404
     KeyFile,
     KEY_FILE_DESKTOP_GROUP,
-    KEY_FILE_DESKTOP_KEY_VERSION,
   } = imports.gi.GLib;
 
   const FLATPAK_ID = getenv("FLATPAK_ID");
@@ -81,17 +80,14 @@
     });
   };
 
+  // https://developer.gnome.org/integration-guide/stable/desktop-files.html.en
+  // https://standards.freedesktop.org/desktop-entry-spec/desktop-entry-spec-latest.html
+  // https://specifications.freedesktop.org/menu-spec/menu-spec-1.0.html
   this.desktopEntry = function desktopEntry(fields) {
     const keyFile = new KeyFile();
-    // https://developer.gnome.org/integration-guide/stable/desktop-files.html.en
-    // https://standards.freedesktop.org/desktop-entry-spec/desktop-entry-spec-latest.html
-    // https://specifications.freedesktop.org/menu-spec/menu-spec-1.0.html
-    keyFile.set_value(
-      KEY_FILE_DESKTOP_GROUP,
-      KEY_FILE_DESKTOP_KEY_VERSION,
-      "1.0"
-    );
     for (const key in fields) {
+      const value = fields[key];
+      if (value === null || value === undefined) continue;
       keyFile.set_value(KEY_FILE_DESKTOP_GROUP, key, fields[key].toString());
     }
     return keyFile;

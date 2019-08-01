@@ -4,7 +4,21 @@
   const { WindowTypeHint } = imports.gi.Gdk;
   const { once, desktopEntry } = imports.util;
   const { programInvocationName } = imports.system;
-  const { Dialog, Align, Grid, Label, Entry, ResponseType } = imports.gi.Gtk;
+  const {
+    Dialog,
+    Align,
+    Grid,
+    Label,
+    Entry,
+    ResponseType,
+    FileChooserButton,
+    FileChooserAction,
+    FileFilter,
+  } = imports.gi.Gtk;
+
+  const iconFileFilter = new FileFilter();
+  iconFileFilter.add_mime_type("image/svg+xml");
+  iconFileFilter.add_mime_type("image/png");
 
   const {
     get_user_data_dir,
@@ -19,6 +33,7 @@
     KEY_FILE_DESKTOP_KEY_TYPE,
     KEY_FILE_DESKTOP_KEY_STARTUP_NOTIFY,
     KEY_FILE_DESKTOP_TYPE_APPLICATION,
+    KEY_FILE_DESKTOP_KEY_ICON,
     uuid_string_random,
     unlink,
   } = imports.gi.GLib;
@@ -81,6 +96,22 @@
     });
     grid.attach(nameEntry, 2, 1, 1, 1);
 
+    const iconLabel = new Label({
+      label: "Icon",
+      halign: Align.END,
+    });
+    grid.attach(iconLabel, 1, 2, 1, 1);
+    const fileChooserButton = new FileChooserButton({
+      title: "Choose an icon",
+      action: FileChooserAction.OPEN,
+    });
+    fileChooserButton.set_current_folder("/usr/share/icons");
+    // fileChooserButton.connect("file-set", () => {
+    //   log(fileChooserButton.get_file());
+    // });
+    fileChooserButton.set_filter(iconFileFilter);
+    grid.attach(fileChooserButton, 2, 2, 1, 1);
+
     dialog.show_all();
 
     const [response_id] = await once(dialog, "response");
@@ -93,6 +124,7 @@
     }
 
     const name = nameEntry.text;
+    const icon = fileChooserButton.get_filename();
     const id = `${name}-${uuid_string_random().replace(/-/g, "")}`;
 
     dialog.destroy();
@@ -106,6 +138,7 @@
       [KEY_FILE_DESKTOP_KEY_TYPE]: KEY_FILE_DESKTOP_TYPE_APPLICATION,
       [KEY_FILE_DESKTOP_KEY_CATEGORIES]: ["Network", "GNOME", "GTK"].join(";"),
       [KEY_FILE_DESKTOP_KEY_STARTUP_NOTIFY]: true,
+      [KEY_FILE_DESKTOP_KEY_ICON]: icon,
       "X-GNOME-UsesNotifications": true,
       StartupWMClass: id,
       // "X-Flatpak": "re.sonny.gigagram",
