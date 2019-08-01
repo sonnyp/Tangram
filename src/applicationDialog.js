@@ -16,6 +16,7 @@
     FileFilter,
   } = imports.gi.Gtk;
 
+  // https://gjs-docs.gnome.org/gtk30~3.24.8/gtk.filefilter
   const iconFileFilter = new FileFilter();
   iconFileFilter.add_mime_type("image/svg+xml");
   iconFileFilter.add_mime_type("image/png");
@@ -36,6 +37,7 @@
     KEY_FILE_DESKTOP_KEY_ICON,
     uuid_string_random,
     unlink,
+    get_home_dir,
   } = imports.gi.GLib;
   const { DesktopAppInfo } = imports.gi.Gio;
 
@@ -48,6 +50,27 @@
       : build_filenamev([get_current_dir(), programInvocationName]);
   }
   log(`bin: ${bin}`);
+
+  let defaultIconPath;
+  if (getenv("FLATPAK_ID")) {
+    defaultIconPath = build_filenamev([
+      get_home_dir(),
+      "flatpak/exports/share",
+      "icons/hicolor/scalable/apps/re.sonny.gigagram.svg",
+    ]);
+  } else if (getenv("DEV")) {
+    defaultIconPath = build_filenamev([
+      get_current_dir(),
+      "data/icons/hicolor/scalable/apps/re.sonny.gigagram.svg",
+    ]);
+  } else {
+    defaultIconPath = build_filenamev([
+      "/usr/share",
+      "icons/hicolor/scalable/apps/re.sonny.gigagram.svg",
+    ]);
+  }
+  log(`defaultIconPath: ${defaultIconPath}`);
+  const fallbackIconPath = defaultIconPath;
 
   this.promptNewApplicationDialog = async function promptNewApplicationDialog({
     window,
@@ -101,15 +124,16 @@
       halign: Align.END,
     });
     grid.attach(iconLabel, 1, 2, 1, 1);
+    // https://gjs-docs.gnome.org/gtk30~3.24.8/gtk.filechooser
     const fileChooserButton = new FileChooserButton({
       title: "Choose an icon",
       action: FileChooserAction.OPEN,
     });
-    fileChooserButton.set_current_folder("/usr/share/icons");
+    fileChooserButton.set_filter(iconFileFilter);
+    fileChooserButton.select_filename(defaultIconPath);
     // fileChooserButton.connect("file-set", () => {
     //   log(fileChooserButton.get_file());
     // });
-    fileChooserButton.set_filter(iconFileFilter);
     grid.attach(fileChooserButton, 2, 2, 1, 1);
 
     dialog.show_all();
@@ -124,7 +148,7 @@
     }
 
     const name = nameEntry.text;
-    const icon = fileChooserButton.get_filename();
+    const icon = fileChooserButton.get_filename() || fallbackIconPath;
     const id = `${name}-${uuid_string_random().replace(/-/g, "")}`;
 
     dialog.destroy();
