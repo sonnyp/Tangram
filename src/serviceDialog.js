@@ -14,7 +14,6 @@
   } = imports.gi.Gtk;
 
   const GLib = imports.gi.GLib;
-  const GObj = imports.gi.GObject;
   const Gtk = imports.gi.Gtk;
 
   const { uuid_string_random } = imports.gi.GLib;
@@ -38,13 +37,6 @@
 
     chooser.add_button("Cancel", Gtk.ResponseType.CANCEL);
     chooser.add_button("OK", Gtk.ResponseType.OK);
-
-    // This is to add the 'combo' filtering options
-    const store = new Gtk.ListStore();
-    store.set_column_types([GObj.TYPE_STRING, GObj.TYPE_STRING]);
-    store.set(store.append(), [0, 1], ["png", "image/png"]);
-    store.set(store.append(), [0, 1], ["jpg", "image/jpeg"]);
-    store.set(store.append(), [0, 1], ["svg", "image/svg+xml"]);
 
     chooser.set_filter(filter);
 
