@@ -143,6 +143,7 @@
         logo_icon_name: "re.sonny.gigagram",
       });
       aboutDialog.add_credit_section("Contributors", [
+        "Rafael Mardojai CM",
         // Add yourself as
         // "John Doe",
         // or
