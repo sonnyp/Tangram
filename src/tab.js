@@ -49,6 +49,7 @@
     instanceSettings
   ) {
     const box = new Box({});
+    const image = new Image({ margin_end: 6 });
 
     const service =
       service_id && services.find(service => service.id === service_id);
@@ -60,16 +61,26 @@
     // use id?
 
     // log(service.icon);
+    function updateIcon(icon) {
+      // log("update " + icon);
+      if (service && service.icon) {
+        // log("a");
+        let pixbuf;
+        // use service icon if service is not custom
 
-    if (service && service.icon) {
-      let pixbuf;
-      // use service icon if service is not custom
-
-      if (service_id === "custom" && icon !== "default") {
-        try {
-          pixbuf = Pixbuf.new_from_file_at_scale(icon, 28, 28, true);
-        } catch (e) {
-          log("icon " + icon + " for service " + name + " no found.");
+        if (service_id === "custom" && icon !== "default") {
+          try {
+            pixbuf = Pixbuf.new_from_file_at_scale(icon, 28, 28, true);
+          } catch (e) {
+            log("icon " + icon + " for service " + name + " no found.");
+            pixbuf = Pixbuf.new_from_resource_at_scale(
+              service.icon,
+              28,
+              28,
+              true
+            );
+          }
+        } else {
           pixbuf = Pixbuf.new_from_resource_at_scale(
             service.icon,
             28,
@@ -77,15 +88,19 @@
             true
           );
         }
-      } else {
-        pixbuf = Pixbuf.new_from_resource_at_scale(service.icon, 28, 28, true);
+        image.set_from_pixbuf(pixbuf);
       }
-      box.add(new Image({ pixbuf, margin_end: 6 }));
     }
+
+    box.add(image);
+    updateIcon(icon);
 
     const label = new Label();
     if (instanceSettings) {
       instanceSettings.bind("name", label, "label", SettingsBindFlags.GET);
+      instanceSettings.connect("changed", settings =>
+        updateIcon(settings.get_string("icon"))
+      );
     } else {
       label.label = name;
     }
