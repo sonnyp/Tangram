@@ -18,7 +18,7 @@
     SimpleAction,
     SettingsBindFlags,
   } = imports.gi.Gio;
-  const { Settings } = imports.util;
+  const { Settings, observeSetting } = imports.util;
 
   // https://github.com/flatpak/flatpak/issues/78#issuecomment-511158618
   // log(imports.gi.Gio.SettingsBackend.get_default());
@@ -275,10 +275,6 @@
       instanceSettings.reset("service");
 
       notebook.remove_page(idx);
-
-      if (instances.length < 1) {
-        showServices();
-      }
     });
     application.add_action(removeInstanceAction);
 
@@ -331,7 +327,6 @@
     application.add_action(nthTab);
 
     function buildInstance({ url, name, service_id, id }) {
-      notebook.set_show_tabs(true);
       const instanceSettings = new Settings({
         schema_id: "re.sonny.gigagram.Instance",
         path: profile.settings + `instances/${id}/`,
@@ -416,24 +411,29 @@
     //   });
     // }
 
-    const instances = settings.get_strv("instances");
-    if (instances.length > 0) {
-      showTabs();
-      instances.forEach(id => {
-        const settings = new Settings({
-          schema_id: "re.sonny.gigagram.Instance",
-          path: profile.settings + `instances/${id}/`,
-        });
-        const name = settings.get_string("name");
-        const url = settings.get_string("url");
-        const service_id = settings.get_string("service");
-        if (!url || !service_id) return;
+    observeSetting(settings, "instances", instances => {
+      if (instances.length === 0) {
+        showServices();
+        return;
+      }
 
-        buildInstance({ url, name, id, service_id });
+      notebook.set_show_tabs(instances.length > 1);
+      showTabs();
+    });
+
+    const instances = settings.get_strv("instances");
+    instances.forEach(id => {
+      const settings = new Settings({
+        schema_id: "re.sonny.gigagram.Instance",
+        path: profile.settings + `instances/${id}/`,
       });
-    } else {
-      showServices();
-    }
+      const name = settings.get_string("name");
+      const url = settings.get_string("url");
+      const service_id = settings.get_string("service");
+      if (!url || !service_id) return;
+
+      buildInstance({ url, name, id, service_id });
+    });
 
     return window;
   };

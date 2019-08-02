@@ -96,4 +96,14 @@
     if (!variant) return null;
     return variant.get_string()[0];
   };
+
+  this.observeSetting = function observeSetting(settings, key, fn) {
+    if (fn(settings.get_value(key).unpack()) === false) {
+      return;
+    }
+    settings.connect("changed", (self, _key) => {
+      if (_key !== key) return;
+      return fn(settings.get_value(key).unpack());
+    });
+  };
 })();
