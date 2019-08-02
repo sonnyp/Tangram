@@ -7,7 +7,11 @@
     Notebook,
     Stack,
     StackTransitionType,
+    AccelGroup,
+    AccelFlags,
+    accelerator_parse,
   } = imports.gi.Gtk;
+  const { ModifierType, keyval_name } = imports.gi.Gdk;
   const {
     Notification,
     NotificationPriority,
@@ -20,43 +24,70 @@
   // log(imports.gi.Gio.SettingsBackend.get_default());
 
   const { buildHomePage } = imports.homePage;
+  6;
   const { Tab } = imports.tab;
   const { promptServiceDialog } = imports.serviceDialog;
   const { connect } = imports.util;
   const { Header } = imports.header;
+  const { promptNewApplicationDialog } = imports.applicationDialog;
 
-  const settings = new Settings({
-    schema_id: "re.sonny.gigagram",
-  });
+  this.Window = function Window({ application, profile }) {
+    profile.settings =
+      "/re/sonny/gigagram/" + (profile.id ? `applications/${profile.id}/` : "");
 
-  this.Window = function Window(application) {
+    for (const key in profile) {
+      log(`profile.${key}: ${profile[key]}`);
+    }
+
+    const settings = new Settings({
+      schema_id: "re.sonny.gigagram",
+      path: profile.settings,
+    });
+
     const header = Header({
       onAddTab: showServices,
       onCancel: showTabs,
       onReload,
       onGoBack,
       onGoForward,
+      profile,
     });
 
-    function onReload() {
-      const child = notebook.get_nth_page(notebook.page);
-      child.reload();
+    function getCurrentTab() {
+      const idx = notebook.get_current_page();
+      if (idx < 0) return null;
+      return notebook.get_nth_page(idx);
+    }
+
+    function onStop() {
+      const tab = getCurrentTab();
+      tab && tab.stop_loading();
+    }
+
+    function onReload(bypass_cache) {
+      const tab = getCurrentTab();
+      if (!tab) return;
+      if (bypass_cache) {
+        tab.reload_bypass_cache();
+      } else {
+        tab.reload();
+      }
     }
 
     function onGoBack() {
-      const child = notebook.get_nth_page(notebook.page);
-      child.go_back();
+      const tab = getCurrentTab();
+      tab && tab.go_back();
     }
 
     function onGoForward() {
-      const child = notebook.get_nth_page(notebook.page);
-      child.go_forward();
+      const tab = getCurrentTab();
+      tab && tab.go_forward();
     }
 
     // https://gjs-docs.gnome.org/gtk30~3.24.8/gtk.applicationwindow
     const window = new ApplicationWindow({
       application,
-      title: "Gigagram",
+      title: profile.title,
       default_height: 620,
       default_width: 840,
     });
@@ -70,6 +101,117 @@
     const addTabPage = buildHomePage({ onAddService });
     stack.add_named(addTabPage, "services");
     stack.show_all();
+
+    // https://gjs-docs.gnome.org/gtk30~3.24.8/gtk.accelgroup
+    const accelGroup = new AccelGroup();
+    window.add_accel_group(accelGroup);
+    const shortcuts = [
+      [["Escape"], onStop],
+      [["<Primary>R", "F5"], onReload],
+      [["<Primary><Shift>R", "<Shift>F5"], () => onReload(true)],
+      [
+        ["<Alt>Left"],
+        () => {
+          onGoBack();
+          // prevents default notebook behavior
+          return true;
+        },
+      ],
+      [
+        ["<Alt>Right"],
+
+        () => {
+          onGoForward();
+          // prevents default notebook behavior
+          return true;
+        },
+      ],
+      [
+        ["<Primary><Shift>I"],
+        () => {
+          getCurrentTab()
+            .get_inspector()
+            .show();
+        },
+      ],
+    ];
+    shortcuts.forEach(([accels, fn]) => {
+      accels.forEach(accel => {
+        const [accelerator_key, accelerator_mods] = accelerator_parse(accel);
+        accelGroup.connect(
+          accelerator_key,
+          accelerator_mods,
+          AccelFlags.VISIBLE,
+          fn
+        );
+      });
+    });
+
+    function nextPage() {
+      if (notebook.page === notebook.get_n_pages() - 1) {
+        notebook.page = 0;
+      } else {
+        notebook.next_page();
+      }
+    }
+
+    function prevPage() {
+      if (notebook.page === 0) {
+        notebook.page = notebook.get_n_pages() - 1;
+      } else {
+        notebook.prev_page();
+      }
+    }
+
+    window.connect("key-press-event", (self, event) => {
+      const [, modifier] = event.get_state();
+      const [, keyval] = event.get_keyval();
+      const name = keyval_name(keyval);
+
+      // CTRL + Page_Down
+      if (name === "Page_Down" && modifier === ModifierType.CONTROL_MASK) {
+        nextPage();
+        return true;
+      }
+      // CTRL + Tab
+      if (
+        ["Tab", "ISO_Left_Tab", "KP_Tab"].includes(name) &&
+        modifier === ModifierType.CONTROL_MASK
+      ) {
+        nextPage();
+        return true;
+      }
+
+      // CTRL + Page_Up
+      if (name === "Page_Up" && modifier === ModifierType.CONTROL_MASK) {
+        prevPage();
+        return true;
+      }
+      // CTRL+SHIFT + Tab
+      if (
+        ["Tab", "ISO_Left_Tab", "KP_Tab"].includes(name) &&
+        modifier === ModifierType.CONTROL_MASK + 1
+      ) {
+        prevPage();
+        return true;
+      }
+
+      // CTRL+SHIFT + PageUp
+      if (name === "Page_Up" && modifier === ModifierType.CONTROL_MASK + 1) {
+        if (notebook.page === 0) return true;
+        notebook.reorder_child(getCurrentTab(), notebook.page - 1);
+        return true;
+      }
+
+      // CTRL+SHIFT + PageDown
+      if (name === "Page_Down" && modifier === ModifierType.CONTROL_MASK + 1) {
+        if (notebook.page === notebook.get_n_pages() - 1) return true;
+        notebook.reorder_child(getCurrentTab(), notebook.page + 1);
+        return true;
+      }
+
+      return false;
+    });
 
     // https://gjs-docs.gnome.org/gio20~2.0_api/gio.simpleaction
     // FIXME, is there a better way to bind setting to action?
@@ -124,7 +266,7 @@
 
       const instanceSettings = new Settings({
         schema_id: "re.sonny.gigagram.Instance",
-        path: `/re/sonny/gigagram/instances/${id}/`,
+        path: profile.settings + `instances/${id}/`,
       });
 
       // instanceSettings.reset("");
@@ -141,6 +283,13 @@
       }
     });
     application.add_action(removeInstanceAction);
+
+    // https://gjs-docs.gnome.org/gio20~2.0_api/gio.simpleaction
+    const newApplication = SimpleAction.new("newApplication", null);
+    newApplication.connect("activate", () => {
+      promptNewApplicationDialog({ window }).catch(log);
+    });
+    application.add_action(newApplication);
 
     function showTabs(idx) {
       if (idx) {
@@ -167,15 +316,28 @@
     editInstanceAction.connect("activate", (self, parameters) => {
       const id = parameters.deep_unpack();
       // showTabs(idx); FIXME
-      promptServiceDialog({ window, id }).catch(logError);
+      promptServiceDialog({ window, id, profile }).catch(logError);
     });
     application.add_action(editInstanceAction);
+
+    const nthTab = new SimpleAction({
+      name: "nth-tab",
+      parameter_type: VariantType.new("i"),
+    });
+    for (let i = 1; i < 10; i++) {
+      application.set_accels_for_action(`app.nth-tab(${i})`, [`<Alt>${i}`]);
+    }
+    nthTab.connect("activate", (self, parameters) => {
+      const idx = parameters.deep_unpack();
+      notebook.page = idx - 1;
+    });
+    application.add_action(nthTab);
 
     function buildInstance({ url, name, icon, service_id, id }) {
       notebook.set_show_tabs(true);
       const instanceSettings = new Settings({
         schema_id: "re.sonny.gigagram.Instance",
-        path: `/re/sonny/gigagram/instances/${id}/`,
+        path: profile.settings + `instances/${id}/`,
       });
 
       const { label, page } = Tab(
@@ -207,7 +369,11 @@
     }
 
     async function onAddService(service) {
-      const instance = await promptServiceDialog({ window, service });
+      const instance = await promptServiceDialog({
+        profile,
+        window,
+        service,
+      });
       if (!instance) return;
 
       const { name, url, icon, id, service_id } = instance;
@@ -260,7 +426,7 @@
       instances.forEach(id => {
         const settings = new Settings({
           schema_id: "re.sonny.gigagram.Instance",
-          path: `/re/sonny/gigagram/instances/${id}/`,
+          path: profile.settings + `instances/${id}/`,
         });
 
         // read properties of service

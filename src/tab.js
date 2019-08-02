@@ -26,7 +26,6 @@
   const { connect } = imports.util;
   const { stylesheets } = imports.serviceManager;
   const {
-    getenv,
     get_user_cache_dir,
     get_user_data_dir,
     build_filenamev,
@@ -176,7 +175,7 @@
 
     // https://gjs-docs.gnome.org/webkit240~4.0_api/webkit2.settings
     const settings = new Settings({
-      enable_developer_extras: !!getenv("DEV"),
+      enable_developer_extras: true,
     });
 
     // https://gjs-docs.gnome.org/webkit240~4.0_api/webkit2.webcontext

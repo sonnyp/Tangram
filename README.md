@@ -13,10 +13,11 @@ Gigagram is powered by [WebKitGTK](https://webkitgtk.org/).
 - Add a tab
 - Edit a tab by right clicking on it
 - Remove a tab by right clicking on it
-- Re-order tabs by drag'n drop
+- Re-order tabs via drag'n drop or shortcut
 - Desktop/audio notifications (if supported by the service)
-- Choose tabs position (top, left, right, bottom) via the menu
+- Change tabs position (top, left, right, bottom) via the menu
 - Navigation controls (go back, forward, reload)
+- Shortcuts
 
 ## Install
 
@@ -85,6 +86,8 @@ npm install
 ./run.sh
 ```
 
+Hit <Ctrl><Shift>Q to restart the application with changes.
+
 ### Test
 
 ```sh
@@ -104,15 +107,15 @@ GSETTINGS_SCHEMA_DIR=./install/share/glib-2.0/schemas/ ./install/bin/re.sonny.gi
 
 ```sh
 cd gigagram
-flatpak-builder --user --force-clean --install-deps-from=flathub flatpak re.sonny.gigagram.yaml
-flatpak-builder --run flatpak re.sonny.gigagram.yaml re.sonny.gigagram
+flatpak-builder --user --force-clean --install-deps-from=flathub flatpak re.sonny.gigagram.json
+flatpak-builder --run flatpak re.sonny.gigagram.json re.sonny.gigagram
 ```
 
 ### Flatpak sandboxed
 
 ```sh
 cd gigagram
-flatpak-builder --repo=repo --force-clean flatpak re.sonny.gigagram.yaml
+flatpak-builder --repo=repo --force-clean flatpak re.sonny.gigagram.json
 flatpak --user remote-add --no-gpg-verify gigagram repo
 flatpak --user install gigagram re.sonny.gigagram
 flatpak run re.sonny.gigagram

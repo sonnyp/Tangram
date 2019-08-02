@@ -1,10 +1,9 @@
 project('gigagram',
-        version: '0.3.0',
+  version: '0.3.0',
   meson_version: '>= 0.50.0',
 )
 
 i18n = import('i18n')
-
 
 subdir('data')
 subdir('src')

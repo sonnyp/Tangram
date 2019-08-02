@@ -1,3 +1,8 @@
+subdir('icons')
+
+pkgdatadir = join_paths(get_option('datadir'), meson.project_name())
+gnome = import('gnome')
+
 desktop_file = i18n.merge_file(
   input: 're.sonny.gigagram.desktop.in',
   output: 're.sonny.gigagram.desktop',
@@ -28,6 +33,13 @@ if appstream_util.found()
     args: ['validate', appstream_file]
   )
 endif
+
+data_res = gnome.compile_resources('re.sonny.gigagram.data',
+  're.sonny.gigagram.data.gresource.xml',
+  gresource_bundle: true,
+  install: true,
+  install_dir: pkgdatadir,
+)
 
 install_data('re.sonny.gigagram.gschema.xml',
   install_dir: join_paths(get_option('datadir'), 'glib-2.0/schemas')

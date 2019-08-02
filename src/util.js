@@ -2,21 +2,34 @@
   "use strict";
 
   const Gio = imports.gi.Gio;
-  const { getenv, build_filenamev, get_user_config_dir } = imports.gi.GLib;
+  const {
+    getenv,
+    build_filenamev,
+    get_user_config_dir,
+    KeyFile,
+    KEY_FILE_DESKTOP_GROUP,
+  } = imports.gi.GLib;
 
   const FLATPAK_ID = getenv("FLATPAK_ID");
 
+  let backend = null; // dconf - default
   // https://github.com/flatpak/flatpak/issues/78#issuecomment-511160975
-  const keyfileBackend = Gio.keyfile_settings_backend_new(
-    FLATPAK_ID
-      ? build_filenamev([get_user_config_dir(), "glib-2.0/settings/keyfile"])
-      : "settings.ini",
-    "/",
-    null
-  );
+  if (FLATPAK_ID) {
+    backend = Gio.keyfile_settings_backend_new(
+      build_filenamev([get_user_config_dir(), "glib-2.0/settings/keyfile"]),
+      "/",
+      null
+    );
+  } else if (getenv("DEV")) {
+    backend = Gio.keyfile_settings_backend_new(
+      "config/glib-2.0/settings/keyfile",
+      "/",
+      null
+    );
+  }
   this.Settings = function Settings(props) {
     return new Gio.Settings({
-      backend: getenv("DEV") ? keyfileBackend : null,
+      backend,
       ...props,
     });
   };
@@ -63,5 +76,24 @@
     return Object.keys(enums).find(key => {
       return enums[key] === idx;
     });
+  };
+
+  // https://developer.gnome.org/integration-guide/stable/desktop-files.html.en
+  // https://standards.freedesktop.org/desktop-entry-spec/desktop-entry-spec-latest.html
+  // https://specifications.freedesktop.org/menu-spec/menu-spec-1.0.html
+  this.desktopEntry = function desktopEntry(fields) {
+    const keyFile = new KeyFile();
+    for (const key in fields) {
+      const value = fields[key];
+      if (value === null || value === undefined) continue;
+      keyFile.set_value(KEY_FILE_DESKTOP_GROUP, key, fields[key].toString());
+    }
+    return keyFile;
+  };
+
+  this.lookup = function lookup(dict, key, type = null) {
+    const variant = dict.lookup_value(key, type);
+    if (!variant) return null;
+    return variant.get_string()[0];
   };
 })();
