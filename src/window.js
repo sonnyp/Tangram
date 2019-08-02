@@ -33,6 +33,7 @@
     createApplication,
     launchApplication,
   } = imports.applicationDialog;
+  const { state } = imports.state;
 
   this.Window = function Window({ application, profile }) {
     profile.settings =
@@ -48,13 +49,12 @@
     });
 
     const header = Header({
-      onAddTab: showServices,
-      onCancel: showServices,
       onReload,
       onGoBack,
       onGoForward,
       onDoneAddingTab,
       profile,
+      state,
     });
 
     function getCurrentTab() {
@@ -96,12 +96,13 @@
       default_width: 840,
     });
     window.set_titlebar(header.titlebar);
-    header.titlebar.show_all();
 
     // https://gjs-docs.gnome.org/gtk30~3.24.8/gtk.stack
     const stack = new Stack();
+    state.bind("view", stack, "visible_child_name");
     stack.set_transition_type(StackTransitionType.CROSSFADE);
     window.add(stack);
+
     const addTabPage = buildHomePage({ onAddService });
     stack.add_named(addTabPage, "services");
     stack.show_all();
@@ -245,7 +246,7 @@
     });
     selectTabAction.connect("activate", (self, parameters) => {
       const idx = parameters.deep_unpack();
-      showTabs(idx);
+      showTab(idx);
       window.present();
     });
     application.add_action(selectTabAction);
@@ -301,24 +302,9 @@
     });
     application.add_action(newApplication);
 
-    function showTabs(idx) {
-      if (idx) {
-        notebook.set_current_page(idx);
-      }
-      header.left_stack.set_visible_child_name("tabs");
-      header.right_stack.set_visible_child_name("tabs");
-      stack.set_visible_child_name("tabs");
-    }
-    function showServices() {
-      const instances = settings.get_strv("instances");
-      stack.set_visible_child_name("services");
-      if (instances.length > 0) {
-        header.left_stack.set_visible_child_name("services");
-        header.right_stack.set_visible_child_name("services");
-      } else {
-        header.left_stack.set_visible_child_name("none");
-        header.right_stack.set_visible_child_name("none");
-      }
+    function showTab(idx) {
+      notebook.set_current_page(idx);
+      state.set({ view: "tabs" });
     }
 
     const editInstanceAction = new SimpleAction({
@@ -327,7 +313,7 @@
     });
     editInstanceAction.connect("activate", (self, parameters) => {
       const id = parameters.deep_unpack();
-      // showTabs(idx); FIXME
+      // showTab(idx); FIXME
       promptServiceDialog({ window, id, profile }).catch(logError);
     });
     application.add_action(editInstanceAction);
@@ -386,7 +372,7 @@
     let serviceBeingAdded;
 
     async function onDoneAddingTab() {
-      const webView = stack.get_child_by_name("webview");
+      const webView = stack.get_child_by_name("add-tab");
       const instance = await promptServiceDialog({
         profile,
         window,
@@ -401,7 +387,7 @@
       settings.set_strv("instances", instances);
 
       const idx = buildInstance({ url, name, service_id, id });
-      showTabs(idx);
+      showTab(idx);
     }
 
     async function onAddService(service) {
@@ -418,13 +404,11 @@
         onNotification: notification =>
           onNotification({ ...notification, idx: 99 }),
       });
+      webview.show_all();
 
-      header.left_stack.set_visible_child_name("services");
-      header.right_stack.set_visible_child_name("services");
+      stack.add_named(webview, "add-tab");
 
-      stack.add_named(webview, "webview");
-      stack.show_all();
-      stack.set_visible_child_name("webview");
+      state.set({ view: "add-tab" });
 
       serviceBeingAdded = service;
 
@@ -442,11 +426,17 @@
       // settings.set_strv("instances", instances);
 
       // const idx = buildInstance({ url, name, service_id, id });
-      // showTabs(idx);
+      // showTab(idx);
     }
 
     // https://gjs-docs.gnome.org/gtk30~3.24.8/gtk.notebook
     const notebook = new Notebook({ scrollable: true, show_tabs: false });
+    state.bind(
+      "instances",
+      notebook,
+      "show_tabs",
+      instances => instances.length > 1
+    );
     notebook.set_group_name("tabs");
     notebook.show_all();
     stack.add_named(notebook, "tabs");
@@ -479,16 +469,6 @@
     //     service_id: "custom",
     //   });
     // }
-
-    observeSetting(settings, "instances", instances => {
-      if (instances.length === 0) {
-        showServices();
-        return;
-      }
-
-      notebook.set_show_tabs(instances.length > 1);
-      showTabs();
-    });
 
     function detachTab(instance_id) {
       const instanceSettings = new Settings({
@@ -544,6 +524,13 @@
       if (!url || !service_id) return;
 
       buildInstance({ url, name, id, service_id });
+    });
+
+    observeSetting(settings, "instances", instances => {
+      state.set({
+        instances,
+        view: instances.length > 0 ? "tabs" : "services",
+      });
     });
 
     return window;

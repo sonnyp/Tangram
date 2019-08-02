@@ -10,6 +10,7 @@
     WebKit2: "4.0",
     Gdk: "3.0",
     GdkPixbuf: "2.0",
+    GObject: "2.0",
   });
 
   const { programInvocationName } = imports.system;
