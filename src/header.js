@@ -38,6 +38,7 @@
     onReload,
     onGoBack,
     onGoForward,
+    onDoneAddingTab,
     profile,
   }) {
     // https://gjs-docs.gnome.org/gtk30~3.24.8/gtk.headerbar
@@ -46,13 +47,13 @@
       show_close_button: true,
     });
 
-    const stack = new Stack();
-    stack.set_transition_type(StackTransitionType.CROSSFADE);
+    const left_stack = new Stack();
+    left_stack.set_transition_type(StackTransitionType.CROSSFADE);
 
     const buttonBox = new Box({
       spacing: 6,
     });
-    stack.add_named(buttonBox, "tabs");
+    left_stack.add_named(buttonBox, "tabs");
 
     const navigationButtons = new Box({ spacing: 0 });
     navigationButtons.get_style_context().add_class(STYLE_CLASS_LINKED);
@@ -94,15 +95,31 @@
     );
     serviceBox.add(cancelButton);
     cancelButton.connect("clicked", onCancel);
-    stack.add_named(serviceBox, "services");
+    left_stack.add_named(serviceBox, "services");
 
-    stack.add_named(new Box(), "none");
+    left_stack.add_named(new Box(), "none");
 
-    titlebar.pack_start(stack);
+    titlebar.pack_start(left_stack);
 
-    const menu = Menu();
-    titlebar.pack_end(menu);
+    const right_stack = new Stack();
+    right_stack.set_transition_type(StackTransitionType.CROSSFADE);
+    titlebar.pack_end(right_stack);
 
-    return { titlebar, stack };
+    const tabsLayer = new Box();
+    tabsLayer.pack_end(Menu(), false, false, null);
+    right_stack.add_named(tabsLayer, "tabs");
+
+    const servicesLayer = new Box();
+    const doneAddingTabButton = new Button({
+      label: "Done",
+    });
+    doneAddingTabButton.connect("clicked", onDoneAddingTab);
+    doneAddingTabButton.get_style_context().add_class("suggested-action");
+    servicesLayer.pack_end(doneAddingTabButton, false, false, null);
+    right_stack.add_named(servicesLayer, "services");
+
+    right_stack.add_named(new Box(), "none");
+
+    return { titlebar, left_stack, right_stack };
   };
 })();

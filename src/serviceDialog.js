@@ -18,6 +18,7 @@
     window,
     service,
     id,
+    uri,
   }) {
     let settings;
 
@@ -29,7 +30,7 @@
       });
     }
     const showName = settings ? settings.get_string("name") : service.name;
-    const showURL = settings ? settings.get_string("url") : service.url;
+    const showURL = settings ? settings.get_string("url") : uri;
 
     // FIXME Dialog.new_with_buttons
     // is undefined in gjs, open issue.
