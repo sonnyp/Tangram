@@ -249,6 +249,17 @@
     });
     application.add_action(selectTabAction);
 
+    // https://gjs-docs.gnome.org/gio20~2.0_api/gio.simpleaction
+    const detachTabAction = new SimpleAction({
+      name: "detachTab",
+      parameter_type: VariantType.new("s"),
+    });
+    detachTabAction.connect("activate", (self, parameters) => {
+      const id = parameters.deep_unpack();
+      detachTab(id);
+    });
+    application.add_action(detachTabAction);
+
     function detachInstance(id) {
       const instances = settings.get_strv("instances");
       const idx = instances.indexOf(id);
@@ -427,8 +438,7 @@
       showTabs();
     });
 
-    notebook.connect("create-window", (self, page /*_x, _y */) => {
-      const { instance_id } = page;
+    function detachTab(instance_id) {
       const instanceSettings = new Settings({
         schema_id: "re.sonny.gigagram.Instance",
         path: `/re/sonny/gigagram/instances/${instance_id}/`,
@@ -460,8 +470,14 @@
         return;
       }
 
-      detachInstance(instance_id);
+      const idx = detachInstance(instance_id);
+
+      const page = notebook.get_nth_page(idx);
       notebook.detach_tab(page);
+    }
+
+    notebook.connect("create-window", (self, page /*_x, _y */) => {
+      detachTab(page._instance_id);
     });
 
     const instances = settings.get_strv("instances");

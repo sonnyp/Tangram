@@ -78,6 +78,7 @@
       const menu = new Menu();
       menu.append("Edit", `app.editInstance("${id}")`);
       menu.append("Remove", `app.removeInstance("${id}")`);
+      menu.append("Detach", `app.detachTab("${id}")`);
 
       const popover = new Popover();
       popover.bind_model(menu, null);
