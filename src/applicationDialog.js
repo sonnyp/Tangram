@@ -72,6 +72,51 @@
   log(`defaultIconPath: ${defaultIconPath}`);
   const fallbackIconPath = defaultIconPath;
 
+  this.launchApplication = launchApplication;
+  function launchApplication(app) {
+    const { desktopFilePath } = app;
+    const desktopAppInfo = DesktopAppInfo.new_from_filename(desktopFilePath);
+
+    try {
+      const success = desktopAppInfo.launch([], null);
+      if (!success) {
+        throw new Error("Failure");
+      }
+    } catch (err) {
+      unlink(desktopFilePath);
+      throw err;
+    }
+  }
+
+  this.createApplication = createApplication;
+  function createApplication({ name, icon }) {
+    const id = `${name}-${uuid_string_random().replace(/-/g, "")}`;
+
+    const desktopKeyFile = desktopEntry({
+      [KEY_FILE_DESKTOP_KEY_NAME]: name,
+      // https://specifications.freedesktop.org/desktop-entry-spec/latest/ar01s07.html
+      [KEY_FILE_DESKTOP_KEY_EXEC]: [bin, `--name=%c`, `--id=${id}`].join(" "),
+      [KEY_FILE_DESKTOP_KEY_TERMINAL]: false,
+      [KEY_FILE_DESKTOP_KEY_TYPE]: KEY_FILE_DESKTOP_TYPE_APPLICATION,
+      [KEY_FILE_DESKTOP_KEY_CATEGORIES]: ["Network", "GNOME", "GTK"].join(";"),
+      [KEY_FILE_DESKTOP_KEY_STARTUP_NOTIFY]: true,
+      [KEY_FILE_DESKTOP_KEY_ICON]: icon || fallbackIconPath,
+      "X-GNOME-UsesNotifications": true,
+      StartupWMClass: id,
+      // "X-Flatpak": "re.sonny.gigagram",
+    });
+    desktopKeyFile.set_comment(null, null, " Created by Gigagram");
+
+    const desktopFilePath = build_filenamev([
+      get_user_data_dir(),
+      "applications",
+      `${id}.desktop`,
+    ]);
+    desktopKeyFile.save_to_file(desktopFilePath);
+
+    return { id, desktopFilePath, desktopKeyFile };
+  }
+
   this.promptNewApplicationDialog = async function promptNewApplicationDialog({
     window,
   }) {
@@ -148,46 +193,16 @@
     }
 
     const name = nameEntry.text;
-    const icon = fileChooserButton.get_filename() || fallbackIconPath;
-    const id = `${name}-${uuid_string_random().replace(/-/g, "")}`;
+    const icon = fileChooserButton.get_filename();
 
     dialog.destroy();
 
-    const desktopKeyFile = desktopEntry({
-      [KEY_FILE_DESKTOP_KEY_NAME]: name,
-      // FIXME %k is not supported by GNOME Shell so we use a cli argument
-      // https://specifications.freedesktop.org/desktop-entry-spec/latest/ar01s07.html
-      [KEY_FILE_DESKTOP_KEY_EXEC]: [bin, `--name=%c`, `--id=${id}`].join(" "),
-      [KEY_FILE_DESKTOP_KEY_TERMINAL]: false,
-      [KEY_FILE_DESKTOP_KEY_TYPE]: KEY_FILE_DESKTOP_TYPE_APPLICATION,
-      [KEY_FILE_DESKTOP_KEY_CATEGORIES]: ["Network", "GNOME", "GTK"].join(";"),
-      [KEY_FILE_DESKTOP_KEY_STARTUP_NOTIFY]: true,
-      [KEY_FILE_DESKTOP_KEY_ICON]: icon,
-      "X-GNOME-UsesNotifications": true,
-      StartupWMClass: id,
-      // "X-Flatpak": "re.sonny.gigagram",
-    });
-    desktopKeyFile.set_comment(null, null, " Created by Gigagram");
-
-    const desktopFilePath = build_filenamev([
-      get_user_data_dir(),
-      "applications",
-      `${id}.desktop`,
-    ]);
-    desktopKeyFile.save_to_file(desktopFilePath);
-
-    const desktopAppInfo = DesktopAppInfo.new_from_filename(desktopFilePath);
-
     try {
-      const success = desktopAppInfo.launch([], null);
-      if (!success) {
-        throw new Error("Failure");
-      }
+      const app = createApplication({ name, icon });
+      launchApplication(app);
     } catch (err) {
       logError(err);
-      unlink(desktopFilePath);
       // TODO show error
-      return;
     }
   };
 })();

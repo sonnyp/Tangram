@@ -28,7 +28,11 @@
   const { promptServiceDialog } = imports.serviceDialog;
   const { connect } = imports.util;
   const { Header } = imports.header;
-  const { promptNewApplicationDialog } = imports.applicationDialog;
+  const {
+    promptNewApplicationDialog,
+    createApplication,
+    launchApplication,
+  } = imports.applicationDialog;
 
   this.Window = function Window({ application, profile }) {
     profile.settings =
@@ -245,6 +249,14 @@
     });
     application.add_action(selectTabAction);
 
+    function detachInstance(id) {
+      const instances = settings.get_strv("instances");
+      const idx = instances.indexOf(id);
+      if (idx < 0) return;
+      instances.splice(idx, 1);
+      settings.set_strv("instances", instances);
+      return idx;
+    }
     // https://gjs-docs.gnome.org/gio20~2.0_api/gio.simpleaction
     const removeInstanceAction = new SimpleAction({
       name: "removeInstance",
@@ -253,26 +265,18 @@
     removeInstanceAction.connect("activate", (self, parameters) => {
       const id = parameters.deep_unpack();
 
-      const instances = settings.get_strv("instances");
-      const idx = instances.indexOf(id);
-
-      if (idx < 0) return;
-
-      instances.splice(idx, 1);
-
-      settings.set_strv("instances", instances);
-
+      const idx = detachInstance(id);
       const instanceSettings = new Settings({
         schema_id: "re.sonny.gigagram.Instance",
-        path: profile.settings + `instances/${id}/`,
+        path: `/re/sonny/gigagram/instances/${id}/`,
       });
-
-      // instanceSettings.reset("");
-      // https://gitlab.gnome.org/GNOME/glib/merge_requests/981#note_551625
-      // so instead
       instanceSettings.reset("name");
       instanceSettings.reset("url");
       instanceSettings.reset("service");
+      // https://gitlab.gnome.org/GNOME/glib/merge_requests/981#note_551625
+      try {
+        instanceSettings.reset("");
+      } catch (err) {} // eslint-disable-line no-empty
 
       notebook.remove_page(idx);
     });
@@ -329,7 +333,7 @@
     function buildInstance({ url, name, service_id, id }) {
       const instanceSettings = new Settings({
         schema_id: "re.sonny.gigagram.Instance",
-        path: profile.settings + `instances/${id}/`,
+        path: `/re/sonny/gigagram/instances/${id}/`,
       });
 
       const { label, page } = Tab(
@@ -352,10 +356,12 @@
         settings,
         instanceSettings
       );
+
       label.show_all();
       page.show_all();
       const idx = notebook.append_page(page, label);
       notebook.set_tab_reorderable(page, true);
+      notebook.set_tab_detachable(page, true);
       return idx;
     }
 
@@ -378,6 +384,7 @@
 
     // https://gjs-docs.gnome.org/gtk30~3.24.8/gtk.notebook
     const notebook = new Notebook({ scrollable: true, show_tabs: false });
+    notebook.set_group_name("tabs");
     notebook.show_all();
     stack.add_named(notebook, "tabs");
     connect(
@@ -399,7 +406,6 @@
         },
       }
     );
-
     settings.bind("tabs-position", notebook, "tab_pos", SettingsBindFlags.GET);
 
     // if (getenv("DEV")) {
@@ -421,11 +427,48 @@
       showTabs();
     });
 
+    notebook.connect("create-window", (self, page /*_x, _y */) => {
+      const { instance_id } = page;
+      const instanceSettings = new Settings({
+        schema_id: "re.sonny.gigagram.Instance",
+        path: `/re/sonny/gigagram/instances/${instance_id}/`,
+      });
+      const name = instanceSettings.get_string("name");
+      // const icon = instanceSettings.get_string("icon");
+
+      let app;
+
+      try {
+        app = createApplication({ name });
+      } catch (err) {
+        logError(err);
+        // TODO show error
+        return;
+      }
+
+      const newAppSettings = new Settings({
+        schema_id: "re.sonny.gigagram",
+        path: `/re/sonny/gigagram/applications/${app.id}/`,
+      });
+      newAppSettings.set_strv("instances", [instance_id]);
+
+      try {
+        launchApplication(app);
+      } catch (err) {
+        logError(err);
+        // todo show error and cleanup
+        return;
+      }
+
+      detachInstance(instance_id);
+      notebook.detach_tab(page);
+    });
+
     const instances = settings.get_strv("instances");
     instances.forEach(id => {
       const settings = new Settings({
         schema_id: "re.sonny.gigagram.Instance",
-        path: profile.settings + `instances/${id}/`,
+        path: `/re/sonny/gigagram/instances/${id}/`,
       });
       const name = settings.get_string("name");
       const url = settings.get_string("url");
