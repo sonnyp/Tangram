@@ -2,52 +2,49 @@
 <interface>
   <object class="GtkPopoverMenu" id="app-menu">
     <child>
-      <object class="GtkBox">
+      <object class="GtkBox" id="menu">
         <property name="visible">True</property>
         <property name="margin">10</property>
         <property name="orientation">1</property>
         <child>
           <object class="GtkModelButton">
             <property name="visible">True</property>
-            <property name="text" translatable="yes">New application</property>
             <property name="action-name">app.newApplication</property>
+            <property name="text" translatable="yes">New application</property>
           </object>
         </child>
         <child>
           <object class="GtkModelButton">
             <property name="visible">True</property>
-            <property name="text" translatable="yes">Tabs position</property>
             <property name="menu-name">tabs-position</property>
-          </object>
-        </child>
-        <child>
-          <object class="GtkSeparatorMenuItem">
-            <property name="visible">True</property>
+            <property name="text" translatable="yes">Tabs position</property>
           </object>
         </child>
         <child>
           <object class="GtkModelButton">
             <property name="visible">True</property>
-            <property name="text" translatable="yes">Keyboard Shortcuts</property>
+            <property name="text" translatable="yes">Shortcuts</property>
             <property name="action-name">app.shortcuts</property>
           </object>
         </child>
         <child>
           <object class="GtkModelButton">
             <property name="visible">True</property>
-            <property name="text" translatable="yes">About Gigagram</property>
+            <property name="text" translatable="yes">About</property>
             <property name="action-name">app.about</property>
           </object>
         </child>
-        <!-- Probably no need for this for now since closing the window achieves the same -->
-        <!-- <child>
+        <child>
           <object class="GtkModelButton">
             <property name="visible">True</property>
             <property name="text" translatable="yes">Quit</property>
             <property name="action-name">app.quit</property>
           </object>
-        </child> -->
+        </child>
       </object>
+      <packing>
+        <property name="submenu">menu</property>
+      </packing>
     </child>
     <child>
       <object class="GtkBox">
@@ -56,14 +53,18 @@
         <property name="margin">10</property>
         <child>
           <object class="GtkModelButton">
-            <property name="visible">True</property>
+            <property name="height_request">30</property>
+            <property name="visible">True</property>            
+            <property name="text" translatable="yes">Tabs position</property>
+            <property name="menu_name">menu</property>
             <property name="inverted">True</property>
             <property name="centered">True</property>
-            <!-- <property name="action-name">app.tabsPosition</property> -->
-            <!-- <property name="action-target">"top"</property> -->
-            <property name="text" translatable="yes">Tabs position</property>
-            <property name="menu-name">main</property>
           </object>
+          <packing>
+            <property name="expand">False</property>
+            <property name="fill">True</property>
+            <property name="position">0</property>
+          </packing>
         </child>
         <child>
           <object class="GtkModelButton">
