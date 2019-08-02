@@ -28,6 +28,7 @@
     );
     resource._register();
   }
+
   register();
 
   function load() {
@@ -45,6 +46,8 @@
           )
         );
         info.icon = `/re/sonny/gigagram/services/${child}icon.svg`;
+
+        // log("load.map " + child);
 
         const styleFile = File.new_for_uri(
           `resource:///re/sonny/gigagram/services/${child}style.css`

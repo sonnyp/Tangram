@@ -149,6 +149,7 @@
       header.stack.set_visible_child_name("tabs");
       stack.set_visible_child_name("tabs");
     }
+
     function showServices() {
       const instances = settings.get_strv("instances");
       stack.set_visible_child_name("services");
@@ -170,7 +171,7 @@
     });
     application.add_action(editInstanceAction);
 
-    function buildInstance({ url, name, service_id, id }) {
+    function buildInstance({ url, name, icon, service_id, id }) {
       notebook.set_show_tabs(true);
       const instanceSettings = new Settings({
         schema_id: "re.sonny.gigagram.Instance",
@@ -181,6 +182,7 @@
         {
           url,
           name,
+          icon,
           window,
           service_id,
           id,
@@ -208,12 +210,12 @@
       const instance = await promptServiceDialog({ window, service });
       if (!instance) return;
 
-      const { name, url, id, service_id } = instance;
+      const { name, url, icon, id, service_id } = instance;
       const instances = settings.get_strv("instances");
       instances.push(id);
       settings.set_strv("instances", instances);
 
-      const idx = buildInstance({ url, name, service_id, id });
+      const idx = buildInstance({ url, name, icon, service_id, id });
       showTabs(idx);
     }
 
@@ -260,12 +262,16 @@
           schema_id: "re.sonny.gigagram.Instance",
           path: `/re/sonny/gigagram/instances/${id}/`,
         });
+
+        // read properties of service
         const name = settings.get_string("name");
         const url = settings.get_string("url");
         const service_id = settings.get_string("service");
+        const icon = settings.get_string("icon");
+        log("window " + icon);
         if (!url || !service_id) return;
 
-        buildInstance({ url, name, id, service_id });
+        buildInstance({ url, name, icon, id, service_id });
       });
     } else {
       showServices();

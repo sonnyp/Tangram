@@ -14,7 +14,66 @@
     EntryIconPosition,
     // Orientation,
   } = imports.gi.Gtk;
+
+  const GLib = imports.gi.GLib;
+  const GObj = imports.gi.GObject;
+  const Gtk = imports.gi.Gtk;
+
   const { uuid_string_random } = imports.gi.GLib;
+
+  const openIconChooserDialog = function() {
+    const filter = new Gtk.FileFilter();
+    filter.add_mime_type("image/png");
+
+    const chooser = new Gtk.FileChooserDialog({
+      action: Gtk.FileChooserAction.OPEN,
+      filter: filter,
+      select_multiple: false,
+      //transient_for: this.window,
+      title: "Open",
+    });
+
+    // Without setting a current folder, folders won't show its contents
+    chooser.set_current_folder(GLib.get_home_dir());
+
+    chooser.add_button("Cancel", Gtk.ResponseType.CANCEL);
+    chooser.add_button("OK", Gtk.ResponseType.OK);
+
+    // This is to add the 'combo' filtering options
+    const store = new Gtk.ListStore();
+    store.set_column_types([GObj.TYPE_STRING, GObj.TYPE_STRING]);
+    store.set(store.append(), [0, 1], ["png", "image/png"]);
+    store.set(store.append(), [0, 1], ["jpg", "image/jpeg"]);
+    store.set(store.append(), [0, 1], ["svg", "image/svg+xml"]);
+
+    const combo = new Gtk.ComboBox({ model: store });
+    const renderer = new Gtk.CellRendererText();
+    combo.pack_start(renderer, false);
+    combo.add_attribute(renderer, "text", 1);
+    combo.set_active(0);
+    combo.connect("changed", widget => {
+      const model = widget.get_model();
+      const active = widget.get_active_iter()[1];
+
+      const text = model.get_value(active, 1);
+
+      const filter = new Gtk.FileFilter();
+      filter.add_mime_type(text);
+
+      chooser.set_filter(filter);
+    });
+    chooser.set_extra_widget(combo);
+
+    // Run the dialog
+    const result = chooser.run();
+    const name = chooser.get_filename();
+    chooser.destroy();
+
+    if (result === Gtk.ResponseType.OK) {
+      return name;
+    }
+    return null;
+  };
 
   this.promptServiceDialog = async function promptServiceDialog({
     window,
@@ -30,8 +89,11 @@
         path: `/re/sonny/gigagram/instances/${id}/`,
       });
     }
+
+    // read properties of service
     const showName = settings ? settings.get_string("name") : service.name;
     const showURL = settings ? settings.get_string("url") : service.url;
+    const showIcon = settings ? settings.get_string("icon") : service.icon;
 
     // FIXME Dialog.new_with_buttons
     // is undefined in gjs, open issue.
@@ -58,6 +120,8 @@
 
     const contentArea = dialog.get_content_area();
     contentArea.margin = 18;
+
+    // grid.attach(frame, column, rom, ?, ?)
 
     const grid = new Grid({
       column_spacing: 12,
@@ -87,6 +151,28 @@
       hexpand: true,
     });
     grid.attach(URLEntry, 2, 2, 1, 1);
+
+    const iconLabel = new Label({
+      label: "Icon",
+      halign: Align.END,
+    });
+    grid.attach(iconLabel, 1, 3, 1, 1);
+    const iconEntry = new Entry({
+      text: showIcon,
+      hexpand: true,
+    });
+    grid.attach(iconEntry, 2, 3, 1, 1);
+
+    const fileButton = new Gtk.Button({ label: "choose" });
+    grid.attach(fileButton, 3, 3, 1, 1);
+
+    // Bind it to a function that says what to do when the button is clicked
+    fileButton.connect("clicked", () => {
+      const file = openIconChooserDialog();
+      if (file) {
+        iconEntry.text = file;
+      }
+    });
 
     // probably trying to be too smart
     // let getURL = () => {
@@ -156,6 +242,7 @@
 
     const name = nameEntry.text;
     const url = URLEntry.text;
+    const icon = iconEntry.text;
 
     if (!settings) {
       id = `${name}-${uuid_string_random().replace(/-/g, "")}`;
@@ -167,6 +254,7 @@
 
     settings.set_string("name", name);
     settings.set_string("url", url);
+    settings.set_string("icon", icon);
     if (service) {
       settings.set_string("service", service.id);
     }
@@ -178,6 +266,7 @@
     return {
       name,
       url,
+      icon,
       id,
       service_id: service ? service.id : "",
     };

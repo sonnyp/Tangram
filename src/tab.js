@@ -43,19 +43,44 @@
   };
 
   this.TabLabel = TabLabel;
-  function TabLabel({ service_id, id, name }, settings, instanceSettings) {
+
+  function TabLabel(
+    { service_id, id, name, icon },
+    settings,
+    instanceSettings
+  ) {
     const box = new Box({});
 
     const service =
       service_id && services.find(service => service.id === service_id);
 
+    log(service_id);
+    log(name);
+    log(id);
+    log(name + " " + icon);
+    // use id?
+
+    log(service.icon);
+
     if (service && service.icon) {
-      const pixbuf = Pixbuf.new_from_resource_at_scale(
-        service.icon,
-        28,
-        28,
-        true
-      );
+      let pixbuf;
+      // use service icon if service is not custom
+
+      if (service_id === "custom" && icon !== "default") {
+        try {
+          pixbuf = Pixbuf.new_from_file_at_scale(icon, 28, 28, true);
+        } catch (e) {
+          log("icon " + icon + " for service " + name + " no found.");
+          pixbuf = Pixbuf.new_from_resource_at_scale(
+            service.icon,
+            28,
+            28,
+            true
+          );
+        }
+      } else {
+        pixbuf = Pixbuf.new_from_resource_at_scale(service.icon, 28, 28, true);
+      }
       box.add(new Image({ pixbuf, margin_end: 6 }));
     }
 
@@ -103,6 +128,7 @@
   }
 
   this.TabPage = TabPage;
+
   function TabPage({ url, service_id, id, window, onNotification }) {
     const dataPath = build_filenamev([get_user_data_dir(), "gigagram", id]);
     const cachePath = build_filenamev([get_user_cache_dir(), "gigagram", id]);
