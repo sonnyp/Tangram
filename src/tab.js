@@ -23,13 +23,16 @@
     SecurityOrigin,
     UserContentManager,
   } = imports.gi.WebKit2;
+
   const { connect } = imports.util;
   const { stylesheets } = imports.serviceManager;
   const {
     get_user_cache_dir,
     get_user_data_dir,
     build_filenamev,
+    mkdir_with_parents,
   } = imports.gi.GLib;
+
   const { Pixbuf } = imports.gi.GdkPixbuf;
 
   const { services } = imports.serviceManager;
@@ -54,33 +57,54 @@
     const service =
       service_id && services.find(service => service.id === service_id);
 
-    // log(service.icon);
+    function get_default_icon_pixbuf() {
+      return Pixbuf.new_from_resource_at_scale(service.icon, 28, 28, true);
+    }
+
     function updateIcon(icon) {
-      // log("update " + icon);
       if (service && service.icon) {
-        // log("a");
+        //https://developer.gnome.org/gdk-pixbuf/2.36/
         let pixbuf;
         // use service icon if service is not custom
 
         if (service_id === "custom" && icon !== "default") {
-          try {
-            pixbuf = Pixbuf.new_from_file_at_scale(icon, 28, 28, true);
-          } catch (e) {
-            log("icon " + icon + " for service " + name + " no found.");
-            pixbuf = Pixbuf.new_from_resource_at_scale(
-              service.icon,
-              28,
-              28,
-              true
-            );
+          const dataPath = build_filenamev([
+            get_user_data_dir(),
+            "gigagram",
+            id,
+          ]);
+          if (icon.startsWith(dataPath)) {
+            // if file is already saved, use it
+            try {
+              pixbuf = Pixbuf.new_from_file_at_scale(icon, 28, 28, true);
+            } catch (e) {
+              log("icon " + icon + " for service " + name + " no found.");
+              pixbuf = get_default_icon_pixbuf();
+            }
+          } else {
+            // save icon
+
+            try {
+              //make directory drwx------
+              mkdir_with_parents(dataPath, 0o700);
+              const icon_save_path = dataPath + "/icon.png";
+
+              pixbuf = Pixbuf.new_from_file_at_scale(icon, 28, 28, true);
+              pixbuf.savev(icon_save_path, "png", [], []);
+              instanceSettings.set_string("icon", icon_save_path);
+            } catch (e) {
+              log(
+                "icon " +
+                  icon +
+                  " for service " +
+                  name +
+                  " couldn't be saved or read."
+              );
+              pixbuf = get_default_icon_pixbuf();
+            }
           }
         } else {
-          pixbuf = Pixbuf.new_from_resource_at_scale(
-            service.icon,
-            28,
-            28,
-            true
-          );
+          pixbuf = get_default_icon_pixbuf();
         }
         image.set_from_pixbuf(pixbuf);
       }
