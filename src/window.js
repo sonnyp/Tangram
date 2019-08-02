@@ -1,7 +1,7 @@
 (() => {
   "use strict";
 
-  const { VariantType, Variant } = imports.gi.GLib;
+  const { VariantType, Variant, uuid_string_random } = imports.gi.GLib;
   const {
     ApplicationWindow,
     Notebook,
@@ -24,7 +24,7 @@
   // log(imports.gi.Gio.SettingsBackend.get_default());
 
   const { buildHomePage } = imports.homePage;
-  const { Tab } = imports.tab;
+  const { Tab, TabPage } = imports.tab;
   const { promptServiceDialog } = imports.serviceDialog;
   const { connect } = imports.util;
   const { Header } = imports.header;
@@ -49,10 +49,11 @@
 
     const header = Header({
       onAddTab: showServices,
-      onCancel: showTabs,
+      onCancel: showServices,
       onReload,
       onGoBack,
       onGoForward,
+      onDoneAddingTab,
       profile,
     });
 
@@ -304,16 +305,19 @@
       if (idx) {
         notebook.set_current_page(idx);
       }
-      header.stack.set_visible_child_name("tabs");
+      header.left_stack.set_visible_child_name("tabs");
+      header.right_stack.set_visible_child_name("tabs");
       stack.set_visible_child_name("tabs");
     }
     function showServices() {
       const instances = settings.get_strv("instances");
       stack.set_visible_child_name("services");
       if (instances.length > 0) {
-        header.stack.set_visible_child_name("services");
+        header.left_stack.set_visible_child_name("services");
+        header.right_stack.set_visible_child_name("services");
       } else {
-        header.stack.set_visible_child_name("none");
+        header.left_stack.set_visible_child_name("none");
+        header.right_stack.set_visible_child_name("none");
       }
     }
 
@@ -341,6 +345,16 @@
     });
     application.add_action(nthTab);
 
+    function onNotification({ title, body, idx }) {
+      // https://gjs-docs.gnome.org/gio20~2.0_api/gio.notification
+      const notification = new Notification();
+      if (title) notification.set_title(title);
+      if (body) notification.set_body(body);
+      notification.set_priority(NotificationPriority.HIGH);
+      notification.set_default_action(`app.selectTab('${idx}')`);
+      application.send_notification(null, notification);
+    }
+
     function buildInstance({ url, name, service_id, id }) {
       const instanceSettings = new Settings({
         schema_id: "re.sonny.gigagram.Instance",
@@ -354,15 +368,8 @@
           window,
           service_id,
           id,
-          onNotification({ title, body }) {
-            // https://gjs-docs.gnome.org/gio20~2.0_api/gio.notification
-            const notification = new Notification();
-            if (title) notification.set_title(title);
-            if (body) notification.set_body(body);
-            notification.set_priority(NotificationPriority.HIGH);
-            notification.set_default_action(`app.selectTab('${idx}')`);
-            application.send_notification(null, notification);
-          },
+          onNotification: notification =>
+            onNotification({ ...notification, idx }),
         },
         settings,
         instanceSettings
@@ -376,11 +383,15 @@
       return idx;
     }
 
-    async function onAddService(service) {
+    let serviceBeingAdded;
+
+    async function onDoneAddingTab() {
+      const webView = stack.get_child_by_name("webview");
       const instance = await promptServiceDialog({
         profile,
         window,
-        service,
+        uri: webView.uri,
+        service: serviceBeingAdded,
       });
       if (!instance) return;
 
@@ -391,6 +402,47 @@
 
       const idx = buildInstance({ url, name, service_id, id });
       showTabs(idx);
+    }
+
+    async function onAddService(service) {
+      const { url } = service;
+      const service_id = service.id;
+      // FIXME should we keep the prefix service.name ? could be confusing when renaming/custom
+      const id = `${service.name}-${uuid_string_random().replace(/-/g, "")}`;
+      const webview = TabPage({
+        url,
+        service_id,
+        id,
+        window,
+        // FIXME fix idx - maybe use id?
+        onNotification: notification =>
+          onNotification({ ...notification, idx: 99 }),
+      });
+
+      header.left_stack.set_visible_child_name("services");
+      header.right_stack.set_visible_child_name("services");
+
+      stack.add_named(webview, "webview");
+      stack.show_all();
+      stack.set_visible_child_name("webview");
+
+      serviceBeingAdded = service;
+
+      return;
+      // const instance = await promptServiceDialog({
+      //   profile,
+      //   window,
+      //   service,
+      // });
+      // if (!instance) return;
+
+      // const { name, url, id, service_id } = instance;
+      // const instances = settings.get_strv("instances");
+      // instances.push(id);
+      // settings.set_strv("instances", instances);
+
+      // const idx = buildInstance({ url, name, service_id, id });
+      // showTabs(idx);
     }
 
     // https://gjs-docs.gnome.org/gtk30~3.24.8/gtk.notebook
