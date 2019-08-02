@@ -98,12 +98,21 @@
   };
 
   this.observeSetting = function observeSetting(settings, key, fn) {
-    if (fn(settings.get_value(key).unpack()) === false) {
-      return;
+    if (fn(settings.get_value(key).unpack()) === true) {
+      return true;
     }
     settings.connect("changed", (self, _key) => {
       if (_key !== key) return;
       return fn(settings.get_value(key).unpack());
+    });
+  };
+
+  this.observeProperty = function observeProperty(GObject, name, fn) {
+    if (fn(GObject[name]) === true) {
+      return true;
+    }
+    GObject.connect(`notify::${name}`, () => {
+      return fn(GObject[name]);
     });
   };
 })();
