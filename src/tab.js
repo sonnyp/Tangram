@@ -54,12 +54,6 @@
     const service =
       service_id && services.find(service => service.id === service_id);
 
-    // log(service_id);
-    // log(name);
-    // log(id);
-    // log(name + " " + icon);
-    // use id?
-
     // log(service.icon);
     function updateIcon(icon) {
       // log("update " + icon);
@@ -201,18 +195,6 @@
       settings,
     });
 
-    // https://gjs-docs.gnome.org/webkit240~4.0_api/webkit2.webinspector
-    // const webInspector = webView.get_inspector();
-    // webView.connect("load-changed", (self, load_event) => {
-    //   webInspector.show();
-    // });
-
-    // webView.connect("decide-policy", (self, decision, decision_policy) => {
-    //   if (decision_policy === PolicyDecisionType.NEW_WINDOW_ACTION)
-    //     log(decision);
-    //   log(decision_policy);
-    // });
-
     connect(
       webView,
       {
@@ -221,15 +203,7 @@
           const uri = navigation_action.get_request().get_uri();
           show_uri_on_window(window, uri, null);
         },
-        // https://gjs-docs.gnome.org/webkit240~4.0_api/webkit2.webview#signal-permission-request
-        // ["permission-request"](request) {
-        //   git ("permission request");
-        //   if (request instanceof NotificationPermissionRequest) {
-        //     request.allow();
-        //     return;
-        //   }
-        //   request.deny();
-        // },
+
         // https://gjs-docs.gnome.org/webkit240~4.0_api/webkit2.webview#signal-show-notification
         ["show-notification"](notification) {
           onNotification(notification);

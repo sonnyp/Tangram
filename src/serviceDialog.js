@@ -22,13 +22,15 @@
   const openIconChooserDialog = function() {
     const filter = new Gtk.FileFilter();
     filter.add_mime_type("image/png");
+    filter.add_mime_type("image/jpeg");
+    filter.add_mime_type("image/svg+xml");
 
     const chooser = new Gtk.FileChooserDialog({
       action: Gtk.FileChooserAction.OPEN,
       filter: filter,
       select_multiple: false,
       //transient_for: this.window,
-      title: "Open",
+      title: "Choose an icon",
     });
 
     // Without setting a current folder, folders won't show its contents
@@ -44,23 +46,7 @@
     store.set(store.append(), [0, 1], ["jpg", "image/jpeg"]);
     store.set(store.append(), [0, 1], ["svg", "image/svg+xml"]);
 
-    const combo = new Gtk.ComboBox({ model: store });
-    const renderer = new Gtk.CellRendererText();
-    combo.pack_start(renderer, false);
-    combo.add_attribute(renderer, "text", 1);
-    combo.set_active(0);
-    combo.connect("changed", widget => {
-      const model = widget.get_model();
-      const active = widget.get_active_iter()[1];
-
-      const text = model.get_value(active, 1);
-
-      const filter = new Gtk.FileFilter();
-      filter.add_mime_type(text);
-
-      chooser.set_filter(filter);
-    });
-    chooser.set_extra_widget(combo);
+    chooser.set_filter(filter);
 
     // Run the dialog
     const result = chooser.run();
@@ -172,40 +158,6 @@
         iconEntry.text = file;
       }
     });
-
-    // probably trying to be too smart
-    // let getURL = () => {
-    //   return service.url;
-    // };
-    // let URLCell;
-    // let URLEntry
-    // if (service.url === "___") {
-    //   URLEntry = new Entry({ text: "", hexpand: true });
-    //   URLCell = URLEntry;
-    //   getURL = () => {
-    //     return URLEntry.text;
-    //   };
-    // } else if (!service.url.includes("___")) {
-    //   URLEntry = new Entry({ text: service.url, hexpand: true });
-    //   URLCell = URLEntry;
-    // } else {
-    //   URLCell = new Box({
-    //     orientation: Orientation.HORIZONTAL,
-    //   });
-    //   const [prefix, suffix] = service.url.split("___");
-    //   const prefixLabel = new Label({ label: prefix });
-    //   URLCell.add(prefixLabel);
-    //   const interfixEntry = new Entry({ text: "", hexpand: true });
-    //   URLCell.add(interfixEntry);
-    //   const suffixLabel = new Label({ label: suffix });
-    //   URLCell.add(suffixLabel);
-    //   grid.attach(URLCell, 2, 2, 1, 1);
-    //   getURL = () => {
-    //     return service.url.replace("___", interfixEntry.text);
-    //   };
-    //   URLEntry = interfixEntry;
-    // }
-    // grid.attach(URLCell, 2, 2, 1, 1);
 
     primaryButton.set_sensitive(!!URLEntry.text);
     URLEntry.set_icon_tooltip_text(

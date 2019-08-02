@@ -24,7 +24,6 @@
   // log(imports.gi.Gio.SettingsBackend.get_default());
 
   const { buildHomePage } = imports.homePage;
-  6;
   const { Tab } = imports.tab;
   const { promptServiceDialog } = imports.serviceDialog;
   const { connect } = imports.util;
