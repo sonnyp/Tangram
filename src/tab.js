@@ -53,13 +53,13 @@
     const service =
       service_id && services.find(service => service.id === service_id);
 
-    log(service_id);
-    log(name);
-    log(id);
-    log(name + " " + icon);
+    // log(service_id);
+    // log(name);
+    // log(id);
+    // log(name + " " + icon);
     // use id?
 
-    log(service.icon);
+    // log(service.icon);
 
     if (service && service.icon) {
       let pixbuf;
@@ -208,7 +208,7 @@
         },
         // https://gjs-docs.gnome.org/webkit240~4.0_api/webkit2.webview#signal-permission-request
         // ["permission-request"](request) {
-        //   log("permission request");
+        //   git ("permission request");
         //   if (request instanceof NotificationPermissionRequest) {
         //     request.allow();
         //     return;

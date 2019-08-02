@@ -434,7 +434,7 @@
         const url = settings.get_string("url");
         const service_id = settings.get_string("service");
         const icon = settings.get_string("icon");
-        log("window " + icon);
+        // log("window " + icon);
         if (!url || !service_id) return;
 
         buildInstance({ url, name, icon, id, service_id });
