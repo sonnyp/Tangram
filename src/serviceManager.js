@@ -22,15 +22,6 @@
   const stylesheets = {};
   this.stylesheets = stylesheets;
 
-  function register() {
-    const resource = Resource.load(
-      `${pkg.pkgdatadir}/re.sonny.gigagram.services.gresource`
-    );
-    resource._register();
-  }
-
-  register();
-
   Resource.load(
     `${pkg.pkgdatadir}/re.sonny.gigagram.services.gresource`
   )._register();
