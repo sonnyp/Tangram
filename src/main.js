@@ -10,6 +10,7 @@
     WebKit2: "4.0",
     Gdk: "3.0",
     GdkPixbuf: "2.0",
+    GObject: "2.0",
   });
 
   const { programInvocationName } = imports.system;
@@ -17,7 +18,7 @@
   const { ApplicationFlags, SimpleAction } = imports.gi.Gio;
   const {
     getenv,
-    listenv,
+    // listenv,
     spawn_async,
     SpawnFlags,
     OptionFlags,
@@ -29,12 +30,7 @@
 
   const { Window } = imports.window;
   const { lookup } = imports.util;
-
-  // if (getenv("DEV")) {
-  listenv().forEach(name => {
-    log(`env ${name}: ${getenv(name)}`);
-  });
-  // }
+  const { state } = imports.state;
 
   // Debug
   log(`programInvocationName: ${programInvocationName}`);
@@ -44,6 +40,9 @@
       log(`pkg.${i}: ${pkg[i]}`);
     }
   }
+  // listenv().forEach(name => {
+  //   log(`env ${name}: ${getenv(name)}`);
+  // });
 
   this.main = function main(argv) {
     log(`argv: ${argv.join(" ")}`);
@@ -119,7 +118,7 @@
       window = app.activeWindow;
 
       if (!window) {
-        window = Window({ application, profile });
+        window = Window({ state, application, profile });
       }
 
       window.present();

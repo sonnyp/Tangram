@@ -3,26 +3,25 @@
 
   const Gio = imports.gi.Gio;
   const {
-    getenv,
     build_filenamev,
     get_user_config_dir,
     KeyFile,
     KEY_FILE_DESKTOP_GROUP,
+    VariantType,
   } = imports.gi.GLib;
-
-  const FLATPAK_ID = getenv("FLATPAK_ID");
+  const { env } = imports.env;
 
   let backend = null; // dconf - default
   // https://github.com/flatpak/flatpak/issues/78#issuecomment-511160975
-  if (FLATPAK_ID) {
+  if (env === "flatpak") {
     backend = Gio.keyfile_settings_backend_new(
       build_filenamev([get_user_config_dir(), "glib-2.0/settings/keyfile"]),
       "/",
       null
     );
-  } else if (getenv("DEV")) {
+  } else if (env === "dev") {
     backend = Gio.keyfile_settings_backend_new(
-      "config/glib-2.0/settings/keyfile",
+      "var/config/glib-2.0/settings/keyfile",
       "/",
       null
     );
@@ -91,9 +90,33 @@
     return keyFile;
   };
 
-  this.lookup = function lookup(dict, key, type = null) {
-    const variant = dict.lookup_value(key, type);
-    if (!variant) return null;
-    return variant.get_string()[0];
+  // merge request
+  // https://gitlab.gnome.org/GNOME/gjs/merge_requests/320
+  this.lookup = function lookup(dict, key, variantType = null, deep = false) {
+    if (typeof variantType === "string")
+      variantType = new VariantType(variantType);
+
+    const variant = dict.lookup_value(key, variantType);
+    if (variant === null) return null;
+    return deep === true ? variant.deep_unpack(deep) : variant.unpack();
+  };
+
+  this.observeSetting = function observeSetting(settings, key, fn) {
+    if (fn(settings.get_value(key).unpack()) === true) {
+      return true;
+    }
+    settings.connect("changed", (self, _key) => {
+      if (_key !== key) return;
+      return fn(settings.get_value(key).unpack());
+    });
+  };
+
+  this.observeProperty = function observeProperty(GObject, name, fn) {
+    if (fn(GObject[name]) === true) {
+      return true;
+    }
+    GObject.connect(`notify::${name}`, () => {
+      return fn(GObject[name]);
+    });
   };
 })();

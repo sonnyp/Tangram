@@ -33,12 +33,13 @@
   }
 
   this.Header = function Header({
-    onAddTab,
-    onCancel,
     onReload,
     onGoBack,
     onGoForward,
+    onDoneAddingTab,
+    onCancelAddTab,
     profile,
+    state,
   }) {
     // https://gjs-docs.gnome.org/gtk30~3.24.8/gtk.headerbar
     const titlebar = new HeaderBar({
@@ -46,13 +47,14 @@
       show_close_button: true,
     });
 
-    const stack = new Stack();
-    stack.set_transition_type(StackTransitionType.CROSSFADE);
+    const left_stack = new Stack();
+    state.bind("view", left_stack, "visible_child_name");
+    left_stack.set_transition_type(StackTransitionType.CROSSFADE);
 
     const buttonBox = new Box({
       spacing: 6,
     });
-    stack.add_named(buttonBox, "tabs");
+    left_stack.add_named(buttonBox, "tabs");
 
     const navigationButtons = new Box({ spacing: 0 });
     navigationButtons.get_style_context().add_class(STYLE_CLASS_LINKED);
@@ -85,24 +87,60 @@
     );
     buttonBox.add(addTabButton);
     addTabButton.set_always_show_image(true);
-    addTabButton.connect("clicked", onAddTab);
+    addTabButton.connect("clicked", () => {
+      state.set({ view: "services" });
+    });
 
     const serviceBox = new Box();
-    const cancelButton = Button.new_from_icon_name(
+    const cancelServicesButton = Button.new_from_icon_name(
       "go-previous-symbolic",
       IconSize.BUTTON
     );
-    serviceBox.add(cancelButton);
-    cancelButton.connect("clicked", onCancel);
-    stack.add_named(serviceBox, "services");
+    serviceBox.add(cancelServicesButton);
+    cancelServicesButton.connect("clicked", () => {
+      state.set({ view: "tabs" });
+    });
+    left_stack.add_named(serviceBox, "services");
 
-    stack.add_named(new Box(), "none");
+    const addTabBox = new Box();
+    const cancelAddTabButton = Button.new_from_icon_name(
+      "go-previous-symbolic",
+      IconSize.BUTTON
+    );
+    addTabBox.add(cancelAddTabButton);
+    cancelAddTabButton.connect("clicked", onCancelAddTab);
+    left_stack.add_named(addTabBox, "add-tab");
 
-    titlebar.pack_start(stack);
+    titlebar.pack_start(left_stack);
 
-    const menu = Menu();
-    titlebar.pack_end(menu);
+    const right_stack = new Stack();
+    state.bind("view", right_stack, "visible_child_name");
+    right_stack.set_transition_type(StackTransitionType.CROSSFADE);
+    titlebar.pack_end(right_stack);
 
-    return { titlebar, stack };
+    const tabsLayer = new Box();
+    tabsLayer.pack_end(Menu(), false, false, null);
+    right_stack.add_named(tabsLayer, "tabs");
+
+    const servicesLayer = new Box();
+    const doneAddingTabButton = new Button({
+      label: "Done",
+    });
+    doneAddingTabButton.connect("clicked", onDoneAddingTab);
+    doneAddingTabButton.get_style_context().add_class("suggested-action");
+    servicesLayer.pack_end(doneAddingTabButton, false, false, null);
+    right_stack.add_named(servicesLayer, "add-tab");
+
+    right_stack.add_named(new Box(), "services");
+
+    titlebar.show_all();
+    state.bind(
+      "instances",
+      cancelServicesButton,
+      "visible",
+      instances => instances.length > 0
+    );
+
+    return { titlebar };
   };
 })();

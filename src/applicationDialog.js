@@ -15,6 +15,7 @@
     FileChooserAction,
     FileFilter,
   } = imports.gi.Gtk;
+  const { applications_dir } = imports.env;
 
   // https://gjs-docs.gnome.org/gtk30~3.24.8/gtk.filefilter
   const iconFileFilter = new FileFilter();
@@ -22,9 +23,7 @@
   iconFileFilter.add_mime_type("image/png");
 
   const {
-    get_user_data_dir,
     build_filenamev,
-    getenv,
     path_is_absolute,
     get_current_dir,
     KEY_FILE_DESKTOP_KEY_CATEGORIES,
@@ -41,8 +40,10 @@
   } = imports.gi.GLib;
   const { DesktopAppInfo } = imports.gi.Gio;
 
+  const { env } = imports.env;
+
   let bin;
-  if (getenv("FLATPAK_ID")) {
+  if (env === "flatpak") {
     bin = pkg.name;
   } else {
     bin = path_is_absolute(programInvocationName)
@@ -52,13 +53,13 @@
   log(`bin: ${bin}`);
 
   let defaultIconPath;
-  if (getenv("FLATPAK_ID")) {
+  if (env === "flatpak") {
     defaultIconPath = build_filenamev([
       get_home_dir(),
       "flatpak/exports/share",
       "icons/hicolor/scalable/apps/re.sonny.gigagram.svg",
     ]);
-  } else if (getenv("DEV")) {
+  } else if (env === "dev") {
     defaultIconPath = build_filenamev([
       get_current_dir(),
       "data/icons/hicolor/scalable/apps/re.sonny.gigagram.svg",
@@ -72,10 +73,54 @@
   log(`defaultIconPath: ${defaultIconPath}`);
   const fallbackIconPath = defaultIconPath;
 
+  this.launchApplication = launchApplication;
+  function launchApplication(app) {
+    const { desktopFilePath } = app;
+    const desktopAppInfo = DesktopAppInfo.new_from_filename(desktopFilePath);
+
+    try {
+      const success = desktopAppInfo.launch([], null);
+      if (!success) {
+        throw new Error("Failure");
+      }
+    } catch (err) {
+      unlink(desktopFilePath);
+      throw err;
+    }
+  }
+
+  this.createApplication = createApplication;
+  function createApplication({ name, icon }) {
+    const id = `${name}-${uuid_string_random().replace(/-/g, "")}`;
+
+    const desktopKeyFile = desktopEntry({
+      [KEY_FILE_DESKTOP_KEY_NAME]: name,
+      // https://specifications.freedesktop.org/desktop-entry-spec/latest/ar01s07.html
+      [KEY_FILE_DESKTOP_KEY_EXEC]: [bin, `--name=%c`, `--id=${id}`].join(" "),
+      [KEY_FILE_DESKTOP_KEY_TERMINAL]: false,
+      [KEY_FILE_DESKTOP_KEY_TYPE]: KEY_FILE_DESKTOP_TYPE_APPLICATION,
+      [KEY_FILE_DESKTOP_KEY_CATEGORIES]: ["Network", "GNOME", "GTK"].join(";"),
+      [KEY_FILE_DESKTOP_KEY_STARTUP_NOTIFY]: true,
+      [KEY_FILE_DESKTOP_KEY_ICON]: icon || fallbackIconPath,
+      "X-GNOME-UsesNotifications": true,
+      StartupWMClass: id,
+      // "X-Flatpak": "re.sonny.gigagram",
+    });
+    desktopKeyFile.set_comment(null, null, " Created by Gigagram");
+
+    const desktopFilePath = build_filenamev([
+      applications_dir,
+      `${id}.desktop`,
+    ]);
+    desktopKeyFile.save_to_file(desktopFilePath);
+
+    return { id, desktopFilePath, desktopKeyFile };
+  }
+
   this.promptNewApplicationDialog = async function promptNewApplicationDialog({
     window,
   }) {
-    // FIXME Dialog.new_with_buttons
+    // TODO Dialog.new_with_buttons
     // is undefined in gjs, open issue.
     // https://developer.gnome.org/hig/stable/dialogs.html.en#Action
     // "Action Dialogs"
@@ -148,46 +193,16 @@
     }
 
     const name = nameEntry.text;
-    const icon = fileChooserButton.get_filename() || fallbackIconPath;
-    const id = `${name}-${uuid_string_random().replace(/-/g, "")}`;
+    const icon = fileChooserButton.get_filename();
 
     dialog.destroy();
 
-    const desktopKeyFile = desktopEntry({
-      [KEY_FILE_DESKTOP_KEY_NAME]: name,
-      // FIXME %k is not supported by GNOME Shell so we use a cli argument
-      // https://specifications.freedesktop.org/desktop-entry-spec/latest/ar01s07.html
-      [KEY_FILE_DESKTOP_KEY_EXEC]: [bin, `--name=%c`, `--id=${id}`].join(" "),
-      [KEY_FILE_DESKTOP_KEY_TERMINAL]: false,
-      [KEY_FILE_DESKTOP_KEY_TYPE]: KEY_FILE_DESKTOP_TYPE_APPLICATION,
-      [KEY_FILE_DESKTOP_KEY_CATEGORIES]: ["Network", "GNOME", "GTK"].join(";"),
-      [KEY_FILE_DESKTOP_KEY_STARTUP_NOTIFY]: true,
-      [KEY_FILE_DESKTOP_KEY_ICON]: icon,
-      "X-GNOME-UsesNotifications": true,
-      StartupWMClass: id,
-      // "X-Flatpak": "re.sonny.gigagram",
-    });
-    desktopKeyFile.set_comment(null, null, " Created by Gigagram");
-
-    const desktopFilePath = build_filenamev([
-      get_user_data_dir(),
-      "applications",
-      `${id}.desktop`,
-    ]);
-    desktopKeyFile.save_to_file(desktopFilePath);
-
-    const desktopAppInfo = DesktopAppInfo.new_from_filename(desktopFilePath);
-
     try {
-      const success = desktopAppInfo.launch([], null);
-      if (!success) {
-        throw new Error("Failure");
-      }
+      const app = createApplication({ name, icon });
+      launchApplication(app);
     } catch (err) {
       logError(err);
-      unlink(desktopFilePath);
       // TODO show error
-      return;
     }
   };
 })();
