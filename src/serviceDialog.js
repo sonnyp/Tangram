@@ -14,6 +14,8 @@
   } = imports.gi.Gtk;
   const { SettingsBindFlags } = imports.gi.Gio;
 
+  const { iconChooser, saveIcon } = imports.icon;
+
   this.editInstanceDialog = function editInstanceDialog({ window, instance }) {
     return serviceDialog({ window, instance, action: "Edit" });
   };
@@ -75,6 +77,16 @@
     instance.bind("url", URLEntry, "text", SettingsBindFlags.DEFAULT);
     grid.attach(URLEntry, 2, 2, 1, 1);
 
+    const iconLabel = new Label({
+      label: "Icon",
+      halign: Align.END,
+    });
+    grid.attach(iconLabel, 1, 3, 1, 1);
+    const iconEntry = iconChooser({
+      value: instance.icon === "default" ? null : instance.icon,
+    });
+    grid.attach(iconEntry, 2, 3, 1, 1);
+
     primaryButton.set_sensitive(!!URLEntry.text);
     URLEntry.set_icon_tooltip_text(
       EntryIconPosition.SECONDARY,
@@ -102,11 +114,20 @@
     if (response_id === ResponseType.DELETE_EVENT) {
       return;
     }
+
     if (response_id !== ResponseType.APPLY) {
       dialog.destroy();
       return;
     }
 
+    let icon = "default";
+    if (iconEntry.get_filename()) {
+      icon = saveIcon(iconEntry.get_filename(), instance.data_dir);
+    }
+
     dialog.destroy();
+
+    // eslint-disable-next-line require-atomic-updates
+    instance.icon = icon;
   }
 })();

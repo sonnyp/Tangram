@@ -148,6 +148,7 @@
         // "John Doe <john@example.com>",
         // or
         // "John Doe https://john.com",
+        "codyfish https://github.com/codyfish",
       ]);
 
       aboutDialog.present();

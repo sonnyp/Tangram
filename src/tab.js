@@ -23,9 +23,11 @@
     SecurityOrigin,
     UserContentManager,
   } = imports.gi.WebKit2;
+
   const { connect } = imports.util;
   const { stylesheets } = imports.serviceManager;
   const { build_filenamev } = imports.gi.GLib;
+
   const { Pixbuf } = imports.gi.GdkPixbuf;
 
   const { services } = imports.serviceManager;
@@ -40,20 +42,26 @@
   this.TabLabel = TabLabel;
   function TabLabel({ instance, settings }) {
     const { service_id, id } = instance;
-    const box = new Box({});
 
     const service =
       service_id && services.find(service => service.id === service_id);
 
-    if (service && service.icon) {
-      const pixbuf = Pixbuf.new_from_resource_at_scale(
-        service.icon,
-        28,
-        28,
-        true
-      );
-      box.add(new Image({ pixbuf, margin_end: 6 }));
-    }
+    const box = new Box({});
+    const image = new Image({ margin_end: 6 });
+    instance.observe("icon", icon => {
+      if (icon && icon !== "default") {
+        image.set_from_file(icon);
+      } else if (service && service.icon) {
+        const pixbuf = Pixbuf.new_from_resource_at_scale(
+          service.icon,
+          28,
+          28,
+          true
+        );
+        image.set_from_pixbuf(pixbuf);
+      }
+    });
+    box.add(image);
 
     const label = new Label();
     instance.bind("name", label, "label", SettingsBindFlags.GET);
@@ -166,6 +174,7 @@
           const uri = navigation_action.get_request().get_uri();
           show_uri_on_window(window, uri, null);
         },
+
         // https://gjs-docs.gnome.org/webkit240~4.0_api/webkit2.webview#signal-permission-request
         // ["permission-request"](request) {
         //   log("permission request");
@@ -175,6 +184,7 @@
         //   }
         //   request.deny();
         // },
+
         // https://gjs-docs.gnome.org/webkit240~4.0_api/webkit2.webview#signal-show-notification
         ["show-notification"](notification) {
           onNotification({ ...notification, id });

@@ -4,23 +4,10 @@
   const { WindowTypeHint } = imports.gi.Gdk;
   const { once, desktopEntry } = imports.util;
   const { programInvocationName } = imports.system;
-  const {
-    Dialog,
-    Align,
-    Grid,
-    Label,
-    Entry,
-    ResponseType,
-    FileChooserButton,
-    FileChooserAction,
-    FileFilter,
-  } = imports.gi.Gtk;
-  const { applications_dir } = imports.env;
+  const { Dialog, Align, Grid, Label, Entry, ResponseType } = imports.gi.Gtk;
 
-  // https://gjs-docs.gnome.org/gtk30~3.24.8/gtk.filefilter
-  const iconFileFilter = new FileFilter();
-  iconFileFilter.add_mime_type("image/svg+xml");
-  iconFileFilter.add_mime_type("image/png");
+  const { applications_dir } = imports.env;
+  const { iconChooser } = imports.icon;
 
   const {
     build_filenamev,
@@ -169,17 +156,8 @@
       halign: Align.END,
     });
     grid.attach(iconLabel, 1, 2, 1, 1);
-    // https://gjs-docs.gnome.org/gtk30~3.24.8/gtk.filechooser
-    const fileChooserButton = new FileChooserButton({
-      title: "Choose an icon",
-      action: FileChooserAction.OPEN,
-    });
-    fileChooserButton.set_filter(iconFileFilter);
-    fileChooserButton.select_filename(defaultIconPath);
-    // fileChooserButton.connect("file-set", () => {
-    //   log(fileChooserButton.get_file());
-    // });
-    grid.attach(fileChooserButton, 2, 2, 1, 1);
+    const iconEntry = iconChooser({ value: defaultIconPath });
+    grid.attach(iconEntry, 2, 2, 1, 1);
 
     dialog.show_all();
 
@@ -193,7 +171,7 @@
     }
 
     const name = nameEntry.text;
-    const icon = fileChooserButton.get_filename();
+    const icon = iconEntry.get_filename();
 
     dialog.destroy();
 
