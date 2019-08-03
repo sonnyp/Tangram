@@ -17,4 +17,4 @@ test:
 	./node_modules/.bin/eslint src/
 
 clean:
-	rm -rf .flatpak-builder build flatpak install repo config
+	rm -rf .flatpak-builder build flatpak install repo var/config var/cache var/data var/applications/*.desktop

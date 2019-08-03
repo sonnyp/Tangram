@@ -24,7 +24,6 @@
 
   const {
     build_filenamev,
-    getenv,
     path_is_absolute,
     get_current_dir,
     KEY_FILE_DESKTOP_KEY_CATEGORIES,
@@ -41,8 +40,10 @@
   } = imports.gi.GLib;
   const { DesktopAppInfo } = imports.gi.Gio;
 
+  const { env } = imports.env;
+
   let bin;
-  if (getenv("FLATPAK_ID")) {
+  if (env === "flatpak") {
     bin = pkg.name;
   } else {
     bin = path_is_absolute(programInvocationName)
@@ -52,13 +53,13 @@
   log(`bin: ${bin}`);
 
   let defaultIconPath;
-  if (getenv("FLATPAK_ID")) {
+  if (env === "flatpak") {
     defaultIconPath = build_filenamev([
       get_home_dir(),
       "flatpak/exports/share",
       "icons/hicolor/scalable/apps/re.sonny.gigagram.svg",
     ]);
-  } else if (getenv("DEV")) {
+  } else if (env === "dev") {
     defaultIconPath = build_filenamev([
       get_current_dir(),
       "data/icons/hicolor/scalable/apps/re.sonny.gigagram.svg",

@@ -3,24 +3,22 @@
 
   const Gio = imports.gi.Gio;
   const {
-    getenv,
     build_filenamev,
     get_user_config_dir,
     KeyFile,
     KEY_FILE_DESKTOP_GROUP,
   } = imports.gi.GLib;
-
-  const FLATPAK_ID = getenv("FLATPAK_ID");
+  const { env } = imports.env;
 
   let backend = null; // dconf - default
   // https://github.com/flatpak/flatpak/issues/78#issuecomment-511160975
-  if (FLATPAK_ID) {
+  if (env === "flatpak") {
     backend = Gio.keyfile_settings_backend_new(
       build_filenamev([get_user_config_dir(), "glib-2.0/settings/keyfile"]),
       "/",
       null
     );
-  } else if (getenv("DEV")) {
+  } else if (env === "dev") {
     backend = Gio.keyfile_settings_backend_new(
       "var/config/glib-2.0/settings/keyfile",
       "/",

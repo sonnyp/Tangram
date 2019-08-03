@@ -86,7 +86,13 @@ npm install
 ./run.sh
 ```
 
-Hit <Ctrl><Shift>Q to restart the application with changes.
+Hit `<Ctrl><Shift>Q` to restart the application with changes.
+
+- data files are stored in `./var/data/` instead of `$XDG_DATA_HOME/gigagram/`
+- cache files are tored in `./var/cache/` instead of `XDG_CACHE_HOME/gigagram/`
+- desktop files are stored in `./var/applications/` instead of `$XDG_DATA_HOME/applications/`
+
+To test desktop notifications you can add a custom service with `https://jhmux.codesandbox.io/` as URL.
 
 ### Test
 
