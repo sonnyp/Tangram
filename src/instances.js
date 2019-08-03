@@ -33,6 +33,12 @@
     set name(name) {
       return this.settings.set_string("name", name);
     }
+    get icon() {
+      return this.settings.get_string("icon");
+    }
+    set icon(icon) {
+      return this.settings.set_string("icon", icon);
+    }
     get url() {
       return this.settings.get_string("url");
     }
@@ -68,11 +74,9 @@
     settings.set_strv("instances", [...instances, id]);
   };
 
-  this.create = function create({ id, name, url, service_id }) {
+  this.create = function create({ id, props }) {
     const instance = new Instance(id);
-    instance.name = name;
-    instance.url = url;
-    instance.service_id = service_id;
+    Object.assign(instance, props);
     list.push(instance);
     return instance;
   };
@@ -85,6 +89,7 @@
     settings.reset("name");
     settings.reset("url");
     settings.reset("service");
+    settings.reset("icon");
     // https://gitlab.gnome.org/GNOME/glib/merge_requests/981#note_551625
     try {
       settings.reset("");

@@ -14,41 +14,7 @@
   } = imports.gi.Gtk;
   const { SettingsBindFlags } = imports.gi.Gio;
 
-  const GLib = imports.gi.GLib;
-  const Gtk = imports.gi.Gtk;
-
-  const openIconChooserDialog = function() {
-    const filter = new Gtk.FileFilter();
-    filter.add_mime_type("image/png");
-    filter.add_mime_type("image/jpeg");
-    filter.add_mime_type("image/svg+xml");
-
-    const chooser = new Gtk.FileChooserDialog({
-      action: Gtk.FileChooserAction.OPEN,
-      filter: filter,
-      select_multiple: false,
-      //transient_for: this.window,
-      title: "Choose an icon",
-    });
-
-    // Without setting a current folder, folders won't show its contents
-    chooser.set_current_folder(GLib.get_home_dir());
-
-    chooser.add_button("Cancel", Gtk.ResponseType.CANCEL);
-    chooser.add_button("OK", Gtk.ResponseType.OK);
-
-    chooser.set_filter(filter);
-
-    // Run the dialog
-    const result = chooser.run();
-    const name = chooser.get_filename();
-    chooser.destroy();
-
-    if (result === Gtk.ResponseType.OK) {
-      return name;
-    }
-    return null;
-  };
+  const { iconChooser } = imports.icon;
 
   this.editInstanceDialog = function editInstanceDialog({ window, instance }) {
     return serviceDialog({ window, instance, action: "Edit" });
@@ -116,22 +82,8 @@
       halign: Align.END,
     });
     grid.attach(iconLabel, 1, 3, 1, 1);
-    const iconEntry = new Entry({
-      hexpand: true,
-    });
-    instance.bind("icon", iconEntry, "text", SettingsBindFlags.DEFAULT);
+    const iconEntry = iconChooser({ value: instance.icon });
     grid.attach(iconEntry, 2, 3, 1, 1);
-
-    const fileButton = new Gtk.Button({ label: "choose" });
-    grid.attach(fileButton, 3, 3, 1, 1);
-
-    // Bind it to a function that says what to do when the button is clicked
-    fileButton.connect("clicked", () => {
-      const file = openIconChooserDialog();
-      if (file) {
-        iconEntry.text = file;
-      }
-    });
 
     primaryButton.set_sensitive(!!URLEntry.text);
     URLEntry.set_icon_tooltip_text(
@@ -160,11 +112,17 @@
     if (response_id === ResponseType.DELETE_EVENT) {
       return;
     }
+
     if (response_id !== ResponseType.APPLY) {
       dialog.destroy();
       return;
     }
 
+    const icon = iconEntry.get_filename() || "default";
+
     dialog.destroy();
+
+    // eslint-disable-next-line require-atomic-updates
+    instance.icon = icon;
   }
 })();
