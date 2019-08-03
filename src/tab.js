@@ -78,7 +78,7 @@
       const menu = new Menu();
       menu.append("Edit", `app.editInstance("${id}")`);
       menu.append("Remove", `app.removeInstance("${id}")`);
-      menu.append("Detach", `app.detachTab("${id}")`);
+      menu.append("New application", `app.detachTab("${id}")`);
 
       const popover = new Popover();
       popover.bind_model(menu, null);
@@ -192,7 +192,7 @@
         // },
         // https://gjs-docs.gnome.org/webkit240~4.0_api/webkit2.webview#signal-show-notification
         ["show-notification"](notification) {
-          onNotification(notification);
+          onNotification({ ...notification, id });
           return true;
         },
       }
@@ -201,6 +201,7 @@
     webView.load_uri(url);
 
     webView.instance_id = id;
+    webView.show_all();
 
     return webView;
   }

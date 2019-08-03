@@ -120,7 +120,7 @@
   this.promptNewApplicationDialog = async function promptNewApplicationDialog({
     window,
   }) {
-    // FIXME Dialog.new_with_buttons
+    // TODO Dialog.new_with_buttons
     // is undefined in gjs, open issue.
     // https://developer.gnome.org/hig/stable/dialogs.html.en#Action
     // "Action Dialogs"
