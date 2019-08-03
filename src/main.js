@@ -30,6 +30,7 @@
 
   const { Window } = imports.window;
   const { lookup } = imports.util;
+  const { state } = imports.state;
 
   // if (getenv("DEV")) {
   listenv().forEach(name => {
@@ -120,7 +121,7 @@
       window = app.activeWindow;
 
       if (!window) {
-        window = Window({ application, profile });
+        window = Window({ state, application, profile });
       }
 
       window.present();
