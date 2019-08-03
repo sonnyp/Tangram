@@ -25,7 +25,7 @@
 
   const { buildHomePage } = imports.homePage;
   const { TabLabel, TabPage } = imports.tab;
-  const { promptServiceDialog } = imports.serviceDialog;
+  const { editInstanceDialog, addInstanceDialog } = imports.serviceDialog;
   const { connect } = imports.util;
   const { Header } = imports.header;
   const {
@@ -33,6 +33,7 @@
     createApplication,
     launchApplication,
   } = imports.applicationDialog;
+  const instances = imports.instances;
 
   this.Window = function Window({ application, profile, state }) {
     profile.settings =
@@ -249,7 +250,7 @@
       parameter_type: VariantType.new("s"),
     });
     selectTabAction.connect("activate", (self, parameters) => {
-      const id = parameters.deep_unpack();
+      const id = parameters.unpack();
       // FIXME get idx or child from id
       const idx = id;
       showTab(idx);
@@ -263,47 +264,32 @@
       parameter_type: VariantType.new("s"),
     });
     detachTabAction.connect("activate", (self, parameters) => {
-      const id = parameters.deep_unpack();
+      const id = parameters.unpack();
       detachTab(id);
     });
     application.add_action(detachTabAction);
 
-    function detachInstance(id) {
-      const instances = settings.get_strv("instances");
-      const idx = instances.indexOf(id);
-      if (idx < 0) return;
-      instances.splice(idx, 1);
-      settings.set_strv("instances", instances);
-      return idx;
-    }
     // https://gjs-docs.gnome.org/gio20~2.0_api/gio.simpleaction
     const removeInstanceAction = new SimpleAction({
       name: "removeInstance",
       parameter_type: VariantType.new("s"),
     });
     removeInstanceAction.connect("activate", (self, parameters) => {
-      const id = parameters.deep_unpack();
+      const instance = instances.get(parameters.deep_unpack());
 
-      const idx = detachInstance(id);
-      notebook.remove_page(idx);
-
-      const instanceSettings = new Settings({
-        schema_id: "re.sonny.gigagram.Instance",
-        path: `/re/sonny/gigagram/instances/${id}/`,
-      });
-      instanceSettings.reset("name");
-      instanceSettings.reset("url");
-      instanceSettings.reset("service");
-      // https://gitlab.gnome.org/GNOME/glib/merge_requests/981#note_551625
-      try {
-        instanceSettings.reset("");
-      } catch (err) {} // eslint-disable-line no-empty
+      const idx = instances.detach(settings, instance.id);
 
       const page = notebook.get_nth_page(idx);
       if (page) {
         const label = notebook.get_tab_label(page);
         if (label) label.destroy();
         page.destroy();
+      }
+
+      try {
+        instances.destroy(instance);
+      } catch (err) {
+        logError(err);
       }
     });
     application.add_action(removeInstanceAction);
@@ -326,8 +312,10 @@
     });
     editInstanceAction.connect("activate", (self, parameters) => {
       const id = parameters.deep_unpack();
-      // showTab(idx); FIXME
-      promptServiceDialog({ window, id, profile }).catch(logError);
+      const instance = instances.get(id);
+      // FIXME - should we show the tab in case it is not the current?
+      // showTab(idx);
+      editInstanceDialog({ window, instance }).catch(logError);
     });
     application.add_action(editInstanceAction);
 
@@ -354,42 +342,17 @@
       application.send_notification(null, notification);
     }
 
-    function buildInstance({ url, name, service_id, id }) {
-      const instanceSettings = new Settings({
-        schema_id: "re.sonny.gigagram.Instance",
-        path: `/re/sonny/gigagram/instances/${id}/`,
+    function buildInstance(instance) {
+      const page = TabPage({
+        instance,
+        window,
+        onNotification,
       });
-
-      const page = TabPage(
-        {
-          url,
-          name,
-          window,
-          service_id,
-          id,
-          onNotification,
-        },
-        settings,
-        instanceSettings
-      );
-      return buildInstanceFromPage({ name, service_id, id, page });
+      return buildInstanceFromPage({ instance, page });
     }
 
-    function buildInstanceFromPage({ name, service_id, id, page }) {
-      const instanceSettings = new Settings({
-        schema_id: "re.sonny.gigagram.Instance",
-        path: `/re/sonny/gigagram/instances/${id}/`,
-      });
-
-      const label = TabLabel(
-        {
-          name,
-          service_id,
-          id,
-        },
-        settings,
-        instanceSettings
-      );
+    function buildInstanceFromPage({ instance, page }) {
+      const label = TabLabel({ instance, settings });
 
       const idx = notebook.append_page(page, label);
       notebook.set_tab_reorderable(page, true);
@@ -397,51 +360,54 @@
       return idx;
     }
 
-    let serviceBeingAdded;
-
     async function onDoneAddingTab() {
       const webView = stack.get_child_by_name("add-tab");
+      const { instance_id } = webView;
+      const instance = instances.get(instance_id);
 
-      const instance = await promptServiceDialog({
-        profile,
-        window,
-        uri: webView.uri,
-        service: serviceBeingAdded,
-      });
+      try {
+        await addInstanceDialog({
+          instance,
+          window,
+        });
+      } catch (err) {
+        logError(err);
+        instances.destroy(instance);
+        // TODO display error
+        return;
+      }
+
+      instances.attach(settings, instance.id);
       stack.remove(webView);
-      if (!instance) return;
-
-      const { name, id, service_id } = instance;
-      const instances = settings.get_strv("instances");
-      instances.push(id);
-      settings.set_strv("instances", instances);
 
       const idx = buildInstanceFromPage({
         page: webView,
-        name,
-        service_id,
-        id,
+        instance,
       });
       showTab(idx);
     }
 
     async function onAddService(service) {
-      const { url } = service;
+      const { url, name } = service;
       const service_id = service.id;
       // FIXME should we keep the prefix service.name ? could be confusing when renaming/custom
       const id = `${service.name}-${uuid_string_random().replace(/-/g, "")}`;
-      const webview = TabPage({
+
+      const instance = instances.create({
         url,
         service_id,
         id,
+        name,
+      });
+
+      const webview = TabPage({
+        instance,
         window,
         onNotification,
       });
 
       stack.add_named(webview, "add-tab");
       state.set({ view: "add-tab" });
-
-      serviceBeingAdded = service;
     }
 
     // https://gjs-docs.gnome.org/gtk30~3.24.8/gtk.notebook
@@ -476,22 +442,13 @@
     );
     settings.bind("tabs-position", notebook, "tab_pos", SettingsBindFlags.GET);
 
-    // if (getenv("DEV")) {
-    //   buildInstance({
-    //     url: "https://jhmux.codesandbox.io/",
-    //     name: "Tests",
-    //     id: "gigagram-tests",
-    //     service_id: "custom",
-    //   });
-    // }
-
     function detachTab(instance_id) {
-      const instanceSettings = new Settings({
-        schema_id: "re.sonny.gigagram.Instance",
-        path: `/re/sonny/gigagram/instances/${instance_id}/`,
-      });
-      const name = instanceSettings.get_string("name");
-      // const icon = instanceSettings.get_string("icon");
+      const instance = instances.get(instance_id);
+      const {
+        name,
+        // TODO
+        //  icon,
+      } = instance;
 
       let app;
 
@@ -507,7 +464,7 @@
         schema_id: "re.sonny.gigagram",
         path: `/re/sonny/gigagram/applications/${app.id}/`,
       });
-      newAppSettings.set_strv("instances", [instance_id]);
+      instances.attach(newAppSettings, instance.id);
 
       try {
         launchApplication(app);
@@ -517,7 +474,7 @@
         return;
       }
 
-      const idx = detachInstance(instance_id);
+      const idx = instances.detach(settings, instance.id);
 
       const page = notebook.get_nth_page(idx);
       notebook.detach_tab(page);
@@ -530,18 +487,9 @@
       detachTab(page.instance_id);
     });
 
-    const instances = settings.get_strv("instances");
-    instances.forEach(id => {
-      const settings = new Settings({
-        schema_id: "re.sonny.gigagram.Instance",
-        path: `/re/sonny/gigagram/instances/${id}/`,
-      });
-      const name = settings.get_string("name");
-      const url = settings.get_string("url");
-      const service_id = settings.get_string("service");
-      if (!url || !service_id) return;
-
-      buildInstance({ url, name, id, service_id });
+    instances.load(settings);
+    instances.list.forEach(instance => {
+      buildInstance(instance);
     });
 
     observeSetting(settings, "instances", instances => {

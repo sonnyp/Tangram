@@ -2,7 +2,7 @@
   "use strict";
 
   const { WindowTypeHint } = imports.gi.Gdk;
-  const { once, Settings } = imports.util;
+  const { once } = imports.util;
   const {
     Dialog,
     Align,
@@ -12,26 +12,17 @@
     ResponseType,
     EntryIconPosition,
   } = imports.gi.Gtk;
-  const { uuid_string_random } = imports.gi.GLib;
+  const { SettingsBindFlags } = imports.gi.Gio;
 
-  this.promptServiceDialog = async function promptServiceDialog({
-    window,
-    service,
-    id,
-    uri,
-  }) {
-    let settings;
+  this.editInstanceDialog = function editInstanceDialog({ window, instance }) {
+    return serviceDialog({ window, instance, action: "Edit" });
+  };
 
-    if (id) {
-      // https://gjs-docs.gnome.org/gio20~2.0_api/gio.settings
-      settings = new Settings({
-        schema_id: "re.sonny.gigagram.Instance",
-        path: `/re/sonny/gigagram/instances/${id}/`,
-      });
-    }
-    const showName = settings ? settings.get_string("name") : service.name;
-    const showURL = settings ? settings.get_string("url") : uri;
+  this.addInstanceDialog = function editInstanceDialog({ window, instance }) {
+    return serviceDialog({ window, instance, action: "Add " });
+  };
 
+  async function serviceDialog({ window, instance, action }) {
     // TODO Dialog.new_with_buttons
     // is undefined in gjs, open issue.
     // https://developer.gnome.org/hig/stable/dialogs.html.en#Action
@@ -39,7 +30,7 @@
     // and
     // https://developer.gnome.org/hig/stable/visual-layout.html.en
     const dialog = new Dialog({
-      title: `${settings ? "Edit" : "Add"} ${showName}`,
+      title: `${action} ${instance.name}`,
       modal: true,
       type_hint: WindowTypeHint.DIALOG,
       use_header_bar: true,
@@ -48,10 +39,7 @@
     });
 
     dialog.add_button("Cancel", ResponseType.CANCEL);
-    const primaryButton = dialog.add_button(
-      id ? "Edit" : "Add",
-      ResponseType.APPLY
-    );
+    const primaryButton = dialog.add_button(action, ResponseType.APPLY);
     primaryButton.get_style_context().add_class("suggested-action");
     primaryButton.grab_focus();
 
@@ -71,8 +59,8 @@
     grid.attach(nameLabel, 1, 1, 1, 1);
     const nameEntry = new Entry({
       hexpand: true,
-      text: showName,
     });
+    instance.bind("name", nameEntry, "text", SettingsBindFlags.DEFAULT);
     grid.attach(nameEntry, 2, 1, 1, 1);
 
     const URLLabel = new Label({
@@ -82,9 +70,9 @@
     grid.attach(URLLabel, 1, 2, 1, 1);
 
     const URLEntry = new Entry({
-      text: showURL,
       hexpand: true,
     });
+    instance.bind("url", URLEntry, "text", SettingsBindFlags.DEFAULT);
     grid.attach(URLEntry, 2, 2, 1, 1);
 
     primaryButton.set_sensitive(!!URLEntry.text);
@@ -119,32 +107,6 @@
       return;
     }
 
-    const name = nameEntry.text;
-    const url = URLEntry.text;
-
-    if (!settings) {
-      id = `${name}-${uuid_string_random().replace(/-/g, "")}`;
-      settings = new Settings({
-        schema_id: "re.sonny.gigagram.Instance",
-        path: `/re/sonny/gigagram/instances/${id}/`,
-      });
-    }
-
-    settings.set_string("name", name);
-    settings.set_string("url", url);
-    if (service) {
-      settings.set_string("service", service.id);
-    }
-    // binding example
-    // settings.bind("name", nameEntry, "text", SettingsBindFlags.DEFAULT);
-
     dialog.destroy();
-
-    return {
-      name,
-      url,
-      id,
-      service_id: service ? service.id : "",
-    };
-  };
+  }
 })();

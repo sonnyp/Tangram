@@ -18,7 +18,7 @@
   const { ApplicationFlags, SimpleAction } = imports.gi.Gio;
   const {
     getenv,
-    listenv,
+    // listenv,
     spawn_async,
     SpawnFlags,
     OptionFlags,
@@ -32,12 +32,6 @@
   const { lookup } = imports.util;
   const { state } = imports.state;
 
-  // if (getenv("DEV")) {
-  listenv().forEach(name => {
-    log(`env ${name}: ${getenv(name)}`);
-  });
-  // }
-
   // Debug
   log(`programInvocationName: ${programInvocationName}`);
   log(`_: ${getenv("_")}`);
@@ -46,6 +40,9 @@
       log(`pkg.${i}: ${pkg[i]}`);
     }
   }
+  // listenv().forEach(name => {
+  //   log(`env ${name}: ${getenv(name)}`);
+  // });
 
   this.main = function main(argv) {
     log(`argv: ${argv.join(" ")}`);

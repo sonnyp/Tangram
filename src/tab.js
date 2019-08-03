@@ -27,7 +27,6 @@
   const { stylesheets } = imports.serviceManager;
   const { build_filenamev } = imports.gi.GLib;
   const { Pixbuf } = imports.gi.GdkPixbuf;
-  const { data_dir, cache_dir } = imports.env;
 
   const { services } = imports.serviceManager;
 
@@ -39,7 +38,8 @@
   };
 
   this.TabLabel = TabLabel;
-  function TabLabel({ service_id, id, name }, settings, instanceSettings) {
+  function TabLabel({ instance, settings }) {
+    const { service_id, id } = instance;
     const box = new Box({});
 
     const service =
@@ -56,11 +56,7 @@
     }
 
     const label = new Label();
-    if (instanceSettings) {
-      instanceSettings.bind("name", label, "label", SettingsBindFlags.GET);
-    } else {
-      label.label = name;
-    }
+    instance.bind("name", label, "label", SettingsBindFlags.GET);
     box.add(label);
 
     box.add_events(EventMask.BUTTON_PRESS_MASK);
@@ -71,43 +67,35 @@
     });
     eventBox.add(box);
 
-    if (service && id) {
-      const menu = new Menu();
-      menu.append("Edit", `app.editInstance("${id}")`);
-      menu.append("Remove", `app.removeInstance("${id}")`);
-      menu.append("New application", `app.detachTab("${id}")`);
+    const menu = new Menu();
+    menu.append("Edit", `app.editInstance("${id}")`);
+    menu.append("Remove", `app.removeInstance("${id}")`);
+    menu.append("New application", `app.detachTab("${id}")`);
 
-      const popover = new Popover();
-      popover.bind_model(menu, null);
-      popover.set_relative_to(box);
-      settings.bind(
-        "tabs-position",
-        popover,
-        "position",
-        SettingsBindFlags.GET
-      );
+    const popover = new Popover();
+    popover.bind_model(menu, null);
+    popover.set_relative_to(box);
+    settings.bind("tabs-position", popover, "position", SettingsBindFlags.GET);
 
-      eventBox.connect("button-press-event", (self, eventButton) => {
-        const [, button] = eventButton.get_button();
-        if (button !== 3) return;
+    eventBox.connect("button-press-event", (self, eventButton) => {
+      const [, button] = eventButton.get_button();
+      if (button !== 3) return;
 
-        popover.popup();
-      });
-    }
+      popover.popup();
+    });
 
     eventBox.show_all();
     return eventBox;
   }
 
   this.TabPage = TabPage;
-  function TabPage({ url, service_id, id, window, onNotification }) {
-    const dataPath = build_filenamev([data_dir, "gigagram", id]);
-    const cachePath = build_filenamev([cache_dir, "gigagram", id]);
+  function TabPage({ instance, window, onNotification }) {
+    const { service_id, id, url, data_dir, cache_dir } = instance;
 
     // https://gjs-docs.gnome.org/webkit240~4.0_api/webkit2.websitedatamanager
     const website_data_manager = new WebsiteDataManager({
-      base_data_directory: dataPath,
-      disk_cache_directory: cachePath,
+      base_data_directory: data_dir,
+      disk_cache_directory: cache_dir,
     });
 
     // https://gjs-docs.gnome.org/webkit240~4.0_api/webkit2.webcontext
@@ -115,7 +103,7 @@
       website_data_manager,
     });
     web_context.set_favicon_database_directory(
-      build_filenamev([cachePath, "icondatabase"])
+      build_filenamev([cache_dir, "icondatabase"])
     );
 
     /*
@@ -135,7 +123,7 @@
     const cookieManager = website_data_manager.get_cookie_manager();
     cookieManager.set_accept_policy(CookieAcceptPolicy.NO_THIRD_PARTY);
     cookieManager.set_persistent_storage(
-      `${dataPath}/cookies.sqlite`,
+      build_filenamev([data_dir, "cookies.sqlite"]),
       CookiePersistentStorage.SQLITE
     );
 
