@@ -14,7 +14,7 @@
   } = imports.gi.Gtk;
   const { SettingsBindFlags } = imports.gi.Gio;
 
-  const { iconChooser } = imports.icon;
+  const { iconChooser, saveIcon } = imports.icon;
 
   this.editInstanceDialog = function editInstanceDialog({ window, instance }) {
     return serviceDialog({ window, instance, action: "Edit" });
@@ -82,7 +82,9 @@
       halign: Align.END,
     });
     grid.attach(iconLabel, 1, 3, 1, 1);
-    const iconEntry = iconChooser({ value: instance.icon });
+    const iconEntry = iconChooser({
+      value: instance.icon === "default" ? null : instance.icon,
+    });
     grid.attach(iconEntry, 2, 3, 1, 1);
 
     primaryButton.set_sensitive(!!URLEntry.text);
@@ -118,7 +120,10 @@
       return;
     }
 
-    const icon = iconEntry.get_filename() || "default";
+    let icon = "default";
+    if (iconEntry.get_filename()) {
+      icon = saveIcon(iconEntry.get_filename(), instance.data_dir);
+    }
 
     dialog.destroy();
 

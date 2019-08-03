@@ -26,7 +26,7 @@
 
   const { connect } = imports.util;
   const { stylesheets } = imports.serviceManager;
-  const { build_filenamev, mkdir_with_parents } = imports.gi.GLib;
+  const { build_filenamev } = imports.gi.GLib;
 
   const { Pixbuf } = imports.gi.GdkPixbuf;
 
@@ -41,69 +41,30 @@
 
   this.TabLabel = TabLabel;
   function TabLabel({ instance, settings }) {
-    const { service_id, id, icon, name, data_dir } = instance;
-    const box = new Box({});
-    const image = new Image({ margin_end: 6 });
+    const { service_id, id } = instance;
 
     const service =
       service_id && services.find(service => service.id === service_id);
 
-    function get_default_icon_pixbuf() {
-      return Pixbuf.new_from_resource_at_scale(service.icon, 28, 28, true);
-    }
-
-    function updateIcon(icon) {
-      if (service && service.icon) {
-        //https://developer.gnome.org/gdk-pixbuf/2.36/
-        let pixbuf;
-        // use service icon if service is not custom
-
-        if (service_id === "custom" && icon !== "default") {
-          if (icon.startsWith(data_dir)) {
-            // if file is already saved, use it
-            try {
-              pixbuf = Pixbuf.new_from_file_at_scale(icon, 28, 28, true);
-            } catch (e) {
-              log("icon " + icon + " for service " + name + " no found.");
-              pixbuf = get_default_icon_pixbuf();
-            }
-          } else {
-            // save icon
-
-            try {
-              //make directory drwx------
-              mkdir_with_parents(data_dir, 0o700);
-              const icon_save_path = data_dir + "/icon.png";
-
-              pixbuf = Pixbuf.new_from_file_at_scale(icon, 28, 28, true);
-              pixbuf.savev(icon_save_path, "png", [], []);
-              instance.settings.set_string("icon", icon_save_path);
-            } catch (e) {
-              log(
-                "icon " +
-                  icon +
-                  " for service " +
-                  name +
-                  " couldn't be saved or read."
-              );
-              pixbuf = get_default_icon_pixbuf();
-            }
-          }
-        } else {
-          pixbuf = get_default_icon_pixbuf();
-        }
+    const box = new Box({});
+    const image = new Image({ margin_end: 6 });
+    instance.observe("icon", icon => {
+      if (icon && icon !== "default") {
+        image.set_from_file(icon);
+      } else if (service && service.icon) {
+        const pixbuf = Pixbuf.new_from_resource_at_scale(
+          service.icon,
+          28,
+          28,
+          true
+        );
         image.set_from_pixbuf(pixbuf);
       }
-    }
-
+    });
     box.add(image);
-    updateIcon(icon);
 
     const label = new Label();
     instance.bind("name", label, "label", SettingsBindFlags.GET);
-    instance.settings.connect("changed", settings =>
-      updateIcon(settings.get_string("icon"))
-    );
     box.add(label);
 
     box.add_events(EventMask.BUTTON_PRESS_MASK);

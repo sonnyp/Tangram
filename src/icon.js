@@ -2,6 +2,11 @@
   "use strict";
 
   const { FileChooserButton, FileChooserAction, FileFilter } = imports.gi.Gtk;
+  const {
+    build_filenamev,
+    // mkdir_with_parents
+  } = imports.gi.GLib;
+  const { Pixbuf } = imports.gi.GdkPixbuf;
 
   // https://gjs-docs.gnome.org/gtk30~3.24.8/gtk.filefilter
   const iconFileFilter = new FileFilter();
@@ -20,5 +25,16 @@
     //   log(fileChooserButton.get_file());
     // });
     return fileChooserButton;
+  };
+
+  this.saveIcon = function saveIcon(image, dir) {
+    const pixbuf = Pixbuf.new_from_file_at_scale(image, 28, 28, true);
+
+    // //make directory drwx------
+    // mkdir_with_parents(data_dir, 0o700);
+
+    const filepath = build_filenamev([dir, "icon.png"]);
+    pixbuf.savev(filepath, "png", [], []);
+    return filepath;
   };
 })();

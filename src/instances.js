@@ -27,6 +27,14 @@
       return this.settings.bind(...args);
     }
 
+    observe(prop, fn) {
+      const val = this[prop];
+      if (val !== undefined) fn(val);
+      this.settings.connect(`changed::${prop}`, () => {
+        fn(this[prop]);
+      });
+    }
+
     get name() {
       return this.settings.get_string("name");
     }
@@ -74,7 +82,7 @@
     settings.set_strv("instances", [...instances, id]);
   };
 
-  this.create = function create({ id, props }) {
+  this.create = function create({ id, ...props }) {
     const instance = new Instance(id);
     Object.assign(instance, props);
     list.push(instance);
