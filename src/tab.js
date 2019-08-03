@@ -25,12 +25,9 @@
   } = imports.gi.WebKit2;
   const { connect } = imports.util;
   const { stylesheets } = imports.serviceManager;
-  const {
-    get_user_cache_dir,
-    get_user_data_dir,
-    build_filenamev,
-  } = imports.gi.GLib;
+  const { build_filenamev } = imports.gi.GLib;
   const { Pixbuf } = imports.gi.GdkPixbuf;
+  const { data_dir, cache_dir } = imports.env;
 
   const { services } = imports.serviceManager;
 
@@ -104,8 +101,8 @@
 
   this.TabPage = TabPage;
   function TabPage({ url, service_id, id, window, onNotification }) {
-    const dataPath = build_filenamev([get_user_data_dir(), "gigagram", id]);
-    const cachePath = build_filenamev([get_user_cache_dir(), "gigagram", id]);
+    const dataPath = build_filenamev([data_dir, "gigagram", id]);
+    const cachePath = build_filenamev([cache_dir, "gigagram", id]);
 
     // https://gjs-docs.gnome.org/webkit240~4.0_api/webkit2.websitedatamanager
     const website_data_manager = new WebsiteDataManager({

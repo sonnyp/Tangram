@@ -33,9 +33,8 @@
     createApplication,
     launchApplication,
   } = imports.applicationDialog;
-  const { state } = imports.state;
 
-  this.Window = function Window({ application, profile }) {
+  this.Window = function Window({ application, profile, state }) {
     profile.settings =
       "/re/sonny/gigagram/" + (profile.id ? `applications/${profile.id}/` : "");
 

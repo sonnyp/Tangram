@@ -15,6 +15,7 @@
     FileChooserAction,
     FileFilter,
   } = imports.gi.Gtk;
+  const { applications_dir } = imports.env;
 
   // https://gjs-docs.gnome.org/gtk30~3.24.8/gtk.filefilter
   const iconFileFilter = new FileFilter();
@@ -22,7 +23,6 @@
   iconFileFilter.add_mime_type("image/png");
 
   const {
-    get_user_data_dir,
     build_filenamev,
     getenv,
     path_is_absolute,
@@ -108,8 +108,7 @@
     desktopKeyFile.set_comment(null, null, " Created by Gigagram");
 
     const desktopFilePath = build_filenamev([
-      get_user_data_dir(),
-      "applications",
+      applications_dir,
       `${id}.desktop`,
     ]);
     desktopKeyFile.save_to_file(desktopFilePath);

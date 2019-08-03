@@ -22,7 +22,7 @@
     );
   } else if (getenv("DEV")) {
     backend = Gio.keyfile_settings_backend_new(
-      "config/glib-2.0/settings/keyfile",
+      "var/config/glib-2.0/settings/keyfile",
       "/",
       null
     );
