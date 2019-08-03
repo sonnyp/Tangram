@@ -250,7 +250,7 @@
       parameter_type: VariantType.new("s"),
     });
     selectTabAction.connect("activate", (self, parameters) => {
-      const id = parameters.deep_unpack();
+      const id = parameters.unpack();
       // FIXME get idx or child from id
       const idx = id;
       showTab(idx);
@@ -264,7 +264,7 @@
       parameter_type: VariantType.new("s"),
     });
     detachTabAction.connect("activate", (self, parameters) => {
-      const id = parameters.deep_unpack();
+      const id = parameters.unpack();
       detachTab(id);
     });
     application.add_action(detachTabAction);
@@ -275,10 +275,9 @@
       parameter_type: VariantType.new("s"),
     });
     removeInstanceAction.connect("activate", (self, parameters) => {
-      const id = parameters.deep_unpack();
+      const instance = instances.get(parameters.deep_unpack());
 
-      const idx = instances.detach(settings, id);
-      notebook.remove_page(idx);
+      const idx = instances.detach(settings, instance.id);
 
       const page = notebook.get_nth_page(idx);
       if (page) {
@@ -287,7 +286,6 @@
         page.destroy();
       }
 
-      const instance = instances.get(id);
       try {
         instances.destroy(instance);
       } catch (err) {

@@ -7,6 +7,7 @@
     get_user_config_dir,
     KeyFile,
     KEY_FILE_DESKTOP_GROUP,
+    VariantType,
   } = imports.gi.GLib;
   const { env } = imports.env;
 
@@ -89,10 +90,15 @@
     return keyFile;
   };
 
-  this.lookup = function lookup(dict, key, type = null) {
-    const variant = dict.lookup_value(key, type);
-    if (!variant) return null;
-    return variant.get_string()[0];
+  // merge request
+  // https://gitlab.gnome.org/GNOME/gjs/merge_requests/320
+  this.lookup = function lookup(dict, key, variantType = null, deep = false) {
+    if (typeof variantType === "string")
+      variantType = new VariantType(variantType);
+
+    const variant = dict.lookup_value(key, variantType);
+    if (variant === null) return null;
+    return deep === true ? variant.deep_unpack(deep) : variant.unpack();
   };
 
   this.observeSetting = function observeSetting(settings, key, fn) {
