@@ -12,6 +12,7 @@
   const iconFileFilter = new FileFilter();
   iconFileFilter.add_mime_type("image/svg+xml");
   iconFileFilter.add_mime_type("image/png");
+  iconFileFilter.add_mime_type("image/jpeg");
 
   this.iconChooser = function iconChooser({ value }) {
     // https://gjs-docs.gnome.org/gtk30~3.24.8/gtk.filechooser

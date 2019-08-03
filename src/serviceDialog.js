@@ -65,27 +65,28 @@
     instance.bind("name", nameEntry, "text", SettingsBindFlags.DEFAULT);
     grid.attach(nameEntry, 2, 1, 1, 1);
 
+    const iconLabel = new Label({
+      label: "Icon",
+      halign: Align.END,
+    });
+    grid.attach(iconLabel, 1, 2, 1, 1);
+
+    const iconEntry = iconChooser({
+      value: instance.icon === "default" ? null : instance.icon,
+    });
+    grid.attach(iconEntry, 2, 2, 1, 1);
+
     const URLLabel = new Label({
       label: "URL",
       halign: Align.END,
     });
-    grid.attach(URLLabel, 1, 2, 1, 1);
+    grid.attach(URLLabel, 1, 3, 1, 1);
 
     const URLEntry = new Entry({
       hexpand: true,
     });
     instance.bind("url", URLEntry, "text", SettingsBindFlags.DEFAULT);
-    grid.attach(URLEntry, 2, 2, 1, 1);
-
-    const iconLabel = new Label({
-      label: "Icon",
-      halign: Align.END,
-    });
-    grid.attach(iconLabel, 1, 3, 1, 1);
-    const iconEntry = iconChooser({
-      value: instance.icon === "default" ? null : instance.icon,
-    });
-    grid.attach(iconEntry, 2, 3, 1, 1);
+    grid.attach(URLEntry, 2, 3, 1, 1);
 
     primaryButton.set_sensitive(!!URLEntry.text);
     URLEntry.set_icon_tooltip_text(
