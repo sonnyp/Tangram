@@ -53,13 +53,9 @@
       onGoBack,
       onGoForward,
       onDoneAddingTab,
+      onCancelAddingTab,
       profile,
       state,
-      onCancelAddTab() {
-        state.set({ view: "services" });
-        const child = stack.get_child_by_name("add-tab");
-        if (child) child.destroy();
-      },
     });
 
     function getCurrentTab() {
@@ -385,6 +381,17 @@
         instance,
       });
       showTab(idx);
+    }
+
+    function onCancelAddingTab() {
+      state.set({ view: "services" });
+      const webView = stack.get_child_by_name("add-tab");
+      if (!webView) return;
+      webView.destroy();
+      const { instance_id } = webView;
+      const instance = instances.get(instance_id);
+      if (!instance) return;
+      instances.destroy(instance);
     }
 
     async function onAddService(service) {

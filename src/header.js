@@ -37,7 +37,7 @@
     onGoBack,
     onGoForward,
     onDoneAddingTab,
-    onCancelAddTab,
+    onCancelAddingTab,
     profile,
     state,
   }) {
@@ -108,7 +108,7 @@
       IconSize.BUTTON
     );
     addTabBox.add(cancelAddTabButton);
-    cancelAddTabButton.connect("clicked", onCancelAddTab);
+    cancelAddTabButton.connect("clicked", onCancelAddingTab);
     left_stack.add_named(addTabBox, "add-tab");
 
     titlebar.pack_start(left_stack);
