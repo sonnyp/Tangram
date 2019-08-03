@@ -418,13 +418,16 @@
     }
 
     // https://gjs-docs.gnome.org/gtk30~3.24.8/gtk.notebook
-    const notebook = new Notebook({ scrollable: true, show_tabs: false });
-    state.bind(
-      "instances",
-      notebook,
-      "show_tabs",
-      instances => instances.length > 1
-    );
+    const notebook = new Notebook({ scrollable: true });
+    // Tab bar only hides on custom applications
+    if (profile.id) {
+      state.bind(
+        "instances",
+        notebook,
+        "show_tabs",
+        instances => instances.length > 1
+      );
+    }
     notebook.set_group_name("tabs");
     notebook.show_all();
     stack.add_named(notebook, "tabs");
