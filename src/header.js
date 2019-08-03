@@ -37,6 +37,7 @@
     onGoBack,
     onGoForward,
     onDoneAddingTab,
+    onCancelAddTab,
     profile,
     state,
   }) {
@@ -107,9 +108,7 @@
       IconSize.BUTTON
     );
     addTabBox.add(cancelAddTabButton);
-    cancelAddTabButton.connect("clicked", () => {
-      state.set({ view: "services" });
-    });
+    cancelAddTabButton.connect("clicked", onCancelAddTab);
     left_stack.add_named(addTabBox, "add-tab");
 
     titlebar.pack_start(left_stack);
