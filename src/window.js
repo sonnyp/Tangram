@@ -164,7 +164,6 @@
         notebook.next_page();
       }
     }
-
     function prevPage() {
       if (notebook.page === 0) {
         notebook.page = notebook.get_n_pages() - 1;
