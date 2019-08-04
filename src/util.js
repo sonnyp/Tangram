@@ -1,34 +1,13 @@
 (() => {
   "use strict";
 
-  const Gio = imports.gi.Gio;
-  const {
-    build_filenamev,
-    get_user_config_dir,
-    KeyFile,
-    KEY_FILE_DESKTOP_GROUP,
-    VariantType,
-  } = imports.gi.GLib;
-  const { env } = imports.env;
+  const GioSettings = imports.gi.Gio.Settings;
+  const { KeyFile, KEY_FILE_DESKTOP_GROUP, VariantType } = imports.gi.GLib;
+  const { settings_backend } = imports.env;
 
-  let backend = null; // dconf - default
-  // https://github.com/flatpak/flatpak/issues/78#issuecomment-511160975
-  if (env === "flatpak") {
-    backend = Gio.keyfile_settings_backend_new(
-      build_filenamev([get_user_config_dir(), "glib-2.0/settings/keyfile"]),
-      "/",
-      null
-    );
-  } else if (env === "dev") {
-    backend = Gio.keyfile_settings_backend_new(
-      "var/config/glib-2.0/settings/keyfile",
-      "/",
-      null
-    );
-  }
   this.Settings = function Settings(props) {
-    return new Gio.Settings({
-      backend,
+    return new GioSettings({
+      backend: settings_backend,
       ...props,
     });
   };
@@ -90,6 +69,7 @@
     return keyFile;
   };
 
+  // TODO replace with dict.lookup with SDK 3.24
   // merge request
   // https://gitlab.gnome.org/GNOME/gjs/merge_requests/320
   this.lookup = function lookup(dict, key, variantType = null, deep = false) {
