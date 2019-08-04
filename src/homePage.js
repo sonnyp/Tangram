@@ -49,8 +49,8 @@
         image_position: PositionType.TOP,
         relief: ReliefStyle.NONE,
       });
-      // FIXME get_data/set_data does not work in gjs
-      // open issue.
+      // TODO get_data/set_data does not work in gjs
+      // open issue?
       button.service_id = service.id;
       button.connect("clicked", onButtonclicked);
 

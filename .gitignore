@@ -12,4 +12,4 @@ gigagram.flatpak
 *.gresource
 node_modules
 gschemas.compiled
-config/
+var

@@ -1,7 +1,7 @@
 (() => {
   "use strict";
 
-  const { VariantType, Variant } = imports.gi.GLib;
+  const { VariantType, Variant, uuid_string_random } = imports.gi.GLib;
   const {
     ApplicationWindow,
     Notebook,
@@ -18,19 +18,24 @@
     SimpleAction,
     SettingsBindFlags,
   } = imports.gi.Gio;
-  const { Settings } = imports.util;
+  const { Settings, observeSetting } = imports.util;
 
   // https://github.com/flatpak/flatpak/issues/78#issuecomment-511158618
   // log(imports.gi.Gio.SettingsBackend.get_default());
 
   const { buildHomePage } = imports.homePage;
-  const { Tab } = imports.tab;
-  const { promptServiceDialog } = imports.serviceDialog;
+  const { TabLabel, TabPage } = imports.tab;
+  const { editInstanceDialog, addInstanceDialog } = imports.serviceDialog;
   const { connect } = imports.util;
   const { Header } = imports.header;
-  const { promptNewApplicationDialog } = imports.applicationDialog;
+  const {
+    promptNewApplicationDialog,
+    createApplication,
+    launchApplication,
+  } = imports.applicationDialog;
+  const instances = imports.instances;
 
-  this.Window = function Window({ application, profile }) {
+  this.Window = function Window({ application, profile, state }) {
     profile.settings =
       "/re/sonny/gigagram/" + (profile.id ? `applications/${profile.id}/` : "");
 
@@ -44,12 +49,13 @@
     });
 
     const header = Header({
-      onAddTab: showServices,
-      onCancel: showTabs,
       onReload,
       onGoBack,
       onGoForward,
+      onDoneAddingTab,
+      onCancelAddingTab,
       profile,
+      state,
     });
 
     function getCurrentTab() {
@@ -91,12 +97,13 @@
       default_width: 840,
     });
     window.set_titlebar(header.titlebar);
-    header.titlebar.show_all();
 
     // https://gjs-docs.gnome.org/gtk30~3.24.8/gtk.stack
     const stack = new Stack();
+    state.bind("view", stack, "visible_child_name");
     stack.set_transition_type(StackTransitionType.CROSSFADE);
     window.add(stack);
+
     const addTabPage = buildHomePage({ onAddService });
     stack.add_named(addTabPage, "services");
     stack.show_all();
@@ -153,7 +160,6 @@
         notebook.next_page();
       }
     }
-
     function prevPage() {
       if (notebook.page === 0) {
         notebook.page = notebook.get_n_pages() - 1;
@@ -240,11 +246,24 @@
       parameter_type: VariantType.new("s"),
     });
     selectTabAction.connect("activate", (self, parameters) => {
-      const idx = parameters.deep_unpack();
-      showTabs(idx);
+      const id = parameters.unpack();
+      // FIXME get idx or child from id
+      const idx = id;
+      showTab(idx);
       window.present();
     });
     application.add_action(selectTabAction);
+
+    // https://gjs-docs.gnome.org/gio20~2.0_api/gio.simpleaction
+    const detachTabAction = new SimpleAction({
+      name: "detachTab",
+      parameter_type: VariantType.new("s"),
+    });
+    detachTabAction.connect("activate", (self, parameters) => {
+      const id = parameters.unpack();
+      detachTab(id);
+    });
+    application.add_action(detachTabAction);
 
     // https://gjs-docs.gnome.org/gio20~2.0_api/gio.simpleaction
     const removeInstanceAction = new SimpleAction({
@@ -252,33 +271,21 @@
       parameter_type: VariantType.new("s"),
     });
     removeInstanceAction.connect("activate", (self, parameters) => {
-      const id = parameters.deep_unpack();
+      const instance = instances.get(parameters.deep_unpack());
 
-      const instances = settings.get_strv("instances");
-      const idx = instances.indexOf(id);
+      const idx = instances.detach(settings, instance.id);
 
-      if (idx < 0) return;
+      const page = notebook.get_nth_page(idx);
+      if (page) {
+        const label = notebook.get_tab_label(page);
+        if (label) label.destroy();
+        page.destroy();
+      }
 
-      instances.splice(idx, 1);
-
-      settings.set_strv("instances", instances);
-
-      const instanceSettings = new Settings({
-        schema_id: "re.sonny.gigagram.Instance",
-        path: profile.settings + `instances/${id}/`,
-      });
-
-      // instanceSettings.reset("");
-      // https://gitlab.gnome.org/GNOME/glib/merge_requests/981#note_551625
-      // so instead
-      instanceSettings.reset("name");
-      instanceSettings.reset("url");
-      instanceSettings.reset("service");
-
-      notebook.remove_page(idx);
-
-      if (instances.length < 1) {
-        showServices();
+      try {
+        instances.destroy(instance);
+      } catch (err) {
+        logError(err);
       }
     });
     application.add_action(removeInstanceAction);
@@ -290,22 +297,9 @@
     });
     application.add_action(newApplication);
 
-    function showTabs(idx) {
-      if (idx) {
-        notebook.set_current_page(idx);
-      }
-      header.stack.set_visible_child_name("tabs");
-      stack.set_visible_child_name("tabs");
-    }
-
-    function showServices() {
-      const instances = settings.get_strv("instances");
-      stack.set_visible_child_name("services");
-      if (instances.length > 0) {
-        header.stack.set_visible_child_name("services");
-      } else {
-        header.stack.set_visible_child_name("none");
-      }
+    function showTab(idx) {
+      notebook.set_current_page(idx);
+      state.set({ view: "tabs" });
     }
 
     const editInstanceAction = new SimpleAction({
@@ -314,8 +308,10 @@
     });
     editInstanceAction.connect("activate", (self, parameters) => {
       const id = parameters.deep_unpack();
-      // showTabs(idx); FIXME
-      promptServiceDialog({ window, id, profile }).catch(logError);
+      const instance = instances.get(id);
+      // FIXME - should we show the tab in case it is not the current?
+      // showTab(idx);
+      editInstanceDialog({ window, instance }).catch(logError);
     });
     application.add_action(editInstanceAction);
 
@@ -332,60 +328,104 @@
     });
     application.add_action(nthTab);
 
-    function buildInstance({ url, name, icon, service_id, id }) {
-      notebook.set_show_tabs(true);
-      const instanceSettings = new Settings({
-        schema_id: "re.sonny.gigagram.Instance",
-        path: profile.settings + `instances/${id}/`,
-      });
+    function onNotification({ title, body, id }) {
+      // https://gjs-docs.gnome.org/gio20~2.0_api/gio.notification
+      const notification = new Notification();
+      if (title) notification.set_title(title);
+      if (body) notification.set_body(body);
+      notification.set_priority(NotificationPriority.HIGH);
+      notification.set_default_action(`app.selectTab('${id}')`);
+      application.send_notification(null, notification);
+    }
 
-      const { label, page } = Tab(
-        {
-          url,
-          name,
-          icon,
-          window,
-          service_id,
-          id,
-          onNotification({ title, body }) {
-            // https://gjs-docs.gnome.org/gio20~2.0_api/gio.notification
-            const notification = new Notification();
-            if (title) notification.set_title(title);
-            if (body) notification.set_body(body);
-            notification.set_priority(NotificationPriority.HIGH);
-            notification.set_default_action(`app.selectTab('${idx}')`);
-            application.send_notification(null, notification);
-          },
-        },
-        settings,
-        instanceSettings
-      );
-      label.show_all();
-      page.show_all();
+    function buildInstance(instance) {
+      const page = TabPage({
+        instance,
+        window,
+        onNotification,
+      });
+      return buildInstanceFromPage({ instance, page });
+    }
+
+    function buildInstanceFromPage({ instance, page }) {
+      const label = TabLabel({ instance, settings });
+
       const idx = notebook.append_page(page, label);
       notebook.set_tab_reorderable(page, true);
+      notebook.set_tab_detachable(page, true);
       return idx;
     }
 
-    async function onAddService(service) {
-      const instance = await promptServiceDialog({
-        profile,
-        window,
-        service,
+    async function onDoneAddingTab() {
+      const webView = stack.get_child_by_name("add-tab");
+      const { instance_id } = webView;
+      const instance = instances.get(instance_id);
+
+      try {
+        await addInstanceDialog({
+          instance,
+          window,
+        });
+      } catch (err) {
+        logError(err);
+        instances.destroy(instance);
+        // TODO display error
+        return;
+      }
+
+      instances.attach(settings, instance.id);
+      stack.remove(webView);
+
+      const idx = buildInstanceFromPage({
+        page: webView,
+        instance,
       });
+      showTab(idx);
+    }
+
+    function onCancelAddingTab() {
+      state.set({ view: "services" });
+      const webView = stack.get_child_by_name("add-tab");
+      if (!webView) return;
+      webView.destroy();
+      const { instance_id } = webView;
+      const instance = instances.get(instance_id);
       if (!instance) return;
+      instances.destroy(instance);
+    }
 
-      const { name, url, icon, id, service_id } = instance;
-      const instances = settings.get_strv("instances");
-      instances.push(id);
-      settings.set_strv("instances", instances);
+    async function onAddService(service) {
+      const { url, name } = service;
+      const service_id = service.id;
+      // FIXME should we keep the prefix service.name ? could be confusing when renaming/custom
+      const id = `${service.name}-${uuid_string_random().replace(/-/g, "")}`;
 
-      const idx = buildInstance({ url, name, icon, service_id, id });
-      showTabs(idx);
+      const instance = instances.create({
+        url,
+        service_id,
+        id,
+        name,
+      });
+
+      const webview = TabPage({
+        instance,
+        window,
+        onNotification,
+      });
+
+      stack.add_named(webview, "add-tab");
+      state.set({ view: "add-tab" });
     }
 
     // https://gjs-docs.gnome.org/gtk30~3.24.8/gtk.notebook
     const notebook = new Notebook({ scrollable: true, show_tabs: false });
+    state.bind(
+      "instances",
+      notebook,
+      "show_tabs",
+      instances => instances.length > 1
+    );
+    notebook.set_group_name("tabs");
     notebook.show_all();
     stack.add_named(notebook, "tabs");
     connect(
@@ -407,40 +447,64 @@
         },
       }
     );
-
     settings.bind("tabs-position", notebook, "tab_pos", SettingsBindFlags.GET);
 
-    // if (getenv("DEV")) {
-    //   buildInstance({
-    //     url: "https://jhmux.codesandbox.io/",
-    //     name: "Tests",
-    //     id: "gigagram-tests",
-    //     service_id: "custom",
-    //   });
-    // }
+    function detachTab(instance_id) {
+      const instance = instances.get(instance_id);
+      const {
+        name,
+        // TODO
+        //  icon,
+      } = instance;
 
-    const instances = settings.get_strv("instances");
-    if (instances.length > 0) {
-      showTabs();
-      instances.forEach(id => {
-        const settings = new Settings({
-          schema_id: "re.sonny.gigagram.Instance",
-          path: profile.settings + `instances/${id}/`,
-        });
+      let app;
 
-        // read properties of service
-        const name = settings.get_string("name");
-        const url = settings.get_string("url");
-        const service_id = settings.get_string("service");
-        const icon = settings.get_string("icon");
-        // log("window " + icon);
-        if (!url || !service_id) return;
+      try {
+        app = createApplication({ name });
+      } catch (err) {
+        logError(err);
+        // TODO show error
+        return;
+      }
 
-        buildInstance({ url, name, icon, id, service_id });
+      const newAppSettings = new Settings({
+        schema_id: "re.sonny.gigagram",
+        path: `/re/sonny/gigagram/applications/${app.id}/`,
       });
-    } else {
-      showServices();
+      instances.attach(newAppSettings, instance.id);
+
+      try {
+        launchApplication(app);
+      } catch (err) {
+        logError(err);
+        // todo show error and cleanup
+        return;
+      }
+
+      const idx = instances.detach(settings, instance.id);
+
+      const page = notebook.get_nth_page(idx);
+      notebook.detach_tab(page);
+      const label = notebook.get_tab_label(page);
+      if (label) label.destroy();
+      page.destroy();
     }
+
+    notebook.connect("create-window", (self, page /*_x, _y */) => {
+      detachTab(page.instance_id);
+    });
+
+    instances.load(settings);
+    instances.list.forEach(instance => {
+      buildInstance(instance);
+    });
+
+    observeSetting(settings, "instances", instances => {
+      state.set({
+        instances,
+        view: instances.length > 0 ? "tabs" : "services",
+      });
+    });
 
     return window;
   };
