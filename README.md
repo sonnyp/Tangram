@@ -14,10 +14,23 @@ Gigagram is powered by [WebKitGTK](https://webkitgtk.org/).
 - Edit a tab by right clicking on it
 - Remove a tab by right clicking on it
 - Re-order tabs via drag'n drop or shortcut
+- Custom tab icon
 - Desktop/audio notifications (if supported by the service)
 - Change tabs position (top, left, right, bottom) via the menu
 - Navigation controls (go back, forward, reload)
 - Shortcuts
+
+### Custom applications
+
+You can create custom applications with one or multiple tabs. They work the same as the main instance.
+
+See demo: https://www.youtube.com/watch?v=y9MIXn4Iw70
+
+You can create a custom application by
+
+- dragging the tab out (see demo)
+- right click on the tab
+- via the application menu
 
 ## Install
 
@@ -30,7 +43,7 @@ https://aur.archlinux.org/packages/gigagram-git/
 [Install flatpak](https://flatpak.org/setup/)
 
 ```sh
-wget https://github.com/sonnyp/gigagram/releases/download/v0.3.0/gigagram.flatpak
+wget https://github.com/sonnyp/gigagram/releases/download/v0.4.0/gigagram.flatpak
 flatpak install gigagram.flatpak
 ```
 

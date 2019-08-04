@@ -20,7 +20,6 @@
     KEY_FILE_DESKTOP_KEY_ICON,
     uuid_string_random,
     unlink,
-    get_home_dir,
   } = imports.gi.GLib;
   const { DesktopAppInfo } = imports.gi.Gio;
 
@@ -37,26 +36,14 @@
   }
   log(`bin: ${bin}`);
 
-  let defaultIconPath;
-  if (env === "flatpak") {
-    defaultIconPath = build_filenamev([
-      get_home_dir(),
-      "flatpak/exports/share",
-      "icons/hicolor/scalable/apps/re.sonny.gigagram.svg",
-    ]);
-  } else if (env === "dev") {
-    defaultIconPath = build_filenamev([
+  let default_icon = "re.sonny.gigagram";
+  if (env === "dev") {
+    default_icon = build_filenamev([
       get_current_dir(),
-      "data/icons/hicolor/scalable/apps/re.sonny.gigagram.svg",
-    ]);
-  } else {
-    defaultIconPath = build_filenamev([
-      "/usr/share",
-      "icons/hicolor/scalable/apps/re.sonny.gigagram.svg",
+      `data/icons/hicolor/scalable/apps/${default_icon}.svg`,
     ]);
   }
-  log(`defaultIconPath: ${defaultIconPath}`);
-  const fallbackIconPath = defaultIconPath;
+  log(`default_icon: ${default_icon}`);
 
   this.launchApplication = launchApplication;
   function launchApplication(app) {
@@ -89,7 +76,7 @@
       [KEY_FILE_DESKTOP_KEY_TYPE]: KEY_FILE_DESKTOP_TYPE_APPLICATION,
       [KEY_FILE_DESKTOP_KEY_CATEGORIES]: ["Network", "GNOME", "GTK"].join(";"),
       [KEY_FILE_DESKTOP_KEY_STARTUP_NOTIFY]: true,
-      [KEY_FILE_DESKTOP_KEY_ICON]: icon || fallbackIconPath,
+      [KEY_FILE_DESKTOP_KEY_ICON]: icon || default_icon,
       "X-GNOME-UsesNotifications": true,
       StartupWMClass: id,
       // "X-Flatpak": "re.sonny.gigagram",
@@ -157,7 +144,7 @@
       halign: Align.END,
     });
     grid.attach(iconLabel, 1, 2, 1, 1);
-    const iconEntry = iconChooser({ value: defaultIconPath });
+    const iconEntry = iconChooser({});
     grid.attach(iconEntry, 2, 2, 1, 1);
 
     dialog.show_all();
