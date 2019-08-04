@@ -362,8 +362,9 @@
       const instance = instances.get(instance_id);
       instance.url = webView.uri;
 
+      let canceled;
       try {
-        await addInstanceDialog({
+        canceled = await addInstanceDialog({
           instance,
           window,
         });
@@ -371,6 +372,10 @@
         logError(err);
         instances.destroy(instance);
         // TODO display error
+        return;
+      }
+
+      if (canceled) {
         return;
       }
 

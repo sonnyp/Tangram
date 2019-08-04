@@ -114,12 +114,12 @@
 
     const [response_id] = await once(dialog, "response");
     if (response_id === ResponseType.DELETE_EVENT) {
-      return;
+      return true;
     }
 
     if (response_id !== ResponseType.APPLY) {
       dialog.destroy();
-      return;
+      return true;
     }
 
     let icon = "default";
@@ -134,5 +134,7 @@
 
     // eslint-disable-next-line require-atomic-updates
     instance.icon = icon;
+
+    return false;
   }
 })();
