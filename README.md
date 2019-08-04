@@ -40,10 +40,18 @@ https://aur.archlinux.org/packages/gigagram-git/
 
 ### Flatpak
 
-[Install flatpak](https://flatpak.org/setup/)
+Make sure flatpak is setup according to [Install flatpak](https://flatpak.org/setup/).
+
+---
+
+Download and install
+[gigagram.flatpak](https://github.com/sonnyp/gigagram/releases/download/v0.4.1/gigagram.flatpak)
+
+or
 
 ```sh
-wget https://github.com/sonnyp/gigagram/releases/download/v0.4.0/gigagram.flatpak
+wget https://github.com/sonnyp/gigagram/releases/download/v0.4.1/gigagram.flatpak
+
 flatpak install gigagram.flatpak
 ```
 
