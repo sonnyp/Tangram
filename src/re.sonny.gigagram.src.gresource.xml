@@ -2,11 +2,15 @@
 <gresources>
   <gresource prefix="/re/sonny/gigagram/js">
     <file>applicationDialog.js</file>
+    <file>env.js</file>
     <file>header.js</file>
     <file>homePage.js</file>
+    <file>icon.js</file>
+    <file>instances.js</file>
     <file>main.js</file>
     <file>serviceDialog.js</file>
     <file>serviceManager.js</file>
+    <file>state.js</file>
     <file>tab.js</file>
     <file>util.js</file>
     <file>window.js</file>
