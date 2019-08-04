@@ -32,6 +32,7 @@
     promptNewApplicationDialog,
     createApplication,
     launchApplication,
+    buildApplicationId,
   } = imports.applicationDialog;
   const instances = imports.instances;
 
@@ -455,16 +456,13 @@
 
     function detachTab(instance_id) {
       const instance = instances.get(instance_id);
-      const {
-        name,
-        // TODO
-        //  icon,
-      } = instance;
+      const { name, icon } = instance;
+      const id = buildApplicationId(name);
 
       let app;
 
       try {
-        app = createApplication({ name });
+        app = createApplication({ name, icon: icon !== "default" && icon, id });
       } catch (err) {
         logError(err);
         // TODO show error

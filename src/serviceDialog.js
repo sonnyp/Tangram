@@ -13,6 +13,7 @@
     EntryIconPosition,
   } = imports.gi.Gtk;
   const { SettingsBindFlags } = imports.gi.Gio;
+  const { build_filenamev } = imports.gi.GLib;
 
   const { iconChooser, saveIcon } = imports.icon;
 
@@ -123,7 +124,10 @@
 
     let icon = "default";
     if (iconEntry.get_filename()) {
-      icon = saveIcon(iconEntry.get_filename(), instance.data_dir);
+      icon = saveIcon(
+        iconEntry.get_filename(),
+        build_filenamev([instance.data_dir, "icon.png"])
+      );
     }
 
     dialog.destroy();

@@ -6,9 +6,6 @@
   const { programInvocationName } = imports.system;
   const { Dialog, Align, Grid, Label, Entry, ResponseType } = imports.gi.Gtk;
 
-  const { applications_dir } = imports.env;
-  const { iconChooser } = imports.icon;
-
   const {
     build_filenamev,
     path_is_absolute,
@@ -27,7 +24,8 @@
   } = imports.gi.GLib;
   const { DesktopAppInfo } = imports.gi.Gio;
 
-  const { env } = imports.env;
+  const { applications_dir, data_dir, env } = imports.env;
+  const { iconChooser, saveIcon } = imports.icon;
 
   let bin;
   if (env === "flatpak") {
@@ -76,10 +74,13 @@
     }
   }
 
-  this.createApplication = createApplication;
-  function createApplication({ name, icon }) {
-    const id = `${name}-${uuid_string_random().replace(/-/g, "")}`;
+  this.buildApplicationId = buildApplicationId;
+  function buildApplicationId(name) {
+    return `${name}-${uuid_string_random().replace(/-/g, "")}`;
+  }
 
+  this.createApplication = createApplication;
+  function createApplication({ name, icon, id }) {
     const desktopKeyFile = desktopEntry({
       [KEY_FILE_DESKTOP_KEY_NAME]: name,
       // https://specifications.freedesktop.org/desktop-entry-spec/latest/ar01s07.html
@@ -171,12 +172,17 @@
     }
 
     const name = nameEntry.text;
-    const icon = iconEntry.get_filename();
+    const id = buildApplicationId(name);
+    let icon = iconEntry.get_filename();
+
+    if (icon) {
+      icon = saveIcon(icon, build_filenamev([data_dir, `${id}.png`]));
+    }
 
     dialog.destroy();
 
     try {
-      const app = createApplication({ name, icon });
+      const app = createApplication({ name, icon, id });
       launchApplication(app);
     } catch (err) {
       logError(err);
