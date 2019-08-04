@@ -3,11 +3,18 @@
 
   const GioSettings = imports.gi.Gio.Settings;
   const { KeyFile, KEY_FILE_DESKTOP_GROUP, VariantType } = imports.gi.GLib;
-  const { settings_backend } = imports.env;
+  const { keyfile_settings_backend_new } = imports.gi.Gio;
 
+  const { keyfile_settings_path } = imports.env;
+
+  // default dconf
+  let backend = null;
+  if (keyfile_settings_path) {
+    backend = keyfile_settings_backend_new(keyfile_settings_path, "/", null);
+  }
   this.Settings = function Settings(props) {
     return new GioSettings({
-      backend: settings_backend,
+      backend,
       ...props,
     });
   };

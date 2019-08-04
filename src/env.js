@@ -10,7 +10,6 @@
     get_home_dir,
     get_user_config_dir,
   } = imports.gi.GLib;
-  const { keyfile_settings_backend_new } = imports.gi.Gio;
 
   const FLATPAK_ID = getenv("FLATPAK_ID");
   const DEV = getenv("DEV");
@@ -56,20 +55,16 @@
   })();
   log(`applications_dir: ${this.applications_dir}`);
 
-  this.settings_backend = (() => {
+  this.keyfile_settings_path = (() => {
     switch (env) {
       case "host":
-        return null; // dconf - default
+        return "";
       // TODO with Sdk 3.34 null backend should just work on flatpak
       // and no need to migrate as we already use the right path
       // flatpak: https://blogs.gnome.org/mclasen/2019/07/12/settings-in-a-sandbox-world/
       default:
-        return keyfile_settings_backend_new(
-          build_filenamev([this.config_dir, "glib-2.0/settings/keyfile"]),
-          "/",
-          null
-        );
+        return build_filenamev([this.config_dir, "glib-2.0/settings/keyfile"]);
     }
   })();
-  log(`settings_backend: ${this.settings_backend}`);
+  log(`keyfile_settings_path: ${this.keyfile_settings_path}`);
 })();
