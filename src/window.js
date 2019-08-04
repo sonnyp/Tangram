@@ -360,6 +360,7 @@
       const webView = stack.get_child_by_name("add-tab");
       const { instance_id } = webView;
       const instance = instances.get(instance_id);
+      instance.url = webView.uri;
 
       try {
         await addInstanceDialog({
