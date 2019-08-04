@@ -11,6 +11,7 @@ flatpak:
 	flatpak run re.sonny.gigagram
 
 bundle:
+	flatpak-builder --user  --force-clean --repo=repo --install-deps-from=flathub flatpak re.sonny.gigagram.json
 	flatpak build-bundle repo gigagram.flatpak re.sonny.gigagram --runtime-repo=https://flathub.org/repo/flathub.flatpakrepo
 
 test:
