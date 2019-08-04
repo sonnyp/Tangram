@@ -350,7 +350,6 @@
 
     function buildInstanceFromPage({ instance, page }) {
       const label = TabLabel({ instance, settings });
-
       const idx = notebook.append_page(page, label);
       notebook.set_tab_reorderable(page, true);
       notebook.set_tab_detachable(page, true);
@@ -374,6 +373,8 @@
         // TODO display error
         return;
       }
+
+      webView.load_uri(instance.url);
 
       instances.attach(settings, instance.id);
       stack.remove(webView);
