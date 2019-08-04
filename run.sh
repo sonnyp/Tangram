@@ -14,4 +14,4 @@ export GSETTINGS_SCHEMA_DIR=./data
 # FIXME add Exec=gjs /home/sonny/Projects/gigagram/src/dev.js
 # cp data/re.sonny.gigagram.desktop.in ~/.local/share/applications/re.sonny.gigagram.desktop
 
-$PWD/src/dev.js "$@"
+$PWD/src/gigagram.js "$@"
