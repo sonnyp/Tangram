@@ -193,7 +193,7 @@
       }
     );
 
-    webView.load_uri(url);
+    webView.load_uri(url || "https://start.duckduckgo.com/");
 
     webView.instance_id = id;
     webView.show_all();
