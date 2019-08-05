@@ -14,5 +14,9 @@
     <file>tab.js</file>
     <file>util.js</file>
     <file>window.js</file>
+    <file>std/console.js</file>
+    <file>std/encoding.js</file>
+    <file>std/globals.js</file>
+    <file>std/timers.js</file>
   </gresource>
 </gresources>

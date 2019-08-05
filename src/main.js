@@ -13,6 +13,8 @@
     GObject: "2.0",
   });
 
+  imports.std.globals;
+
   const { programInvocationName } = imports.system;
   const { Application, AboutDialog, License, Builder } = imports.gi.Gtk;
   const { ApplicationFlags, SimpleAction } = imports.gi.Gio;

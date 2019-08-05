@@ -2,17 +2,22 @@ env:
   es6: true
 extends: "eslint:recommended"
 globals:
+  Debugger: readonly
+  GIRepositoryGType: readonly
+  Intl: readonly
   imports: readonly
   pkg: readonly
   log: readonly
   logError: readonly
-  # print: readonly # use log
-  # printerr: readonly # use logError
+  print: readonly
+  printerr: readonly
   ARGV: readonly
   window: readonly
 parserOptions:
   ecmaVersion: 2018
 rules:
+  # https://eslint.org/docs/rules/no-restricted-globals
+  no-restricted-globals: [error, window, printerr, print, Intl, Debugger]
   # https://eslint.org/docs/rules/#strict-mode
   strict: [error, function] # https://eslint.org/docs/rules/strict
   # https://eslint.org/docs/rules/#best-practices
