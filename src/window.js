@@ -527,6 +527,7 @@ this.Window = function Window({ application, profile, state }) {
     state.set({
       instances,
       view: instances.length > 0 ? "tabs" : "services",
+      webview: instances.length > 0 ? undefined : null,
     });
   });
 
