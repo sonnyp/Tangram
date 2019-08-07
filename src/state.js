@@ -11,8 +11,10 @@ class State {
 
   set(props) {
     for (const key in props) {
+      const value = props[key];
+      if (value === undefined) continue;
       const previous = this.properties[key];
-      const current = (this.properties[key] = props[key]);
+      const current = (this.properties[key] = value);
       this.emit(`notify::${key}`, current, previous);
     }
   }
