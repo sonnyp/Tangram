@@ -1,76 +1,70 @@
-(() => {
-  "use strict";
+const { byteArray } = imports;
+const {
+  ResourceLookupFlags,
+  resources_enumerate_children,
+  resources_lookup_data,
+  File,
+  IOErrorEnum,
+  Resource,
+} = imports.gi.Gio;
+const {
+  UserStyleSheet,
+  UserContentInjectedFrames,
+  UserStyleLevel,
+} = imports.gi.WebKit2;
 
-  const { byteArray } = imports;
-  const {
-    ResourceLookupFlags,
-    resources_enumerate_children,
-    resources_lookup_data,
-    File,
-    IOErrorEnum,
-    Resource,
-  } = imports.gi.Gio;
-  const {
-    UserStyleSheet,
-    UserContentInjectedFrames,
-    UserStyleLevel,
-  } = imports.gi.WebKit2;
+const services = [];
+this.services = services;
 
-  const services = [];
-  this.services = services;
+const stylesheets = {};
+this.stylesheets = stylesheets;
 
-  const stylesheets = {};
-  this.stylesheets = stylesheets;
+Resource.load(
+  `${pkg.pkgdatadir}/re.sonny.gigagram.services.gresource`
+)._register();
 
-  Resource.load(
-    `${pkg.pkgdatadir}/re.sonny.gigagram.services.gresource`
-  )._register();
-
-  function load() {
-    services.push(
-      ...resources_enumerate_children(
-        "/re/sonny/gigagram/services/",
-        ResourceLookupFlags.NONE
-      ).map(child => {
-        const info = JSON.parse(
-          byteArray.fromGBytes(
-            resources_lookup_data(
-              `/re/sonny/gigagram/services/${child}service.json`,
-              ResourceLookupFlags.NONE
-            )
+function load() {
+  services.push(
+    ...resources_enumerate_children(
+      "/re/sonny/gigagram/services/",
+      ResourceLookupFlags.NONE
+    ).map(child => {
+      const info = JSON.parse(
+        byteArray.fromGBytes(
+          resources_lookup_data(
+            `/re/sonny/gigagram/services/${child}service.json`,
+            ResourceLookupFlags.NONE
           )
-        );
-        info.icon = `/re/sonny/gigagram/services/${child}icon.svg`;
+        )
+      );
+      info.icon = `/re/sonny/gigagram/services/${child}icon.svg`;
 
-        // log("load.map " + child);
-
-        const styleFile = File.new_for_uri(
-          `resource:///re/sonny/gigagram/services/${child}style.css`
-        );
-        let success;
-        let content;
-        try {
-          [success, content] = styleFile.load_contents(null);
-        } catch (err) {
-          if (err.code !== IOErrorEnum.NOT_FOUND) {
-            logError(err);
-            throw err;
-          }
+      const styleFile = File.new_for_uri(
+        `resource:///re/sonny/gigagram/services/${child}style.css`
+      );
+      let success;
+      let content;
+      try {
+        [success, content] = styleFile.load_contents(null);
+      } catch (err) {
+        if (err.code !== IOErrorEnum.NOT_FOUND) {
+          logError(err);
+          throw err;
         }
-        if (success) {
-          stylesheets[child.slice(0, -1)] = new UserStyleSheet(
-            content.toString(),
-            UserContentInjectedFrames.TOP_FRAME,
-            UserStyleLevel.USER,
-            null,
-            null
-          );
-        }
+      }
+      if (success) {
+        stylesheets[child.slice(0, -1)] = new UserStyleSheet(
+          content.toString(),
+          UserContentInjectedFrames.TOP_FRAME,
+          UserStyleLevel.USER,
+          null,
+          null
+        );
+      }
 
-        return info;
-      })
-    );
-  }
+      return info;
+    })
+  );
+}
 
-  load();
-})();
+load();

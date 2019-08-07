@@ -1,8 +1,13 @@
 .PHONY: build flatpak bundle test clean
 
 build:
-	meson --reconfigure --prefix $(shell pwd)/install build
+	# meson --reconfigure --prefix $(shell pwd)/install build
+	meson --prefix $(shell pwd)/install build
 	ninja -C build install
+
+run-host:
+	make build
+	GSETTINGS_SCHEMA_DIR=./data ./install/bin/re.sonny.gigagram
 
 flatpak:
 	flatpak-builder --user  --force-clean --repo=repo --install-deps-from=flathub flatpak re.sonny.gigagram.json
@@ -11,6 +16,7 @@ flatpak:
 	flatpak run re.sonny.gigagram
 
 bundle:
+	flatpak-builder --user  --force-clean --repo=repo --install-deps-from=flathub flatpak re.sonny.gigagram.json
 	flatpak build-bundle repo gigagram.flatpak re.sonny.gigagram --runtime-repo=https://flathub.org/repo/flathub.flatpakrepo
 
 test:

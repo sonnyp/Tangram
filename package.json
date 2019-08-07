@@ -1,5 +1,8 @@
 {
   "private": true,
+  "name": "gigagram",
+  "id": "re.sonny.gigagram",
+  "version": "0.4.1",
   "devDependencies": {
     "eslint": "^6.0.1",
     "husky": "^3.0.0",
