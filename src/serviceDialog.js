@@ -16,12 +16,12 @@ const { build_filenamev } = imports.gi.GLib;
 
 const { iconChooser, saveIcon } = imports.icon;
 
-this.editInstanceDialog = function editInstanceDialog({ window, instance }) {
-  return serviceDialog({ window, instance, action: "Edit" });
+this.editInstanceDialog = function editInstanceDialog(props) {
+  return serviceDialog({ ...props, action: "Edit" });
 };
 
-this.addInstanceDialog = function editInstanceDialog({ window, instance }) {
-  return serviceDialog({ window, instance, action: "Add " });
+this.addInstanceDialog = function editInstanceDialog(props) {
+  return serviceDialog({ ...props, action: "Add " });
 };
 
 async function serviceDialog({ window, instance, action }) {
