@@ -1,25 +1,19 @@
 # ROADMAP 1.0
 
-MUST
-
 - [x] use instance icon when detaching a tab
 - [ ] new Tangram app icon
 - [ ] rename to Tangram and re.sonny.Tangram (waiting for icon)
 - [x] fix adding services without URL
-
-SHOULD
-
+- [x] address bar
 - [ ] better icon chooser
 - [x] use saveIcon with applicationDialog
-
-COULD
-
-- [ ] move to GNOME gitlab?
 - [ ] use windows instead of instances for applications?
-- [ ] fetch icon from the web
-- [ ] remote builtin services in favor of remote file
+- [ ] use icon from the web
+- [ ] use title from web
+- [ ] remote services in favor of local services
 - [ ] manager custom application
   - [ ] edit application name
   - [ ] edit application icon
   - [ ] delete application
-- tab parameters with all crazy stuff from webkit
+- tab parameters with all crazy settings from webkit
+- [ ] move to GNOME gitlab?
