@@ -14,7 +14,7 @@
   - [ ] delete application
 - services
   - [x] fix adding services without URL
-  - [ ] use icon from the web
+  - [x] use icon from the web
   - [x] use title from web
   - [ ] parameters with all crazy settings from webkit
 - misc

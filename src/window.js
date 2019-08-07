@@ -1,4 +1,10 @@
-const { VariantType, Variant, uuid_string_random } = imports.gi.GLib;
+const {
+  VariantType,
+  Variant,
+  uuid_string_random,
+  get_tmp_dir,
+  build_filenamev,
+} = imports.gi.GLib;
 const {
   ApplicationWindow,
   Notebook,
@@ -15,7 +21,13 @@ const {
   SimpleAction,
   SettingsBindFlags,
 } = imports.gi.Gio;
-const { Settings, observeSetting } = imports.util;
+const {
+  Settings,
+  observeSetting,
+  getWebAppName,
+  getWebAppIcon,
+  download,
+} = imports.util;
 
 // https://github.com/flatpak/flatpak/issues/78#issuecomment-511158618
 // log(imports.gi.Gio.SettingsBackend.get_default());
@@ -368,8 +380,21 @@ this.Window = function Window({ application, profile, state }) {
     const instance = instances.get(instance_id);
     instance.url = webview.uri;
 
+    const [iconURL, title] = await Promise.all([
+      getWebAppIcon(webview),
+      getWebAppName(webview),
+    ]);
+
     if (!instance.name) {
-      instance.name = webview.title || "";
+      instance.name = title || webview.title || "";
+    }
+
+    const icon = build_filenamev([get_tmp_dir(), instance_id]);
+    try {
+      await download(webview, iconURL, `file://${icon}`);
+      instance.icon = icon;
+    } catch (err) {
+      logError(err);
     }
 
     let canceled;

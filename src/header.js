@@ -152,7 +152,9 @@ this.Header = function Header({
   const addTabButton = new Button({
     label: "Done",
   });
-  addTabButton.connect("clicked", onAddTab);
+  addTabButton.connect("clicked", () => {
+    onAddTab().catch(logError);
+  });
   addTabButton.get_style_context().add_class("suggested-action");
   servicesLayer.pack_end(addTabButton, false, false, null);
   right_stack.add_named(servicesLayer, "add-tab");
