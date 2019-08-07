@@ -17,7 +17,7 @@ Gigagram is powered by [WebKitGTK](https://webkitgtk.org/).
 - Custom tab icon
 - Desktop/audio notifications (if supported by the service)
 - Change tabs position (top, left, right, bottom) via the menu
-- Navigation controls (go back, forward, reload)
+- Navigation controls (go back, forward, reload, stop loading)
 - Shortcuts
 
 ### Custom applications
@@ -107,7 +107,7 @@ npm install
 ./run.sh
 ```
 
-Hit `<Ctrl><Shift>Q` to restart the application with changes.
+Hit `<Ctrl><Shift>Q` to restart the application.
 
 - data files are stored in `./var/data/` instead of `$XDG_DATA_HOME/gigagram/`
 - cache files are tored in `./var/cache/` instead of `XDG_CACHE_HOME/gigagram/`

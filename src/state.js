@@ -10,9 +10,16 @@ class State {
   }
 
   set(props) {
-    Object.assign(this.properties, props);
-    Object.keys(props).forEach(key => {
-      this.emit(`notify::${key}`, this);
+    for (const key in props) {
+      const previous = this.properties[key];
+      const current = (this.properties[key] = props[key]);
+      this.emit(`notify::${key}`, current, previous);
+    }
+  }
+
+  notify(prop, fn) {
+    return this.connect(`notify::${prop}`, (self, ...args) => {
+      fn(...args);
     });
   }
 
