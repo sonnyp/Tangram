@@ -38,6 +38,7 @@ this.Tab = function Tab(...params) {
 };
 
 this.TabLabel = TabLabel;
+
 function TabLabel({ instance, settings }) {
   const { service_id, id } = instance;
 
@@ -48,7 +49,8 @@ function TabLabel({ instance, settings }) {
   const image = new Image({ margin_end: 6 });
   instance.observe("icon", icon => {
     if (icon && icon !== "default") {
-      image.set_from_file(icon);
+      const pixbuf = Pixbuf.new_from_file_at_scale(icon, 28, 28, true);
+      image.set_from_pixbuf(pixbuf);
     } else if (service && service.icon) {
       const pixbuf = Pixbuf.new_from_resource_at_scale(
         service.icon,
@@ -95,6 +97,7 @@ function TabLabel({ instance, settings }) {
 }
 
 this.TabPage = TabPage;
+
 function TabPage({ instance, window, onNotification }) {
   const { service_id, id, url, data_dir, cache_dir } = instance;
 
