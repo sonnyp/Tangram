@@ -8,7 +8,7 @@ const {
 //   mkdir_with_parents,
 // } = imports.gi.GLib;
 const { Pixbuf } = imports.gi.GdkPixbuf;
-const { Image, Align, PositionType, ResponseType, Box, Label } = imports.gi.Gtk;
+const { Image, ResponseType, Box, Label } = imports.gi.Gtk;
 
 // https://gjs-docs.gnome.org/gtk30~3.24.8/gtk.filefilter
 const iconFileFilter = new FileFilter();
