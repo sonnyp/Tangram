@@ -48,12 +48,14 @@ this.Window = function Window({ application, profile, state }) {
 
   const header = Header({
     onReload,
+    onStopLoading,
     onGoBack,
     onGoForward,
     onDoneAddingTab,
     onCancelAddingTab,
     profile,
     state,
+    onAddService,
   });
 
   function getCurrentTab() {
@@ -62,7 +64,7 @@ this.Window = function Window({ application, profile, state }) {
     return notebook.get_nth_page(idx);
   }
 
-  function onStop() {
+  function onStopLoading() {
     const tab = getCurrentTab();
     tab && tab.stop_loading();
   }
@@ -97,9 +99,10 @@ this.Window = function Window({ application, profile, state }) {
   window.set_titlebar(header.titlebar);
 
   // https://gjs-docs.gnome.org/gtk30~3.24.8/gtk.stack
-  const stack = new Stack();
+  const stack = new Stack({
+    transition_type: StackTransitionType.CROSSFADE,
+  });
   state.bind("view", stack, "visible_child_name");
-  stack.set_transition_type(StackTransitionType.CROSSFADE);
   window.add(stack);
 
   const addTabPage = buildHomePage({ onAddService });
@@ -110,7 +113,7 @@ this.Window = function Window({ application, profile, state }) {
   const accelGroup = new AccelGroup();
   window.add_accel_group(accelGroup);
   const shortcuts = [
-    [["Escape"], onStop],
+    [["Escape"], onStopLoading],
     [["<Primary>R", "F5"], onReload],
     [["<Primary><Shift>R", "<Shift>F5"], () => onReload(true)],
     [
@@ -136,6 +139,12 @@ this.Window = function Window({ application, profile, state }) {
         getCurrentTab()
           .get_inspector()
           .show();
+      },
+    ],
+    [
+      ["<Primary>L"],
+      () => {
+        header.addressBar.grab_focus();
       },
     ],
   ];
@@ -389,7 +398,7 @@ this.Window = function Window({ application, profile, state }) {
   }
 
   function onCancelAddingTab() {
-    state.set({ view: "services" });
+    state.set({ view: "services", webview: null });
     const webView = stack.get_child_by_name("add-tab");
     if (!webView) return;
     webView.destroy();
@@ -399,7 +408,7 @@ this.Window = function Window({ application, profile, state }) {
     instances.destroy(instance);
   }
 
-  async function onAddService(service) {
+  function onAddService(service) {
     const { url, name } = service;
     const service_id = service.id;
     // FIXME should we keep the prefix service.name ? could be confusing when renaming/custom
@@ -419,7 +428,10 @@ this.Window = function Window({ application, profile, state }) {
     });
 
     stack.add_named(webview, "add-tab");
-    state.set({ view: "add-tab" });
+    state.set({ webview, view: "add-tab" });
+    if (!url) {
+      header.addressBar.grab_focus();
+    }
   }
 
   // https://gjs-docs.gnome.org/gtk30~3.24.8/gtk.notebook
@@ -433,6 +445,9 @@ this.Window = function Window({ application, profile, state }) {
       instances => instances.length > 1
     );
   }
+  notebook.connect("switch-page", (self, webview) => {
+    state.set({ webview });
+  });
   notebook.set_group_name("tabs");
   notebook.show_all();
   stack.add_named(notebook, "tabs");
