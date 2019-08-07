@@ -8,7 +8,7 @@ const {
 //   mkdir_with_parents,
 // } = imports.gi.GLib;
 const { Pixbuf } = imports.gi.GdkPixbuf;
-const { Image, ResponseType, Box, Label, Align } = imports.gi.Gtk;
+const { Image, ResponseType } = imports.gi.Gtk;
 
 // https://gjs-docs.gnome.org/gtk30~3.24.8/gtk.filefilter
 const iconFileFilter = new FileFilter();
@@ -21,31 +21,17 @@ this.iconChooser = function iconChooser({ value, size }) {
 
   const image = new Image();
 
-  //let text;
   if (value) {
-    // scale a little up
     const pixbuf = Pixbuf.new_from_file_at_size(value, size, size);
     image.set_from_pixbuf(pixbuf);
-    //text = value.split("/").pop();
   } else {
     // text = "(default)";
   }
-  /* const label = new Label({ label: text });
 
-   const box = new Box({});
-   box.add(image);
-   box.add(label);
-   box.show_all();*/
   image.set_size_request(size, size);
   const fileChooserButton = new Button({
-    //label: "Choose an icon",
     image: image,
-    //  always_show_image: true
   });
-
-  //fileChooserButton.set_image(box);
-
-  //fileChooserButton.add(box);
 
   fileChooserButton.filename = null;
 
@@ -81,11 +67,6 @@ this.iconChooser = function iconChooser({ value, size }) {
     return fileChooserButton.filename;
   };
 
-  // fileChooserButton.set_filter(iconFileFilter);
-  // if (value) fileChooserButton.select_filename(value);
-  // fileChooserButton.connect("file-set", () => {
-  //   log(fileChooserButton.get_file());
-  // });
   return fileChooserButton;
 };
 
