@@ -8,7 +8,7 @@ const {
 //   mkdir_with_parents,
 // } = imports.gi.GLib;
 const { Pixbuf } = imports.gi.GdkPixbuf;
-const { Image, ResponseType, Box, Label } = imports.gi.Gtk;
+const { Image, ResponseType, Box, Label, Align } = imports.gi.Gtk;
 
 // https://gjs-docs.gnome.org/gtk30~3.24.8/gtk.filefilter
 const iconFileFilter = new FileFilter();
@@ -16,36 +16,36 @@ iconFileFilter.add_mime_type("image/svg+xml");
 iconFileFilter.add_mime_type("image/png");
 iconFileFilter.add_mime_type("image/jpeg");
 
-this.iconChooser = function iconChooser({ value }) {
+this.iconChooser = function iconChooser({ value, size }) {
   // https://gjs-docs.gnome.org/gtk30~3.24.8/gtk.filechooser
 
-  const image = new Image({ margin_end: 10 });
+  const image = new Image();
 
-  let text;
+  //let text;
   if (value) {
-    // scale a little down
-    image.set_from_pixbuf(Pixbuf.new_from_file_at_scale(value, 20, 20, true));
-    text = value.split("/").pop();
+    // scale a little up
+    const pixbuf = Pixbuf.new_from_file_at_size(value, size, size);
+    image.set_from_pixbuf(pixbuf);
+    //text = value.split("/").pop();
   } else {
-    text = "(default)";
+    // text = "(default)";
   }
-  const label = new Label({ label: text });
+  /* const label = new Label({ label: text });
 
-  const box = new Box({});
-  box.add(image);
-  box.add(label);
-  box.show_all();
-
+   const box = new Box({});
+   box.add(image);
+   box.add(label);
+   box.show_all();*/
+  image.set_size_request(size, size);
   const fileChooserButton = new Button({
     //label: "Choose an icon",
-    //image: box,
-    //image_position: PositionType.LEFT,
+    image: image,
     //  always_show_image: true
   });
 
   //fileChooserButton.set_image(box);
 
-  fileChooserButton.add(box);
+  //fileChooserButton.add(box);
 
   fileChooserButton.filename = null;
 
@@ -66,13 +66,13 @@ this.iconChooser = function iconChooser({ value }) {
       fileChooserButton.filename = fileChooserDialog.get_filename();
       const pixbuf = Pixbuf.new_from_file_at_scale(
         fileChooserButton.filename,
-        20,
-        20,
+        size,
+        size,
         true
       );
       //don't save as it can still change
       image.set_from_pixbuf(pixbuf);
-      label.set_label(fileChooserButton.filename.split("/").pop());
+      //label.set_label(fileChooserButton.filename.split("/").pop());
     }
     fileChooserDialog.destroy();
   });
@@ -89,8 +89,8 @@ this.iconChooser = function iconChooser({ value }) {
   return fileChooserButton;
 };
 
-this.saveIcon = function saveIcon(image, filepath) {
-  const pixbuf = Pixbuf.new_from_file_at_scale(image, 28, 28, true);
+this.saveIcon = function saveIcon(image, filepath, size) {
+  const pixbuf = Pixbuf.new_from_file_at_scale(image, size, size, true);
 
   // //make directory drwx------
   // mkdir_with_parents(data_dir, 0o700);
