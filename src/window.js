@@ -51,8 +51,8 @@ this.Window = function Window({ application, profile, state }) {
     onStopLoading,
     onGoBack,
     onGoForward,
-    onDoneAddingTab,
-    onCancelAddingTab,
+    onAddTab,
+    onCancelAddTab,
     profile,
     state,
     onAddService,
@@ -362,14 +362,14 @@ this.Window = function Window({ application, profile, state }) {
     return idx;
   }
 
-  async function onDoneAddingTab() {
-    const webView = stack.get_child_by_name("add-tab");
-    const { instance_id } = webView;
+  async function onAddTab() {
+    const webview = stack.get_child_by_name("add-tab");
+    const { instance_id } = webview;
     const instance = instances.get(instance_id);
-    instance.url = webView.uri;
+    instance.url = webview.uri;
 
     if (!instance.name) {
-      instance.name = webView.title || "";
+      instance.name = webview.title || "";
     }
 
     let canceled;
@@ -389,19 +389,19 @@ this.Window = function Window({ application, profile, state }) {
       return;
     }
 
-    webView.load_uri(instance.url);
+    webview.load_uri(instance.url);
 
     instances.attach(settings, instance.id);
-    stack.remove(webView);
+    stack.remove(webview);
 
     const idx = buildInstanceFromPage({
-      page: webView,
+      page: webview,
       instance,
     });
     showTab(idx);
   }
 
-  function onCancelAddingTab() {
+  function onCancelAddTab() {
     state.set({ view: "services", webview: null });
     const webView = stack.get_child_by_name("add-tab");
     if (!webView) return;

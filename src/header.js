@@ -38,8 +38,8 @@ this.Header = function Header({
   onStopLoading,
   onGoBack,
   onGoForward,
-  onDoneAddingTab,
-  onCancelAddingTab,
+  onAddTab,
+  onCancelAddTab,
   profile,
   state,
   onAddService,
@@ -92,13 +92,13 @@ this.Header = function Header({
     }
   });
 
-  const addTabButton = Button.new_from_icon_name(
+  const newTabButton = Button.new_from_icon_name(
     "tab-new-symbolic",
     IconSize.BUTTON
   );
-  buttonBox.add(addTabButton);
-  addTabButton.set_always_show_image(true);
-  addTabButton.connect("clicked", () => {
+  buttonBox.add(newTabButton);
+  newTabButton.set_always_show_image(true);
+  newTabButton.connect("clicked", () => {
     state.set({ view: "services", webview: null });
   });
 
@@ -119,7 +119,7 @@ this.Header = function Header({
     IconSize.BUTTON
   );
   addTabBox.add(cancelAddTabButton);
-  cancelAddTabButton.connect("clicked", onCancelAddingTab);
+  cancelAddTabButton.connect("clicked", onCancelAddTab);
   left_stack.add_named(addTabBox, "add-tab");
 
   titlebar.pack_start(left_stack);
@@ -149,12 +149,12 @@ this.Header = function Header({
   right_stack.add_named(tabsLayer, "tabs");
 
   const servicesLayer = new Box();
-  const doneAddingTabButton = new Button({
+  const addTabButton = new Button({
     label: "Done",
   });
-  doneAddingTabButton.connect("clicked", onDoneAddingTab);
-  doneAddingTabButton.get_style_context().add_class("suggested-action");
-  servicesLayer.pack_end(doneAddingTabButton, false, false, null);
+  addTabButton.connect("clicked", onAddTab);
+  addTabButton.get_style_context().add_class("suggested-action");
+  servicesLayer.pack_end(addTabButton, false, false, null);
   right_stack.add_named(servicesLayer, "add-tab");
 
   right_stack.add_named(new Box(), "services");
