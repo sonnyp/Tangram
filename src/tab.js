@@ -19,6 +19,7 @@ const {
   // NotificationPermissionRequest,
   SecurityOrigin,
   UserContentManager,
+  TLSErrorsPolicy,
 } = imports.gi.WebKit2;
 
 const { connect } = imports.util;
@@ -107,6 +108,7 @@ function TabPage({ instance, window, onNotification }) {
   const web_context = new WebContext({
     website_data_manager,
   });
+  web_context.set_tls_errors_policy(TLSErrorsPolicy.FAIL);
   web_context.set_favicon_database_directory(
     build_filenamev([cache_dir, "icondatabase"])
   );
@@ -190,7 +192,7 @@ function TabPage({ instance, window, onNotification }) {
     }
   );
 
-  webView.load_uri(url || "https://start.duckduckgo.com/");
+  webView.load_uri(url || "about:blank");
 
   webView.instance_id = id;
   webView.show_all();
