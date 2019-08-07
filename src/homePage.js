@@ -16,6 +16,7 @@ this.buildHomePage = function buildHomePage({ onAddService }) {
   const scrolledWindow = new ScrolledWindow();
   const viewPort = new Viewport();
   scrolledWindow.add(viewPort);
+
   const flowBox = new FlowBox({
     homogeneous: true,
     halign: Align.CENTER,
@@ -58,7 +59,7 @@ this.buildHomePage = function buildHomePage({ onAddService }) {
   function onButtonclicked({ service_id }) {
     const service = services.find(({ id }) => id === service_id);
     if (!service) return;
-    onAddService(service).catch(logError);
+    onAddService(service);
   }
 
   return scrolledWindow;

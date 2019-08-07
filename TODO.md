@@ -14,10 +14,12 @@ SHOULD
 
 COULD
 
+- [ ] move to GNOME gitlab?
 - [ ] use windows instead of instances for applications?
 - [ ] fetch icon from the web
-- [ ] remote buitin services in favor of remote file
+- [ ] remote builtin services in favor of remote file
 - [ ] manager custom application
   - [ ] edit application name
   - [ ] edit application icon
   - [ ] delete application
+- tab parameters with all crazy stuff from webkit
