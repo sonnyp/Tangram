@@ -1,7 +1,16 @@
 const { WindowTypeHint } = imports.gi.Gdk;
 const { once, desktopEntry } = imports.util;
 const { programInvocationName } = imports.system;
-const { Dialog, Align, Grid, Label, Entry, ResponseType } = imports.gi.Gtk;
+const {
+  Dialog,
+  Align,
+  Grid,
+  Label,
+  Entry,
+  ResponseType,
+  Orientation,
+  Box,
+} = imports.gi.Gtk;
 
 const {
   build_filenamev,
@@ -113,6 +122,17 @@ this.promptNewApplicationDialog = async function promptNewApplicationDialog({
   const contentArea = dialog.get_content_area();
   contentArea.margin = 18;
 
+  const iconEntry = iconChooser({
+    value: null,
+  });
+  const box = new Box({
+    orientation: Orientation.HORIZONTAL,
+    halign: Align.CENTER,
+    margin_bottom: 18,
+  });
+  box.add(iconEntry);
+  contentArea.add(box);
+
   const grid = new Grid({
     column_spacing: 12,
     row_spacing: 6,
@@ -132,14 +152,6 @@ this.promptNewApplicationDialog = async function promptNewApplicationDialog({
     primaryButton.set_sensitive(!!nameEntry.text);
   });
   grid.attach(nameEntry, 2, 1, 1, 1);
-
-  const iconLabel = new Label({
-    label: "Icon",
-    halign: Align.END,
-  });
-  grid.attach(iconLabel, 1, 2, 1, 1);
-  const iconEntry = iconChooser({});
-  grid.attach(iconEntry, 2, 2, 1, 1);
 
   dialog.show_all();
 

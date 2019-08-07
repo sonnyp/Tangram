@@ -40,8 +40,6 @@ async function serviceDialog({ window, instance, action }) {
     resizable: false,
   });
 
-  const icon_size = 128;
-
   dialog.add_button("Cancel", ResponseType.CANCEL);
   const primaryButton = dialog.add_button(action, ResponseType.APPLY);
   primaryButton.get_style_context().add_class("suggested-action");
@@ -52,7 +50,6 @@ async function serviceDialog({ window, instance, action }) {
 
   const iconEntry = iconChooser({
     value: instance.icon === "default" ? null : instance.icon,
-    size: icon_size,
   });
   const box = new Box({
     orientation: Orientation.HORIZONTAL,
@@ -128,8 +125,7 @@ async function serviceDialog({ window, instance, action }) {
   if (iconEntry.get_filename()) {
     icon = saveIcon(
       iconEntry.get_filename(),
-      build_filenamev([instance.data_dir, "icon.png"]),
-      icon_size
+      build_filenamev([instance.data_dir, "icon.png"])
     );
   }
 
