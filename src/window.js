@@ -368,6 +368,10 @@ this.Window = function Window({ application, profile, state }) {
     const instance = instances.get(instance_id);
     instance.url = webView.uri;
 
+    if (!instance.name) {
+      instance.name = webView.title || "";
+    }
+
     let canceled;
     try {
       canceled = await addInstanceDialog({
@@ -412,13 +416,13 @@ this.Window = function Window({ application, profile, state }) {
     const { url, name } = service;
     const service_id = service.id;
     // FIXME should we keep the prefix service.name ? could be confusing when renaming/custom
-    const id = `${service.name}-${uuid_string_random().replace(/-/g, "")}`;
+    const id = `${service.id}-${uuid_string_random().replace(/-/g, "")}`;
 
     const instance = instances.create({
       url,
       service_id,
       id,
-      name,
+      name: service_id === "custom" ? "" : name,
     });
 
     const webview = TabPage({
