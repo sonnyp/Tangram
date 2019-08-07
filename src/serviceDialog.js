@@ -8,6 +8,8 @@ const {
   Entry,
   ResponseType,
   EntryIconPosition,
+  Box,
+  Orientation,
 } = imports.gi.Gtk;
 const { SettingsBindFlags } = imports.gi.Gio;
 const { build_filenamev } = imports.gi.GLib;
@@ -46,6 +48,17 @@ async function serviceDialog({ window, instance, action }) {
   const contentArea = dialog.get_content_area();
   contentArea.margin = 18;
 
+  const iconEntry = iconChooser({
+    value: instance.icon === "default" ? null : instance.icon,
+  });
+  const box = new Box({
+    orientation: Orientation.HORIZONTAL,
+    halign: Align.CENTER,
+    margin_bottom: 18,
+  });
+  box.add(iconEntry);
+  contentArea.add(box);
+
   const grid = new Grid({
     column_spacing: 12,
     row_spacing: 6,
@@ -62,17 +75,6 @@ async function serviceDialog({ window, instance, action }) {
   });
   instance.bind("name", nameEntry, "text", SettingsBindFlags.DEFAULT);
   grid.attach(nameEntry, 2, 1, 1, 1);
-
-  const iconLabel = new Label({
-    label: "Icon",
-    halign: Align.END,
-  });
-  grid.attach(iconLabel, 1, 2, 1, 1);
-
-  const iconEntry = iconChooser({
-    value: instance.icon === "default" ? null : instance.icon,
-  });
-  grid.attach(iconEntry, 2, 2, 1, 1);
 
   const URLLabel = new Label({
     label: "URL",
