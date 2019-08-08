@@ -18,13 +18,13 @@ iconFileFilter.add_mime_type("image/jpeg");
 
 const ICON_SIZE = 128;
 
-this.iconChooser = function iconChooser({ parent, value }) {
+this.iconChooser = function iconChooser(props) {
   const image = new Image();
-  if (value) {
-    const pixbuf = Pixbuf.new_from_file_at_size(value, ICON_SIZE, ICON_SIZE);
-    image.set_from_pixbuf(pixbuf);
+  if (props.value.startsWith("resource://")) {
+    image.set_from_resource(props.value.split("resource://")[1]);
   } else {
-    // text = "(default)";
+    const pixbuf = Pixbuf.new_from_file(props.value);
+    image.set_from_pixbuf(pixbuf);
   }
   image.set_size_request(ICON_SIZE, ICON_SIZE);
 
@@ -32,7 +32,7 @@ this.iconChooser = function iconChooser({ parent, value }) {
     image,
   });
 
-  let filename = value;
+  let value = props.value;
   fileChooserButton.connect("clicked", () => {
     // https://gjs-docs.gnome.org/gtk30~3.24.8/gtk.filechoosernative
     const fileChooserDialog = new FileChooserNative({
@@ -45,14 +45,14 @@ this.iconChooser = function iconChooser({ parent, value }) {
       local_only: true,
       // TODO - no property parent on gjs
       // parent,
-      transient_for: parent,
+      transient_for: props.parent,
     });
 
     const result = fileChooserDialog.run();
     if (result === ResponseType.ACCEPT) {
-      filename = fileChooserDialog.get_filename();
+      value = fileChooserDialog.get_filename();
       const pixbuf = Pixbuf.new_from_file_at_scale(
-        filename,
+        value,
         ICON_SIZE,
         ICON_SIZE,
         true
@@ -62,8 +62,8 @@ this.iconChooser = function iconChooser({ parent, value }) {
     fileChooserDialog.destroy();
   });
 
-  fileChooserButton.get_filename = function() {
-    return filename;
+  fileChooserButton.get_value = function() {
+    return value;
   };
 
   return fileChooserButton;

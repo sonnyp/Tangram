@@ -7,10 +7,17 @@
         <property name="margin">10</property>
         <property name="orientation">1</property>
         <child>
-          <object class="GtkModelButton">
+          <object class="GtkModelButton" id="new-application">
             <property name="visible">True</property>
             <property name="text" translatable="yes">New application</property>
             <property name="action-name">app.newApplication</property>
+          </object>
+        </child>
+        <child>
+          <object class="GtkModelButton" id="edit-application">
+            <property name="visible">True</property>
+            <property name="text" translatable="yes">Edit application</property>
+            <property name="action-name">app.editApplication</property>
           </object>
         </child>
         <child>
@@ -40,6 +47,7 @@
           </object>
         </child>
         <!-- Probably no need for this for now since closing the window achieves the same -->
+        <!-- Could be useful if we add a service/daemon -->
         <!-- <child>
           <object class="GtkModelButton">
             <property name="visible">True</property>

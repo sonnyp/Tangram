@@ -21,14 +21,11 @@ const {
   UserContentManager,
   TLSErrorsPolicy,
 } = imports.gi.WebKit2;
+const { Pixbuf } = imports.gi.GdkPixbuf;
+const { build_filenamev } = imports.gi.GLib;
 
 const { connect } = imports.util;
 const { stylesheets } = imports.serviceManager;
-const { build_filenamev } = imports.gi.GLib;
-
-const { Pixbuf } = imports.gi.GdkPixbuf;
-
-const { services } = imports.serviceManager;
 
 this.Tab = function Tab(...params) {
   return {
@@ -40,26 +37,27 @@ this.Tab = function Tab(...params) {
 this.TabLabel = TabLabel;
 
 function TabLabel({ instance, settings }) {
-  const { service_id, id } = instance;
-
-  const service =
-    service_id && services.find(service => service.id === service_id);
+  const { id } = instance;
 
   const box = new Box({});
   const image = new Image({ margin_end: 6 });
-  instance.observe("icon", icon => {
-    if (icon && icon !== "default") {
-      const pixbuf = Pixbuf.new_from_file_at_scale(icon, 28, 28, true);
-      image.set_from_pixbuf(pixbuf);
-    } else if (service && service.icon) {
-      const pixbuf = Pixbuf.new_from_resource_at_scale(
-        service.icon,
+  instance.observe("icon", () => {
+    const icon = instance.getIconForDisplay();
+    if (!icon) return;
+
+    let pixbuf;
+    if (icon.startsWith("resource://")) {
+      pixbuf = Pixbuf.new_from_resource_at_scale(
+        icon.split("resource://")[1],
         28,
         28,
         true
       );
       image.set_from_pixbuf(pixbuf);
+    } else {
+      pixbuf = Pixbuf.new_from_file_at_scale(icon, 28, 28, true);
     }
+    image.set_from_pixbuf(pixbuf);
   });
   box.add(image);
 

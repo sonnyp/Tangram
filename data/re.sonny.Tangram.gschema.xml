@@ -38,7 +38,7 @@
       <description>Service identifier</description>
     </key>
     <key type="s" name="icon">
-      <default>"default"</default>
+      <default>""</default>
       <summary>Icon</summary>
       <description>Service icon</description>
     </key>

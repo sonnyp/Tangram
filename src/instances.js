@@ -3,6 +3,7 @@ const { File } = imports.gi.Gio;
 
 const { Settings } = imports.util;
 const { data_dir, cache_dir } = imports.env;
+const services = imports.serviceManager;
 
 const list = [];
 this.list = list;
@@ -55,6 +56,12 @@ class Instance {
   }
   set service_id(service) {
     return this.settings.set_string("service", service);
+  }
+  getIconForDisplay() {
+    if (this.icon) return this.icon;
+    const service = services.get(this.service_id);
+    if (!service || !service.icon) return null;
+    return `resource://${service.icon}`;
   }
 }
 this.Instance = Instance;
