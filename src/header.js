@@ -15,11 +15,20 @@ const { LoadEvent } = imports.gi.WebKit2;
 
 const { AddressBar } = imports.AddressBar;
 
-function Menu() {
+function Menu({ profile }) {
   const builder = Builder.new_from_resource(
     "/re/sonny/Tangram/data/menu.xml.ui"
   );
   const popover = builder.get_object("app-menu");
+
+  // main app
+  if (!profile.id) {
+    builder.get_object("edit-application").destroy();
+  }
+  // custom app
+  else {
+    builder.get_object("new-application").destroy();
+  }
 
   const image = new Image({
     icon_name: "open-menu-symbolic",
@@ -145,8 +154,9 @@ this.Header = function Header({
   titlebar.pack_end(right_stack);
 
   const tabsLayer = new Box();
-  tabsLayer.pack_end(Menu(), false, false, null);
+  tabsLayer.pack_end(Menu({ profile }), false, false, null);
   right_stack.add_named(tabsLayer, "tabs");
+  right_stack.add_named(tabsLayer, "services");
 
   const servicesLayer = new Box();
   const addTabButton = new Button({
@@ -158,8 +168,6 @@ this.Header = function Header({
   addTabButton.get_style_context().add_class("suggested-action");
   servicesLayer.pack_end(addTabButton, false, false, null);
   right_stack.add_named(servicesLayer, "add-tab");
-
-  right_stack.add_named(new Box(), "services");
 
   titlebar.show_all();
   state.bind(

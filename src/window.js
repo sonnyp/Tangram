@@ -38,10 +38,11 @@ const { editInstanceDialog, addInstanceDialog } = imports.serviceDialog;
 const { connect } = imports.util;
 const { Header } = imports.header;
 const {
-  promptNewApplicationDialog,
+  newApplicationDialog,
   createApplication,
   launchApplication,
   buildApplicationId,
+  editApplicationDialog,
 } = imports.applicationDialog;
 const instances = imports.instances;
 
@@ -312,9 +313,16 @@ this.Window = function Window({ application, profile, state }) {
   // https://gjs-docs.gnome.org/gio20~2.0_api/gio.simpleaction
   const newApplication = SimpleAction.new("newApplication", null);
   newApplication.connect("activate", () => {
-    promptNewApplicationDialog({ window }).catch(log);
+    newApplicationDialog({ window }).catch(log);
   });
   application.add_action(newApplication);
+
+  // https://gjs-docs.gnome.org/gio20~2.0_api/gio.simpleaction
+  const editApplication = SimpleAction.new("editApplication", null);
+  editApplication.connect("activate", () => {
+    editApplicationDialog({ id: profile.id, window }).catch(logError);
+  });
+  application.add_action(editApplication);
 
   function showTab(idx) {
     notebook.set_current_page(idx);
@@ -509,7 +517,7 @@ this.Window = function Window({ application, profile, state }) {
     let app;
 
     try {
-      app = createApplication({ name, icon: icon !== "default" && icon, id });
+      app = createApplication({ name, icon, id });
     } catch (err) {
       logError(err);
       // TODO show error

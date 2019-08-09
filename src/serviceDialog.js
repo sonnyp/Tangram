@@ -49,7 +49,7 @@ async function serviceDialog({ window, instance, action }) {
   contentArea.margin = 18;
 
   const iconEntry = iconChooser({
-    value: instance.icon === "default" ? null : instance.icon,
+    value: instance.getIconForDisplay(),
     parent: dialog,
   });
   const box = new Box({
@@ -122,18 +122,17 @@ async function serviceDialog({ window, instance, action }) {
     return true;
   }
 
-  let icon = "default";
-  if (iconEntry.get_filename()) {
+  let icon = iconEntry.get_value();
+  if (!icon.startsWith("resource://")) {
     icon = saveIcon(
-      iconEntry.get_filename(),
+      iconEntry.get_value(),
       build_filenamev([instance.data_dir, "icon.png"])
     );
+    // eslint-disable-next-line require-atomic-updates
+    instance.icon = icon;
   }
 
   dialog.destroy();
-
-  // eslint-disable-next-line require-atomic-updates
-  instance.icon = icon;
 
   return false;
 }
