@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <gresources>
   <gresource prefix="/re/sonny/Tangram/js">
+    <file>AboutDialog.js</file>
     <file>AddressBar.js</file>
     <file>applicationDialog.js</file>
     <file>env.js</file>

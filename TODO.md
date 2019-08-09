@@ -3,6 +3,7 @@
 - [x] new icon
 - [x] rename to Tangram
 - [x] address bar
+- [ ] user agent
 - [ ] disable back button if cannot go back
 - [ ] disable forward button of cannot go forward
 - [ ] webapp manifest support
@@ -16,13 +17,13 @@
   - [x] edit application icon
   - [ ] tab dnd between windows
   - [ ] delete application ?
-  - [ ] keywords?
+  - [ ] keywords in desktop file
   - [ ] name with spaces does not work
 - services
   - [x] fix adding services without URL
   - [x] use icon from the web
   - [x] use title from web
-  - [ ] parameters with all crazy settings from webkit
+  - [ ] parameters with all non-breaking settings from webkit
   - [ ] add service dialog
     - [ ] The icon (and title) fetching from the web app should start after the dialog has open and we should show a animated spinner in the icon chooser (like Epiphany)
     - [ ] The button that triggers the dialog "Done" should be disabled when the page is loading

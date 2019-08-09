@@ -13,7 +13,7 @@ pkg.require({
 imports.std.globals;
 
 const { programInvocationName } = imports.system;
-const { Application, AboutDialog, License, Builder } = imports.gi.Gtk;
+const { Application, Builder } = imports.gi.Gtk;
 const { ApplicationFlags, SimpleAction } = imports.gi.Gio;
 const {
   getenv,
@@ -26,6 +26,7 @@ const {
   set_application_name,
 } = imports.gi.GLib;
 const { set_program_class } = imports.gi.Gdk;
+const { AboutDialog } = imports.AboutDialog;
 
 const { Window } = imports.window;
 const { lookup } = imports.util;
@@ -128,30 +129,7 @@ this.main = function main(argv) {
     parameter_type: null,
   });
   showAboutDialog.connect("activate", () => {
-    const aboutDialog = new AboutDialog({
-      authors: ["Sonny Piers https://sonny.re"],
-      artists: ["Tobias Bernard <tbernard@gnome.org>"],
-      comments: "Run web apps on your desktop",
-      copyright: "Copyright © 2019 Tangram authors",
-      license_type: License.GPL_3_0,
-      version: pkg.version,
-      website_label: "Learn more about Tangram",
-      website: "https://github.com/sonnyp/Tangram",
-      transient_for: window,
-      modal: true,
-      logo_icon_name: "re.sonny.Tangram",
-    });
-    aboutDialog.add_credit_section("Contributors", [
-      // Add yourself as
-      // "John Doe",
-      // or
-      // "John Doe <john@example.com>",
-      // or
-      // "John Doe https://john.com",
-      "codyfish https://github.com/codyfish",
-    ]);
-
-    aboutDialog.present();
+    AboutDialog({ window });
   });
   application.add_action(showAboutDialog);
 
