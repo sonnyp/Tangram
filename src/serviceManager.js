@@ -66,5 +66,8 @@ function load() {
     })
   );
 }
-
 load();
+
+this.get = function get(id) {
+  return services.find(service => service.id === id);
+};

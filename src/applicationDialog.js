@@ -26,6 +26,9 @@ const {
   KEY_FILE_DESKTOP_KEY_ICON,
   uuid_string_random,
   unlink,
+  KeyFile,
+  KeyFileFlags,
+  KEY_FILE_DESKTOP_GROUP,
 } = imports.gi.GLib;
 const { DesktopAppInfo } = imports.gi.Gio;
 
@@ -42,18 +45,19 @@ if (env === "flatpak") {
 }
 log(`bin: ${bin}`);
 
-let default_icon = "re.sonny.Tangram";
+let default_desktop_icon = "re.sonny.Tangram";
 if (env === "dev") {
-  default_icon = build_filenamev([
+  default_desktop_icon = build_filenamev([
     get_current_dir(),
-    `data/icons/hicolor/scalable/apps/${default_icon}.svg`,
+    `data/icons/hicolor/scalable/apps/${default_desktop_icon}.svg`,
   ]);
 }
-log(`default_icon: ${default_icon}`);
+log(`default_icon: ${default_desktop_icon}`);
+
+const APP_ICON = "resource:///re/sonny/Tangram/data/icon.svg";
 
 this.launchApplication = launchApplication;
-function launchApplication(app) {
-  const { desktopFilePath } = app;
+function launchApplication(desktopFilePath) {
   const desktopAppInfo = DesktopAppInfo.new_from_filename(desktopFilePath);
 
   try {
@@ -72,8 +76,16 @@ function buildApplicationId(name) {
   return `${name}-${uuid_string_random().replace(/-/g, "")}`;
 }
 
+function buildDesktopFilePath(id) {
+  return build_filenamev([applications_dir, `${id}.desktop`]);
+}
+
 this.createApplication = createApplication;
 function createApplication({ name, icon, id }) {
+  if (icon === APP_ICON || !icon) {
+    icon = default_desktop_icon;
+  }
+
   const desktopKeyFile = desktopEntry({
     [KEY_FILE_DESKTOP_KEY_NAME]: name,
     // https://specifications.freedesktop.org/desktop-entry-spec/latest/ar01s07.html
@@ -82,21 +94,87 @@ function createApplication({ name, icon, id }) {
     [KEY_FILE_DESKTOP_KEY_TYPE]: KEY_FILE_DESKTOP_TYPE_APPLICATION,
     [KEY_FILE_DESKTOP_KEY_CATEGORIES]: ["Network", "GNOME", "GTK"].join(";"),
     [KEY_FILE_DESKTOP_KEY_STARTUP_NOTIFY]: true,
-    [KEY_FILE_DESKTOP_KEY_ICON]: icon || default_icon,
+    [KEY_FILE_DESKTOP_KEY_ICON]: icon,
     "X-GNOME-UsesNotifications": true,
     StartupWMClass: id,
   });
   desktopKeyFile.set_comment(null, null, " Created by Tangram");
 
-  const desktopFilePath = build_filenamev([applications_dir, `${id}.desktop`]);
+  const desktopFilePath = buildDesktopFilePath(id);
   desktopKeyFile.save_to_file(desktopFilePath);
 
   return { id, desktopFilePath, desktopKeyFile };
 }
 
-this.promptNewApplicationDialog = async function promptNewApplicationDialog({
-  window,
+this.editApplicationDialog = async function editApplicationDialog({
+  id,
+  ...props
 }) {
+  const desktopFilePath = buildDesktopFilePath(id);
+  const keyFile = new KeyFile();
+  keyFile.load_from_file(
+    desktopFilePath,
+    KeyFileFlags.KEEP_COMMENTS | KeyFileFlags.KEEP_TRANSLATIONS
+  );
+
+  const name = keyFile.get_value(
+    KEY_FILE_DESKTOP_GROUP,
+    KEY_FILE_DESKTOP_KEY_NAME
+  );
+
+  let icon = keyFile.get_value(
+    KEY_FILE_DESKTOP_GROUP,
+    KEY_FILE_DESKTOP_KEY_ICON
+  );
+  if (!icon || icon === default_desktop_icon) {
+    icon = APP_ICON;
+  }
+
+  const result = await applicationDialog({
+    ...props,
+    params: {
+      name,
+      icon,
+    },
+    action: "Edit",
+  });
+
+  keyFile.set_value(
+    KEY_FILE_DESKTOP_GROUP,
+    KEY_FILE_DESKTOP_KEY_NAME,
+    result.name
+  );
+  keyFile.set_value(
+    KEY_FILE_DESKTOP_GROUP,
+    KEY_FILE_DESKTOP_KEY_ICON,
+    result.icon
+  );
+  keyFile.save_to_file(desktopFilePath);
+  // FIXME - we should restart the app
+  // maybe notification https://developer.gnome.org/hig/stable/in-app-notifications.html.en ?
+};
+
+this.newApplicationDialog = async function newApplicationDialog({ ...props }) {
+  const params = {
+    name: "",
+    icon: APP_ICON,
+  };
+
+  const { name, icon, id } = await applicationDialog({
+    ...props,
+    params,
+    action: "New",
+  });
+  try {
+    const { desktopFilePath } = createApplication({ name, icon, id });
+    launchApplication(desktopFilePath);
+  } catch (err) {
+    logError(err);
+    // TODO show error
+  }
+};
+
+async function applicationDialog({ window, action, params = {} }) {
   // TODO Dialog.new_with_buttons
   // is undefined in gjs, open issue.
   // https://developer.gnome.org/hig/stable/dialogs.html.en#Action
@@ -104,7 +182,7 @@ this.promptNewApplicationDialog = async function promptNewApplicationDialog({
   // and
   // https://developer.gnome.org/hig/stable/visual-layout.html.en
   const dialog = new Dialog({
-    title: `New Application`,
+    title: `${action} Application`,
     modal: true,
     type_hint: WindowTypeHint.DIALOG,
     use_header_bar: true,
@@ -122,7 +200,7 @@ this.promptNewApplicationDialog = async function promptNewApplicationDialog({
   contentArea.margin = 18;
 
   const iconEntry = iconChooser({
-    value: null,
+    value: params.icon,
     parent: dialog,
   });
   const box = new Box({
@@ -146,8 +224,9 @@ this.promptNewApplicationDialog = async function promptNewApplicationDialog({
   grid.attach(nameLabel, 1, 1, 1, 1);
   const nameEntry = new Entry({
     hexpand: true,
-    text: "",
+    text: params.name || "",
   });
+  primaryButton.set_sensitive(!!nameEntry.text);
   nameEntry.connect("changed", () => {
     primaryButton.set_sensitive(!!nameEntry.text);
   });
@@ -165,20 +244,14 @@ this.promptNewApplicationDialog = async function promptNewApplicationDialog({
   }
 
   const name = nameEntry.text;
-  const id = buildApplicationId(name);
-  let icon = iconEntry.get_filename();
+  const id = params.id || buildApplicationId(name);
+  let icon = iconEntry.get_value();
 
-  if (icon) {
+  if (icon !== params.icon) {
     icon = saveIcon(icon, build_filenamev([data_dir, `${id}.png`]));
   }
 
   dialog.destroy();
 
-  try {
-    const app = createApplication({ name, icon, id });
-    launchApplication(app);
-  } catch (err) {
-    logError(err);
-    // TODO show error
-  }
-};
+  return { name, icon, id };
+}

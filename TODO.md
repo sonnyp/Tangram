@@ -3,15 +3,20 @@
 - [x] new icon
 - [x] rename to Tangram
 - [x] address bar
+- [ ] disable back button if cannot go back
+- [ ] disable forward button of cannot go forward
+- [ ] webapp manifest
 - [ ] better icon chooser
   - [x] use saveIcon with applicationDialog
   - [x] image button
+  - [ ] show service icon if no webapp icon
 - applications
   - [x] use instance icon when detaching a tab
   - [ ] tab dnd between windows
   - [ ] edit application name
   - [ ] edit application icon
   - [ ] delete application ?
+  - [ ] keywords?
 - services
   - [x] fix adding services without URL
   - [x] use icon from the web
