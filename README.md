@@ -1,3 +1,5 @@
+<img style="vertical-align: middle;" src="data/icons/hicolor/scalable/apps/re.sonny.Tangram.svg" width="120" height="120">
+
 # Tangram
 
 Run web apps on your desktop.
