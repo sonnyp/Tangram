@@ -23,7 +23,12 @@ this.iconChooser = function iconChooser(props) {
   if (props.value.startsWith("resource://")) {
     image.set_from_resource(props.value.split("resource://")[1]);
   } else {
-    const pixbuf = Pixbuf.new_from_file(props.value);
+    const pixbuf = Pixbuf.new_from_file_at_scale(
+      props.value,
+      ICON_SIZE,
+      ICON_SIZE,
+      true
+    );
     image.set_from_pixbuf(pixbuf);
   }
   image.set_size_request(ICON_SIZE, ICON_SIZE);
