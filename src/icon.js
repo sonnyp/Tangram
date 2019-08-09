@@ -1,5 +1,5 @@
 const {
-  FileChooserDialog,
+  FileChooserNative,
   FileChooserAction,
   FileFilter,
   Button,
@@ -18,7 +18,7 @@ iconFileFilter.add_mime_type("image/jpeg");
 
 const ICON_SIZE = 128;
 
-this.iconChooser = function iconChooser({ value }) {
+this.iconChooser = function iconChooser({ parent, value }) {
   const image = new Image();
   if (value) {
     const pixbuf = Pixbuf.new_from_file_at_size(value, ICON_SIZE, ICON_SIZE);
@@ -34,21 +34,22 @@ this.iconChooser = function iconChooser({ value }) {
 
   let filename = value;
   fileChooserButton.connect("clicked", () => {
-    // https://gjs-docs.gnome.org/gtk30~3.24.8/gtk.filechooserdialog
-    const fileChooserDialog = new FileChooserDialog({
+    // https://gjs-docs.gnome.org/gtk30~3.24.8/gtk.filechoosernative
+    const fileChooserDialog = new FileChooserNative({
       action: FileChooserAction.OPEN,
+      // Filter is not supported on flatpak
+      // any alternative?
       filter: iconFileFilter,
       select_multiple: false,
       title: "Choose an icon",
+      local_only: true,
+      // TODO - no property parent on gjs
+      // parent,
+      transient_for: parent,
     });
-    if (filename) {
-      fileChooserDialog.set_filename(filename);
-    }
-    fileChooserDialog.add_button("Cancel", ResponseType.CANCEL);
-    fileChooserDialog.add_button("OK", ResponseType.OK);
 
     const result = fileChooserDialog.run();
-    if (result === ResponseType.OK) {
+    if (result === ResponseType.ACCEPT) {
       filename = fileChooserDialog.get_filename();
       const pixbuf = Pixbuf.new_from_file_at_scale(
         filename,
