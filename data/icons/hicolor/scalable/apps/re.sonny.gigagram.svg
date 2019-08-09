@@ -6,213 +6,214 @@
    xmlns:svg="http://www.w3.org/2000/svg"
    xmlns="http://www.w3.org/2000/svg"
    xmlns:xlink="http://www.w3.org/1999/xlink"
-   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
-   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
-   version="1.1"
    width="128"
    height="128"
-   id="svg30"
-   sodipodi:docname="re.sonny.gigagram.svg"
-   inkscape:version="0.92.4 5da689c313, 2019-01-14">
+   id="svg11300"
+   version="1.0"
+   style="display:inline;enable-background:new"
+   viewBox="0 0 128 128"
+   enable-background="new">
+  <title
+     id="title4162">Adwaita Icon Template</title>
+  <defs
+     id="defs3">
+    <linearGradient
+       y2="-449.39401"
+       x2="536.59589"
+       y1="-449.39401"
+       x1="88.595886"
+       gradientTransform="matrix(0.23214285,0,0,0.19736843,-8.56688,204.69618)"
+       gradientUnits="userSpaceOnUse"
+       id="linearGradient1138"
+       xlink:href="#linearGradient1153" />
+    <linearGradient
+       id="linearGradient1153">
+      <stop
+         style="stop-color:#000000;stop-opacity:1"
+         offset="0"
+         id="stop1141" />
+      <stop
+         id="stop1143"
+         offset="0.03846154"
+         style="stop-color:#c0bfbc;stop-opacity:1" />
+      <stop
+         style="stop-color:#000000;stop-opacity:1"
+         offset="0.07685554"
+         id="stop1145" />
+      <stop
+         id="stop1147"
+         offset="0.92307693"
+         style="stop-color:#000000;stop-opacity:1" />
+      <stop
+         style="stop-color:#c0bfbc;stop-opacity:1"
+         offset="0.96153849"
+         id="stop1149" />
+      <stop
+         style="stop-color:#000000;stop-opacity:1"
+         offset="1"
+         id="stop1151" />
+    </linearGradient>
+    <linearGradient
+       y2="-449.39401"
+       x2="536.59589"
+       y1="-449.39401"
+       x1="88.595886"
+       gradientTransform="matrix(0.23214285,0,0,0.19736843,-8.56688,204.69618)"
+       gradientUnits="userSpaceOnUse"
+       id="linearGradient1064"
+       xlink:href="#linearGradient1073" />
+    <linearGradient
+       id="linearGradient1073">
+      <stop
+         id="stop1060"
+         offset="0"
+         style="stop-color:#77767b;stop-opacity:1" />
+      <stop
+         style="stop-color:#c0bfbc;stop-opacity:1"
+         offset="0.03846154"
+         id="stop1062" />
+      <stop
+         id="stop1064"
+         offset="0.07685554"
+         style="stop-color:#9a9996;stop-opacity:1" />
+      <stop
+         style="stop-color:#9a9996;stop-opacity:1"
+         offset="0.92307693"
+         id="stop1067" />
+      <stop
+         id="stop1069"
+         offset="0.96153849"
+         style="stop-color:#c0bfbc;stop-opacity:1" />
+      <stop
+         id="stop1071"
+         offset="1"
+         style="stop-color:#77767b;stop-opacity:1" />
+    </linearGradient>
+  </defs>
   <metadata
-     id="metadata34">
+     id="metadata4">
     <rdf:RDF>
       <cc:Work
          rdf:about="">
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:creator>
+          <cc:Agent>
+            <dc:title>GNOME Design Team</dc:title>
+          </cc:Agent>
+        </dc:creator>
+        <dc:source />
+        <cc:license
+           rdf:resource="http://creativecommons.org/licenses/by-sa/4.0/" />
+        <dc:title>Adwaita Icon Template</dc:title>
+        <dc:subject>
+          <rdf:Bag />
+        </dc:subject>
+        <dc:date />
+        <dc:rights>
+          <cc:Agent>
+            <dc:title />
+          </cc:Agent>
+        </dc:rights>
+        <dc:publisher>
+          <cc:Agent>
+            <dc:title />
+          </cc:Agent>
+        </dc:publisher>
+        <dc:identifier />
+        <dc:relation />
+        <dc:language />
+        <dc:coverage />
+        <dc:description />
+        <dc:contributor>
+          <cc:Agent>
+            <dc:title />
+          </cc:Agent>
+        </dc:contributor>
       </cc:Work>
+      <cc:License
+         rdf:about="http://creativecommons.org/licenses/by-sa/4.0/">
+        <cc:permits
+           rdf:resource="http://creativecommons.org/ns#Reproduction" />
+        <cc:permits
+           rdf:resource="http://creativecommons.org/ns#Distribution" />
+        <cc:requires
+           rdf:resource="http://creativecommons.org/ns#Notice" />
+        <cc:requires
+           rdf:resource="http://creativecommons.org/ns#Attribution" />
+        <cc:permits
+           rdf:resource="http://creativecommons.org/ns#DerivativeWorks" />
+        <cc:requires
+           rdf:resource="http://creativecommons.org/ns#ShareAlike" />
+      </cc:License>
     </rdf:RDF>
   </metadata>
-  <sodipodi:namedview
-     pagecolor="#ffffff"
-     bordercolor="#666666"
-     borderopacity="1"
-     objecttolerance="10"
-     gridtolerance="10"
-     guidetolerance="10"
-     inkscape:pageopacity="0"
-     inkscape:pageshadow="2"
-     inkscape:window-width="1920"
-     inkscape:window-height="1009"
-     id="namedview32"
-     showgrid="false"
-     fit-margin-top="0"
-     fit-margin-left="0"
-     fit-margin-right="0"
-     fit-margin-bottom="0"
-     inkscape:zoom="3.1678384"
-     inkscape:cx="142.65391"
-     inkscape:cy="15.111054"
-     inkscape:window-x="0"
-     inkscape:window-y="34"
-     inkscape:window-maximized="1"
-     inkscape:current-layer="svg30"
-     inkscape:showpageshadow="true"
-     showborder="true" />
-  <defs
-     id="defs13">
-    <!-- Tangram
-		     7 Elemente
-		     Seitenlänge des Quadrates aller Figuren: 2a
-		     Diagonale: a*sqrt(2) = b
-		     2 gleichschenkelig rechtwinkelige Dreiecke Basis 2a
-		     2 gleichschenkelig rechtwinkelige Dreiecke Basis a
-		     1 Parallelogramm Basis a, Höhe a
-				 1 Quadrat Seitenlänge b/4
-				 1 gleichschenkelig rechtwinkeliges Dreieck Basis b/2
-				 sqrt(2) = 1,414213562373095
-         Näherung für sqrt(2): 577/408 = 1,41421568627451
-         daher waehlen wir als a: 2*408 = 816
-         a = 816
-         2a = 1632
-         b = 2308
-         b/2 = 1154
-         b/4 = 577
-  	-->
-    <style
-       type="text/css"
-       id="style2"><![CDATA[
-    .Border { fill:none; stroke:blue; stroke-width:5 }
-    .Connect { fill:none; stroke:#888888; stroke-width:2 }
-    .SamplePath { fill:none; stroke:red; stroke-width:5 }
-    .puzzleout { stroke:black; stroke-width:5 }
-    .csqr { fill:gold }
-    .cbig1 { fill:darkgreen }
-    .cbig2 { fill:crimson }
-    .cmid { fill:orangered }
-    .csm1 { fill:maroon }
-    .csm2 { fill:darkblue }
-    .cpar { fill:darkslateblue }
-    .EndPoint { fill:none; stroke:#888888; stroke-width:2 }
-    .CtlPoint { fill:#888888; stroke:none }
-    .AutoCtlPoint { fill:none; stroke:blue; stroke-width:4 }
-    .Label { font-size:22; font-family:Courier }
-  ]]></style>
-    <!-- square -->
-    <path
-       id="square"
-       class="csqr puzzleout"
-       d="M 0,0 H 577 V 577 H 0 Z"
-       inkscape:connector-curvature="0"
-       style="fill:#ffd700;stroke:#000000;stroke-width:5" />
-    <path
-       id="bigtri"
-       d="M 0,-816 816,0 0,816 Z"
-       inkscape:connector-curvature="0" />
-    <use
-       id="bigtri1"
-       class="cbig1 puzzleout"
-       xlink:href="#bigtri"
-       style="fill:#006400;stroke:#000000;stroke-width:5"
-       x="0"
-       y="0"
-       width="100%"
-       height="100%" />
-    <use
-       id="bigtri2"
-       class="cbig2 puzzleout"
-       xlink:href="#bigtri"
-       style="fill:#dc143c;stroke:#000000;stroke-width:5"
-       x="0"
-       y="0"
-       width="100%"
-       height="100%" />
-    <path
-       id="smalltri"
-       d="M 0,-408 408,0 0,408 Z"
-       inkscape:connector-curvature="0" />
-    <use
-       id="smalltri1"
-       class="csm1 puzzleout"
-       xlink:href="#smalltri"
-       style="fill:#800000;stroke:#000000;stroke-width:5"
-       x="0"
-       y="0"
-       width="100%"
-       height="100%" />
-    <use
-       id="smalltri2"
-       class="csm2 puzzleout"
-       xlink:href="#smalltri"
-       style="fill:#00008b;stroke:#000000;stroke-width:5"
-       x="0"
-       y="0"
-       width="100%"
-       height="100%" />
-    <path
-       id="midtri"
-       class="cmid puzzleout"
-       d="M 0,0 H 1154 L 577,577 Z"
-       inkscape:connector-curvature="0"
-       style="fill:#ff4500;stroke:#000000;stroke-width:5" />
-    <path
-       id="para"
-       class="cpar puzzleout"
-       d="m 0,0 h 816 l 408,-408 H 408 Z"
-       inkscape:connector-curvature="0"
-       style="fill:#483d8b;stroke:#000000;stroke-width:5" />
-  </defs>
   <g
-     id="tangram-square"
-     transform="matrix(0.05501033,0.05505214,-0.05501033,0.05505214,18.936396,18.717392)">
-    <use
-       xlink:href="#bigtri1"
-       transform="rotate(45,816,0)"
-       id="use15"
-       x="0"
-       y="0"
-       width="100%"
-       height="100%" />
-    <use
-       xlink:href="#bigtri2"
-       transform="rotate(-45,816,0)"
-       id="use17"
-       x="0"
-       y="0"
-       width="100%"
-       height="100%" />
-    <use
-       xlink:href="#smalltri1"
-       transform="rotate(135,731.50061,-204.00043)"
-       id="use19"
-       x="0"
-       y="0"
-       width="100%"
-       height="100%" />
-    <use
-       xlink:href="#square"
-       transform="translate(816,-577)"
-       id="use21"
-       x="0"
-       y="0"
-       width="100%"
-       height="100%" />
-    <use
-       xlink:href="#midtri"
-       transform="rotate(-90,985,-408)"
-       id="use23"
-       x="0"
-       y="0"
-       width="100%"
-       height="100%" />
-    <use
-       xlink:href="#smalltri2"
-       transform="rotate(-135,612,-84.499567)"
-       id="use25"
-       x="0"
-       y="0"
-       width="100%"
-       height="100%" />
-    <use
-       xlink:href="#para"
-       transform="rotate(-45,1801.0006,-408.00061)"
-       id="use27"
-       x="0"
-       y="0"
-       width="100%"
-       height="100%" />
+     id="g924">
+    <rect
+       ry="8"
+       rx="7.999999"
+       y="56"
+       x="12.000031"
+       height="60"
+       width="104"
+       id="rect1048"
+       style="display:inline;opacity:1;vector-effect:none;fill:url(#linearGradient1064);fill-opacity:1;stroke:none;stroke-width:0.24999999;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;marker:none;marker-start:none;marker-mid:none;marker-end:none;paint-order:normal;enable-background:new" />
+    <rect
+       style="display:inline;opacity:1;vector-effect:none;fill:#deddda;fill-opacity:1;stroke:none;stroke-width:0.24999999;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;marker:none;marker-start:none;marker-mid:none;marker-end:none;paint-order:normal;enable-background:new"
+       id="rect929-36-9"
+       width="104"
+       height="99.999992"
+       x="12.000031"
+       y="12"
+       rx="7.9999986"
+       ry="8" />
+    <g
+       id="g1044"
+       transform="matrix(1.3684211,0,0,1.3684211,-23.57895,-256.21054)"
+       style="display:inline;stroke-width:0.73076922;enable-background:new">
+      <path
+         style="fill:#33d17a;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+         d="m 28,28 c -2.216,0 -4.21611,0.891891 -5.662109,2.337891 L 72,80 121.66211,30.337891 C 120.21611,28.891891 118.216,28 116,28 Z"
+         transform="matrix(0.73076921,0,0,0.73076921,11.384617,175.53847)"
+         id="path975" />
+      <path
+         style="fill:#3584e4;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+         d="M 22.337891,30.337891 C 20.891891,31.783891 20,33.784 20,36 v 88 c 0,2.216 0.891891,4.21611 2.337891,5.66211 L 72,80 Z"
+         transform="matrix(0.73076921,0,0,0.73076921,11.384617,175.53847)"
+         id="path977" />
+      <path
+         style="fill:#5e5c64;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+         d="M 121.66211,30.337891 98,54 124,80 V 36 c 0,-2.216 -0.89189,-4.216109 -2.33789,-5.662109 z"
+         id="path979"
+         transform="matrix(0.73076921,0,0,0.73076921,11.384617,175.53847)" />
+      <rect
+         y="210.71782"
+         x="-120.20815"
+         height="26.870056"
+         width="26.870054"
+         id="rect981"
+         style="display:inline;opacity:1;vector-effect:none;fill:#f6d32d;fill-opacity:1;stroke:none;stroke-width:0.18269229;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;marker:none;marker-start:none;marker-mid:none;marker-end:none;paint-order:normal;enable-background:new"
+         transform="rotate(-45)" />
+      <path
+         style="fill:#865e3c;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+         d="m 124,80 -52,52 h 44 c 4.432,0 8,-3.568 8,-8 z"
+         transform="matrix(0.73076921,0,0,0.73076921,11.384617,175.53847)"
+         id="path983" />
+      <path
+         style="fill:#ff7800;fill-opacity:1;stroke:none;stroke-width:0.73076922px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+         d="M 82.99998,253 H 45 l 19,-19 z"
+         id="path985" />
+      <path
+         style="fill:#ed333b;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+         d="M 46,106 22.337891,129.66211 C 23.78389,131.10811 25.784,132 28,132 h 44 l 26,-26 z"
+         transform="matrix(0.73076921,0,0,0.73076921,11.384617,175.53847)"
+         id="path1013" />
+    </g>
+    <path
+       style="display:inline;opacity:0.39300005;vector-effect:none;fill:url(#linearGradient1138);fill-opacity:1;stroke:none;stroke-width:0.24999999;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;marker:none;marker-start:none;marker-mid:none;marker-end:none;paint-order:normal;enable-background:new"
+       d="m 12,104 v 4 c 0,4.432 3.568001,8 8,8 h 88 c 4.432,0 8,-3.568 8,-8 v -4 c 0,4.432 -3.568,8 -8,8 H 20 c -4.431999,0 -8,-3.568 -8,-8 z"
+       id="rect1134" />
   </g>
 </svg>

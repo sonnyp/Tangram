@@ -5,214 +5,36 @@
    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
    xmlns:svg="http://www.w3.org/2000/svg"
    xmlns="http://www.w3.org/2000/svg"
-   xmlns:xlink="http://www.w3.org/1999/xlink"
-   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
-   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
-   version="1.1"
    width="16"
-   height="16"
-   id="svg30"
-   sodipodi:docname="re.sonny.gigagram.svg"
-   inkscape:version="0.92.4 5da689c313, 2019-01-14">
+   version="1.1"
+   id="svg7384"
+   height="16">
   <metadata
-     id="metadata34">
+     id="metadata90">
     <rdf:RDF>
       <cc:Work
          rdf:about="">
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title>Gnome Symbolic Icon Theme</dc:title>
       </cc:Work>
     </rdf:RDF>
   </metadata>
-  <sodipodi:namedview
-     pagecolor="#ffffff"
-     bordercolor="#666666"
-     borderopacity="1"
-     objecttolerance="10"
-     gridtolerance="10"
-     guidetolerance="10"
-     inkscape:pageopacity="0"
-     inkscape:pageshadow="2"
-     inkscape:window-width="1920"
-     inkscape:window-height="1009"
-     id="namedview32"
-     showgrid="false"
-     fit-margin-top="0"
-     fit-margin-left="0"
-     fit-margin-right="0"
-     fit-margin-bottom="0"
-     inkscape:zoom="3.1678384"
-     inkscape:cx="156.38567"
-     inkscape:cy="16.215908"
-     inkscape:window-x="0"
-     inkscape:window-y="34"
-     inkscape:window-maximized="1"
-     inkscape:current-layer="svg30"
-     inkscape:showpageshadow="true"
-     showborder="true" />
+  <title
+     id="title9167">Gnome Symbolic Icon Theme</title>
   <defs
-     id="defs13">
-    <!-- Tangram
-		     7 Elemente
-		     Seitenlänge des Quadrates aller Figuren: 2a
-		     Diagonale: a*sqrt(2) = b
-		     2 gleichschenkelig rechtwinkelige Dreiecke Basis 2a
-		     2 gleichschenkelig rechtwinkelige Dreiecke Basis a
-		     1 Parallelogramm Basis a, Höhe a
-				 1 Quadrat Seitenlänge b/4
-				 1 gleichschenkelig rechtwinkeliges Dreieck Basis b/2
-				 sqrt(2) = 1,414213562373095
-         Näherung für sqrt(2): 577/408 = 1,41421568627451
-         daher waehlen wir als a: 2*408 = 816
-         a = 816
-         2a = 1632
-         b = 2308
-         b/2 = 1154
-         b/4 = 577
-  	-->
-    <style
-       type="text/css"
-       id="style2"><![CDATA[
-    .Border { fill:none; stroke:blue; stroke-width:5 }
-    .Connect { fill:none; stroke:#888888; stroke-width:2 }
-    .SamplePath { fill:none; stroke:red; stroke-width:5 }
-    .puzzleout { stroke:black; stroke-width:5 }
-    .csqr { fill:gold }
-    .cbig1 { fill:darkgreen }
-    .cbig2 { fill:crimson }
-    .cmid { fill:orangered }
-    .csm1 { fill:maroon }
-    .csm2 { fill:darkblue }
-    .cpar { fill:darkslateblue }
-    .EndPoint { fill:none; stroke:#888888; stroke-width:2 }
-    .CtlPoint { fill:#888888; stroke:none }
-    .AutoCtlPoint { fill:none; stroke:blue; stroke-width:4 }
-    .Label { font-size:22; font-family:Courier }
-  ]]></style>
-    <!-- square -->
-    <path
-       id="square"
-       class="csqr puzzleout"
-       d="M 0,0 H 577 V 577 H 0 Z"
-       inkscape:connector-curvature="0"
-       style="fill:#ffd700;stroke:#000000;stroke-width:5" />
-    <path
-       id="bigtri"
-       d="M 0,-816 816,0 0,816 Z"
-       inkscape:connector-curvature="0" />
-    <use
-       id="bigtri1"
-       class="cbig1 puzzleout"
-       xlink:href="#bigtri"
-       style="fill:#006400;stroke:#000000;stroke-width:5"
-       x="0"
-       y="0"
-       width="100%"
-       height="100%" />
-    <use
-       id="bigtri2"
-       class="cbig2 puzzleout"
-       xlink:href="#bigtri"
-       style="fill:#dc143c;stroke:#000000;stroke-width:5"
-       x="0"
-       y="0"
-       width="100%"
-       height="100%" />
-    <path
-       id="smalltri"
-       d="M 0,-408 408,0 0,408 Z"
-       inkscape:connector-curvature="0" />
-    <use
-       id="smalltri1"
-       class="csm1 puzzleout"
-       xlink:href="#smalltri"
-       style="fill:#800000;stroke:#000000;stroke-width:5"
-       x="0"
-       y="0"
-       width="100%"
-       height="100%" />
-    <use
-       id="smalltri2"
-       class="csm2 puzzleout"
-       xlink:href="#smalltri"
-       style="fill:#00008b;stroke:#000000;stroke-width:5"
-       x="0"
-       y="0"
-       width="100%"
-       height="100%" />
-    <path
-       id="midtri"
-       class="cmid puzzleout"
-       d="M 0,0 H 1154 L 577,577 Z"
-       inkscape:connector-curvature="0"
-       style="fill:#ff4500;stroke:#000000;stroke-width:5" />
-    <path
-       id="para"
-       class="cpar puzzleout"
-       d="m 0,0 h 816 l 408,-408 H 408 Z"
-       inkscape:connector-curvature="0"
-       style="fill:#483d8b;stroke:#000000;stroke-width:5" />
-  </defs>
-  <g
-     id="tangram-square"
-     transform="matrix(0.00688152,0.00688168,-0.00688152,0.00688168,2.4541542,2.58267)">
-    <use
-       xlink:href="#bigtri1"
-       transform="rotate(45,816,0)"
-       id="use15"
-       x="0"
-       y="0"
-       width="100%"
-       height="100%" />
-    <use
-       xlink:href="#bigtri2"
-       transform="rotate(-45,816,0)"
-       id="use17"
-       x="0"
-       y="0"
-       width="100%"
-       height="100%" />
-    <use
-       xlink:href="#smalltri1"
-       transform="rotate(135,731.50061,-204.00043)"
-       id="use19"
-       x="0"
-       y="0"
-       width="100%"
-       height="100%" />
-    <use
-       xlink:href="#square"
-       transform="translate(816,-577)"
-       id="use21"
-       x="0"
-       y="0"
-       width="100%"
-       height="100%" />
-    <use
-       xlink:href="#midtri"
-       transform="rotate(-90,985,-408)"
-       id="use23"
-       x="0"
-       y="0"
-       width="100%"
-       height="100%" />
-    <use
-       xlink:href="#smalltri2"
-       transform="rotate(-135,612,-84.499567)"
-       id="use25"
-       x="0"
-       y="0"
-       width="100%"
-       height="100%" />
-    <use
-       xlink:href="#para"
-       transform="rotate(-45,1801.0006,-408.00061)"
-       id="use27"
-       x="0"
-       y="0"
-       width="100%"
-       height="100%" />
-  </g>
+     id="defs7386" />
+  <path
+     id="path1030"
+     d="M 1.875,0.99996776 8.4375,7.5624834 15,0.99996776 Z"
+     style="fill:#241f31;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
+  <path
+     style="opacity:0.35;fill:#241f31;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+     d="M 1,15.000001 7.5625,8.4374854 1,1.8749698 Z"
+     id="path1034" />
+  <path
+     style="fill:#241f31;stroke:none;stroke-width:0.99999988px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+     d="M 14.999982,14.999984 V 2.7499719 L 2.75,14.999984 Z"
+     id="path1014" />
 </svg>
