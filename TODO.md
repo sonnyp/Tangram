@@ -5,23 +5,28 @@
 - [x] address bar
 - [ ] disable back button if cannot go back
 - [ ] disable forward button of cannot go forward
-- [ ] webapp manifest
-- [ ] better icon chooser
+- [ ] webapp manifest support
+- [x] better icon chooser
   - [x] use saveIcon with applicationDialog
   - [x] image button
-  - [ ] show service icon if no webapp icon
+  - [x] show service icon if no webapp icon
 - applications
   - [x] use instance icon when detaching a tab
+  - [x] edit application name
+  - [x] edit application icon
   - [ ] tab dnd between windows
-  - [ ] edit application name
-  - [ ] edit application icon
   - [ ] delete application ?
   - [ ] keywords?
+  - [ ] name with spaces does not work
 - services
   - [x] fix adding services without URL
   - [x] use icon from the web
   - [x] use title from web
   - [ ] parameters with all crazy settings from webkit
+  - [ ] add service dialog
+    - [ ] The icon (and title) fetching from the web app should start after the dialog has open and we should show a animated spinner in the icon chooser (like Epiphany)
+    - [ ] The button that triggers the dialog "Done" should be disabled when the page is loading
+    - [ ] The button "Done" in the dialog should be disabled until fetching icon/title is done
 - misc
   - [ ] remote services in favor of local services
   - [ ] move to GNOME gitlab?

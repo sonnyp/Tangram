@@ -20,7 +20,10 @@ const {
   NotificationPriority,
   SimpleAction,
   SettingsBindFlags,
+  File,
+  FileCopyFlags,
 } = imports.gi.Gio;
+
 const {
   Settings,
   observeSetting,
@@ -45,6 +48,7 @@ const {
   editApplicationDialog,
 } = imports.applicationDialog;
 const instances = imports.instances;
+const { data_dir } = imports.env;
 
 this.Window = function Window({ application, profile, state }) {
   profile.settings =
@@ -511,13 +515,20 @@ this.Window = function Window({ application, profile, state }) {
 
   function detachTab(instance_id) {
     const instance = instances.get(instance_id);
-    const { name, icon } = instance;
+    const { name } = instance;
     const id = buildApplicationId(name);
 
-    let app;
+    let icon = instance.getIconForDisplay();
+    if (icon && icon.startsWith("resource://")) {
+      const file = File.new_for_uri(icon);
+      const dest = build_filenamev([data_dir, `${id}.svg`]);
+      file.copy(File.new_for_path(dest), FileCopyFlags.OVERWRITE, null, null);
+      icon = dest;
+    }
 
+    let desktopFilePath;
     try {
-      app = createApplication({ name, icon, id });
+      desktopFilePath = createApplication({ name, icon, id }).desktopFilePath;
     } catch (err) {
       logError(err);
       // TODO show error
@@ -526,12 +537,12 @@ this.Window = function Window({ application, profile, state }) {
 
     const newAppSettings = new Settings({
       schema_id: "re.sonny.Tangram",
-      path: `/re/sonny/Tangram/applications/${app.id}/`,
+      path: `/re/sonny/Tangram/applications/${id}/`,
     });
     instances.attach(newAppSettings, instance.id);
 
     try {
-      launchApplication(app);
+      launchApplication(desktopFilePath);
     } catch (err) {
       logError(err);
       // todo show error and cleanup

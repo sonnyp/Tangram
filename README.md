@@ -1,8 +1,8 @@
 # Tangram
 
-![screenshot](screenshot.png)
+Run web apps on your desktop.
 
-Tangram combines webapps and websites into single applications.
+![screenshot](screenshot.png)
 
 Tabs are persistent and independent from each others so you can use multiple accounts.
 
