@@ -45,14 +45,14 @@ Make sure flatpak is setup according to [Install flatpak](https://flatpak.org/se
 ---
 
 Download and install
-[gigagram.flatpak](https://github.com/sonnyp/Tangram/releases/download/v0.4.1/gigagram.flatpak)
+[Tangram.flatpak](https://github.com/sonnyp/Tangram/releases/download/v0.5.0/Tangram.flatpak)
 
 or
 
 ```sh
-wget https://github.com/sonnyp/Tangram/releases/download/v0.4.1/gigagram.flatpak
+wget https://github.com/sonnyp/Tangram/releases/download/v0.5.0/Tangram.flatpak
 
-flatpak install gigagram.flatpak
+flatpak install Tangram.flatpak
 ```
 
 ## Services
@@ -148,7 +148,6 @@ flatpak run re.sonny.Tangram
 ### Inspect
 
 ```sh
-cd gigagrram
 gsettings set org.gtk.Settings.Debug enable-inspector-keybinding true
 GTK_DEBUG=interactive ./run.sh
 ```
