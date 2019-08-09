@@ -42,7 +42,7 @@ if (env === "flatpak") {
 }
 log(`bin: ${bin}`);
 
-let default_icon = "re.sonny.gigagram";
+let default_icon = "re.sonny.Tangram";
 if (env === "dev") {
   default_icon = build_filenamev([
     get_current_dir(),
@@ -85,9 +85,8 @@ function createApplication({ name, icon, id }) {
     [KEY_FILE_DESKTOP_KEY_ICON]: icon || default_icon,
     "X-GNOME-UsesNotifications": true,
     StartupWMClass: id,
-    // "X-Flatpak": "re.sonny.gigagram",
   });
-  desktopKeyFile.set_comment(null, null, " Created by Gigagram");
+  desktopKeyFile.set_comment(null, null, " Created by Tangram");
 
   const desktopFilePath = build_filenamev([applications_dir, `${id}.desktop`]);
   desktopKeyFile.save_to_file(desktopFilePath);

@@ -1,7 +1,7 @@
 # ROADMAP 1.0
 
-- [ ] new icon
-- [ ] rename to Tangram
+- [x] new icon
+- [x] rename to Tangram
 - [x] address bar
 - [ ] better icon chooser
   - [x] use saveIcon with applicationDialog
@@ -11,7 +11,7 @@
   - [ ] tab dnd between windows
   - [ ] edit application name
   - [ ] edit application icon
-  - [ ] delete application
+  - [ ] delete application ?
 - services
   - [x] fix adding services without URL
   - [x] use icon from the web

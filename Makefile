@@ -7,17 +7,17 @@ build:
 
 run-host:
 	make build
-	GSETTINGS_SCHEMA_DIR=./data ./install/bin/re.sonny.gigagram
+	GSETTINGS_SCHEMA_DIR=./data ./install/bin/re.sonny.Tangram
 
 flatpak:
-	flatpak-builder --user  --force-clean --repo=repo --install-deps-from=flathub flatpak re.sonny.gigagram.json
-	flatpak --user remote-add --no-gpg-verify --if-not-exists gigagram repo
-	flatpak --user install --reinstall --assumeyes gigagram re.sonny.gigagram
-	flatpak run re.sonny.gigagram
+	flatpak-builder --user  --force-clean --repo=repo --install-deps-from=flathub flatpak re.sonny.Tangram.json
+	flatpak --user remote-add --no-gpg-verify --if-not-exists Tangram repo
+	flatpak --user install --reinstall --assumeyes Tangram re.sonny.Tangram
+	flatpak run re.sonny.Tangram
 
 bundle:
-	flatpak-builder --user  --force-clean --repo=repo --install-deps-from=flathub flatpak re.sonny.gigagram.json
-	flatpak build-bundle repo gigagram.flatpak re.sonny.gigagram --runtime-repo=https://flathub.org/repo/flathub.flatpakrepo
+	flatpak-builder --user  --force-clean --repo=repo --install-deps-from=flathub flatpak re.sonny.Tangram.json
+	flatpak build-bundle repo Tangram.flatpak re.sonny.Tangram --runtime-repo=https://flathub.org/repo/flathub.flatpakrepo
 
 test:
 	./node_modules/.bin/eslint src/

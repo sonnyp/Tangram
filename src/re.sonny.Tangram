@@ -28,7 +28,7 @@ imports.package.init({
 setenv("DEV", "true", false);
 
 Resource.load(
-  build_filenamev([pkg.pkgdatadir, "re.sonny.gigagram.data.gresource"])
+  build_filenamev([pkg.pkgdatadir, "re.sonny.Tangram.data.gresource"])
 )._register();
 
 imports.package.run(imports.main);

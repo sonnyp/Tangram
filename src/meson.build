@@ -1,22 +1,22 @@
 pkgdatadir = join_paths(get_option('datadir'), meson.project_name())
 gnome = import('gnome')
 
-src_res = gnome.compile_resources('re.sonny.gigagram.src',
-  're.sonny.gigagram.src.gresource.xml',
+src_res = gnome.compile_resources('re.sonny.Tangram.src',
+  're.sonny.Tangram.src.gresource.xml',
   gresource_bundle: true,
   install: true,
   install_dir: pkgdatadir,
 )
 
-# data_res = gnome.compile_resources('re.sonny.gigagram.data',
-#   're.sonny.gigagram.data.gresource.xml',
+# data_res = gnome.compile_resources('re.sonny.Tangram.data',
+#   're.sonny.Tangram.data.gresource.xml',
 #   gresource_bundle: true,
 #   install: true,
 #   install_dir: pkgdatadir,
 # )
 
-data_res = gnome.compile_resources('re.sonny.gigagram.services',
-  're.sonny.gigagram.services.gresource.xml',
+data_res = gnome.compile_resources('re.sonny.Tangram.services',
+  're.sonny.Tangram.services.gresource.xml',
   gresource_bundle: true,
   install: true,
   install_dir: pkgdatadir,
@@ -31,8 +31,8 @@ bin_conf.set('libdir', join_paths(get_option('prefix'), get_option('libdir')))
 bin_conf.set('datadir', join_paths(get_option('prefix'), get_option('datadir')))
 
 configure_file(
-  input: 're.sonny.gigagram.in',
-  output: 're.sonny.gigagram',
+  input: 're.sonny.Tangram.in',
+  output: 're.sonny.Tangram',
   configuration: bin_conf,
   install: true,
   install_dir: get_option('bindir')

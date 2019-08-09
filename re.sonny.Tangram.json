@@ -1,9 +1,9 @@
 {
-  "app-id": "re.sonny.gigagram",
+  "app-id": "re.sonny.Tangram",
   "runtime": "org.gnome.Platform",
   "runtime-version": "3.32",
   "sdk": "org.gnome.Sdk",
-  "command": "re.sonny.gigagram",
+  "command": "re.sonny.Tangram",
   "finish-args": [
     "--share=ipc",
     "--socket=x11",
@@ -15,7 +15,7 @@
   ],
   "modules": [
     {
-      "name": "gigagram",
+      "name": "Tangram",
       "builddir": true,
       "buildsystem": "meson",
       "sources": [{ "type": "dir", "path": "./" }]

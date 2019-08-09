@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <gresources>
-  <gresource prefix="/re/sonny/gigagram">
+  <gresource prefix="/re/sonny/Tangram">
     <!-- custom -->
     <file>services/custom/icon.svg</file>
     <file>services/custom/service.json</file>

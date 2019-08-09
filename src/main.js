@@ -46,7 +46,7 @@ for (const i in pkg) {
 this.main = function main(argv) {
   log(`argv: ${argv.join(" ")}`);
   const application = new Application({
-    application_id: "re.sonny.gigagram",
+    application_id: "re.sonny.Tangram",
     flags: ApplicationFlags.NON_UNIQUE,
   });
 
@@ -68,14 +68,14 @@ this.main = function main(argv) {
   );
 
   const profile = {
-    title: "Gigagram",
-    application_id: "re.sonny.gigagram",
+    title: "Tangram",
+    application_id: "re.sonny.Tangram",
   };
   // https://gitlab.gnome.org/GNOME/epiphany/blob/master/lib/ephy-web-app-utils.c#L484
   function setupProfile() {
     application.set_application_id(profile.application_id);
     // On X11 and wayland Shows in about dialog
-    set_application_name("Gigagram");
+    set_application_name("Tangram");
 
     if (profile.id) {
       // On X11 does not show anywhere
@@ -90,8 +90,8 @@ this.main = function main(argv) {
       // on Wayland does not show anywhere
       set_program_class(profile.id);
     } else {
-      set_prgname("gigagram");
-      set_program_class("Gigagram");
+      set_prgname("Tangram");
+      set_program_class("Tangram");
     }
   }
   application.connect("handle-local-options", (self, dict) => {
@@ -132,14 +132,14 @@ this.main = function main(argv) {
       authors: ["Sonny Piers https://sonny.re"],
       artists: ["Tobias Bernard <tbernard@gnome.org>"],
       comments: "Run web apps on your desktop",
-      copyright: "Copyright © 2019 Gigagram authors",
+      copyright: "Copyright © 2019 Tangram authors",
       license_type: License.GPL_3_0,
       version: pkg.version,
-      website_label: "Learn more about Gigagram",
-      website: "https://github.com/sonnyp/gigagram",
+      website_label: "Learn more about Tangram",
+      website: "https://github.com/sonnyp/Tangram",
       transient_for: window,
       modal: true,
-      logo_icon_name: "re.sonny.gigagram",
+      logo_icon_name: "re.sonny.Tangram",
     });
     aboutDialog.add_credit_section("Contributors", [
       // Add yourself as
@@ -161,7 +161,7 @@ this.main = function main(argv) {
   });
   showShortcutsDialog.connect("activate", () => {
     const builder = Builder.new_from_resource(
-      "/re/sonny/gigagram/data/shortcuts.xml.ui"
+      "/re/sonny/Tangram/data/shortcuts.xml.ui"
     );
     const shortcutsWindow = builder.get_object("shortcuts-window");
     shortcutsWindow.set_transient_for(window);

@@ -1,12 +1,12 @@
-# Gigagram
+# Tangram
 
 ![screenshot](screenshot.png)
 
-Gigagram combines webapps and websites into a single application.
+Tangram combines webapps and websites into single applications.
 
 Tabs are persistent and independent from each others so you can use multiple accounts.
 
-Gigagram is powered by [WebKitGTK](https://webkitgtk.org/).
+Tangram is powered by [WebKitGTK](https://webkitgtk.org/).
 
 ## Features
 
@@ -45,12 +45,12 @@ Make sure flatpak is setup according to [Install flatpak](https://flatpak.org/se
 ---
 
 Download and install
-[gigagram.flatpak](https://github.com/sonnyp/gigagram/releases/download/v0.4.1/gigagram.flatpak)
+[gigagram.flatpak](https://github.com/sonnyp/Tangram/releases/download/v0.4.1/gigagram.flatpak)
 
 or
 
 ```sh
-wget https://github.com/sonnyp/gigagram/releases/download/v0.4.1/gigagram.flatpak
+wget https://github.com/sonnyp/Tangram/releases/download/v0.4.1/gigagram.flatpak
 
 flatpak install gigagram.flatpak
 ```
@@ -61,16 +61,16 @@ Only a limited number of services but adding a new service is quite easy.
 
 Make sure the service loads/works using `Custom`.
 
-If you can please send a pull request with the changes; look into [src/services](src/services) and [src/re.sonny.gigagram.services.gresource.xml](src/re.sonny.gigagram.services.gresource.xml).
+If you can please send a pull request with the changes; look into [src/services](src/services) and [src/re.sonny.Tangram.services.gresource.xml](src/re.sonny.Tangram.services.gresource.xml).
 
-Otherwise feel free to [open an issue](https://github.com/sonnyp/gigagram/issues/new) with the service name and url.
+Otherwise feel free to [open an issue](https://github.com/sonnyp/Tangram/issues/new) with the service name and url.
 
 ## Details
 
 Similar to [GNOME Web standalone](https://fedoramagazine.org/standalone-web-applications-gnome-web/):
 
-- WebKit data is stored under `~/.local/share/gigagram/{instance-id}/`
-- WebKit cache is stored under `~/.cache/gigagram/{instance-id}/`
+- WebKit data is stored under `~/.local/share/Tangram/{instance-id}/`
+- WebKit cache is stored under `~/.cache/Tangram/{instance-id}/`
 
 ## Development
 
@@ -109,8 +109,8 @@ npm install
 
 Hit `<Ctrl><Shift>Q` to restart the application.
 
-- data files are stored in `./var/data/` instead of `$XDG_DATA_HOME/gigagram/`
-- cache files are tored in `./var/cache/` instead of `XDG_CACHE_HOME/gigagram/`
+- data files are stored in `./var/data/` instead of `$XDG_DATA_HOME/Tangram/`
+- cache files are tored in `./var/cache/` instead of `XDG_CACHE_HOME/Tangram/`
 - desktop files are stored in `./var/applications/` instead of `$XDG_DATA_HOME/applications/`
 
 To test desktop notifications you can add a custom service with `https://jhmux.codesandbox.io/` as URL.
@@ -124,28 +124,25 @@ make test
 ### Meson
 
 ```sh
-cd gigagram
 meson --reconfigure --prefix $PWD/install build
 ninja -C build install
-GSETTINGS_SCHEMA_DIR=./install/share/glib-2.0/schemas/ ./install/bin/re.sonny.gigagram
+GSETTINGS_SCHEMA_DIR=./install/share/glib-2.0/schemas/ ./install/bin/re.sonny.Tangram
 ```
 
 ### Flatpak
 
 ```sh
-cd gigagram
-flatpak-builder --user --force-clean --install-deps-from=flathub flatpak re.sonny.gigagram.json
-flatpak-builder --run flatpak re.sonny.gigagram.json re.sonny.gigagram
+flatpak-builder --user --force-clean --install-deps-from=flathub flatpak re.sonny.Tangram.json
+flatpak-builder --run flatpak re.sonny.Tangram.json re.sonny.Tangram
 ```
 
 ### Flatpak sandboxed
 
 ```sh
-cd gigagram
-flatpak-builder --repo=repo --force-clean flatpak re.sonny.gigagram.json
-flatpak --user remote-add --no-gpg-verify gigagram repo
-flatpak --user install gigagram re.sonny.gigagram
-flatpak run re.sonny.gigagram
+flatpak-builder --repo=repo --force-clean flatpak re.sonny.Tangram.json
+flatpak --user remote-add --no-gpg-verify Tangram repo
+flatpak --user install Tangram re.sonny.Tangram
+flatpak run re.sonny.Tangram
 ```
 
 ### Inspect

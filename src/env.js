@@ -25,19 +25,19 @@ log(`env: ${env}`);
 this.data_dir =
   env === "dev"
     ? build_filenamev([get_current_dir(), "var/data"])
-    : build_filenamev([get_user_data_dir(), "gigagram"]);
+    : build_filenamev([get_user_data_dir(), "Tangram"]);
 log(`data_dir: ${this.data_dir}`);
 
 this.cache_dir =
   env === "dev"
     ? build_filenamev([get_current_dir(), "var/cache"])
-    : build_filenamev([get_user_cache_dir(), "gigagram"]);
+    : build_filenamev([get_user_cache_dir(), "Tangram"]);
 log(`cache_dir: ${this.cache_dir}`);
 
 this.config_dir =
   env === "dev"
     ? build_filenamev([get_current_dir(), "var/config"])
-    : build_filenamev([get_user_config_dir(), "gigagram"]);
+    : build_filenamev([get_user_config_dir(), "Tangram"]);
 log(`config: ${this.config_dir}`);
 
 this.applications_dir = (() => {

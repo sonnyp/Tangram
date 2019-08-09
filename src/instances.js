@@ -15,8 +15,8 @@ class Instance {
 
     // https://gjs-docs.gnome.org/gio20~2.0_api/gio.settings
     this.settings = new Settings({
-      schema_id: "re.sonny.gigagram.Instance",
-      path: `/re/sonny/gigagram/instances/${id}/`,
+      schema_id: "re.sonny.Tangram.Instance",
+      path: `/re/sonny/Tangram/instances/${id}/`,
     });
   }
 
