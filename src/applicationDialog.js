@@ -123,6 +123,7 @@ this.promptNewApplicationDialog = async function promptNewApplicationDialog({
 
   const iconEntry = iconChooser({
     value: null,
+    parent: dialog,
   });
   const box = new Box({
     orientation: Orientation.HORIZONTAL,

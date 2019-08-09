@@ -50,6 +50,7 @@ async function serviceDialog({ window, instance, action }) {
 
   const iconEntry = iconChooser({
     value: instance.icon === "default" ? null : instance.icon,
+    parent: dialog,
   });
   const box = new Box({
     orientation: Orientation.HORIZONTAL,
