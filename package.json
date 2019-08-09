@@ -1,8 +1,5 @@
 {
   "private": true,
-  "name": "Tangram",
-  "id": "re.sonny.Tangram",
-  "version": "0.4.1",
   "devDependencies": {
     "eslint": "^6.0.1",
     "husky": "^3.0.0",

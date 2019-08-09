@@ -1,27 +1,23 @@
 #!/usr/bin/gjs
 
-const {
-  get_current_dir,
-  file_get_contents,
-  setenv,
-  build_filenamev,
-} = imports.gi.GLib;
-const { toString } = imports._byteArrayNative;
+const { get_current_dir, setenv, build_filenamev } = imports.gi.GLib;
 const { Resource } = imports.gi.Gio;
 const prefix = get_current_dir();
 
-function readPackage() {
-  const path = build_filenamev([prefix, "package.json"]);
-  const [, result] = file_get_contents(path);
-  return JSON.parse(toString(result));
-}
-const { name, version } = readPackage();
+// const { file_get_contents } = imports.gi.GLib;
+// const { toString } = imports._byteArrayNative;
+// function readPackage() {
+//   const path = build_filenamev([prefix, "package.json"]);
+//   const [, result] = file_get_contents(path);
+//   return JSON.parse(toString(result));
+// }
+// const { name, version } = readPackage();
 
 // https://gitlab.gnome.org/GNOME/gjs/wikis/Package/Specification
 // https://gitlab.gnome.org/GNOME/gjs/blob/master/modules/package.js
 imports.package.init({
-  name,
-  version,
+  name: "re.sonny.Tangram",
+  version: "dev",
   prefix,
 });
 
