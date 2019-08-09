@@ -130,7 +130,8 @@ this.main = function main(argv) {
   showAboutDialog.connect("activate", () => {
     const aboutDialog = new AboutDialog({
       authors: ["Sonny Piers https://sonny.re"],
-      comments: "Web applications runner/manager",
+      artists: ["Tobias Bernard <tbernard@gnome.org>"],
+      comments: "Run web apps on your desktop",
       copyright: "Copyright © 2019 Gigagram authors",
       license_type: License.GPL_3_0,
       version: pkg.version,
