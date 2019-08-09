@@ -6,11 +6,10 @@ install/
 .flatpak-builder/
 flatpak/
 repo/
-gigagram.flatpak
+*.flatpak
 
 # Dev
 *.gresource
 node_modules
 gschemas.compiled
 var
-pkg.md

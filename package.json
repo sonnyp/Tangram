@@ -1,7 +1,7 @@
 {
   "private": true,
-  "name": "gigagram",
-  "id": "re.sonny.gigagram",
+  "name": "Tangram",
+  "id": "re.sonny.Tangram",
   "version": "0.4.1",
   "devDependencies": {
     "eslint": "^6.0.1",

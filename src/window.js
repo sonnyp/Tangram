@@ -47,14 +47,14 @@ const instances = imports.instances;
 
 this.Window = function Window({ application, profile, state }) {
   profile.settings =
-    "/re/sonny/gigagram/" + (profile.id ? `applications/${profile.id}/` : "");
+    "/re/sonny/Tangram/" + (profile.id ? `applications/${profile.id}/` : "");
 
   for (const key in profile) {
     log(`profile.${key}: ${profile[key]}`);
   }
 
   const settings = new Settings({
-    schema_id: "re.sonny.gigagram",
+    schema_id: "re.sonny.Tangram",
     path: profile.settings,
   });
 
@@ -517,8 +517,8 @@ this.Window = function Window({ application, profile, state }) {
     }
 
     const newAppSettings = new Settings({
-      schema_id: "re.sonny.gigagram",
-      path: `/re/sonny/gigagram/applications/${app.id}/`,
+      schema_id: "re.sonny.Tangram",
+      path: `/re/sonny/Tangram/applications/${app.id}/`,
     });
     instances.attach(newAppSettings, instance.id);
 

@@ -1,4 +1,4 @@
-project('gigagram',
+project('Tangram',
   version: '0.4.1',
   meson_version: '>= 0.50.0',
 )

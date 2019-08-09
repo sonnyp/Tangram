@@ -1,6 +1,6 @@
-data/re.sonny.gigagram.desktop.in
-data/re.sonny.gigagram.appdata.xml.in
-data/re.sonny.gigagram.gschema.xml
+data/re.sonny.Tangram.desktop.in
+data/re.sonny.Tangram.appdata.xml.in
+data/re.sonny.Tangram.gschema.xml
 src/window.ui
 src/main.js
 src/window.js

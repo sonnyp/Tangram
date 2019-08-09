@@ -17,7 +17,7 @@ const { AddressBar } = imports.AddressBar;
 
 function Menu() {
   const builder = Builder.new_from_resource(
-    "/re/sonny/gigagram/data/menu.xml.ui"
+    "/re/sonny/Tangram/data/menu.xml.ui"
   );
   const popover = builder.get_object("app-menu");
 

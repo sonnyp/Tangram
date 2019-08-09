@@ -1,10 +1,10 @@
 [Desktop Entry]
-Name=Gigagram
-Exec=re.sonny.gigagram
+Name=Tangram
+Exec=re.sonny.Tangram
 Terminal=false
 Type=Application
 Categories=Network;GNOME;GTK;
 StartupNotify=true
 X-GNOME-UsesNotifications=true
-StartupWMClass=gigagram
-Icon=re.sonny.gigagram
+StartupWMClass=Tangram
+Icon=re.sonny.Tangram

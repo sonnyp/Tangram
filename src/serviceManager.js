@@ -20,27 +20,27 @@ const stylesheets = {};
 this.stylesheets = stylesheets;
 
 Resource.load(
-  `${pkg.pkgdatadir}/re.sonny.gigagram.services.gresource`
+  `${pkg.pkgdatadir}/re.sonny.Tangram.services.gresource`
 )._register();
 
 function load() {
   services.push(
     ...resources_enumerate_children(
-      "/re/sonny/gigagram/services/",
+      "/re/sonny/Tangram/services/",
       ResourceLookupFlags.NONE
     ).map(child => {
       const info = JSON.parse(
         byteArray.fromGBytes(
           resources_lookup_data(
-            `/re/sonny/gigagram/services/${child}service.json`,
+            `/re/sonny/Tangram/services/${child}service.json`,
             ResourceLookupFlags.NONE
           )
         )
       );
-      info.icon = `/re/sonny/gigagram/services/${child}icon.svg`;
+      info.icon = `/re/sonny/Tangram/services/${child}icon.svg`;
 
       const styleFile = File.new_for_uri(
-        `resource:///re/sonny/gigagram/services/${child}style.css`
+        `resource:///re/sonny/Tangram/services/${child}style.css`
       );
       let success;
       let content;
