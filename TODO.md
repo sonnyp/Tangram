@@ -19,6 +19,7 @@
   - [ ] delete application ?
   - [ ] keywords in desktop file
   - [ ] name with spaces does not work
+  - [ ] restart when edited
 - services
   - [x] fix adding services without URL
   - [x] use icon from the web

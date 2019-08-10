@@ -10,7 +10,7 @@ const {
   ReliefStyle,
 } = imports.gi.Gtk;
 
-const { services } = imports.serviceManager;
+const services = imports.serviceManager;
 
 this.buildHomePage = function buildHomePage({ onAddService }) {
   const scrolledWindow = new ScrolledWindow();
@@ -25,7 +25,7 @@ this.buildHomePage = function buildHomePage({ onAddService }) {
   });
   viewPort.add(flowBox);
 
-  services.forEach(service => {
+  services.services.forEach(service => {
     const flowBoxChild = new FlowBoxChild({
       width_request: 200,
       height_request: 200,
@@ -57,7 +57,7 @@ this.buildHomePage = function buildHomePage({ onAddService }) {
   });
 
   function onButtonclicked({ service_id }) {
-    const service = services.find(({ id }) => id === service_id);
+    const service = services.get(service_id);
     if (!service) return;
     onAddService(service);
   }
