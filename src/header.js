@@ -11,7 +11,7 @@ const {
   STYLE_CLASS_LINKED,
   Label,
 } = imports.gi.Gtk;
-const { LoadEvent } = imports.gi.WebKit2;
+const { LoadEvent, uri_for_display } = imports.gi.WebKit2;
 
 const { AddressBar } = imports.AddressBar;
 
@@ -180,7 +180,7 @@ this.Header = function Header({
   let loadChangedHandlerId = null;
   function setAddress(webview) {
     const url = webview.get_uri();
-    addressBar.text = url === "about:blank" ? "" : url;
+    addressBar.text = url === "about:blank" ? "" : uri_for_display(url);
   }
   function setSecurity(webview) {
     if (!addressBar.text) {
