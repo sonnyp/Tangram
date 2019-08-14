@@ -1,13 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <gresources>
   <gresource prefix="/re/sonny/Tangram/js">
+    <file>std/console.js</file>
+    <file>std/encoding.js</file>
+    <file>std/fetch.js</file>
+    <file>std/globals.js</file>
+    <file>std/timers.js</file>
+    <file>webapp/ephy.js</file>
+    <file>webapp/webapp.js</file>
     <file>AboutDialog.js</file>
     <file>Actions.js</file>
     <file>AddressBar.js</file>
     <file>application.js</file>
     <file>applicationDialog.js</file>
     <file>env.js</file>
-    <file>ephy.js</file>
     <file>header.js</file>
     <file>homePage.js</file>
     <file>icon.js</file>
@@ -21,9 +27,5 @@
     <file>tab.js</file>
     <file>util.js</file>
     <file>window.js</file>
-    <file>std/console.js</file>
-    <file>std/encoding.js</file>
-    <file>std/globals.js</file>
-    <file>std/timers.js</file>
   </gresource>
 </gresources>
