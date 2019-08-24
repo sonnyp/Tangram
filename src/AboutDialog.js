@@ -1,8 +1,17 @@
 const Gtk = imports.gi.Gtk;
 const WebKit = imports.gi.WebKit2;
+const system = imports.system;
 
 const { get_major_version, get_minor_version, get_micro_version } = WebKit;
 const WebKitGTKVersion = `${get_major_version()}.${get_minor_version()}.${get_micro_version()}`;
+
+const gjsVersion = (() => {
+  const v = system.version.toString();
+  return `${v[0]}.${+(v[1] + v[2])}.${+(v[3] + v[4])}`;
+})();
+
+log(`gjs ${gjsVersion}`);
+log(`WebKitGTK ${WebKitGTKVersion}`);
 
 this.AboutDialog = function AboutDialog({ window }) {
   // https://gjs-docs.gnome.org/gtk30~3.24.8/gtk.aboutdialog
@@ -11,7 +20,9 @@ this.AboutDialog = function AboutDialog({ window }) {
     artists: ["Tobias Bernard <tbernard@gnome.org>"],
     comments: [
       "Run web apps on your desktop",
+      "",
       `Powered by WebKitGTK ${WebKitGTKVersion}`,
+      `Powered by gjs ${gjsVersion}`,
     ].join("\n"),
     copyright: "Copyright © 2019 Tangram authors",
     license_type: Gtk.License.GPL_3_0,
