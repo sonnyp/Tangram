@@ -75,6 +75,7 @@ this.Header = function Header({
     "go-previous-symbolic",
     IconSize.BUTTON
   );
+  backButton.sensitive = false;
   navigationButtons.add(backButton);
   backButton.connect("clicked", onGoBack);
 
@@ -82,6 +83,7 @@ this.Header = function Header({
     "go-next-symbolic",
     IconSize.BUTTON
   );
+  forwardButton.sensitive = false;
   navigationButtons.add(forwardButton);
   forwardButton.connect("clicked", onGoForward);
 
@@ -156,6 +158,7 @@ this.Header = function Header({
   const servicesLayer = new Box();
   const addTabButton = new Button({
     label: "Done",
+    sensitive: false,
   });
   addTabButton.connect("clicked", () => {
     onAddTab().catch(logError);
@@ -234,10 +237,20 @@ this.Header = function Header({
     reloadIcon.icon_name = webview.is_loading
       ? "process-stop-symbolic"
       : "view-refresh-symbolic";
+    // https://gjs-docs.gnome.org/webkit240~4.0_api/webkit2.loadevent
     loadChangedHandlerId = webview.connect(
       "load-changed",
       (self, loadEvent) => {
-        // https://gjs-docs.gnome.org/webkit240~4.0_api/webkit2.loadevent
+        backButton.sensitive = webview.can_go_back();
+        forwardButton.sensitive = webview.can_go_forward();
+
+        if (loadEvent === LoadEvent.FINISHED) {
+          reloadIcon.icon_name = "view-refresh-symbolic";
+          addTabButton.sensitive = true;
+        } else {
+          addTabButton.sensitive = false;
+        }
+
         if (loadEvent === LoadEvent.STARTED) {
           reloadIcon.icon_name = "process-stop-symbolic";
           setAddress(webview);
@@ -246,8 +259,6 @@ this.Header = function Header({
           setAddress(webview);
         } else if (loadEvent === LoadEvent.COMMITTED) {
           setSecurity(webview);
-        } else if (loadEvent === LoadEvent.FINISHED) {
-          reloadIcon.icon_name = "view-refresh-symbolic";
         }
       }
     );
