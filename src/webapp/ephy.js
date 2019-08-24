@@ -4,8 +4,40 @@
 
 /* eslint-env browser */
 
-this.getWebAppName = function getWebAppTitle() {
-  const metas = document.getElementsByTagName("meta");
+this.getWebAppManifest = function() {
+  const manifest = document.head.querySelector("link[rel=manifest]");
+  return manifest ? manifest.href : null;
+};
+
+this.getWebAppURL = function() {
+  function querySelectorLast(el, query) {
+    const els = el.querySelectorAll(query);
+    return els[els.length - 1];
+  }
+
+  // https://msdn.microsoft.com/en-us/ie/dn255024(v=vs.94)
+  const msApplicationStartURL = querySelectorLast(
+    document.head,
+    "meta[name=msapplication-starturl]"
+  );
+  if (msApplicationStartURL && msApplicationStartURL.content) {
+    return msApplicationStartURL.content;
+  }
+
+  // https://ogp.me/#metadata
+  const openGraphURL = querySelectorLast(
+    document.head,
+    "meta[property='og:url']"
+  );
+  if (openGraphURL && openGraphURL.content) {
+    return openGraphURL.content;
+  }
+
+  return document.location.href;
+};
+
+this.getWebAppTitle = function() {
+  const metas = document.head.getElementsByTagName("meta");
   for (let i = 0; i < metas.length; i++) {
     const meta = metas[i];
     if (meta.name === "application-name") return meta.content;
@@ -18,10 +50,12 @@ this.getWebAppName = function getWebAppTitle() {
     )
       return meta.content;
   }
-  return null;
+  const titles = document.head.getElementsByTagName("title");
+  const title = titles[titles.length - 1];
+  return title ? title.innerText : null;
 };
 
-this.getWebAppIcon = function getWebAppIcon(baseURL) {
+this.getWebAppIcon = function() {
   // FIXME: This function could be improved considerably. See the first two answers at:
   // http://stackoverflow.com/questions/21991044/how-to-get-high-resolution-website-logo-favicon-for-a-given-url
   //
@@ -29,7 +63,7 @@ this.getWebAppIcon = function getWebAppIcon(baseURL) {
   let iconURL = null;
   let appleTouchIconURL = null;
   let largestIconSize = 0;
-  const links = document.getElementsByTagName("link");
+  const links = document.head.getElementsByTagName("link");
   for (let i = 0; i < links.length; i++) {
     const link = links[i];
     if (
@@ -39,7 +73,10 @@ this.getWebAppIcon = function getWebAppIcon(baseURL) {
       link.rel === "shortcut-icon"
     ) {
       const sizes = link.getAttribute("sizes");
-      if (!sizes) continue;
+      if (!sizes) {
+        iconURL = link.href;
+        break;
+      }
 
       if (sizes === "any") {
         // "any" means a vector, and thus it will always be the largest icon.
@@ -75,11 +112,11 @@ this.getWebAppIcon = function getWebAppIcon(baseURL) {
   }
 
   // HTML icon.
-  if (iconURL) return { url: new URL(iconURL, baseURL).href, color: null };
+  if (iconURL) return { url: iconURL, color: null };
 
   let iconColor = null;
   let ogpIcon = null;
-  const metas = document.getElementsByTagName("meta");
+  const metas = document.head.getElementsByTagName("meta");
   for (let i = 0; i < metas.length; i++) {
     const meta = metas[i];
     // FIXME: Ought to also search browserconfig.xml
@@ -94,15 +131,14 @@ this.getWebAppIcon = function getWebAppIcon(baseURL) {
   }
 
   // msapplication icon.
-  if (iconURL) return { url: new URL(iconURL, baseURL).href, color: iconColor };
+  if (iconURL) return { url: iconURL, color: iconColor };
 
   // Apple touch icon.
-  if (appleTouchIconURL)
-    return { url: new URL(appleTouchIconURL, baseURL).href, color: null };
+  if (appleTouchIconURL) return { url: appleTouchIconURL, color: null };
 
   // ogp icon.
-  if (ogpIcon) return { url: new URL(ogpIcon, baseURL).href, color: null };
+  if (ogpIcon) return { url: ogpIcon, color: null };
 
   // Last ditch effort: just fallback to the default favicon location.
-  return { url: new URL("./favicon.ico", baseURL).href, color: null };
+  return { url: "/favicon.ico", color: null };
 };

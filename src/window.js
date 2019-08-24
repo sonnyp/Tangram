@@ -6,13 +6,8 @@ const { Notification, NotificationPriority } = imports.gi.Gio;
 const { Notebook } = imports.Notebook;
 const { Shortcuts } = imports.Shortcuts;
 const { Actions } = imports.Actions;
-const {
-  Settings,
-  observeSetting,
-  getWebAppName,
-  getWebAppIcon,
-  download,
-} = imports.util;
+const { Settings, observeSetting } = imports.util;
+const { getWebAppInfo, download } = imports.webapp.webapp;
 
 // https://github.com/flatpak/flatpak/issues/78#issuecomment-511158618
 // log(imports.gi.Gio.SettingsBackend.get_default());
@@ -146,21 +141,22 @@ this.Window = function Window({ application, profile, state }) {
     const instance = instances.get(instance_id);
     instance.url = webview.uri;
 
-    const [iconURL, title] = await Promise.all([
-      getWebAppIcon(webview),
-      getWebAppName(webview),
-    ]);
+    const info = await getWebAppInfo(webview);
+    log(`WebApp info for ${instance.url}`);
+    log(JSON.stringify(info, null, 2));
+
+    instance.url = info.URL;
 
     if (!instance.name) {
-      instance.name = title || webview.title || "";
+      instance.name = info.title || webview.title || "";
     }
 
     const icon = build_filenamev([get_tmp_dir(), instance_id]);
     try {
-      await download(webview, iconURL, `file://${icon}`);
+      await download(webview, info.icon, `file://${icon}`);
       instance.icon = icon;
     } catch (err) {
-      logError(err);
+      logError(err, info.icon);
     }
 
     let canceled;
@@ -254,7 +250,7 @@ this.Window = function Window({ application, profile, state }) {
     onShowInspector,
   });
 
-  Actions({ window, application, settings, showTab });
+  Actions({ window, application, settings, profile, notebook, showTab });
 
   return window;
 };
