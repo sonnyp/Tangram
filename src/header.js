@@ -61,12 +61,11 @@ this.Header = function Header({
   const left_stack = new Stack({
     transition_type: StackTransitionType.CROSSFADE,
   });
-  state.bind("view", left_stack, "visible_child_name");
 
   const buttonBox = new Box({
     spacing: 6,
   });
-  left_stack.add_named(buttonBox, "tabs");
+  left_stack.add_named(buttonBox, "navigation");
 
   const navigationButtons = new Box({ spacing: 0 });
   navigationButtons.get_style_context().add_class(STYLE_CLASS_LINKED);
@@ -120,7 +119,7 @@ this.Header = function Header({
   cancelServicesButton.connect("clicked", () => {
     state.set({ view: "tabs" });
   });
-  left_stack.add_named(serviceBox, "services");
+  left_stack.add_named(serviceBox, "cancel-services");
 
   const addTabBox = new Box();
   const cancelAddTabButton = Button.new_from_icon_name(
@@ -129,7 +128,7 @@ this.Header = function Header({
   );
   addTabBox.add(cancelAddTabButton);
   cancelAddTabButton.connect("clicked", onCancelAddTab);
-  left_stack.add_named(addTabBox, "add-tab");
+  left_stack.add_named(addTabBox, "cancel-add-tab");
 
   titlebar.pack_start(left_stack);
 
@@ -141,22 +140,18 @@ this.Header = function Header({
     label: profile.title,
   });
   title.get_style_context().add_class("title");
-  center_stack.add_named(title, "tabs");
+  center_stack.add_named(title, "title");
   const addressBar = AddressBar({ state, onAddService });
-  center_stack.add_named(addressBar, "services");
-  center_stack.add_named(addressBar, "add-tab");
-  state.bind("view", center_stack, "visible_child_name");
+  center_stack.add_named(addressBar, "url");
 
   const right_stack = new Stack({
     transition_type: StackTransitionType.CROSSFADE,
   });
-  state.bind("view", right_stack, "visible_child_name");
   titlebar.pack_end(right_stack);
 
   const tabsLayer = new Box();
   tabsLayer.pack_end(Menu({ profile }), false, false, null);
-  right_stack.add_named(tabsLayer, "tabs");
-  right_stack.add_named(tabsLayer, "services");
+  right_stack.add_named(tabsLayer, "menu");
 
   const servicesLayer = new Box();
   const addTabButton = new Button({
@@ -201,6 +196,23 @@ this.Header = function Header({
 
     addressBar.primary_icon_name = null;
   }
+
+  state.notify("view", view => {
+    if (view === "services") {
+      left_stack.visible_child_name = "cancel-services";
+      center_stack.visible_child_name = "url";
+      right_stack.visible_child_name = "menu";
+    } else if (view === "tabs") {
+      left_stack.visible_child_name = "navigation";
+      center_stack.visible_child_name = "title";
+      right_stack.visible_child_name = "menu";
+    } else if (view === "add-tab") {
+      left_stack.visible_child_name = "cancel-add-tab";
+      center_stack.visible_child_name = "url";
+      right_stack.visible_child_name = "add-tab";
+    }
+  });
+
   state.notify("webview", (webview, previous) => {
     if (previous) {
       if (loadChangedHandlerId) {
