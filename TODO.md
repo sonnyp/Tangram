@@ -4,8 +4,8 @@
 - [x] rename to Tangram
 - [x] address bar
 - [ ] user agent
-- [ ] disable back button if cannot go back
-- [ ] disable forward button of cannot go forward
+- [x] disable back button if cannot go back
+- [x] disable forward button of cannot go forward
 - [x] webapp manifest support
 - [x] better icon chooser
   - [x] use saveIcon with applicationDialog
@@ -26,8 +26,8 @@
   - [x] use title from web
   - [ ] parameters with all non-breaking settings from webkit
   - [ ] add service dialog
+    - [x] The button that triggers the dialog "Done" should be disabled when the page is loading
     - [ ] The icon (and title) fetching from the web app should start after the dialog has open and we should show a animated spinner in the icon chooser (like Epiphany)
-    - [ ] The button that triggers the dialog "Done" should be disabled when the page is loading
     - [ ] The button "Done" in the dialog should be disabled until fetching icon/title is done
 - misc
   - [ ] remote services in favor of local services
