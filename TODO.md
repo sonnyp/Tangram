@@ -6,7 +6,7 @@
 - [ ] user agent
 - [ ] disable back button if cannot go back
 - [ ] disable forward button of cannot go forward
-- [ ] webapp manifest support
+- [x] webapp manifest support
 - [x] better icon chooser
   - [x] use saveIcon with applicationDialog
   - [x] image button
