@@ -43,19 +43,13 @@ this.Window = function Window({ application, profile, state }) {
     onAddService,
   });
 
-  function getCurrentTab() {
-    const idx = notebook.get_current_page();
-    if (idx < 0) return null;
-    return notebook.get_nth_page(idx);
-  }
-
   function onStopLoading() {
-    const tab = getCurrentTab();
+    const tab = state.get("webview");
     tab && tab.stop_loading();
   }
 
   function onReload(bypass_cache) {
-    const tab = getCurrentTab();
+    const tab = state.get("webview");
     if (!tab) return;
     if (bypass_cache) {
       tab.reload_bypass_cache();
@@ -65,19 +59,18 @@ this.Window = function Window({ application, profile, state }) {
   }
 
   function onGoBack() {
-    const tab = getCurrentTab();
+    const tab = state.get("webview");
     tab && tab.go_back();
   }
 
   function onGoForward() {
-    const tab = getCurrentTab();
+    const tab = state.get("webview");
     tab && tab.go_forward();
   }
 
   function onShowInspector() {
-    getCurrentTab()
-      .get_inspector()
-      .show();
+    const tab = state.get("webview");
+    tab && tab.get_inspector().show();
   }
 
   // https://gjs-docs.gnome.org/gtk30~3.24.8/gtk.applicationwindow
