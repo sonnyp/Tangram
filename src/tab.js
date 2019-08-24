@@ -145,6 +145,7 @@ function TabPage({ instance, window, onNotification }) {
   const settings = new Settings({
     enable_developer_extras: true,
   });
+  settings.set_user_agent_with_application_details("Tangram", pkg.version);
 
   // https://gjs-docs.gnome.org/webkit240~4.0_api/webkit2.webcontext
   const webView = new WebView({
