@@ -79,6 +79,8 @@ async function test(html, manifest) {
   return { info, webview, server };
 }
 
+let exit_code = 0;
+
 (async () => {
   await (async () => {
     const { info } = await test(
@@ -225,12 +227,13 @@ async function test(html, manifest) {
 
   loop.quit();
 })().catch(err => {
-  loop.quit();
   logError(err);
-  // FIXME
-  // Program with a mainloop cannot exit with non zero status_code
-  // https://gitlab.gnome.org/GNOME/gjs/issues/278
-  log(imports.system.exit(1));
+  exit_code = 1;
+  loop.quit();
 });
 
 loop.run();
+
+// Must run after loop, see
+// https://gitlab.gnome.org/GNOME/gjs/issues/278#note_587273
+imports.system.exit(exit_code);
