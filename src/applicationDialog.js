@@ -138,6 +138,7 @@ this.editApplicationDialog = async function editApplicationDialog({
     },
     action: "Edit",
   });
+  if (!result) return;
 
   keyFile.set_value(
     KEY_FILE_DESKTOP_GROUP,
@@ -160,13 +161,15 @@ this.newApplicationDialog = async function newApplicationDialog({ ...props }) {
     icon: APP_ICON,
   };
 
-  const { name, icon, id } = await applicationDialog({
+  const result = await applicationDialog({
     ...props,
     params,
     action: "New",
   });
+  if (!result) return;
+
   try {
-    const { desktopFilePath } = createApplication({ name, icon, id });
+    const { desktopFilePath } = createApplication(result);
     launchApplication(desktopFilePath);
   } catch (err) {
     logError(err);

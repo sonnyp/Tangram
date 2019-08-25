@@ -33,3 +33,4 @@
   - [ ] remote services in favor of local services
   - [ ] move to GNOME gitlab?
   - [ ] use windows instead of instances for applications?
+  - [ ] should be able to search in url bar

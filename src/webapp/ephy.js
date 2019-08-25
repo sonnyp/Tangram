@@ -42,6 +42,9 @@ this.getWebAppTitle = function() {
     const meta = metas[i];
     if (meta.name === "application-name") return meta.content;
 
+    // https://developer.apple.com/library/archive/documentation/AppleApplications/Reference/SafariWebContent/ConfiguringWebApplications/ConfiguringWebApplications.html
+    if (meta.name === "apple-mobile-web-app-title") return meta.content;
+
     // og:site_name is read from the property attribute (standard), but is
     // commonly seen on the web in the name attribute. Both are supported.
     if (
