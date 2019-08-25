@@ -141,6 +141,24 @@ let exit_code = 0;
         <html>
         <head>
         <meta charset="UTF-8">
+        <meta name="apple-mobile-web-app-title" content="meta-apple-mobile-web-app-title">
+        <title>title</title>
+        </head>
+        <body></body>
+        </html>
+    `
+    );
+
+    assert.is(info.title, "meta-apple-mobile-web-app-title");
+  })();
+
+  await (async () => {
+    const { info } = await test(
+      `
+        <!DOCTYPE html>
+        <html>
+        <head>
+        <meta charset="UTF-8">
         <meta property="og:site_name" content="meta-property-site-name">
         <title>title</title>
         <meta name="application-name" content="meta-application-name">
