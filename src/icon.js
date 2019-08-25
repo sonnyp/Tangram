@@ -3,12 +3,35 @@ const {
   FileChooserAction,
   FileFilter,
   Button,
+  Image,
+  ResponseType,
 } = imports.gi.Gtk;
-// const {
-//   mkdir_with_parents,
-// } = imports.gi.GLib;
 const { Pixbuf } = imports.gi.GdkPixbuf;
-const { Image, ResponseType } = imports.gi.Gtk;
+const { pixbuf_get_from_surface } = imports.gi.Gdk;
+const {
+  get_tmp_dir,
+  build_filenamev,
+  // mkdir_with_parents
+} = imports.gi.GLib;
+
+this.saveFavicon = function(webview, instance) {
+  const favicon = webview.get_favicon();
+  if (!favicon) return null;
+
+  const pixbuf = pixbuf_get_from_surface(
+    favicon,
+    0,
+    0,
+    favicon.getWidth(),
+    favicon.getHeight()
+  );
+  if (!pixbuf) return null;
+
+  const path = build_filenamev([get_tmp_dir(), instance.id]);
+  if (!pixbuf.savev(path, "png", [], [])) return null;
+
+  return path;
+};
 
 // https://gjs-docs.gnome.org/gtk30~3.24.8/gtk.filefilter
 const iconFileFilter = new FileFilter();
@@ -16,7 +39,7 @@ iconFileFilter.add_mime_type("image/svg+xml");
 iconFileFilter.add_mime_type("image/png");
 iconFileFilter.add_mime_type("image/jpeg");
 
-const ICON_SIZE = 128;
+const ICON_SIZE = 16;
 
 this.iconChooser = function iconChooser(props) {
   const image = new Image();

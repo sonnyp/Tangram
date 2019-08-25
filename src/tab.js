@@ -36,6 +36,8 @@ this.Tab = function Tab(...params) {
 
 this.TabLabel = TabLabel;
 
+const ICON_SIZE = 16;
+
 function TabLabel({ instance, settings }) {
   const { id } = instance;
 
@@ -49,13 +51,13 @@ function TabLabel({ instance, settings }) {
     if (icon.startsWith("resource://")) {
       pixbuf = Pixbuf.new_from_resource_at_scale(
         icon.split("resource://")[1],
-        28,
-        28,
+        ICON_SIZE,
+        ICON_SIZE,
         true
       );
       image.set_from_pixbuf(pixbuf);
     } else {
-      pixbuf = Pixbuf.new_from_file_at_scale(icon, 28, 28, true);
+      pixbuf = Pixbuf.new_from_file_at_scale(icon, ICON_SIZE, ICON_SIZE, true);
     }
     image.set_from_pixbuf(pixbuf);
   });

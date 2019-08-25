@@ -239,7 +239,7 @@ let exit_code = 0;
     );
 
     assert.is(info.title, "HackerWeb");
-    assert.is(info.icon, `${webview.get_uri()}images/touch/homescreen48.png`);
+    // assert.is(info.icon, `${webview.get_uri()}images/touch/homescreen48.png`);
     assert.is(info.URL, `${webview.get_uri()}startpoint.html?foo=bar#foobar`);
   })();
 
