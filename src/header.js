@@ -175,7 +175,6 @@ this.Header = function Header({
     instances => instances.length > 0
   );
 
-  let loadChangedHandlerId = null;
   function setAddress(webview) {
     const url = webview.get_uri();
     addressBar.text = url === "about:blank" ? "" : uri_for_display(url);
@@ -216,6 +215,7 @@ this.Header = function Header({
     }
   });
 
+  let loadChangedHandlerId = null;
   state.notify("webview", (webview, previous) => {
     if (previous) {
       if (loadChangedHandlerId) {
