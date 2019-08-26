@@ -6,21 +6,22 @@ Run web apps on your desktop.
 
 ![screenshot](screenshot.png)
 
-Tabs are persistent and independent from each others so you can use multiple accounts.
+## About
+
+Each tab is a container so you can setup web apps with different accounts/settings.
 
 Tangram is powered by [WebKitGTK](https://webkitgtk.org/).
 
 ## Features
 
-- Add a tab
-- Edit a tab by right clicking on it
-- Remove a tab by right clicking on it
-- Re-order tabs via drag'n drop or shortcut
-- Custom tab icon
-- Desktop/audio notifications (if supported by the service)
-- Change tabs position (top, left, right, bottom) via the menu
-- Navigation controls (go back, forward, reload, stop loading)
+- Setup and manage web applications
+- Custom icon
+- Custom title
+- Re-order tabs
+- Change tabs position
+- Navigation
 - Shortcuts
+- Desktop/audio notifications (if supported by the service)
 
 <!-- Disabled for now, enable with TANGRAM_ENABLE_CUSTOM_APPLICATIONS=true -->
 <!-- use at your own risk -->

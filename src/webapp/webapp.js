@@ -1,4 +1,6 @@
 const Soup = imports.gi.Soup;
+const { pixbuf_get_from_surface } = imports.gi.Gdk;
+const { get_tmp_dir, build_filenamev } = imports.gi.GLib;
 
 const { promiseAsyncReadyCallback, once } = imports.util;
 const { fetch } = imports.std.fetch;
@@ -189,3 +191,38 @@ async function getWebAppInfo(webview) {
   info.manifest = manifest;
   return info;
 }
+
+this.saveFavicon = function(webview, instance) {
+  // TODO file gjs issue
+  // null if there is no favicon (example.com), throws otherwise
+  try {
+    if (webview.favicon === null) return null;
+  } catch (err) {
+    // Error: Can't convert non-null pointer to JS value
+  }
+
+  let favicon;
+  // if there is no favicon webview.get_favicon throws with
+  // JSObject* gjs_cairo_surface_from_surface(JSContext*, cairo_surface_t*): assertion 'surface != NULL' failed
+  try {
+    favicon = webview.get_favicon();
+  } catch (err) {
+    logError(err);
+    return null;
+  }
+  if (!favicon) return null;
+
+  const pixbuf = pixbuf_get_from_surface(
+    favicon,
+    0,
+    0,
+    favicon.getWidth(),
+    favicon.getHeight()
+  );
+  if (!pixbuf) return null;
+
+  const path = build_filenamev([get_tmp_dir(), instance.id]);
+  if (!pixbuf.savev(path, "png", [], [])) return null;
+
+  return path;
+};

@@ -9,7 +9,8 @@ const { Actions } = imports.Actions;
 const { Settings, observeSetting } = imports.util;
 const {
   getWebAppInfo,
-  // download
+  // download,
+  saveFavicon,
 } = imports.webapp.webapp;
 
 // https://github.com/flatpak/flatpak/issues/78#issuecomment-511158618
@@ -21,7 +22,6 @@ const { addInstanceDialog } = imports.serviceDialog;
 const { Header } = imports.header;
 const instances = imports.instances;
 const flags = imports.flags;
-const { saveFavicon } = imports.icon;
 
 this.Window = function Window({ application, profile, state }) {
   profile.settings =

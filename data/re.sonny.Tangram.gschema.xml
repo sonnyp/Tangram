@@ -10,7 +10,7 @@
 
   <schema id="re.sonny.Tangram">
     <key name="tabs-position" enum='re.sonny.Tangram.PositionType'>
-      <default>"top"</default>
+      <default>"left"</default>
       <summary>Tabs position</summary>
       <description>Sets the position of the tabs</description>
     </key>
