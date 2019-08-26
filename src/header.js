@@ -14,6 +14,7 @@ const {
 const { LoadEvent, uri_for_display } = imports.gi.WebKit2;
 
 const { AddressBar } = imports.AddressBar;
+const flags = imports.flags;
 
 function Menu({ profile }) {
   const builder = Builder.new_from_resource(
@@ -21,8 +22,12 @@ function Menu({ profile }) {
   );
   const popover = builder.get_object("app-menu");
 
+  if (!flags.custom_applications) {
+    builder.get_object("edit-application").destroy();
+    builder.get_object("new-application").destroy();
+  }
   // main app
-  if (!profile.id) {
+  else if (!profile.id) {
     builder.get_object("edit-application").destroy();
   }
   // custom app
