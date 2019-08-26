@@ -1,4 +1,4 @@
-const { uuid_string_random, get_tmp_dir, build_filenamev } = imports.gi.GLib;
+const { uuid_string_random } = imports.gi.GLib;
 const { ApplicationWindow, Stack, StackTransitionType } = imports.gi.Gtk;
 
 const { Notification, NotificationPriority } = imports.gi.Gio;
@@ -7,7 +7,10 @@ const { Notebook } = imports.Notebook;
 const { Shortcuts } = imports.Shortcuts;
 const { Actions } = imports.Actions;
 const { Settings, observeSetting } = imports.util;
-const { getWebAppInfo, download } = imports.webapp.webapp;
+const {
+  getWebAppInfo,
+  // download
+} = imports.webapp.webapp;
 
 // https://github.com/flatpak/flatpak/issues/78#issuecomment-511158618
 // log(imports.gi.Gio.SettingsBackend.get_default());
@@ -18,6 +21,7 @@ const { addInstanceDialog } = imports.serviceDialog;
 const { Header } = imports.header;
 const instances = imports.instances;
 const flags = imports.flags;
+const { saveFavicon } = imports.icon;
 
 this.Window = function Window({ application, profile, state }) {
   profile.settings =
@@ -147,12 +151,12 @@ this.Window = function Window({ application, profile, state }) {
       instance.name = info.title || webview.title || "";
     }
 
-    const icon = build_filenamev([get_tmp_dir(), instance_id]);
     try {
-      await download(webview, info.icon, `file://${icon}`);
-      instance.icon = icon;
+      // await download(webview, info.icon, `file://${icon}`);
+      const icon = saveFavicon(webview, instance);
+      if (icon) instance.icon = icon;
     } catch (err) {
-      logError(err, info.icon);
+      logError(err);
     }
 
     let canceled;

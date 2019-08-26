@@ -62,6 +62,7 @@ function getURL(webview) {
     });
 }
 
+// eslint-disable-next-line no-unused-vars
 function getIcon(webview) {
   const script = `(${getWebAppIcon.toString()})()`;
 
@@ -108,6 +109,7 @@ function getMaxSize(icon) {
   return Math.max(...sizes);
 }
 
+// eslint-disable-next-line no-unused-vars
 function findBestIcon(icons) {
   let bestIcon;
 
@@ -140,14 +142,14 @@ function resolveURI(webview, URL) {
 this.getWebAppInfo = getWebAppInfo;
 async function getWebAppInfo(webview) {
   const title = await getTitle(webview);
-  const icon = await getIcon(webview);
+  // const icon = await getIcon(webview);
   const URL = await getURL(webview);
 
   const info = { title };
   info.URL = resolveURI(webview, URL);
-  if (icon) {
-    info.icon = resolveURI(webview, icon);
-  }
+  // if (icon) {
+  // info.icon = resolveURI(webview, icon);
+  // }
 
   const manifestURL = await getManifestURL(webview);
   if (!manifestURL) {
@@ -162,7 +164,12 @@ async function getWebAppInfo(webview) {
     return info;
   }
 
-  const { name, short_name, icons = [], start_url } = manifest;
+  const {
+    name,
+    short_name,
+    // icons = [],
+    start_url,
+  } = manifest;
 
   if (short_name) {
     info.title = short_name;
@@ -174,10 +181,10 @@ async function getWebAppInfo(webview) {
     info.URL = resolveURI(webview, start_url);
   }
 
-  const bestIcon = findBestIcon(icons);
-  if (bestIcon) {
-    info.icon = resolveURI(webview, bestIcon.src);
-  }
+  // const bestIcon = findBestIcon(icons);
+  // if (bestIcon) {
+  //   info.icon = resolveURI(webview, bestIcon.src);
+  // }
 
   info.manifest = manifest;
   return info;
