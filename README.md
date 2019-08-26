@@ -22,6 +22,9 @@ Tangram is powered by [WebKitGTK](https://webkitgtk.org/).
 - Navigation controls (go back, forward, reload, stop loading)
 - Shortcuts
 
+<!-- Disabled for now, enable with TANGRAM_ENABLE_CUSTOM_APPLICATIONS=true -->
+<!-- use at your own risk -->
+<!--
 ### Custom applications
 
 You can create custom applications with one or multiple tabs. They work the same as the main instance.
@@ -32,7 +35,7 @@ You can create a custom application by
 
 - dragging the tab out (see demo)
 - right click on the tab
-- via the application menu
+- via the application menu -->
 
 ## Install
 

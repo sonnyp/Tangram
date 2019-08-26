@@ -14,6 +14,7 @@
     <file>application.js</file>
     <file>applicationDialog.js</file>
     <file>env.js</file>
+    <file>flags.js</file>
     <file>header.js</file>
     <file>homePage.js</file>
     <file>icon.js</file>

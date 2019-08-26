@@ -11,6 +11,7 @@ const {
 } = imports.applicationDialog;
 const instances = imports.instances;
 const { data_dir } = imports.env;
+const flags = imports.flags;
 
 this.detachTab = detachTab;
 function detachTab({ instance_id, notebook, settings }) {
@@ -97,9 +98,11 @@ this.Notebook = function Notebook({ profile, settings }) {
   );
   settings.bind("tabs-position", notebook, "tab_pos", SettingsBindFlags.GET);
 
-  notebook.connect("create-window", (self, { instance_id } /*_x, _y */) => {
-    detachTab({ instance_id, settings, notebook });
-  });
+  if (flags.custom_applications) {
+    notebook.connect("create-window", (self, { instance_id } /*_x, _y */) => {
+      detachTab({ instance_id, settings, notebook });
+    });
+  }
 
   return notebook;
 };

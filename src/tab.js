@@ -8,7 +8,6 @@ const {
 } = imports.gi.Gtk;
 const { EventMask } = imports.gi.Gdk;
 const { Menu, SettingsBindFlags } = imports.gi.Gio;
-
 const {
   WebsiteDataManager,
   WebView,
@@ -26,6 +25,7 @@ const { build_filenamev } = imports.gi.GLib;
 
 const { connect } = imports.util;
 const { stylesheets } = imports.serviceManager;
+const flags = imports.flags;
 
 this.Tab = function Tab(...params) {
   return {
@@ -76,7 +76,9 @@ function TabLabel({ instance, settings }) {
   const menu = new Menu();
   menu.append("Edit", `app.editInstance("${id}")`);
   menu.append("Remove", `app.removeInstance("${id}")`);
-  menu.append("New application", `app.detachTab("${id}")`);
+  if (flags.custom_applications) {
+    menu.append("New application", `app.detachTab("${id}")`);
+  }
 
   const popover = new Popover();
   popover.bind_model(menu, null);

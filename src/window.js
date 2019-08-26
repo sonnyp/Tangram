@@ -17,6 +17,7 @@ const { TabLabel, TabPage } = imports.tab;
 const { addInstanceDialog } = imports.serviceDialog;
 const { Header } = imports.header;
 const instances = imports.instances;
+const flags = imports.flags;
 
 this.Window = function Window({ application, profile, state }) {
   profile.settings =
@@ -124,7 +125,9 @@ this.Window = function Window({ application, profile, state }) {
     const label = TabLabel({ instance, settings });
     const idx = notebook.append_page(page, label);
     notebook.set_tab_reorderable(page, true);
-    notebook.set_tab_detachable(page, true);
+    if (flags.custom_applications) {
+      notebook.set_tab_detachable(page, true);
+    }
     return idx;
   }
 
