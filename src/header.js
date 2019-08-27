@@ -67,14 +67,14 @@ this.Header = function Header({
     transition_type: StackTransitionType.CROSSFADE,
   });
 
-  const buttonBox = new Box({
+  const navigationButtonBox = new Box({
     spacing: 6,
   });
-  left_stack.add_named(buttonBox, "navigation");
+  left_stack.add_named(navigationButtonBox, "navigation");
 
   const navigationButtons = new Box({ spacing: 0 });
   navigationButtons.get_style_context().add_class(STYLE_CLASS_LINKED);
-  buttonBox.add(navigationButtons);
+  navigationButtonBox.add(navigationButtons);
 
   const backButton = Button.new_from_icon_name(
     "go-previous-symbolic",
@@ -97,7 +97,7 @@ this.Header = function Header({
     icon_name: "view-refresh-symbolic",
   });
   const reloadButton = new Button({ image: reloadIcon });
-  buttonBox.add(reloadButton);
+  navigationButtonBox.add(reloadButton);
   reloadButton.connect("clicked", () => {
     const webview = state.get("webview");
     if (webview.is_loading) {
@@ -105,16 +105,6 @@ this.Header = function Header({
     } else {
       onReload();
     }
-  });
-
-  const newTabButton = Button.new_from_icon_name(
-    "tab-new-symbolic",
-    IconSize.BUTTON
-  );
-  buttonBox.add(newTabButton);
-  newTabButton.set_always_show_image(true);
-  newTabButton.connect("clicked", () => {
-    state.set({ view: "services", webview: null });
   });
 
   const serviceBox = new Box();
@@ -156,9 +146,21 @@ this.Header = function Header({
   });
   titlebar.pack_end(right_stack);
 
-  const tabsLayer = new Box();
-  tabsLayer.pack_end(Menu({ profile }), false, false, null);
-  right_stack.add_named(tabsLayer, "menu");
+  const menuButtonBox = new Box({
+    spacing: 6,
+  });
+  const newTabButton = Button.new_from_icon_name(
+    "tab-new-symbolic",
+    IconSize.BUTTON
+  );
+  newTabButton.set_always_show_image(true);
+  newTabButton.connect("clicked", () => {
+    state.set({ view: "services", webview: null });
+  });
+  menuButtonBox.pack_end(Menu({ profile }), false, false, null);
+  menuButtonBox.pack_end(newTabButton, false, false, null);
+  right_stack.add_named(menuButtonBox, "menu");
+  right_stack.add_named(new Box(), "empty");
 
   const servicesLayer = new Box();
   const addTabButton = new Button({
@@ -205,10 +207,11 @@ this.Header = function Header({
   }
 
   state.notify("view", view => {
+    addTabButton.sensitive = false;
     if (view === "services") {
       left_stack.visible_child_name = "cancel-services";
       center_stack.visible_child_name = "url";
-      right_stack.visible_child_name = "menu";
+      right_stack.visible_child_name = "empty";
     } else if (view === "tabs") {
       left_stack.visible_child_name = "navigation";
       center_stack.visible_child_name = "title";
