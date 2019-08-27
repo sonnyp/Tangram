@@ -192,25 +192,28 @@ async function getWebAppInfo(webview) {
   return info;
 }
 
-this.saveFavicon = function(webview, instance) {
+function getFavicon(webview) {
   // TODO file gjs issue
-  // null if there is no favicon (example.com), throws otherwise
+  // favicon property is null if there is no favicon (example.com), throws otherwise
   try {
-    if (webview.favicon === null) return null;
+    if (!webview.favicon) return null;
   } catch (err) {
     // Error: Can't convert non-null pointer to JS value
   }
 
-  let favicon;
   // if there is no favicon webview.get_favicon throws with
   // JSObject* gjs_cairo_surface_from_surface(JSContext*, cairo_surface_t*): assertion 'surface != NULL' failed
   try {
-    favicon = webview.get_favicon();
+    return webview.get_favicon();
   } catch (err) {
     logError(err);
     return null;
   }
-  if (!favicon) return null;
+}
+
+function getFaviconAsPixbuf(webview) {
+  const favicon = getFavicon(webview);
+  if (!favicon) return;
 
   const pixbuf = pixbuf_get_from_surface(
     favicon,
@@ -219,10 +222,15 @@ this.saveFavicon = function(webview, instance) {
     favicon.getWidth(),
     favicon.getHeight()
   );
-  if (!pixbuf) return null;
+  return pixbuf;
+}
+
+this.saveFavicon = function saveFavicon(webview, instance) {
+  const favicon = getFaviconAsPixbuf(webview);
+  if (!favicon) return null;
 
   const path = build_filenamev([get_tmp_dir(), instance.id]);
-  if (!pixbuf.savev(path, "png", [], [])) return null;
+  if (!favicon.savev(path, "png", [], [])) return null;
 
   return path;
 };

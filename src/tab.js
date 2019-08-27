@@ -20,47 +20,72 @@ const {
   UserContentManager,
   TLSErrorsPolicy,
 } = imports.gi.WebKit2;
-const { Pixbuf } = imports.gi.GdkPixbuf;
+const { Pixbuf, InterpType } = imports.gi.GdkPixbuf;
 const { build_filenamev } = imports.gi.GLib;
 
 const { connect } = imports.util;
 const { stylesheets } = imports.serviceManager;
 const flags = imports.flags;
-
-this.Tab = function Tab(...params) {
-  return {
-    label: TabLabel(...params),
-    page: TabPage(...params),
-  };
-};
-
-this.TabLabel = TabLabel;
+const { getFaviconAsPixbuf } = imports.webapp.webapp;
 
 const ICON_SIZE = 16;
 
-function TabLabel({ instance, settings }) {
+function getFaviconScaled(webview) {
+  const pixbuf = getFaviconAsPixbuf(webview);
+  if (!pixbuf) return null;
+  return pixbuf.scale_simple(ICON_SIZE, ICON_SIZE, InterpType.BILINEAR);
+}
+
+this.TabLabel = TabLabel;
+function TabLabel({ instance, settings, page }) {
   const { id } = instance;
 
   const box = new Box({});
   const image = new Image({ margin_end: 6 });
-  instance.observe("icon", () => {
-    const icon = instance.getIconForDisplay();
-    if (!icon) return;
 
-    let pixbuf;
-    if (icon.startsWith("resource://")) {
-      pixbuf = Pixbuf.new_from_resource_at_scale(
-        icon.split("resource://")[1],
-        ICON_SIZE,
-        ICON_SIZE,
-        true
+  let connectFaviconId;
+  function connectFavicon() {
+    connectFaviconId = page.connect("notify::favicon", () => {
+      const new_favicon = getFaviconScaled(page);
+      if (!new_favicon) {
+        return;
+      }
+      image.set_from_pixbuf(new_favicon);
+    });
+  }
+
+  if (flags.custom_icons) {
+    if (instance.icon) {
+      image.set_from_pixbuf(
+        Pixbuf.new_from_file_at_scale(instance.icon, ICON_SIZE, ICON_SIZE, true)
       );
-      image.set_from_pixbuf(pixbuf);
     } else {
-      pixbuf = Pixbuf.new_from_file_at_scale(icon, ICON_SIZE, ICON_SIZE, true);
+      const favicon = getFaviconScaled(page);
+      if (favicon) {
+        image.set_from_pixbuf(favicon);
+      }
+      connectFavicon();
     }
-    image.set_from_pixbuf(pixbuf);
-  });
+    instance.observe("icon", () => {
+      const icon = instance.getIconForDisplay();
+      if (!icon) {
+        connectFavicon();
+        return;
+      }
+      page.disconnect(connectFaviconId);
+      if (icon.startsWith("resource://")) return;
+      image.set_from_pixbuf(
+        Pixbuf.new_from_file_at_scale(instance.icon, ICON_SIZE, ICON_SIZE, true)
+      );
+    });
+  } else {
+    const favicon = getFaviconScaled(page);
+    if (favicon) {
+      image.set_from_pixbuf(favicon);
+    }
+    connectFavicon();
+  }
+
   box.add(image);
 
   const label = new Label();
@@ -99,7 +124,6 @@ function TabLabel({ instance, settings }) {
 }
 
 this.TabPage = TabPage;
-
 function TabPage({ instance, window, onNotification }) {
   const { service_id, id, url, data_dir, cache_dir } = instance;
 
@@ -117,6 +141,9 @@ function TabPage({ instance, window, onNotification }) {
   web_context.set_favicon_database_directory(
     build_filenamev([cache_dir, "icondatabase"])
   );
+
+  // https://gjs-docs.gnome.org/webkit240~4.0_api/webkit2.favicondatabase
+  // const favicon_database = web_context.get_favicon_database();
 
   /*
    * Notifications
@@ -198,10 +225,10 @@ function TabPage({ instance, window, onNotification }) {
     }
   );
 
-  webView.load_uri(url || "about:blank");
-
   webView.instance_id = id;
   webView.show_all();
+
+  webView.load_uri(url || "about:blank");
 
   return webView;
 }

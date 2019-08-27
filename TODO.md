@@ -7,6 +7,7 @@
 - [x] disable back button if cannot go back
 - [x] disable forward button of cannot go forward
 - [x] webapp manifest support
+- [ ] open external link in browser
 - [x] better icon chooser
   - [x] use saveIcon with applicationDialog
   - [x] image button

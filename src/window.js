@@ -126,7 +126,7 @@ this.Window = function Window({ application, profile, state }) {
   }
 
   function buildInstanceFromPage({ instance, page }) {
-    const label = TabLabel({ instance, settings });
+    const label = TabLabel({ instance, settings, page });
     const idx = notebook.append_page(page, label);
     notebook.set_tab_reorderable(page, true);
     if (flags.custom_applications) {
