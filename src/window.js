@@ -106,13 +106,23 @@ this.Window = function Window({ application, profile, state }) {
     state.set({ view: "tabs" });
   }
 
-  function onNotification({ title, body, id }) {
+  function onNotification(webkit_notification, instance_id) {
+    // TODO
+    // report gjs bug webkit_notification.body and webkit_notification.title return undefined
+    const body = webkit_notification.get_body();
+    const title = webkit_notification.get_title();
+
     // https://gjs-docs.gnome.org/gio20~2.0_api/gio.notification
     const notification = new Notification();
     if (title) notification.set_title(title);
     if (body) notification.set_body(body);
     notification.set_priority(NotificationPriority.HIGH);
-    notification.set_default_action(`app.selectTab('${id}')`);
+
+    // FIXME seems to be broken
+    // I can see org.freedesktop.Application.ActivateAction in Bustle
+    // but it does not seem to trigger in Tangram
+    notification.set_default_action(`app.selectTab('${instance_id}')`);
+
     application.send_notification(null, notification);
   }
 
@@ -250,7 +260,14 @@ this.Window = function Window({ application, profile, state }) {
     onShowInspector,
   });
 
-  Actions({ window, application, settings, profile, notebook, showTab });
+  Actions({
+    window,
+    application,
+    settings,
+    profile,
+    notebook,
+    showTab,
+  });
 
   return window;
 };

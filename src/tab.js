@@ -219,7 +219,7 @@ function TabPage({ instance, window, onNotification }) {
 
       // https://gjs-docs.gnome.org/webkit240~4.0_api/webkit2.webview#signal-show-notification
       ["show-notification"](notification) {
-        onNotification({ ...notification, id });
+        onNotification(notification, id);
         return true;
       },
     }
