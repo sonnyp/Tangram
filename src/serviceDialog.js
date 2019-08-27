@@ -15,6 +15,7 @@ const { SettingsBindFlags } = imports.gi.Gio;
 const { build_filenamev } = imports.gi.GLib;
 
 const { iconChooser, saveIcon } = imports.icon;
+const flags = imports.flags;
 
 this.editInstanceDialog = function editInstanceDialog(props) {
   return serviceDialog({ ...props, action: "Edit" });
@@ -48,17 +49,20 @@ async function serviceDialog({ window, instance, action }) {
   const contentArea = dialog.get_content_area();
   contentArea.margin = 18;
 
-  const iconEntry = iconChooser({
-    value: instance.getIconForDisplay(),
-    parent: dialog,
-  });
-  const box = new Box({
-    orientation: Orientation.HORIZONTAL,
-    halign: Align.CENTER,
-    margin_bottom: 18,
-  });
-  box.add(iconEntry);
-  contentArea.add(box);
+  let iconEntry;
+  if (flags.custom_icons) {
+    iconEntry = iconChooser({
+      value: instance.getIconForDisplay(),
+      parent: dialog,
+    });
+    const box = new Box({
+      orientation: Orientation.HORIZONTAL,
+      halign: Align.CENTER,
+      margin_bottom: 18,
+    });
+    box.add(iconEntry);
+    contentArea.add(box);
+  }
 
   const grid = new Grid({
     column_spacing: 12,
@@ -122,14 +126,16 @@ async function serviceDialog({ window, instance, action }) {
     return true;
   }
 
-  let icon = iconEntry.get_value();
-  if (!icon.startsWith("resource://")) {
-    icon = saveIcon(
-      iconEntry.get_value(),
-      build_filenamev([instance.data_dir, "icon.png"])
-    );
-    // eslint-disable-next-line require-atomic-updates
-    instance.icon = icon;
+  if (flags.custom_icons) {
+    let icon = iconEntry.get_value();
+    if (!icon.startsWith("resource://")) {
+      icon = saveIcon(
+        iconEntry.get_value(),
+        build_filenamev([instance.data_dir, "icon.png"])
+      );
+      // eslint-disable-next-line require-atomic-updates
+      instance.icon = icon;
+    }
   }
 
   dialog.destroy();
