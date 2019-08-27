@@ -21,6 +21,7 @@
   - [ ] keywords in desktop file MAY
   - [ ] name with spaces does not work MUST
   - [ ] restart when edited SHOULD
+  - [ ] use windows instead of instances for applications?
 - services
   - [x] fix adding services without URL
   - [x] use icon from the web
@@ -33,5 +34,4 @@
 - misc
   - [ ] remote services in favor of local services
   - [ ] move to GNOME gitlab?
-  - [ ] use windows instead of instances for applications?
   - [ ] should be able to search in url bar
