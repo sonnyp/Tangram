@@ -53,10 +53,10 @@ this.Header = function Header({
   onGoBack,
   onGoForward,
   onAddTab,
-  onCancelAddTab,
+  onCancelNewTab,
   profile,
   state,
-  onAddService,
+  onNewTab,
 }) {
   // https://gjs-docs.gnome.org/gtk30~3.24.8/gtk.headerbar
   const titlebar = new HeaderBar({
@@ -107,25 +107,20 @@ this.Header = function Header({
     }
   });
 
-  const serviceBox = new Box();
-  const cancelServicesButton = Button.new_from_icon_name(
+  const cancelBox = new Box();
+  const cancelButton = Button.new_from_icon_name(
     "go-previous-symbolic",
     IconSize.BUTTON
   );
-  serviceBox.add(cancelServicesButton);
-  cancelServicesButton.connect("clicked", () => {
-    state.set({ view: "tabs" });
-  });
-  left_stack.add_named(serviceBox, "cancel-services");
-
-  const addTabBox = new Box();
-  const cancelAddTabButton = Button.new_from_icon_name(
-    "go-previous-symbolic",
-    IconSize.BUTTON
+  state.bind(
+    "instances",
+    cancelButton,
+    "visible",
+    instances => instances.length > 0
   );
-  addTabBox.add(cancelAddTabButton);
-  cancelAddTabButton.connect("clicked", onCancelAddTab);
-  left_stack.add_named(addTabBox, "cancel-add-tab");
+  cancelBox.add(cancelButton);
+  cancelButton.connect("clicked", onCancelNewTab);
+  left_stack.add_named(cancelBox, "cancel");
 
   titlebar.pack_start(left_stack);
 
@@ -138,7 +133,7 @@ this.Header = function Header({
   });
   title.get_style_context().add_class("title");
   center_stack.add_named(title, "title");
-  const addressBar = AddressBar({ state, onAddService });
+  const addressBar = AddressBar({ state });
   center_stack.add_named(addressBar, "url");
 
   const right_stack = new Stack({
@@ -154,9 +149,7 @@ this.Header = function Header({
     IconSize.BUTTON
   );
   newTabButton.set_always_show_image(true);
-  newTabButton.connect("clicked", () => {
-    state.set({ view: "services", webview: null });
-  });
+  newTabButton.connect("clicked", () => onNewTab());
   menuButtonBox.pack_end(Menu({ profile }), false, false, null);
   menuButtonBox.pack_end(newTabButton, false, false, null);
   right_stack.add_named(menuButtonBox, "menu");
@@ -172,19 +165,17 @@ this.Header = function Header({
   });
   addTabButton.get_style_context().add_class("suggested-action");
   servicesLayer.pack_end(addTabButton, false, false, null);
-  right_stack.add_named(servicesLayer, "add-tab");
+  right_stack.add_named(servicesLayer, "new-tab");
 
   titlebar.show_all();
-  state.bind(
-    "instances",
-    cancelServicesButton,
-    "visible",
-    instances => instances.length > 0
-  );
 
   function setAddress(webview) {
     const url = webview.get_uri();
-    addressBar.text = url === "about:blank" ? "" : uri_for_display(url);
+    if (!url || url === "about:blank") {
+      addressBar.text = "";
+      return;
+    }
+    addressBar.text = uri_for_display(url);
   }
   function setSecurity(webview) {
     if (!addressBar.text) {
@@ -208,18 +199,14 @@ this.Header = function Header({
 
   state.notify("view", view => {
     addTabButton.sensitive = false;
-    if (view === "services") {
-      left_stack.visible_child_name = "cancel-services";
-      center_stack.visible_child_name = "url";
-      right_stack.visible_child_name = "empty";
-    } else if (view === "tabs") {
+    if (view === "tabs") {
       left_stack.visible_child_name = "navigation";
       center_stack.visible_child_name = "title";
       right_stack.visible_child_name = "menu";
-    } else if (view === "add-tab") {
-      left_stack.visible_child_name = "cancel-add-tab";
+    } else if (view === "new-tab") {
+      left_stack.visible_child_name = "cancel";
       center_stack.visible_child_name = "url";
-      right_stack.visible_child_name = "add-tab";
+      right_stack.visible_child_name = "new-tab";
     }
   });
 
@@ -252,9 +239,11 @@ this.Header = function Header({
         backButton.sensitive = webview.can_go_back();
         forwardButton.sensitive = webview.can_go_forward();
 
-        if (loadEvent === LoadEvent.FINISHED) {
-          reloadIcon.icon_name = "view-refresh-symbolic";
-          addTabButton.sensitive = true;
+        if (loadEvent === LoadEvent.COMMITTED) {
+          if (webview.uri !== "about:blank") {
+            reloadIcon.icon_name = "view-refresh-symbolic";
+            addTabButton.sensitive = true;
+          }
         } else {
           addTabButton.sensitive = false;
         }

@@ -55,7 +55,8 @@ this.getWebAppTitle = function() {
   }
   const titles = document.head.getElementsByTagName("title");
   const title = titles[titles.length - 1];
-  return title ? title.innerText : null;
+  if (title && title.innerText) return title.innerText;
+  return document.location.hostname;
 };
 
 this.getWebAppIcon = function() {

@@ -1,6 +1,5 @@
-const { build_filenamev } = imports.gi.GLib;
 const Gtk = imports.gi.Gtk;
-const { SettingsBindFlags, File, FileCopyFlags } = imports.gi.Gio;
+const { SettingsBindFlags } = imports.gi.Gio;
 
 const { Settings, connect } = imports.util;
 const { state } = imports.state;
@@ -10,22 +9,13 @@ const {
   buildApplicationId,
 } = imports.applicationDialog;
 const instances = imports.instances;
-const { data_dir } = imports.env;
 const flags = imports.flags;
 
 this.detachTab = detachTab;
 function detachTab({ instance_id, notebook, settings }) {
   const instance = instances.get(instance_id);
-  const { name } = instance;
+  const { name, icon } = instance;
   const id = buildApplicationId(name);
-
-  let icon = instance.getIconForDisplay();
-  if (icon && icon.startsWith("resource://")) {
-    const file = File.new_for_uri(icon);
-    const dest = build_filenamev([data_dir, `${id}.svg`]);
-    file.copy(File.new_for_path(dest), FileCopyFlags.OVERWRITE, null, null);
-    icon = dest;
-  }
 
   let desktopFilePath;
   try {
@@ -62,7 +52,6 @@ function detachTab({ instance_id, notebook, settings }) {
 this.Notebook = function Notebook({ profile, settings }) {
   // https://gjs-docs.gnome.org/gtk30~3.24.8/gtk.notebook
   const notebook = new Gtk.Notebook({ scrollable: true });
-  this.notebook = notebook;
   // Tab bar only hides on custom applications
   if (profile.id) {
     state.bind(

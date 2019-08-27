@@ -18,14 +18,14 @@ const { iconChooser, saveIcon } = imports.icon;
 const flags = imports.flags;
 
 this.editInstanceDialog = function editInstanceDialog(props) {
-  return serviceDialog({ ...props, action: "Edit" });
+  return instanceDialog({ ...props, action: "Edit" });
 };
 
 this.addInstanceDialog = function editInstanceDialog(props) {
-  return serviceDialog({ ...props, action: "Add " });
+  return instanceDialog({ ...props, action: "Add " });
 };
 
-async function serviceDialog({ window, instance, action }) {
+async function instanceDialog({ window, instance, action }) {
   // TODO Dialog.new_with_buttons
   // is undefined in gjs, open issue.
   // https://developer.gnome.org/hig/stable/dialogs.html.en#Action

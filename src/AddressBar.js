@@ -23,24 +23,10 @@ function normalizeURL(str) {
   return uri.to_string(false);
 }
 
-this.AddressBar = function AddressBar({
-  state,
-  // onNavigate,
-  onAddService,
-}) {
+this.AddressBar = function AddressBar({ state }) {
   const URLBar = new Entry({
     hexpand: true,
-  });
-
-  state.bind("view", URLBar, "placeholder_text", view => {
-    switch (view) {
-      case "services":
-        return "Select a service or enter address";
-      case "add-tab":
-        return "Enter address";
-      default:
-        return "";
-    }
+    placeholder_text: "Enter address",
   });
 
   // This is a workaround https://gitlab.gnome.org/GNOME/gtk/issues/378
@@ -66,20 +52,10 @@ this.AddressBar = function AddressBar({
     const url = normalizeURL(URLBar.text);
     if (!url) return;
 
-    if (state.get("view") === "services") {
-      onAddService({
-        name: "",
-        id: "custom",
-        url,
-      });
-      const webview = state.get("webview");
-      if (webview) webview.grab_focus();
-    } else {
-      const webview = state.get("webview");
-      if (!webview) return;
-      webview.load_uri(url);
-      webview.grab_focus();
-    }
+    const webview = state.get("webview");
+    if (!webview) return;
+    webview.load_uri(url);
+    webview.grab_focus();
   });
   return URLBar;
 };

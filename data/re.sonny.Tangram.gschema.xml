@@ -30,12 +30,7 @@
     <key type="s" name="url">
       <default>""</default>
       <summary>URL</summary>
-      <description>URL to load</description>
-    </key>
-    <key type="s" name="service">
-      <default>"custom"</default>
-      <summary>Service</summary>
-      <description>Service identifier</description>
+      <description>Start URL</description>
     </key>
     <key type="s" name="icon">
       <default>""</default>
