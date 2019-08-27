@@ -19,6 +19,7 @@ const {
   SecurityOrigin,
   UserContentManager,
   TLSErrorsPolicy,
+  HardwareAccelerationPolicy,
 } = imports.gi.WebKit2;
 const { Pixbuf, InterpType } = imports.gi.GdkPixbuf;
 const { build_filenamev } = imports.gi.GLib;
@@ -141,6 +142,9 @@ function TabPage({ instance, window, onNotification }) {
   web_context.set_favicon_database_directory(
     build_filenamev([cache_dir, "icondatabase"])
   );
+  // web_context.set_process_model(
+  //   imports.gi.WebKit2.ProcessModel.MULTIPLE_SECONDARY_PROCESSES
+  // );
 
   // https://gjs-docs.gnome.org/webkit240~4.0_api/webkit2.favicondatabase
   // const favicon_database = web_context.get_favicon_database();
@@ -175,7 +179,17 @@ function TabPage({ instance, window, onNotification }) {
   // https://gjs-docs.gnome.org/webkit240~4.0_api/webkit2.settings
   const settings = new Settings({
     enable_developer_extras: true,
+    enable_site_specific_quirks: true,
+    enable_smooth_scrolling: true,
+    media_playback_requires_user_gesture: true,
   });
+
+  // https://github.com/sonnyp/Tangram/issues/39
+  if (url.includes("reddit.com")) {
+    settings.set_media_playback_requires_user_gesture(true);
+    settings.set_hardware_acceleration_policy(HardwareAccelerationPolicy.NEVER);
+  }
+
   settings.set_user_agent_with_application_details("Tangram", pkg.version);
 
   // https://gjs-docs.gnome.org/webkit240~4.0_api/webkit2.webcontext
