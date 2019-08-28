@@ -16,17 +16,16 @@
     <file>env.js</file>
     <file>flags.js</file>
     <file>header.js</file>
-    <file>homePage.js</file>
     <file>icon.js</file>
+    <file>instanceDialog.js</file>
     <file>instances.js</file>
     <file>main.js</file>
     <file>Notebook.js</file>
-    <file>serviceDialog.js</file>
-    <file>serviceManager.js</file>
     <file>Shortcuts.js</file>
     <file>state.js</file>
     <file>tab.js</file>
     <file>util.js</file>
+    <file>WebView.js</file>
     <file>window.js</file>
   </gresource>
 </gresources>

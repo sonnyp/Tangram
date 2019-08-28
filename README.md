@@ -61,16 +61,6 @@ wget https://github.com/sonnyp/Tangram/releases/download/v0.5.0/Tangram.flatpak
 flatpak install Tangram.flatpak
 ```
 
-## Services
-
-Only a limited number of services but adding a new service is quite easy.
-
-Make sure the service loads/works using `Custom`.
-
-If you can please send a pull request with the changes; look into [src/services](src/services) and [src/re.sonny.Tangram.services.gresource.xml](src/re.sonny.Tangram.services.gresource.xml).
-
-Otherwise feel free to [open an issue](https://github.com/sonnyp/Tangram/issues/new) with the service name and url.
-
 ## Details
 
 Similar to [GNOME Web standalone](https://fedoramagazine.org/standalone-web-applications-gnome-web/):
@@ -119,7 +109,7 @@ Hit `<Ctrl><Shift>Q` to restart the application.
 - cache files are tored in `./var/cache/` instead of `XDG_CACHE_HOME/Tangram/`
 - desktop files are stored in `./var/applications/` instead of `$XDG_DATA_HOME/applications/`
 
-To test desktop notifications you can add a custom service with `https://jhmux.codesandbox.io/` as URL.
+To test desktop notifications you can add `https://jhmux.codesandbox.io/`.
 
 ### Test
 
