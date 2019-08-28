@@ -6,6 +6,10 @@ Run web apps on your desktop.
 
 ![screenshot](screenshot.png)
 
+## Goal
+
+The goal of the project is to improve integration of web applications into the desktop, specifically [GNOME](https://www.gnome.org/).
+
 ## About
 
 Each tab is a container so you can setup web apps with different accounts/settings.
@@ -15,13 +19,22 @@ Tangram is powered by [WebKitGTK](https://webkitgtk.org/).
 ## Features
 
 - Setup and manage web applications
-- Custom icon
+  <!-- - Custom icon -->
+- Persistent and independant tabs
 - Custom title
 - Re-order tabs
 - Change tabs position
 - Navigation
 - Shortcuts
-- Desktop/audio notifications (if supported by the service)
+- Desktop/audio notifications
+
+## Roadmap
+
+- Custom icon (almost done)
+- Custom applications (almost done)
+- Expose WebKitGTK settings (todo)
+- SearchProvider (todo)
+- Custom CSS/JS for better integration (todo)
 
 <!-- Disabled for now, enable with TANGRAM_ENABLE_CUSTOM_APPLICATIONS=true -->
 <!-- use at your own risk -->
