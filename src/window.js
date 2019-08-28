@@ -115,10 +115,7 @@ this.Window = function Window({ application, profile, state }) {
     if (body) notification.set_body(body);
     notification.set_priority(NotificationPriority.HIGH);
 
-    // FIXME seems to be broken
-    // I can see org.freedesktop.Application.ActivateAction in Bustle
-    // but it does not seem to trigger in Tangram
-    notification.set_default_action(`app.selectTab('${instance_id}')`);
+    notification.set_default_action(`app.showInstance('${instance_id}')`);
 
     application.send_notification(null, notification);
   }
@@ -264,5 +261,5 @@ this.Window = function Window({ application, profile, state }) {
     showTab,
   });
 
-  return window;
+  return { window, notebook, showTab };
 };

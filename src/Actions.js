@@ -17,6 +17,10 @@ this.Actions = function Actions({
   notebook,
   showTab,
 }) {
+  function showPage(page) {
+    showTab(notebook.page_num(page));
+  }
+
   // https://gjs-docs.gnome.org/gio20~2.0_api/gio.simpleaction
   // FIXME, is there a better way to bind setting to action?
   // or even better bind menu to setting, see header.js
@@ -35,20 +39,6 @@ this.Actions = function Actions({
     settings.set_string("tabs-position", position);
   });
   application.add_action(tabsPosition);
-
-  // https://gjs-docs.gnome.org/gio20~2.0_api/gio.simpleaction
-  const selectTabAction = new SimpleAction({
-    name: "selectTab",
-    parameter_type: VariantType.new("s"),
-  });
-  selectTabAction.connect("activate", (self, parameters) => {
-    const id = parameters.unpack();
-    // FIXME get idx or child from id
-    const idx = id;
-    showTab(idx);
-    window.present();
-  });
-  application.add_action(selectTabAction);
 
   // https://gjs-docs.gnome.org/gio20~2.0_api/gio.simpleaction
   const detachTabAction = new SimpleAction({
@@ -107,8 +97,10 @@ this.Actions = function Actions({
   editInstanceAction.connect("activate", (self, parameters) => {
     const id = parameters.deep_unpack();
     const instance = instances.get(id);
-    // FIXME - should we show the tab in case it is not the current?
-    // showTab(idx);
+    if (!instance) return;
+    if (instance.page) {
+      showPage(instance.page);
+    }
     editInstanceDialog({ window, instance }).catch(logError);
   });
   application.add_action(editInstanceAction);

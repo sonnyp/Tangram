@@ -3,6 +3,9 @@ project('Tangram',
   meson_version: '>= 0.50.0',
 )
 
+conf = configuration_data()
+conf.set('BINDIR', join_paths([ get_option('prefix'), 'bin' ]))
+
 i18n = import('i18n')
 
 subdir('data')

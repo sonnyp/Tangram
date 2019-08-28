@@ -1,5 +1,8 @@
 const { Application, Builder } = imports.gi.Gtk;
-const { ApplicationFlags, SimpleAction } = imports.gi.Gio;
+const {
+  // ApplicationFlags,
+  SimpleAction,
+} = imports.gi.Gio;
 const {
   OptionFlags,
   OptionArg,
@@ -12,10 +15,12 @@ const { AboutDialog } = imports.AboutDialog;
 const { Window } = imports.window;
 const { lookup } = imports.util;
 const { state } = imports.state;
+const { PersistentActions } = imports.persistentActions;
 
 const application = new Application({
   application_id: "re.sonny.Tangram",
-  flags: ApplicationFlags.NON_UNIQUE,
+  // Custom applications
+  // flags: ApplicationFlags.NON_UNIQUE,
 });
 this.application = application;
 
@@ -63,6 +68,7 @@ function setupProfile() {
     set_program_class("Tangram");
   }
 }
+
 application.connect("handle-local-options", (self, dict) => {
   const name = lookup(dict, "name");
   const id = lookup(dict, "id");
@@ -82,14 +88,20 @@ application.connect("handle-local-options", (self, dict) => {
 
 let window;
 
-application.connect("activate", app => {
-  window = app.activeWindow;
-
+function getWindow() {
   if (!window) {
     window = Window({ state, application, profile });
   }
 
-  window.present();
+  return window;
+}
+
+application.connect("activate", app => {
+  if (app.active_window) {
+    app.active_window.present();
+    return;
+  }
+  getWindow().window.present();
 });
 
 const showAboutDialog = new SimpleAction({
@@ -128,3 +140,5 @@ quit.connect("activate", () => {
 });
 application.add_action(quit);
 application.set_accels_for_action("app.quit", ["<Ctrl>Q"]);
+
+PersistentActions({ application, getWindow });

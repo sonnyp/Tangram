@@ -21,6 +21,7 @@
     <file>instances.js</file>
     <file>main.js</file>
     <file>Notebook.js</file>
+    <file>persistentActions.js</file>
     <file>Shortcuts.js</file>
     <file>state.js</file>
     <file>tab.js</file>
