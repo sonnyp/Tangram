@@ -106,6 +106,7 @@ Similar to [GNOME Web standalone](https://fedoramagazine.org/standalone-web-appl
 </details>
 
 ```sh
+# Development dependencies
 npm install
 ```
 

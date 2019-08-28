@@ -5,7 +5,7 @@ const {
   CookiePersistentStorage,
   CookieAcceptPolicy,
   Settings,
-  // NotificationPermissionRequest,
+  NotificationPermissionRequest,
   SecurityOrigin,
   UserContentManager,
   TLSErrorsPolicy,
@@ -18,7 +18,7 @@ const { connect } = imports.util;
 
 this.buildWebView = buildWebView;
 function buildWebView({ instance, onNotification, window }) {
-  const { data_dir, cache_dir, url } = instance;
+  const { data_dir, cache_dir, url, id } = instance;
 
   // https://gjs-docs.gnome.org/webkit240~4.0_api/webkit2.websitedatamanager
   const website_data_manager = new WebsiteDataManager({
@@ -45,13 +45,15 @@ function buildWebView({ instance, onNotification, window }) {
    * Notifications
    */
   // https://gjs-docs.gnome.org/webkit240~4.0_api/webkit2.webcontext#signal-initialize-notification-permissions
-  web_context.connect("initialize-notification-permissions", () => {
-    // https://gjs-docs.gnome.org/webkit240~4.0_api/webkit2.webcontext#method-initialize_notification_permissions
-    web_context.initialize_notification_permissions(
-      [SecurityOrigin.new_for_uri(url)],
-      []
-    );
-  });
+  if (url) {
+    web_context.connect("initialize-notification-permissions", () => {
+      // https://gjs-docs.gnome.org/webkit240~4.0_api/webkit2.webcontext#method-initialize_notification_permissions
+      web_context.initialize_notification_permissions(
+        [SecurityOrigin.new_for_uri(url)],
+        []
+      );
+    });
+  }
 
   // https://gjs-docs.gnome.org/webkit240~4.0_api/webkit2.cookiemanager
   // not sure why but must be done after new_with_website_data_manager
@@ -111,27 +113,26 @@ function buildWebView({ instance, onNotification, window }) {
       },
 
       // https://gjs-docs.gnome.org/webkit240~4.0_api/webkit2.webview#signal-permission-request
-      // ["permission-request"](request) {
-      //   log("permission request");
-      //   if (request instanceof NotificationPermissionRequest) {
-      //     request.allow();
-      //     return;
-      //   }
-      //   request.deny();
-      // },
+      ["permission-request"](request) {
+        if (request instanceof NotificationPermissionRequest) {
+          request.allow();
+          return;
+        }
+        request.deny();
+      },
 
       // https://gjs-docs.gnome.org/webkit240~4.0_api/webkit2.webview#signal-show-notification
       ["show-notification"](notification) {
-        onNotification(notification, instance.id);
+        onNotification(notification, id);
         return true;
       },
     }
   );
 
-  webView.instance_id = instance.id;
+  webView.instance_id = id;
   webView.show_all();
 
-  webView.load_uri(instance.url || "about:blank");
+  webView.load_uri(url || "about:blank");
 
   return webView;
 }
