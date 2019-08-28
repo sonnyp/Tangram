@@ -15,13 +15,6 @@ src_res = gnome.compile_resources('re.sonny.Tangram.src',
 #   install_dir: pkgdatadir,
 # )
 
-data_res = gnome.compile_resources('re.sonny.Tangram.services',
-  're.sonny.Tangram.services.gresource.xml',
-  gresource_bundle: true,
-  install: true,
-  install_dir: pkgdatadir,
-)
-
 bin_conf = configuration_data()
 bin_conf.set('GJS', find_program('gjs').path())
 bin_conf.set('PACKAGE_VERSION', meson.project_version())

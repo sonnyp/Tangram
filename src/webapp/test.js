@@ -106,6 +106,22 @@ let exit_code = 0;
         <html>
         <head>
         <meta charset="UTF-8">
+        </head>
+        <body></body>
+        </html>
+    `
+    );
+
+    assert.is(info.title, "127.0.0.1");
+  })();
+
+  await (async () => {
+    const { info } = await test(
+      `
+        <!DOCTYPE html>
+        <html>
+        <head>
+        <meta charset="UTF-8">
         <meta property="og:url" content="https://opengraph.url">
         </head>
         <body></body>

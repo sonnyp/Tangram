@@ -7,7 +7,7 @@ const {
   newApplicationDialog,
   editApplicationDialog,
 } = imports.applicationDialog;
-const { editInstanceDialog } = imports.serviceDialog;
+const { editInstanceDialog } = imports.instanceDialog;
 
 this.Actions = function Actions({
   window,

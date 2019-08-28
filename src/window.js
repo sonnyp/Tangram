@@ -16,12 +16,12 @@ const {
 // https://github.com/flatpak/flatpak/issues/78#issuecomment-511158618
 // log(imports.gi.Gio.SettingsBackend.get_default());
 
-const { buildHomePage } = imports.homePage;
 const { TabLabel, TabPage } = imports.tab;
-const { addInstanceDialog } = imports.serviceDialog;
+const { addInstanceDialog } = imports.instanceDialog;
 const { Header } = imports.header;
 const instances = imports.instances;
 const flags = imports.flags;
+const { buildWebView } = imports.WebView;
 
 this.Window = function Window({ application, profile, state }) {
   profile.settings =
@@ -42,10 +42,10 @@ this.Window = function Window({ application, profile, state }) {
     onGoBack,
     onGoForward,
     onAddTab,
-    onCancelAddTab,
+    onCancelNewTab,
     profile,
     state,
-    onAddService,
+    onNewTab,
   });
 
   function onStopLoading() {
@@ -96,14 +96,11 @@ this.Window = function Window({ application, profile, state }) {
 
   const notebook = Notebook({ profile, settings });
   stack.add_named(notebook, "tabs");
-
-  const addTabPage = buildHomePage({ onAddService });
-  stack.add_named(addTabPage, "services");
   stack.show_all();
 
   function showTab(idx) {
     notebook.set_current_page(idx);
-    state.set({ view: "tabs" });
+    state.set({ view: "tabs", webview: notebook.get_nth_page(idx) });
   }
 
   function onNotification(webkit_notification, instance_id) {
@@ -146,7 +143,7 @@ this.Window = function Window({ application, profile, state }) {
   }
 
   async function onAddTab() {
-    const webview = stack.get_child_by_name("add-tab");
+    const webview = stack.get_child_by_name("new-tab");
     const { instance_id } = webview;
     const instance = instances.get(instance_id);
     instance.url = webview.uri;
@@ -198,9 +195,11 @@ this.Window = function Window({ application, profile, state }) {
     showTab(idx);
   }
 
-  function onCancelAddTab() {
-    state.set({ view: "services", webview: null });
-    const webView = stack.get_child_by_name("add-tab");
+  function onCancelNewTab() {
+    // FIXME set webview!!
+    // state.set({ view: "tabs", webview: notebook.get_nth_child(notebook.page) });
+    showTab(notebook.page || 0);
+    const webView = stack.get_child_by_name("new-tab");
     if (!webView) return;
     webView.destroy();
     const { instance_id } = webView;
@@ -209,30 +208,21 @@ this.Window = function Window({ application, profile, state }) {
     instances.destroy(instance);
   }
 
-  function onAddService(service) {
-    const { url, name } = service;
-    const service_id = service.id;
-    // FIXME should we keep the prefix service.name ? could be confusing when renaming/custom
-    const id = `${service.id}-${uuid_string_random().replace(/-/g, "")}`;
+  function onNewTab() {
+    const id = uuid_string_random().replace(/-/g, "");
 
     const instance = instances.create({
-      url,
-      service_id,
+      url: "about:blank",
       id,
-      name: service_id === "custom" ? "" : name,
+      name: "",
     });
 
-    const webview = TabPage({
-      instance,
-      window,
-      onNotification,
-    });
+    const webview = buildWebView({ onNotification, window, instance });
 
-    stack.add_named(webview, "add-tab");
-    state.set({ webview, view: "add-tab" });
-    if (!url) {
-      header.addressBar.grab_focus();
-    }
+    const previous = stack.get_child_by_name("new-tab");
+    if (previous) previous.destroy();
+    stack.add_named(webview, "new-tab");
+    state.set({ webview, view: "new-tab" });
   }
 
   instances.load(settings);
@@ -241,11 +231,15 @@ this.Window = function Window({ application, profile, state }) {
   });
 
   observeSetting(settings, "instances", instances => {
-    state.set({
-      instances,
-      view: instances.length > 0 ? "tabs" : "services",
-      webview: instances.length > 0 ? undefined : null,
-    });
+    if (instances.length === 0) {
+      onNewTab();
+    } else {
+      const page = notebook.get_nth_page(notebook.page);
+      state.set({
+        view: "tabs",
+        webview: page,
+      });
+    }
   });
 
   Shortcuts({

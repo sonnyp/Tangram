@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<svg width="64" height="64" version="1.1" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
- <g id="Mark" transform="matrix(.24 0 0 .24 9e-6 5e-6)" fill-rule="evenodd">
-  <rect id="Board" width="200" height="200" rx="25" fill="#0079bf"/>
-  <rect id="Right-List" x="113" y="26" width="61" height="87.5" rx="12" fill="#fff"/>
-  <rect id="Left-List" x="26" y="26" width="61" height="137.5" rx="12" fill="#fff"/>
- </g>
-</svg>
