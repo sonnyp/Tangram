@@ -244,7 +244,7 @@ this.Header = function Header({
             reloadIcon.icon_name = "view-refresh-symbolic";
             addTabButton.sensitive = true;
           }
-        } else {
+        } else if (loadEvent !== LoadEvent.FINISHED) {
           addTabButton.sensitive = false;
         }
 
