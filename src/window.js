@@ -231,6 +231,7 @@ this.Window = function Window({ application, profile, state }) {
   });
 
   observeSetting(settings, "instances", instances => {
+    state.set({ instances });
     if (instances.length === 0) {
       onNewTab();
     } else {
