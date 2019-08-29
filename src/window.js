@@ -106,9 +106,11 @@ this.Window = function Window({ application, profile, state }) {
   function onNotification(webkit_notification, instance_id) {
     // TODO
     // report gjs bug webkit_notification.body and webkit_notification.title return undefined
+
     const body = webkit_notification.get_body();
     const title = webkit_notification.get_title();
 
+    log(title + "-" + body);
     // https://gjs-docs.gnome.org/gio20~2.0_api/gio.notification
     const notification = new Notification();
     if (title) notification.set_title(title);
