@@ -43,5 +43,9 @@ this.AboutDialog = function AboutDialog({ window }) {
     "codyfish https://github.com/codyfish",
   ]);
   aboutDialog.present();
+  aboutDialog.connect("response", () => {
+    aboutDialog.destroy();
+  });
+
   return aboutDialog;
 };
