@@ -37,11 +37,6 @@
       <summary>Icon</summary>
       <description>Service icon</description>
     </key>
-    <key type="s" name="icon">
-      <default>"default"</default>
-      <summary>Icon</summary>
-      <description>Service icon</description>
-    </key>
   </schema>
 
 </schemalist>
