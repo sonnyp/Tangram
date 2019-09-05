@@ -177,6 +177,7 @@ this.Header = function Header({
     }
     addressBar.text = uri_for_display(url);
   }
+
   function setSecurity(webview) {
     if (!addressBar.text) {
       addressBar.primary_icon_name = null;
@@ -211,11 +212,16 @@ this.Header = function Header({
   });
 
   let loadChangedHandlerId = null;
+  let resourceLoadStartedHandlerId = null;
   state.notify("webview", (webview, previous) => {
     if (previous) {
       if (loadChangedHandlerId) {
         previous.disconnect(loadChangedHandlerId);
         loadChangedHandlerId = null;
+      }
+      if (resourceLoadStartedHandlerId) {
+        previous.disconnect(resourceLoadStartedHandlerId);
+        resourceLoadStartedHandlerId = null;
       }
     }
 
@@ -233,11 +239,24 @@ this.Header = function Header({
       ? "process-stop-symbolic"
       : "view-refresh-symbolic";
     // https://gjs-docs.gnome.org/webkit240~4.0_api/webkit2.loadevent
+
+    resourceLoadStartedHandlerId = webview.connect(
+      "resource-load-started",
+      (self, resource, request) => {
+        backButton.sensitive = webview.can_go_back();
+        // log(webview.can_go_back());
+        forwardButton.sensitive = webview.can_go_forward();
+        //log(webview.can_go_forward());
+      }
+    );
+
     loadChangedHandlerId = webview.connect(
       "load-changed",
       (self, loadEvent) => {
         backButton.sensitive = webview.can_go_back();
+        //log(webview.can_go_back());
         forwardButton.sensitive = webview.can_go_forward();
+        //log(webview.can_go_forward());
 
         if (loadEvent === LoadEvent.COMMITTED) {
           if (webview.uri !== "about:blank") {
