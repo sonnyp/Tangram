@@ -26,5 +26,5 @@ cp -rp data/icons/hicolor/scalable/apps/re.sonny.Tangram.svg ~/.local/share/icon
 mkdir -p ~/.local/share/icons/hicolor/symbolic/apps/
 cp -rp data/icons/hicolor/symbolic/apps/re.sonny.Tangram-symbolic.svg ~/.local/share/icons/hicolor/symbolic/apps/re.sonny.Tangram-symbolic.svg
 
-# $PWD/src/re.sonny.Tangram "$@"
-gtk-launch re.sonny.Tangram
+$PWD/src/re.sonny.Tangram "$@"
+# gtk-launch re.sonny.Tangram

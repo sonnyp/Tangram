@@ -109,7 +109,7 @@ const showAboutDialog = new SimpleAction({
   parameter_type: null,
 });
 showAboutDialog.connect("activate", () => {
-  AboutDialog({ window });
+  AboutDialog({ window: window.window });
 });
 application.add_action(showAboutDialog);
 
@@ -122,7 +122,7 @@ showShortcutsDialog.connect("activate", () => {
     "/re/sonny/Tangram/data/shortcuts.xml.ui"
   );
   const shortcutsWindow = builder.get_object("shortcuts-window");
-  shortcutsWindow.set_transient_for(window);
+  shortcutsWindow.set_transient_for(window.window);
   shortcutsWindow.present();
 });
 application.add_action(showShortcutsDialog);
