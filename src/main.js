@@ -19,9 +19,17 @@ const {
   // listenv,
   spawn_async,
   SpawnFlags,
+  log_writer_is_journald,
+  setenv,
 } = imports.gi.GLib;
 
 const { application } = imports.application;
+
+if (getenv("DEV")) {
+  if (log_writer_is_journald(2)) {
+    setenv("G_MESSAGES_DEBUG", "re.sonny.Tangram", false);
+  }
+}
 
 // Debug
 log(`programInvocationName: ${programInvocationName}`);

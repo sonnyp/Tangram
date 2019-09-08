@@ -8,3 +8,4 @@ StartupNotify=true
 X-GNOME-UsesNotifications=true
 StartupWMClass=Tangram
 Icon=re.sonny.Tangram
+DBusActivatable=true

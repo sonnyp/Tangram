@@ -1,0 +1,3 @@
+[D-BUS Service]
+Name=re.sonny.Tangram
+Exec=@BINDIR@/re.sonny.Tangram --gapplication-service

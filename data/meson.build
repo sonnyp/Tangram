@@ -3,6 +3,13 @@ subdir('icons')
 pkgdatadir = join_paths(get_option('datadir'), meson.project_name())
 gnome = import('gnome')
 
+configure_file(
+  input: 're.sonny.Tangram.service.in',
+  output: 're.sonny.Tangram.service',
+  configuration: conf,
+  install_dir: join_paths(get_option('datadir'), 'dbus-1/services')
+)
+
 desktop_file = i18n.merge_file(
   input: 're.sonny.Tangram.desktop.in',
   output: 're.sonny.Tangram.desktop',

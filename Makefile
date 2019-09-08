@@ -13,7 +13,7 @@ flatpak:
 	flatpak-builder --user  --force-clean --repo=repo --install-deps-from=flathub flatpak re.sonny.Tangram.json
 	flatpak --user remote-add --no-gpg-verify --if-not-exists Tangram repo
 	flatpak --user install --reinstall --assumeyes Tangram re.sonny.Tangram
-	flatpak run re.sonny.Tangram
+	gtk-launch re.sonny.Tangram
 
 bundle:
 	flatpak-builder --user  --force-clean --repo=repo --install-deps-from=flathub flatpak re.sonny.Tangram.json
