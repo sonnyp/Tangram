@@ -82,9 +82,23 @@ this.Window = function Window({ application, profile, state }) {
   const window = new ApplicationWindow({
     application,
     title: profile.title,
-    default_height: 620,
-    default_width: 840,
   });
+
+  let width = settings.get_int("window-width");
+  let height = settings.get_int("window-height");
+  if (width && height) {
+    window.set_default_size(width, height);
+  } else {
+    window.maximize();
+  }
+  window.connect("size-allocate", () => {
+    [width, height] = window.is_maximized ? [0, 0] : window.get_size();
+  });
+  window.connect("destroy", () => {
+    settings.set_int("window-width", width);
+    settings.set_int("window-height", height);
+  });
+
   window.set_titlebar(header.titlebar);
 
   // https://gjs-docs.gnome.org/gtk30~3.24.8/gtk.stack

@@ -26,7 +26,7 @@ Tangram is powered by [WebKitGTK](https://webkitgtk.org/).
 - Change tabs position
 - Navigation
 - Shortcuts
-- Desktop/audio notifications
+- Persistent desktop notifications
 
 ## Roadmap
 

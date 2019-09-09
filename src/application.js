@@ -131,14 +131,4 @@ application.set_accels_for_action("app.shortcuts", [
   "<Ctrl>question",
 ]);
 
-const quit = new SimpleAction({
-  name: "quit",
-  parameter_type: null,
-});
-quit.connect("activate", () => {
-  application.quit();
-});
-application.add_action(quit);
-application.set_accels_for_action("app.quit", ["<Ctrl>Q"]);
-
 PersistentActions({ application, getWindow });
