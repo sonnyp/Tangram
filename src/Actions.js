@@ -90,6 +90,7 @@ this.Actions = function Actions({
   });
   application.add_action(editApplication);
 
+  // https://gjs-docs.gnome.org/gio20~2.0_api/gio.simpleaction
   const editInstanceAction = new SimpleAction({
     name: "editInstance",
     parameter_type: VariantType.new("s"),
@@ -104,4 +105,16 @@ this.Actions = function Actions({
     editInstanceDialog({ window, instance }).catch(logError);
   });
   application.add_action(editInstanceAction);
+
+  // https://gjs-docs.gnome.org/gio20~2.0_api/gio.simpleaction
+  const quit = new SimpleAction({
+    name: "quit",
+    parameter_type: null,
+  });
+  quit.connect("activate", () => {
+    window.destroy();
+    // application.quit();
+  });
+  application.add_action(quit);
+  application.set_accels_for_action("app.quit", ["<Ctrl>Q"]);
 };
