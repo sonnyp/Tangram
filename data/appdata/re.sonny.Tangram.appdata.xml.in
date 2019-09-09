@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Copyright 2019 Sonny Piers https://sonny.re -->
+<component type="desktop-application">
+  <id>re.sonny.Tangram</id>
+  <metadata_license>FSFAP</metadata_license>
+  <project_license>GPL-3.0+</project_license>
+  <name>Tangram</name>
+  <summary>Run web apps on your desktop.</summary>
+  <description>
+    <p>
+      Tangram is a new kind of browser. It is designed to organize and run your Web applications.
+      Each tab is persistent and independant. You can set multiple tabs with different accounts for the same application.
+    </p>
+    <p>
+      Common use cases for Tangram includes
+    </p>
+    <ul>
+      <li>Stay up to date with your favorite communities</li>
+      <li>Merge all these annoying separate chat applications into one</li>
+      <li>Group your workplace tools under one application</li>
+    </ul>
+  </description>
+  <screenshots>
+    <screenshot type="default">
+      <image>https://raw.githubusercontent.com/sonnyp/Tangram/master/data/appdata/screenshot.png</image>
+    </screenshot>
+  </screenshots>
+  <launchable type="desktop-id">re.sonny.Tangram.desktop</launchable>
+  <url type="homepage">https://github.com/sonnyp/Tangram</url>
+  <url type="bugtracker">https://github.com/sonnyp/Tangram/issues</url>
+  <update_contact>sonny@fastmail.net</update_contact>
+  <developer_name>Sonny Piers</developer_name>
+  <kudos>
+    <kudo>HiDpiIcon</kudo>
+    <kudo>ModernToolkit</kudo>
+    <kudo>Notifications</kudo>
+  </kudos>
+</component>

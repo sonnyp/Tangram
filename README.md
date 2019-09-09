@@ -4,7 +4,7 @@
 
 Run web apps on your desktop.
 
-![screenshot](screenshot.png)
+![screenshot](data/appdata/screenshot.png)
 
 ## Goal
 
