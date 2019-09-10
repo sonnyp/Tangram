@@ -30,6 +30,10 @@
   <url type="bugtracker">https://github.com/sonnyp/Tangram/issues</url>
   <update_contact>sonny@fastmail.net</update_contact>
   <developer_name>Sonny Piers</developer_name>
+  <content_rating type="oars-1.1" />
+  <releases>
+    <release version="1.0.1" timestamp="1568144250"/>
+  </releases>
   <kudos>
     <kudo>HiDpiIcon</kudo>
     <kudo>ModernToolkit</kudo>
