@@ -64,12 +64,12 @@ Make sure flatpak is setup according to [Install flatpak](https://flatpak.org/se
 ---
 
 Download and install
-[Tangram.flatpak](https://github.com/sonnyp/Tangram/releases/download/v0.6.0/Tangram.flatpak)
+[Tangram.flatpak](https://github.com/sonnyp/Tangram/releases/download/v1.0.0/Tangram.flatpak)
 
 or
 
 ```sh
-wget https://github.com/sonnyp/Tangram/releases/download/v0.6.0/Tangram.flatpak
+wget https://github.com/sonnyp/Tangram/releases/download/v1.0.0/Tangram.flatpak
 flatpak install Tangram.flatpak
 ```
 
