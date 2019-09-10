@@ -169,6 +169,12 @@ this.Header = function Header({
 
   titlebar.show_all();
 
+  function updateButtons(webview) {
+    log("ub");
+    backButton.sensitive = webview.can_go_back();
+    forwardButton.sensitive = webview.can_go_forward();
+  }
+
   function setAddress(webview) {
     const url = webview.get_uri();
     if (!url || url === "about:blank") {
@@ -212,51 +218,37 @@ this.Header = function Header({
   });
 
   let loadChangedHandlerId = null;
-  let resourceLoadStartedHandlerId = null;
+  let backForwardListChangedHandlerId = null;
   state.notify("webview", (webview, previous) => {
+    //on tab change
+
+    log("hi");
+
+    const backForwardList = webview.get_back_forward_list();
+
+    //disconnect handlers of other tab
     if (previous) {
+      const lastBackForwardList = previous.get_back_forward_list();
       if (loadChangedHandlerId) {
         previous.disconnect(loadChangedHandlerId);
         loadChangedHandlerId = null;
       }
-      if (resourceLoadStartedHandlerId) {
-        previous.disconnect(resourceLoadStartedHandlerId);
-        resourceLoadStartedHandlerId = null;
+      if (backForwardListChangedHandlerId) {
+        lastBackForwardList.disconnect(backForwardListChangedHandlerId);
+        backForwardListChangedHandlerId = null;
       }
     }
 
-    if (!webview) {
-      addressBar.primary_icon_name = null;
-      addressBar.text = "";
-      return;
-    }
+    //connect handlers to new tab
 
-    setAddress(webview);
-    if (!webview.is_loading) {
-      setSecurity(webview);
-    }
-    reloadIcon.icon_name = webview.is_loading
-      ? "process-stop-symbolic"
-      : "view-refresh-symbolic";
-    // https://gjs-docs.gnome.org/webkit240~4.0_api/webkit2.loadevent
-
-    resourceLoadStartedHandlerId = webview.connect(
-      "resource-load-started",
-      (self, resource, request) => {
-        backButton.sensitive = webview.can_go_back();
-        // log(webview.can_go_back());
-        forwardButton.sensitive = webview.can_go_forward();
-        //log(webview.can_go_forward());
-      }
-    );
+    backForwardListChangedHandlerId = backForwardList.connect("changed", () => {
+      updateButtons(webview);
+    });
 
     loadChangedHandlerId = webview.connect(
       "load-changed",
       (self, loadEvent) => {
-        backButton.sensitive = webview.can_go_back();
-        //log(webview.can_go_back());
-        forwardButton.sensitive = webview.can_go_forward();
-        //log(webview.can_go_forward());
+        updateButtons(webview);
 
         if (loadEvent === LoadEvent.COMMITTED) {
           if (webview.uri !== "about:blank") {
@@ -278,6 +270,23 @@ this.Header = function Header({
         }
       }
     );
+
+    updateButtons(webview);
+
+    if (!webview) {
+      addressBar.primary_icon_name = null;
+      addressBar.text = "";
+      return;
+    }
+
+    setAddress(webview);
+    if (!webview.is_loading) {
+      setSecurity(webview);
+    }
+    reloadIcon.icon_name = webview.is_loading
+      ? "process-stop-symbolic"
+      : "view-refresh-symbolic";
+    // https://gjs-docs.gnome.org/webkit240~4.0_api/webkit2.loadevent
   });
 
   return { titlebar, addressBar };
