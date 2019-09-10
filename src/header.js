@@ -170,7 +170,6 @@ this.Header = function Header({
   titlebar.show_all();
 
   function updateButtons(webview) {
-    log("ub");
     backButton.sensitive = webview.can_go_back();
     forwardButton.sensitive = webview.can_go_forward();
   }
@@ -220,35 +219,46 @@ this.Header = function Header({
   let loadChangedHandlerId = null;
   let backForwardListChangedHandlerId = null;
   state.notify("webview", (webview, previous) => {
-    //on tab change
-
-    log("hi");
-
-    const backForwardList = webview.get_back_forward_list();
-
-    //disconnect handlers of other tab
     if (previous) {
-      const lastBackForwardList = previous.get_back_forward_list();
       if (loadChangedHandlerId) {
         previous.disconnect(loadChangedHandlerId);
         loadChangedHandlerId = null;
       }
       if (backForwardListChangedHandlerId) {
-        lastBackForwardList.disconnect(backForwardListChangedHandlerId);
+        previous
+          .get_back_forward_list()
+          .disconnect(backForwardListChangedHandlerId);
         backForwardListChangedHandlerId = null;
       }
     }
 
-    //connect handlers to new tab
+    if (!webview) {
+      addressBar.primary_icon_name = null;
+      addressBar.text = "";
+      return;
+    }
 
-    backForwardListChangedHandlerId = backForwardList.connect("changed", () => {
-      updateButtons(webview);
-    });
+    updateButtons(webview);
+    setAddress(webview);
+    if (!webview.is_loading) {
+      setSecurity(webview);
+    }
+    reloadIcon.icon_name = webview.is_loading
+      ? "process-stop-symbolic"
+      : "view-refresh-symbolic";
 
+    // https://gjs-docs.gnome.org/webkit240~4.0_api/webkit2.backforwardlist#signal-changed
+    backForwardListChangedHandlerId = webview
+      .get_back_forward_list()
+      .connect("changed", () => {
+        updateButtons(webview);
+      });
+
+    // https://gjs-docs.gnome.org/webkit240~4.0_api/webkit2.loadevent
     loadChangedHandlerId = webview.connect(
       "load-changed",
       (self, loadEvent) => {
-        updateButtons(webview);
+        // updateButtons(webview);
 
         if (loadEvent === LoadEvent.COMMITTED) {
           if (webview.uri !== "about:blank") {
@@ -270,23 +280,6 @@ this.Header = function Header({
         }
       }
     );
-
-    updateButtons(webview);
-
-    if (!webview) {
-      addressBar.primary_icon_name = null;
-      addressBar.text = "";
-      return;
-    }
-
-    setAddress(webview);
-    if (!webview.is_loading) {
-      setSecurity(webview);
-    }
-    reloadIcon.icon_name = webview.is_loading
-      ? "process-stop-symbolic"
-      : "view-refresh-symbolic";
-    // https://gjs-docs.gnome.org/webkit240~4.0_api/webkit2.loadevent
   });
 
   return { titlebar, addressBar };
