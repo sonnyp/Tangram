@@ -10,7 +10,7 @@ const { Settings, observeSetting } = imports.util;
 const {
   getWebAppInfo,
   // download,
-  saveFavicon,
+  // saveFavicon,
 } = imports.webapp.webapp;
 
 // https://github.com/flatpak/flatpak/issues/78#issuecomment-511158618
@@ -169,13 +169,14 @@ this.Window = function Window({ application, profile, state }) {
       instance.name = info.title || webview.title || "";
     }
 
-    try {
-      // await download(webview, info.icon, `file://${icon}`);
-      const icon = saveFavicon(webview, instance);
-      if (icon) instance.icon = icon;
-    } catch (err) {
-      logError(err);
-    }
+    // TODO icon
+    // try {
+    //   // await download(webview, info.icon, `file://${icon}`);
+    //   const icon = saveFavicon(webview, instance);
+    //   if (icon) instance.icon = icon;
+    // } catch (err) {
+    //   logError(err);
+    // }
 
     let canceled;
     try {

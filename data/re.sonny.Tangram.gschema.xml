@@ -45,6 +45,7 @@
       <summary>URL</summary>
       <description>Start URL</description>
     </key>
+    <!-- TODO icon -->
     <!-- <key type="s" name="icon">
       <default>""</default>
       <summary>Icon</summary>

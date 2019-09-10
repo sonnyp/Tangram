@@ -38,12 +38,13 @@ class Instance {
   set name(name) {
     return this.settings.set_string("name", name);
   }
-  get icon() {
-    return this.settings.get_string("icon");
-  }
-  set icon(icon) {
-    return this.settings.set_string("icon", icon);
-  }
+  // TODO icon
+  // get icon() {
+  //   return this.settings.get_string("icon");
+  // }
+  // set icon(icon) {
+  //   return this.settings.set_string("icon", icon);
+  // }
   get url() {
     return this.settings.get_string("url");
   }
