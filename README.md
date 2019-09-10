@@ -30,6 +30,13 @@ Tangram is powered by [WebKitGTK](https://webkitgtk.org/).
 - Shortcuts
 - Persistent desktop notifications
 
+## Security
+
+Both Flatpak and non-Flatpak versions of Tangram provide strong sandboxing for Web applications.
+
+- Flatpak via [our restricted permissions](https://github.com/sonnyp/Tangram/blob/master/re.sonny.Tangram.json)
+- Non-Flatpak through [WebkitGTK Sandboxing](https://www.youtube.com/watch?v=5TDg83LHZ6o) (requires WebkitGTK >= 2.26)
+
 ## Roadmap
 
 - Custom icon (almost done)

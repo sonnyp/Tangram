@@ -11,6 +11,7 @@ const {
   TLSErrorsPolicy,
   HardwareAccelerationPolicy,
   WebView,
+  ProcessModel,
 } = imports.gi.WebKit2;
 const { build_filenamev } = imports.gi.GLib;
 
@@ -34,9 +35,10 @@ function buildWebView({ instance, onNotification, window }) {
   web_context.set_favicon_database_directory(
     build_filenamev([cache_dir, "icondatabase"])
   );
-  // web_context.set_process_model(
-  //   imports.gi.WebKit2.ProcessModel.MULTIPLE_SECONDARY_PROCESSES
-  // );
+  web_context.set_process_model(ProcessModel.MULTIPLE_SECONDARY_PROCESSES);
+  if (typeof web_context.set_sandbox_enabled === "function") {
+    web_context.set_sandbox_enabled(true);
+  }
 
   // https://gjs-docs.gnome.org/webkit240~4.0_api/webkit2.favicondatabase
   // const favicon_database = web_context.get_favicon_database();
@@ -56,7 +58,6 @@ function buildWebView({ instance, onNotification, window }) {
   }
 
   // https://gjs-docs.gnome.org/webkit240~4.0_api/webkit2.cookiemanager
-  // not sure why but must be done after new_with_website_data_manager
   const cookieManager = website_data_manager.get_cookie_manager();
   cookieManager.set_accept_policy(CookieAcceptPolicy.NO_THIRD_PARTY);
   cookieManager.set_persistent_storage(
