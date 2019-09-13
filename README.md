@@ -4,6 +4,8 @@
 
 Run web apps on your desktop.
 
+<a href='https://flathub.org/apps/details/re.sonny.Tangram'><img width='240' alt='Download on Flathub' src='https://flathub.org/assets/badges/flathub-badge-en.svg'/></a>
+
 ![screenshot](data/appdata/screenshot.png)
 
 ## Goal
@@ -53,25 +55,9 @@ You can create a custom application by
 
 ## Install
 
-### Arch Linux
+[Flatpak](https://flathub.org/apps/details/re.sonny.Tangram)
 
-https://aur.archlinux.org/packages/gigagram-git/
-
-### Flatpak
-
-Make sure flatpak is setup according to [Install flatpak](https://flatpak.org/setup/).
-
----
-
-Download and install
-[Tangram.flatpak](https://github.com/sonnyp/Tangram/releases/download/v1.0.0/Tangram.flatpak)
-
-or
-
-```sh
-wget https://github.com/sonnyp/Tangram/releases/download/v1.0.0/Tangram.flatpak
-flatpak install Tangram.flatpak
-```
+[Arch Linux](https://aur.archlinux.org/packages/gigagram-git/)
 
 ## Details
 
