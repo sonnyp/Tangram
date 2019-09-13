@@ -1,7 +1,7 @@
 {
   "app-id": "re.sonny.Tangram",
   "runtime": "org.gnome.Platform",
-  "runtime-version": "3.32",
+  "runtime-version": "3.34",
   "sdk": "org.gnome.Sdk",
   "command": "re.sonny.Tangram",
   "finish-args": [
