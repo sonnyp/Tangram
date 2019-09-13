@@ -108,7 +108,7 @@ this.Window = function Window({ application, profile, state }) {
   state.bind("view", stack, "visible_child_name");
   window.add(stack);
 
-  const notebook = Notebook({ profile, settings });
+  const notebook = Notebook({ profile, settings, application });
   stack.add_named(notebook, "tabs");
   stack.show_all();
 
@@ -128,10 +128,8 @@ this.Window = function Window({ application, profile, state }) {
     if (title) notification.set_title(title);
     if (body) notification.set_body(body);
     notification.set_priority(NotificationPriority.HIGH);
-
     notification.set_default_action(`app.showInstance('${instance_id}')`);
-
-    application.send_notification(null, notification);
+    application.send_notification(instance_id, notification);
   }
 
   function buildInstance(instance) {

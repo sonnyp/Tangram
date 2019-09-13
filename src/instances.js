@@ -88,7 +88,8 @@ this.destroy = function destroy(instance) {
   const { settings } = instance;
   settings.reset("name");
   settings.reset("url");
-  settings.reset("icon");
+  // TODO icon
+  // settings.reset("icon");
   // https://gitlab.gnome.org/GNOME/glib/merge_requests/981#note_551625
   try {
     settings.reset("");

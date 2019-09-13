@@ -49,7 +49,7 @@ function detachTab({ instance_id, notebook, settings }) {
   page.destroy();
 }
 
-this.Notebook = function Notebook({ profile, settings }) {
+this.Notebook = function Notebook({ profile, settings, application }) {
   // https://gjs-docs.gnome.org/gtk30~3.24.8/gtk.notebook
   const notebook = new Gtk.Notebook({ scrollable: true });
   // Tab bar only hides on custom applications
@@ -62,6 +62,7 @@ this.Notebook = function Notebook({ profile, settings }) {
     );
   }
   notebook.connect("switch-page", (self, webview) => {
+    application.withdraw_notification(webview.instance_id);
     state.set({ webview });
   });
   notebook.set_group_name("tabs");
