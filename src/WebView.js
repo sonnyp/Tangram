@@ -38,6 +38,8 @@ function buildWebView({ instance, onNotification, window }) {
   web_context.set_process_model(ProcessModel.MULTIPLE_SECONDARY_PROCESSES);
   if (typeof web_context.set_sandbox_enabled === "function") {
     web_context.set_sandbox_enabled(true);
+    web_context.add_path_to_sandbox(data_dir, true);
+    web_context.add_path_to_sandbox(cache_dir, true);
   }
 
   // https://gjs-docs.gnome.org/webkit240~4.0_api/webkit2.favicondatabase
