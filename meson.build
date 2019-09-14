@@ -1,5 +1,5 @@
 project('Tangram',
-  version: '1.0.1',
+  version: '1.1.0',
   meson_version: '>= 0.50.0',
 )
 
