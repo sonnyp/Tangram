@@ -102,8 +102,13 @@ function TabLabel({ instance, settings, page }) {
 }
 
 this.TabPage = TabPage;
-function TabPage({ instance, window, onNotification }) {
-  const webView = buildWebView({ instance, window, onNotification });
+function TabPage({ instance, window, onNotification, application }) {
+  const webView = buildWebView({
+    instance,
+    window,
+    onNotification,
+    application,
+  });
   instance.page = webView;
   return webView;
 }
