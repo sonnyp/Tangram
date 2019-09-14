@@ -10,8 +10,7 @@
     "--socket=wayland",
     "--device=dri",
     "--share=network",
-    "--socket=pulseaudio",
-    "--filesystem=xdg-data/applications:create"
+    "--socket=pulseaudio"
   ],
   "modules": [
     {

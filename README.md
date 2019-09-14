@@ -112,8 +112,10 @@ npm install
 Hit `<Ctrl><Shift>Q` to restart the application.
 
 - data files are stored in `./var/data/` instead of `$XDG_DATA_HOME/Tangram/`
-- cache files are tored in `./var/cache/` instead of `XDG_CACHE_HOME/Tangram/`
-- desktop files are stored in `./var/applications/` instead of `$XDG_DATA_HOME/applications/`
+- cache files are stored in `./var/cache/` instead of `XDG_CACHE_HOME/Tangram/`
+  <!-- TODO application -->
+  <!-- - desktop files are stored in `./var/applications/` instead of `$XDG_DATA_HOME/applications/` -->
+  <!-- "--filesystem=xdg-data/applications:create" -->
 
 To test desktop notifications you can add `https://jhmux.codesandbox.io/`.
 
