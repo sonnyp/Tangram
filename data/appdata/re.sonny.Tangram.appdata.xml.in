@@ -1,11 +1,11 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8" ?>
 <!-- Copyright 2019 Sonny Piers https://sonny.re -->
 <component type="desktop-application">
   <id>re.sonny.Tangram</id>
   <metadata_license>FSFAP</metadata_license>
   <project_license>GPL-3.0+</project_license>
   <name>Tangram</name>
-  <summary>Run web apps on your desktop.</summary>
+  <summary>Run web apps on your desktop</summary>
   <description>
     <p>
       Tangram is a new kind of browser. It is designed to organize and run your Web applications.
@@ -35,35 +35,22 @@
     <release version="1.1.0" date="2019-09-14" urgency="high">
       <description>
         <p>
-          <strong>New</strong>
           <ul>
             <li>
-              Improved notifications handling
-              <a href="https://github.com/sonnyp/Tangram/issues/50">#50</a>
+              Better notifications handling
             </li>
             <li>
-              Enable WebKitGTK sandboxing see
-              <a href="https://github.com/sonnyp/Tangram/pull/48">#48</a>
+              Improved web compatibility and performances
             </li>
-            <li>
-              Improve compatibility and performances by updating Gnome SDK to 3.34
-            </li>
-          </ul>
-        </p>
-
-        <p>
-          <strong>Fixed</strong>
-          <ul>
             <li>
               Tangram now works properly on Flatpak 1.0 (Linux Mint, Ubuntu 18.04, ...)
-              <a href="https://github.com/sonnyp/Tangram/issues/51">#51</a>
             </li>
           </ul>
         </p>
       </description>
     </release>
     ​
-    <release version="1.0.1" date="2019-09-10"/>
+    <release version="1.0.1" date="2019-09-10" />
   </releases>
   <kudos>
     <kudo>HiDpiIcon</kudo>
