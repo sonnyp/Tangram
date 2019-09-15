@@ -4,4 +4,3 @@ Yes please!
 
   'AppIndicator3': '0.1'
 
-isflatpak = !!getenv('FLATPAK_ID')

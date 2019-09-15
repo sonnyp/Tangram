@@ -1,5 +1,6 @@
 [Desktop Entry]
 Name=Tangram
+Comment=Run web apps on your desktop
 Exec=re.sonny.Tangram
 Terminal=false
 Type=Application
