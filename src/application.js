@@ -16,30 +16,33 @@ const { Window } = imports.window;
 const { lookup } = imports.util;
 const { state } = imports.state;
 const { PersistentActions } = imports.persistentActions;
+const flags = imports.flags;
 
 const application = new Application({
   application_id: "re.sonny.Tangram",
-  // Custom applications
+  // TODO applications
   // flags: ApplicationFlags.NON_UNIQUE,
 });
 this.application = application;
 
-application.add_main_option(
-  "name",
-  null,
-  OptionFlags.OPTIONAL_ARG,
-  OptionArg.STRING,
-  "Display name to use",
-  "name"
-);
-application.add_main_option(
-  "id",
-  null,
-  OptionFlags.OPTIONAL_ARG,
-  OptionArg.STRING,
-  "Application id to use",
-  "application-id"
-);
+if (flags.custom_applications) {
+  application.add_main_option(
+    "name",
+    null,
+    OptionFlags.OPTIONAL_ARG,
+    OptionArg.STRING,
+    "Display name to use",
+    "name"
+  );
+  application.add_main_option(
+    "id",
+    null,
+    OptionFlags.OPTIONAL_ARG,
+    OptionArg.STRING,
+    "Application id to use",
+    "application-id"
+  );
+}
 
 const profile = {
   title: "Tangram",
@@ -69,22 +72,24 @@ function setupProfile() {
   }
 }
 
-application.connect("handle-local-options", (self, dict) => {
-  const name = lookup(dict, "name");
-  const id = lookup(dict, "id");
+if (flags.custom_applications) {
+  application.connect("handle-local-options", (self, dict) => {
+    const name = lookup(dict, "name");
+    const id = lookup(dict, "id");
 
-  if (name) {
-    profile.name = name;
-    profile.title = name;
-  }
-  if (id) {
-    profile.id = id;
-    profile.application_id += `.${id}`;
-  }
-  setupProfile();
+    if (name) {
+      profile.name = name;
+      profile.title = name;
+    }
+    if (id) {
+      profile.id = id;
+      profile.application_id += `.${id}`;
+    }
+    setupProfile();
 
-  return -1;
-});
+    return -1;
+  });
+}
 
 let window;
 
