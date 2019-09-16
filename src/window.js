@@ -41,6 +41,7 @@ this.Window = function Window({ application, profile, state }) {
     onStopLoading,
     onGoBack,
     onGoForward,
+    onGoHome,
     onAddTab,
     onCancelNewTab,
     profile,
@@ -71,6 +72,14 @@ this.Window = function Window({ application, profile, state }) {
   function onGoForward() {
     const tab = state.get("webview");
     tab && tab.go_forward();
+  }
+
+  function onGoHome() {
+    const tab = state.get("webview");
+    if (!tab || !tab.instance_id) return;
+    const instance = instances.get(tab.instance_id);
+    if (!instance) return;
+    tab.load_uri(instance.url);
   }
 
   function onShowInspector() {
@@ -262,6 +271,7 @@ this.Window = function Window({ application, profile, state }) {
     onReload,
     onGoBack,
     onGoForward,
+    onGoHome,
     onShowInspector,
   });
 

@@ -28,6 +28,7 @@ this.Shortcuts = function Shortcuts({
   onGoBack,
   onGoForward,
   onShowInspector,
+  onGoHome,
 }) {
   const nthTab = new SimpleAction({
     name: "nth-tab",
@@ -48,6 +49,7 @@ this.Shortcuts = function Shortcuts({
   const shortcuts = [
     [["Escape"], onStopLoading],
     [["<Primary>R", "F5"], onReload],
+    [["<Alt>Home"], onGoHome],
     [["<Primary><Shift>R", "<Shift>F5"], () => onReload(true)],
     [
       ["<Alt>Left"],

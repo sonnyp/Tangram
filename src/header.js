@@ -52,6 +52,7 @@ this.Header = function Header({
   onStopLoading,
   onGoBack,
   onGoForward,
+  onGoHome,
   onAddTab,
   onCancelNewTab,
   profile,
@@ -80,6 +81,7 @@ this.Header = function Header({
     "go-previous-symbolic",
     IconSize.BUTTON
   );
+  backButton.set_tooltip_text("Go back to the previous page");
   backButton.sensitive = false;
   navigationButtons.add(backButton);
   backButton.connect("clicked", onGoBack);
@@ -88,6 +90,7 @@ this.Header = function Header({
     "go-next-symbolic",
     IconSize.BUTTON
   );
+  forwardButton.set_tooltip_text("Go forward to the next page");
   forwardButton.sensitive = false;
   navigationButtons.add(forwardButton);
   forwardButton.connect("clicked", onGoForward);
@@ -97,6 +100,7 @@ this.Header = function Header({
     icon_name: "view-refresh-symbolic",
   });
   const reloadButton = new Button({ image: reloadIcon });
+  reloadButton.set_tooltip_text("Reload the current page");
   navigationButtonBox.add(reloadButton);
   reloadButton.connect("clicked", () => {
     const webview = state.get("webview");
@@ -107,11 +111,25 @@ this.Header = function Header({
     }
   });
 
+  const homeIcon = new Image({
+    icon_size: IconSize.BUTTON,
+    icon_name: "go-home-symbolic",
+  });
+  const homeButton = new Button({ image: homeIcon });
+  homeButton.set_tooltip_text("Go to homepage");
+  navigationButtonBox.add(homeButton);
+  homeButton.connect("clicked", onGoHome);
+
   const cancelBox = new Box();
-  const cancelButton = Button.new_from_icon_name(
-    "go-previous-symbolic",
-    IconSize.BUTTON
-  );
+  const cancelIcon = new Image({
+    icon_size: IconSize.BUTTON,
+    icon_name: "go-previous-symbolic",
+  });
+  const cancelButton = new Button({
+    label: "Cancel",
+    image: cancelIcon,
+    always_show_image: true,
+  });
   state.bind(
     "instances",
     cancelButton,
@@ -148,6 +166,7 @@ this.Header = function Header({
     "tab-new-symbolic",
     IconSize.BUTTON
   );
+  newTabButton.set_tooltip_text("Add new tab");
   newTabButton.set_always_show_image(true);
   newTabButton.connect("clicked", () => onNewTab());
   menuButtonBox.pack_end(Menu({ profile }), false, false, null);
