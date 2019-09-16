@@ -34,7 +34,7 @@
 - misc
   - [ ] remote services in favor of local services
   - [ ] move to GNOME gitlab?
-  - [ ] should be able to search in url bar
+  - [ ] should be able to search in url bar?
   - [x] dbus activation
   - [x] persistent notifications and actions
   - [ ] search provider

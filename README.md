@@ -62,9 +62,8 @@ You can create a custom application by
 
 ## Install
 
-[Flatpak](https://flathub.org/apps/details/re.sonny.Tangram)
-
-[Arch Linux](https://aur.archlinux.org/packages/gigagram-git/)
+- Flatpak - [Flathub](https://flathub.org/apps/details/re.sonny.Tangram)
+- Arch Linux - [AUR as `tangram`](https://aur.archlinux.org/packages/tangram/)
 
 ## Details
 

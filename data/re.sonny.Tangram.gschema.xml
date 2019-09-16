@@ -1,15 +1,15 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8" ?>
 <schemalist gettext-domain="tangram">
   <!-- https://gjs-docs.gnome.org/gtk30~3.24.8/gtk.positiontype -->
   <enum id="re.sonny.Tangram.PositionType">
-    <value nick="left" value="0"/>
-    <value nick="right" value="1"/>
-    <value nick="top" value="2"/>
-    <value nick="bottom" value="3"/>
+    <value nick="left" value="0" />
+    <value nick="right" value="1" />
+    <value nick="top" value="2" />
+    <value nick="bottom" value="3" />
   </enum>
 
   <schema id="re.sonny.Tangram">
-    <key name="tabs-position" enum='re.sonny.Tangram.PositionType'>
+    <key name="tabs-position" enum="re.sonny.Tangram.PositionType">
       <default>"left"</default>
       <summary>Tabs position</summary>
       <description>Sets the position of the tabs</description>
