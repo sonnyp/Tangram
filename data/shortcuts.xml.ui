@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8" ?>
 <interface>
   <!-- https://gitlab.gnome.org/GNOME/epiphany/blob/master/src/resources/gtk/shortcuts-dialog.ui -->
   <object class="GtkShortcutsWindow" id="shortcuts-window">
@@ -78,6 +78,13 @@
           <object class="GtkShortcutsGroup">
             <property name="visible">True</property>
             <property name="title" translatable="yes" context="shortcut window">Navigation</property>
+            <child>
+              <object class="GtkShortcutsShortcut">
+                <property name="visible">True</property>
+                <property name="title" translatable="yes" context="shortcut window">Go to homepage</property>
+                <property name="accelerator">&lt;alt&gt;Home</property>
+              </object>
+            </child>
             <child>
               <object class="GtkShortcutsShortcut">
                 <property name="visible">True</property>

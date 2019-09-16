@@ -82,7 +82,7 @@ async function instanceDialog({ window, instance, action }) {
   grid.attach(nameEntry, 2, 1, 1, 1);
 
   const URLLabel = new Label({
-    label: "URL",
+    label: "Homepage",
     halign: Align.END,
   });
   grid.attach(URLLabel, 1, 3, 1, 1);
