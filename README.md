@@ -29,6 +29,7 @@ Tangram is powered by [WebKitGTK](https://webkitgtk.org/).
 - Navigation
 - Shortcuts
 - Smart notifications
+- Downloads
 
 ## Security
 

@@ -138,6 +138,8 @@ function buildWebView({ instance, onNotification, application, window }) {
         do_overwrite_confirmation: true,
         create_folders: true,
       });
+      // On Linux Mint XFCE 19.2 the default label is 'Open'
+      dialog.set_accept_label("Save");
       // dest_dir is null in sandbox
       if (dest_dir) {
         dialog.set_current_folder(dest_dir);
