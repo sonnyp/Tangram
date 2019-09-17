@@ -56,15 +56,17 @@ this.applications_dir = (() => {
 })();
 log(`applications_dir: ${this.applications_dir}`);
 
-this.keyfile_settings_path = (() => {
-  switch (env) {
-    case "host":
-      return "";
-    // TODO with Sdk 3.34 null backend should just work on flatpak
-    // and no need to migrate as we already use the right path
-    // flatpak: https://blogs.gnome.org/mclasen/2019/07/12/settings-in-a-sandbox-world/
-    default:
-      return build_filenamev([this.config_dir, "glib-2.0/settings/keyfile"]);
-  }
-})();
+// On Flatpak with org.gnome.Platform//3.34 (which we use)
+// dconf defaults to using the keyfile backend with
+// ~/.var/app/re.sonny.Tangram/config/glib-2.0/settings/keyfile
+// so there is no need to specify keyfile backend
+// see https://blogs.gnome.org/mclasen/2019/07/12/settings-in-a-sandbox-world/
+this.keyfile_settings_path =
+  env === "dev"
+    ? build_filenamev([
+        get_current_dir(),
+        "var/config/",
+        "glib-2.0/settings/keyfile",
+      ])
+    : "";
 log(`keyfile_settings_path: ${this.keyfile_settings_path}`);
