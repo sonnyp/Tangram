@@ -6,19 +6,23 @@ const {
   get_current_dir,
   get_home_dir,
   get_user_config_dir,
+  file_test,
+  FileTest,
 } = imports.gi.GLib;
 
-const FLATPAK_ID = getenv("FLATPAK_ID");
-const DEV = getenv("DEV");
-let env;
-if (FLATPAK_ID) {
-  env = "flatpak";
-} else if (DEV) {
-  env = "dev";
-} else {
-  env = "host";
-}
+const env = (() => {
+  // On flatpak 1.0 (Ubuntu 18.04 and derivates such as Mint 19.3)
+  // FLATPAK_ID is not defined
+  if (getenv("FLATPAK_ID") || file_test("/.flatpak-info", FileTest.EXISTS)) {
+    return "flatpak";
+  }
 
+  if (getenv("DEV")) {
+    return "dev";
+  }
+
+  return "host";
+})();
 this.env = env;
 log(`env: ${env}`);
 
@@ -38,7 +42,7 @@ this.config_dir =
   env === "dev"
     ? build_filenamev([get_current_dir(), "var/config"])
     : build_filenamev([get_user_config_dir(), "Tangram"]);
-log(`config: ${this.config_dir}`);
+log(`config_dir: ${this.config_dir}`);
 
 this.applications_dir = (() => {
   switch (env) {
