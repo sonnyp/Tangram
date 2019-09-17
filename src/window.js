@@ -143,6 +143,7 @@ this.Window = function Window({ application, profile, state }) {
 
   function buildInstance(instance) {
     const page = TabPage({
+      application,
       instance,
       window,
       onNotification,
@@ -236,7 +237,12 @@ this.Window = function Window({ application, profile, state }) {
       name: "",
     });
 
-    const webview = buildWebView({ onNotification, window, instance });
+    const webview = buildWebView({
+      application,
+      onNotification,
+      window,
+      instance,
+    });
 
     const previous = stack.get_child_by_name("new-tab");
     if (previous) previous.destroy();
