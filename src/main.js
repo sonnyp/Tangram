@@ -24,6 +24,7 @@ const {
 } = imports.gi.GLib;
 
 const { application } = imports.application;
+const { migrate } = imports.migrate;
 
 if (getenv("DEV")) {
   if (log_writer_is_journald(2)) {
@@ -45,6 +46,8 @@ for (const i in pkg) {
 
 this.main = function main(argv) {
   log(`argv: ${argv.join(" ")}`);
+
+  migrate();
 
   if (getenv("DEV")) {
     const restart = new SimpleAction({
