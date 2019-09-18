@@ -99,6 +99,7 @@ this.Window = function Window({ application, profile, state }) {
     window.set_default_size(width, height);
   } else {
     window.maximize();
+    window.set_default_size(800, 600);
   }
   window.connect("size-allocate", () => {
     [width, height] = window.is_maximized ? [0, 0] : window.get_size();

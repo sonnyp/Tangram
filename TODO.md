@@ -1,5 +1,7 @@
 # ROADMAP 1.0
 
+investigate schema not found in host env
+
 - [x] new icon
 - [x] rename to Tangram
 - [x] address bar
