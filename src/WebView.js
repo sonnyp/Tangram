@@ -178,6 +178,7 @@ function buildWebView({ instance, onNotification, application, window }) {
     enable_site_specific_quirks: true,
     enable_smooth_scrolling: true,
     media_playback_requires_user_gesture: true,
+    enable_back_forward_navigation_gestures: true,
   });
 
   // https://github.com/sonnyp/Tangram/issues/39
