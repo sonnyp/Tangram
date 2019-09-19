@@ -4,7 +4,7 @@
 
 Run web apps on your desktop
 
-<a href='https://flathub.org/apps/details/re.sonny.Tangram'><img width='240' alt='Download on Flathub' src='https://flathub.org/assets/badges/flathub-badge-en.svg'/></a>
+<a href='https://flathub.org/apps/details/re.sonny.Tangram'><img width='200' alt='Download on Flathub' src='https://flathub.org/assets/badges/flathub-badge-en.svg'/></a>
 
 ![screenshot](data/appdata/screenshot.png)
 
@@ -30,6 +30,7 @@ Tangram is powered by [WebKitGTK](https://webkitgtk.org/).
 - Shortcuts
 - Smart notifications
 - Downloads
+- [Touchpad/touchscreen gestures](https://blogs.gnome.org/alexm/2019/09/13/gnome-and-gestures-part-1-webkitgtk/)
 
 ## Security
 

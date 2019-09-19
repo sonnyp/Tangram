@@ -1,6 +1,7 @@
-# ROADMAP 1.0
+# ROADMAP
 
 investigate schema not found in host env
+avoid resizing window on opening for smoother animation
 
 - [x] new icon
 - [x] rename to Tangram

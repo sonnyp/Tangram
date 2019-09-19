@@ -127,6 +127,21 @@
                 <property name="accelerator">&lt;Primary&gt;L</property>
               </object>
             </child>
+            <child>
+              <object class="GtkShortcutsShortcut">
+                <property name="visible">True</property>
+                <property name="shortcut-type">gesture-two-finger-swipe-right</property>
+                <property name="title" translatable="yes" context="shortcut window">Go back to the previous page</property>
+              </object>
+            </child>
+            <child>
+              <object class="GtkShortcutsShortcut">
+                <property name="visible">True</property>
+                <property name="shortcut-type">gesture-two-finger-swipe-left</property>
+                <property name="title" translatable="yes" context="shortcut window">Go forward to the next page</property>
+              </object>
+            </child>
+
           </object>
         </child>
       </object>

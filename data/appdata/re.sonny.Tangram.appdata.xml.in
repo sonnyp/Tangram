@@ -11,9 +11,7 @@
       Tangram is a new kind of browser. It is designed to organize and run your Web applications.
       Each tab is persistent and independant. You can set multiple tabs with different accounts for the same application.
     </p>
-    <p>
-      Common use cases for Tangram includes
-    </p>
+    <p>Common use cases:</p>
     <ul>
       <li>Stay up to date with your favorite communities</li>
       <li>Merge all these annoying separate chat applications into one</li>
@@ -32,21 +30,24 @@
   <developer_name>Sonny Piers</developer_name>
   <content_rating type="oars-1.1" />
   <releases>
+    <release version="1.2.0" date="2019-09-19" urgency="high">
+      <description>
+        <ul>
+          <li>Add support for downloading files</li>
+          <li>Better desktop integration</li>
+          <li>Fix the main window becoming tiny when unmaximizing</li>
+          <li>Enable touchpad/touchscreen swipe navigation gestures</li>
+        </ul>
+      </description>
+    </release>
+
     <release version="1.1.0" date="2019-09-14" urgency="high">
       <description>
-        <p>
-          <ul>
-            <li>
-              Better notifications handling
-            </li>
-            <li>
-              Improved web compatibility and performances
-            </li>
-            <li>
-              Tangram now works properly on Flatpak 1.0 (Linux Mint, Ubuntu 18.04, ...)
-            </li>
-          </ul>
-        </p>
+        <ul>
+          <li>Better notifications handling</li>
+          <li>Improved web compatibility and performances</li>
+          <li>Tangram now works properly on Flatpak 1.0 (Linux Mint, Ubuntu 18.04, ...)</li>
+        </ul>
       </description>
     </release>
     ​
@@ -54,6 +55,7 @@
   </releases>
   <kudos>
     <kudo>HiDpiIcon</kudo>
+    <kudo>HighContrast</kudo>
     <kudo>ModernToolkit</kudo>
     <kudo>Notifications</kudo>
   </kudos>
