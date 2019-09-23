@@ -1,5 +1,5 @@
 const { WindowTypeHint } = imports.gi.Gdk;
-const { once } = imports.util;
+const { once } = imports.troll.util;
 const {
   Dialog,
   Align,

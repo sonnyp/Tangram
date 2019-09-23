@@ -1,5 +1,6 @@
 const { WindowTypeHint } = imports.gi.Gdk;
-const { once, desktopEntry } = imports.util;
+const { desktopEntry } = imports.util;
+const { once } = imports.troll.util;
 const { programInvocationName } = imports.system;
 const {
   Dialog,
