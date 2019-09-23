@@ -76,6 +76,10 @@ Similar to [GNOME Web standalone](https://fedoramagazine.org/standalone-web-appl
 
 ## Development
 
+```sh
+git clone --recursive git://github.com/sonnyp/Tangram.git
+```
+
 ### Install dependencies
 
 <details>

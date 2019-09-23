@@ -1,11 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <gresources>
   <gresource prefix="/re/sonny/Tangram/js">
-    <file>std/console.js</file>
-    <file>std/encoding.js</file>
-    <file>std/fetch.js</file>
-    <file>std/globals.js</file>
-    <file>std/timers.js</file>
+    <file>troll/std/fetch.js</file>
+    <file>troll/util.js</file>
     <file>webapp/ephy.js</file>
     <file>webapp/webapp.js</file>
     <file>AboutDialog.js</file>

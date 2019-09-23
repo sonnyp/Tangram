@@ -2,8 +2,8 @@ const Soup = imports.gi.Soup;
 const { pixbuf_get_from_surface } = imports.gi.Gdk;
 const { get_tmp_dir, build_filenamev } = imports.gi.GLib;
 
-const { promiseAsyncReadyCallback, once } = imports.util;
-const { fetch } = imports.std.fetch;
+const { promiseTask, once } = imports.troll.util;
+const { fetch } = imports.troll.std.fetch;
 const {
   getWebAppIcon,
   getWebAppTitle,
@@ -20,7 +20,7 @@ this.download = function download(webview, url, destination) {
 
 this.runJavaScript = runJavaScript;
 function runJavaScript(webview, script) {
-  return promiseAsyncReadyCallback(
+  return promiseTask(
     webview,
     "run_javascript",
     "run_javascript_finish",

@@ -10,8 +10,6 @@ pkg.require({
   GObject: "2.0",
 });
 
-imports.std.globals;
-
 const { programInvocationName } = imports.system;
 const { SimpleAction } = imports.gi.Gio;
 const {
