@@ -26,6 +26,7 @@ const {
   UserDirectory,
   path_get_basename,
   path_get_dirname,
+  get_language_names,
 } = imports.gi.GLib;
 const { Notification, AppInfo } = imports.gi.Gio;
 
@@ -46,6 +47,8 @@ function buildWebView({ instance, onNotification, application, window }) {
   const web_context = new WebContext({
     website_data_manager,
   });
+  web_context.set_spell_checking_enabled(true);
+  web_context.set_spell_checking_languages(get_language_names());
   web_context.set_tls_errors_policy(TLSErrorsPolicy.FAIL);
   web_context.set_favicon_database_directory(
     build_filenamev([cache_dir, "icondatabase"])
