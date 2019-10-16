@@ -34,6 +34,7 @@
       <description>
         <ul>
           <li>Add support for downloading files</li>
+          <li>Add home button</li>
           <li>Better desktop integration</li>
           <li>Fix the main window becoming tiny when unmaximizing</li>
           <li>Enable touchpad/touchscreen swipe navigation gestures</li>
