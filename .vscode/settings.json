@@ -1,3 +1,10 @@
 {
-    "editor.formatOnSave": true
+  "editor.formatOnSave": true,
+  "files.watcherExclude": {
+    "**/.flatpak-builder/**": true,
+    "**/build-aux/**": true,
+    "**/build/**": true,
+    "**/flatpak/**": true,
+    "**/repo/**": true
+  }
 }

@@ -66,18 +66,6 @@ You can create a custom application by
 - right click on the tab
 - via the application menu -->
 
-## Install
-
-- Flatpak - [Flathub](https://flathub.org/apps/details/re.sonny.Tangram)
-- Arch Linux - [AUR as `tangram`](https://aur.archlinux.org/packages/tangram/)
-
-## Details
-
-Similar to [GNOME Web standalone](https://fedoramagazine.org/standalone-web-applications-gnome-web/):
-
-- WebKit data is stored under `~/.local/share/Tangram/{instance-id}/`
-- WebKit cache is stored under `~/.cache/Tangram/{instance-id}/`
-
 ## Development
 
 ```sh
