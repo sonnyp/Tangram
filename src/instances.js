@@ -1,13 +1,12 @@
 const { build_filenamev } = imports.gi.GLib;
 const { File } = imports.gi.Gio;
 
-const { Settings } = imports.util;
-const { data_dir, cache_dir } = imports.env;
+import { Settings } from "./util";
+import { data_dir, cache_dir } from "./env";
 
-const list = [];
-this.list = list;
+export const list = [];
 
-class Instance {
+export class Instance {
   constructor(id) {
     this.id = id;
     this.data_dir = build_filenamev([data_dir, id]);
@@ -52,36 +51,35 @@ class Instance {
     return this.settings.set_string("url", url);
   }
 }
-this.Instance = Instance;
 
-this.load = function load(settings) {
+export function load(settings) {
   settings.get_strv("instances").forEach(id => {
     list.push(new Instance(id));
   });
-};
+}
 
-this.detach = function detach(settings, id) {
+export function detach(settings, id) {
   const instances = settings.get_strv("instances");
   const idx = instances.indexOf(id);
   if (idx < 0) return;
   instances.splice(idx, 1);
   settings.set_strv("instances", instances);
   return idx;
-};
+}
 
-this.attach = function attach(settings, id) {
+export function attach(settings, id) {
   const instances = settings.get_strv("instances") || [];
   settings.set_strv("instances", [...instances, id]);
-};
+}
 
-this.create = function create({ id, ...props }) {
+export function create({ id, ...props }) {
   const instance = new Instance(id);
   Object.assign(instance, props);
   list.push(instance);
   return instance;
-};
+}
 
-this.destroy = function destroy(instance) {
+export function destroy(instance) {
   const idx = list.indexOf(instance);
   if (idx > -1) list.splice(idx, 1);
 
@@ -97,8 +95,8 @@ this.destroy = function destroy(instance) {
 
   File.new_for_path(instance.data_dir).trash(null);
   File.new_for_path(instance.cache_dir).trash(null);
-};
+}
 
-this.get = function get(id) {
+export function get(id) {
   return list.find(instance => instance.id === id);
-};
+}

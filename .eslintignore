@@ -1,1 +1,8 @@
-src/troll
+build/
+data/
+dist/
+flatpak/
+node_modules/
+repo/
+src/troll/
+var/

@@ -1,29 +1,35 @@
 const { uuid_string_random } = imports.gi.GLib;
 const { ApplicationWindow, Stack, StackTransitionType } = imports.gi.Gtk;
-
 const { Notification, NotificationPriority } = imports.gi.Gio;
 
-const { Notebook } = imports.Notebook;
-const { Shortcuts } = imports.Shortcuts;
-const { Actions } = imports.Actions;
-const { Settings, observeSetting } = imports.util;
-const {
+import Notebook from "./Notebook";
+import Shortcuts from "./Shortcuts";
+import Actions from "./Actions";
+import { Settings, observeSetting } from "./util";
+import {
   getWebAppInfo,
   // download,
-  // saveFavicon,
-} = imports.webapp.webapp;
+  // saveFavicon
+} from "./webapp/webapp";
 
 // https://github.com/flatpak/flatpak/issues/78#issuecomment-511158618
 // log(imports.gi.Gio.SettingsBackend.get_default());
 
-const { TabLabel, TabPage } = imports.tab;
-const { addInstanceDialog } = imports.instanceDialog;
-const { Header } = imports.header;
-const instances = imports.instances;
-const flags = imports.flags;
-const { buildWebView } = imports.WebView;
+import { TabLabel, TabPage } from "./tab";
+import { addInstanceDialog } from "./instanceDialog";
+import { Header } from "./header";
+import {
+  get as getInstance,
+  attach as attachInstance,
+  destroy as destroyInstance,
+  list as instanceList,
+  load as loadInstances,
+  create as createInstance,
+} from "./instances";
+import flags from "./flags";
+import { buildWebView } from "./WebView";
 
-this.Window = function Window({ application, profile, state }) {
+export default function Window({ application, profile, state }) {
   profile.settings =
     "/re/sonny/Tangram/" + (profile.id ? `applications/${profile.id}/` : "");
 
@@ -77,7 +83,7 @@ this.Window = function Window({ application, profile, state }) {
   function onGoHome() {
     const tab = state.get("webview");
     if (!tab || !tab.instance_id) return;
-    const instance = instances.get(tab.instance_id);
+    const instance = getInstance(tab.instance_id);
     if (!instance) return;
     tab.load_uri(instance.url);
   }
@@ -165,7 +171,7 @@ this.Window = function Window({ application, profile, state }) {
   async function onAddTab() {
     const webview = stack.get_child_by_name("new-tab");
     const { instance_id } = webview;
-    const instance = instances.get(instance_id);
+    const instance = getInstance(instance_id);
     instance.url = webview.uri;
 
     const info = await getWebAppInfo(webview);
@@ -195,7 +201,7 @@ this.Window = function Window({ application, profile, state }) {
       });
     } catch (err) {
       logError(err);
-      instances.destroy(instance);
+      destroyInstance(instance);
       // TODO display error
       return;
     }
@@ -206,7 +212,7 @@ this.Window = function Window({ application, profile, state }) {
 
     webview.load_uri(instance.url);
 
-    instances.attach(settings, instance.id);
+    attachInstance(settings, instance.id);
     stack.remove(webview);
 
     const idx = buildInstanceFromPage({
@@ -224,15 +230,15 @@ this.Window = function Window({ application, profile, state }) {
     if (!webView) return;
     webView.destroy();
     const { instance_id } = webView;
-    const instance = instances.get(instance_id);
+    const instance = getInstance(instance_id);
     if (!instance) return;
-    instances.destroy(instance);
+    destroyInstance(instance);
   }
 
   function onNewTab() {
     const id = uuid_string_random().replace(/-/g, "");
 
-    const instance = instances.create({
+    const instance = createInstance({
       url: "about:blank",
       id,
       name: "",
@@ -251,8 +257,8 @@ this.Window = function Window({ application, profile, state }) {
     state.set({ webview, view: "new-tab" });
   }
 
-  instances.load(settings);
-  instances.list.forEach(instance => {
+  loadInstances(settings);
+  instanceList.forEach(instance => {
     buildInstance(instance);
   });
 
@@ -292,4 +298,4 @@ this.Window = function Window({ application, profile, state }) {
   });
 
   return { window, notebook, showTab };
-};
+}

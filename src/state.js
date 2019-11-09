@@ -1,6 +1,6 @@
 const { addSignalMethods } = imports.signals;
 
-class State {
+export class State {
   constructor() {
     this.properties = Object.create(null);
   }
@@ -50,6 +50,5 @@ class State {
   }
 }
 addSignalMethods(State.prototype);
-this.State = State;
 
-this.state = new State();
+export default new State();

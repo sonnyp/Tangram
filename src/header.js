@@ -13,8 +13,8 @@ const {
 } = imports.gi.Gtk;
 const { LoadEvent, uri_for_display } = imports.gi.WebKit2;
 
-const { AddressBar } = imports.AddressBar;
-const flags = imports.flags;
+import { AddressBar } from "./AddressBar";
+import flags from "./flags";
 
 function Menu({ profile }) {
   const builder = Builder.new_from_resource(
@@ -47,7 +47,7 @@ function Menu({ profile }) {
   return button;
 }
 
-this.Header = function Header({
+export function Header({
   onReload,
   onStopLoading,
   onGoBack,
@@ -302,4 +302,4 @@ this.Header = function Header({
   });
 
   return { titlebar, addressBar };
-};
+}

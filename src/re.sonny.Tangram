@@ -13,7 +13,7 @@ setenv("DEV", "true", false);
 // }
 // const { name, version } = readPackage();
 
-// https://gitlab.gnome.org/GNOME/gjs/wikis/Package/Specification
+// https://gitlab.gnome.org/GNOME/gjs/blob/master/doc/Package/Specification.md
 // https://gitlab.gnome.org/GNOME/gjs/blob/master/modules/package.js
 imports.package.start({
   name: "re.sonny.Tangram",

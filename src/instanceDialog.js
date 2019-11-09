@@ -1,5 +1,4 @@
 const { WindowTypeHint } = imports.gi.Gdk;
-const { once } = imports.troll.util;
 const {
   Dialog,
   Align,
@@ -14,16 +13,17 @@ const {
 const { SettingsBindFlags } = imports.gi.Gio;
 const { build_filenamev } = imports.gi.GLib;
 
-const { iconChooser, saveIcon } = imports.icon;
-const flags = imports.flags;
+import { once } from "./troll/util";
+import { iconChooser, saveIcon } from "./icon";
+import flags from "./flags";
 
-this.editInstanceDialog = function editInstanceDialog(props) {
+export function editInstanceDialog(props) {
   return instanceDialog({ ...props, action: "Edit" });
-};
+}
 
-this.addInstanceDialog = function editInstanceDialog(props) {
+export function addInstanceDialog(props) {
   return instanceDialog({ ...props, action: "Add " });
-};
+}
 
 async function instanceDialog({ window, instance, action }) {
   // TODO Dialog.new_with_buttons

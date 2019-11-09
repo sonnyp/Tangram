@@ -1,15 +1,15 @@
 const { VariantType, Variant } = imports.gi.GLib;
 const { SimpleAction } = imports.gi.Gio;
 
-const { detachTab } = imports.Notebook;
-const instances = imports.instances;
-const {
+import { detachTab } from "./Notebook";
+import * as instances from "./instances";
+import {
   newApplicationDialog,
   editApplicationDialog,
-} = imports.applicationDialog;
-const { editInstanceDialog } = imports.instanceDialog;
+} from "./applicationDialog";
+import { editInstanceDialog } from "./instanceDialog";
 
-this.Actions = function Actions({
+export default function Actions({
   window,
   application,
   settings,
@@ -117,4 +117,4 @@ this.Actions = function Actions({
   });
   application.add_action(quit);
   application.set_accels_for_action("app.quit", ["<Ctrl>Q"]);
-};
+}

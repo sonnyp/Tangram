@@ -21,7 +21,9 @@ bundle:
 	flatpak build-bundle repo Tangram.flatpak re.sonny.Tangram --runtime-repo=https://flathub.org/repo/flathub.flatpakrepo
 
 test:
-	gjs -I src/ src/webapp/test.js
+	./node_modules/.bin/webpack
+	./node_modules/.bin/webpack src/webapp/test.js -o dist/webapp/test.js
+	gjs dist/webapp/test.js
 	./node_modules/.bin/eslint src/
 
 clean:
