@@ -6,9 +6,9 @@ const {
 } = imports.gi.GLib;
 const { FileCopyFlags, File, IOErrorEnum } = imports.gi.Gio;
 
-const { env } = imports.env;
+import { env } from "./env";
 
-this.migrate = function migrate() {
+export default function migrate() {
   if (env !== "flatpak") {
     return;
   }
@@ -41,4 +41,4 @@ this.migrate = function migrate() {
   }
 
   log(`Migrated: ${migrated}`);
-};
+}

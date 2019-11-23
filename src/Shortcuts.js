@@ -18,7 +18,7 @@ function prevPage(notebook) {
   }
 }
 
-this.Shortcuts = function Shortcuts({
+export default function Shortcuts({
   window,
   application,
   notebook,
@@ -138,4 +138,4 @@ this.Shortcuts = function Shortcuts({
 
     return false;
   });
-};
+}

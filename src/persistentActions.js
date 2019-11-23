@@ -1,12 +1,9 @@
 const { VariantType } = imports.gi.GLib;
 const { SimpleAction, AppInfo } = imports.gi.Gio;
 
-const instances = imports.instances;
+import * as instances from "./instances";
 
-this.PersistentActions = function PersistentActions({
-  getWindow,
-  application,
-}) {
+export function PersistentActions({ getWindow, application }) {
   // https://gjs-docs.gnome.org/gio20~2.0_api/gio.simpleaction
   const showInstanceAction = new SimpleAction({
     name: "showInstance",
@@ -35,4 +32,4 @@ this.PersistentActions = function PersistentActions({
     AppInfo.launch_default_for_uri(path, null);
   });
   application.add_action(openURIAction);
-};
+}

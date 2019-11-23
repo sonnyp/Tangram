@@ -1,6 +1,4 @@
 const { WindowTypeHint } = imports.gi.Gdk;
-const { desktopEntry } = imports.util;
-const { once } = imports.troll.util;
 const { programInvocationName } = imports.system;
 const {
   Dialog,
@@ -12,7 +10,6 @@ const {
   Orientation,
   Box,
 } = imports.gi.Gtk;
-
 const {
   build_filenamev,
   path_is_absolute,
@@ -33,8 +30,10 @@ const {
 } = imports.gi.GLib;
 const { DesktopAppInfo } = imports.gi.Gio;
 
-const { applications_dir, data_dir, env } = imports.env;
-const { iconChooser, saveIcon } = imports.icon;
+import { applications_dir, data_dir, env } from "./env";
+import { iconChooser, saveIcon } from "./icon";
+import { desktopEntry } from "./util";
+import { once } from "./troll/util";
 
 let bin;
 if (env === "flatpak") {
@@ -57,8 +56,7 @@ log(`default_icon: ${default_desktop_icon}`);
 
 const APP_ICON = "resource:///re/sonny/Tangram/data/icon.svg";
 
-this.launchApplication = launchApplication;
-function launchApplication(desktopFilePath) {
+export function launchApplication(desktopFilePath) {
   const desktopAppInfo = DesktopAppInfo.new_from_filename(desktopFilePath);
 
   try {
@@ -72,17 +70,15 @@ function launchApplication(desktopFilePath) {
   }
 }
 
-this.buildApplicationId = buildApplicationId;
-function buildApplicationId(name) {
+export function buildApplicationId(name) {
   return `${name}-${uuid_string_random().replace(/-/g, "")}`;
 }
 
-function buildDesktopFilePath(id) {
+export function buildDesktopFilePath(id) {
   return build_filenamev([applications_dir, `${id}.desktop`]);
 }
 
-this.createApplication = createApplication;
-function createApplication({ name, icon, id }) {
+export function createApplication({ name, icon, id }) {
   if (icon === APP_ICON || !icon) {
     icon = default_desktop_icon;
   }
@@ -107,10 +103,7 @@ function createApplication({ name, icon, id }) {
   return { id, desktopFilePath, desktopKeyFile };
 }
 
-this.editApplicationDialog = async function editApplicationDialog({
-  id,
-  ...props
-}) {
+export async function editApplicationDialog({ id, ...props }) {
   const desktopFilePath = buildDesktopFilePath(id);
   const keyFile = new KeyFile();
   keyFile.load_from_file(
@@ -154,9 +147,9 @@ this.editApplicationDialog = async function editApplicationDialog({
   keyFile.save_to_file(desktopFilePath);
   // FIXME - we should restart the app
   // maybe notification https://developer.gnome.org/hig/stable/in-app-notifications.html.en ?
-};
+}
 
-this.newApplicationDialog = async function newApplicationDialog({ ...props }) {
+export async function newApplicationDialog({ ...props }) {
   const params = {
     name: "",
     icon: APP_ICON,
@@ -176,9 +169,9 @@ this.newApplicationDialog = async function newApplicationDialog({ ...props }) {
     logError(err);
     // TODO show error
   }
-};
+}
 
-async function applicationDialog({ window, action, params = {} }) {
+export async function applicationDialog({ window, action, params = {} }) {
   // TODO Dialog.new_with_buttons
   // is undefined in gjs, open issue.
   // https://developer.gnome.org/hig/stable/dialogs.html.en#Action

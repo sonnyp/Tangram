@@ -1,3 +1,25 @@
+const { programInvocationName } = imports.system;
+const { SimpleAction } = imports.gi.Gio;
+const {
+  getenv,
+  // listenv,
+  spawn_async,
+  SpawnFlags,
+  log_writer_is_journald,
+  setenv,
+} = imports.gi.GLib;
+
+const pkg = imports.package;
+// eslint-disable-next-line no-restricted-globals
+window.pkg = pkg;
+setenv("DEV", "true", false);
+pkg._runningFromSource = () => true;
+pkg._findEffectiveEntryPointName = () => "re.sonny.Tangram";
+pkg.init({
+  name: "re.sonny.Tangram",
+  version: "dev",
+  prefix: "", // Required but not used when running from source
+});
 pkg.initGettext();
 pkg.initFormat();
 pkg.require({
@@ -10,19 +32,8 @@ pkg.require({
   GObject: "2.0",
 });
 
-const { programInvocationName } = imports.system;
-const { SimpleAction } = imports.gi.Gio;
-const {
-  getenv,
-  // listenv,
-  spawn_async,
-  SpawnFlags,
-  log_writer_is_journald,
-  setenv,
-} = imports.gi.GLib;
-
-const { application } = imports.application;
-const { migrate } = imports.migrate;
+import application from "./application";
+import migrate from "./migrate";
 
 if (getenv("DEV")) {
   if (log_writer_is_journald(2)) {
@@ -42,11 +53,8 @@ for (const i in pkg) {
 //   log(`env ${name}: ${getenv(name)}`);
 // });
 
-this.main = function main(argv) {
-  log(`argv: ${argv.join(" ")}`);
-
+export default function main(argv = []) {
   migrate();
-
   if (getenv("DEV")) {
     const restart = new SimpleAction({
       name: "restart",
@@ -59,6 +67,7 @@ this.main = function main(argv) {
     application.add_action(restart);
     application.set_accels_for_action("app.restart", ["<Ctrl><Shift>Q"]);
   }
-
   return application.run(argv);
-};
+}
+
+main();

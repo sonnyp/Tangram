@@ -13,3 +13,5 @@ repo/
 node_modules
 gschemas.compiled
 var
+dist/
+!dist/re.sonny.Tangram

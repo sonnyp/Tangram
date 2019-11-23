@@ -10,20 +10,20 @@ const {
   set_application_name,
 } = imports.gi.GLib;
 const { set_program_class } = imports.gi.Gdk;
-const { AboutDialog } = imports.AboutDialog;
 
-const { Window } = imports.window;
-const { lookup } = imports.util;
-const { state } = imports.state;
-const { PersistentActions } = imports.persistentActions;
-const flags = imports.flags;
+import AboutDialog from "./AboutDialog";
+import Window from "./window";
+import { lookup } from "./util";
+import state from "./state";
+import { PersistentActions } from "./persistentActions";
+import flags from "./flags";
 
 const application = new Application({
   application_id: "re.sonny.Tangram",
   // TODO applications
   // flags: ApplicationFlags.NON_UNIQUE,
 });
-this.application = application;
+export default application;
 
 if (flags.custom_applications) {
   application.add_main_option(

@@ -1,13 +1,11 @@
-#!/usr/bin/env gjs
-
 // gjs -I src/ src/webapp/test.js
+
+import { getWebAppInfo } from "./webapp";
 
 const WebKit = imports.gi.WebKit2;
 const Gtk = imports.gi.Gtk;
 const GLib = imports.gi.GLib;
 const Soup = imports.gi.Soup;
-
-const { getWebAppInfo } = imports.webapp.webapp;
 
 // Gtk needs to be initialized for WebKitGTK
 Gtk.init(null);

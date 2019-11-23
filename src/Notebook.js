@@ -1,19 +1,22 @@
 const Gtk = imports.gi.Gtk;
 const { SettingsBindFlags } = imports.gi.Gio;
 
-const { Settings, connect } = imports.util;
-const { state } = imports.state;
-const {
+import { Settings, connect } from "./util";
+import state from "./state";
+import {
   createApplication,
   launchApplication,
   buildApplicationId,
-} = imports.applicationDialog;
-const instances = imports.instances;
-const flags = imports.flags;
+} from "./applicationDialog";
+import {
+  get as getInstance,
+  attach as attachInstance,
+  detach as detachInstance,
+} from "./instances";
+import flags from "./flags";
 
-this.detachTab = detachTab;
-function detachTab({ instance_id, notebook, settings }) {
-  const instance = instances.get(instance_id);
+export function detachTab({ instance_id, notebook, settings }) {
+  const instance = getInstance(instance_id);
   const { name, icon } = instance;
   const id = buildApplicationId(name);
 
@@ -30,7 +33,7 @@ function detachTab({ instance_id, notebook, settings }) {
     schema_id: "re.sonny.Tangram",
     path: `/re/sonny/Tangram/applications/${id}/`,
   });
-  instances.attach(newAppSettings, instance.id);
+  attachInstance(newAppSettings, instance.id);
 
   try {
     launchApplication(desktopFilePath);
@@ -40,7 +43,7 @@ function detachTab({ instance_id, notebook, settings }) {
     return;
   }
 
-  const idx = instances.detach(settings, instance.id);
+  const idx = detachInstance(settings, instance.id);
 
   const page = notebook.get_nth_page(idx);
   notebook.detach_tab(page);
@@ -49,7 +52,7 @@ function detachTab({ instance_id, notebook, settings }) {
   page.destroy();
 }
 
-this.Notebook = function Notebook({ profile, settings, application }) {
+export default function Notebook({ profile, settings, application }) {
   // https://gjs-docs.gnome.org/gtk30~3.24.8/gtk.notebook
   const notebook = new Gtk.Notebook({ scrollable: true });
   // Tab bar only hides on custom applications
@@ -95,4 +98,4 @@ this.Notebook = function Notebook({ profile, settings, application }) {
   }
 
   return notebook;
-};
+}

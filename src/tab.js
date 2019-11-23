@@ -3,9 +3,9 @@ const { EventMask } = imports.gi.Gdk;
 const { Menu, SettingsBindFlags } = imports.gi.Gio;
 const { Pixbuf, InterpType } = imports.gi.GdkPixbuf;
 
-const flags = imports.flags;
-const { getFaviconAsPixbuf } = imports.webapp.webapp;
-const { buildWebView } = imports.WebView;
+import flags from "./flags";
+import { getFaviconAsPixbuf } from "./webapp/webapp";
+import { buildWebView } from "./WebView";
 
 const ICON_SIZE = 16;
 
@@ -15,8 +15,7 @@ function getFaviconScaled(webview) {
   return pixbuf.scale_simple(ICON_SIZE, ICON_SIZE, InterpType.BILINEAR);
 }
 
-this.TabLabel = TabLabel;
-function TabLabel({ instance, settings, page }) {
+export function TabLabel({ instance, settings, page }) {
   const { id } = instance;
 
   const box = new Box({});
@@ -101,8 +100,7 @@ function TabLabel({ instance, settings, page }) {
   return eventBox;
 }
 
-this.TabPage = TabPage;
-function TabPage({ instance, window, onNotification, application }) {
+export function TabPage({ instance, window, onNotification, application }) {
   const webView = buildWebView({
     instance,
     window,

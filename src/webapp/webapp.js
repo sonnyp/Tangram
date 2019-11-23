@@ -2,24 +2,24 @@ const Soup = imports.gi.Soup;
 const { pixbuf_get_from_surface } = imports.gi.Gdk;
 const { get_tmp_dir, build_filenamev } = imports.gi.GLib;
 
-const { promiseTask, once } = imports.troll.util;
-const { fetch } = imports.troll.std.fetch;
-const {
+import { promiseTask, once } from "../troll/util";
+import fetch from "../troll/std/fetch";
+
+import {
   getWebAppIcon,
   getWebAppTitle,
   getWebAppManifest,
   getWebAppURL,
-} = imports.webapp.ephy;
+} from "./ephy";
 
-this.download = function download(webview, url, destination) {
+export function download(webview, url, destination) {
   const download = webview.download_uri(url);
   download.set_allow_overwrite(true);
   download.set_destination(destination);
   return once(download, "finished", "failed");
-};
+}
 
-this.runJavaScript = runJavaScript;
-function runJavaScript(webview, script) {
+export function runJavaScript(webview, script) {
   return promiseTask(
     webview,
     "run_javascript",
@@ -32,7 +32,7 @@ function runJavaScript(webview, script) {
   });
 }
 
-async function fetchManifest(url) {
+export async function fetchManifest(url) {
   return (await fetch(url)).json();
 }
 
@@ -141,8 +141,7 @@ function resolveURI(webview, URL) {
   );
 }
 
-this.getWebAppInfo = getWebAppInfo;
-async function getWebAppInfo(webview) {
+export async function getWebAppInfo(webview) {
   const title = await getTitle(webview);
   // const icon = await getIcon(webview);
   const URL = await getURL(webview);
@@ -211,7 +210,7 @@ function getFavicon(webview) {
   }
 }
 
-function getFaviconAsPixbuf(webview) {
+export function getFaviconAsPixbuf(webview) {
   const favicon = getFavicon(webview);
   if (!favicon) return;
 
@@ -225,7 +224,7 @@ function getFaviconAsPixbuf(webview) {
   return pixbuf;
 }
 
-this.saveFavicon = function saveFavicon(webview, instance) {
+export function saveFavicon(webview, instance) {
   const favicon = getFaviconAsPixbuf(webview);
   if (!favicon) return null;
 
@@ -233,4 +232,4 @@ this.saveFavicon = function saveFavicon(webview, instance) {
   if (!favicon.savev(path, "png", [], [])) return null;
 
   return path;
-};
+}

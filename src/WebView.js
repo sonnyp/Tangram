@@ -30,11 +30,15 @@ const {
 } = imports.gi.GLib;
 const { Notification, AppInfo } = imports.gi.Gio;
 
-const { connect } = imports.util;
-const { env } = imports.env;
+import { connect } from "./util";
+import { env } from "./env";
 
-this.buildWebView = buildWebView;
-function buildWebView({ instance, onNotification, application, window }) {
+export function buildWebView({
+  instance,
+  onNotification,
+  application,
+  window,
+}) {
   const { data_dir, cache_dir, url, id, name } = instance;
 
   // https://gjs-docs.gnome.org/webkit240~4.0_api/webkit2.websitedatamanager
