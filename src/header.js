@@ -126,7 +126,8 @@ export function Header({
     icon_name: "go-previous-symbolic",
   });
   const cancelButton = new Button({
-    label: "Cancel",
+    // https://github.com/sonnyp/Tangram/issues/64
+    // label: "Cancel",
     image: cancelIcon,
     always_show_image: true,
   });

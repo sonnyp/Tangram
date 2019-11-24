@@ -1,6 +1,5 @@
-// gjs -I src/ src/webapp/test.js
-
 import { getWebAppInfo } from "./webapp";
+import * as assert from "../troll/assert";
 
 const WebKit = imports.gi.WebKit2;
 const Gtk = imports.gi.Gtk;
@@ -10,14 +9,6 @@ const Soup = imports.gi.Soup;
 // Gtk needs to be initialized for WebKitGTK
 Gtk.init(null);
 const loop = GLib.MainLoop.new(null, false);
-
-const assert = {
-  is(actual, expected) {
-    if (!Object.is(actual, expected)) {
-      throw new Error(`Expected "${actual}" to be "${expected}".`);
-    }
-  },
-};
 
 async function setup(webview, html, manifest) {
   return new Promise(resolve => {
