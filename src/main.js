@@ -33,7 +33,6 @@ pkg.require({
 });
 
 import application from "./application";
-import migrate from "./migrate";
 
 if (getenv("DEV")) {
   if (log_writer_is_journald(2)) {
@@ -54,7 +53,6 @@ for (const i in pkg) {
 // });
 
 export default function main(argv = []) {
-  migrate();
   if (getenv("DEV")) {
     const restart = new SimpleAction({
       name: "restart",
