@@ -12,7 +12,7 @@
     <file>applicationDialog.js</file>
     <file>env.js</file>
     <file>flags.js</file>
-    <file>header.js</file>
+    <file>Header.js</file>
     <file>icon.js</file>
     <file>instanceDialog.js</file>
     <file>instances.js</file>
