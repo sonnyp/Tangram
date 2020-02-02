@@ -52,7 +52,7 @@ for (const i in pkg) {
 //   log(`env ${name}: ${getenv(name)}`);
 // });
 
-export default function main(argv = []) {
+function main(argv = []) {
   if (getenv("DEV")) {
     const restart = new SimpleAction({
       name: "restart",

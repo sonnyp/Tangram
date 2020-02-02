@@ -17,7 +17,7 @@ import {
 
 import { TabLabel, TabPage } from "./tab";
 import { addInstanceDialog } from "./instanceDialog";
-import { Header } from "./header";
+import Header from "./Header";
 import {
   get as getInstance,
   attach as attachInstance,

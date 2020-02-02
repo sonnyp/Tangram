@@ -47,7 +47,7 @@ function Menu({ profile }) {
   return button;
 }
 
-export function Header({
+export default function Header({
   onReload,
   onStopLoading,
   onGoBack,
