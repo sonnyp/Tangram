@@ -23,7 +23,7 @@ function normalizeURL(str) {
   return uri.to_string(false);
 }
 
-this.AddressBar = function AddressBar({ state }) {
+export default function AddressBar({ state }) {
   const URLBar = new Entry({
     hexpand: true,
     placeholder_text: "Enter address",
@@ -58,4 +58,4 @@ this.AddressBar = function AddressBar({ state }) {
     webview.grab_focus();
   });
   return URLBar;
-};
+}

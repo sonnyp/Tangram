@@ -13,7 +13,7 @@ const gjsVersion = (() => {
 log(`gjs ${gjsVersion}`);
 log(`WebKitGTK ${WebKitGTKVersion}`);
 
-this.AboutDialog = function AboutDialog({ window }) {
+export default function AboutDialog({ window }) {
   // https://gjs-docs.gnome.org/gtk30~3.24.8/gtk.aboutdialog
   const aboutDialog = new Gtk.AboutDialog({
     authors: ["Sonny Piers https://sonny.re"],
@@ -48,4 +48,4 @@ this.AboutDialog = function AboutDialog({ window }) {
   });
 
   return aboutDialog;
-};
+}

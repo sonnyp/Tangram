@@ -70,25 +70,22 @@ export default function Notebook({ profile, settings, application }) {
   });
   notebook.set_group_name("tabs");
   notebook.show_all();
-  connect(
-    notebook,
-    {
-      ["page-reordered"]() {
-        const number_of_pages = notebook.get_n_pages();
+  connect(notebook, {
+    ["page-reordered"]() {
+      const number_of_pages = notebook.get_n_pages();
 
-        const instances = settings.get_strv("instances");
-        const reordered = [];
+      const instances = settings.get_strv("instances");
+      const reordered = [];
 
-        for (let i = 0; i < number_of_pages; i++) {
-          const id = notebook.get_nth_page(i).instance_id;
-          if (!instances.includes(id)) continue;
-          reordered.push(id);
-        }
+      for (let i = 0; i < number_of_pages; i++) {
+        const id = notebook.get_nth_page(i).instance_id;
+        if (!instances.includes(id)) continue;
+        reordered.push(id);
+      }
 
-        settings.set_strv("instances", reordered);
-      },
-    }
-  );
+      settings.set_strv("instances", reordered);
+    },
+  });
   settings.bind("tabs-position", notebook, "tab_pos", SettingsBindFlags.GET);
 
   if (flags.custom_applications) {
