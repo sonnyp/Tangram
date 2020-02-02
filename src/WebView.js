@@ -208,31 +208,28 @@ export function buildWebView({
   // const webInspector = webView.get_inspector();
   // webInspector.show();
 
-  connect(
-    webView,
-    {
-      // https://gjs-docs.gnome.org/webkit240~4.0_api/webkit2.webview#signal-create
-      create(navigation_action) {
-        const uri = navigation_action.get_request().get_uri();
-        show_uri_on_window(window, uri, null);
-      },
+  connect(webView, {
+    // https://gjs-docs.gnome.org/webkit240~4.0_api/webkit2.webview#signal-create
+    create(navigation_action) {
+      const uri = navigation_action.get_request().get_uri();
+      show_uri_on_window(window, uri, null);
+    },
 
-      // https://gjs-docs.gnome.org/webkit240~4.0_api/webkit2.webview#signal-permission-request
-      ["permission-request"](request) {
-        if (request instanceof NotificationPermissionRequest) {
-          request.allow();
-          return;
-        }
-        request.deny();
-      },
+    // https://gjs-docs.gnome.org/webkit240~4.0_api/webkit2.webview#signal-permission-request
+    ["permission-request"](request) {
+      if (request instanceof NotificationPermissionRequest) {
+        request.allow();
+        return;
+      }
+      request.deny();
+    },
 
-      // https://gjs-docs.gnome.org/webkit240~4.0_api/webkit2.webview#signal-show-notification
-      ["show-notification"](notification) {
-        onNotification(notification, id);
-        return true;
-      },
-    }
-  );
+    // https://gjs-docs.gnome.org/webkit240~4.0_api/webkit2.webview#signal-show-notification
+    ["show-notification"](notification) {
+      onNotification(notification, id);
+      return true;
+    },
+  });
 
   webView.instance_id = id;
   webView.show_all();

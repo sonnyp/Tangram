@@ -13,7 +13,7 @@ const {
 } = imports.gi.Gtk;
 const { LoadEvent, uri_for_display } = imports.gi.WebKit2;
 
-import { AddressBar } from "./AddressBar";
+import AddressBar from "./AddressBar";
 import flags from "./flags";
 
 function Menu({ profile }) {
