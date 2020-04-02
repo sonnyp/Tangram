@@ -96,7 +96,7 @@ async function instanceDialog({ window, instance, action }) {
   primaryButton.set_sensitive(!!URLEntry.text);
   URLEntry.set_icon_tooltip_text(
     EntryIconPosition.SECONDARY,
-    "Cannot be empty"
+    "Cannot be empty",
   );
   URLEntry.set_icon_activatable(EntryIconPosition.SECONDARY, false);
   URLEntry.connect("changed", () => {
@@ -110,7 +110,7 @@ async function instanceDialog({ window, instance, action }) {
     primaryButton.set_sensitive(false);
     URLEntry.set_icon_from_icon_name(
       EntryIconPosition.SECONDARY,
-      "face-sick-symbolic"
+      "face-sick-symbolic",
     );
   });
 
@@ -131,7 +131,7 @@ async function instanceDialog({ window, instance, action }) {
     if (!icon.startsWith("resource://")) {
       icon = saveIcon(
         iconEntry.get_value(),
-        build_filenamev([instance.data_dir, "icon.png"])
+        build_filenamev([instance.data_dir, "icon.png"]),
       );
       // eslint-disable-next-line require-atomic-updates
       instance.icon = icon;

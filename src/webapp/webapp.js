@@ -25,7 +25,7 @@ export function runJavaScript(webview, script) {
     "run_javascript",
     "run_javascript_finish",
     script,
-    null
+    null,
   ).then(javascriptResult => {
     if (!javascriptResult) return;
     return javascriptResult.get_js_value();
@@ -137,7 +137,7 @@ function findBestIcon(icons) {
 
 function resolveURI(webview, URL) {
   return Soup.URI.new_with_base(new Soup.URI(webview.get_uri()), URL).to_string(
-    false
+    false,
   );
 }
 
@@ -219,7 +219,7 @@ export function getFaviconAsPixbuf(webview) {
     0,
     0,
     favicon.getWidth(),
-    favicon.getHeight()
+    favicon.getHeight(),
   );
   return pixbuf;
 }

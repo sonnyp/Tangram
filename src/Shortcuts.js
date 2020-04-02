@@ -82,7 +82,7 @@ export default function Shortcuts({
         accelerator_key,
         accelerator_mods,
         AccelFlags.VISIBLE,
-        fn
+        fn,
       );
     });
   });

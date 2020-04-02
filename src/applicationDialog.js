@@ -108,17 +108,17 @@ export async function editApplicationDialog({ id, ...props }) {
   const keyFile = new KeyFile();
   keyFile.load_from_file(
     desktopFilePath,
-    KeyFileFlags.KEEP_COMMENTS | KeyFileFlags.KEEP_TRANSLATIONS
+    KeyFileFlags.KEEP_COMMENTS | KeyFileFlags.KEEP_TRANSLATIONS,
   );
 
   const name = keyFile.get_value(
     KEY_FILE_DESKTOP_GROUP,
-    KEY_FILE_DESKTOP_KEY_NAME
+    KEY_FILE_DESKTOP_KEY_NAME,
   );
 
   let icon = keyFile.get_value(
     KEY_FILE_DESKTOP_GROUP,
-    KEY_FILE_DESKTOP_KEY_ICON
+    KEY_FILE_DESKTOP_KEY_ICON,
   );
   if (!icon || icon === default_desktop_icon) {
     icon = APP_ICON;
@@ -137,12 +137,12 @@ export async function editApplicationDialog({ id, ...props }) {
   keyFile.set_value(
     KEY_FILE_DESKTOP_GROUP,
     KEY_FILE_DESKTOP_KEY_NAME,
-    result.name
+    result.name,
   );
   keyFile.set_value(
     KEY_FILE_DESKTOP_GROUP,
     KEY_FILE_DESKTOP_KEY_ICON,
-    result.icon
+    result.icon,
   );
   keyFile.save_to_file(desktopFilePath);
   // FIXME - we should restart the app
