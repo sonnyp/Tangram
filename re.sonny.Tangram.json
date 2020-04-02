@@ -1,12 +1,13 @@
 {
   "app-id": "re.sonny.Tangram",
   "runtime": "org.gnome.Platform",
-  "runtime-version": "3.34",
+  "runtime-version": "3.36",
   "sdk": "org.gnome.Sdk",
   "command": "re.sonny.Tangram",
   "finish-args": [
     "--share=ipc",
     "--socket=x11",
+    "--socket=fallback-x11",
     "--socket=wayland",
     "--device=dri",
     "--share=network",
