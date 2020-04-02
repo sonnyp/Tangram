@@ -28,7 +28,7 @@ cp -rp data/icons/hicolor/symbolic/apps/re.sonny.Tangram-symbolic.svg ~/.local/s
 
 update-desktop-database -q
 
-gjs $PWD/dist/main.js "$@"
+gjs $PWD/src/main.js "$@"
 # gtk-launch re.sonny.Tangram
 
 rm ~/.local/share/applications/re.sonny.Tangram.desktop

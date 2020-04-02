@@ -1,29 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <gresources>
   <gresource prefix="/re/sonny/Tangram/js">
-    <file>troll/std/fetch.js</file>
-    <file>troll/util.js</file>
-    <file>webapp/ephy.js</file>
-    <file>webapp/webapp.js</file>
-    <file>AboutDialog.js</file>
-    <file>Actions.js</file>
-    <file>AddressBar.js</file>
-    <file>application.js</file>
-    <file>applicationDialog.js</file>
-    <file>env.js</file>
-    <file>flags.js</file>
-    <file>Header.js</file>
-    <file>icon.js</file>
-    <file>instanceDialog.js</file>
-    <file>instances.js</file>
     <file>main.js</file>
-    <file>Notebook.js</file>
-    <file>persistentActions.js</file>
-    <file>Shortcuts.js</file>
-    <file>state.js</file>
-    <file>tab.js</file>
-    <file>util.js</file>
-    <file>WebView.js</file>
-    <file>window.js</file>
   </gresource>
 </gresources>

@@ -15,3 +15,4 @@ gschemas.compiled
 var
 dist/
 !dist/re.sonny.Tangram
+src/main.js
