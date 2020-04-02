@@ -5,18 +5,18 @@ const path = require("path");
 module.exports = {
   mode: "development",
   entry: {
-    main: "./src/main.js",
+    main: "./src/index.js",
   },
   // devtool: "inline-source-map",
   output: {
-    filename: "./dist/[name].js",
+    filename: "./src/main.js",
     path: path.resolve(__dirname),
     libraryTarget: "var",
     library: "[name]",
   },
-  optimization: {
-    minimize: false,
-  },
+  // optimization: {
+  //   minimize: false,
+  // },
   resolve: {
     modules: [path.resolve("./src"), "node_modules"],
   },

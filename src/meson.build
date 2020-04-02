@@ -1,19 +1,19 @@
 pkgdatadir = join_paths(get_option('datadir'), meson.project_name())
 gnome = import('gnome')
 
+message('Webpack')
+r = run_command('../node_modules/.bin/webpack', '--mode=production', 'index.js', '--output=main.js')
+if r.returncode() != 0
+message(r.stdout().strip())
+error(r.stderr().strip())
+endif
+
 src_res = gnome.compile_resources('re.sonny.Tangram.src',
   're.sonny.Tangram.src.gresource.xml',
   gresource_bundle: true,
   install: true,
   install_dir: pkgdatadir,
 )
-
-# data_res = gnome.compile_resources('re.sonny.Tangram.data',
-#   're.sonny.Tangram.data.gresource.xml',
-#   gresource_bundle: true,
-#   install: true,
-#   install_dir: pkgdatadir,
-# )
 
 bin_conf = configuration_data()
 bin_conf.set('GJS', find_program('gjs').path())

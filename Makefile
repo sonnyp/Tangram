@@ -6,6 +6,7 @@ build:
 	ninja -C build install
 
 run-host:
+	make clean
 	make build
 	GSETTINGS_SCHEMA_DIR=./data ./install/bin/re.sonny.Tangram
 
@@ -27,4 +28,4 @@ test:
 	./node_modules/.bin/eslint src/
 
 clean:
-	rm -rf .flatpak-builder build flatpak install repo var/config var/cache var/data var/applications/*.desktop
+	rm -rf .flatpak-builder build flatpak install repo var/config var/cache var/data var/applications/*.desktop dist/ src/main.js

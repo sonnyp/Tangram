@@ -141,10 +141,9 @@ flatpak-builder --run flatpak re.sonny.Tangram.json re.sonny.Tangram
 ### Flatpak sandboxed
 
 ```sh
-flatpak-builder --repo=repo --force-clean flatpak re.sonny.Tangram.json
-flatpak --user remote-add --no-gpg-verify Tangram repo
-flatpak --user install Tangram re.sonny.Tangram
-flatpak run re.sonny.Tangram
+flatpak-builder --user  --force-clean --repo=repo --install-deps-from=flathub flatpak re.sonny.Tangram.json
+flatpak --user remote-add --no-gpg-verify --if-not-exists Tangram repo
+flatpak --user install --reinstall --assumeyes Tangram re.sonny.Tangram
 ```
 
 ### Inspect
