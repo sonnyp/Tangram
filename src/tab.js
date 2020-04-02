@@ -35,7 +35,12 @@ export function TabLabel({ instance, settings, page }) {
   if (flags.custom_icons) {
     if (instance.icon) {
       image.set_from_pixbuf(
-        Pixbuf.new_from_file_at_scale(instance.icon, ICON_SIZE, ICON_SIZE, true)
+        Pixbuf.new_from_file_at_scale(
+          instance.icon,
+          ICON_SIZE,
+          ICON_SIZE,
+          true,
+        ),
       );
     } else {
       const favicon = getFaviconScaled(page);
@@ -52,7 +57,12 @@ export function TabLabel({ instance, settings, page }) {
       }
       page.disconnect(connectFaviconId);
       image.set_from_pixbuf(
-        Pixbuf.new_from_file_at_scale(instance.icon, ICON_SIZE, ICON_SIZE, true)
+        Pixbuf.new_from_file_at_scale(
+          instance.icon,
+          ICON_SIZE,
+          ICON_SIZE,
+          true,
+        ),
       );
     });
   } else {

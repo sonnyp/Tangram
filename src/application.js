@@ -32,7 +32,7 @@ if (flags.custom_applications) {
     OptionFlags.OPTIONAL_ARG,
     OptionArg.STRING,
     "Display name to use",
-    "name"
+    "name",
   );
   application.add_main_option(
     "id",
@@ -40,7 +40,7 @@ if (flags.custom_applications) {
     OptionFlags.OPTIONAL_ARG,
     OptionArg.STRING,
     "Application id to use",
-    "application-id"
+    "application-id",
   );
 }
 
@@ -124,7 +124,7 @@ const showShortcutsDialog = new SimpleAction({
 });
 showShortcutsDialog.connect("activate", () => {
   const builder = Builder.new_from_resource(
-    "/re/sonny/Tangram/data/shortcuts.xml.ui"
+    "/re/sonny/Tangram/data/shortcuts.xml.ui",
   );
   const shortcutsWindow = builder.get_object("shortcuts-window");
   shortcutsWindow.set_transient_for(window.window);

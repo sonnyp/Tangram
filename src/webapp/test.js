@@ -16,7 +16,7 @@ async function setup(webview, html, manifest) {
 
     const loadChangedHandlerId = webview.connect(
       "load-changed",
-      loadChangedHandler
+      loadChangedHandler,
     );
     function loadChangedHandler(self, loadEvent) {
       if (loadEvent !== WebKit.LoadEvent.FINISHED) return;
@@ -82,7 +82,7 @@ let exit_code = 0;
         </head>
         <body></body>
         </html>
-    `
+    `,
     );
 
     assert.is(info.URL, "https://msapplication.starturl/");
@@ -98,7 +98,7 @@ let exit_code = 0;
         </head>
         <body></body>
         </html>
-    `
+    `,
     );
 
     assert.is(info.title, "127.0.0.1");
@@ -115,7 +115,7 @@ let exit_code = 0;
         </head>
         <body></body>
         </html>
-    `
+    `,
     );
 
     assert.is(info.URL, "https://opengraph.url/");
@@ -133,7 +133,7 @@ let exit_code = 0;
         </head>
         <body></body>
         </html>
-    `
+    `,
     );
 
     assert.is(info.title, "meta-application-name");
@@ -151,7 +151,7 @@ let exit_code = 0;
         </head>
         <body></body>
         </html>
-    `
+    `,
     );
 
     assert.is(info.title, "meta-apple-mobile-web-app-title");
@@ -170,7 +170,7 @@ let exit_code = 0;
         </head>
         <body></body>
         </html>
-    `
+    `,
     );
 
     assert.is(info.title, "meta-property-site-name");
@@ -190,7 +190,7 @@ let exit_code = 0;
         </head>
         <body></body>
         </html>
-    `
+    `,
     );
 
     assert.is(info.title, "meta-site-name");
@@ -207,7 +207,7 @@ let exit_code = 0;
         </head>
         <body></body>
         </html>
-    `
+    `,
     );
 
     assert.is(info.title, "title");
@@ -240,7 +240,7 @@ let exit_code = 0;
             type: "image/png",
           },
         ],
-      }
+      },
     );
 
     assert.is(info.title, "HackerWeb");

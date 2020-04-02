@@ -31,7 +31,7 @@ export class State {
     source_property,
     target,
     target_property,
-    fn = value => value
+    fn = value => value,
     // flags,
     // transform_to,
     // transform_from

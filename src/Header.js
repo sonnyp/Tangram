@@ -18,7 +18,7 @@ import flags from "./flags";
 
 function Menu({ profile }) {
   const builder = Builder.new_from_resource(
-    "/re/sonny/Tangram/data/menu.xml.ui"
+    "/re/sonny/Tangram/data/menu.xml.ui",
   );
   const popover = builder.get_object("app-menu");
 
@@ -79,7 +79,7 @@ export default function Header({
 
   const backButton = Button.new_from_icon_name(
     "go-previous-symbolic",
-    IconSize.BUTTON
+    IconSize.BUTTON,
   );
   backButton.set_tooltip_text("Go back to the previous page");
   backButton.sensitive = false;
@@ -88,7 +88,7 @@ export default function Header({
 
   const forwardButton = Button.new_from_icon_name(
     "go-next-symbolic",
-    IconSize.BUTTON
+    IconSize.BUTTON,
   );
   forwardButton.set_tooltip_text("Go forward to the next page");
   forwardButton.sensitive = false;
@@ -135,7 +135,7 @@ export default function Header({
     "instances",
     cancelButton,
     "visible",
-    instances => instances.length > 0
+    instances => instances.length > 0,
   );
   cancelBox.add(cancelButton);
   cancelButton.connect("clicked", onCancelNewTab);
@@ -165,7 +165,7 @@ export default function Header({
   });
   const newTabButton = Button.new_from_icon_name(
     "tab-new-symbolic",
-    IconSize.BUTTON
+    IconSize.BUTTON,
   );
   newTabButton.set_tooltip_text("Add new tab");
   newTabButton.set_always_show_image(true);
@@ -298,7 +298,7 @@ export default function Header({
         } else if (loadEvent === LoadEvent.COMMITTED) {
           setSecurity(webview);
         }
-      }
+      },
     );
   });
 

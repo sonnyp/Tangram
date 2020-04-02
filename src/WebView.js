@@ -55,7 +55,7 @@ export function buildWebView({
   web_context.set_spell_checking_languages(get_language_names());
   web_context.set_tls_errors_policy(TLSErrorsPolicy.FAIL);
   web_context.set_favicon_database_directory(
-    build_filenamev([cache_dir, "icondatabase"])
+    build_filenamev([cache_dir, "icondatabase"]),
   );
   web_context.set_process_model(ProcessModel.MULTIPLE_SECONDARY_PROCESSES);
   if (typeof web_context.set_sandbox_enabled === "function") {
@@ -76,7 +76,7 @@ export function buildWebView({
       // https://gjs-docs.gnome.org/webkit240~4.0_api/webkit2.webcontext#method-initialize_notification_permissions
       web_context.initialize_notification_permissions(
         [SecurityOrigin.new_for_uri(url)],
-        []
+        [],
       );
     });
   }
@@ -136,7 +136,7 @@ export function buildWebView({
       const dest_dir = get_user_special_dir(UserDirectory.DIRECTORY_DOWNLOAD);
       const dest_name = suggested_filename.replace(
         new RegExp(DIR_SEPARATOR_S, "g"),
-        "_"
+        "_",
       );
 
       const dialog = new FileChooserNative({
@@ -173,7 +173,7 @@ export function buildWebView({
   cookieManager.set_accept_policy(CookieAcceptPolicy.NO_THIRD_PARTY);
   cookieManager.set_persistent_storage(
     build_filenamev([data_dir, "cookies.sqlite"]),
-    CookiePersistentStorage.SQLITE
+    CookiePersistentStorage.SQLITE,
   );
 
   // https://gjs-docs.gnome.org/webkit240~4.0_api/webkit2.usercontentmanager

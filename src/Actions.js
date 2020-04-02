@@ -27,11 +27,11 @@ export default function Actions({
   const tabsPosition = SimpleAction.new_stateful(
     "tabsPosition",
     VariantType.new("s"),
-    Variant.new_string(settings.get_string("tabs-position"))
+    Variant.new_string(settings.get_string("tabs-position")),
   );
   settings.connect("changed::tabs-position", () => {
     tabsPosition.set_state(
-      Variant.new_string(settings.get_string("tabs-position"))
+      Variant.new_string(settings.get_string("tabs-position")),
     );
   });
   tabsPosition.connect("change-state", (self, value) => {

@@ -26,7 +26,7 @@ this.iconChooser = function iconChooser(props) {
       props.value,
       ICON_SIZE,
       ICON_SIZE,
-      true
+      true,
     );
     image.set_from_pixbuf(pixbuf);
   }
@@ -59,7 +59,7 @@ this.iconChooser = function iconChooser(props) {
         value,
         ICON_SIZE,
         ICON_SIZE,
-        true
+        true,
       );
       image.set_from_pixbuf(pixbuf);
     }
@@ -78,7 +78,7 @@ this.saveIcon = function saveIcon(image, filepath) {
     image,
     ICON_SIZE,
     ICON_SIZE,
-    true
+    true,
   );
 
   // //make directory drwx------

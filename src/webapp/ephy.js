@@ -18,7 +18,7 @@ this.getWebAppURL = function() {
   // https://msdn.microsoft.com/en-us/ie/dn255024(v=vs.94)
   const msApplicationStartURL = querySelectorLast(
     document.head,
-    "meta[name=msapplication-starturl]"
+    "meta[name=msapplication-starturl]",
   );
   if (msApplicationStartURL && msApplicationStartURL.content) {
     return msApplicationStartURL.content;
@@ -27,7 +27,7 @@ this.getWebAppURL = function() {
   // https://ogp.me/#metadata
   const openGraphURL = querySelectorLast(
     document.head,
-    "meta[property='og:url']"
+    "meta[property='og:url']",
   );
   if (openGraphURL && openGraphURL.content) {
     return openGraphURL.content;
