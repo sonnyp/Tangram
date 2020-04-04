@@ -4,12 +4,12 @@
 
 /* eslint-env browser */
 
-this.getWebAppManifest = function() {
+export function getWebAppManifest() {
   const manifest = document.head.querySelector("link[rel=manifest]");
   return manifest ? manifest.href : null;
-};
+}
 
-this.getWebAppURL = function() {
+export function getWebAppURL() {
   function querySelectorLast(el, query) {
     const els = el.querySelectorAll(query);
     return els[els.length - 1];
@@ -34,9 +34,9 @@ this.getWebAppURL = function() {
   }
 
   return document.location.href;
-};
+}
 
-this.getWebAppTitle = function() {
+export function getWebAppTitle() {
   const metas = document.head.getElementsByTagName("meta");
   for (let i = 0; i < metas.length; i++) {
     const meta = metas[i];
@@ -57,9 +57,9 @@ this.getWebAppTitle = function() {
   const title = titles[titles.length - 1];
   if (title && title.innerText) return title.innerText;
   return document.location.hostname;
-};
+}
 
-this.getWebAppIcon = function() {
+export function getWebAppIcon() {
   // FIXME: This function could be improved considerably. See the first two answers at:
   // http://stackoverflow.com/questions/21991044/how-to-get-high-resolution-website-logo-favicon-for-a-given-url
   //
@@ -145,4 +145,4 @@ this.getWebAppIcon = function() {
 
   // Last ditch effort: just fallback to the default favicon location.
   return { url: "/favicon.ico", color: null };
-};
+}

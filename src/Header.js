@@ -121,21 +121,21 @@ export default function Header({
   homeButton.connect("clicked", onGoHome);
 
   const cancelBox = new Box();
-  const cancelIcon = new Image({
-    icon_size: IconSize.BUTTON,
-    icon_name: "go-previous-symbolic",
-  });
+  // https://github.com/sonnyp/Tangram/issues/64
+  // const cancelIcon = new Image({
+  //   icon_size: IconSize.BUTTON,
+  //   icon_name: "go-previous-symbolic",
+  // });
   const cancelButton = new Button({
-    // https://github.com/sonnyp/Tangram/issues/64
-    // label: "Cancel",
-    image: cancelIcon,
+    label: "Cancel",
+    // image: cancelIcon,
     always_show_image: true,
   });
   state.bind(
     "instances",
     cancelButton,
     "visible",
-    instances => instances.length > 0,
+    (instances) => instances.length > 0,
   );
   cancelBox.add(cancelButton);
   cancelButton.connect("clicked", onCancelNewTab);
@@ -223,7 +223,7 @@ export default function Header({
     addressBar.primary_icon_name = null;
   }
 
-  state.notify("view", view => {
+  state.notify("view", (view) => {
     addTabButton.sensitive = false;
     if (view === "tabs") {
       left_stack.visible_child_name = "navigation";

@@ -103,7 +103,7 @@ npm install
 ### Run
 
 ```sh
-./node_modules/.bin/webpack --watch
+make dev
 ./run.sh
 ```
 

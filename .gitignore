@@ -12,7 +12,6 @@ repo/
 *.gresource
 node_modules
 gschemas.compiled
-var
+var/
 dist/
-!dist/re.sonny.Tangram
 src/main.js

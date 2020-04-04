@@ -17,7 +17,7 @@ iconFileFilter.add_mime_type("image/jpeg");
 
 const ICON_SIZE = 16;
 
-this.iconChooser = function iconChooser(props) {
+export function iconChooser(props) {
   const image = new Image();
   if (props.value.startsWith("resource://")) {
     image.set_from_resource(props.value.split("resource://")[1]);
@@ -66,14 +66,14 @@ this.iconChooser = function iconChooser(props) {
     fileChooserDialog.destroy();
   });
 
-  fileChooserButton.get_value = function() {
+  fileChooserButton.get_value = function () {
     return value;
   };
 
   return fileChooserButton;
-};
+}
 
-this.saveIcon = function saveIcon(image, filepath) {
+export function saveIcon(image, filepath) {
   const pixbuf = Pixbuf.new_from_file_at_scale(
     image,
     ICON_SIZE,
@@ -86,4 +86,4 @@ this.saveIcon = function saveIcon(image, filepath) {
 
   pixbuf.savev(filepath, "png", [], []);
   return filepath;
-};
+}
