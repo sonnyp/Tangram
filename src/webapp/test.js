@@ -11,7 +11,7 @@ Gtk.init(null);
 const loop = GLib.MainLoop.new(null, false);
 
 async function setup(webview, html, manifest) {
-  return new Promise(resolve => {
+  return new Promise((resolve) => {
     const { url, server } = serve(html, manifest);
 
     const loadChangedHandlerId = webview.connect(
@@ -249,7 +249,7 @@ let exit_code = 0;
   })();
 
   loop.quit();
-})().catch(err => {
+})().catch((err) => {
   logError(err);
   exit_code = 1;
   loop.quit();

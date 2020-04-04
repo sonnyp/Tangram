@@ -45,7 +45,7 @@ export function disconnect(object, signal) {
 }
 
 export function getEnum(enums, idx) {
-  return Object.keys(enums).find(key => {
+  return Object.keys(enums).find((key) => {
     return enums[key] === idx;
   });
 }

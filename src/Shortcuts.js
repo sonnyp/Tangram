@@ -76,7 +76,7 @@ export default function Shortcuts({
     ],
   ];
   shortcuts.forEach(([accels, fn]) => {
-    accels.forEach(accel => {
+    accels.forEach((accel) => {
       const [accelerator_key, accelerator_mods] = accelerator_parse(accel);
       accelGroup.connect(
         accelerator_key,

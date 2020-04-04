@@ -101,7 +101,7 @@ function getWindow() {
   return window;
 }
 
-application.connect("activate", app => {
+application.connect("activate", (app) => {
   if (app.active_window) {
     app.active_window.present();
     return;

@@ -53,7 +53,7 @@ export class Instance {
 }
 
 export function load(settings) {
-  settings.get_strv("instances").forEach(id => {
+  settings.get_strv("instances").forEach((id) => {
     list.push(new Instance(id));
   });
 }
@@ -98,5 +98,5 @@ export function destroy(instance) {
 }
 
 export function get(id) {
-  return list.find(instance => instance.id === id);
+  return list.find((instance) => instance.id === id);
 }

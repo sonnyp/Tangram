@@ -26,7 +26,7 @@ export function runJavaScript(webview, script) {
     "run_javascript_finish",
     script,
     null,
-  ).then(javascriptResult => {
+  ).then((javascriptResult) => {
     if (!javascriptResult) return;
     return javascriptResult.get_js_value();
   });
@@ -40,11 +40,11 @@ function getTitle(webview) {
   const script = `(${getWebAppTitle.toString()})()`;
 
   return runJavaScript(webview, script)
-    .then(javascriptValue => {
+    .then((javascriptValue) => {
       if (!javascriptValue.is_string()) return null;
       return javascriptValue.to_string();
     })
-    .catch(err => {
+    .catch((err) => {
       logError(err);
       return null;
     });
@@ -54,11 +54,11 @@ function getURL(webview) {
   const script = `(${getWebAppURL.toString()})()`;
 
   return runJavaScript(webview, script)
-    .then(javascriptValue => {
+    .then((javascriptValue) => {
       if (!javascriptValue.is_string()) return null;
       return javascriptValue.to_string();
     })
-    .catch(err => {
+    .catch((err) => {
       logError(err);
       return null;
     });
@@ -69,13 +69,13 @@ function getIcon(webview) {
   const script = `(${getWebAppIcon.toString()})()`;
 
   return runJavaScript(webview, script)
-    .then(javascriptValue => {
+    .then((javascriptValue) => {
       const url = javascriptValue.object_get_property("url");
       if (!url.is_string()) return null;
       return url.to_string();
       // const color = javascriptValue.object_get_property('color').to_string();
     })
-    .catch(err => {
+    .catch((err) => {
       logError(err);
       return null;
     });
@@ -85,11 +85,11 @@ async function getManifestURL(webview) {
   const script = `(${getWebAppManifest.toString()})()`;
 
   return runJavaScript(webview, script)
-    .then(javascriptValue => {
+    .then((javascriptValue) => {
       if (!javascriptValue.is_string()) return null;
       return javascriptValue.to_string();
     })
-    .catch(err => {
+    .catch((err) => {
       logError(err);
       return null;
     });
@@ -97,7 +97,7 @@ async function getManifestURL(webview) {
 
 const supported_formats = (() => {
   const formats = imports.gi.GdkPixbuf.Pixbuf.get_formats();
-  return [].concat(...formats.map(format => format.get_mime_types()));
+  return [].concat(...formats.map((format) => format.get_mime_types()));
 })();
 
 function getMaxSize(icon) {
@@ -157,7 +157,7 @@ export async function getWebAppInfo(webview) {
     return info;
   }
 
-  const manifest = await fetchManifest(manifestURL).catch(err => {
+  const manifest = await fetchManifest(manifestURL).catch((err) => {
     logError(err);
     return null;
   });

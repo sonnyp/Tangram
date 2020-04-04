@@ -258,11 +258,11 @@ export default function Window({ application, profile, state }) {
   }
 
   loadInstances(settings);
-  instanceList.forEach(instance => {
+  instanceList.forEach((instance) => {
     buildInstance(instance);
   });
 
-  observeSetting(settings, "instances", instances => {
+  observeSetting(settings, "instances", (instances) => {
     state.set({ instances });
     if (instances.length === 0) {
       onNewTab();

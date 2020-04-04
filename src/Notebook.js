@@ -61,7 +61,7 @@ export default function Notebook({ profile, settings, application }) {
       "instances",
       notebook,
       "show_tabs",
-      instances => instances.length > 1,
+      (instances) => instances.length > 1,
     );
   }
   notebook.connect("switch-page", (self, webview) => {
