@@ -1,3 +1,5 @@
+import "../setup";
+
 import { getWebAppInfo } from "./webapp";
 import * as assert from "../troll/assert";
 

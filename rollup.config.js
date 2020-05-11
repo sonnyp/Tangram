@@ -3,5 +3,5 @@ export default {
   output: {
     file: "src/main.js",
   },
-  context: "window",
+  context: "this",
 };

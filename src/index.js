@@ -1,3 +1,5 @@
+import { versions } from "./setup";
+
 const { programInvocationName } = imports.system;
 const { SimpleAction } = imports.gi.Gio;
 const {
@@ -9,28 +11,7 @@ const {
   setenv,
 } = imports.gi.GLib;
 
-const pkg = imports.package;
-// eslint-disable-next-line no-restricted-globals
-window.pkg = pkg;
-setenv("DEV", "true", false);
-pkg._runningFromSource = () => true;
-pkg._findEffectiveEntryPointName = () => "re.sonny.Tangram";
-pkg.init({
-  name: "re.sonny.Tangram",
-  version: "dev",
-  prefix: "", // Required but not used when running from source
-});
-pkg.initGettext();
-pkg.initFormat();
-pkg.require({
-  Gio: "2.0",
-  Gtk: "3.0",
-  GLib: "2.0",
-  WebKit2: "4.0",
-  Gdk: "3.0",
-  GdkPixbuf: "2.0",
-  GObject: "2.0",
-});
+pkg.require(versions);
 
 import application from "./application";
 
@@ -48,11 +29,13 @@ for (const i in pkg) {
     log(`pkg.${i}: ${pkg[i]}`);
   }
 }
-// listenv().forEach(name => {
+// listenv().forEach((name) => {
 //   log(`env ${name}: ${getenv(name)}`);
 // });
 
-function main(argv = []) {
+this.main = function main(argv = []) {
+  log("argv " + argv.join(" "));
+
   if (getenv("DEV")) {
     const restart = new SimpleAction({
       name: "restart",
@@ -60,12 +43,11 @@ function main(argv = []) {
     });
     restart.connect("activate", () => {
       application.quit();
+      log(argv);
       spawn_async(null, argv, null, SpawnFlags.DEFAULT, null);
     });
     application.add_action(restart);
     application.set_accels_for_action("app.restart", ["<Ctrl><Shift>Q"]);
   }
   return application.run(argv);
-}
-
-main();
+};
