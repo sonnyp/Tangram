@@ -35,7 +35,7 @@ export class Instance {
     return this.settings.get_string("name");
   }
   set name(name) {
-    return this.settings.set_string("name", name);
+    this.settings.set_string("name", name);
   }
   // TODO icon
   // get icon() {
@@ -48,7 +48,7 @@ export class Instance {
     return this.settings.get_string("url");
   }
   set url(url) {
-    return this.settings.set_string("url", url);
+    this.settings.set_string("url", url);
   }
 }
 
