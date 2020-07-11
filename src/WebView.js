@@ -194,6 +194,13 @@ export function buildWebView({
 
   settings.set_user_agent_with_application_details("Tangram", pkg.version);
 
+  // user-agent
+  const userAgent = instance.settings.get_string("user-agent");
+  if (userAgent) settings.set_user_agent(userAgent);
+  instance.settings.connect(`changed::user-agent`, () => {
+    settings.set_user_agent(instance.settings.get_string("user-agent"));
+  });
+
   // https://gjs-docs.gnome.org/webkit240~4.0_api/webkit2.webcontext
   const webView = new WebView({
     web_context,
