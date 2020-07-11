@@ -103,11 +103,11 @@ npm install
 ### Run
 
 ```sh
-make dev
-./run.sh
+make dev # in one terminal
+./run.sh # in an other
 ```
 
-Hit `<Ctrl><Shift>Q` to restart the application.
+`make dev` constantly watch for file changes and will rebuild automatically. `./run.sh` runs the application in `development` mode. Hit `<Ctrl><Shift>Q` to restart the application.
 
 - data files are stored in `./var/data/` instead of `$XDG_DATA_HOME/Tangram/`
 - cache files are stored in `./var/cache/` instead of `XDG_CACHE_HOME/Tangram/`

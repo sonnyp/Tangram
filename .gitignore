@@ -1,6 +1,7 @@
 # Meson/ninja
 build/
 install/
+builddir
 
 # Flatpak
 .flatpak-builder/

@@ -14,7 +14,6 @@ const {
   SecurityOrigin,
   UserContentManager,
   TLSErrorsPolicy,
-  HardwareAccelerationPolicy,
   WebView,
   ProcessModel,
   DownloadError,
@@ -181,18 +180,17 @@ export function buildWebView({
 
   // https://gjs-docs.gnome.org/webkit240~4.0_api/webkit2.settings
   const settings = new Settings({
-    enable_developer_extras: true,
-    enable_site_specific_quirks: true,
     enable_smooth_scrolling: true,
     media_playback_requires_user_gesture: true,
-    enable_back_forward_navigation_gestures: true,
-  });
 
-  // https://github.com/sonnyp/Tangram/issues/39
-  if (url.includes("reddit.com")) {
-    settings.set_media_playback_requires_user_gesture(true);
-    settings.set_hardware_acceleration_policy(HardwareAccelerationPolicy.NEVER);
-  }
+    // https://gitlab.gnome.org/GNOME/epiphany/-/blob/master/embed/ephy-embed-prefs.c
+    enable_back_forward_navigation_gestures: true,
+    enable_developer_extras: true,
+    enable_dns_prefetching: true,
+    enable_plugins: false,
+    javascript_can_open_windows_automatically: true,
+    allow_top_navigation_to_data_urls: false,
+  });
 
   settings.set_user_agent_with_application_details("Tangram", pkg.version);
 
