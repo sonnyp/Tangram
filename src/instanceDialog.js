@@ -114,6 +114,23 @@ async function instanceDialog({ window, instance, action }) {
     );
   });
 
+  const UserAgentLabel = new Label({
+    label: "User Agent",
+    halign: Align.END,
+  });
+  grid.attach(UserAgentLabel, 1, 4, 1, 1);
+
+  const UserAgentEntry = new Entry({
+    hexpand: true,
+  });
+  instance.bind(
+    "user-agent",
+    UserAgentEntry,
+    "text",
+    SettingsBindFlags.DEFAULT,
+  );
+  grid.attach(UserAgentEntry, 2, 4, 1, 1);
+
   dialog.show_all();
 
   const [response_id] = await once(dialog, "response");

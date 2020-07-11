@@ -45,6 +45,11 @@
       <summary>URL</summary>
       <description>Start URL</description>
     </key>
+    <key type="s" name="user-agent">
+      <default>""</default>
+      <summary>User agent</summary>
+      <description>String that will be used as user agent, to identify the browser to the web servers.</description>
+    </key>
     <!-- TODO icon -->
     <!-- <key type="s" name="icon">
       <default>""</default>
