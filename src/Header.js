@@ -15,6 +15,7 @@ const { LoadEvent, uri_for_display } = imports.gi.WebKit2;
 
 import AddressBar from "./AddressBar";
 import flags from "./flags";
+import { BLANK_URI } from "./constants";
 
 function Menu({ profile }) {
   const builder = Builder.new_from_resource(
@@ -196,7 +197,7 @@ export default function Header({
 
   function setAddress(webview) {
     const url = webview.get_uri();
-    if (!url || url === "about:blank") {
+    if (!url || url === BLANK_URI) {
       addressBar.text = "";
       return;
     }
@@ -281,7 +282,7 @@ export default function Header({
         // updateButtons(webview);
 
         if (loadEvent === LoadEvent.COMMITTED) {
-          if (webview.uri !== "about:blank") {
+          if (webview.uri !== BLANK_URI) {
             reloadIcon.icon_name = "view-refresh-symbolic";
             addTabButton.sensitive = true;
           }

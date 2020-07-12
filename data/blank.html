@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <!-- https://gitlab.gnome.org/GNOME/epiphany/-/blob/dce900bc732f3787984fe82eefae2a860df3142f/src/resources/about.css -->
+    <style>
+      html {
+        /* Adwaita colors */
+        --bg-color: #f6f5f4;
+        --fg-color: #2e3436;
+        --base-color: #fff;
+        --text-color: #000;
+        --borders: #d3d7cf;
+
+        /* Misc colors */
+        --header-color: #999;
+        --header-text-color: white;
+        --row-hover-color: rgba(0, 0, 0, 0.1);
+      }
+
+      @media (prefers-color-scheme: dark) {
+        html {
+          /* Adwaita colors */
+          --bg-color: #353535;
+          --fg-color: #eeeeec;
+          --base-color: #2d2d2d;
+          --text-color: #fff;
+          --borders: #1b1b1b;
+
+          /* Misc colors */
+          --header-color: #666;
+          --row-hover-color: rgba(255, 255, 255, 0.1);
+        }
+      }
+
+      html,
+      body {
+        margin: 0;
+        padding: 0;
+      }
+
+      html {
+        font-family: -webkit-system-font;
+        font-size: 11pt;
+        color: var(--fg-color);
+        background-color: var(--bg-color);
+      }
+    </style>
+  </head>
+
+  <body></body>
+</html>

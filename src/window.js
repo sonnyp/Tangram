@@ -28,6 +28,7 @@ import {
 } from "./instances";
 import flags from "./flags";
 import { buildWebView } from "./WebView";
+import { BLANK_URI } from "./constants";
 
 export default function Window({ application, profile, state }) {
   profile.settings =
@@ -239,7 +240,7 @@ export default function Window({ application, profile, state }) {
     const id = uuid_string_random().replace(/-/g, "");
 
     const instance = createInstance({
-      url: "about:blank",
+      url: BLANK_URI,
       id,
       name: "",
     });
