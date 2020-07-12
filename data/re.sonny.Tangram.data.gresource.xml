@@ -3,6 +3,7 @@
   <gresource prefix="/re/sonny/Tangram/data">
     <file>menu.xml.ui</file>
     <file>shortcuts.xml.ui</file>
+    <file>blank.html</file>
     <file alias="icon.svg">icons/hicolor/scalable/apps/re.sonny.Tangram.svg</file>
   </gresource>
 </gresources>

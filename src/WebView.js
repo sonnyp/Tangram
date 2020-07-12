@@ -27,10 +27,16 @@ const {
   path_get_dirname,
   get_language_names,
 } = imports.gi.GLib;
-const { Notification, AppInfo } = imports.gi.Gio;
+const {
+  Notification,
+  AppInfo,
+  ResourceLookupFlags,
+  resources_open_stream,
+} = imports.gi.Gio;
 
 import { connect } from "./util";
 import { env } from "./env";
+import { BLANK_URI } from "./constants";
 
 export function buildWebView({
   instance,
@@ -62,6 +68,17 @@ export function buildWebView({
     web_context.add_path_to_sandbox(data_dir, true);
     web_context.add_path_to_sandbox(cache_dir, true);
   }
+
+  const security_manager = web_context.get_security_manager();
+
+  security_manager.register_uri_scheme_as_local("tangram-resource");
+  web_context.register_uri_scheme("tangram-resource", (schemeRequest) => {
+    const stream = resources_open_stream(
+      schemeRequest.get_path(),
+      ResourceLookupFlags.NONE,
+    );
+    schemeRequest.finish(stream, -1, null);
+  });
 
   // https://gjs-docs.gnome.org/webkit240~4.0_api/webkit2.favicondatabase
   // const favicon_database = web_context.get_favicon_database();
@@ -239,7 +256,7 @@ export function buildWebView({
   webView.instance_id = id;
   webView.show_all();
 
-  webView.load_uri(url || "about:blank");
+  webView.load_uri(url || BLANK_URI);
 
   return webView;
 }

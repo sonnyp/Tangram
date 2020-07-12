@@ -33,7 +33,10 @@
     <release version="1.3.0" date="2020-04-04" urgency="medium">
       <description>
         <ul>
-          <li>Add spell checking</li>
+          <li>Enable spell checking</li>
+          <li>Customizable user-agent per instance</li>
+          <li>New icon</li>
+          <li>New tab background color respects dark mode<li>
         </ul>
       </description>
     </release>
