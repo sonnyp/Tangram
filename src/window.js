@@ -16,7 +16,7 @@ import {
 // log(imports.gi.Gio.SettingsBackend.get_default());
 
 import { TabLabel, TabPage } from "./tab";
-import { addInstanceDialog } from "./instanceDialog";
+// import { addInstanceDialog } from "./instanceDialog";
 import Header from "./Header";
 import {
   get as getInstance,
@@ -29,6 +29,8 @@ import {
 import flags from "./flags";
 import { buildWebView } from "./WebView";
 import { BLANK_URI } from "./constants";
+
+import { addInstanceDialog } from "./newInstance";
 
 export default function Window({ application, profile, state }) {
   profile.settings =
@@ -50,7 +52,6 @@ export default function Window({ application, profile, state }) {
     onGoForward,
     onGoHome,
     onAddTab,
-    onCancelNewTab,
     profile,
     state,
     onNewTab,
@@ -223,39 +224,63 @@ export default function Window({ application, profile, state }) {
     showTab(idx);
   }
 
-  function onCancelNewTab() {
-    // FIXME set webview!!
-    // state.set({ view: "tabs", webview: notebook.get_nth_child(notebook.page) });
-    showTab(notebook.page || 0);
-    const webView = stack.get_child_by_name("new-tab");
-    if (!webView) return;
-    webView.destroy();
-    const { instance_id } = webView;
-    const instance = getInstance(instance_id);
-    if (!instance) return;
-    destroyInstance(instance);
-  }
+  // function onCancelNewTab() {
+  //   // FIXME set webview!!
+  //   // state.set({ view: "tabs", webview: notebook.get_nth_child(notebook.page) });
+  //   showTab(notebook.page || 0);
+  //   const webView = stack.get_child_by_name("new-tab");
+  //   if (!webView) return;
+  //   webView.destroy();
+  //   const { instance_id } = webView;
+  //   const instance = getInstance(instance_id);
+  //   if (!instance) return;
+  //   destroyInstance(instance);
+  // }
 
-  function onNewTab() {
+  // function onNewTab() {
+  //   const id = uuid_string_random().replace(/-/g, "");
+
+  //   const instance = createInstance({
+  //     url: BLANK_URI,
+  //     id,
+  //     name: "",
+  //   });
+
+  //   const webview = buildWebView({
+  //     application,
+  //     onNotification,
+  //     window,
+  //     instance,
+  //   });
+
+  //   const previous = stack.get_child_by_name("new-tab");
+  //   if (previous) previous.destroy();
+  //   stack.add_named(webview, "new-tab");
+  //   state.set({ webview, view: "new-tab" });
+  // }
+
+  async function onNewTab() {
     const id = uuid_string_random().replace(/-/g, "");
 
     const instance = createInstance({
-      url: BLANK_URI,
+      url: "google.com",
       id,
       name: "",
     });
 
-    const webview = buildWebView({
+    const webView = buildWebView({
       application,
       onNotification,
       window,
       instance,
     });
 
-    const previous = stack.get_child_by_name("new-tab");
-    if (previous) previous.destroy();
-    stack.add_named(webview, "new-tab");
-    state.set({ webview, view: "new-tab" });
+    // const previous = stack.get_child_by_name("new-tab");
+    // if (previous) previous.destroy();
+    // stack.add_named(webview, "new-tab");
+    // state.set({ webview, view: "new-tab" });
+
+    addInstanceDialog({ window, webView, instance }).catch(logError);
   }
 
   loadInstances(settings);
