@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8" ?>
+<?xml version="1.0" encoding="UTF-8"?>
 <!-- Copyright 2019 Sonny Piers https://sonny.re -->
 <component type="desktop-application">
   <id>re.sonny.Tangram</id>
@@ -36,7 +36,7 @@
           <li>Enable spell checking</li>
           <li>Customizable user-agent per instance</li>
           <li>New icon</li>
-          <li>New tab background color respects dark mode<li>
+          <li>New tab background color respects dark mode</li>
         </ul>
       </description>
     </release>

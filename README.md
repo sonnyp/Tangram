@@ -68,35 +68,40 @@ You can create a custom application by
 
 ## Development
 
-```sh
-git clone --recursive git://github.com/sonnyp/Tangram.git
-```
-
-### Install dependencies
+### Install packages
 
 <details>
  <summary>Ubuntu</summary>
  <code>
- sudo apt install npm libglib2.0-dev-bin flatpak-builder
+ sudo apt install npm libglib2.0-dev-bin flatpak-builder npm git
  </code>
 </details>
 
 <details>
  <summary>Arch Linux</summary>
  <code>
- sudo pacman -S npm glib2 flatpak-builder
+ sudo pacman -S npm glib2 flatpak-builder npm git
  </code>
 </details>
 
 <details>
   <summary>Fedora</summary>
   <code>
-  sudo dnf install npm glib2-devel flatpak-builder
+  sudo dnf install npm glib2-devel flatpak-builder npm git
   </code>
 </details>
 
+#### Clone
+
 ```sh
-# Development dependencies
+git clone git://github.com/sonnyp/Tangram.git
+```
+
+### Install dependencies
+
+```sh
+git submodule init
+git submodule update
 npm install
 ```
 
