@@ -15,4 +15,4 @@ node_modules
 gschemas.compiled
 var/
 dist/
-src/main.js
+# src/main.js
