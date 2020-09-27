@@ -5,11 +5,13 @@
   "sdk": "org.gnome.Sdk",
   "command": "re.sonny.Tangram",
   "finish-args": [
-    "--socket=fallback-x11",
-    "--socket=wayland",
     "--device=dri",
+    "--share=ipc",
     "--share=network",
-    "--socket=pulseaudio"
+    "--socket=fallback-x11",
+    "--socket=pulseaudio",
+    "--socket=wayland",
+    "--system-talk-name=org.freedesktop.GeoClue2"
   ],
   "modules": [
     {
