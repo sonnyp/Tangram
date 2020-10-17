@@ -1241,61 +1241,6 @@ function Actions({
   application.set_accels_for_action("app.quit", ["<Ctrl>Q"]);
 }
 
-// -*- mode: js; js-indent-level: 4; indent-tabs-mode: nil -*-
-
-const {Soup} = imports.gi;
-const ByteArray = imports.byteArray;
-
-async function fetch(url, options = {}) {
-    const session = new Soup.Session();
-    const method = options.method || 'GET';
-    const message = new Soup.Message({
-        method,
-        uri: Soup.URI.new(url),
-    });
-    const headers = options.headers || {};
-
-    for (const header in headers)
-        message.request_headers.set(header, headers[header]);
-
-    if (typeof options.body === 'string')
-        message.response_body_data = new Uint8Array(options.body);
-
-    const inputStream = await promiseTask(
-        session,
-        'send_async',
-        'send_finish',
-        message,
-        null
-    );
-
-    const {status_code, response_headers, reason_phrase} = message;
-    const ok = status_code >= 200 && status_code < 300;
-
-    return {
-        status: status_code,
-        statusText: reason_phrase,
-        ok,
-        type: 'basic',
-        async json() {
-            const text = await this.text();
-            return JSON.parse(text);
-        },
-        async text() {
-            const contentLength = response_headers.get('content-length');
-            const bytes = await promiseTask(
-                inputStream,
-                'read_bytes_async',
-                'read_bytes_finish',
-                contentLength,
-                null,
-                null
-            );
-            return ByteArray.toString(ByteArray.fromGBytes(bytes));
-        },
-    };
-}
-
 /* Shameless copy/paste of
  * https://gitlab.gnome.org/GNOME/epiphany/blob/master/embed/web-process-extension/resources/js/ephy.js
  */
@@ -1357,9 +1302,10 @@ function getWebAppTitle() {
   return document.location.hostname;
 }
 
-const Soup$1 = imports.gi.Soup;
+const Soup = imports.gi.Soup;
 const { pixbuf_get_from_surface } = imports.gi.Gdk;
 const { get_tmp_dir, build_filenamev: build_filenamev$4 } = imports.gi.GLib;
+const byteArray = imports.byteArray;
 
 function runJavaScript(webview, script) {
   return promiseTask(
@@ -1374,8 +1320,39 @@ function runJavaScript(webview, script) {
   });
 }
 
-async function fetchManifest(url) {
-  return (await fetch(url)).json();
+// FIXME: we should use troll fetch but it doesn't support reading an InputStream
+// without a `content-length` header
+// import fetch from "../troll/std/fetch";
+async function fetchManifest(url, webview) {
+  return new Promise((resolve) => {
+    const session = new Soup.Session();
+    const message = new Soup.Message({
+      method: "GET",
+      uri: Soup.URI.new(url),
+    });
+    message.request_headers.append("Cache-Control", "no-cache");
+    if (webview) {
+      message.request_headers.append(
+        "User-Agent",
+        webview.get_settings().get_user_agent(),
+      );
+    }
+
+    session.queue_message(message, () => {
+      try {
+        resolve(
+          JSON.parse(
+            byteArray.toString(
+              byteArray.fromGBytes(message.response_body_data),
+            ),
+          ),
+        );
+      } catch (err) {
+        logError(err);
+        resolve(null);
+      }
+    });
+  });
 }
 
 function getTitle(webview) {
@@ -1426,7 +1403,7 @@ const supported_formats = (() => {
 })();
 
 function resolveURI(webview, URL) {
-  return Soup$1.URI.new_with_base(new Soup$1.URI(webview.get_uri()), URL).to_string(
+  return Soup.URI.new_with_base(new Soup.URI(webview.get_uri()), URL).to_string(
     false,
   );
 }
@@ -1447,10 +1424,9 @@ async function getWebAppInfo(webview) {
     return info;
   }
 
-  const manifest = await fetchManifest(manifestURL).catch((err) => {
-    logError(err);
-    return null;
-  });
+  log(`manifestURL <${manifestURL}>`);
+
+  const manifest = await fetchManifest(manifestURL, webview);
   if (!manifest) {
     return info;
   }

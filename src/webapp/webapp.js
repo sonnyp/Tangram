@@ -1,9 +1,9 @@
 const Soup = imports.gi.Soup;
 const { pixbuf_get_from_surface } = imports.gi.Gdk;
 const { get_tmp_dir, build_filenamev } = imports.gi.GLib;
+const byteArray = imports.byteArray;
 
 import { promiseTask, once } from "../troll/util";
-import fetch from "../troll/std/fetch";
 
 import {
   getWebAppIcon,
@@ -32,8 +32,39 @@ export function runJavaScript(webview, script) {
   });
 }
 
-export async function fetchManifest(url) {
-  return (await fetch(url)).json();
+// FIXME: we should use troll fetch but it doesn't support reading an InputStream
+// without a `content-length` header
+// import fetch from "../troll/std/fetch";
+export async function fetchManifest(url, webview) {
+  return new Promise((resolve) => {
+    const session = new Soup.Session();
+    const message = new Soup.Message({
+      method: "GET",
+      uri: Soup.URI.new(url),
+    });
+    message.request_headers.append("Cache-Control", "no-cache");
+    if (webview) {
+      message.request_headers.append(
+        "User-Agent",
+        webview.get_settings().get_user_agent(),
+      );
+    }
+
+    session.queue_message(message, () => {
+      try {
+        resolve(
+          JSON.parse(
+            byteArray.toString(
+              byteArray.fromGBytes(message.response_body_data),
+            ),
+          ),
+        );
+      } catch (err) {
+        logError(err);
+        resolve(null);
+      }
+    });
+  });
 }
 
 function getTitle(webview) {
@@ -157,10 +188,9 @@ export async function getWebAppInfo(webview) {
     return info;
   }
 
-  const manifest = await fetchManifest(manifestURL).catch((err) => {
-    logError(err);
-    return null;
-  });
+  log(`manifestURL <${manifestURL}>`);
+
+  const manifest = await fetchManifest(manifestURL, webview);
   if (!manifest) {
     return info;
   }
