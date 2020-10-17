@@ -30,7 +30,17 @@
   <developer_name>Sonny Piers</developer_name>
   <content_rating type="oars-1.1" />
   <releases>
-    <release version="1.3.0" date="2020-09-12" urgency="medium">
+    <release version="1.3.1" date="2020-09-12" urgency="high">
+      <description>
+        <ul>
+          <li>Fix an issue prevent some sites such as Twitter or Facebook from being added.</li>
+          <li>Update runtime version</li>
+        </ul>
+      </description>
+    </release>
+
+
+    <release version="1.3.0" date="2020-09-12">
       <description>
         <ul>
           <li>Enable spell checking</li>
@@ -41,7 +51,7 @@
       </description>
     </release>
 
-    <release version="1.2.0" date="2019-09-19" urgency="high">
+    <release version="1.2.0" date="2019-09-19">
       <description>
         <ul>
           <li>Add support for downloading files</li>
@@ -53,7 +63,7 @@
       </description>
     </release>
 
-    <release version="1.1.0" date="2019-09-14" urgency="high">
+    <release version="1.1.0" date="2019-09-14">
       <description>
         <ul>
           <li>Better notifications handling</li>
