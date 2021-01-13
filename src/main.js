@@ -1511,6 +1511,8 @@ const {
   WebView,
   ProcessModel,
   DownloadError,
+  // PolicyDecision,
+  // PolicyDecisionType,
 } = imports.gi.WebKit2;
 const {
   build_filenamev: build_filenamev$5,
@@ -1527,6 +1529,7 @@ const {
   ResourceLookupFlags,
   resources_open_stream,
 } = imports.gi.Gio;
+const { URI } = imports.gi.Soup;
 
 function buildWebView({
   instance,
@@ -1723,8 +1726,17 @@ function buildWebView({
   connect(webView, {
     // https://gjs-docs.gnome.org/webkit240~4.0_api/webkit2.webview#signal-create
     create(navigation_action) {
-      const uri = navigation_action.get_request().get_uri();
-      show_uri_on_window(window, uri, null);
+      const url = navigation_action.get_request().get_uri();
+
+      const host = new URI(url).get_host();
+      if (["accounts.google.com"].includes(host)) {
+        // Open URL in current tab
+        webView.load_uri(url);
+        return;
+      }
+
+      // Open URL in default browser
+      show_uri_on_window(window, url, null);
     },
 
     // https://gjs-docs.gnome.org/webkit240~4.0_api/webkit2.webview#signal-permission-request
@@ -1741,6 +1753,17 @@ function buildWebView({
       onNotification(notification, id);
       return true;
     },
+
+    // https://gjs-docs.gnome.org/webkit240~4.0_api/webkit2.webview#signal-decide-policy
+    // ["decide-policy"](decision, decision_type) {
+    //   // PolicyDecision.NAVIGATION_ACTION
+    //   // PolicyDecision.RESPONSE
+    //   if (decision === PolicyDecision.NEW_WINDOW_ACTION) {
+    //     log("new window");
+    //     return true;
+    //   }
+    //   return false;
+    // },
   });
 
   webView.instance_id = id;
@@ -1874,7 +1897,7 @@ const {
   Entry: Entry$2,
   //  CssProvider
 } = imports.gi.Gtk;
-const { URI } = imports.gi.Soup;
+const { URI: URI$1 } = imports.gi.Soup;
 
 function normalizeURL(str) {
   if (!str) return null;
@@ -1883,7 +1906,7 @@ function normalizeURL(str) {
     str = "http://" + str;
   }
 
-  const uri = new URI(str);
+  const uri = new URI$1(str);
   if (!uri) return null;
 
   // FIXME
