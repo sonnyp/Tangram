@@ -33,10 +33,12 @@ const {
   ResourceLookupFlags,
   resources_open_stream,
 } = imports.gi.Gio;
+const { URI } = imports.gi.Soup;
 
 import { connect } from "./util";
 import { env } from "./env";
 import { BLANK_URI } from "./constants";
+import { isSameSite } from "./hostnameUtils";
 
 export function buildWebView({
   instance,
@@ -233,8 +235,17 @@ export function buildWebView({
   connect(webView, {
     // https://gjs-docs.gnome.org/webkit240~4.0_api/webkit2.webview#signal-create
     create(navigation_action) {
-      const uri = navigation_action.get_request().get_uri();
-      show_uri_on_window(window, uri, null);
+      const current_url = webView.get_uri();
+      const request_url = navigation_action.get_request().get_uri();
+
+      if (isSameSite(new URI(current_url), new URI(request_url))) {
+        // Open URL in current tab
+        webView.load_uri(request_url);
+        return;
+      }
+
+      // Open URL in default browser
+      show_uri_on_window(window, request_url, null);
     },
 
     // https://gjs-docs.gnome.org/webkit240~4.0_api/webkit2.webview#signal-permission-request
