@@ -1493,6 +1493,40 @@ function getFaviconAsPixbuf(webview) {
 const BLANK_URI = "tangram-resource:///re/sonny/Tangram/data/blank.html";
 
 const {
+  tld_get_base_domain,
+  URI,
+  TLDError: { IS_IP_ADDRESS, NOT_ENOUGH_DOMAINS, NO_BASE_DOMAIN },
+} = imports.gi.Soup;
+const { hostname_to_ascii } = imports.gi.GLib;
+
+// Implements https://web.dev/same-site-same-origin/
+function isSameSite(a, b) {
+  a = new URI(a);
+  b = new URI(b);
+
+  if (!a || !b) return false;
+
+  // punycode
+  a = hostname_to_ascii(a.get_host());
+  b = hostname_to_ascii(b.get_host());
+
+  if (!a || !b) return false;
+
+  try {
+    return tld_get_base_domain(a) === tld_get_base_domain(b);
+  } catch (err) {
+    switch (err.code) {
+      case IS_IP_ADDRESS:
+      case NOT_ENOUGH_DOMAINS:
+      case NO_BASE_DOMAIN:
+        return a === b;
+    }
+    logError(err);
+    return false;
+  }
+}
+
+const {
   show_uri_on_window,
   FileChooserNative: FileChooserNative$1,
   FileChooserAction: FileChooserAction$1,
@@ -1723,8 +1757,17 @@ function buildWebView({
   connect(webView, {
     // https://gjs-docs.gnome.org/webkit240~4.0_api/webkit2.webview#signal-create
     create(navigation_action) {
-      const uri = navigation_action.get_request().get_uri();
-      show_uri_on_window(window, uri, null);
+      const current_url = webView.get_uri();
+      const request_url = navigation_action.get_request().get_uri();
+
+      if (isSameSite(current_url, request_url)) {
+        // Open URL in current tab
+        webView.load_uri(request_url);
+        return;
+      }
+
+      // Open URL in default browser
+      show_uri_on_window(window, request_url, null);
     },
 
     // https://gjs-docs.gnome.org/webkit240~4.0_api/webkit2.webview#signal-permission-request
@@ -1874,7 +1917,7 @@ const {
   Entry: Entry$2,
   //  CssProvider
 } = imports.gi.Gtk;
-const { URI } = imports.gi.Soup;
+const { URI: URI$1 } = imports.gi.Soup;
 
 function normalizeURL(str) {
   if (!str) return null;
@@ -1883,7 +1926,7 @@ function normalizeURL(str) {
     str = "http://" + str;
   }
 
-  const uri = new URI(str);
+  const uri = new URI$1(str);
   if (!uri) return null;
 
   // FIXME
