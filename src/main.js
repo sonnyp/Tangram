@@ -1492,464 +1492,38 @@ function getFaviconAsPixbuf(webview) {
 
 const BLANK_URI = "tangram-resource:///re/sonny/Tangram/data/blank.html";
 
-/*******************************************************************************
-
-    publicsuffixlist.js - an efficient javascript implementation to deal with
-    Mozilla Foundation's Public Suffix List <http://publicsuffix.org/list/>
-
-    Copyright (C) 2013-present Raymond Hill
-
-    License: pick the one which suits you:
-      GPL v3 see <https://www.gnu.org/licenses/gpl.html>
-      APL v2 see <http://www.apache.org/licenses/LICENSE-2.0>
-
-*/
-
-/*! Home: https://github.com/gorhill/publicsuffixlist.js -- GPLv3 APLv2 */
-
-/* jshint browser:true, esversion:6, laxbreak:true, undef:true, unused:true */
-
-/*******************************************************************************
-
-    Reference:
-    https://publicsuffix.org/list/
-
-    Excerpt:
-
-    > Algorithm
-    >
-    > 1. Match domain against all rules and take note of the matching ones.
-    > 2. If no rules match, the prevailing rule is "*".
-    > 3. If more than one rule matches, the prevailing rule is the one which
-         is an exception rule.
-    > 4. If there is no matching exception rule, the prevailing rule is the
-         one with the most labels.
-    > 5. If the prevailing rule is a exception rule, modify it by removing
-         the leftmost label.
-    > 6. The public suffix is the set of labels from the domain which match
-         the labels of the prevailing rule, using the matching algorithm above.
-    > 7. The registered or registrable domain is the public suffix plus one
-         additional label.
-
-*/
-
-/******************************************************************************/
-
-/*******************************************************************************
-
-    Tree encoding in array buffer:
-
-     Node:
-     +  u8: length of char data
-     +  u8: flags => bit 0: is_publicsuffix, bit 1: is_exception
-     + u16: length of array of children
-     + u32: char data or offset to char data
-     + u32: offset to array of children
-     = 12 bytes
-
-    More bits in flags could be used; for example:
-    - to distinguish private suffixes
-
-*/
-
-// i32 /  i8
-// const HOSTNAME_SLOT = 0; // jshint ignore:line
-const LABEL_INDICES_SLOT = 256; //  -- / 256 (256/2 => 128 labels max)
-const RULES_PTR_SLOT = 100; // 100 / 400 (400-256=144 => 144>128)
-const SUFFIX_NOT_FOUND_SLOT = 399; //  -- / 399 (safe, see above)
-const CHARDATA_PTR_SLOT = 101; // 101 / 404
-const EMPTY_STRING = "";
-
-let pslBuffer32;
-let pslBuffer8;
-let pslByteLength = 0;
-let hostnameArg = EMPTY_STRING;
-
-/******************************************************************************/
-
-const allocateBuffers = function (byteLength) {
-  pslByteLength = (byteLength + 3) & ~3;
-  if (pslBuffer32 !== undefined && pslBuffer32.byteLength >= pslByteLength) {
-    return;
-  }
-  pslBuffer8 = new Uint8Array(pslByteLength);
-  pslBuffer32 = new Uint32Array(pslBuffer8.buffer);
-  hostnameArg = EMPTY_STRING;
-  pslBuffer8[LABEL_INDICES_SLOT] = 0;
-};
-
-/******************************************************************************/
-
-// Parse and set a UTF-8 text-based suffix list. Format is same as found at:
-// http://publicsuffix.org/list/
-//
-// `toAscii` is a converter from unicode to punycode. Required since the
-// Public Suffix List contains unicode characters.
-// Suggestion: use <https://github.com/bestiejs/punycode.js>
-
-const parse = function (text, toAscii) {
-  // Use short property names for better minifying results
-  const rootRule = {
-    l: EMPTY_STRING, // l => label
-    f: 0, // f => flags
-    c: undefined, // c => children
-  };
-
-  // Tree building
-  {
-    const compareLabels = function (a, b) {
-      const n = a.length;
-      let d = n - b.length;
-      if (d !== 0) {
-        return d;
-      }
-      for (let i = 0; i < n; i++) {
-        d = a.charCodeAt(i) - b.charCodeAt(i);
-        if (d !== 0) {
-          return d;
-        }
-      }
-      return 0;
-    };
-
-    const addToTree = function (rule, exception) {
-      let node = rootRule;
-      let end = rule.length;
-      while (end > 0) {
-        const beg = rule.lastIndexOf(".", end - 1);
-        const label = rule.slice(beg + 1, end);
-        end = beg;
-
-        if (Array.isArray(node.c) === false) {
-          const child = { l: label, f: 0, c: undefined };
-          node.c = [child];
-          node = child;
-          continue;
-        }
-
-        let left = 0;
-        let right = node.c.length;
-        while (left < right) {
-          const i = (left + right) >>> 1;
-          const d = compareLabels(label, node.c[i].l);
-          if (d < 0) {
-            right = i;
-            if (right === left) {
-              const child = {
-                l: label,
-                f: 0,
-                c: undefined,
-              };
-              node.c.splice(left, 0, child);
-              node = child;
-              break;
-            }
-            continue;
-          }
-          if (d > 0) {
-            left = i + 1;
-            if (left === right) {
-              const child = {
-                l: label,
-                f: 0,
-                c: undefined,
-              };
-              node.c.splice(right, 0, child);
-              node = child;
-              break;
-            }
-            continue;
-          }
-          /* d === 0 */
-          node = node.c[i];
-          break;
-        }
-      }
-      node.f |= 0b01;
-      if (exception) {
-        node.f |= 0b10;
-      }
-    };
-
-    // 2. If no rules match, the prevailing rule is "*".
-    addToTree("*", false);
-
-    const mustPunycode = /[^a-z0-9.-]/;
-    const textEnd = text.length;
-    let lineBeg = 0;
-
-    while (lineBeg < textEnd) {
-      let lineEnd = text.indexOf("\n", lineBeg);
-      if (lineEnd === -1) {
-        lineEnd = text.indexOf("\r", lineBeg);
-        if (lineEnd === -1) {
-          lineEnd = textEnd;
-        }
-      }
-      let line = text.slice(lineBeg, lineEnd).trim();
-      lineBeg = lineEnd + 1;
-
-      // Ignore comments
-      const pos = line.indexOf("//");
-      if (pos !== -1) {
-        line = line.slice(0, pos);
-      }
-
-      // Ignore surrounding whitespaces
-      line = line.trim();
-      if (line.length === 0) {
-        continue;
-      }
-
-      const exception = line.charCodeAt(0) === 0x21; /* '!' */
-      if (exception) {
-        line = line.slice(1);
-      }
-
-      if (mustPunycode.test(line)) {
-        line = toAscii(line.toLowerCase());
-      }
-
-      addToTree(line, exception);
-    }
-  }
-
-  {
-    const labelToOffsetMap = new Map();
-    const treeData = [];
-    const charData = [];
-
-    const allocate = function (n) {
-      const ibuf = treeData.length;
-      for (let i = 0; i < n; i++) {
-        treeData.push(0);
-      }
-      return ibuf;
-    };
-
-    const storeNode = function (ibuf, node) {
-      const nChars = node.l.length;
-      const nChildren = node.c !== undefined ? node.c.length : 0;
-      treeData[ibuf + 0] = (nChildren << 16) | (node.f << 8) | nChars;
-      // char data
-      if (nChars <= 4) {
-        let v = 0;
-        if (nChars > 0) {
-          v |= node.l.charCodeAt(0);
-          if (nChars > 1) {
-            v |= node.l.charCodeAt(1) << 8;
-            if (nChars > 2) {
-              v |= node.l.charCodeAt(2) << 16;
-              if (nChars > 3) {
-                v |= node.l.charCodeAt(3) << 24;
-              }
-            }
-          }
-        }
-        treeData[ibuf + 1] = v;
-      } else {
-        let offset = labelToOffsetMap.get(node.l);
-        if (offset === undefined) {
-          offset = charData.length;
-          for (let i = 0; i < nChars; i++) {
-            charData.push(node.l.charCodeAt(i));
-          }
-          labelToOffsetMap.set(node.l, offset);
-        }
-        treeData[ibuf + 1] = offset;
-      }
-      // child nodes
-      if (Array.isArray(node.c) === false) {
-        treeData[ibuf + 2] = 0;
-        return;
-      }
-
-      const iarray = allocate(nChildren * 3);
-      treeData[ibuf + 2] = iarray;
-      for (let i = 0; i < nChildren; i++) {
-        storeNode(iarray + i * 3, node.c[i]);
-      }
-    };
-
-    // First 512 bytes are reserved for internal use
-    allocate(512 >> 2);
-
-    const iRootRule = allocate(3);
-    storeNode(iRootRule, rootRule);
-    treeData[RULES_PTR_SLOT] = iRootRule;
-
-    const iCharData = treeData.length << 2;
-    treeData[CHARDATA_PTR_SLOT] = iCharData;
-
-    const byteLength = (treeData.length << 2) + ((charData.length + 3) & ~3);
-    allocateBuffers(byteLength);
-    pslBuffer32.set(treeData);
-    pslBuffer8.set(charData, treeData.length << 2);
-  }
-};
-
-/******************************************************************************/
-
-const setHostnameArg = function (hostname) {
-  const buf = pslBuffer8;
-  if (hostname === hostnameArg) {
-    return buf[LABEL_INDICES_SLOT];
-  }
-  if (hostname === null || hostname.length === 0) {
-    hostnameArg = EMPTY_STRING;
-    return (buf[LABEL_INDICES_SLOT] = 0);
-  }
-  hostname = hostname.toLowerCase();
-  hostnameArg = hostname;
-  let n = hostname.length;
-  if (n > 255) {
-    n = 255;
-  }
-  buf[LABEL_INDICES_SLOT] = n;
-  let i = n;
-  let j = LABEL_INDICES_SLOT + 1;
-  while (i--) {
-    const c = hostname.charCodeAt(i);
-    if (c === 0x2e /* '.' */) {
-      buf[j + 0] = i + 1;
-      buf[j + 1] = i;
-      j += 2;
-    }
-    buf[i] = c;
-  }
-  buf[j] = 0;
-  return n;
-};
-
-/******************************************************************************/
-
-// Returns an offset to the start of the public suffix.
-//
-// WASM-able, because no information outside the buffer content is required.
-
-const getPublicSuffixPos = function () {
-  const buf8 = pslBuffer8;
-  const buf32 = pslBuffer32;
-  const iCharData = buf32[CHARDATA_PTR_SLOT];
-
-  let iNode = pslBuffer32[RULES_PTR_SLOT];
-  let cursorPos = -1;
-  let iLabel = LABEL_INDICES_SLOT;
-
-  // Label-lookup loop
-  for (;;) {
-    // Extract label indices
-    const labelBeg = buf8[iLabel + 1];
-    const labelLen = buf8[iLabel + 0] - labelBeg;
-    // Match-lookup loop: binary search
-    let r = buf32[iNode + 0] >>> 16;
-    if (r === 0) {
-      break;
-    }
-    const iCandidates = buf32[iNode + 2];
-    let l = 0;
-    let iFound = 0;
-    while (l < r) {
-      const iCandidate = (l + r) >>> 1;
-      const iCandidateNode = iCandidates + iCandidate + (iCandidate << 1);
-      const candidateLen = buf32[iCandidateNode + 0] & 0x000000ff;
-      let d = labelLen - candidateLen;
-      if (d === 0) {
-        const iCandidateChar =
-          candidateLen <= 4
-            ? (iCandidateNode + 1) << 2
-            : iCharData + buf32[iCandidateNode + 1];
-        for (let i = 0; i < labelLen; i++) {
-          d = buf8[labelBeg + i] - buf8[iCandidateChar + i];
-          if (d !== 0) {
-            break;
-          }
-        }
-      }
-      if (d < 0) {
-        r = iCandidate;
-      } else if (d > 0) {
-        l = iCandidate + 1;
-      } /* if ( d === 0 ) */ else {
-        iFound = iCandidateNode;
-        break;
-      }
-    }
-    // 2. If no rules match, the prevailing rule is "*".
-    if (iFound === 0) {
-      if (buf8[(iCandidates + 1) << 2] !== 0x2a /* '*' */) {
-        break;
-      }
-      buf8[SUFFIX_NOT_FOUND_SLOT] = 1;
-      iFound = iCandidates;
-    }
-    iNode = iFound;
-    // 5. If the prevailing rule is a exception rule, modify it by
-    //    removing the leftmost label.
-    if ((buf32[iNode + 0] & 0x00000200) !== 0) {
-      if (iLabel > LABEL_INDICES_SLOT) {
-        return iLabel - 2;
-      }
-      break;
-    }
-    if ((buf32[iNode + 0] & 0x00000100) !== 0) {
-      cursorPos = iLabel;
-    }
-    if (labelBeg === 0) {
-      break;
-    }
-    iLabel += 2;
-  }
-
-  return cursorPos;
-};
-
-/******************************************************************************/
-
-const getDomain = function (hostname) {
-  if (pslBuffer32 === undefined) {
-    return EMPTY_STRING;
-  }
-
-  const hostnameLen = setHostnameArg(hostname);
-  const buf8 = pslBuffer8;
-  if (hostnameLen === 0 || buf8[0] === 0x2e /* '.' */) {
-    return EMPTY_STRING;
-  }
-
-  const cursorPos = getPublicSuffixPos();
-  if (cursorPos === -1 || buf8[cursorPos + 1] === 0) {
-    return EMPTY_STRING;
-  }
-
-  // 7. The registered or registrable domain is the public suffix plus one
-  //    additional label.
-  const beg = buf8[cursorPos + 3];
-  return beg === 0 ? hostnameArg : hostnameArg.slice(beg);
-};
-
 const {
-  file_get_contents,
-  build_filenamev: build_filenamev$5,
-  get_current_dir: get_current_dir$2,
-  hostname_to_ascii,
-} = imports.gi.GLib;
-const { toString } = imports._byteArrayNative;
+  tld_get_base_domain,
+  URI,
+  TLDError: { IS_IP_ADDRESS, NOT_ENOUGH_DOMAINS, NO_BASE_DOMAIN },
+} = imports.gi.Soup;
+const { hostname_to_ascii } = imports.gi.GLib;
 
-function load$1() {
-  const path = build_filenamev$5([
-    get_current_dir$2(),
-    "src/public_suffix_list.dat",
-  ]);
-  const [, result] = file_get_contents(path);
-
-  parse(toString(result), hostname_to_ascii);
-}
-
-load$1();
-
+// Implements https://web.dev/same-site-same-origin/
 function isSameSite(a, b) {
-  return getDomain(a.get_host()) === getDomain(b.get_host());
+  a = new URI(a);
+  b = new URI(b);
+
+  if (!a || !b) return false;
+
+  // punycode
+  a = hostname_to_ascii(a.get_host());
+  b = hostname_to_ascii(b.get_host());
+
+  if (!a || !b) return false;
+
+  try {
+    return tld_get_base_domain(a) === tld_get_base_domain(b);
+  } catch (err) {
+    switch (err.code) {
+      case IS_IP_ADDRESS:
+      case NOT_ENOUGH_DOMAINS:
+      case NO_BASE_DOMAIN:
+        return a === b;
+    }
+    logError(err);
+    return false;
+  }
 }
 
 const {
@@ -1973,7 +1547,7 @@ const {
   DownloadError,
 } = imports.gi.WebKit2;
 const {
-  build_filenamev: build_filenamev$6,
+  build_filenamev: build_filenamev$5,
   DIR_SEPARATOR_S,
   get_user_special_dir,
   UserDirectory,
@@ -1987,7 +1561,6 @@ const {
   ResourceLookupFlags,
   resources_open_stream,
 } = imports.gi.Gio;
-const { URI } = imports.gi.Soup;
 
 function buildWebView({
   instance,
@@ -2011,7 +1584,7 @@ function buildWebView({
   web_context.set_spell_checking_languages(get_language_names());
   web_context.set_tls_errors_policy(TLSErrorsPolicy.FAIL);
   web_context.set_favicon_database_directory(
-    build_filenamev$6([cache_dir, "icondatabase"]),
+    build_filenamev$5([cache_dir, "icondatabase"]),
   );
   web_context.set_process_model(ProcessModel.MULTIPLE_SECONDARY_PROCESSES);
   if (typeof web_context.set_sandbox_enabled === "function") {
@@ -2139,7 +1712,7 @@ function buildWebView({
   const cookieManager = website_data_manager.get_cookie_manager();
   cookieManager.set_accept_policy(CookieAcceptPolicy.NO_THIRD_PARTY);
   cookieManager.set_persistent_storage(
-    build_filenamev$6([data_dir, "cookies.sqlite"]),
+    build_filenamev$5([data_dir, "cookies.sqlite"]),
     CookiePersistentStorage.SQLITE,
   );
 
@@ -2187,7 +1760,7 @@ function buildWebView({
       const current_url = webView.get_uri();
       const request_url = navigation_action.get_request().get_uri();
 
-      if (isSameSite(new URI(current_url), new URI(request_url))) {
+      if (isSameSite(current_url, request_url)) {
         // Open URL in current tab
         webView.load_uri(request_url);
         return;

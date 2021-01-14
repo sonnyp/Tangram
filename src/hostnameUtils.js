@@ -1,27 +1,35 @@
-import { parse, getDomain } from "./publicsuffixlist";
-
 const {
-  file_get_contents,
-  build_filenamev,
-  get_current_dir,
-  hostname_to_ascii,
-} = imports.gi.GLib;
-const { toString } = imports._byteArrayNative;
+  tld_get_base_domain,
+  URI,
+  TLDError: { IS_IP_ADDRESS, NOT_ENOUGH_DOMAINS, NO_BASE_DOMAIN },
+} = imports.gi.Soup;
+const { hostname_to_ascii } = imports.gi.GLib;
 
-function load() {
-  const path = build_filenamev([
-    get_current_dir(),
-    "src/public_suffix_list.dat",
-  ]);
-  const [, result] = file_get_contents(path);
-
-  parse(toString(result), hostname_to_ascii);
-}
-
-load();
-
+// Implements https://web.dev/same-site-same-origin/
 function isSameSite(a, b) {
-  return getDomain(a.get_host()) === getDomain(b.get_host());
+  a = new URI(a);
+  b = new URI(b);
+
+  if (!a || !b) return false;
+
+  // punycode
+  a = hostname_to_ascii(a.get_host());
+  b = hostname_to_ascii(b.get_host());
+
+  if (!a || !b) return false;
+
+  try {
+    return tld_get_base_domain(a) === tld_get_base_domain(b);
+  } catch (err) {
+    switch (err.code) {
+      case IS_IP_ADDRESS:
+      case NOT_ENOUGH_DOMAINS:
+      case NO_BASE_DOMAIN:
+        return a === b;
+    }
+    logError(err);
+    return false;
+  }
 }
 
 export { isSameSite };

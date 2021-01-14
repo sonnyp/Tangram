@@ -33,7 +33,6 @@ const {
   ResourceLookupFlags,
   resources_open_stream,
 } = imports.gi.Gio;
-const { URI } = imports.gi.Soup;
 
 import { connect } from "./util";
 import { env } from "./env";
@@ -238,7 +237,7 @@ export function buildWebView({
       const current_url = webView.get_uri();
       const request_url = navigation_action.get_request().get_uri();
 
-      if (isSameSite(new URI(current_url), new URI(request_url))) {
+      if (isSameSite(current_url, request_url)) {
         // Open URL in current tab
         webView.load_uri(request_url);
         return;
