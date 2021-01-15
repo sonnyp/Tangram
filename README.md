@@ -45,11 +45,12 @@ Both Flatpak and non-Flatpak versions of Tangram provide sandboxing for Web appl
 
 ## Roadmap
 
-- Custom icon (almost done)
-- Custom applications (almost done)
+- Custom icon (WIP)
+- Custom applications (WIP)
 - Expose WebKitGTK settings (todo)
 - SearchProvider (todo)
 - Custom CSS/JS for better integration (todo)
+- WebExtensions (todo)
 
 <!-- Disabled for now, enable with TANGRAM_ENABLE_CUSTOM_APPLICATIONS=true -->
 <!-- use at your own risk -->
@@ -65,6 +66,18 @@ You can create a custom application by
 - dragging the tab out (see demo)
 - right click on the tab
 - via the application menu -->
+
+## In the press
+
+[How to run web apps with ease on Linux](https://www.addictivetips.com/ubuntu-linux-tips/run-web-apps-linux/) - 09/2020
+
+[Tangram, nueva opción basada en GNOME para agrupar nuestras web-apps](https://ubunlog.com/tangram-nueva-opcion-basada-en-gnome-para-agrupar-nuestras-web-apps/) - 09/2020
+
+[Tangram integrates social media services in a single app](https://www.linux-magazine.com/Issues/2020/235/Tangram) - 06/2020
+
+[Tangram integriert Social-Media-Dienste und Messenger in eine App](https://www.linux-community.de/ausgaben/linuxuser/2020/02/zusammengepuzzelt/) - 02/2020
+
+[Tangram, um app para gerenciar Webapps](https://diolinux.com.br/aplicativos/tangram-um-app-para-gerenciar-webapps.html) - 09/2019
 
 ## Development
 
@@ -160,4 +173,8 @@ GTK_DEBUG=interactive ./run.sh
 
 ## Credits
 
-Inspired by [GNOME Web](https://wiki.gnome.org/Apps/Web), [Rambox](https://rambox.pro/#home), [Station](https://getstation.com/) and [Franz](https://meetfranz.com/).
+Icon by [Tobias Bernard](https://tobiasbernard.com/)
+
+[Igalia](https://www.igalia.com/) and contributors for the amazing work on [WebKitGTK](https://webkitgtk.org/)
+
+Inspired by [GNOME Web](https://wiki.gnome.org/Apps/Web), [Rambox](https://rambox.pro/#home), [Station](https://getstation.com/) and [Franz](https://meetfranz.com/)
