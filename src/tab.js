@@ -3,6 +3,7 @@ const { EventMask } = imports.gi.Gdk;
 const { Menu, SettingsBindFlags } = imports.gi.Gio;
 const { Pixbuf, InterpType } = imports.gi.GdkPixbuf;
 
+import { MODES } from "./constants";
 import flags from "./flags";
 import { getFaviconAsPixbuf } from "./webapp/webapp";
 import { buildWebView } from "./WebView";
@@ -118,5 +119,6 @@ export function TabPage({ instance, window, onNotification, application }) {
     application,
   });
   instance.page = webView;
+  webView.mode = MODES.PERMANENT;
   return webView;
 }

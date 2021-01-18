@@ -5,8 +5,10 @@ const {
 } = imports.gi.Soup;
 const { hostname_to_ascii } = imports.gi.GLib;
 
+import { BLANK_URI, MODES } from "./constants";
+
 // Implements https://web.dev/same-site-same-origin/
-function isSameSite(a, b) {
+export function isSameSite(a, b) {
   // uris
   a = new URI(a);
   b = new URI(b);
@@ -37,4 +39,13 @@ function isSameSite(a, b) {
   }
 }
 
-export { isSameSite };
+export function isUrlAllowedForNavigation(webView, request_url) {
+  const current_url = webView.get_uri();
+
+  log(webView.mode);
+  if (webView.mode === MODES.TEMPORARY) return true;
+
+  if (request_url === BLANK_URI) return true;
+
+  return isSameSite(current_url, request_url);
+}

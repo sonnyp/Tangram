@@ -30,9 +30,9 @@ bundle:
 test:
 	./node_modules/.bin/rollup -c
 	./node_modules/.bin/rollup --context=window --file=dist/webapp/test.js -- src/webapp/test.js
-	./node_modules/.bin/rollup --context=window --file=dist/hostnameUtils.test.js -- src/hostnameUtils.test.js
+	./node_modules/.bin/rollup --context=window --file=dist/utils.test.js -- src/utils.test.js
 	gjs dist/webapp/test.js
-	gjs dist/hostnameUtils.test.js
+	gjs dist/utils.test.js
 	./node_modules/.bin/eslint src/
 
 clean:

@@ -1,7 +1,8 @@
 import "./setup";
 
-import { isSameSite } from "./hostnameUtils";
+import { isSameSite, isUrlAllowedForNavigation } from "./utils.js";
 import * as assert from "./troll/assert";
+import { BLANK_URI } from "./constants";
 
 assert.is(isSameSite("https://github.com", "https://github.com"), true);
 assert.is(isSameSite("https://github.com", "http://github.com"), true);
@@ -32,3 +33,15 @@ assert.is(isSameSite("https://foo", "https://bar"), false);
 assert.is(isSameSite("https://foo.github.io", "https://bar.github.io"), false);
 assert.is(isSameSite("https://foo.github.io", "https://github.io"), false);
 assert.is(isSameSite("https://foo.github.io", "https://github.io"), false);
+
+assert.is(
+  isUrlAllowedForNavigation(
+    {
+      get_uri() {
+        return "foo";
+      },
+    },
+    BLANK_URI,
+  ),
+  true,
+);

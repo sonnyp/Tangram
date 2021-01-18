@@ -28,7 +28,7 @@ import {
 } from "./instances";
 import flags from "./flags";
 import { buildWebView } from "./WebView";
-import { BLANK_URI } from "./constants";
+import { BLANK_URI, MODES } from "./constants";
 
 export default function Window({ application, profile, state }) {
   profile.settings =
@@ -212,6 +212,7 @@ export default function Window({ application, profile, state }) {
     }
 
     webview.load_uri(instance.url);
+    webview.mode = MODES.PERMANENT;
 
     attachInstance(settings, instance.id);
     stack.remove(webview);
@@ -251,6 +252,7 @@ export default function Window({ application, profile, state }) {
       window,
       instance,
     });
+    webview.mode = MODES.TEMPORARY;
 
     const previous = stack.get_child_by_name("new-tab");
     if (previous) previous.destroy();

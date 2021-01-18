@@ -38,7 +38,7 @@ const {
 import { connect } from "./util";
 import { env } from "./env";
 import { BLANK_URI } from "./constants";
-import { isSameSite } from "./hostnameUtils";
+import { isUrlAllowedForNavigation } from "./utils";
 
 export function buildWebView({
   instance,
@@ -235,10 +235,9 @@ export function buildWebView({
   connect(webView, {
     // https://gjs-docs.gnome.org/webkit240~4.0_api/webkit2.webview#signal-create
     create(navigation_action) {
-      const current_url = webView.get_uri();
       const request_url = navigation_action.get_request().get_uri();
 
-      if (isSameSite(current_url, request_url)) {
+      if (isUrlAllowedForNavigation(webView, request_url)) {
         // Open URL in current tab
         webView.load_uri(request_url);
         return;
@@ -271,14 +270,9 @@ export function buildWebView({
         }
 
         const navigation_action = decision.get_navigation_action();
-
         const request_url = navigation_action.get_request().get_uri();
-        if (request_url === "about:blank") {
-          return false;
-        }
 
-        const current_url = webView.get_uri();
-        if (isSameSite(current_url, request_url)) {
+        if (isUrlAllowedForNavigation(webView, request_url)) {
           // Open URL in current tab
           return false;
         }
