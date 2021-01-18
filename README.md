@@ -67,17 +67,17 @@ You can create a custom application by
 - right click on the tab
 - via the application menu -->
 
-## In the press
+## In the media
 
-[How to run web apps with ease on Linux](https://www.addictivetips.com/ubuntu-linux-tips/run-web-apps-linux/) - 09/2020
+[addictivetips.com - How to run web apps with ease on Linux](https://www.addictivetips.com/ubuntu-linux-tips/run-web-apps-linux/) - 09/2020
 
-[Tangram, nueva opción basada en GNOME para agrupar nuestras web-apps](https://ubunlog.com/tangram-nueva-opcion-basada-en-gnome-para-agrupar-nuestras-web-apps/) - 09/2020
+[ubunlog.com - Tangram, nueva opción basada en GNOME para agrupar nuestras web-apps](https://ubunlog.com/tangram-nueva-opcion-basada-en-gnome-para-agrupar-nuestras-web-apps/) - 09/2020
 
-[Tangram integrates social media services in a single app](https://www.linux-magazine.com/Issues/2020/235/Tangram) - 06/2020
+[linux-magazine.com - Tangram integrates social media services in a single app](https://www.linux-magazine.com/Issues/2020/235/Tangram) - 06/2020
 
-[Tangram integriert Social-Media-Dienste und Messenger in eine App](https://www.linux-community.de/ausgaben/linuxuser/2020/02/zusammengepuzzelt/) - 02/2020
+[linux-community.de - Tangram integriert Social-Media-Dienste und Messenger in eine App](https://www.linux-community.de/ausgaben/linuxuser/2020/02/zusammengepuzzelt/) - 02/2020
 
-[Tangram, um app para gerenciar Webapps](https://diolinux.com.br/aplicativos/tangram-um-app-para-gerenciar-webapps.html) - 09/2019
+[diolinux.com.br - Tangram, um app para gerenciar Webapps](https://diolinux.com.br/aplicativos/tangram-um-app-para-gerenciar-webapps.html) - 09/2019
 
 ## Development
 
