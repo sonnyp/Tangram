@@ -26,11 +26,9 @@ assert.is(
   isSameSite("https://foo.ком.рус", "https://bar.xn--j1aef.xn--p1acf"),
   true,
 );
+assert.is(isSameSite("about:blank", "about:blank"), true);
 
 assert.is(isSameSite("https://foo", "https://bar"), false);
 assert.is(isSameSite("https://foo.github.io", "https://bar.github.io"), false);
 assert.is(isSameSite("https://foo.github.io", "https://github.io"), false);
 assert.is(isSameSite("https://foo.github.io", "https://github.io"), false);
-assert.is(isSameSite("some-invalid-url", "some-invalid-url"), false);
-assert.is(isSameSite("some-invalid-url", "some-other-invalid-url"), false);
-assert.is(isSameSite("https://", "https://"), false);

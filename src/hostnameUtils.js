@@ -7,15 +7,20 @@ const { hostname_to_ascii } = imports.gi.GLib;
 
 // Implements https://web.dev/same-site-same-origin/
 function isSameSite(a, b) {
+  // uris
   a = new URI(a);
   b = new URI(b);
-
   if (!a || !b) return false;
 
-  // punycode
-  a = hostname_to_ascii(a.get_host());
-  b = hostname_to_ascii(b.get_host());
+  // hostnames
+  a = a.get_host();
+  b = b.get_host();
+  // example: about:blank
+  if (!a || !b) return a === b;
 
+  // punycode
+  a = hostname_to_ascii(a);
+  b = hostname_to_ascii(b);
   if (!a || !b) return false;
 
   try {

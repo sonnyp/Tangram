@@ -17,6 +17,7 @@ const {
   WebView,
   ProcessModel,
   DownloadError,
+  PolicyDecisionType,
 } = imports.gi.WebKit2;
 const {
   build_filenamev,
@@ -260,6 +261,36 @@ export function buildWebView({
     ["show-notification"](notification) {
       onNotification(notification, id);
       return true;
+    },
+
+    // https://gjs-docs.gnome.org/webkit240~4.0_api/webkit2.webview#signal-decide-policy
+    ["decide-policy"](decision, decision_type) {
+      if (decision_type === PolicyDecisionType.NAVIGATION_ACTION) {
+        if (decision.get_frame_name()) {
+          return false;
+        }
+
+        const navigation_action = decision.get_navigation_action();
+
+        const request_url = navigation_action.get_request().get_uri();
+        if (request_url === "about:blank") {
+          return false;
+        }
+
+        const current_url = webView.get_uri();
+        if (isSameSite(current_url, request_url)) {
+          // Open URL in current tab
+          return false;
+        }
+
+        decision.ignore();
+        // Open URL in default browser
+        show_uri_on_window(window, request_url, null);
+
+        return true;
+      }
+
+      return false;
     },
   });
 
