@@ -15,4 +15,6 @@ node_modules
 gschemas.compiled
 var/
 dist/
-# src/main.js
+
+# Should only be added to tagged releases
+src/main.js

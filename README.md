@@ -171,6 +171,15 @@ gsettings set org.gtk.Settings.Debug enable-inspector-keybinding true
 GTK_DEBUG=interactive ./run.sh
 ```
 
+### Release
+
+```sh
+git add -f src/main.js
+git tag $VERSION
+git push origin $VERSION
+# send PR to https://github.com/flathub/re.sonny.Tangram/blob/master/re.sonny.Tangram.json
+```
+
 ## Credits
 
 Icon by [Tobias Bernard](https://tobiasbernard.com/)
