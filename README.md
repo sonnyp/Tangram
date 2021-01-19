@@ -26,7 +26,7 @@ Before submitting a compatibility issue with a Website, please try to reproduce 
 
 - Setup and manage web applications
   <!-- - Custom icon -->
-- Persistent and independant tabs
+- Persistent and independent tabs
 - Custom title
 - Re-order tabs
 - Change tabs position
