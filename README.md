@@ -69,6 +69,8 @@ You can create a custom application by
 
 ## In the media
 
+[Chris Were Digital (share.tube) - Tangram a browser just for web apps](https://share.tube/videos/watch/684332bf-cf6a-415d-970b-fb6ca996996b) - 02/2021
+
 [addictivetips.com - How to run web apps with ease on Linux](https://www.addictivetips.com/ubuntu-linux-tips/run-web-apps-linux/) - 09/2020
 
 [ubunlog.com - Tangram, nueva opción basada en GNOME para agrupar nuestras web-apps](https://ubunlog.com/tangram-nueva-opcion-basada-en-gnome-para-agrupar-nuestras-web-apps/) - 09/2020
