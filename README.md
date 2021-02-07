@@ -8,15 +8,17 @@ Run web apps on your desktop
 
 ![screenshot](data/appdata/screenshot.png)
 
-## Goal
-
-The goal of the project is to improve integration of web applications into the desktop, specifically [GNOME](https://www.gnome.org/).
-
 ## About
 
-Each tab is a container so you can setup web apps with different accounts/settings.
+Tangram is a new kind of browser. It is designed to organize and run your Web applications.
+Each tab is persistent and independent. You can set multiple tabs with different accounts for the same application.
 
-Tangram is powered by [WebKitGTK](https://webkitgtk.org/).
+Common use cases:
+
+- Stay up to date with your favorite communities; Mastodon, Twitter, ...
+- Merge all these chat applications into one; WhatsApp, Messenger, Telegram, ...
+- Group your organization tools under one application; EMail, Calendar, ...
+- One-stop for multiple sources of documentation or information
 
 ## Reporting an issue
 
@@ -43,14 +45,14 @@ Both Flatpak and non-Flatpak versions of Tangram provide sandboxing for Web appl
 - Flatpak via [our restricted permissions](https://github.com/sonnyp/Tangram/blob/master/re.sonny.Tangram.json)
 - Non-Flatpak through [WebkitGTK Sandboxing](https://www.youtube.com/watch?v=5TDg83LHZ6o) (requires WebkitGTK >= 2.26)
 
-## Roadmap
+<!-- ## Roadmap
 
 - Custom icon (WIP)
 - Custom applications (WIP)
 - Expose WebKitGTK settings (todo)
 - SearchProvider (todo)
 - Custom CSS/JS for better integration (todo)
-- WebExtensions (todo)
+- WebExtensions (todo) -->
 
 <!-- Disabled for now, enable with TANGRAM_ENABLE_CUSTOM_APPLICATIONS=true -->
 <!-- use at your own risk -->
@@ -69,7 +71,7 @@ You can create a custom application by
 
 ## In the media
 
-[Chris Were Digital (share.tube) - Tangram a browser just for web apps](https://share.tube/videos/watch/684332bf-cf6a-415d-970b-fb6ca996996b) - 02/2021
+Chris Were Digital - Tangram a browser just for web apps [share.tube](https://share.tube/videos/watch/684332bf-cf6a-415d-970b-fb6ca996996b) / [youtube.com](https://www.youtube.com/watch?v=M1NEZ6fVBQQ) - 02/2021
 
 [addictivetips.com - How to run web apps with ease on Linux](https://www.addictivetips.com/ubuntu-linux-tips/run-web-apps-linux/) - 09/2020
 
@@ -88,33 +90,28 @@ You can create a custom application by
 <details>
  <summary>Ubuntu</summary>
  <code>
- sudo apt install npm libglib2.0-dev-bin flatpak-builder npm git
+ sudo apt install npm libglib2.0-dev-bin flatpak-builder git
  </code>
 </details>
 
 <details>
  <summary>Arch Linux</summary>
  <code>
- sudo pacman -S npm glib2 flatpak-builder npm git
+ sudo pacman -S npm glib2 flatpak-builder git
  </code>
 </details>
 
 <details>
   <summary>Fedora</summary>
   <code>
-  sudo dnf install npm glib2-devel flatpak-builder npm git
+  sudo dnf install npm glib2-devel flatpak-builder git
   </code>
 </details>
-
-#### Clone
-
-```sh
-git clone git://github.com/sonnyp/Tangram.git
-```
 
 ### Install dependencies
 
 ```sh
+cd Tangram
 git submodule init
 git submodule update
 npm install
@@ -123,6 +120,7 @@ npm install
 ### Run
 
 ```sh
+cd Tangram
 make dev # in one terminal
 ./run.sh # in an other
 ```
