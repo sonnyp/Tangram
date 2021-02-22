@@ -77,6 +77,8 @@ Chris Were Digital - Tangram a browser just for web apps [share.tube](https://sh
 
 [ubunlog.com - Tangram, nueva opción basada en GNOME para agrupar nuestras web-apps](https://ubunlog.com/tangram-nueva-opcion-basada-en-gnome-para-agrupar-nuestras-web-apps/) - 09/2020
 
+[edivaldobrito.com.br - Como instalar o navegador Tangram no Linux via Flatpak](https://www.edivaldobrito.com.br/como-instalar-o-navegador-tangram-no-linux-via-flatpak/) - 08/2020
+
 [linux-magazine.com - Tangram integrates social media services in a single app](https://www.linux-magazine.com/Issues/2020/235/Tangram) - 06/2020
 
 [linux-community.de - Tangram integriert Social-Media-Dienste und Messenger in eine App](https://www.linux-community.de/ausgaben/linuxuser/2020/02/zusammengepuzzelt/) - 02/2020
@@ -186,4 +188,6 @@ Icon by [Tobias Bernard](https://tobiasbernard.com/)
 
 [Igalia](https://www.igalia.com/) and contributors for the amazing work on [WebKitGTK](https://webkitgtk.org/)
 
-Inspired by [GNOME Web](https://wiki.gnome.org/Apps/Web), [Rambox](https://rambox.pro/#home), [Station](https://getstation.com/) and [Franz](https://meetfranz.com/)
+Inspired by [GNOME Web](https://wiki.gnome.org/Apps/Web), [Rambox](https://rambox.pro/#home) and [Franz](https://meetfranz.com/).
+
+See also [Wavebox](https://wavebox.io/) and [Station](https://getstation.com/).
