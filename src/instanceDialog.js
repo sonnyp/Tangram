@@ -1,4 +1,9 @@
-const { WindowTypeHint } = imports.gi.Gdk;
+import Gtk from "gi://Gtk";
+import Gdk from "gi://Gdk";
+import GLib from "gi://GLib";
+import Gio from "gi://Gio";
+
+const { WindowTypeHint } = Gdk;
 const {
   Dialog,
   Align,
@@ -9,13 +14,13 @@ const {
   EntryIconPosition,
   Box,
   Orientation,
-} = imports.gi.Gtk;
-const { SettingsBindFlags } = imports.gi.Gio;
-const { build_filenamev } = imports.gi.GLib;
+} = Gtk;
+const { SettingsBindFlags } = Gio;
+const { build_filenamev } = GLib;
 
-import { once } from "./troll/util";
-import { iconChooser, saveIcon } from "./icon";
-import flags from "./flags";
+import { once } from "./troll/util.js";
+import { iconChooser, saveIcon } from "./icon.js";
+import flags from "./flags.js";
 
 export function editInstanceDialog(props) {
   return instanceDialog({ ...props, action: "Edit" });

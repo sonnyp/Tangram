@@ -1,4 +1,6 @@
-const { getenv } = imports.gi.GLib;
+import GLib from "gi://GLib";
+
+const { getenv } = GLib;
 
 const custom_applications =
   getenv("TANGRAM_ENABLE_CUSTOM_APPLICATIONS") === "true";

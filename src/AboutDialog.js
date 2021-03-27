@@ -1,6 +1,6 @@
-const Gtk = imports.gi.Gtk;
-const WebKit = imports.gi.WebKit2;
-const system = imports.system;
+import Gtk from "gi://Gtk";
+import WebKit from "gi://WebKit2";
+import system from "system";
 
 const { get_major_version, get_minor_version, get_micro_version } = WebKit;
 const WebKitGTKVersion = `${get_major_version()}.${get_minor_version()}.${get_micro_version()}`;

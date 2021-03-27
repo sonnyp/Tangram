@@ -1,8 +1,15 @@
-#!@GJS@
-imports.package.start({
+#!/usr/bin/env -S gjs -m
+
+const { programInvocationName } = imports.system;
+
+imports.package.init({
   name: "@PACKAGE_NAME@",
   version: "@PACKAGE_VERSION@",
   prefix: "@prefix@",
   libdir: "@libdir@",
   datadir: "@datadir@",
 });
+
+// FIXME: won't work
+import main from "./main.js";
+main([programInvocationName, ...ARGV]);

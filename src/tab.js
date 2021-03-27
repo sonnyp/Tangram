@@ -1,12 +1,17 @@
-const { Label, Image, Box, EventBox, Popover } = imports.gi.Gtk;
-const { EventMask } = imports.gi.Gdk;
-const { Menu, SettingsBindFlags } = imports.gi.Gio;
-const { Pixbuf, InterpType } = imports.gi.GdkPixbuf;
+import Gtk from "gi://Gtk";
+import Gdk from "gi://Gdk";
+import Gio from "gi://Gio";
+import GdkPixbuf from "gi://GdkPixbuf";
 
-import { MODES } from "./constants";
-import flags from "./flags";
-import { getFaviconAsPixbuf } from "./webapp/webapp";
-import { buildWebView } from "./WebView";
+const { Label, Image, Box, EventBox, Popover } = Gtk;
+const { EventMask } = Gdk;
+const { Menu, SettingsBindFlags } = Gio;
+const { Pixbuf, InterpType } = GdkPixbuf;
+
+import { MODES } from "./constants.js";
+import flags from "./flags.js";
+import { getFaviconAsPixbuf } from "./webapp/webapp.js";
+import { buildWebView } from "./WebView.js";
 
 const ICON_SIZE = 16;
 

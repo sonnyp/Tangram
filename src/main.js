@@ -1,7 +1,13 @@
-import { versions } from "./setup";
+import "./setup.js";
+import { programInvocationName } from "system";
+import GLib from "gi://GLib";
+import Gio from "gi://Gio";
 
-const { programInvocationName } = imports.system;
-const { SimpleAction } = imports.gi.Gio;
+// FIXME: investigate pkg not being defined
+// for some reason globalThis appears to be different in re.sonny.Tangram / scripts
+globalThis.pkg = imports.package;
+
+const { SimpleAction } = Gio;
 const {
   getenv,
   // listenv,
@@ -9,11 +15,9 @@ const {
   SpawnFlags,
   log_writer_is_journald,
   setenv,
-} = imports.gi.GLib;
+} = GLib;
 
-pkg.require(versions);
-
-import application from "./application";
+import application from "./application.js";
 
 if (getenv("DEV")) {
   if (log_writer_is_journald(2)) {
@@ -33,7 +37,7 @@ for (const i in pkg) {
 //   log(`env ${name}: ${getenv(name)}`);
 // });
 
-this.main = function main(argv = []) {
+export default function main(argv = []) {
   log("argv " + argv.join(" "));
 
   if (getenv("DEV")) {
@@ -50,4 +54,4 @@ this.main = function main(argv = []) {
     application.set_accels_for_action("app.restart", ["<Ctrl><Shift>Q"]);
   }
   return application.run(argv);
-};
+}

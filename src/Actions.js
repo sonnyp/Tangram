@@ -1,13 +1,16 @@
-const { VariantType, Variant } = imports.gi.GLib;
-const { SimpleAction } = imports.gi.Gio;
+import GLib from "gi://GLib";
+import Gio from "gi://Gio";
 
-import { detachTab } from "./Notebook";
-import * as instances from "./instances";
+const { VariantType, Variant } = GLib;
+const { SimpleAction } = Gio;
+
+import { detachTab } from "./Notebook.js";
+import * as instances from "./instances.js";
 import {
   newApplicationDialog,
   editApplicationDialog,
-} from "./applicationDialog";
-import { editInstanceDialog } from "./instanceDialog";
+} from "./applicationDialog.js";
+import { editInstanceDialog } from "./instanceDialog.js";
 
 export default function Actions({
   window,

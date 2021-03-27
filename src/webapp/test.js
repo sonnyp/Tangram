@@ -1,12 +1,13 @@
-import "../setup";
+import "../setup.js";
 
-import { getWebAppInfo } from "./webapp";
-import * as assert from "../troll/assert";
+import GLib from "gi://GLib";
+import WebKit from "gi://WebKit2";
+import Gtk from "gi://Gtk";
+import Soup from "gi://Soup";
+import { exit } from "system";
 
-const WebKit = imports.gi.WebKit2;
-const Gtk = imports.gi.Gtk;
-const GLib = imports.gi.GLib;
-const Soup = imports.gi.Soup;
+import { getWebAppInfo } from "./webapp.js";
+import * as assert from "../troll/assert.js";
 
 // Gtk needs to be initialized for WebKitGTK
 Gtk.init(null);
@@ -261,4 +262,4 @@ loop.run();
 
 // Must run after loop, see
 // https://gitlab.gnome.org/GNOME/gjs/issues/278#note_587273
-imports.system.exit(exit_code);
+exit(exit_code);
