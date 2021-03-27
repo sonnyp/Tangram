@@ -1,4 +1,6 @@
-const { addSignalMethods } = imports.signals;
+const {
+  signals: { addSignalMethods },
+} = imports;
 
 export class State {
   constructor() {

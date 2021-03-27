@@ -1,9 +1,14 @@
+import Gtk from "gi://Gtk";
+import WebKit2 from "gi://WebKit2";
+import GLib from "gi://GLib";
+import Gio from "gi://Gio";
+
 const {
   show_uri_on_window,
   FileChooserNative,
   FileChooserAction,
   ResponseType,
-} = imports.gi.Gtk;
+} = Gtk;
 const {
   WebsiteDataManager,
   WebContext,
@@ -18,7 +23,7 @@ const {
   ProcessModel,
   DownloadError,
   PolicyDecisionType,
-} = imports.gi.WebKit2;
+} = WebKit2;
 const {
   build_filenamev,
   DIR_SEPARATOR_S,
@@ -27,18 +32,18 @@ const {
   path_get_basename,
   path_get_dirname,
   get_language_names,
-} = imports.gi.GLib;
+} = GLib;
 const {
   Notification,
   AppInfo,
   ResourceLookupFlags,
   resources_open_stream,
-} = imports.gi.Gio;
+} = Gio;
 
-import { connect } from "./util";
-import { env } from "./env";
-import { BLANK_URI } from "./constants";
-import { isUrlAllowedForNavigation } from "./utils";
+import { connect } from "./util.js";
+import { env } from "./env.js";
+import { BLANK_URI } from "./constants.js";
+import { isUrlAllowedForNavigation } from "./utils.js";
 
 export function buildWebView({
   instance,

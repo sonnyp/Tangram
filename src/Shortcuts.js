@@ -1,7 +1,12 @@
-const { VariantType } = imports.gi.GLib;
-const { AccelGroup, AccelFlags, accelerator_parse } = imports.gi.Gtk;
-const { SimpleAction } = imports.gi.Gio;
-const { ModifierType, keyval_name } = imports.gi.Gdk;
+import GLib from "gi://GLib";
+import Gtk from "gi://Gtk";
+import Gio from "gi://Gio";
+import Gdk from "gi://Gdk";
+
+const { VariantType } = GLib;
+const { AccelGroup, AccelFlags, accelerator_parse } = Gtk;
+const { SimpleAction } = Gio;
+const { ModifierType, keyval_name } = Gdk;
 
 function nextPage(notebook) {
   if (notebook.page === notebook.get_n_pages() - 1) {

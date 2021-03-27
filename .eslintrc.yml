@@ -1,5 +1,6 @@
 env:
   es6: true
+  es2020: true
 extends:
   - "eslint:recommended"
   - "plugin:import/errors"
@@ -16,8 +17,8 @@ globals:
   printerr: readonly
   ARGV: readonly
   window: readonly
+  globalThis: readonly
 parserOptions:
-  ecmaVersion: 2018
   sourceType: module
 rules:
   # https://eslint.org/docs/rules/no-restricted-globals
@@ -31,3 +32,7 @@ rules:
   no-var: error # https://eslint.org/docs/rules/no-var
   prefer-arrow-callback: error # https://eslint.org/docs/rules/prefer-arrow-callback
   prefer-const: error # https://eslint.org/docs/rules/prefer-const
+  # https://github.com/benmosher/eslint-plugin-import/
+  import/extensions: ["error", "ignorePackages"]
+  import/no-unresolved:
+    [2, { ignore: ["gi://*", "cairo", "gettext", "system"] }]

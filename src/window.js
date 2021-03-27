@@ -1,23 +1,27 @@
-const { uuid_string_random } = imports.gi.GLib;
-const { ApplicationWindow, Stack, StackTransitionType } = imports.gi.Gtk;
-const { Notification, NotificationPriority } = imports.gi.Gio;
+import Gtk from "gi://Gtk";
+import GLib from "gi://GLib";
+import Gio from "gi://Gio";
 
-import Notebook from "./Notebook";
-import Shortcuts from "./Shortcuts";
-import Actions from "./Actions";
-import { Settings, observeSetting } from "./util";
+const { uuid_string_random } = GLib;
+const { ApplicationWindow, Stack, StackTransitionType } = Gtk;
+const { Notification, NotificationPriority } = Gio;
+
+import Notebook from "./Notebook.js";
+import Shortcuts from "./Shortcuts.js";
+import Actions from "./Actions.js";
+import { Settings, observeSetting } from "./util.js";
 import {
   getWebAppInfo,
   // download,
   // saveFavicon
-} from "./webapp/webapp";
+} from "./webapp/webapp.js";
 
 // https://github.com/flatpak/flatpak/issues/78#issuecomment-511158618
 // log(imports.gi.Gio.SettingsBackend.get_default());
 
-import { TabLabel, TabPage } from "./tab";
-import { addInstanceDialog } from "./instanceDialog";
-import Header from "./Header";
+import { TabLabel, TabPage } from "./tab.js";
+import { addInstanceDialog } from "./instanceDialog.js";
+import Header from "./Header.js";
 import {
   get as getInstance,
   attach as attachInstance,
@@ -25,10 +29,10 @@ import {
   list as instanceList,
   load as loadInstances,
   create as createInstance,
-} from "./instances";
-import flags from "./flags";
-import { buildWebView } from "./WebView";
-import { BLANK_URI, MODES } from "./constants";
+} from "./instances.js";
+import flags from "./flags.js";
+import { buildWebView } from "./WebView.js";
+import { BLANK_URI, MODES } from "./constants.js";
 
 export default function Window({ application, profile, state }) {
   profile.settings =

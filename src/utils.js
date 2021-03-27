@@ -1,11 +1,14 @@
+import Soup from "gi://Soup";
+import GLib from "gi://GLib";
+
 const {
   tld_get_base_domain,
   URI,
   TLDError: { IS_IP_ADDRESS, NOT_ENOUGH_DOMAINS, NO_BASE_DOMAIN },
-} = imports.gi.Soup;
-const { hostname_to_ascii } = imports.gi.GLib;
+} = Soup;
+const { hostname_to_ascii } = GLib;
 
-import { BLANK_URI, MODES } from "./constants";
+import { BLANK_URI, MODES } from "./constants.js";
 
 // Implements https://web.dev/same-site-same-origin/
 export function isSameSite(a, b) {
