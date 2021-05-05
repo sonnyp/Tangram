@@ -1,5 +1,7 @@
 #!/usr/bin/env -S gjs -m
 
+// -*- mode: js; -*-
+
 const { programInvocationName } = imports.system;
 
 // https://gitlab.gnome.org/GNOME/gjs/blob/master/doc/Package/Specification.md
@@ -11,4 +13,5 @@ imports.package.init({
 });
 
 import main from "./main.js";
+
 main([programInvocationName, ...ARGV]);
