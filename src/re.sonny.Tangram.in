@@ -1,5 +1,7 @@
 #!/usr/bin/env -S gjs -m
 
+// -*- mode: js; -*-
+
 const { programInvocationName } = imports.system;
 
 imports.package.init({
@@ -10,6 +12,7 @@ imports.package.init({
   datadir: "@datadir@",
 });
 
-// FIXME: won't work
-import main from "./main.js";
+// eslint-disable-next-line import/no-unresolved
+import main from "file://@datadir@/@PACKAGE_NAME@/main.js";
+
 main([programInvocationName, ...ARGV]);
