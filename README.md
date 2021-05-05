@@ -1,12 +1,12 @@
-<img style="vertical-align: middle;" src="data/icons/hicolor/scalable/apps/re.sonny.Tangram.svg" width="120" height="120">
+<img style="vertical-align: middle;" src="data/icons/hicolor/scalable/apps/re.sonny.Tangram.svg" align="left" width="120" height="120">
 
 # Tangram
 
 Run web apps on your desktop
 
-<a href='https://flathub.org/apps/details/re.sonny.Tangram'><img width='200' alt='Download on Flathub' src='https://flathub.org/assets/badges/flathub-badge-en.svg'/></a>
-
 ![screenshot](data/appdata/screenshot.png)
+
+<a href='https://flathub.org/apps/details/re.sonny.Tangram'><img width='200' alt='Download on Flathub' width='180' height='60' src='https://flathub.org/assets/badges/flathub-badge-en.svg'/></a>
 
 ## About
 
@@ -19,6 +19,12 @@ Common use cases:
 - Merge all these chat applications into one; WhatsApp, Messenger, Telegram, ...
 - Group your organization tools under one application; EMail, Calendar, ...
 - One-stop for multiple sources of documentation or information
+
+## Installation
+
+|      Distro      |                        Package Name/Link                         |                   Maintainer                    |
+| :--------------: | :--------------------------------------------------------------: | :---------------------------------------------: |
+| Arch Linux (aur) | [`tangram-web`](https://aur.archlinux.org/packages/tangram-web/) | [Mark Wagie](https://github.com/yochananmarqos) |
 
 ## Reporting an issue
 
