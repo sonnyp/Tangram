@@ -22,9 +22,10 @@ Common use cases:
 
 ## Installation
 
-|      Distro      |                        Package Name/Link                         |                   Maintainer                    |
-| :--------------: | :--------------------------------------------------------------: | :---------------------------------------------: |
-| Arch Linux (aur) | [`tangram-web`](https://aur.archlinux.org/packages/tangram-web/) | [Mark Wagie](https://github.com/yochananmarqos) |
+|     Platform     |                            Package Name/Link                            |                   Maintainer                    |
+| :--------------: | :---------------------------------------------------------------------: | :---------------------------------------------: |
+|     Flatpak      | [`re.sonny.Tangram`](https://flathub.org/apps/details/re.sonny.Tangram) |    [Sonny Piers](https://github.com/sonnyp)     |
+| Arch Linux (aur) |        [`tangram`](https://aur.archlinux.org/packages/tangram/)         | [Mark Wagie](https://github.com/yochananmarqos) |
 
 ## Reporting an issue
 
@@ -77,21 +78,23 @@ You can create a custom application by
 
 ## In the media
 
-[GNU/Linux.ch – Tangram - eine neue Art des Webbrowsers (Review)](https://gnulinux.ch/tangram-eine-neue-art-des-webbrowsers) - 04/2021
+[GNU/Linux.ch – Tangram - eine neue Art des Webbrowsers (Review)](https://gnulinux.ch/tangram-eine-neue-art-des-webbrowsers) - 2021-04
 
-Chris Were Digital - Tangram a browser just for web apps [share.tube](https://share.tube/videos/watch/684332bf-cf6a-415d-970b-fb6ca996996b) / [youtube.com](https://www.youtube.com/watch?v=M1NEZ6fVBQQ) - 02/2021
+Chris Were Digital - Tangram a browser just for web apps [share.tube](https://share.tube/videos/watch/684332bf-cf6a-415d-970b-fb6ca996996b) / [youtube.com](https://www.youtube.com/watch?v=M1NEZ6fVBQQ) - 2021-02
 
-[addictivetips.com - How to run web apps with ease on Linux](https://www.addictivetips.com/ubuntu-linux-tips/run-web-apps-linux/) - 09/2020
+[addictivetips.com - How to run web apps with ease on Linux](https://www.addictivetips.com/ubuntu-linux-tips/run-web-apps-linux/) - 2020-09
 
-[ubunlog.com - Tangram, nueva opción basada en GNOME para agrupar nuestras web-apps](https://ubunlog.com/tangram-nueva-opcion-basada-en-gnome-para-agrupar-nuestras-web-apps/) - 09/2020
+[ubunlog.com - Tangram, nueva opción basada en GNOME para agrupar nuestras web-apps](https://ubunlog.com/tangram-nueva-opcion-basada-en-gnome-para-agrupar-nuestras-web-apps/) - 2020-09
 
-[edivaldobrito.com.br - Como instalar o navegador Tangram no Linux via Flatpak](https://www.edivaldobrito.com.br/como-instalar-o-navegador-tangram-no-linux-via-flatpak/) - 08/2020
+[edivaldobrito.com.br - Como instalar o navegador Tangram no Linux via Flatpak](https://www.edivaldobrito.com.br/como-instalar-o-navegador-tangram-no-linux-via-flatpak/) - 2020-08
 
-[linux-magazine.com - Tangram integrates social media services in a single app](https://www.linux-magazine.com/Issues/2020/235/Tangram) - 06/2020
+[linux-magazine.com - Tangram integrates social media services in a single app](https://www.linux-magazine.com/Issues/2020/235/Tangram) - 2020-06
 
-[linux-community.de - Tangram integriert Social-Media-Dienste und Messenger in eine App](https://www.linux-community.de/ausgaben/linuxuser/2020/02/zusammengepuzzelt/) - 02/2020
+[linux-community.de - Tangram integriert Social-Media-Dienste und Messenger in eine App](https://www.linux-community.de/ausgaben/linuxuser/2020/02/zusammengepuzzelt/) - 2020-02
 
-[diolinux.com.br - Tangram, um app para gerenciar Webapps](https://diolinux.com.br/aplicativos/tangram-um-app-para-gerenciar-webapps.html) - 09/2019
+[linuxdicasesuporte.blogspot.com - Navegador Tangram no GNU/Linux ](https://linuxdicasesuporte.blogspot.com/2019/11/navegador-tangram-no-gnulinux.html) - 2019-11
+
+[diolinux.com.br - Tangram, um app para gerenciar Webapps](https://diolinux.com.br/aplicativos/tangram-um-app-para-gerenciar-webapps.html) - 2019-09
 
 ## Development
 
