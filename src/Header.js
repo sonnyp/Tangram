@@ -1,3 +1,6 @@
+import Gtk from "gi://Gtk";
+import WebKit2 from "gi://WebKit2";
+
 const {
   HeaderBar,
   Button,
@@ -10,12 +13,12 @@ const {
   Image,
   STYLE_CLASS_LINKED,
   Label,
-} = imports.gi.Gtk;
-const { LoadEvent, uri_for_display } = imports.gi.WebKit2;
+} = Gtk;
+const { LoadEvent, uri_for_display } = WebKit2;
 
-import AddressBar from "./AddressBar";
-import flags from "./flags";
-import { BLANK_URI } from "./constants";
+import AddressBar from "./AddressBar.js";
+import flags from "./flags.js";
+import { BLANK_URI } from "./constants.js";
 
 function Menu({ profile }) {
   const builder = Builder.new_from_resource(

@@ -1,22 +1,22 @@
-const { Application, Builder } = imports.gi.Gtk;
+import Gtk from "gi://Gtk";
+import GLib from "gi://GLib";
+import Gio from "gi://Gio";
+import Gdk from "gi://Gdk";
+
+const { Application, Builder } = Gtk;
 const {
   // ApplicationFlags,
   SimpleAction,
-} = imports.gi.Gio;
-const {
-  OptionFlags,
-  OptionArg,
-  set_prgname,
-  set_application_name,
-} = imports.gi.GLib;
-const { set_program_class } = imports.gi.Gdk;
+} = Gio;
+const { OptionFlags, OptionArg, set_prgname, set_application_name } = GLib;
+const { set_program_class } = Gdk;
 
-import AboutDialog from "./AboutDialog";
-import Window from "./window";
-import { lookup } from "./util";
-import state from "./state";
-import { PersistentActions } from "./persistentActions";
-import flags from "./flags";
+import AboutDialog from "./AboutDialog.js";
+import Window from "./window.js";
+import { lookup } from "./util.js";
+import state from "./state.js";
+import { PersistentActions } from "./persistentActions.js";
+import flags from "./flags.js";
 
 const application = new Application({
   application_id: "re.sonny.Tangram",

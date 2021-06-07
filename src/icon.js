@@ -1,3 +1,6 @@
+import Gtk from "gi://Gtk";
+import GdkPixbuf from "gi://GdkPixbuf";
+
 const {
   FileChooserNative,
   FileChooserAction,
@@ -5,9 +8,9 @@ const {
   Button,
   Image,
   ResponseType,
-} = imports.gi.Gtk;
-const { Pixbuf } = imports.gi.GdkPixbuf;
-// const { mkdir_with_parents } = imports.gi.GLib;
+} = Gtk;
+const { Pixbuf } = GdkPixbuf;
+// const { mkdir_with_parents } = GLib;
 
 // https://gjs-docs.gnome.org/gtk30~3.24.8/gtk.filefilter
 const iconFileFilter = new FileFilter();

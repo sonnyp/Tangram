@@ -6,5 +6,6 @@
     "**/build/**": true,
     "**/flatpak/**": true,
     "**/repo/**": true
-  }
+  },
+  "stylelint.enable": false
 }

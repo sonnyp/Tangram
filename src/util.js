@@ -1,8 +1,10 @@
-const GioSettings = imports.gi.Gio.Settings;
-const { KeyFile, KEY_FILE_DESKTOP_GROUP, VariantType } = imports.gi.GLib;
-const { keyfile_settings_backend_new } = imports.gi.Gio;
+import Gio from "gi://Gio";
+import GLib from "gi://GLib";
 
-import { keyfile_settings_path } from "./env";
+const { Settings: GioSettings, keyfile_settings_backend_new } = Gio;
+const { KeyFile, KEY_FILE_DESKTOP_GROUP, VariantType } = GLib;
+
+import { keyfile_settings_path } from "./env.js";
 
 // default dconf
 let backend = null;
