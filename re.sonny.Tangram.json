@@ -11,7 +11,10 @@
     "--socket=fallback-x11",
     "--socket=pulseaudio",
     "--socket=wayland",
-    "--system-talk-name=org.freedesktop.GeoClue2"
+    "--system-talk-name=org.freedesktop.GeoClue2",
+    // Required for FLATPAK_ID
+    // https://github.com/flatpak/flatpak/releases/tag/1.1.2
+    "--require-version=1.1.2"
   ],
   "modules": [
     {

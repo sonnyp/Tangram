@@ -1,7 +1,7 @@
 pkgdatadir = join_paths(get_option('datadir'), meson.project_name())
 gnome = import('gnome')
 
-install_subdir('.', install_dir : pkgdatadir, excludes: ['re.sonny.Tangra']) # TODO exclude
+install_subdir('.', install_dir : pkgdatadir, exclude_files: ['re.sonny.Tangram', 'meson.build'])
 
 bin_conf = configuration_data()
 bin_conf.set('GJS', find_program('gjs').path())
