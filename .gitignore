@@ -15,6 +15,7 @@ node_modules
 gschemas.compiled
 var/
 dist/
+.eslintcache
 
 # Should only be added to tagged releases
 src/main.js

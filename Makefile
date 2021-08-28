@@ -33,7 +33,7 @@ test:
 	./node_modules/.bin/rollup --context=window --file=dist/utils.test.js -- src/utils.test.js
 	gjs dist/webapp/test.js
 	gjs dist/utils.test.js
-	./node_modules/.bin/eslint src/
+	./node_modules/.bin/eslint --cache src/
 
 clean:
 	rm -rf .flatpak-builder build flatpak install repo var/config var/cache var/data var/applications/*.desktop dist/ src/main.js dist/webapp/test.js
