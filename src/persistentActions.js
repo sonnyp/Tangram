@@ -1,7 +1,10 @@
-const { VariantType } = imports.gi.GLib;
-const { SimpleAction, AppInfo } = imports.gi.Gio;
+import GLib from "gi://GLib";
+import Gio from "gi://Gio";
 
-import * as instances from "./instances";
+const { VariantType } = GLib;
+const { SimpleAction, AppInfo } = Gio;
+
+import * as instances from "./instances.js";
 
 export function PersistentActions({ getWindow, application }) {
   // https://gjs-docs.gnome.org/gio20~2.0_api/gio.simpleaction

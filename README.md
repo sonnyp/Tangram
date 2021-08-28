@@ -134,11 +134,10 @@ npm install
 
 ```sh
 cd Tangram
-make dev # in one terminal
-./run.sh # in an other
+./run.sh
 ```
 
-`make dev` constantly watch for file changes and will rebuild automatically. `./run.sh` runs the application in `development` mode. Hit `<Ctrl><Shift>Q` to restart the application.
+`./run.sh` runs the application in `development` mode. Hit `<Ctrl><Shift>Q` to restart the application.
 
 - data files are stored in `./var/data/` instead of `$XDG_DATA_HOME/Tangram/`
 - cache files are stored in `./var/cache/` instead of `XDG_CACHE_HOME/Tangram/`
@@ -187,7 +186,6 @@ GTK_DEBUG=interactive ./run.sh
 ### Release
 
 ```sh
-git add -f src/main.js
 git tag $VERSION
 git push origin $VERSION
 # send PR to https://github.com/flathub/re.sonny.Tangram/blob/master/re.sonny.Tangram.json

@@ -1,9 +1,6 @@
 build/
-data/
-dist/
 flatpak/
 node_modules/
 repo/
-src/troll/
 var/
-src/main.js
+src/troll/

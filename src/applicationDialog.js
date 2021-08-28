@@ -1,5 +1,11 @@
-const { WindowTypeHint } = imports.gi.Gdk;
-const { programInvocationName } = imports.system;
+import Gdk from "gi://Gdk";
+import system from "system";
+import Gtk from "gi://Gtk";
+import GLib from "gi://GLib";
+import Gio from "gi://Gio";
+
+const { WindowTypeHint } = Gdk;
+const { programInvocationName } = system;
 const {
   Dialog,
   Align,
@@ -9,7 +15,7 @@ const {
   ResponseType,
   Orientation,
   Box,
-} = imports.gi.Gtk;
+} = Gtk;
 const {
   build_filenamev,
   path_is_absolute,
@@ -27,13 +33,13 @@ const {
   KeyFile,
   KeyFileFlags,
   KEY_FILE_DESKTOP_GROUP,
-} = imports.gi.GLib;
-const { DesktopAppInfo } = imports.gi.Gio;
+} = GLib;
+const { DesktopAppInfo } = Gio;
 
-import { applications_dir, data_dir, env } from "./env";
-import { iconChooser, saveIcon } from "./icon";
-import { desktopEntry } from "./util";
-import { once } from "./troll/util";
+import { applications_dir, data_dir, env } from "./env.js";
+import { iconChooser, saveIcon } from "./icon.js";
+import { desktopEntry } from "./util.js";
+import { once } from "./troll/util.js";
 
 let bin;
 if (env === "flatpak") {

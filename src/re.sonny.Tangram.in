@@ -1,8 +1,20 @@
-#!@GJS@
-imports.package.start({
+#!/usr/bin/env -S gjs -m
+
+// -*- mode: js; -*-
+
+globalThis.__DEV__ = false;
+
+const { programInvocationName } = imports.system;
+
+imports.package.init({
   name: "@PACKAGE_NAME@",
   version: "@PACKAGE_VERSION@",
   prefix: "@prefix@",
   libdir: "@libdir@",
   datadir: "@datadir@",
 });
+
+// eslint-disable-next-line import/no-unresolved
+import main from "file://@datadir@/@PACKAGE_NAME@/main.js";
+
+main([programInvocationName, ...ARGV]);

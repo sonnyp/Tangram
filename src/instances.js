@@ -1,8 +1,11 @@
-const { build_filenamev } = imports.gi.GLib;
-const { File } = imports.gi.Gio;
+import GLib from "gi://GLib";
+import Gio from "gi://Gio";
 
-import { Settings } from "./util";
-import { data_dir, cache_dir } from "./env";
+const { build_filenamev } = GLib;
+const { File } = Gio;
+
+import { Settings } from "./util.js";
+import { data_dir, cache_dir } from "./env.js";
 
 export const list = [];
 

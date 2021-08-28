@@ -1,8 +1,8 @@
-const {
-  Entry,
-  //  CssProvider
-} = imports.gi.Gtk;
-const { URI } = imports.gi.Soup;
+import Gtk from "gi://Gtk";
+import Soup from "gi://Soup";
+
+const { Entry } = Gtk;
+const { URI } = Soup;
 
 function normalizeURL(str) {
   if (!str) return null;

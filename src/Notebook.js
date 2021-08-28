@@ -1,19 +1,21 @@
-const Gtk = imports.gi.Gtk;
-const { SettingsBindFlags } = imports.gi.Gio;
+import Gtk from "gi://Gtk";
+import Gio from "gi://Gio";
 
-import { Settings, connect } from "./util";
-import state from "./state";
+const { SettingsBindFlags } = Gio;
+
+import { Settings, connect } from "./util.js";
+import state from "./state.js";
 import {
   createApplication,
   launchApplication,
   buildApplicationId,
-} from "./applicationDialog";
+} from "./applicationDialog.js";
 import {
   get as getInstance,
   attach as attachInstance,
   detach as detachInstance,
-} from "./instances";
-import flags from "./flags";
+} from "./instances.js";
+import flags from "./flags.js";
 
 export function detachTab({ instance_id, notebook, settings }) {
   const instance = getInstance(instance_id);

@@ -1,12 +1,7 @@
 pkgdatadir = join_paths(get_option('datadir'), meson.project_name())
 gnome = import('gnome')
 
-src_res = gnome.compile_resources('re.sonny.Tangram.src',
-  're.sonny.Tangram.src.gresource.xml',
-  gresource_bundle: true,
-  install: true,
-  install_dir: pkgdatadir,
-)
+install_subdir('.', install_dir : pkgdatadir, exclude_files: ['re.sonny.Tangram', 'meson.build'])
 
 bin_conf = configuration_data()
 bin_conf.set('GJS', find_program('gjs').path())

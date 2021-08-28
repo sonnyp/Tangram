@@ -1,16 +1,22 @@
-const Soup = imports.gi.Soup;
-const { pixbuf_get_from_surface } = imports.gi.Gdk;
-const { get_tmp_dir, build_filenamev } = imports.gi.GLib;
-const byteArray = imports.byteArray;
+import GLib from "gi://GLib";
+import Gdk from "gi://Gdk";
+import Soup from "gi://Soup";
+import GdkPixbuf from "gi://GdkPixbuf";
 
-import { promiseTask, once } from "../troll/util";
+const { byteArray } = imports;
+
+const { pixbuf_get_from_surface } = Gdk;
+const { get_tmp_dir, build_filenamev } = GLib;
+const { Pixbuf } = GdkPixbuf;
+
+import { promiseTask, once } from "../troll/util.js";
 
 import {
   getWebAppIcon,
   getWebAppTitle,
   getWebAppManifest,
   getWebAppURL,
-} from "./ephy";
+} from "./ephy.js";
 
 export function download(webview, url, destination) {
   const download = webview.download_uri(url);
@@ -127,7 +133,7 @@ async function getManifestURL(webview) {
 }
 
 const supported_formats = (() => {
-  const formats = imports.gi.GdkPixbuf.Pixbuf.get_formats();
+  const formats = Pixbuf.get_formats();
   return [].concat(...formats.map((format) => format.get_mime_types()));
 })();
 

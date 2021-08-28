@@ -1,22 +1,19 @@
-#!/usr/bin/gjs
+#!/usr/bin/env -S gjs -m
 
-const { setenv } = imports.gi.GLib;
+// -*- mode: js; -*-
 
-setenv("DEV", "true", false);
+globalThis.__DEV__ = true;
 
-// const { file_get_contents } = imports.gi.GLib;
-// const { toString } = imports._byteArrayNative;
-// function readPackage() {
-//   const path = build_filenamev([prefix, "package.json"]);
-//   const [, result] = file_get_contents(path);
-//   return JSON.parse(toString(result));
-// }
-// const { name, version } = readPackage();
+const { programInvocationName } = imports.system;
 
 // https://gitlab.gnome.org/GNOME/gjs/blob/master/doc/Package/Specification.md
-// https://gitlab.gnome.org/GNOME/gjs/blob/master/modules/package.js
-imports.package.start({
+// https://gitlab.gnome.org/GNOME/gjs/-/blob/master/modules/script/package.js
+imports.package.init({
   name: "re.sonny.Tangram",
   version: "dev",
   prefix: "", // Required but not used when running from source
 });
+
+import main from "./main.js";
+
+main([programInvocationName, ...ARGV]);

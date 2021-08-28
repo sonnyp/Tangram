@@ -1,3 +1,5 @@
+import GLib from "gi://GLib";
+
 const {
   getenv,
   get_user_cache_dir,
@@ -8,7 +10,7 @@ const {
   get_user_config_dir,
   file_test,
   FileTest,
-} = imports.gi.GLib;
+} = GLib;
 
 export const env = (() => {
   // On flatpak 1.0 (Ubuntu 18.04 and derivates such as Mint 19.3)
