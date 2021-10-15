@@ -78,6 +78,12 @@ You can create a custom application by
 
 ## In the media
 
+TechHut - NEW Kind of Web Browser on Linux [odysee.com](https://odysee.com/@TechHut:1/new-kind-of-web-browser-on-linux:b) / [youtube.com](https://www.youtube.com/watch?v=KmQRh-ekaYw) - 2021-10
+
+[techrepublic.com - Try this Linux web browser dedicated solely to web applications](https://www.techrepublic.com/article/try-this-linux-web-browser-dedicated-solely-to-web-applications/) - 2021-09
+
+Conheça programas para profissionais que usam Linux - Diolinux App Showcase #9 [youtube.com](https://www.youtube.com/watch?v=OJVPIYaIBZY&t=230s) - 2021-05
+
 [GNU/Linux.ch – Tangram - eine neue Art des Webbrowsers (Review)](https://gnulinux.ch/tangram-eine-neue-art-des-webbrowsers) - 2021-04
 
 Chris Were Digital - Tangram a browser just for web apps [share.tube](https://share.tube/videos/watch/684332bf-cf6a-415d-970b-fb6ca996996b) / [youtube.com](https://www.youtube.com/watch?v=M1NEZ6fVBQQ) - 2021-02
@@ -85,6 +91,8 @@ Chris Were Digital - Tangram a browser just for web apps [share.tube](https://sh
 [addictivetips.com - How to run web apps with ease on Linux](https://www.addictivetips.com/ubuntu-linux-tips/run-web-apps-linux/) - 2020-09
 
 [ubunlog.com - Tangram, nueva opción basada en GNOME para agrupar nuestras web-apps](https://ubunlog.com/tangram-nueva-opcion-basada-en-gnome-para-agrupar-nuestras-web-apps/) - 2020-09
+
+[ubunlog.com - Tangram, a new option based on GNOME to group our web-apps](https://ubunlog.com/en/tangram-nueva-opcion-basada-en-gnome-para-agrupar-nuestras-web-apps/) - 2020-09
 
 [edivaldobrito.com.br - Como instalar o navegador Tangram no Linux via Flatpak](https://www.edivaldobrito.com.br/como-instalar-o-navegador-tangram-no-linux-via-flatpak/) - 2020-08
 
