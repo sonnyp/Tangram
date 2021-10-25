@@ -2,8 +2,6 @@
 
 // -*- mode: js; -*-
 
-globalThis.__DEV__ = true;
-
 const { programInvocationName } = imports.system;
 
 // https://gitlab.gnome.org/GNOME/gjs/blob/master/doc/Package/Specification.md

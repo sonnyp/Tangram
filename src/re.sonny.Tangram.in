@@ -2,8 +2,6 @@
 
 // -*- mode: js; -*-
 
-globalThis.__DEV__ = false;
-
 const { programInvocationName } = imports.system;
 
 imports.package.init({
