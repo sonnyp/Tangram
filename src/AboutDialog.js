@@ -1,17 +1,16 @@
 import Gtk from "gi://Gtk";
 import WebKit from "gi://WebKit2";
-import system from "system";
+import Soup from "gi://Soup";
 
-const { get_major_version, get_minor_version, get_micro_version } = WebKit;
-const WebKitGTKVersion = `${get_major_version()}.${get_minor_version()}.${get_micro_version()}`;
+import { getGIRepositoryVersion, getGjsVersion } from "./utils.js";
 
-const gjsVersion = (() => {
-  const v = system.version.toString();
-  return `${v[0]}.${+(v[1] + v[2])}.${+(v[3] + v[4])}`;
-})();
+const WebKitGTKVersion = getGIRepositoryVersion(WebKit);
+const gjsVersion = getGjsVersion();
+const soupVersion = getGIRepositoryVersion(Soup);
 
 log(`gjs ${gjsVersion}`);
 log(`WebKitGTK ${WebKitGTKVersion}`);
+log(`libsoup ${soupVersion}`);
 
 export default function AboutDialog({ window }) {
   // https://gjs-docs.gnome.org/gtk30~3.24.8/gtk.aboutdialog
@@ -23,6 +22,7 @@ export default function AboutDialog({ window }) {
       "",
       `Powered by WebKitGTK ${WebKitGTKVersion}`,
       `Powered by gjs ${gjsVersion}`,
+      `Powered by libsoup ${soupVersion}`,
     ].join("\n"),
     copyright: "Copyright 2019-2021 Sonny Piers",
     license_type: Gtk.License.GPL_3_0,
