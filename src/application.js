@@ -3,12 +3,8 @@ const {
   // ApplicationFlags,
   SimpleAction,
 } = imports.gi.Gio;
-const {
-  OptionFlags,
-  OptionArg,
-  set_prgname,
-  set_application_name,
-} = imports.gi.GLib;
+const { OptionFlags, OptionArg, set_prgname, set_application_name } =
+  imports.gi.GLib;
 const { set_program_class } = imports.gi.Gdk;
 
 import AboutDialog from "./AboutDialog";

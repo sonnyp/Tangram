@@ -9,9 +9,14 @@ const {
   SpawnFlags,
   log_writer_is_journald,
   setenv,
+  set_prgname,
+  set_application_name,
 } = imports.gi.GLib;
 
 pkg.require(versions);
+
+set_prgname("re.sonny.Tangram");
+set_application_name("Tangram");
 
 import application from "./application";
 
