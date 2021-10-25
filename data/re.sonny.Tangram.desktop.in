@@ -9,3 +9,4 @@ StartupNotify=true
 X-GNOME-UsesNotifications=true
 Icon=re.sonny.Tangram
 DBusActivatable=true
+Keywords=Franz;Ferdi;Rambox;Wavebox;Station;
