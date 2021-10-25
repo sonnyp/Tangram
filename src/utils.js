@@ -46,7 +46,6 @@ export function isSameSite(a, b) {
 export function isUrlAllowedForNavigation(webView, request_url) {
   const current_url = webView.get_uri();
 
-  log(webView.mode);
   if (webView.mode === MODES.TEMPORARY) return true;
 
   if (request_url === BLANK_URI) return true;

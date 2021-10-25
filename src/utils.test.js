@@ -23,16 +23,24 @@ assert.is(isSameSite("https://192.0.2.235", "https://192.0.2.235"), true);
 assert.is(isSameSite("https://localhost", "https://localhost"), true);
 assert.is(isSameSite("https://github.io", "https://github.io"), true);
 assert.is(isSameSite("https://ком.рус", "https://xn--j1aef.xn--p1acf"), true);
-assert.is(
-  isSameSite("https://foo.ком.рус", "https://bar.xn--j1aef.xn--p1acf"),
-  true,
-);
+
 assert.is(isSameSite("about:blank", "about:blank"), true);
 
 assert.is(isSameSite("https://foo", "https://bar"), false);
 assert.is(isSameSite("https://foo.github.io", "https://bar.github.io"), false);
 assert.is(isSameSite("https://foo.github.io", "https://github.io"), false);
-assert.is(isSameSite("https://foo.github.io", "https://github.io"), false);
+
+// ком.рус is public suffix
+assert.is(
+  isSameSite("https://foo.ком.рус", "https://bar.xn--j1aef.xn--p1acf"),
+  false,
+);
+
+// кто.рф is not public suffix
+assert.is(
+  isSameSite("https://foo.кто.рф", "https://bar.xn--j1ail.xn--p1ai"),
+  true,
+);
 
 assert.is(
   isUrlAllowedForNavigation(
