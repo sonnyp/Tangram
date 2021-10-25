@@ -10,7 +10,7 @@ const versions = {
 
 Object.assign(imports.gi.versions, versions);
 
-const Gtk = imports.gi.Gtk;
+const Gtk$1 = imports.gi.Gtk;
 const WebKit = imports.gi.WebKit2;
 const system = imports.system;
 
@@ -27,7 +27,7 @@ log(`WebKitGTK ${WebKitGTKVersion}`);
 
 function AboutDialog({ window }) {
   // https://gjs-docs.gnome.org/gtk30~3.24.8/gtk.aboutdialog
-  const aboutDialog = new Gtk.AboutDialog({
+  const aboutDialog = new Gtk$1.AboutDialog({
     authors: ["Sonny Piers https://sonny.re"],
     artists: ["Tobias Bernard <tbernard@gnome.org>"],
     comments: [
@@ -37,7 +37,7 @@ function AboutDialog({ window }) {
       `Powered by gjs ${gjsVersion}`,
     ].join("\n"),
     copyright: "Copyright 2019-2020 Sonny Piers",
-    license_type: Gtk.License.GPL_3_0,
+    license_type: Gtk$1.License.GPL_3_0,
     version: pkg.version,
     website_label: "Learn more about Tangram",
     website: "https://github.com/sonnyp/Tangram",
@@ -63,11 +63,11 @@ function AboutDialog({ window }) {
 }
 
 const {
-  getenv,
+  getenv: getenv$2,
   get_user_cache_dir,
   get_user_data_dir,
-  build_filenamev,
-  get_current_dir,
+  build_filenamev: build_filenamev$4,
+  get_current_dir: get_current_dir$1,
   get_home_dir,
   get_user_config_dir,
   file_test,
@@ -77,11 +77,11 @@ const {
 const env = (() => {
   // On flatpak 1.0 (Ubuntu 18.04 and derivates such as Mint 19.3)
   // FLATPAK_ID is not defined
-  if (getenv("FLATPAK_ID") || file_test("/.flatpak-info", FileTest.EXISTS)) {
+  if (getenv$2("FLATPAK_ID") || file_test("/.flatpak-info", FileTest.EXISTS)) {
     return "flatpak";
   }
 
-  if (getenv("DEV")) {
+  if (getenv$2("DEV")) {
     return "dev";
   }
 
@@ -91,30 +91,30 @@ log(`env: ${env}`);
 
 const data_dir =
   env === "dev"
-    ? build_filenamev([get_current_dir(), "var/data/Tangram"])
-    : build_filenamev([get_user_data_dir(), "Tangram"]);
+    ? build_filenamev$4([get_current_dir$1(), "var/data/Tangram"])
+    : build_filenamev$4([get_user_data_dir(), "Tangram"]);
 log(`data_dir: ${data_dir}`);
 
 const cache_dir =
   env === "dev"
-    ? build_filenamev([get_current_dir(), "var/cache/Tangram"])
-    : build_filenamev([get_user_cache_dir(), "Tangram"]);
+    ? build_filenamev$4([get_current_dir$1(), "var/cache/Tangram"])
+    : build_filenamev$4([get_user_cache_dir(), "Tangram"]);
 log(`cache_dir: ${cache_dir}`);
 
 const config_dir =
   env === "dev"
-    ? build_filenamev([get_current_dir(), "var/config/Tangram"])
-    : build_filenamev([get_user_config_dir(), "Tangram"]);
+    ? build_filenamev$4([get_current_dir$1(), "var/config/Tangram"])
+    : build_filenamev$4([get_user_config_dir(), "Tangram"]);
 log(`config_dir: ${config_dir}`);
 
 const applications_dir = (() => {
   switch (env) {
     case "dev":
-      return build_filenamev([get_current_dir(), "var/applications"]);
+      return build_filenamev$4([get_current_dir$1(), "var/applications"]);
     case "flatpak":
-      return build_filenamev([get_home_dir(), ".local/share/applications"]);
+      return build_filenamev$4([get_home_dir(), ".local/share/applications"]);
     default:
-      return build_filenamev([get_user_data_dir(), "applications"]);
+      return build_filenamev$4([get_user_data_dir(), "applications"]);
   }
 })();
 log(`applications_dir: ${applications_dir}`);
@@ -126,8 +126,8 @@ log(`applications_dir: ${applications_dir}`);
 // see https://blogs.gnome.org/mclasen/2019/07/12/settings-in-a-sandbox-world/
 const keyfile_settings_path =
   env === "dev"
-    ? build_filenamev([
-        get_current_dir(),
+    ? build_filenamev$4([
+        get_current_dir$1(),
         "var/config/",
         "glib-2.0/settings/keyfile",
       ])
@@ -135,7 +135,7 @@ const keyfile_settings_path =
 log(`keyfile_settings_path: ${keyfile_settings_path}`);
 
 const GioSettings = imports.gi.Gio.Settings;
-const { KeyFile, KEY_FILE_DESKTOP_GROUP, VariantType } = imports.gi.GLib;
+const { KeyFile: KeyFile$1, KEY_FILE_DESKTOP_GROUP: KEY_FILE_DESKTOP_GROUP$1, VariantType: VariantType$3 } = imports.gi.GLib;
 const { keyfile_settings_backend_new } = imports.gi.Gio;
 
 // default dconf
@@ -144,7 +144,7 @@ if (keyfile_settings_path) {
   backend = keyfile_settings_backend_new(keyfile_settings_path, "/", null);
 }
 
-function Settings(props) {
+function Settings$1(props) {
   return new GioSettings({
     backend,
     ...props,
@@ -171,11 +171,11 @@ function connect(object, signal, handler) {
 // https://standards.freedesktop.org/desktop-entry-spec/desktop-entry-spec-latest.html
 // https://specifications.freedesktop.org/menu-spec/menu-spec-1.0.html
 function desktopEntry(fields) {
-  const keyFile = new KeyFile();
+  const keyFile = new KeyFile$1();
   for (const key in fields) {
     const value = fields[key];
     if (value === null || value === undefined) continue;
-    keyFile.set_value(KEY_FILE_DESKTOP_GROUP, key, fields[key].toString());
+    keyFile.set_value(KEY_FILE_DESKTOP_GROUP$1, key, fields[key].toString());
   }
   return keyFile;
 }
@@ -185,7 +185,7 @@ function desktopEntry(fields) {
 // https://gitlab.gnome.org/GNOME/gjs/merge_requests/320
 function lookup(dict, key, variantType = null, deep = false) {
   if (typeof variantType === "string")
-    variantType = new VariantType(variantType);
+    variantType = new VariantType$3(variantType);
 
   const variant = dict.lookup_value(key, variantType);
   if (variant === null) return null;
@@ -258,14 +258,14 @@ addSignalMethods(State.prototype);
 var state = new State();
 
 const {
-  FileChooserNative,
-  FileChooserAction,
+  FileChooserNative: FileChooserNative$1,
+  FileChooserAction: FileChooserAction$1,
   FileFilter,
-  Button,
-  Image,
-  ResponseType,
+  Button: Button$1,
+  Image: Image$2,
+  ResponseType: ResponseType$3,
 } = imports.gi.Gtk;
-const { Pixbuf } = imports.gi.GdkPixbuf;
+const { Pixbuf: Pixbuf$1 } = imports.gi.GdkPixbuf;
 // const { mkdir_with_parents } = imports.gi.GLib;
 
 // https://gjs-docs.gnome.org/gtk30~3.24.8/gtk.filefilter
@@ -274,32 +274,32 @@ iconFileFilter.add_mime_type("image/svg+xml");
 iconFileFilter.add_mime_type("image/png");
 iconFileFilter.add_mime_type("image/jpeg");
 
-const ICON_SIZE = 16;
+const ICON_SIZE$1 = 16;
 
 function iconChooser(props) {
-  const image = new Image();
+  const image = new Image$2();
   if (props.value.startsWith("resource://")) {
     image.set_from_resource(props.value.split("resource://")[1]);
   } else {
-    const pixbuf = Pixbuf.new_from_file_at_scale(
+    const pixbuf = Pixbuf$1.new_from_file_at_scale(
       props.value,
-      ICON_SIZE,
-      ICON_SIZE,
+      ICON_SIZE$1,
+      ICON_SIZE$1,
       true,
     );
     image.set_from_pixbuf(pixbuf);
   }
-  image.set_size_request(ICON_SIZE, ICON_SIZE);
+  image.set_size_request(ICON_SIZE$1, ICON_SIZE$1);
 
-  const fileChooserButton = new Button({
+  const fileChooserButton = new Button$1({
     image,
   });
 
   let value = props.value;
   fileChooserButton.connect("clicked", () => {
     // https://gjs-docs.gnome.org/gtk30~3.24.8/gtk.filechoosernative
-    const fileChooserDialog = new FileChooserNative({
-      action: FileChooserAction.OPEN,
+    const fileChooserDialog = new FileChooserNative$1({
+      action: FileChooserAction$1.OPEN,
       // Filter is not supported on flatpak
       // any alternative?
       filter: iconFileFilter,
@@ -312,12 +312,12 @@ function iconChooser(props) {
     });
 
     const result = fileChooserDialog.run();
-    if (result === ResponseType.ACCEPT) {
+    if (result === ResponseType$3.ACCEPT) {
       value = fileChooserDialog.get_filename();
-      const pixbuf = Pixbuf.new_from_file_at_scale(
+      const pixbuf = Pixbuf$1.new_from_file_at_scale(
         value,
-        ICON_SIZE,
-        ICON_SIZE,
+        ICON_SIZE$1,
+        ICON_SIZE$1,
         true,
       );
       image.set_from_pixbuf(pixbuf);
@@ -333,10 +333,10 @@ function iconChooser(props) {
 }
 
 function saveIcon(image, filepath) {
-  const pixbuf = Pixbuf.new_from_file_at_scale(
+  const pixbuf = Pixbuf$1.new_from_file_at_scale(
     image,
-    ICON_SIZE,
-    ICON_SIZE,
+    ICON_SIZE$1,
+    ICON_SIZE$1,
     true,
   );
 
@@ -382,22 +382,22 @@ function once(object, signal, errorSignal) {
   });
 }
 
-const { WindowTypeHint } = imports.gi.Gdk;
-const { programInvocationName } = imports.system;
+const { WindowTypeHint: WindowTypeHint$1 } = imports.gi.Gdk;
+const { programInvocationName: programInvocationName$1 } = imports.system;
 const {
-  Dialog,
-  Align,
-  Grid,
-  Label,
-  Entry,
-  ResponseType: ResponseType$1,
-  Orientation,
-  Box,
+  Dialog: Dialog$1,
+  Align: Align$1,
+  Grid: Grid$1,
+  Label: Label$3,
+  Entry: Entry$2,
+  ResponseType: ResponseType$2,
+  Orientation: Orientation$1,
+  Box: Box$3,
 } = imports.gi.Gtk;
 const {
-  build_filenamev: build_filenamev$1,
+  build_filenamev: build_filenamev$3,
   path_is_absolute,
-  get_current_dir: get_current_dir$1,
+  get_current_dir,
   KEY_FILE_DESKTOP_KEY_CATEGORIES,
   KEY_FILE_DESKTOP_KEY_NAME,
   KEY_FILE_DESKTOP_KEY_EXEC,
@@ -406,11 +406,11 @@ const {
   KEY_FILE_DESKTOP_KEY_STARTUP_NOTIFY,
   KEY_FILE_DESKTOP_TYPE_APPLICATION,
   KEY_FILE_DESKTOP_KEY_ICON,
-  uuid_string_random,
+  uuid_string_random: uuid_string_random$1,
   unlink,
-  KeyFile: KeyFile$1,
+  KeyFile,
   KeyFileFlags,
-  KEY_FILE_DESKTOP_GROUP: KEY_FILE_DESKTOP_GROUP$1,
+  KEY_FILE_DESKTOP_GROUP,
 } = imports.gi.GLib;
 const { DesktopAppInfo } = imports.gi.Gio;
 
@@ -418,16 +418,16 @@ let bin;
 if (env === "flatpak") {
   bin = pkg.name;
 } else {
-  bin = path_is_absolute(programInvocationName)
-    ? programInvocationName
-    : build_filenamev$1([get_current_dir$1(), programInvocationName]);
+  bin = path_is_absolute(programInvocationName$1)
+    ? programInvocationName$1
+    : build_filenamev$3([get_current_dir(), programInvocationName$1]);
 }
 log(`bin: ${bin}`);
 
 let default_desktop_icon = "re.sonny.Tangram";
 if (env === "dev") {
-  default_desktop_icon = build_filenamev$1([
-    get_current_dir$1(),
+  default_desktop_icon = build_filenamev$3([
+    get_current_dir(),
     `data/icons/hicolor/scalable/apps/${default_desktop_icon}.svg`,
   ]);
 }
@@ -450,11 +450,11 @@ function launchApplication(desktopFilePath) {
 }
 
 function buildApplicationId(name) {
-  return `${name}-${uuid_string_random().replace(/-/g, "")}`;
+  return `${name}-${uuid_string_random$1().replace(/-/g, "")}`;
 }
 
 function buildDesktopFilePath(id) {
-  return build_filenamev$1([applications_dir, `${id}.desktop`]);
+  return build_filenamev$3([applications_dir, `${id}.desktop`]);
 }
 
 function createApplication({ name, icon, id }) {
@@ -484,19 +484,19 @@ function createApplication({ name, icon, id }) {
 
 async function editApplicationDialog({ id, ...props }) {
   const desktopFilePath = buildDesktopFilePath(id);
-  const keyFile = new KeyFile$1();
+  const keyFile = new KeyFile();
   keyFile.load_from_file(
     desktopFilePath,
     KeyFileFlags.KEEP_COMMENTS | KeyFileFlags.KEEP_TRANSLATIONS,
   );
 
   const name = keyFile.get_value(
-    KEY_FILE_DESKTOP_GROUP$1,
+    KEY_FILE_DESKTOP_GROUP,
     KEY_FILE_DESKTOP_KEY_NAME,
   );
 
   let icon = keyFile.get_value(
-    KEY_FILE_DESKTOP_GROUP$1,
+    KEY_FILE_DESKTOP_GROUP,
     KEY_FILE_DESKTOP_KEY_ICON,
   );
   if (!icon || icon === default_desktop_icon) {
@@ -514,12 +514,12 @@ async function editApplicationDialog({ id, ...props }) {
   if (!result) return;
 
   keyFile.set_value(
-    KEY_FILE_DESKTOP_GROUP$1,
+    KEY_FILE_DESKTOP_GROUP,
     KEY_FILE_DESKTOP_KEY_NAME,
     result.name,
   );
   keyFile.set_value(
-    KEY_FILE_DESKTOP_GROUP$1,
+    KEY_FILE_DESKTOP_GROUP,
     KEY_FILE_DESKTOP_KEY_ICON,
     result.icon,
   );
@@ -557,17 +557,17 @@ async function applicationDialog({ window, action, params = {} }) {
   // "Action Dialogs"
   // and
   // https://developer.gnome.org/hig/stable/visual-layout.html.en
-  const dialog = new Dialog({
+  const dialog = new Dialog$1({
     title: `${action} Application`,
     modal: true,
-    type_hint: WindowTypeHint.DIALOG,
+    type_hint: WindowTypeHint$1.DIALOG,
     use_header_bar: true,
     transient_for: window,
     resizable: false,
   });
 
-  dialog.add_button("Cancel", ResponseType$1.CANCEL);
-  const primaryButton = dialog.add_button("Confirm", ResponseType$1.APPLY);
+  dialog.add_button("Cancel", ResponseType$2.CANCEL);
+  const primaryButton = dialog.add_button("Confirm", ResponseType$2.APPLY);
   primaryButton.get_style_context().add_class("suggested-action");
   primaryButton.grab_focus();
   primaryButton.set_sensitive(false);
@@ -579,26 +579,26 @@ async function applicationDialog({ window, action, params = {} }) {
     value: params.icon,
     parent: dialog,
   });
-  const box = new Box({
-    orientation: Orientation.HORIZONTAL,
-    halign: Align.CENTER,
+  const box = new Box$3({
+    orientation: Orientation$1.HORIZONTAL,
+    halign: Align$1.CENTER,
     margin_bottom: 18,
   });
   box.add(iconEntry);
   contentArea.add(box);
 
-  const grid = new Grid({
+  const grid = new Grid$1({
     column_spacing: 12,
     row_spacing: 6,
   });
   contentArea.add(grid);
 
-  const nameLabel = new Label({
+  const nameLabel = new Label$3({
     label: "Name",
-    halign: Align.END,
+    halign: Align$1.END,
   });
   grid.attach(nameLabel, 1, 1, 1, 1);
-  const nameEntry = new Entry({
+  const nameEntry = new Entry$2({
     hexpand: true,
     text: params.name || "",
   });
@@ -611,10 +611,10 @@ async function applicationDialog({ window, action, params = {} }) {
   dialog.show_all();
 
   const [response_id] = await once(dialog, "response");
-  if (response_id === ResponseType$1.DELETE_EVENT) {
+  if (response_id === ResponseType$2.DELETE_EVENT) {
     return;
   }
-  if (response_id !== ResponseType$1.APPLY) {
+  if (response_id !== ResponseType$2.APPLY) {
     dialog.destroy();
     return;
   }
@@ -624,7 +624,7 @@ async function applicationDialog({ window, action, params = {} }) {
   let icon = iconEntry.get_value();
 
   if (icon !== params.icon) {
-    icon = saveIcon(icon, build_filenamev$1([data_dir, `${id}.png`]));
+    icon = saveIcon(icon, build_filenamev$3([data_dir, `${id}.png`]));
   }
 
   dialog.destroy();
@@ -644,7 +644,7 @@ class Instance {
     this.cache_dir = build_filenamev$2([cache_dir, id]);
 
     // https://gjs-docs.gnome.org/gio20~2.0_api/gio.settings
-    this.settings = new Settings({
+    this.settings = new Settings$1({
       schema_id: "re.sonny.Tangram.Instance",
       path: `/re/sonny/Tangram/instances/${id}/`,
     });
@@ -743,8 +743,8 @@ log(`flag TANGRAM_ENABLE_CUSTOM_ICONS ${custom_icons}`);
 
 var flags = { custom_applications, custom_icons };
 
-const Gtk$1 = imports.gi.Gtk;
-const { SettingsBindFlags } = imports.gi.Gio;
+const Gtk = imports.gi.Gtk;
+const { SettingsBindFlags: SettingsBindFlags$2 } = imports.gi.Gio;
 
 function detachTab({ instance_id, notebook, settings }) {
   const instance = get(instance_id);
@@ -760,7 +760,7 @@ function detachTab({ instance_id, notebook, settings }) {
     return;
   }
 
-  const newAppSettings = new Settings({
+  const newAppSettings = new Settings$1({
     schema_id: "re.sonny.Tangram",
     path: `/re/sonny/Tangram/applications/${id}/`,
   });
@@ -785,7 +785,7 @@ function detachTab({ instance_id, notebook, settings }) {
 
 function Notebook({ profile, settings, application }) {
   // https://gjs-docs.gnome.org/gtk30~3.24.8/gtk.notebook
-  const notebook = new Gtk$1.Notebook({ scrollable: true });
+  const notebook = new Gtk.Notebook({ scrollable: true });
   // Tab bar only hides on custom applications
   if (profile.id) {
     state.bind(
@@ -817,7 +817,7 @@ function Notebook({ profile, settings, application }) {
       settings.set_strv("instances", reordered);
     },
   });
-  settings.bind("tabs-position", notebook, "tab_pos", SettingsBindFlags.GET);
+  settings.bind("tabs-position", notebook, "tab_pos", SettingsBindFlags$2.GET);
 
   if (flags.custom_applications) {
     notebook.connect("create-window", (self, { instance_id } /*_x, _y */) => {
@@ -828,9 +828,9 @@ function Notebook({ profile, settings, application }) {
   return notebook;
 }
 
-const { VariantType: VariantType$1 } = imports.gi.GLib;
+const { VariantType: VariantType$2 } = imports.gi.GLib;
 const { AccelGroup, AccelFlags, accelerator_parse } = imports.gi.Gtk;
-const { SimpleAction } = imports.gi.Gio;
+const { SimpleAction: SimpleAction$4 } = imports.gi.Gio;
 const { ModifierType, keyval_name } = imports.gi.Gdk;
 
 function nextPage(notebook) {
@@ -860,9 +860,9 @@ function Shortcuts({
   onShowInspector,
   onGoHome,
 }) {
-  const nthTab = new SimpleAction({
+  const nthTab = new SimpleAction$4({
     name: "nth-tab",
-    parameter_type: VariantType$1.new("i"),
+    parameter_type: VariantType$2.new("i"),
   });
   for (let i = 1; i < 10; i++) {
     application.set_accels_for_action(`app.nth-tab(${i})`, [`<Alt>${i}`]);
@@ -970,20 +970,20 @@ function Shortcuts({
   });
 }
 
-const { WindowTypeHint: WindowTypeHint$1 } = imports.gi.Gdk;
+const { WindowTypeHint } = imports.gi.Gdk;
 const {
-  Dialog: Dialog$1,
-  Align: Align$1,
-  Grid: Grid$1,
-  Label: Label$1,
+  Dialog,
+  Align,
+  Grid,
+  Label: Label$2,
   Entry: Entry$1,
-  ResponseType: ResponseType$2,
+  ResponseType: ResponseType$1,
   EntryIconPosition,
-  Box: Box$1,
-  Orientation: Orientation$1,
+  Box: Box$2,
+  Orientation,
 } = imports.gi.Gtk;
 const { SettingsBindFlags: SettingsBindFlags$1 } = imports.gi.Gio;
-const { build_filenamev: build_filenamev$3 } = imports.gi.GLib;
+const { build_filenamev: build_filenamev$1 } = imports.gi.GLib;
 
 function editInstanceDialog(props) {
   return instanceDialog({ ...props, action: "Edit" });
@@ -1000,17 +1000,17 @@ async function instanceDialog({ window, instance, action }) {
   // "Action Dialogs"
   // and
   // https://developer.gnome.org/hig/stable/visual-layout.html.en
-  const dialog = new Dialog$1({
+  const dialog = new Dialog({
     title: `${action} ${instance.name}`,
     modal: true,
-    type_hint: WindowTypeHint$1.DIALOG,
+    type_hint: WindowTypeHint.DIALOG,
     use_header_bar: true,
     transient_for: window,
     resizable: false,
   });
 
-  dialog.add_button("Cancel", ResponseType$2.CANCEL);
-  const primaryButton = dialog.add_button(action, ResponseType$2.APPLY);
+  dialog.add_button("Cancel", ResponseType$1.CANCEL);
+  const primaryButton = dialog.add_button(action, ResponseType$1.APPLY);
   primaryButton.get_style_context().add_class("suggested-action");
   primaryButton.grab_focus();
 
@@ -1023,24 +1023,24 @@ async function instanceDialog({ window, instance, action }) {
       value: instance.getIconForDisplay(),
       parent: dialog,
     });
-    const box = new Box$1({
-      orientation: Orientation$1.HORIZONTAL,
-      halign: Align$1.CENTER,
+    const box = new Box$2({
+      orientation: Orientation.HORIZONTAL,
+      halign: Align.CENTER,
       margin_bottom: 18,
     });
     box.add(iconEntry);
     contentArea.add(box);
   }
 
-  const grid = new Grid$1({
+  const grid = new Grid({
     column_spacing: 12,
     row_spacing: 6,
   });
   contentArea.add(grid);
 
-  const nameLabel = new Label$1({
+  const nameLabel = new Label$2({
     label: "Name",
-    halign: Align$1.END,
+    halign: Align.END,
   });
   grid.attach(nameLabel, 1, 1, 1, 1);
   const nameEntry = new Entry$1({
@@ -1049,9 +1049,9 @@ async function instanceDialog({ window, instance, action }) {
   instance.bind("name", nameEntry, "text", SettingsBindFlags$1.DEFAULT);
   grid.attach(nameEntry, 2, 1, 1, 1);
 
-  const URLLabel = new Label$1({
+  const URLLabel = new Label$2({
     label: "Homepage",
-    halign: Align$1.END,
+    halign: Align.END,
   });
   grid.attach(URLLabel, 1, 3, 1, 1);
 
@@ -1082,9 +1082,9 @@ async function instanceDialog({ window, instance, action }) {
     );
   });
 
-  const UserAgentLabel = new Label$1({
+  const UserAgentLabel = new Label$2({
     label: "User Agent",
-    halign: Align$1.END,
+    halign: Align.END,
   });
   grid.attach(UserAgentLabel, 1, 4, 1, 1);
 
@@ -1102,11 +1102,11 @@ async function instanceDialog({ window, instance, action }) {
   dialog.show_all();
 
   const [response_id] = await once(dialog, "response");
-  if (response_id === ResponseType$2.DELETE_EVENT) {
+  if (response_id === ResponseType$1.DELETE_EVENT) {
     return true;
   }
 
-  if (response_id !== ResponseType$2.APPLY) {
+  if (response_id !== ResponseType$1.APPLY) {
     dialog.destroy();
     return true;
   }
@@ -1116,7 +1116,7 @@ async function instanceDialog({ window, instance, action }) {
     if (!icon.startsWith("resource://")) {
       icon = saveIcon(
         iconEntry.get_value(),
-        build_filenamev$3([instance.data_dir, "icon.png"]),
+        build_filenamev$1([instance.data_dir, "icon.png"]),
       );
       // eslint-disable-next-line require-atomic-updates
       instance.icon = icon;
@@ -1128,8 +1128,8 @@ async function instanceDialog({ window, instance, action }) {
   return false;
 }
 
-const { VariantType: VariantType$2, Variant } = imports.gi.GLib;
-const { SimpleAction: SimpleAction$1 } = imports.gi.Gio;
+const { VariantType: VariantType$1, Variant } = imports.gi.GLib;
+const { SimpleAction: SimpleAction$3 } = imports.gi.Gio;
 
 function Actions({
   window,
@@ -1146,9 +1146,9 @@ function Actions({
   // https://gjs-docs.gnome.org/gio20~2.0_api/gio.simpleaction
   // FIXME, is there a better way to bind setting to action?
   // or even better bind menu to setting, see header.js
-  const tabsPosition = SimpleAction$1.new_stateful(
+  const tabsPosition = SimpleAction$3.new_stateful(
     "tabsPosition",
-    VariantType$2.new("s"),
+    VariantType$1.new("s"),
     Variant.new_string(settings.get_string("tabs-position")),
   );
   settings.connect("changed::tabs-position", () => {
@@ -1163,9 +1163,9 @@ function Actions({
   application.add_action(tabsPosition);
 
   // https://gjs-docs.gnome.org/gio20~2.0_api/gio.simpleaction
-  const detachTabAction = new SimpleAction$1({
+  const detachTabAction = new SimpleAction$3({
     name: "detachTab",
-    parameter_type: VariantType$2.new("s"),
+    parameter_type: VariantType$1.new("s"),
   });
   detachTabAction.connect("activate", (self, parameters) => {
     const id = parameters.unpack();
@@ -1174,9 +1174,9 @@ function Actions({
   application.add_action(detachTabAction);
 
   // https://gjs-docs.gnome.org/gio20~2.0_api/gio.simpleaction
-  const removeInstanceAction = new SimpleAction$1({
+  const removeInstanceAction = new SimpleAction$3({
     name: "removeInstance",
-    parameter_type: VariantType$2.new("s"),
+    parameter_type: VariantType$1.new("s"),
   });
   removeInstanceAction.connect("activate", (self, parameters) => {
     const instance = get(parameters.deep_unpack());
@@ -1199,23 +1199,23 @@ function Actions({
   application.add_action(removeInstanceAction);
 
   // https://gjs-docs.gnome.org/gio20~2.0_api/gio.simpleaction
-  const newApplication = SimpleAction$1.new("newApplication", null);
+  const newApplication = SimpleAction$3.new("newApplication", null);
   newApplication.connect("activate", () => {
     newApplicationDialog({ window }).catch(log);
   });
   application.add_action(newApplication);
 
   // https://gjs-docs.gnome.org/gio20~2.0_api/gio.simpleaction
-  const editApplication = SimpleAction$1.new("editApplication", null);
+  const editApplication = SimpleAction$3.new("editApplication", null);
   editApplication.connect("activate", () => {
     editApplicationDialog({ id: profile.id, window }).catch(logError);
   });
   application.add_action(editApplication);
 
   // https://gjs-docs.gnome.org/gio20~2.0_api/gio.simpleaction
-  const editInstanceAction = new SimpleAction$1({
+  const editInstanceAction = new SimpleAction$3({
     name: "editInstance",
-    parameter_type: VariantType$2.new("s"),
+    parameter_type: VariantType$1.new("s"),
   });
   editInstanceAction.connect("activate", (self, parameters) => {
     const id = parameters.deep_unpack();
@@ -1229,7 +1229,7 @@ function Actions({
   application.add_action(editInstanceAction);
 
   // https://gjs-docs.gnome.org/gio20~2.0_api/gio.simpleaction
-  const quit = new SimpleAction$1({
+  const quit = new SimpleAction$3({
     name: "quit",
     parameter_type: null,
   });
@@ -1304,7 +1304,7 @@ function getWebAppTitle() {
 
 const Soup = imports.gi.Soup;
 const { pixbuf_get_from_surface } = imports.gi.Gdk;
-const { get_tmp_dir, build_filenamev: build_filenamev$4 } = imports.gi.GLib;
+imports.gi.GLib;
 const byteArray = imports.byteArray;
 
 function runJavaScript(webview, script) {
@@ -1397,7 +1397,7 @@ async function getManifestURL(webview) {
     });
 }
 
-const supported_formats = (() => {
+(() => {
   const formats = imports.gi.GdkPixbuf.Pixbuf.get_formats();
   return [].concat(...formats.map((format) => format.get_mime_types()));
 })();
@@ -1494,16 +1494,16 @@ const BLANK_URI = "tangram-resource:///re/sonny/Tangram/data/blank.html";
 
 const {
   show_uri_on_window,
-  FileChooserNative: FileChooserNative$1,
-  FileChooserAction: FileChooserAction$1,
-  ResponseType: ResponseType$3,
+  FileChooserNative,
+  FileChooserAction,
+  ResponseType,
 } = imports.gi.Gtk;
 const {
   WebsiteDataManager,
   WebContext,
   CookiePersistentStorage,
   CookieAcceptPolicy,
-  Settings: Settings$1,
+  Settings,
   NotificationPermissionRequest,
   SecurityOrigin,
   UserContentManager,
@@ -1513,7 +1513,7 @@ const {
   DownloadError,
 } = imports.gi.WebKit2;
 const {
-  build_filenamev: build_filenamev$5,
+  build_filenamev,
   DIR_SEPARATOR_S,
   get_user_special_dir,
   UserDirectory,
@@ -1522,8 +1522,8 @@ const {
   get_language_names,
 } = imports.gi.GLib;
 const {
-  Notification,
-  AppInfo,
+  Notification: Notification$1,
+  AppInfo: AppInfo$1,
   ResourceLookupFlags,
   resources_open_stream,
 } = imports.gi.Gio;
@@ -1550,7 +1550,7 @@ function buildWebView({
   web_context.set_spell_checking_languages(get_language_names());
   web_context.set_tls_errors_policy(TLSErrorsPolicy.FAIL);
   web_context.set_favicon_database_directory(
-    build_filenamev$5([cache_dir, "icondatabase"]),
+    build_filenamev([cache_dir, "icondatabase"]),
   );
   web_context.set_process_model(ProcessModel.MULTIPLE_SECONDARY_PROCESSES);
   if (typeof web_context.set_sandbox_enabled === "function") {
@@ -1597,7 +1597,7 @@ function buildWebView({
     const uri = request.get_uri();
     if (uri.startsWith("http")) {
       download.cancel();
-      AppInfo.launch_default_for_uri(uri, null);
+      AppInfo$1.launch_default_for_uri(uri, null);
       return;
     }
 
@@ -1615,7 +1615,7 @@ function buildWebView({
       const path = download.get_destination();
       const filename = path_get_basename(path);
 
-      const notification = new Notification();
+      const notification = new Notification$1();
       notification.set_title(name);
 
       if (error) {
@@ -1645,8 +1645,8 @@ function buildWebView({
         "_",
       );
 
-      const dialog = new FileChooserNative$1({
-        action: FileChooserAction$1.SAVE,
+      const dialog = new FileChooserNative({
+        action: FileChooserAction.SAVE,
         transient_for: window,
         do_overwrite_confirmation: true,
         create_folders: true,
@@ -1659,7 +1659,7 @@ function buildWebView({
       }
       dialog.set_current_name(dest_name);
 
-      if (dialog.run() !== ResponseType$3.ACCEPT) {
+      if (dialog.run() !== ResponseType.ACCEPT) {
         download.cancel();
         dialog.destroy();
         // TODO open issue
@@ -1678,7 +1678,7 @@ function buildWebView({
   const cookieManager = website_data_manager.get_cookie_manager();
   cookieManager.set_accept_policy(CookieAcceptPolicy.NO_THIRD_PARTY);
   cookieManager.set_persistent_storage(
-    build_filenamev$5([data_dir, "cookies.sqlite"]),
+    build_filenamev([data_dir, "cookies.sqlite"]),
     CookiePersistentStorage.SQLITE,
   );
 
@@ -1686,7 +1686,7 @@ function buildWebView({
   const user_content_manager = new UserContentManager();
 
   // https://gjs-docs.gnome.org/webkit240~4.0_api/webkit2.settings
-  const settings = new Settings$1({
+  const settings = new Settings({
     enable_smooth_scrolling: true,
     media_playback_requires_user_gesture: true,
 
@@ -1751,23 +1751,23 @@ function buildWebView({
   return webView;
 }
 
-const { Label: Label$2, Image: Image$1, Box: Box$2, EventBox, Popover } = imports.gi.Gtk;
+const { Label: Label$1, Image: Image$1, Box: Box$1, EventBox, Popover } = imports.gi.Gtk;
 const { EventMask } = imports.gi.Gdk;
-const { Menu, SettingsBindFlags: SettingsBindFlags$2 } = imports.gi.Gio;
-const { Pixbuf: Pixbuf$1, InterpType } = imports.gi.GdkPixbuf;
+const { Menu: Menu$1, SettingsBindFlags } = imports.gi.Gio;
+const { Pixbuf, InterpType } = imports.gi.GdkPixbuf;
 
-const ICON_SIZE$1 = 16;
+const ICON_SIZE = 16;
 
 function getFaviconScaled(webview) {
   const pixbuf = getFaviconAsPixbuf(webview);
   if (!pixbuf) return null;
-  return pixbuf.scale_simple(ICON_SIZE$1, ICON_SIZE$1, InterpType.BILINEAR);
+  return pixbuf.scale_simple(ICON_SIZE, ICON_SIZE, InterpType.BILINEAR);
 }
 
 function TabLabel({ instance, settings, page }) {
   const { id } = instance;
 
-  const box = new Box$2({});
+  const box = new Box$1({});
   const image = new Image$1({ margin_end: 6 });
 
   let connectFaviconId;
@@ -1784,10 +1784,10 @@ function TabLabel({ instance, settings, page }) {
   if (flags.custom_icons) {
     if (instance.icon) {
       image.set_from_pixbuf(
-        Pixbuf$1.new_from_file_at_scale(
+        Pixbuf.new_from_file_at_scale(
           instance.icon,
-          ICON_SIZE$1,
-          ICON_SIZE$1,
+          ICON_SIZE,
+          ICON_SIZE,
           true,
         ),
       );
@@ -1806,10 +1806,10 @@ function TabLabel({ instance, settings, page }) {
       }
       page.disconnect(connectFaviconId);
       image.set_from_pixbuf(
-        Pixbuf$1.new_from_file_at_scale(
+        Pixbuf.new_from_file_at_scale(
           instance.icon,
-          ICON_SIZE$1,
-          ICON_SIZE$1,
+          ICON_SIZE,
+          ICON_SIZE,
           true,
         ),
       );
@@ -1824,8 +1824,8 @@ function TabLabel({ instance, settings, page }) {
 
   box.add(image);
 
-  const label = new Label$2();
-  instance.bind("name", label, "label", SettingsBindFlags$2.GET);
+  const label = new Label$1();
+  instance.bind("name", label, "label", SettingsBindFlags.GET);
   box.add(label);
 
   box.add_events(EventMask.BUTTON_PRESS_MASK);
@@ -1836,7 +1836,7 @@ function TabLabel({ instance, settings, page }) {
   });
   eventBox.add(box);
 
-  const menu = new Menu();
+  const menu = new Menu$1();
   menu.append("Edit", `app.editInstance("${id}")`);
   menu.append("Remove", `app.removeInstance("${id}")`);
   if (flags.custom_applications) {
@@ -1846,7 +1846,7 @@ function TabLabel({ instance, settings, page }) {
   const popover = new Popover();
   popover.bind_model(menu, null);
   popover.set_relative_to(box);
-  settings.bind("tabs-position", popover, "position", SettingsBindFlags$2.GET);
+  settings.bind("tabs-position", popover, "position", SettingsBindFlags.GET);
 
   eventBox.connect("button-press-event", (self, eventButton) => {
     const [, button] = eventButton.get_button();
@@ -1871,7 +1871,7 @@ function TabPage({ instance, window, onNotification, application }) {
 }
 
 const {
-  Entry: Entry$2,
+  Entry,
   //  CssProvider
 } = imports.gi.Gtk;
 const { URI } = imports.gi.Soup;
@@ -1896,7 +1896,7 @@ function normalizeURL(str) {
 }
 
 function AddressBar({ state }) {
-  const URLBar = new Entry$2({
+  const URLBar = new Entry({
     hexpand: true,
     placeholder_text: "Enter address",
   });
@@ -1934,21 +1934,21 @@ function AddressBar({ state }) {
 
 const {
   HeaderBar,
-  Button: Button$1,
-  Stack,
-  StackTransitionType,
-  Box: Box$3,
+  Button,
+  Stack: Stack$1,
+  StackTransitionType: StackTransitionType$1,
+  Box,
   MenuButton,
-  Builder,
+  Builder: Builder$1,
   IconSize,
-  Image: Image$2,
+  Image,
   STYLE_CLASS_LINKED,
-  Label: Label$3,
+  Label,
 } = imports.gi.Gtk;
 const { LoadEvent, uri_for_display } = imports.gi.WebKit2;
 
-function Menu$1({ profile }) {
-  const builder = Builder.new_from_resource(
+function Menu({ profile }) {
+  const builder = Builder$1.new_from_resource(
     "/re/sonny/Tangram/data/menu.xml.ui",
   );
   const popover = builder.get_object("app-menu");
@@ -1966,7 +1966,7 @@ function Menu$1({ profile }) {
     builder.get_object("new-application").destroy();
   }
 
-  const image = new Image$2({
+  const image = new Image({
     icon_name: "open-menu-symbolic",
     icon_size: IconSize.BUTTON,
   });
@@ -1995,20 +1995,20 @@ function Header({
     show_close_button: true,
   });
 
-  const left_stack = new Stack({
-    transition_type: StackTransitionType.CROSSFADE,
+  const left_stack = new Stack$1({
+    transition_type: StackTransitionType$1.CROSSFADE,
   });
 
-  const navigationButtonBox = new Box$3({
+  const navigationButtonBox = new Box({
     spacing: 6,
   });
   left_stack.add_named(navigationButtonBox, "navigation");
 
-  const navigationButtons = new Box$3({ spacing: 0 });
+  const navigationButtons = new Box({ spacing: 0 });
   navigationButtons.get_style_context().add_class(STYLE_CLASS_LINKED);
   navigationButtonBox.add(navigationButtons);
 
-  const backButton = Button$1.new_from_icon_name(
+  const backButton = Button.new_from_icon_name(
     "go-previous-symbolic",
     IconSize.BUTTON,
   );
@@ -2017,7 +2017,7 @@ function Header({
   navigationButtons.add(backButton);
   backButton.connect("clicked", onGoBack);
 
-  const forwardButton = Button$1.new_from_icon_name(
+  const forwardButton = Button.new_from_icon_name(
     "go-next-symbolic",
     IconSize.BUTTON,
   );
@@ -2026,11 +2026,11 @@ function Header({
   navigationButtons.add(forwardButton);
   forwardButton.connect("clicked", onGoForward);
 
-  const reloadIcon = new Image$2({
+  const reloadIcon = new Image({
     icon_size: IconSize.BUTTON,
     icon_name: "view-refresh-symbolic",
   });
-  const reloadButton = new Button$1({ image: reloadIcon });
+  const reloadButton = new Button({ image: reloadIcon });
   reloadButton.set_tooltip_text("Reload the current page");
   navigationButtonBox.add(reloadButton);
   reloadButton.connect("clicked", () => {
@@ -2042,22 +2042,22 @@ function Header({
     }
   });
 
-  const homeIcon = new Image$2({
+  const homeIcon = new Image({
     icon_size: IconSize.BUTTON,
     icon_name: "go-home-symbolic",
   });
-  const homeButton = new Button$1({ image: homeIcon });
+  const homeButton = new Button({ image: homeIcon });
   homeButton.set_tooltip_text("Go to homepage");
   navigationButtonBox.add(homeButton);
   homeButton.connect("clicked", onGoHome);
 
-  const cancelBox = new Box$3();
+  const cancelBox = new Box();
   // https://github.com/sonnyp/Tangram/issues/64
   // const cancelIcon = new Image({
   //   icon_size: IconSize.BUTTON,
   //   icon_name: "go-previous-symbolic",
   // });
-  const cancelButton = new Button$1({
+  const cancelButton = new Button({
     label: "Cancel",
     // image: cancelIcon,
     always_show_image: true,
@@ -2074,11 +2074,11 @@ function Header({
 
   titlebar.pack_start(left_stack);
 
-  const center_stack = new Stack({
-    transition_type: StackTransitionType.CROSSFADE,
+  const center_stack = new Stack$1({
+    transition_type: StackTransitionType$1.CROSSFADE,
   });
   titlebar.custom_title = center_stack;
-  const title = new Label$3({
+  const title = new Label({
     label: profile.title,
   });
   title.get_style_context().add_class("title");
@@ -2086,28 +2086,28 @@ function Header({
   const addressBar = AddressBar({ state });
   center_stack.add_named(addressBar, "url");
 
-  const right_stack = new Stack({
-    transition_type: StackTransitionType.CROSSFADE,
+  const right_stack = new Stack$1({
+    transition_type: StackTransitionType$1.CROSSFADE,
   });
   titlebar.pack_end(right_stack);
 
-  const menuButtonBox = new Box$3({
+  const menuButtonBox = new Box({
     spacing: 6,
   });
-  const newTabButton = Button$1.new_from_icon_name(
+  const newTabButton = Button.new_from_icon_name(
     "tab-new-symbolic",
     IconSize.BUTTON,
   );
   newTabButton.set_tooltip_text("Add new tab");
   newTabButton.set_always_show_image(true);
   newTabButton.connect("clicked", () => onNewTab());
-  menuButtonBox.pack_end(Menu$1({ profile }), false, false, null);
+  menuButtonBox.pack_end(Menu({ profile }), false, false, null);
   menuButtonBox.pack_end(newTabButton, false, false, null);
   right_stack.add_named(menuButtonBox, "menu");
-  right_stack.add_named(new Box$3(), "empty");
+  right_stack.add_named(new Box(), "empty");
 
-  const servicesLayer = new Box$3();
-  const addTabButton = new Button$1({
+  const servicesLayer = new Box();
+  const addTabButton = new Button({
     label: "Done",
     sensitive: false,
   });
@@ -2236,9 +2236,9 @@ function Header({
   return { titlebar, addressBar };
 }
 
-const { uuid_string_random: uuid_string_random$1 } = imports.gi.GLib;
-const { ApplicationWindow, Stack: Stack$1, StackTransitionType: StackTransitionType$1 } = imports.gi.Gtk;
-const { Notification: Notification$1, NotificationPriority } = imports.gi.Gio;
+const { uuid_string_random } = imports.gi.GLib;
+const { ApplicationWindow, Stack, StackTransitionType } = imports.gi.Gtk;
+const { Notification, NotificationPriority } = imports.gi.Gio;
 
 function Window({ application, profile, state }) {
   profile.settings =
@@ -2248,7 +2248,7 @@ function Window({ application, profile, state }) {
     log(`profile.${key}: ${profile[key]}`);
   }
 
-  const settings = new Settings({
+  const settings = new Settings$1({
     schema_id: "re.sonny.Tangram",
     path: profile.settings,
   });
@@ -2329,8 +2329,8 @@ function Window({ application, profile, state }) {
   window.set_titlebar(header.titlebar);
 
   // https://gjs-docs.gnome.org/gtk30~3.24.8/gtk.stack
-  const stack = new Stack$1({
-    transition_type: StackTransitionType$1.CROSSFADE,
+  const stack = new Stack({
+    transition_type: StackTransitionType.CROSSFADE,
   });
   state.bind("view", stack, "visible_child_name");
   window.add(stack);
@@ -2351,7 +2351,7 @@ function Window({ application, profile, state }) {
     const title = webkit_notification.get_title();
 
     // https://gjs-docs.gnome.org/gio20~2.0_api/gio.notification
-    const notification = new Notification$1();
+    const notification = new Notification();
     if (title) notification.set_title(title);
     if (body) notification.set_body(body);
     notification.set_priority(NotificationPriority.HIGH);
@@ -2447,7 +2447,7 @@ function Window({ application, profile, state }) {
   }
 
   function onNewTab() {
-    const id = uuid_string_random$1().replace(/-/g, "");
+    const id = uuid_string_random().replace(/-/g, "");
 
     const instance = create({
       url: BLANK_URI,
@@ -2511,14 +2511,14 @@ function Window({ application, profile, state }) {
   return { window, notebook, showTab };
 }
 
-const { VariantType: VariantType$3 } = imports.gi.GLib;
-const { SimpleAction: SimpleAction$2, AppInfo: AppInfo$1 } = imports.gi.Gio;
+const { VariantType } = imports.gi.GLib;
+const { SimpleAction: SimpleAction$2, AppInfo } = imports.gi.Gio;
 
 function PersistentActions({ getWindow, application }) {
   // https://gjs-docs.gnome.org/gio20~2.0_api/gio.simpleaction
   const showInstanceAction = new SimpleAction$2({
     name: "showInstance",
-    parameter_type: VariantType$3.new("s"),
+    parameter_type: VariantType.new("s"),
   });
   showInstanceAction.connect("activate", (self, parameters) => {
     const id = parameters.unpack();
@@ -2536,26 +2536,22 @@ function PersistentActions({ getWindow, application }) {
   // https://gjs-docs.gnome.org/gio20~2.0_api/gio.simpleaction
   const openURIAction = new SimpleAction$2({
     name: "openURI",
-    parameter_type: VariantType$3.new("s"),
+    parameter_type: VariantType.new("s"),
   });
   openURIAction.connect("activate", (self, parameters) => {
     const path = parameters.unpack();
-    AppInfo$1.launch_default_for_uri(path, null);
+    AppInfo.launch_default_for_uri(path, null);
   });
   application.add_action(openURIAction);
 }
 
-const { Application, Builder: Builder$1 } = imports.gi.Gtk;
+const { Application, Builder } = imports.gi.Gtk;
 const {
   // ApplicationFlags,
-  SimpleAction: SimpleAction$3,
+  SimpleAction: SimpleAction$1,
 } = imports.gi.Gio;
-const {
-  OptionFlags,
-  OptionArg,
-  set_prgname,
-  set_application_name,
-} = imports.gi.GLib;
+const { OptionFlags, OptionArg, set_prgname: set_prgname$1, set_application_name: set_application_name$1 } =
+  imports.gi.GLib;
 const { set_program_class } = imports.gi.Gdk;
 
 const application = new Application({
@@ -2591,7 +2587,7 @@ const profile = {
 function setupProfile() {
   application.set_application_id(profile.application_id);
   // On X11 and wayland Shows in about dialog
-  set_application_name("Tangram");
+  set_application_name$1("Tangram");
 
   if (profile.id) {
     // On X11 does not show anywhere
@@ -2600,13 +2596,13 @@ function setupProfile() {
     // On wayland shows in GNOME Shell header bar
     // and task bar
     // On wayland is the wmclass
-    set_prgname(profile.id);
+    set_prgname$1(profile.id);
     // On X11 shows in GNOME Shell header bar
     // on X11 is the wmclass
     // on Wayland does not show anywhere
     set_program_class(profile.id);
   } else {
-    set_prgname("Tangram");
+    set_prgname$1("Tangram");
     set_program_class("Tangram");
   }
 }
@@ -2648,7 +2644,7 @@ application.connect("activate", (app) => {
   getWindow().window.present();
 });
 
-const showAboutDialog = new SimpleAction$3({
+const showAboutDialog = new SimpleAction$1({
   name: "about",
   parameter_type: null,
 });
@@ -2657,12 +2653,12 @@ showAboutDialog.connect("activate", () => {
 });
 application.add_action(showAboutDialog);
 
-const showShortcutsDialog = new SimpleAction$3({
+const showShortcutsDialog = new SimpleAction$1({
   name: "shortcuts",
   parameter_type: null,
 });
 showShortcutsDialog.connect("activate", () => {
-  const builder = Builder$1.new_from_resource(
+  const builder = Builder.new_from_resource(
     "/re/sonny/Tangram/data/shortcuts.xml.ui",
   );
   const shortcutsWindow = builder.get_object("shortcuts-window");
@@ -2677,28 +2673,33 @@ application.set_accels_for_action("app.shortcuts", [
 
 PersistentActions({ application, getWindow });
 
-const { programInvocationName: programInvocationName$1 } = imports.system;
-const { SimpleAction: SimpleAction$4 } = imports.gi.Gio;
+const { programInvocationName } = imports.system;
+const { SimpleAction } = imports.gi.Gio;
 const {
-  getenv: getenv$2,
+  getenv,
   // listenv,
   spawn_async,
   SpawnFlags,
   log_writer_is_journald,
   setenv,
+  set_prgname,
+  set_application_name,
 } = imports.gi.GLib;
 
 pkg.require(versions);
 
-if (getenv$2("DEV")) {
+set_prgname("re.sonny.Tangram");
+set_application_name("Tangram");
+
+if (getenv("DEV")) {
   if (log_writer_is_journald(2)) {
     setenv("G_MESSAGES_DEBUG", "re.sonny.Tangram", false);
   }
 }
 
 // Debug
-log(`programInvocationName: ${programInvocationName$1}`);
-log(`_: ${getenv$2("_")}`);
+log(`programInvocationName: ${programInvocationName}`);
+log(`_: ${getenv("_")}`);
 for (const i in pkg) {
   if (typeof pkg[i] === "string") {
     log(`pkg.${i}: ${pkg[i]}`);
@@ -2711,8 +2712,8 @@ for (const i in pkg) {
 this.main = function main(argv = []) {
   log("argv " + argv.join(" "));
 
-  if (getenv$2("DEV")) {
-    const restart = new SimpleAction$4({
+  if (getenv("DEV")) {
+    const restart = new SimpleAction({
       name: "restart",
       parameter_type: null,
     });
