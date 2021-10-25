@@ -2,7 +2,7 @@
 
 # Tangram
 
-Run web apps on your desktop
+Browser for your pinned tabs
 
 ![screenshot](data/appdata/screenshot.png)
 
