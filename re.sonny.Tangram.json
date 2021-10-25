@@ -1,7 +1,7 @@
 {
   "app-id": "re.sonny.Tangram",
   "runtime": "org.gnome.Platform",
-  "runtime-version": "40",
+  "runtime-version": "41",
   "sdk": "org.gnome.Sdk",
   "command": "re.sonny.Tangram",
   "finish-args": [
@@ -12,8 +12,6 @@
     "--socket=pulseaudio",
     "--socket=wayland",
     "--system-talk-name=org.freedesktop.GeoClue2",
-    // Required for FLATPAK_ID
-    // https://github.com/flatpak/flatpak/releases/tag/1.1.2
     "--require-version=1.1.2"
   ],
   "modules": [
