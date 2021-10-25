@@ -43,6 +43,7 @@
     <release version="1.3.2" date="2021-10-25">
       <description>
         <ul>
+          <li>Fix window title</li>
           <li>Update GNOME runtime to 41</li>
         </ul>
       </description>

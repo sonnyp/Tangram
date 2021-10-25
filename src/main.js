@@ -17,6 +17,9 @@ const {
   setenv,
 } = GLib;
 
+GLib.set_prgname("re.sonny.Tangram");
+GLib.set_application_name("Tangram");
+
 import application from "./application.js";
 
 if (getenv("DEV")) {
