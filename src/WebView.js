@@ -272,6 +272,14 @@ export function buildWebView({
           return false;
         }
 
+        // Reddit spawns about:blank and https://www.redditmedia.com/gtm/jail?id=GTM-5XVNS82 out of nowhere
+        // Google recaptcha or account also appears to be triggering this
+        // NavigationType.OTHER does not seem to be triggered by user action
+        const navigation_type = decision.get_navigation_type();
+        if (navigation_type === WebKit2.NavigationType.OTHER) {
+          return false;
+        }
+
         const navigation_action = decision.get_navigation_action();
         const request_url = navigation_action.get_request().get_uri();
 
