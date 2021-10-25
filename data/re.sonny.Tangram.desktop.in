@@ -1,6 +1,6 @@
 [Desktop Entry]
 Name=Tangram
-Comment=Run web apps on your desktop
+Comment=Browser for your pinned tabs
 Exec=re.sonny.Tangram
 Terminal=false
 Type=Application

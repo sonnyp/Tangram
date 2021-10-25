@@ -2,7 +2,7 @@
 
 # Tangram
 
-Run web apps on your desktop
+Browser for your pinned tabs
 
 <a href='https://flathub.org/apps/details/re.sonny.Tangram'><img width='200' alt='Download on Flathub' src='https://flathub.org/assets/badges/flathub-badge-en.svg'/></a>
 

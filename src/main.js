@@ -31,7 +31,7 @@ function AboutDialog({ window }) {
     authors: ["Sonny Piers https://sonny.re"],
     artists: ["Tobias Bernard <tbernard@gnome.org>"],
     comments: [
-      "Run web apps on your desktop",
+      "Browser for your pinned tabs",
       "",
       `Powered by WebKitGTK ${WebKitGTKVersion}`,
       `Powered by gjs ${gjsVersion}`,
