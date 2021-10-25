@@ -49,7 +49,7 @@ Before submitting a compatibility issue with a Website, please try to reproduce 
 
 Both Flatpak and non-Flatpak versions of Tangram provide sandboxing for Web applications.
 
-- Flatpak via [our restricted permissions](https://github.com/sonnyp/Tangram/blob/master/re.sonny.Tangram.json)
+- Flatpak via [our restricted permissions](https://github.com/sonnyp/Tangram/blob/main/re.sonny.Tangram.json)
 - Non-Flatpak through [WebkitGTK Sandboxing](https://www.youtube.com/watch?v=5TDg83LHZ6o) (requires WebkitGTK >= 2.26)
 
 <!-- ## Roadmap
@@ -194,6 +194,7 @@ GTK_DEBUG=interactive ./run.sh
 ### Release
 
 ```sh
+# bump meson.build version
 git tag $VERSION
 git push origin $VERSION
 # send PR to https://github.com/flathub/re.sonny.Tangram/blob/master/re.sonny.Tangram.json
