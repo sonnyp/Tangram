@@ -36,7 +36,7 @@ function AboutDialog({ window }) {
       `Powered by WebKitGTK ${WebKitGTKVersion}`,
       `Powered by gjs ${gjsVersion}`,
     ].join("\n"),
-    copyright: "Copyright 2019-2020 Sonny Piers",
+    copyright: "Copyright 2019-2021 Sonny Piers",
     license_type: Gtk$1.License.GPL_3_0,
     version: pkg.version,
     website_label: "Learn more about Tangram",
