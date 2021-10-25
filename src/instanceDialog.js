@@ -1,26 +1,13 @@
 import Gtk from "gi://Gtk";
 import Gdk from "gi://Gdk";
-import GLib from "gi://GLib";
 import Gio from "gi://Gio";
 
 const { WindowTypeHint } = Gdk;
-const {
-  Dialog,
-  Align,
-  Grid,
-  Label,
-  Entry,
-  ResponseType,
-  EntryIconPosition,
-  Box,
-  Orientation,
-} = Gtk;
+const { Dialog, Align, Grid, Label, Entry, ResponseType, EntryIconPosition } =
+  Gtk;
 const { SettingsBindFlags } = Gio;
-const { build_filenamev } = GLib;
 
 import { once } from "./troll/util.js";
-import { iconChooser, saveIcon } from "./icon.js";
-import flags from "./flags.js";
 
 export function editInstanceDialog(props) {
   return instanceDialog({ ...props, action: "Edit" });
@@ -53,21 +40,6 @@ async function instanceDialog({ window, instance, action }) {
 
   const contentArea = dialog.get_content_area();
   contentArea.margin = 18;
-
-  let iconEntry;
-  if (flags.custom_icons) {
-    iconEntry = iconChooser({
-      value: instance.getIconForDisplay(),
-      parent: dialog,
-    });
-    const box = new Box({
-      orientation: Orientation.HORIZONTAL,
-      halign: Align.CENTER,
-      margin_bottom: 18,
-    });
-    box.add(iconEntry);
-    contentArea.add(box);
-  }
 
   const grid = new Grid({
     column_spacing: 12,
@@ -146,18 +118,6 @@ async function instanceDialog({ window, instance, action }) {
   if (response_id !== ResponseType.APPLY) {
     dialog.destroy();
     return true;
-  }
-
-  if (flags.custom_icons) {
-    let icon = iconEntry.get_value();
-    if (!icon.startsWith("resource://")) {
-      icon = saveIcon(
-        iconEntry.get_value(),
-        build_filenamev([instance.data_dir, "icon.png"]),
-      );
-      // eslint-disable-next-line require-atomic-updates
-      instance.icon = icon;
-    }
   }
 
   dialog.destroy();

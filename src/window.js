@@ -16,9 +16,6 @@ import {
   // saveFavicon
 } from "./webapp/webapp.js";
 
-// https://github.com/flatpak/flatpak/issues/78#issuecomment-511158618
-// log(imports.gi.Gio.SettingsBackend.get_default());
-
 import { TabLabel, TabPage } from "./tab.js";
 import { addInstanceDialog } from "./instanceDialog.js";
 import Header from "./Header.js";
@@ -30,21 +27,13 @@ import {
   load as loadInstances,
   create as createInstance,
 } from "./instances.js";
-import flags from "./flags.js";
 import { buildWebView } from "./WebView.js";
 import { BLANK_URI, MODES } from "./constants.js";
 
-export default function Window({ application, profile, state }) {
-  profile.settings =
-    "/re/sonny/Tangram/" + (profile.id ? `applications/${profile.id}/` : "");
-
-  for (const key in profile) {
-    log(`profile.${key}: ${profile[key]}`);
-  }
-
+export default function Window({ application, state }) {
   const settings = new Settings({
     schema_id: "re.sonny.Tangram",
-    path: profile.settings,
+    path: "/re/sonny/Tangram/",
   });
 
   const header = Header({
@@ -55,7 +44,6 @@ export default function Window({ application, profile, state }) {
     onGoHome,
     onAddTab,
     onCancelNewTab,
-    profile,
     state,
     onNewTab,
   });
@@ -101,7 +89,7 @@ export default function Window({ application, profile, state }) {
   // https://gjs-docs.gnome.org/gtk30~3.24.8/gtk.applicationwindow
   const window = new ApplicationWindow({
     application,
-    title: profile.title,
+    title: "Tangram",
   });
 
   let width = settings.get_int("window-width");
@@ -129,7 +117,7 @@ export default function Window({ application, profile, state }) {
   state.bind("view", stack, "visible_child_name");
   window.add(stack);
 
-  const notebook = Notebook({ profile, settings, application });
+  const notebook = Notebook({ settings, application });
   stack.add_named(notebook, "tabs");
   stack.show_all();
 
@@ -167,9 +155,6 @@ export default function Window({ application, profile, state }) {
     const label = TabLabel({ instance, settings, page });
     const idx = notebook.append_page(page, label);
     notebook.set_tab_reorderable(page, true);
-    if (flags.custom_applications) {
-      notebook.set_tab_detachable(page, true);
-    }
     return idx;
   }
 
@@ -188,15 +173,6 @@ export default function Window({ application, profile, state }) {
     if (!instance.name) {
       instance.name = info.title || webview.title || "";
     }
-
-    // TODO icon
-    // try {
-    //   // await download(webview, info.icon, `file://${icon}`);
-    //   const icon = saveFavicon(webview, instance);
-    //   if (icon) instance.icon = icon;
-    // } catch (err) {
-    //   logError(err);
-    // }
 
     let canceled;
     try {
@@ -299,7 +275,6 @@ export default function Window({ application, profile, state }) {
     window,
     application,
     settings,
-    profile,
     notebook,
     showTab,
   });

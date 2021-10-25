@@ -7,20 +7,6 @@
         <property name="margin">10</property>
         <property name="orientation">1</property>
         <child>
-          <object class="GtkModelButton" id="new-application">
-            <property name="visible">True</property>
-            <property name="text" translatable="yes">New application</property>
-            <property name="action-name">app.newApplication</property>
-          </object>
-        </child>
-        <child>
-          <object class="GtkModelButton" id="edit-application">
-            <property name="visible">True</property>
-            <property name="text" translatable="yes">Edit application</property>
-            <property name="action-name">app.editApplication</property>
-          </object>
-        </child>
-        <child>
           <object class="GtkModelButton">
             <property name="visible">True</property>
             <property name="text" translatable="yes">Tabs position</property>

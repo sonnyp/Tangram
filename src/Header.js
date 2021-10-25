@@ -17,27 +17,13 @@ const {
 const { LoadEvent, uri_for_display } = WebKit2;
 
 import AddressBar from "./AddressBar.js";
-import flags from "./flags.js";
 import { BLANK_URI } from "./constants.js";
 
-function Menu({ profile }) {
+function Menu() {
   const builder = Builder.new_from_resource(
     "/re/sonny/Tangram/data/menu.xml.ui",
   );
   const popover = builder.get_object("app-menu");
-
-  if (!flags.custom_applications) {
-    builder.get_object("edit-application").destroy();
-    builder.get_object("new-application").destroy();
-  }
-  // main app
-  else if (!profile.id) {
-    builder.get_object("edit-application").destroy();
-  }
-  // custom app
-  else {
-    builder.get_object("new-application").destroy();
-  }
 
   const image = new Image({
     icon_name: "open-menu-symbolic",
@@ -59,7 +45,6 @@ export default function Header({
   onGoHome,
   onAddTab,
   onCancelNewTab,
-  profile,
   state,
   onNewTab,
 }) {
@@ -152,7 +137,7 @@ export default function Header({
   });
   titlebar.custom_title = center_stack;
   const title = new Label({
-    label: profile.title,
+    label: "Tangram",
   });
   title.get_style_context().add_class("title");
   center_stack.add_named(title, "title");
@@ -174,7 +159,7 @@ export default function Header({
   newTabButton.set_tooltip_text("Add new tab");
   newTabButton.set_always_show_image(true);
   newTabButton.connect("clicked", () => onNewTab());
-  menuButtonBox.pack_end(Menu({ profile }), false, false, null);
+  menuButtonBox.pack_end(Menu(), false, false, null);
   menuButtonBox.pack_end(newTabButton, false, false, null);
   right_stack.add_named(menuButtonBox, "menu");
   right_stack.add_named(new Box(), "empty");

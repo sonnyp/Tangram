@@ -40,13 +40,6 @@ export class Instance {
   set name(name) {
     this.settings.set_string("name", name);
   }
-  // TODO icon
-  // get icon() {
-  //   return this.settings.get_string("icon");
-  // }
-  // set icon(icon) {
-  //   return this.settings.set_string("icon", icon);
-  // }
   get url() {
     return this.settings.get_string("url");
   }
@@ -89,8 +82,6 @@ export function destroy(instance) {
   const { settings } = instance;
   settings.reset("name");
   settings.reset("url");
-  // TODO icon
-  // settings.reset("icon");
   // https://gitlab.gnome.org/GNOME/glib/merge_requests/981#note_551625
   try {
     settings.reset("");

@@ -33,12 +33,8 @@ const {
   path_get_dirname,
   get_language_names,
 } = GLib;
-const {
-  Notification,
-  AppInfo,
-  ResourceLookupFlags,
-  resources_open_stream,
-} = Gio;
+const { Notification, AppInfo, ResourceLookupFlags, resources_open_stream } =
+  Gio;
 
 import { connect } from "./util.js";
 import { env } from "./env.js";
@@ -241,6 +237,8 @@ export function buildWebView({
     // https://gjs-docs.gnome.org/webkit240~4.0_api/webkit2.webview#signal-create
     create(navigation_action) {
       const request_url = navigation_action.get_request().get_uri();
+
+      log(["create", request_url]);
 
       if (isUrlAllowedForNavigation(webView, request_url)) {
         // Open URL in current tab

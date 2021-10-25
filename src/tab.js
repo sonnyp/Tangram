@@ -6,10 +6,9 @@ import GdkPixbuf from "gi://GdkPixbuf";
 const { Label, Image, Box, EventBox, Popover } = Gtk;
 const { EventMask } = Gdk;
 const { Menu, SettingsBindFlags } = Gio;
-const { Pixbuf, InterpType } = GdkPixbuf;
+const { InterpType } = GdkPixbuf;
 
 import { MODES } from "./constants.js";
-import flags from "./flags.js";
 import { getFaviconAsPixbuf } from "./webapp/webapp.js";
 import { buildWebView } from "./WebView.js";
 
@@ -27,9 +26,8 @@ export function TabLabel({ instance, settings, page }) {
   const box = new Box({});
   const image = new Image({ margin_end: 6 });
 
-  let connectFaviconId;
   function connectFavicon() {
-    connectFaviconId = page.connect("notify::favicon", () => {
+    page.connect("notify::favicon", () => {
       const new_favicon = getFaviconScaled(page);
       if (!new_favicon) {
         return;
@@ -38,46 +36,11 @@ export function TabLabel({ instance, settings, page }) {
     });
   }
 
-  if (flags.custom_icons) {
-    if (instance.icon) {
-      image.set_from_pixbuf(
-        Pixbuf.new_from_file_at_scale(
-          instance.icon,
-          ICON_SIZE,
-          ICON_SIZE,
-          true,
-        ),
-      );
-    } else {
-      const favicon = getFaviconScaled(page);
-      if (favicon) {
-        image.set_from_pixbuf(favicon);
-      }
-      connectFavicon();
-    }
-    instance.observe("icon", () => {
-      const icon = instance.icon;
-      if (!icon) {
-        connectFavicon();
-        return;
-      }
-      page.disconnect(connectFaviconId);
-      image.set_from_pixbuf(
-        Pixbuf.new_from_file_at_scale(
-          instance.icon,
-          ICON_SIZE,
-          ICON_SIZE,
-          true,
-        ),
-      );
-    });
-  } else {
-    const favicon = getFaviconScaled(page);
-    if (favicon) {
-      image.set_from_pixbuf(favicon);
-    }
-    connectFavicon();
+  const favicon = getFaviconScaled(page);
+  if (favicon) {
+    image.set_from_pixbuf(favicon);
   }
+  connectFavicon();
 
   box.add(image);
 
@@ -96,9 +59,6 @@ export function TabLabel({ instance, settings, page }) {
   const menu = new Menu();
   menu.append("Edit", `app.editInstance("${id}")`);
   menu.append("Remove", `app.removeInstance("${id}")`);
-  if (flags.custom_applications) {
-    menu.append("New application", `app.detachTab("${id}")`);
-  }
 
   const popover = new Popover();
   popover.bind_model(menu, null);

@@ -7,7 +7,5 @@ Type=Application
 Categories=Network;WebBrowser;GNOME;GTK;
 StartupNotify=true
 X-GNOME-UsesNotifications=true
-# TODO application
-# StartupWMClass=Tangram
 Icon=re.sonny.Tangram
 DBusActivatable=true

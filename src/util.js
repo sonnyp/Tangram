@@ -2,7 +2,7 @@ import Gio from "gi://Gio";
 import GLib from "gi://GLib";
 
 const { Settings: GioSettings, keyfile_settings_backend_new } = Gio;
-const { KeyFile, KEY_FILE_DESKTOP_GROUP, VariantType } = GLib;
+const { KeyFile, KEY_FILE_DESKTOP_GROUP } = GLib;
 
 import { keyfile_settings_path } from "./env.js";
 
@@ -63,18 +63,6 @@ export function desktopEntry(fields) {
     keyFile.set_value(KEY_FILE_DESKTOP_GROUP, key, fields[key].toString());
   }
   return keyFile;
-}
-
-// TODO replace with dict.lookup with SDK 3.24
-// merge request
-// https://gitlab.gnome.org/GNOME/gjs/merge_requests/320
-export function lookup(dict, key, variantType = null, deep = false) {
-  if (typeof variantType === "string")
-    variantType = new VariantType(variantType);
-
-  const variant = dict.lookup_value(key, variantType);
-  if (variant === null) return null;
-  return deep === true ? variant.deep_unpack(deep) : variant.unpack();
 }
 
 export function observeSetting(settings, key, fn) {

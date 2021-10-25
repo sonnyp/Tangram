@@ -4,19 +4,13 @@ import Gio from "gi://Gio";
 const { VariantType, Variant } = GLib;
 const { SimpleAction } = Gio;
 
-import { detachTab } from "./Notebook.js";
 import * as instances from "./instances.js";
-import {
-  newApplicationDialog,
-  editApplicationDialog,
-} from "./applicationDialog.js";
 import { editInstanceDialog } from "./instanceDialog.js";
 
 export default function Actions({
   window,
   application,
   settings,
-  profile,
   notebook,
   showTab,
 }) {
@@ -44,17 +38,6 @@ export default function Actions({
   application.add_action(tabsPosition);
 
   // https://gjs-docs.gnome.org/gio20~2.0_api/gio.simpleaction
-  const detachTabAction = new SimpleAction({
-    name: "detachTab",
-    parameter_type: VariantType.new("s"),
-  });
-  detachTabAction.connect("activate", (self, parameters) => {
-    const id = parameters.unpack();
-    detachTab({ instance_id: id, settings, notebook });
-  });
-  application.add_action(detachTabAction);
-
-  // https://gjs-docs.gnome.org/gio20~2.0_api/gio.simpleaction
   const removeInstanceAction = new SimpleAction({
     name: "removeInstance",
     parameter_type: VariantType.new("s"),
@@ -78,20 +61,6 @@ export default function Actions({
     }
   });
   application.add_action(removeInstanceAction);
-
-  // https://gjs-docs.gnome.org/gio20~2.0_api/gio.simpleaction
-  const newApplication = SimpleAction.new("newApplication", null);
-  newApplication.connect("activate", () => {
-    newApplicationDialog({ window }).catch(log);
-  });
-  application.add_action(newApplication);
-
-  // https://gjs-docs.gnome.org/gio20~2.0_api/gio.simpleaction
-  const editApplication = SimpleAction.new("editApplication", null);
-  editApplication.connect("activate", () => {
-    editApplicationDialog({ id: profile.id, window }).catch(logError);
-  });
-  application.add_action(editApplication);
 
   // https://gjs-docs.gnome.org/gio20~2.0_api/gio.simpleaction
   const editInstanceAction = new SimpleAction({
