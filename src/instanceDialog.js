@@ -1,16 +1,14 @@
 import Gtk from "gi://Gtk";
 import Gdk from "gi://Gdk";
-import Gio from "gi://Gio";
 
 const { WindowTypeHint } = Gdk;
 const { Dialog, Align, Grid, Label, Entry, ResponseType, EntryIconPosition } =
   Gtk;
-const { SettingsBindFlags } = Gio;
 
 import { once } from "./troll/util.js";
 
 export function editInstanceDialog(props) {
-  return instanceDialog({ ...props, action: "Edit" });
+  return instanceDialog({ ...props, action: "Save" });
 }
 
 export function addInstanceDialog(props) {
@@ -54,8 +52,8 @@ async function instanceDialog({ window, instance, action }) {
   grid.attach(nameLabel, 1, 1, 1, 1);
   const nameEntry = new Entry({
     hexpand: true,
+    text: instance.settings.get_string('name')
   });
-  instance.bind("name", nameEntry, "text", SettingsBindFlags.DEFAULT);
   grid.attach(nameEntry, 2, 1, 1, 1);
 
   const URLLabel = new Label({
@@ -66,8 +64,8 @@ async function instanceDialog({ window, instance, action }) {
 
   const URLEntry = new Entry({
     hexpand: true,
+    text: instance.settings.get_string('url')
   });
-  instance.bind("url", URLEntry, "text", SettingsBindFlags.DEFAULT);
   grid.attach(URLEntry, 2, 3, 1, 1);
 
   primaryButton.set_sensitive(!!URLEntry.text);
@@ -91,22 +89,26 @@ async function instanceDialog({ window, instance, action }) {
     );
   });
 
+  const expander = new Gtk.Expander({label: 'Advanced'})
+  const expander_grid = new Grid({
+    column_spacing: 12,
+    row_spacing: 6,
+  });
+  expander.add(expander_grid)
+
   const UserAgentLabel = new Label({
     label: "User Agent",
     halign: Align.END,
   });
-  grid.attach(UserAgentLabel, 1, 4, 1, 1);
+  expander_grid.attach(UserAgentLabel, 1, 4, 1, 1);
 
   const UserAgentEntry = new Entry({
     hexpand: true,
+    text: instance.settings.get_string('user-agent')
   });
-  instance.bind(
-    "user-agent",
-    UserAgentEntry,
-    "text",
-    SettingsBindFlags.DEFAULT,
-  );
-  grid.attach(UserAgentEntry, 2, 4, 1, 1);
+  expander_grid.attach(UserAgentEntry, 2, 4, 1, 1);
+
+  contentArea.add(expander)
 
   dialog.show_all();
 
@@ -119,6 +121,10 @@ async function instanceDialog({ window, instance, action }) {
     dialog.destroy();
     return true;
   }
+
+  instance.settings.set_string('name', nameEntry.text)
+  instance.settings.set_string('url', URLEntry.text)
+  instance.settings.set_string('user-agent', UserAgentEntry.text)
 
   dialog.destroy();
 
