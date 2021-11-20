@@ -46,6 +46,13 @@ export class Instance {
   set url(url) {
     this.settings.set_string("url", url);
   }
+
+  get hasNotification() {
+    return this.settings.get_boolean("hasnotification");
+  }
+  set hasNotification(val) {
+    this.settings.set_boolean("hasnotification", val);
+  }
 }
 
 export function load(settings) {

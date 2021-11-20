@@ -141,6 +141,8 @@ export default function Window({ application, state }) {
     if (body) notification.set_body(body);
     notification.set_priority(priority);
     notification.set_default_action(`app.showInstance('${instance_id}')`);
+    const instance = getInstance(instance_id);
+    instance.hasNotification = true;
     application.send_notification(instance_id, notification);
   }
 
@@ -151,11 +153,14 @@ export default function Window({ application, state }) {
       window,
       onNotification,
     });
+    instance.observe("hasNotification", (val) => {
+      log(val);
+    });
     return buildInstanceFromPage({ instance, page });
   }
 
-  function buildInstanceFromPage({ instance, page }) {
-    const label = TabLabel({ instance, settings, page });
+  function buildInstanceFromPage({ instance, page, hasNotification }) {
+    const label = TabLabel({ instance, settings, page, hasNotification });
     const idx = notebook.append_page(page, label);
     notebook.set_tab_reorderable(page, true);
     return idx;

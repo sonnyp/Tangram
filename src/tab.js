@@ -20,7 +20,7 @@ function getFaviconScaled(webview) {
   return pixbuf.scale_simple(ICON_SIZE, ICON_SIZE, InterpType.BILINEAR);
 }
 
-export function TabLabel({ instance, settings, page }) {
+export function TabLabel({ instance, settings, page, hasNotification }) {
   const { id } = instance;
 
   const box = new Box({});
@@ -41,6 +41,10 @@ export function TabLabel({ instance, settings, page }) {
     image.set_from_pixbuf(favicon);
   }
   connectFavicon();
+
+  const notificationsLabel = new Label();
+  notificationsLabel.set_label(hasNotification ? "Notification!" : "");
+  box.add(notificationsLabel);
 
   box.add(image);
 
