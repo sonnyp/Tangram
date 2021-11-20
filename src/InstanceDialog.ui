@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<interface>
+  <object class="GtkDialog" id="dialog">
+    <property name="modal">true</property>
+    <property name="use_header_bar">1</property>
+    <child type="action">
+      <object class="GtkButton" id="button_cancel">
+        <property name="label">Cancel</property>
+      </object>
+    </child>
+    <child type="action">
+      <object class="GtkButton" id="button_save">
+        <property name="can-default">True</property>
+        <property name="label">Save</property>
+      </object>
+    </child>
+    <action-widgets>
+      <action-widget response="cancel">button_cancel</action-widget>
+      <action-widget response="apply" default="true">button_save</action-widget>
+    </action-widgets>
+  </object>
+  <object class="GtkListStore" id="notification_options">
+    <columns>
+      <column type="gint" />
+      <column type="gchararray" />
+    </columns>
+    <data>
+      <row>
+        <col id="0">0</col>
+        <col id="1">Normal</col>
+      </row>
+      <row>
+        <col id="0">1</col>
+        <col id="1">Low</col>
+      </row>
+      <row>
+        <col id="0">2</col>
+        <col id="1">High</col>
+      </row>
+      <row>
+        <col id="0">3</col>
+        <col id="1">Urgent</col>
+      </row>
+    </data>
+  </object>
+</interface>

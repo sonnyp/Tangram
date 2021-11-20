@@ -1,11 +1,19 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <schemalist gettext-domain="tangram">
-  <!-- https://gjs-docs.gnome.org/gtk30~3.24.8/gtk.positiontype -->
+  <!-- https://docs.gtk.org/gtk3/enum.PositionType.html -->
   <enum id="re.sonny.Tangram.PositionType">
     <value nick="left" value="0" />
     <value nick="right" value="1" />
     <value nick="top" value="2" />
     <value nick="bottom" value="3" />
+  </enum>
+
+  <!-- https://docs.gtk.org/gio/enum.NotificationPriority.html -->
+  <enum id="re.sonny.Tangram.NotificationPriority">
+    <value nick="normal" value="0" />
+    <value nick="low" value="1" />
+    <value nick="high" value="2" />
+    <value nick="urgent" value="3" />
   </enum>
 
   <schema id="re.sonny.Tangram">
@@ -30,7 +38,8 @@
     <key name="instances" type="as">
       <default>[]</default>
       <summary>Instances</summary>
-      <description>Identifiers of instances to be found in /re/sonny/Tangram/instances/</description>
+      <description
+      >Identifiers of instances to be found in /re/sonny/Tangram/instances/</description>
     </key>
   </schema>
 
@@ -48,14 +57,17 @@
     <key type="s" name="user-agent">
       <default>""</default>
       <summary>User agent</summary>
-      <description>String that will be used as user agent, to identify the browser to the web servers.</description>
+      <description
+      >String that will be used as user agent, to identify the browser to the web servers.</description>
     </key>
-    <!-- TODO icon -->
-    <!-- <key type="s" name="icon">
-      <default>""</default>
-      <summary>Icon</summary>
-      <description>Service icon</description>
-    </key> -->
+    <key
+      name="notifications-priority"
+      enum="re.sonny.Tangram.NotificationPriority"
+    >
+      <default>"normal"</default>
+      <summary>Notifications priority</summary>
+      <description>Sets the priority of notifications</description>
+    </key>
   </schema>
 
 </schemalist>
