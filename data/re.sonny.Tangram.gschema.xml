@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8" ?>
+<?xml version="1.0" encoding="UTF-8"?>
 <schemalist gettext-domain="tangram">
   <!-- https://docs.gtk.org/gtk3/enum.PositionType.html -->
   <enum id="re.sonny.Tangram.PositionType">
@@ -53,6 +53,11 @@
       <default>""</default>
       <summary>URL</summary>
       <description>Start URL</description>
+    </key>
+    <key type="b" name="hasnotification">
+      <default>false</default>
+      <summary>hasNotification</summary>
+      <description>Has notifcation</description>
     </key>
     <key type="s" name="user-agent">
       <default>""</default>

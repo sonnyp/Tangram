@@ -11,6 +11,8 @@ export default function Notebook({ settings, application }) {
   const notebook = new Gtk.Notebook({ scrollable: true });
   notebook.connect("switch-page", (self, webview) => {
     application.withdraw_notification(webview.instance_id);
+    const instance = getInstance(webview.instance_id);
+    instance.hasNotification = false;
     state.set({ webview });
   });
   notebook.set_group_name("tabs");
