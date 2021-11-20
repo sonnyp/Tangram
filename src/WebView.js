@@ -39,8 +39,8 @@ const { Notification, AppInfo, ResourceLookupFlags, resources_open_stream } =
 
 import { connect, getEnum } from "./util.js";
 import { env } from "./env.js";
-import { BLANK_URI } from "./constants.js";
-import { isUrlAllowedForNavigation } from "./utils.js";
+import { BLANK_URI, MODES } from "./constants.js";
+// import { isUrlAllowedForNavigation } from "./utils.js";
 
 export function buildWebView({
   instance,
@@ -241,8 +241,7 @@ export function buildWebView({
 
       log(["create", request_url]);
 
-      if (isUrlAllowedForNavigation(webView, request_url)) {
-        // Open URL in current tab
+      if (webView.mode === MODES.TEMPORARY) {
         webView.load_uri(request_url);
         return;
       }
@@ -270,45 +269,25 @@ export function buildWebView({
     ["decide-policy"](decision, decision_type) {
       log(["decide-policy", getEnum(PolicyDecisionType, decision_type)]);
 
-      if (decision_type !== PolicyDecisionType.NAVIGATION_ACTION) return false;
+      if (decision_type === PolicyDecisionType.NAVIGATION_ACTION) {
+        const navigation_type = decision.get_navigation_type();
+        // https://webkitgtk.org/reference/webkit2gtk/stable/WebKitNavigationAction.html
+        const navigation_action = decision.get_navigation_action();
+        const request_url = navigation_action.get_request().get_uri();
+        log([
+          "navigation",
+          getEnum(WebKit2.NavigationType, navigation_type),
+          request_url,
+        ]);
 
-      if (decision.get_frame_name()) {
-        return false;
+        if (didUserRequestOpenInBrowser(navigation_action)) {
+          decision.ignore();
+          show_uri_on_window(window, request_url, null);
+          return true;
+        }
       }
 
-      // Reddit spawns about:blank and https://www.redditmedia.com/gtm/jail?id=GTM-5XVNS82 out of nowhere
-      // Google recaptcha or account also appears to be triggering this
-      // NavigationType.OTHER does not seem to be triggered by user action
-      const navigation_type = decision.get_navigation_type();
-      if (navigation_type === WebKit2.NavigationType.OTHER) {
-        return false;
-      }
-
-      // https://webkitgtk.org/reference/webkit2gtk/stable/WebKitNavigationAction.html
-      const navigation_action = decision.get_navigation_action();
-      const request_url = navigation_action.get_request().get_uri();
-
-      // Google drive when opening a doc and navigating back
-      if (request_url === "about:blank") {
-        return false;
-      }
-
-      if (didUserRequestOpenInBrowser(navigation_action)) {
-        decision.ignore();
-        show_uri_on_window(window, request_url, null);
-        return true;
-      }
-
-      if (isUrlAllowedForNavigation(webView, request_url)) {
-        // Open URL in current tab
-        return false;
-      }
-
-      decision.ignore();
-      // Open URL in default browser
-      show_uri_on_window(window, request_url, null);
-
-      return true;
+      return false;
     },
     // ["load-changed"](load_event) {
     //   log(["load-changed", getEnum(WebKit2.LoadEvent, load_event)]);

@@ -42,7 +42,6 @@
           <li>Notifications priority is normal instead of urgent by default</li>
           <li>Add a per-tab setting to change notifications priority</li>
           <li>Fix authentication on many popular websites</li>
-          <li>Implement same site navigation</li>
           <li>Fix Cancel button in tab settings dialog</li>
           <li>Use middle-click or Ctrl+click to open links in the browser</li>
         </ul>
