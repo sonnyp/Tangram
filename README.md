@@ -47,6 +47,8 @@ Before submitting a compatibility issue with a Website, please try to reproduce 
 
 ## Security
 
+Tabs are independant and sandboxed from each others.
+
 Both Flatpak and non-Flatpak versions of Tangram provide sandboxing for Web applications.
 
 - Flatpak via [our restricted permissions](https://github.com/sonnyp/Tangram/blob/main/re.sonny.Tangram.json)

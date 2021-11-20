@@ -4,7 +4,7 @@ import Gio from "gi://Gio";
 
 const { uuid_string_random } = GLib;
 const { ApplicationWindow, Stack, StackTransitionType } = Gtk;
-const { Notification, NotificationPriority } = Gio;
+const { Notification } = Gio;
 
 import Notebook from "./Notebook.js";
 import Shortcuts from "./Shortcuts.js";
@@ -29,6 +29,7 @@ import {
 } from "./instances.js";
 import { buildWebView } from "./WebView.js";
 import { BLANK_URI, MODES } from "./constants.js";
+import * as instances from './instances.js';
 
 export default function Window({ application, state }) {
   const settings = new Settings({
@@ -127,6 +128,8 @@ export default function Window({ application, state }) {
   }
 
   function onNotification(webkit_notification, instance_id) {
+    const priority = instances.get(instance_id).settings.get_enum('notifications-priority')
+
     // TODO
     // report gjs bug webkit_notification.body and webkit_notification.title return undefined
     const body = webkit_notification.get_body();
@@ -136,7 +139,7 @@ export default function Window({ application, state }) {
     const notification = new Notification();
     if (title) notification.set_title(title);
     if (body) notification.set_body(body);
-    notification.set_priority(NotificationPriority.HIGH);
+    notification.set_priority(priority);
     notification.set_default_action(`app.showInstance('${instance_id}')`);
     application.send_notification(instance_id, notification);
   }

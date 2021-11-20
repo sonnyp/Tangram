@@ -1,40 +1,29 @@
 import Gtk from "gi://Gtk";
-import Gdk from "gi://Gdk";
-
-const { WindowTypeHint } = Gdk;
-const { Dialog, Align, Grid, Label, Entry, ResponseType, EntryIconPosition } =
-  Gtk;
 
 import { once } from "./troll/util.js";
 
+import { relativePath } from "./util.js";
+
+const { Align, Grid, Label, Entry, ResponseType, EntryIconPosition } = Gtk;
+
 export function editInstanceDialog(props) {
-  return instanceDialog({ ...props, action: "Save" });
+  return instanceDialog({ ...props, mode: "edit" });
 }
 
 export function addInstanceDialog(props) {
-  return instanceDialog({ ...props, action: "Add " });
+  return instanceDialog({ ...props, mode: "add" });
 }
 
-async function instanceDialog({ window, instance, action }) {
-  // TODO Dialog.new_with_buttons
-  // is undefined in gjs, open issue.
-  // https://developer.gnome.org/hig/stable/dialogs.html.en#Action
-  // "Action Dialogs"
-  // and
-  // https://developer.gnome.org/hig/stable/visual-layout.html.en
-  const dialog = new Dialog({
-    title: `${action} ${instance.name}`,
-    modal: true,
-    type_hint: WindowTypeHint.DIALOG,
-    use_header_bar: true,
-    transient_for: window,
-    resizable: false,
-  });
+async function instanceDialog({ window, instance, mode }) {
+  const builder = Gtk.Builder.new_from_file(
+    relativePath("./InstanceDialog.ui"),
+  );
+  const dialog = builder.get_object("dialog");
+  dialog.title =
+    mode === "add" ? `Add ${instance.name}` : `Edit ${instance.name}`;
+  dialog.set_transient_for(window);
 
-  dialog.add_button("Cancel", ResponseType.CANCEL);
-  const primaryButton = dialog.add_button(action, ResponseType.APPLY);
-  primaryButton.get_style_context().add_class("suggested-action");
-  primaryButton.grab_focus();
+  const button_save = builder.get_object("button_save");
 
   const contentArea = dialog.get_content_area();
   contentArea.margin = 18;
@@ -52,7 +41,7 @@ async function instanceDialog({ window, instance, action }) {
   grid.attach(nameLabel, 1, 1, 1, 1);
   const nameEntry = new Entry({
     hexpand: true,
-    text: instance.settings.get_string('name')
+    text: instance.settings.get_string("name"),
   });
   grid.attach(nameEntry, 2, 1, 1, 1);
 
@@ -64,11 +53,11 @@ async function instanceDialog({ window, instance, action }) {
 
   const URLEntry = new Entry({
     hexpand: true,
-    text: instance.settings.get_string('url')
+    text: instance.settings.get_string("url"),
   });
   grid.attach(URLEntry, 2, 3, 1, 1);
 
-  primaryButton.set_sensitive(!!URLEntry.text);
+  button_save.set_sensitive(!!URLEntry.text);
   URLEntry.set_icon_tooltip_text(
     EntryIconPosition.SECONDARY,
     "Cannot be empty",
@@ -78,37 +67,41 @@ async function instanceDialog({ window, instance, action }) {
     const isValid = !!URLEntry.text;
     if (isValid) {
       URLEntry.set_icon_from_icon_name(EntryIconPosition.SECONDARY, null);
-      primaryButton.set_sensitive(true);
+      button_save.set_sensitive(true);
       return;
     }
 
-    primaryButton.set_sensitive(false);
+    button_save.set_sensitive(false);
     URLEntry.set_icon_from_icon_name(
       EntryIconPosition.SECONDARY,
       "face-sick-symbolic",
     );
   });
 
-  const expander = new Gtk.Expander({label: 'Advanced'})
-  const expander_grid = new Grid({
-    column_spacing: 12,
-    row_spacing: 6,
+  const notifications_priority_label = new Label({
+    label: "Notifications priority",
+    halign: Align.END,
   });
-  expander.add(expander_grid)
+  grid.attach(notifications_priority_label, 1, 4, 1, 1);
+  const model = builder.get_object("notification_options");
+  const combobox = new Gtk.ComboBox({ model, hexpand: true });
+  const renderer = new Gtk.CellRendererText();
+  combobox.pack_start(renderer, true);
+  combobox.add_attribute(renderer, "text", 1);
+  combobox.set_active(instance.settings.get_enum("notifications-priority"));
+  grid.attach(combobox, 2, 4, 1, 1);
 
-  const UserAgentLabel = new Label({
+
+  const userAgentLabel = new Label({
     label: "User Agent",
     halign: Align.END,
   });
-  expander_grid.attach(UserAgentLabel, 1, 4, 1, 1);
-
-  const UserAgentEntry = new Entry({
+  grid.attach(userAgentLabel, 1, 5, 1, 1);
+  const userAgentEntry = new Entry({
     hexpand: true,
-    text: instance.settings.get_string('user-agent')
+    text: instance.settings.get_string("user-agent"),
   });
-  expander_grid.attach(UserAgentEntry, 2, 4, 1, 1);
-
-  contentArea.add(expander)
+  grid.attach(userAgentEntry, 2, 5, 1, 1);
 
   dialog.show_all();
 
@@ -122,9 +115,13 @@ async function instanceDialog({ window, instance, action }) {
     return true;
   }
 
-  instance.settings.set_string('name', nameEntry.text)
-  instance.settings.set_string('url', URLEntry.text)
-  instance.settings.set_string('user-agent', UserAgentEntry.text)
+  instance.settings.set_string("name", nameEntry.text);
+  instance.settings.set_string("url", URLEntry.text);
+  instance.settings.set_string("user-agent", userAgentEntry.text);
+  const [success, iter] = combobox.get_active_iter();
+  if (!success) return;
+  const value = model.get_value(iter, 0);
+  instance.settings.set_enum("notifications-priority", value);
 
   dialog.destroy();
 

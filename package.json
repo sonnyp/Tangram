@@ -1,18 +1,18 @@
 {
   "private": true,
   "devDependencies": {
-    "eslint": "^7.32.0",
-    "eslint-plugin-import": "^2.24.2",
-    "husky": "^7.0.2",
-    "lint-staged": "^11.1.2",
-    "prettier": "^2.3.2",
-    "rollup": "^2.56.3"
-  },
-  "scripts": {
-    "prepare": "husky install"
+    "@prettier/plugin-xml": "^1.1.0",
+    "eslint": "^8.2.0",
+    "eslint-plugin-import": "^2.25.3",
+    "husky": "^7.0.4",
+    "lint-staged": "^12.0.3",
+    "prettier": "^2.4.1"
   },
   "lint-staged": {
     "*.{js,cjs,mjs}": "eslint --cache --fix",
-    "*.{json,md,html,css,yaml,yml}": "prettier --write"
+    "*.{xml, css, json,md,html,,yaml,yml}": "prettier --write"
+  },
+  "scripts": {
+    "prepare": "husky install"
   }
 }

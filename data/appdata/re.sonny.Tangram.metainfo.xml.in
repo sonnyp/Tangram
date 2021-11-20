@@ -27,6 +27,7 @@
   <launchable type="desktop-id">re.sonny.Tangram.desktop</launchable>
   <url type="homepage">https://github.com/sonnyp/Tangram</url>
   <url type="bugtracker">https://github.com/sonnyp/Tangram/issues</url>
+  <url type="donation">https://ko-fi.com/sonnyp</url>
   <update_contact>sonny@fastmail.net</update_contact>
   <developer_name>Sonny Piers</developer_name>
   <content_rating type="oars-1.1" />
@@ -34,7 +35,7 @@
     <release version="1.4.0" date="xxx-xx-xx">
       <description>
         <ul>
-          <li>Fix authentication on some websites.</li>
+          <li>Fix authentication on some websites</li>
           <li>Implement same site navigation</li>
         </ul>
       </description>
