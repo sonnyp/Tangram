@@ -86,14 +86,6 @@ export function observeProperty(GObject, name, fn) {
   });
 }
 
-export function logEnum(obj, value) {
-  log(
-    Object.entries(obj).find(([, v]) => {
-      return v === value;
-    })[0],
-  );
-}
-
 export function relativePath(path) {
   const [filename] = GLib.filename_from_uri(import.meta.url);
   const dirname = GLib.path_get_dirname(filename);

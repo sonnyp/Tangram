@@ -2,6 +2,7 @@ import Gtk from "gi://Gtk";
 import WebKit2 from "gi://WebKit2";
 import GLib from "gi://GLib";
 import Gio from "gi://Gio";
+import Gdk from "gi://Gdk";
 
 const {
   show_uri_on_window,
@@ -36,7 +37,7 @@ const {
 const { Notification, AppInfo, ResourceLookupFlags, resources_open_stream } =
   Gio;
 
-import { connect } from "./util.js";
+import { connect, getEnum } from "./util.js";
 import { env } from "./env.js";
 import { BLANK_URI } from "./constants.js";
 import { isUrlAllowedForNavigation } from "./utils.js";
@@ -265,38 +266,53 @@ export function buildWebView({
       return true;
     },
 
-    // https://gjs-docs.gnome.org/webkit240~4.0_api/webkit2.webview#signal-decide-policy
+    // https://webkitgtk.org/reference/webkit2gtk/stable/WebKitWebView.html#WebKitWebView-decide-policy
     ["decide-policy"](decision, decision_type) {
-      if (decision_type === PolicyDecisionType.NAVIGATION_ACTION) {
-        if (decision.get_frame_name()) {
-          return false;
-        }
+      log(["decide-policy", getEnum(PolicyDecisionType, decision_type)]);
 
-        // Reddit spawns about:blank and https://www.redditmedia.com/gtm/jail?id=GTM-5XVNS82 out of nowhere
-        // Google recaptcha or account also appears to be triggering this
-        // NavigationType.OTHER does not seem to be triggered by user action
-        const navigation_type = decision.get_navigation_type();
-        if (navigation_type === WebKit2.NavigationType.OTHER) {
-          return false;
-        }
+      if (decision_type !== PolicyDecisionType.NAVIGATION_ACTION) return false;
 
-        const navigation_action = decision.get_navigation_action();
-        const request_url = navigation_action.get_request().get_uri();
+      if (decision.get_frame_name()) {
+        return false;
+      }
 
-        if (isUrlAllowedForNavigation(webView, request_url)) {
-          // Open URL in current tab
-          return false;
-        }
+      // Reddit spawns about:blank and https://www.redditmedia.com/gtm/jail?id=GTM-5XVNS82 out of nowhere
+      // Google recaptcha or account also appears to be triggering this
+      // NavigationType.OTHER does not seem to be triggered by user action
+      const navigation_type = decision.get_navigation_type();
+      if (navigation_type === WebKit2.NavigationType.OTHER) {
+        return false;
+      }
 
+      // https://webkitgtk.org/reference/webkit2gtk/stable/WebKitNavigationAction.html
+      const navigation_action = decision.get_navigation_action();
+      const request_url = navigation_action.get_request().get_uri();
+
+      // Google drive when opening a doc and navigating back
+      if (request_url === "about:blank") {
+        return false;
+      }
+
+      if (didUserRequestOpenInBrowser(navigation_action)) {
         decision.ignore();
-        // Open URL in default browser
         show_uri_on_window(window, request_url, null);
-
         return true;
       }
 
-      return false;
+      if (isUrlAllowedForNavigation(webView, request_url)) {
+        // Open URL in current tab
+        return false;
+      }
+
+      decision.ignore();
+      // Open URL in default browser
+      show_uri_on_window(window, request_url, null);
+
+      return true;
     },
+    // ["load-changed"](load_event) {
+    //   log(["load-changed", getEnum(WebKit2.LoadEvent, load_event)]);
+    // },
   });
 
   webView.instance_id = id;
@@ -305,4 +321,17 @@ export function buildWebView({
   webView.load_uri(url || BLANK_URI);
 
   return webView;
+}
+
+function didUserRequestOpenInBrowser(navigation_action) {
+  if (navigation_action.get_mouse_button() === Gdk.BUTTON_MIDDLE) {
+    return true;
+  }
+
+  const { CONTROL_MASK } = Gdk.ModifierType;
+  if ((navigation_action.get_modifiers() & CONTROL_MASK) === CONTROL_MASK) {
+    return true;
+  }
+
+  return false;
 }
