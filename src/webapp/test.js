@@ -1,4 +1,4 @@
-import "../setup.js";
+import "gi://WebKit2?version=5.0";
 
 import GLib from "gi://GLib";
 import WebKit from "gi://WebKit2";
@@ -88,7 +88,7 @@ let exit_code = 0;
     `,
     );
 
-    assert.is(info.URL, "https://msapplication.starturl/");
+    assert.is(info.URL, "https://msapplication.starturl");
   })();
 
   await (async () => {
@@ -121,7 +121,7 @@ let exit_code = 0;
     `,
     );
 
-    assert.is(info.URL, "https://opengraph.url/");
+    assert.is(info.URL, "https://opengraph.url");
   })();
 
   await (async () => {

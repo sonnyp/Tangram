@@ -42,35 +42,33 @@ export function runJavaScript(webview, script) {
 // without a `content-length` header
 // import fetch from "../troll/std/fetch";
 export async function fetchManifest(url, webview) {
-  return new Promise((resolve) => {
-    const session = new Soup.Session();
-    const message = new Soup.Message({
-      method: "GET",
-      uri: Soup.URI.new(url),
-    });
-    message.request_headers.append("Cache-Control", "no-cache");
-    if (webview) {
-      message.request_headers.append(
-        "User-Agent",
-        webview.get_settings().get_user_agent(),
-      );
-    }
-
-    session.queue_message(message, () => {
-      try {
-        resolve(
-          JSON.parse(
-            byteArray.toString(
-              byteArray.fromGBytes(message.response_body_data),
-            ),
-          ),
-        );
-      } catch (err) {
-        logError(err);
-        resolve(null);
-      }
-    });
+  const session = new Soup.Session();
+  const message = new Soup.Message({
+    method: "GET",
+    uri: GLib.Uri.parse(url, GLib.UriFlags.NONE),
   });
+  message.request_headers.append("Cache-Control", "no-cache");
+  if (webview) {
+    message.request_headers.append(
+      "User-Agent",
+      webview.get_settings().get_user_agent(),
+    );
+  }
+
+  try {
+    const body = await promiseTask(
+      session,
+      "send_and_read_async",
+      "send_and_read_finish",
+      message,
+      GLib.PRIORITY_DEFAULT,
+      null,
+    );
+    return JSON.parse(byteArray.toString(byteArray.fromGBytes(body)));
+  } catch (err) {
+    logError(err);
+    return null;
+  }
 }
 
 function getTitle(webview) {
@@ -173,9 +171,7 @@ function findBestIcon(icons) {
 }
 
 function resolveURI(webview, URL) {
-  return Soup.URI.new_with_base(new Soup.URI(webview.get_uri()), URL).to_string(
-    false,
-  );
+  return GLib.Uri.resolve_relative(webview.get_uri(), URL, GLib.UriFlags.NONE);
 }
 
 export async function getWebAppInfo(webview) {

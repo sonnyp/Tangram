@@ -23,16 +23,22 @@
       <description>Sets the position of the tabs</description>
     </key>
 
+    <key name="window-width" type="i">
+      <default>800</default>
+      <summary>Window width</summary>
+      <description>Width of the window</description>
+    </key>
+
     <key name="window-height" type="i">
-      <default>0</default>
+      <default>600</default>
       <summary>Window height</summary>
       <description>Height of the window</description>
     </key>
 
-    <key name="window-width" type="i">
-      <default>0</default>
-      <summary>Window width</summary>
-      <description>Width of the window</description>
+    <key name="window-maximized" type="b">
+      <default>false</default>
+      <summary>Window maximized</summary>
+      <description>Weither the window is maximized</description>
     </key>
 
     <key name="instances" type="as">

@@ -1,4 +1,4 @@
-import "./setup.js";
+import "gi://WebKit2?version=5.0";
 import { programInvocationName } from "system";
 import GLib from "gi://GLib";
 import Gio from "gi://Gio";
@@ -54,7 +54,7 @@ export default function main(argv = []) {
       spawn_async(null, argv, null, SpawnFlags.DEFAULT, null);
     });
     application.add_action(restart);
-    application.set_accels_for_action("app.restart", ["<Ctrl><Shift>Q"]);
+    application.set_accels_for_action("app.restart", ["<Primary><Shift>Q"]);
   }
   return application.run(argv);
 }

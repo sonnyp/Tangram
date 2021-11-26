@@ -1,19 +1,8 @@
 import Gtk from "gi://Gtk";
 import WebKit2 from "gi://WebKit2";
 
-const {
-  HeaderBar,
-  Button,
-  Stack,
-  StackTransitionType,
-  Box,
-  MenuButton,
-  Builder,
-  IconSize,
-  Image,
-  STYLE_CLASS_LINKED,
-  Label,
-} = Gtk;
+const { Button, Stack, StackTransitionType, Box, MenuButton, Builder, Label } =
+  Gtk;
 const { LoadEvent, uri_for_display } = WebKit2;
 
 import AddressBar from "./AddressBar.js";
@@ -23,15 +12,11 @@ function Menu() {
   const builder = Builder.new_from_resource(
     "/re/sonny/Tangram/data/menu.xml.ui",
   );
-  const popover = builder.get_object("app-menu");
+  const popover = builder.get_object("menu_popover");
 
-  const image = new Image({
-    icon_name: "open-menu-symbolic",
-    icon_size: IconSize.BUTTON,
-  });
   const button = new MenuButton({
     popover,
-    image,
+    icon_name: "open-menu-symbolic",
   });
 
   return button;
@@ -48,10 +33,7 @@ export default function Header({
   state,
   onNewTab,
 }) {
-  // https://gjs-docs.gnome.org/gtk30~3.24.8/gtk.headerbar
-  const titlebar = new HeaderBar({
-    show_close_button: true,
-  });
+  const titlebar = new Gtk.HeaderBar();
 
   const left_stack = new Stack({
     transition_type: StackTransitionType.CROSSFADE,
@@ -63,34 +45,24 @@ export default function Header({
   left_stack.add_named(navigationButtonBox, "navigation");
 
   const navigationButtons = new Box({ spacing: 0 });
-  navigationButtons.get_style_context().add_class(STYLE_CLASS_LINKED);
-  navigationButtonBox.add(navigationButtons);
+  navigationButtons.add_css_class("linked");
+  navigationButtonBox.append(navigationButtons);
 
-  const backButton = Button.new_from_icon_name(
-    "go-previous-symbolic",
-    IconSize.BUTTON,
-  );
+  const backButton = Button.new_from_icon_name("go-previous-symbolic");
   backButton.set_tooltip_text("Go back to the previous page");
   backButton.sensitive = false;
-  navigationButtons.add(backButton);
+  navigationButtons.append(backButton);
   backButton.connect("clicked", onGoBack);
 
-  const forwardButton = Button.new_from_icon_name(
-    "go-next-symbolic",
-    IconSize.BUTTON,
-  );
+  const forwardButton = Button.new_from_icon_name("go-next-symbolic");
   forwardButton.set_tooltip_text("Go forward to the next page");
   forwardButton.sensitive = false;
-  navigationButtons.add(forwardButton);
+  navigationButtons.append(forwardButton);
   forwardButton.connect("clicked", onGoForward);
 
-  const reloadIcon = new Image({
-    icon_size: IconSize.BUTTON,
-    icon_name: "view-refresh-symbolic",
-  });
-  const reloadButton = new Button({ image: reloadIcon });
+  const reloadButton = new Gtk.Button({ icon_name: "view-refresh-symbolic" });
   reloadButton.set_tooltip_text("Reload the current page");
-  navigationButtonBox.add(reloadButton);
+  navigationButtonBox.append(reloadButton);
   reloadButton.connect("clicked", () => {
     const webview = state.get("webview");
     if (webview.is_loading) {
@@ -100,25 +72,15 @@ export default function Header({
     }
   });
 
-  const homeIcon = new Image({
-    icon_size: IconSize.BUTTON,
-    icon_name: "go-home-symbolic",
-  });
-  const homeButton = new Button({ image: homeIcon });
+  const homeButton = new Gtk.Button({ icon_name: "go-home-symbolic" });
   homeButton.set_tooltip_text("Go to homepage");
-  navigationButtonBox.add(homeButton);
+  navigationButtonBox.append(homeButton);
   homeButton.connect("clicked", onGoHome);
 
   const cancelBox = new Box();
   // https://github.com/sonnyp/Tangram/issues/64
-  // const cancelIcon = new Image({
-  //   icon_size: IconSize.BUTTON,
-  //   icon_name: "go-previous-symbolic",
-  // });
   const cancelButton = new Button({
     label: "Cancel",
-    // image: cancelIcon,
-    always_show_image: true,
   });
   state.bind(
     "instances",
@@ -126,7 +88,7 @@ export default function Header({
     "visible",
     (instances) => instances.length > 0,
   );
-  cancelBox.add(cancelButton);
+  cancelBox.append(cancelButton);
   cancelButton.connect("clicked", onCancelNewTab);
   left_stack.add_named(cancelBox, "cancel");
 
@@ -135,7 +97,7 @@ export default function Header({
   const center_stack = new Stack({
     transition_type: StackTransitionType.CROSSFADE,
   });
-  titlebar.custom_title = center_stack;
+  titlebar.set_title_widget(center_stack);
   const title = new Label({
     label: "Tangram",
   });
@@ -152,15 +114,11 @@ export default function Header({
   const menuButtonBox = new Box({
     spacing: 6,
   });
-  const newTabButton = Button.new_from_icon_name(
-    "tab-new-symbolic",
-    IconSize.BUTTON,
-  );
+  const newTabButton = Button.new_from_icon_name("tab-new-symbolic");
   newTabButton.set_tooltip_text("Add new tab");
-  newTabButton.set_always_show_image(true);
   newTabButton.connect("clicked", () => onNewTab());
-  menuButtonBox.pack_end(Menu(), false, false, null);
-  menuButtonBox.pack_end(newTabButton, false, false, null);
+  menuButtonBox.append(newTabButton);
+  menuButtonBox.append(Menu());
   right_stack.add_named(menuButtonBox, "menu");
   right_stack.add_named(new Box(), "empty");
 
@@ -173,10 +131,8 @@ export default function Header({
     onAddTab().catch(logError);
   });
   addTabButton.get_style_context().add_class("suggested-action");
-  servicesLayer.pack_end(addTabButton, false, false, null);
+  servicesLayer.append(addTabButton);
   right_stack.add_named(servicesLayer, "new-tab");
-
-  titlebar.show_all();
 
   function updateButtons(webview) {
     backButton.sensitive = webview.can_go_back();
@@ -252,7 +208,7 @@ export default function Header({
     if (!webview.is_loading) {
       setSecurity(webview);
     }
-    reloadIcon.icon_name = webview.is_loading
+    reloadButton.icon_name = webview.is_loading
       ? "process-stop-symbolic"
       : "view-refresh-symbolic";
 
@@ -271,7 +227,7 @@ export default function Header({
 
         if (loadEvent === LoadEvent.COMMITTED) {
           if (webview.uri !== BLANK_URI) {
-            reloadIcon.icon_name = "view-refresh-symbolic";
+            reloadButton.icon_name = "view-refresh-symbolic";
             addTabButton.sensitive = true;
           }
         } else if (loadEvent !== LoadEvent.FINISHED) {
@@ -279,7 +235,7 @@ export default function Header({
         }
 
         if (loadEvent === LoadEvent.STARTED) {
-          reloadIcon.icon_name = "process-stop-symbolic";
+          reloadButton.icon_name = "process-stop-symbolic";
           setAddress(webview);
           addressBar.primary_icon_name = null;
         } else if (loadEvent === LoadEvent.REDIRECTED) {

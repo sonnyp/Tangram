@@ -14,7 +14,6 @@ export default function Notebook({ settings, application }) {
     state.set({ webview });
   });
   notebook.set_group_name("tabs");
-  notebook.show_all();
   connect(notebook, {
     ["page-reordered"]() {
       const number_of_pages = notebook.get_n_pages();

@@ -29,7 +29,7 @@ import {
 } from "./instances.js";
 import { buildWebView } from "./WebView.js";
 import { BLANK_URI, MODES } from "./constants.js";
-import * as instances from './instances.js';
+import * as instances from "./instances.js";
 
 export default function Window({ application, state }) {
   const settings = new Settings({
@@ -82,9 +82,16 @@ export default function Window({ application, state }) {
     tab.load_uri(instance.url);
   }
 
-  function onShowInspector() {
+  function onToggleWebInspector() {
     const tab = state.get("webview");
-    tab && tab.get_inspector().show();
+    if (!tab) return;
+    const inspector = tab.get_inspector();
+
+    if (inspector.attached_height) {
+      inspector.close();
+    } else {
+      inspector.show();
+    }
   }
 
   // https://gjs-docs.gnome.org/gtk30~3.24.8/gtk.applicationwindow
@@ -93,21 +100,25 @@ export default function Window({ application, state }) {
     title: "Tangram",
   });
 
-  let width = settings.get_int("window-width");
-  let height = settings.get_int("window-height");
-  if (width && height) {
-    window.set_default_size(width, height);
-  } else {
-    window.maximize();
-    window.set_default_size(800, 600);
-  }
-  window.connect("size-allocate", () => {
-    [width, height] = window.is_maximized ? [0, 0] : window.get_size();
-  });
-  window.connect("destroy", () => {
-    settings.set_int("window-width", width);
-    settings.set_int("window-height", height);
-  });
+  // https://wiki.gnome.org/HowDoI/SaveWindowState
+  settings.bind(
+    "window-width",
+    window,
+    "default-width",
+    Gio.SettingsBindFlags.DEFAULT,
+  );
+  settings.bind(
+    "window-height",
+    window,
+    "default-height",
+    Gio.SettingsBindFlags.DEFAULT,
+  );
+  settings.bind(
+    "window-maximized",
+    window,
+    "maximized",
+    Gio.SettingsBindFlags.DEFAULT,
+  );
 
   window.set_titlebar(header.titlebar);
 
@@ -116,11 +127,10 @@ export default function Window({ application, state }) {
     transition_type: StackTransitionType.CROSSFADE,
   });
   state.bind("view", stack, "visible_child_name");
-  window.add(stack);
+  window.set_child(stack);
 
   const notebook = Notebook({ settings, application });
   stack.add_named(notebook, "tabs");
-  stack.show_all();
 
   function showTab(idx) {
     notebook.set_current_page(idx);
@@ -128,7 +138,9 @@ export default function Window({ application, state }) {
   }
 
   function onNotification(webkit_notification, instance_id) {
-    const priority = instances.get(instance_id).settings.get_enum('notifications-priority')
+    const priority = instances
+      .get(instance_id)
+      .settings.get_enum("notifications-priority");
 
     // TODO
     // report gjs bug webkit_notification.body and webkit_notification.title return undefined
@@ -213,7 +225,7 @@ export default function Window({ application, state }) {
     showTab(notebook.page || 0);
     const webView = stack.get_child_by_name("new-tab");
     if (!webView) return;
-    webView.destroy();
+    stack.remove(webView);
     const { instance_id } = webView;
     const instance = getInstance(instance_id);
     if (!instance) return;
@@ -238,7 +250,7 @@ export default function Window({ application, state }) {
     webview.mode = MODES.TEMPORARY;
 
     const previous = stack.get_child_by_name("new-tab");
-    if (previous) previous.destroy();
+    if (previous) stack.remove(previous);
     stack.add_named(webview, "new-tab");
     state.set({ webview, view: "new-tab" });
   }
@@ -271,7 +283,7 @@ export default function Window({ application, state }) {
     onGoBack,
     onGoForward,
     onGoHome,
-    onShowInspector,
+    onToggleWebInspector,
   });
 
   Actions({
@@ -282,5 +294,7 @@ export default function Window({ application, state }) {
     showTab,
   });
 
-  return { window, notebook, showTab };
+  window.present();
+
+  return window;
 }

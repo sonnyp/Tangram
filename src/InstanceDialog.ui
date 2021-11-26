@@ -10,7 +10,6 @@
     </child>
     <child type="action">
       <object class="GtkButton" id="button_save">
-        <property name="can-default">True</property>
         <property name="label">Save</property>
       </object>
     </child>

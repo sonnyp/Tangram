@@ -1,8 +1,8 @@
 import GLib from "gi://GLib";
 import Gio from "gi://Gio";
+import Gtk from "gi://Gtk";
 
-const { VariantType, Variant } = GLib;
-const { SimpleAction } = Gio;
+import AboutDialog from "./AboutDialog.js";
 
 import * as instances from "./instances.js";
 import { editInstanceDialog } from "./instanceDialog.js";
@@ -18,40 +18,22 @@ export default function Actions({
     showTab(notebook.page_num(page));
   }
 
-  // https://gjs-docs.gnome.org/gio20~2.0_api/gio.simpleaction
-  // FIXME, is there a better way to bind setting to action?
-  // or even better bind menu to setting, see header.js
-  const tabsPosition = SimpleAction.new_stateful(
-    "tabsPosition",
-    VariantType.new("s"),
-    Variant.new_string(settings.get_string("tabs-position")),
-  );
-  settings.connect("changed::tabs-position", () => {
-    tabsPosition.set_state(
-      Variant.new_string(settings.get_string("tabs-position")),
-    );
-  });
-  tabsPosition.connect("change-state", (self, value) => {
-    const position = value.get_string()[0];
-    settings.set_string("tabs-position", position);
-  });
-  application.add_action(tabsPosition);
+  const tabsPosition = settings.create_action("tabs-position");
+  window.add_action(tabsPosition);
 
-  // https://gjs-docs.gnome.org/gio20~2.0_api/gio.simpleaction
-  const removeInstanceAction = new SimpleAction({
+  const removeInstanceAction = new Gio.SimpleAction({
     name: "removeInstance",
-    parameter_type: VariantType.new("s"),
+    parameter_type: GLib.VariantType.new("s"),
   });
   removeInstanceAction.connect("activate", (self, parameters) => {
     const instance = instances.get(parameters.deep_unpack());
 
     const idx = instances.detach(settings, instance.id);
 
+    // FIXME: Does not appear to be working as intended
     const page = notebook.get_nth_page(idx);
     if (page) {
-      const label = notebook.get_tab_label(page);
-      if (label) label.destroy();
-      page.destroy();
+      notebook.remove_page(page);
     }
 
     try {
@@ -60,12 +42,11 @@ export default function Actions({
       logError(err);
     }
   });
-  application.add_action(removeInstanceAction);
+  window.add_action(removeInstanceAction);
 
-  // https://gjs-docs.gnome.org/gio20~2.0_api/gio.simpleaction
-  const editInstanceAction = new SimpleAction({
+  const editInstanceAction = new Gio.SimpleAction({
     name: "editInstance",
-    parameter_type: VariantType.new("s"),
+    parameter_type: GLib.VariantType.new("s"),
   });
   editInstanceAction.connect("activate", (self, parameters) => {
     const id = parameters.deep_unpack();
@@ -76,17 +57,63 @@ export default function Actions({
     }
     editInstanceDialog({ window, instance }).catch(logError);
   });
-  application.add_action(editInstanceAction);
+  window.add_action(editInstanceAction);
 
-  // https://gjs-docs.gnome.org/gio20~2.0_api/gio.simpleaction
-  const quit = new SimpleAction({
+  const showAboutDialog = new Gio.SimpleAction({
+    name: "about",
+    parameter_type: null,
+  });
+  showAboutDialog.connect("activate", () => {
+    AboutDialog({ window });
+  });
+  application.add_action(showAboutDialog);
+
+  const showShortcutsDialog = new Gio.SimpleAction({
+    name: "shortcuts",
+    parameter_type: null,
+  });
+  showShortcutsDialog.connect("activate", () => {
+    const builder = Gtk.Builder.new_from_resource(
+      "/re/sonny/Tangram/data/shortcuts.xml.ui",
+    );
+    const shortcutsWindow = builder.get_object("shortcuts-window");
+    shortcutsWindow.set_transient_for(window);
+    shortcutsWindow.present();
+  });
+  application.add_action(showShortcutsDialog);
+
+  const showInstanceAction = new Gio.SimpleAction({
+    name: "showInstance",
+    parameter_type: GLib.VariantType.new("s"),
+  });
+  showInstanceAction.connect("activate", (self, parameters) => {
+    const id = parameters.unpack();
+
+    const instance = instances.get(id);
+    if (instance && instance.page) {
+      showTab(notebook.page_num(instance.page));
+    }
+
+    window.present();
+  });
+  application.add_action(showInstanceAction);
+
+  const openURIAction = new Gio.SimpleAction({
+    name: "openURI",
+    parameter_type: GLib.VariantType.new("s"),
+  });
+  openURIAction.connect("activate", (self, parameters) => {
+    const path = parameters.unpack();
+    Gio.AppInfo.launch_default_for_uri(path, null);
+  });
+  application.add_action(openURIAction);
+
+  const quit = new Gio.SimpleAction({
     name: "quit",
     parameter_type: null,
   });
   quit.connect("activate", () => {
-    window.destroy();
-    // application.quit();
+    application.quit();
   });
   application.add_action(quit);
-  application.set_accels_for_action("app.quit", ["<Ctrl>Q"]);
 }
