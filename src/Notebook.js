@@ -8,7 +8,11 @@ import state from "./state.js";
 
 export default function Notebook({ settings, application }) {
   // https://gjs-docs.gnome.org/gtk30~3.24.8/gtk.notebook
-  const notebook = new Gtk.Notebook({ scrollable: true });
+  const notebook = new Gtk.Notebook({
+    scrollable: true,
+    hexpand: true,
+    vexpand: true,
+  });
   notebook.connect("switch-page", (self, webview) => {
     application.withdraw_notification(webview.instance_id);
     state.set({ webview });

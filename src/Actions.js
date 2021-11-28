@@ -26,15 +26,22 @@ export default function Actions({
     parameter_type: GLib.VariantType.new("s"),
   });
   removeInstanceAction.connect("activate", (self, parameters) => {
-    const instance = instances.get(parameters.deep_unpack());
+    const id = parameters.deep_unpack();
+    const instance = instances.get(id);
 
-    const idx = instances.detach(settings, instance.id);
+    // const idx = instances.detach(settings, instance.id);
 
-    // FIXME: Does not appear to be working as intended
-    const page = notebook.get_nth_page(idx);
-    if (page) {
-      notebook.remove_page(page);
+    log([id]);
+
+    const pages = notebook.get_pages();
+    for (let i = 0; i < pages.get_n_items(); i++) {
+      const page = pages.get_item(i);
+      log([i, page.child.instance_id]);
     }
+
+    notebook.remove_page(instance.page);
+
+    return;
 
     try {
       instances.destroy(instance);
