@@ -1,45 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
 <interface>
   <template class="Tab" parent="GtkBox">
     <child>
       <object class="GtkImage" id="image">
-
+        <property name="pixel-size">16</property>
       </object>
     </child>
 
     <child>
-      <object class="GtkLabel" id="text">
-
+      <object class="GtkLabel" id="label">
       </object>
-
-      <!-- <object class="GtkButton" id="button">
-        <property name="label">Button</property>
-        <property name="halign">center</property>
-        <property name="hexpand">True</property>
-        <property name="valign">center</property>
-        <property name="visible">True</property> -->
-
-        <!-- Signals
-
-          * name: the signal name
-          * handler: the name of method on the subclass to call when emitted
-          * swapped: must always be "no" in GJS applications
-          * object: the object bound to `this` in the callback. This is
-            usually the template class (eg. `ExampleClass`) but may also be
-            an object ID (eg. `box` or `button`).
-
-          -->
-        <!-- <signal
-          name="clicked"
-          handler="_onButtonClicked"
-          swapped="no"
-          object="ExampleWindow"
-        />
-      </object> -->
     </child>
 
     <child>
       <object class="GtkPopoverMenu" id="popover">
-
+        <property name="position">right</property>
+        <property name="autohide">true</property>
       </object>
     </child>
   </template>

@@ -18,6 +18,7 @@ globals:
   ARGV: readonly
   window: readonly
   globalThis: readonly
+  console: readonly
 parserOptions:
   sourceType: module
 rules:

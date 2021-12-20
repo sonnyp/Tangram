@@ -1,5 +1,3 @@
-import Gtk from "gi://Gtk";
-import Gdk from "gi://Gdk";
 import Gio from "gi://Gio";
 import GdkPixbuf from "gi://GdkPixbuf";
 
@@ -29,59 +27,40 @@ export function TabLabel({ instance, settings, page }) {
   //   margin_top: 6,
   //   margin_bottom: 6,
   // });
-  // const image = new Gtk.Image({ margin_end: 6 });
-  const widget = new TabWidget({
-    label: "foo",
-    // webView: page,
-  });
+  const widget = new TabWidget();
 
-  // function connectFavicon() {
-  //   page.connect("notify::favicon", () => {
-  //     const new_favicon = getFaviconScaled(page);
-  //     if (!new_favicon) {
-  //       return;
-  //     }
-  //     image.set_from_pixbuf(new_favicon);
-  //   });
-  // }
+  function connectFavicon() {
+    page.connect("notify::favicon", () => {
+      const new_favicon = getFaviconScaled(page);
+      if (!new_favicon) {
+        return;
+      }
+      widget.image.set_from_pixbuf(new_favicon);
+    });
+  }
 
-  // const favicon = getFaviconScaled(page);
-  // if (favicon) {
-  //   image.set_from_pixbuf(favicon);
-  // }
-  // connectFavicon();
+  const favicon = getFaviconScaled(page);
+  if (favicon) {
+    widget.image.set_from_pixbuf(favicon);
+  }
+  connectFavicon();
 
-  // box.append(image);
-
-  // const label = new Gtk.Label();
   instance.bind("name", widget, "label", Gio.SettingsBindFlags.GET);
-  // box.append(label);
 
   const menu = new Gio.Menu();
   menu.append("Edit", `win.editInstance("${id}")`);
   menu.append("Remove", `win.removeInstance("${id}")`);
+  widget.popover.set_menu_model(menu);
 
-  // file:///run/host/usr/share/doc/gtk4/migrating-3to4.html#adapt-to-gtkaboutdialog-api-changes
-  // const popoverMenu = new Gtk.PopoverMenu({
-  //   menu_model: menu,
-  //   position: Gtk.PositionType.RIGHT,
-  //   autohide: true,
-  // });
-  // box.append(popoverMenu);
-  // settings.bind(
-  //   "tabs-position",
-  //   popoverMenu,
-  //   "position",
-  //   Gio.SettingsBindFlags.GET,
-  // );
-
-  // const eventController = new Gtk.GestureSingle({
-  //   button: Gdk.BUTTON_SECONDARY,
-  // });
-  // box.add_controller(eventController);
-  // eventController.connect("end", () => {
-  //   popoverMenu.popup();
-  // });
+  // FIXME we should invert for better placement
+  // top <-> bottom
+  // left <-> right
+  settings.bind(
+    "tabs-position",
+    widget.popover,
+    "position",
+    Gio.SettingsBindFlags.GET,
+  );
 
   return widget;
 }
