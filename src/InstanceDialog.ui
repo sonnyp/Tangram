@@ -17,29 +17,78 @@
       <action-widget response="cancel">button_cancel</action-widget>
       <action-widget response="apply" default="true">button_save</action-widget>
     </action-widgets>
-  </object>
-  <object class="GtkListStore" id="notification_options">
-    <columns>
-      <column type="gint" />
-      <column type="gchararray" />
-    </columns>
-    <data>
-      <row>
-        <col id="0">0</col>
-        <col id="1">Normal</col>
-      </row>
-      <row>
-        <col id="0">1</col>
-        <col id="1">Low</col>
-      </row>
-      <row>
-        <col id="0">2</col>
-        <col id="1">High</col>
-      </row>
-      <row>
-        <col id="0">3</col>
-        <col id="1">Urgent</col>
-      </row>
-    </data>
+    <child>
+      <object class="AdwPreferencesPage">
+        <property name="vexpand">True</property>
+        <child>
+          <object class="AdwPreferencesGroup">
+            <child>
+              <object class="AdwPreferencesRow">
+                <child>
+                  <object class="AdwActionRow">
+                    <property name="title" translatable="yes">Name</property>
+                    <child>
+                      <object class="GtkEntry" id="name">
+                        <property name='valign'>center</property>
+                      </object>
+                    </child>
+                  </object>
+                </child>
+              </object>
+            </child>
+            <child>
+              <object class="AdwPreferencesRow">
+                <child>
+                  <object class="AdwActionRow">
+                    <property name="title" translatable="yes">URL</property>
+                    <child>
+                      <object class="GtkEntry" id="url">
+                        <property name='valign'>center</property>
+                        <property name='hexpand'>true</property>
+                      </object>
+                    </child>
+                  </object>
+                </child>
+              </object>
+            </child>
+            <child>
+              <object class="AdwComboRow" id="notifications-priority">
+                <property
+                  name="title"
+                  translatable="yes"
+                >Notifications priority</property>
+                <property name="model">
+                  <object class="GtkStringList">
+                    <items>
+                      <item>Normal</item>
+                      <item>Low</item>
+                      <item>High</item>
+                      <item>Urgent</item>
+                    </items>
+                  </object>
+                </property>
+              </object>
+            </child>
+            <child>
+              <object class="AdwPreferencesRow">
+                <child>
+                  <object class="AdwActionRow">
+                    <property
+                      name="title"
+                      translatable="yes"
+                    >User Agent</property>
+                    <child>
+                      <object class="GtkEntry" id="user-agent">
+                        <property name='valign'>center</property>
+                      </object>
+                    </child>
+                  </object>
+                </child>
+              </object>
+            </child>
+          </object>
+        </child>
+      </object>
+    </child>
   </object>
 </interface>
