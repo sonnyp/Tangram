@@ -1,9 +1,11 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8" ?>
 <gresources>
   <gresource prefix="/re/sonny/Tangram/data">
-    <file>menu.xml.ui</file>
-    <file>shortcuts.xml.ui</file>
+    <file>menu.ui</file>
+    <file>shortcuts.ui</file>
     <file>blank.html</file>
-    <file alias="icon.svg">icons/hicolor/scalable/apps/re.sonny.Tangram.svg</file>
+    <file
+      alias="icon.svg"
+    >icons/hicolor/scalable/apps/re.sonny.Tangram.svg</file>
   </gresource>
 </gresources>

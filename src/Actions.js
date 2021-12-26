@@ -69,7 +69,7 @@ export default function Actions({
   });
   showShortcutsDialog.connect("activate", () => {
     const builder = Gtk.Builder.new_from_resource(
-      "/re/sonny/Tangram/data/shortcuts.xml.ui",
+      "/re/sonny/Tangram/data/shortcuts.ui",
     );
     const shortcutsWindow = builder.get_object("shortcuts-window");
     shortcutsWindow.set_transient_for(window);

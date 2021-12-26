@@ -10,9 +10,7 @@ import AddressBar from "./AddressBar.js";
 import { BLANK_URI } from "./constants.js";
 
 function Menu() {
-  const builder = Builder.new_from_resource(
-    "/re/sonny/Tangram/data/menu.xml.ui",
-  );
+  const builder = Builder.new_from_resource("/re/sonny/Tangram/data/menu.ui");
   const popover = builder.get_object("menu_popover");
 
   const button = new MenuButton({
