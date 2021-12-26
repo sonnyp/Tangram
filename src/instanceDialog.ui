@@ -76,7 +76,7 @@
                     <property
                       name="title"
                       translatable="yes"
-                    >User Agent</property>
+                    >User agent</property>
                     <child>
                       <object class="GtkEntry" id="user-agent">
                         <property name='valign'>center</property>

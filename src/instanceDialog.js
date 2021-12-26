@@ -14,7 +14,7 @@ export function addInstanceDialog(props) {
 
 async function instanceDialog({ window, instance, mode }) {
   const builder = Gtk.Builder.new_from_file(
-    relativePath("./InstanceDialog.ui"),
+    relativePath("./instanceDialog.ui"),
   );
   const dialog = builder.get_object("dialog");
   dialog.title =

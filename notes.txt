@@ -1,6 +1,0 @@
-pixdata is deprecated
-should I send a PR to notice about preprocess=to-pixdata being deprecated in https://developer.gnome.org/gio/stable/GResource.html ?
-Yes please!
-
-  'AppIndicator3': '0.1'
-

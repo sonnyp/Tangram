@@ -1,1 +1,1 @@
-i18n.gettext('tangram', preset: 'glib')
+i18n.gettext(application_id, preset: 'glib', args: ['--no-wrap'])
