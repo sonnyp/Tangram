@@ -19,7 +19,7 @@
     </action-widgets>
     <child>
       <object class="AdwPreferencesPage">
-        <property name="vexpand">True</property>
+        <property name="vexpand">true</property>
         <child>
           <object class="AdwPreferencesGroup">
             <child>

@@ -2,25 +2,21 @@
 <interface>
   <!-- https://gitlab.gnome.org/GNOME/epiphany/blob/master/src/resources/gtk/shortcuts-dialog.ui -->
   <object class="GtkShortcutsWindow" id="shortcuts-window">
-    <property name="modal">True</property>
+    <property name="modal">true</property>
     <child>
       <object class="GtkShortcutsSection">
-        <property name="visible">True</property>
         <property name="section-name">shortcuts</property>
         <property name="max-height">10</property>
         <!-- General shortcuts -->
         <child>
           <object class="GtkShortcutsGroup">
-            <property name="visible">True</property>
             <property
               name="title"
               translatable="yes"
               context="shortcut window"
             >General</property>
-
             <child>
               <object class="GtkShortcutsShortcut">
-                <property name="visible">True</property>
                 <property
                   name="title"
                   translatable="yes"
@@ -33,7 +29,6 @@
             </child>
             <child>
               <object class="GtkShortcutsShortcut">
-                <property name="visible">True</property>
                 <property
                   name="title"
                   translatable="yes"
@@ -46,7 +41,6 @@
             </child>
             <child>
               <object class="GtkShortcutsShortcut">
-                <property name="visible">True</property>
                 <property
                   name="title"
                   translatable="yes"
@@ -59,7 +53,6 @@
             </child>
             <child>
               <object class="GtkShortcutsShortcut">
-                <property name="visible">True</property>
                 <property
                   name="title"
                   translatable="yes"
@@ -70,10 +63,8 @@
                 >&lt;Primary&gt;&lt;Shift&gt;Page_Down</property>
               </object>
             </child>
-
             <child>
               <object class="GtkShortcutsShortcut">
-                <property name="visible">True</property>
                 <property
                   name="title"
                   translatable="yes"
@@ -84,7 +75,6 @@
             </child>
             <child>
               <object class="GtkShortcutsShortcut">
-                <property name="visible">True</property>
                 <property
                   name="title"
                   translatable="yes"
@@ -95,7 +85,6 @@
             </child>
             <child>
               <object class="GtkShortcutsShortcut">
-                <property name="visible">True</property>
                 <property
                   name="title"
                   translatable="yes"
@@ -108,7 +97,6 @@
             </child>
             <child>
               <object class="GtkShortcutsShortcut">
-                <property name="visible">True</property>
                 <property
                   name="title"
                   translatable="yes"
@@ -119,10 +107,8 @@
             </child>
           </object>
         </child>
-
         <child>
           <object class="GtkShortcutsGroup">
-            <property name="visible">True</property>
             <property
               name="title"
               translatable="yes"
@@ -130,7 +116,6 @@
             >Navigation</property>
             <child>
               <object class="GtkShortcutsShortcut">
-                <property name="visible">True</property>
                 <property
                   name="title"
                   translatable="yes"
@@ -141,7 +126,6 @@
             </child>
             <child>
               <object class="GtkShortcutsShortcut">
-                <property name="visible">True</property>
                 <property
                   name="title"
                   translatable="yes"
@@ -152,7 +136,6 @@
             </child>
             <child>
               <object class="GtkShortcutsShortcut">
-                <property name="visible">True</property>
                 <property
                   name="title"
                   translatable="yes"
@@ -165,7 +148,6 @@
             </child>
             <child>
               <object class="GtkShortcutsShortcut">
-                <property name="visible">True</property>
                 <property
                   name="title"
                   translatable="yes"
@@ -176,7 +158,6 @@
             </child>
             <child>
               <object class="GtkShortcutsShortcut">
-                <property name="visible">True</property>
                 <property
                   name="title"
                   translatable="yes"
@@ -187,7 +168,6 @@
             </child>
             <child>
               <object class="GtkShortcutsShortcut">
-                <property name="visible">True</property>
                 <property
                   name="title"
                   translatable="yes"
@@ -198,7 +178,6 @@
             </child>
             <child>
               <object class="GtkShortcutsShortcut">
-                <property name="visible">True</property>
                 <property
                   name="title"
                   translatable="yes"
@@ -209,7 +188,6 @@
             </child>
             <child>
               <object class="GtkShortcutsShortcut">
-                <property name="visible">True</property>
                 <property
                   name="shortcut-type"
                 >gesture-two-finger-swipe-right</property>
@@ -222,7 +200,6 @@
             </child>
             <child>
               <object class="GtkShortcutsShortcut">
-                <property name="visible">True</property>
                 <property
                   name="shortcut-type"
                 >gesture-two-finger-swipe-left</property>
@@ -233,7 +210,6 @@
                 >Go forward to the next page</property>
               </object>
             </child>
-
           </object>
         </child>
       </object>

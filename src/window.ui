@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <interface>
   <object class="AdwApplicationWindow" id="window">
-    <property name="resizable">True</property>
+    <property name="resizable">true</property>
     <property name="default_width">800</property>
     <property name="default_height">600</property>
     <property name="title">Tangram</property>
