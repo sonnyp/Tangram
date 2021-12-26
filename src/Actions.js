@@ -29,25 +29,13 @@ export default function Actions({
     const id = parameters.deep_unpack();
     const instance = instances.get(id);
 
-    // const idx = instances.detach(settings, instance.id);
+    const idx = instances.detach(settings, instance.id);
 
-    log([id]);
-
-    const pages = notebook.get_pages();
-    for (let i = 0; i < pages.get_n_items(); i++) {
-      const page = pages.get_item(i);
-      log([i, page.child.instance_id]);
+    if (idx >= 0) {
+      notebook.remove_page(idx);
     }
 
-    notebook.remove_page(instance.page);
-
-    return;
-
-    try {
-      instances.destroy(instance);
-    } catch (err) {
-      logError(err);
-    }
+    instances.destroy(instance);
   });
   window.add_action(removeInstanceAction);
 

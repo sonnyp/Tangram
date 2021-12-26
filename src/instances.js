@@ -57,7 +57,7 @@ export function load(settings) {
 export function detach(settings, id) {
   const instances = settings.get_strv("instances");
   const idx = instances.indexOf(id);
-  if (idx < 0) return;
+  if (idx < 0) return null;
   instances.splice(idx, 1);
   settings.set_strv("instances", instances);
   return idx;
@@ -85,10 +85,17 @@ export function destroy(instance) {
   // https://gitlab.gnome.org/GNOME/glib/merge_requests/981#note_551625
   try {
     settings.reset("");
-  } catch (err) {} // eslint-disable-line no-empty
+    // eslint-disable-next-line no-empty
+  } catch {}
 
-  File.new_for_path(instance.data_dir).trash(null);
-  File.new_for_path(instance.cache_dir).trash(null);
+  try {
+    File.new_for_path(instance.data_dir).trash(null);
+    File.new_for_path(instance.cache_dir).trash(null);
+  } catch (err) {
+    logError(err);
+  }
+
+  return idx;
 }
 
 export function get(id) {
