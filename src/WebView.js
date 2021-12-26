@@ -4,12 +4,7 @@ import GLib from "gi://GLib";
 import Gio from "gi://Gio";
 import Gdk from "gi://Gdk";
 
-const {
-  show_uri_on_window,
-  FileChooserNative,
-  FileChooserAction,
-  ResponseType,
-} = Gtk;
+const { FileChooserNative, FileChooserAction, ResponseType } = Gtk;
 const {
   WebsiteDataManager,
   WebContext,
@@ -226,7 +221,6 @@ export function buildWebView({
   const webView = new WebView({
     web_context,
     user_content_manager,
-    expand: true,
     settings,
   });
 
@@ -247,7 +241,7 @@ export function buildWebView({
       }
 
       // Open URL in default browser
-      show_uri_on_window(window, request_url, null);
+      Gtk.show_uri(window, request_url, Gdk.CURRENT_TIME);
     },
 
     // https://gjs-docs.gnome.org/webkit240~4.0_api/webkit2.webview#signal-permission-request
@@ -282,7 +276,7 @@ export function buildWebView({
 
         if (didUserRequestOpenInBrowser(navigation_action)) {
           decision.ignore();
-          show_uri_on_window(window, request_url, null);
+          Gtk.show_uri(window, request_url, Gdk.CURRENT_TIME);
           return true;
         }
       }
@@ -295,7 +289,6 @@ export function buildWebView({
   });
 
   webView.instance_id = id;
-  webView.show_all();
 
   webView.load_uri(url || BLANK_URI);
 

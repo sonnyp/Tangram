@@ -1,100 +1,46 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8" ?>
 <interface>
-  <object class="GtkPopoverMenu" id="app-menu">
-    <child>
-      <object class="GtkBox">
-        <property name="visible">True</property>
-        <property name="margin">10</property>
-        <property name="orientation">1</property>
-        <child>
-          <object class="GtkModelButton">
-            <property name="visible">True</property>
-            <property name="text" translatable="yes">Tabs position</property>
-            <property name="menu-name">tabs-position</property>
-          </object>
-        </child>
-        <child>
-          <object class="GtkSeparatorMenuItem">
-            <property name="visible">True</property>
-          </object>
-        </child>
-        <child>
-          <object class="GtkModelButton">
-            <property name="visible">True</property>
-            <property name="text" translatable="yes">Keyboard Shortcuts</property>
-            <property name="action-name">app.shortcuts</property>
-          </object>
-        </child>
-        <child>
-          <object class="GtkModelButton">
-            <property name="visible">True</property>
-            <property name="text" translatable="yes">About Tangram</property>
-            <property name="action-name">app.about</property>
-          </object>
-        </child>
-        <!-- Probably no need for this for now since closing the window achieves the same -->
-        <!-- Could be useful if we add a service/daemon -->
-        <!-- <child>
-          <object class="GtkModelButton">
-            <property name="visible">True</property>
-            <property name="text" translatable="yes">Quit</property>
-            <property name="action-name">app.quit</property>
-          </object>
-        </child> -->
-      </object>
-    </child>
-    <child>
-      <object class="GtkBox">
-        <property name="orientation">1</property>
-        <property name="visible">True</property>
-        <property name="margin">10</property>
-        <child>
-          <object class="GtkModelButton">
-            <property name="visible">True</property>
-            <property name="inverted">True</property>
-            <property name="centered">True</property>
-            <!-- <property name="action-name">app.tabsPosition</property> -->
-            <!-- <property name="action-target">"top"</property> -->
-            <property name="text" translatable="yes">Tabs position</property>
-            <property name="menu-name">main</property>
-          </object>
-        </child>
-        <child>
-          <object class="GtkModelButton">
-            <property name="visible">True</property>
-            <property name="action-name">app.tabsPosition</property>
-            <property name="action-target">"top"</property>
-            <property name="text" translatable="yes">Top</property>
-          </object>
-        </child>
-        <child>
-          <object class="GtkModelButton">
-            <property name="visible">True</property>
-            <property name="action-name">app.tabsPosition</property>
-            <property name="action-target">"left"</property>
-            <property name="text" translatable="yes">Left</property>
-          </object>
-        </child>
-        <child>
-          <object class="GtkModelButton">
-            <property name="visible">True</property>
-            <property name="action-name">app.tabsPosition</property>
-            <property name="action-target">"right"</property>
-            <property name="text" translatable="yes">Right</property>
-          </object>
-        </child>
-        <child>
-          <object class="GtkModelButton">
-            <property name="visible">True</property>
-            <property name="action-name">app.tabsPosition</property>
-            <property name="action-target">"bottom"</property>
-            <property name="text" translatable="yes">Bottom</property>
-          </object>
-        </child>
-      </object>
-      <packing>
-        <property name="submenu">tabs-position</property>
-      </packing>
-    </child>
+  <object class="GtkPopoverMenu" id="menu_popover">
+    <property name="menu-model">menu_model</property>
   </object>
+  <menu id="menu_model">
+    <submenu>
+      <attribute name="label" translatable="yes">Tabs position</attribute>
+      <section>
+        <item>
+          <attribute name="label" translatable="yes">Top</attribute>
+          <attribute name="action">win.tabs-position</attribute>
+          <attribute name="target">top</attribute>
+        </item>
+        <item>
+          <attribute name="label" translatable="yes">Left</attribute>
+          <attribute name="action">win.tabs-position</attribute>
+          <attribute name="target">left</attribute>
+        </item>
+        <item>
+          <attribute name="label" translatable="yes">Right</attribute>
+          <attribute name="action">win.tabs-position</attribute>
+          <attribute name="target">right</attribute>
+        </item>
+        <item>
+          <attribute name="label" translatable="yes">Bottom</attribute>
+          <attribute name="action">win.tabs-position</attribute>
+          <attribute name="target">bottom</attribute>
+        </item>
+      </section>
+    </submenu>
+    <section>
+      <item>
+        <attribute
+          name="label"
+          translatable="yes"
+        >Keyboard Shortcuts</attribute>
+        <attribute name="action">app.shortcuts</attribute>
+      </item>
+      <item>
+        <attribute name="label" translatable="yes">About Tangram</attribute>
+        <attribute name="action">app.about</attribute>
+      </item>
+    </section>
+  </menu>
 </interface>

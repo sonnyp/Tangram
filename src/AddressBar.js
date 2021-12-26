@@ -1,8 +1,7 @@
 import Gtk from "gi://Gtk";
-import Soup from "gi://Soup";
+import GLib from "gi://GLib";
 
 const { Entry } = Gtk;
-const { URI } = Soup;
 
 function normalizeURL(str) {
   if (!str) return null;
@@ -11,16 +10,14 @@ function normalizeURL(str) {
     str = "http://" + str;
   }
 
-  const uri = new URI(str);
+  const uri = GLib.Uri.parse(str, GLib.UriFlags.NONE);
   if (!uri) return null;
 
-  // FIXME
-  // no is_valid or valid_for_http in soup gjs?
-  if (!["http", "https"].includes(uri.scheme)) {
+  if (!["http", "https"].includes(uri.get_scheme())) {
     return null;
   }
 
-  return uri.to_string(false);
+  return uri.to_string();
 }
 
 export default function AddressBar({ state }) {
@@ -29,24 +26,11 @@ export default function AddressBar({ state }) {
     placeholder_text: "Enter address",
   });
 
-  // This is a workaround https://gitlab.gnome.org/GNOME/gtk/issues/378
-  // described in https://gitlab.gnome.org/GNOME/gtk/commit/7aad0896a73e6957c8d5ef65d59b2d0891df1b9c
-  // but that commit did not made it to stable yet so it's not working
-  // there is unfortunally no workaround until then so we don't grab focus
-  /*
-  const css = new CssProvider();
-  css.load_from_data(`
-    entry:focus > placeholder {
-      opacity: 1;
-    }
-  `);
-  URLBar.get_style_context().add_provider(css, 0);
-  state.notify("view", view => {
-    if (view === "services") {
+  state.notify("view", (view) => {
+    if (view === "new-tab") {
       URLBar.grab_focus_without_selecting();
     }
   });
-  */
 
   URLBar.connect("activate", () => {
     const url = normalizeURL(URLBar.text);

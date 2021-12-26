@@ -5,6 +5,9 @@ build:
 	meson --prefix $(shell pwd)/install build
 	ninja -C build install
 
+lint:
+	./node_modules/.bin/eslint --cache src/
+
 run-host:
 	make clean
 	make build
@@ -24,7 +27,7 @@ bundle:
 test:
 	gjs -m src/webapp/test.js
 	gjs -m src/utils.test.js
-	./node_modules/.bin/eslint --cache src/
+	make lint
 
 clean:
 	rm -rf .flatpak-builder build flatpak install repo var/config var/cache var/data var/applications/*.desktop

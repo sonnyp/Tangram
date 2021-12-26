@@ -1,4 +1,4 @@
-import "./setup.js";
+import "gi://WebKit2?version=5.0";
 
 import { isSameSite, isUrlAllowedForNavigation } from "./utils.js";
 import * as assert from "./troll/assert.js";

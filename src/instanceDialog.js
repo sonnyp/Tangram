@@ -32,7 +32,7 @@ async function instanceDialog({ window, instance, mode }) {
     column_spacing: 12,
     row_spacing: 6,
   });
-  contentArea.add(grid);
+  contentArea.append(grid);
 
   const nameLabel = new Label({
     label: "Name",
@@ -91,7 +91,6 @@ async function instanceDialog({ window, instance, mode }) {
   combobox.set_active(instance.settings.get_enum("notifications-priority"));
   grid.attach(combobox, 2, 4, 1, 1);
 
-
   const userAgentLabel = new Label({
     label: "User Agent",
     halign: Align.END,
@@ -103,7 +102,7 @@ async function instanceDialog({ window, instance, mode }) {
   });
   grid.attach(userAgentEntry, 2, 5, 1, 1);
 
-  dialog.show_all();
+  dialog.show();
 
   const [response_id] = await once(dialog, "response");
   if (response_id === ResponseType.DELETE_EVENT) {

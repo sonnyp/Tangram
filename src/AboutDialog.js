@@ -1,6 +1,7 @@
 import Gtk from "gi://Gtk";
 import WebKit from "gi://WebKit2";
 import Soup from "gi://Soup";
+import { gettext as _ } from "gettext";
 
 import { getGIRepositoryVersion, getGjsVersion } from "./utils.js";
 
@@ -13,7 +14,6 @@ log(`WebKitGTK ${WebKitGTKVersion}`);
 log(`libsoup ${soupVersion}`);
 
 export default function AboutDialog({ window }) {
-  // https://gjs-docs.gnome.org/gtk30~3.24.8/gtk.aboutdialog
   const aboutDialog = new Gtk.AboutDialog({
     authors: ["Sonny Piers https://sonny.re"],
     artists: ["Tobias Bernard <tbernard@gnome.org>"],
@@ -24,13 +24,15 @@ export default function AboutDialog({ window }) {
       `gjs ${gjsVersion}`,
       `libsoup ${soupVersion}`,
     ].join("\n"),
-    copyright: "Copyright 2019-2021 Sonny Piers",
+    copyright: "Copyright 2019-2022 Sonny Piers",
     license_type: Gtk.License.GPL_3_0,
     version: pkg.version,
     website: "https://github.com/sonnyp/Tangram",
     transient_for: window,
     modal: true,
     logo_icon_name: "re.sonny.Tangram",
+    // TRANSLATORS: eg. 'Translator Name <your.email@domain.com>' or 'Translator Name https://website.example'
+    translator_credits: _("translator-credits"),
   });
   aboutDialog.add_credit_section("Contributors", [
     // Add yourself as
@@ -42,9 +44,6 @@ export default function AboutDialog({ window }) {
     "codyfish https://github.com/codyfish",
   ]);
   aboutDialog.present();
-  aboutDialog.connect("response", () => {
-    aboutDialog.destroy();
-  });
 
   return aboutDialog;
 }

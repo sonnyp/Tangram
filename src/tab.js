@@ -1,30 +1,33 @@
-import Gtk from "gi://Gtk";
-import Gdk from "gi://Gdk";
 import Gio from "gi://Gio";
 import GdkPixbuf from "gi://GdkPixbuf";
-
-const { Label, Image, Box, EventBox, Popover } = Gtk;
-const { EventMask } = Gdk;
-const { Menu, SettingsBindFlags } = Gio;
-const { InterpType } = GdkPixbuf;
 
 import { MODES } from "./constants.js";
 import { getFaviconAsPixbuf } from "./webapp/webapp.js";
 import { buildWebView } from "./WebView.js";
+import TabWidget from "./TabWidget.js";
 
 const ICON_SIZE = 16;
 
 function getFaviconScaled(webview) {
   const pixbuf = getFaviconAsPixbuf(webview);
   if (!pixbuf) return null;
-  return pixbuf.scale_simple(ICON_SIZE, ICON_SIZE, InterpType.BILINEAR);
+  return pixbuf.scale_simple(
+    ICON_SIZE,
+    ICON_SIZE,
+    GdkPixbuf.InterpType.BILINEAR,
+  );
 }
 
 export function TabLabel({ instance, settings, page }) {
   const { id } = instance;
 
-  const box = new Box({});
-  const image = new Image({ margin_end: 6 });
+  // FIXME: Replace with padding
+  // so that right click on the space works
+  // const box = new Gtk.Box({
+  //   margin_top: 6,
+  //   margin_bottom: 6,
+  // });
+  const widget = new TabWidget();
 
   function connectFavicon() {
     page.connect("notify::favicon", () => {
@@ -32,48 +35,34 @@ export function TabLabel({ instance, settings, page }) {
       if (!new_favicon) {
         return;
       }
-      image.set_from_pixbuf(new_favicon);
+      widget.image.set_from_pixbuf(new_favicon);
     });
   }
 
   const favicon = getFaviconScaled(page);
   if (favicon) {
-    image.set_from_pixbuf(favicon);
+    widget.image.set_from_pixbuf(favicon);
   }
   connectFavicon();
 
-  box.add(image);
+  instance.bind("name", widget, "label", Gio.SettingsBindFlags.GET);
 
-  const label = new Label();
-  instance.bind("name", label, "label", SettingsBindFlags.GET);
-  box.add(label);
+  const menu = new Gio.Menu();
+  menu.append("Edit", `win.editInstance("${id}")`);
+  menu.append("Remove", `win.removeInstance("${id}")`);
+  widget.popover.set_menu_model(menu);
 
-  box.add_events(EventMask.BUTTON_PRESS_MASK);
+  // FIXME: we should invert for better placement
+  // top <-> bottom
+  // left <-> right
+  settings.bind(
+    "tabs-position",
+    widget.popover,
+    "position",
+    Gio.SettingsBindFlags.GET,
+  );
 
-  const eventBox = new EventBox({
-    // margin_top: 6,
-    // margin_bottom: 6,
-  });
-  eventBox.add(box);
-
-  const menu = new Menu();
-  menu.append("Edit", `app.editInstance("${id}")`);
-  menu.append("Remove", `app.removeInstance("${id}")`);
-
-  const popover = new Popover();
-  popover.bind_model(menu, null);
-  popover.set_relative_to(box);
-  settings.bind("tabs-position", popover, "position", SettingsBindFlags.GET);
-
-  eventBox.connect("button-press-event", (self, eventButton) => {
-    const [, button] = eventButton.get_button();
-    if (button !== 3) return;
-
-    popover.popup();
-  });
-
-  eventBox.show_all();
-  return eventBox;
+  return widget;
 }
 
 export function TabPage({ instance, window, onNotification, application }) {
