@@ -12,62 +12,108 @@
         <child>
           <object class="GtkShortcutsGroup">
             <property name="visible">True</property>
-            <property name="title" translatable="yes" context="shortcut window">General</property>
+            <property
+              name="title"
+              translatable="yes"
+              context="shortcut window"
+            >General</property>
 
             <child>
               <object class="GtkShortcutsShortcut">
                 <property name="visible">True</property>
-                <property name="title" translatable="yes" context="shortcut window">Go to the next tab</property>
-                <property name="accelerator">&lt;Primary&gt;Page_Down &lt;Primary&gt;Tab</property>
+                <property
+                  name="title"
+                  translatable="yes"
+                  context="shortcut window"
+                >Go to the next tab</property>
+                <property
+                  name="accelerator"
+                >&lt;Primary&gt;Page_Down &lt;Primary&gt;Tab</property>
               </object>
             </child>
             <child>
               <object class="GtkShortcutsShortcut">
                 <property name="visible">True</property>
-                <property name="title" translatable="yes" context="shortcut window">Go to the previous tab</property>
-                <property name="accelerator">&lt;Primary&gt;Page_Up &lt;Shift&gt;&lt;Primary&gt;Tab</property>
+                <property
+                  name="title"
+                  translatable="yes"
+                  context="shortcut window"
+                >Go to the previous tab</property>
+                <property
+                  name="accelerator"
+                >&lt;Primary&gt;Page_Up &lt;Shift&gt;&lt;Primary&gt;Tab</property>
               </object>
             </child>
             <child>
               <object class="GtkShortcutsShortcut">
                 <property name="visible">True</property>
-                <property name="title" translatable="yes" context="shortcut window">Move current tab to the left</property>
-                <property name="accelerator">&lt;Primary&gt;&lt;Shift&gt;Page_Up</property>
+                <property
+                  name="title"
+                  translatable="yes"
+                  context="shortcut window"
+                >Move current tab to the left</property>
+                <property
+                  name="accelerator"
+                >&lt;Primary&gt;&lt;Shift&gt;Page_Up</property>
               </object>
             </child>
             <child>
               <object class="GtkShortcutsShortcut">
                 <property name="visible">True</property>
-                <property name="title" translatable="yes" context="shortcut window">Move current tab to the right</property>
-                <property name="accelerator">&lt;Primary&gt;&lt;Shift&gt;Page_Down</property>
+                <property
+                  name="title"
+                  translatable="yes"
+                  context="shortcut window"
+                >Move current tab to the right</property>
+                <property
+                  name="accelerator"
+                >&lt;Primary&gt;&lt;Shift&gt;Page_Down</property>
               </object>
             </child>
 
             <child>
               <object class="GtkShortcutsShortcut">
                 <property name="visible">True</property>
-                <property name="title" translatable="yes" context="shortcut window">Quit</property>
+                <property
+                  name="title"
+                  translatable="yes"
+                  context="shortcut window"
+                >Quit</property>
                 <property name="accelerator">&lt;Primary&gt;Q</property>
               </object>
             </child>
             <child>
               <object class="GtkShortcutsShortcut">
                 <property name="visible">True</property>
-                <property name="title" translatable="yes" context="shortcut window">Shortcuts</property>
-                <property name="accelerator">&lt;Primary&gt;question &lt;Primary&gt;F1</property>
+                <property
+                  name="title"
+                  translatable="yes"
+                  context="shortcut window"
+                >Shortcuts</property>
+                <property name="accelerator">&lt;Primary&gt;question</property>
               </object>
             </child>
             <child>
               <object class="GtkShortcutsShortcut">
                 <property name="visible">True</property>
-                <property name="title" translatable="yes" context="shortcut window">Toggle inspector</property>
-                <property name="accelerator">&lt;Primary&gt;&lt;Shift&gt;I</property>
+                <property
+                  name="title"
+                  translatable="yes"
+                  context="shortcut window"
+                >Toggle inspector</property>
+                <property
+                  name="accelerator"
+                >&lt;Primary&gt;&lt;Shift&gt;I</property>
               </object>
             </child>
             <child>
               <object class="GtkShortcutsShortcut">
                 <property name="visible">True</property>
-                <property name="title" translatable="yes" context="shortcut window">First – Ninth Tab</property>
+                <property
+                  name="title"
+                  translatable="yes"
+                  context="shortcut window"
+                >First – Ninth Tab</property>
                 <property name="accelerator">&lt;Alt&gt;1...9</property>
               </object>
             </child>
@@ -77,68 +123,114 @@
         <child>
           <object class="GtkShortcutsGroup">
             <property name="visible">True</property>
-            <property name="title" translatable="yes" context="shortcut window">Navigation</property>
+            <property
+              name="title"
+              translatable="yes"
+              context="shortcut window"
+            >Navigation</property>
             <child>
               <object class="GtkShortcutsShortcut">
                 <property name="visible">True</property>
-                <property name="title" translatable="yes" context="shortcut window">Go to homepage</property>
+                <property
+                  name="title"
+                  translatable="yes"
+                  context="shortcut window"
+                >Go to homepage</property>
                 <property name="accelerator">&lt;Alt&gt;Home</property>
               </object>
             </child>
             <child>
               <object class="GtkShortcutsShortcut">
                 <property name="visible">True</property>
-                <property name="title" translatable="yes" context="shortcut window">Reload current page</property>
+                <property
+                  name="title"
+                  translatable="yes"
+                  context="shortcut window"
+                >Reload current page</property>
                 <property name="accelerator">F5 &lt;Primary&gt;R</property>
               </object>
             </child>
             <child>
               <object class="GtkShortcutsShortcut">
                 <property name="visible">True</property>
-                <property name="title" translatable="yes" context="shortcut window">Reload bypassing cache</property>
-                <property name="accelerator">&lt;Primary&gt;&lt;Shift&gt;R &lt;Shift&gt;F5</property>
+                <property
+                  name="title"
+                  translatable="yes"
+                  context="shortcut window"
+                >Reload bypassing cache</property>
+                <property
+                  name="accelerator"
+                >&lt;Primary&gt;&lt;Shift&gt;R &lt;Shift&gt;F5</property>
               </object>
             </child>
             <child>
               <object class="GtkShortcutsShortcut">
                 <property name="visible">True</property>
-                <property name="title" translatable="yes" context="shortcut window">Stop loading current page</property>
+                <property
+                  name="title"
+                  translatable="yes"
+                  context="shortcut window"
+                >Stop loading current page</property>
                 <property name="accelerator">Escape</property>
               </object>
             </child>
             <child>
               <object class="GtkShortcutsShortcut">
                 <property name="visible">True</property>
-                <property name="title" translatable="yes" context="shortcut window">Go back to the previous page</property>
+                <property
+                  name="title"
+                  translatable="yes"
+                  context="shortcut window"
+                >Go back to the previous page</property>
                 <property name="accelerator">&lt;Alt&gt;Left</property>
               </object>
             </child>
             <child>
               <object class="GtkShortcutsShortcut">
                 <property name="visible">True</property>
-                <property name="title" translatable="yes" context="shortcut window">Go forward to the next page</property>
+                <property
+                  name="title"
+                  translatable="yes"
+                  context="shortcut window"
+                >Go forward to the next page</property>
                 <property name="accelerator">&lt;Alt&gt;Right</property>
               </object>
             </child>
             <child>
               <object class="GtkShortcutsShortcut">
                 <property name="visible">True</property>
-                <property name="title" translatable="yes" context="shortcut window">Focus the address bar</property>
+                <property
+                  name="title"
+                  translatable="yes"
+                  context="shortcut window"
+                >Focus the address bar</property>
                 <property name="accelerator">&lt;Primary&gt;L</property>
               </object>
             </child>
             <child>
               <object class="GtkShortcutsShortcut">
                 <property name="visible">True</property>
-                <property name="shortcut-type">gesture-two-finger-swipe-right</property>
-                <property name="title" translatable="yes" context="shortcut window">Go back to the previous page</property>
+                <property
+                  name="shortcut-type"
+                >gesture-two-finger-swipe-right</property>
+                <property
+                  name="title"
+                  translatable="yes"
+                  context="shortcut window"
+                >Go back to the previous page</property>
               </object>
             </child>
             <child>
               <object class="GtkShortcutsShortcut">
                 <property name="visible">True</property>
-                <property name="shortcut-type">gesture-two-finger-swipe-left</property>
-                <property name="title" translatable="yes" context="shortcut window">Go forward to the next page</property>
+                <property
+                  name="shortcut-type"
+                >gesture-two-finger-swipe-left</property>
+                <property
+                  name="title"
+                  translatable="yes"
+                  context="shortcut window"
+                >Go forward to the next page</property>
               </object>
             </child>
 

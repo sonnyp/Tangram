@@ -52,7 +52,7 @@ export function TabLabel({ instance, settings, page }) {
   menu.append("Remove", `win.removeInstance("${id}")`);
   widget.popover.set_menu_model(menu);
 
-  // FIXME we should invert for better placement
+  // FIXME: we should invert for better placement
   // top <-> bottom
   // left <-> right
   settings.bind(

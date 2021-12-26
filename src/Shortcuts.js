@@ -103,10 +103,7 @@ export default function Shortcuts({
 
   application.set_accels_for_action("app.quit", ["<Primary>Q"]);
   application.set_accels_for_action("app.inspector", ["<Primary><Shift>D"]);
-  application.set_accels_for_action("app.shortcuts", [
-    "<Primary>F1",
-    "<Primary>question",
-  ]);
+  application.set_accels_for_action("app.shortcuts", ["<Primary>question"]);
 
   window.add_controller(shortcutController);
 }
