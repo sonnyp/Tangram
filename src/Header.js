@@ -1,5 +1,6 @@
 import Gtk from "gi://Gtk";
 import WebKit2 from "gi://WebKit2";
+import Adw from "gi://Adw";
 
 const { Button, Stack, StackTransitionType, Box, MenuButton, Builder, Label } =
   Gtk;
@@ -33,7 +34,7 @@ export default function Header({
   state,
   onNewTab,
 }) {
-  const titlebar = new Gtk.HeaderBar();
+  const titlebar = new Adw.HeaderBar();
 
   const left_stack = new Stack({
     transition_type: StackTransitionType.CROSSFADE,
