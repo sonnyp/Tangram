@@ -2,14 +2,10 @@ import Gtk from "gi://Gtk";
 import GLib from "gi://GLib";
 import Gio from "gi://Gio";
 
-const { uuid_string_random } = GLib;
-const { ApplicationWindow, Stack, StackTransitionType } = Gtk;
-const { Notification } = Gio;
-
 import Notebook from "./Notebook.js";
 import Shortcuts from "./Shortcuts.js";
 import Actions from "./Actions.js";
-import { Settings, observeSetting } from "./util.js";
+import { Settings, observeSetting, relativePath } from "./util.js";
 import {
   getWebAppInfo,
   // download,
@@ -94,11 +90,10 @@ export default function Window({ application, state }) {
     }
   }
 
-  // https://gjs-docs.gnome.org/gtk30~3.24.8/gtk.applicationwindow
-  const window = new ApplicationWindow({
-    application,
-    title: "Tangram",
-  });
+  const builder = Gtk.Builder.new_from_file(relativePath("./window.ui"));
+
+  const window = builder.get_object("window");
+  window.set_application(application);
 
   // https://wiki.gnome.org/HowDoI/SaveWindowState
   settings.bind(
@@ -120,14 +115,10 @@ export default function Window({ application, state }) {
     Gio.SettingsBindFlags.DEFAULT,
   );
 
-  window.set_titlebar(header.titlebar);
+  builder.get_object("main").prepend(header.titlebar);
 
-  // https://gjs-docs.gnome.org/gtk30~3.24.8/gtk.stack
-  const stack = new Stack({
-    transition_type: StackTransitionType.CROSSFADE,
-  });
+  const stack = builder.get_object("stack");
   state.bind("view", stack, "visible_child_name");
-  window.set_child(stack);
 
   const notebook = Notebook({ settings, application });
   stack.add_named(notebook, "tabs");
@@ -148,7 +139,7 @@ export default function Window({ application, state }) {
     const title = webkit_notification.get_title();
 
     // https://gjs-docs.gnome.org/gio20~2.0_api/gio.notification
-    const notification = new Notification();
+    const notification = new Gio.Notification();
     if (title) notification.set_title(title);
     if (body) notification.set_body(body);
     notification.set_priority(priority);
@@ -233,7 +224,7 @@ export default function Window({ application, state }) {
   }
 
   function onNewTab() {
-    const id = uuid_string_random().replace(/-/g, "");
+    const id = GLib.uuid_string_random().replace(/-/g, "");
 
     const instance = createInstance({
       url: BLANK_URI,

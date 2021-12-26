@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<interface>
+  <object class="AdwApplicationWindow" id="window">
+    <property name="resizable">True</property>
+    <property name="default_width">800</property>
+    <property name="default_height">600</property>
+    <property name="title">Tangram</property>
+    <child>
+      <object class="GtkBox" id="main">
+        <property name="orientation">vertical</property>
+        <child>
+          <object class="GtkStack" id="stack">
+            <property name="transition_type">crossfade</property>
+          </object>
+        </child>
+      </object>
+    </child>
+  </object>
+</interface>
