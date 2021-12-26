@@ -9,14 +9,14 @@ glib-compile-schemas --strict data/
 # export GSETTINGS_SCHEMA_DIR=./data
 
 # desktop file (required for notifications)
-cp data/re.sonny.Tangram.desktop.in re.sonny.Tangram.desktop
+cp data/re.sonny.Tangram.desktop re.sonny.Tangram.desktop
 sed -i "/^Exec=/s/=.*/=${PWD//\//\\/}\/src\/re\.sonny\.Tangram/" re.sonny.Tangram.desktop
 # disable DBusActivatable on dev because imports.package does not work without PWD
 sed -i "/^DBusActivatable=/s/=.*/=false/" re.sonny.Tangram.desktop
 mv re.sonny.Tangram.desktop ~/.local/share/applications
 
 # dbus services
-# cp data/re.sonny.Tangram.service.in re.sonny.Tangram.service
+# cp data/re.sonny.Tangram.service re.sonny.Tangram.service
 # sed -i "/^Exec=/s/=.*/=${PWD//\//\\/}\/src\/re\.sonny\.Tangram --gapplication-service/" re.sonny.Tangram.service
 # mv re.sonny.Tangram.service ~/.local/share/dbus-1/services/
 

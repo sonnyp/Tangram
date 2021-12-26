@@ -1,11 +1,14 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<!-- Copyright 2019 Sonny Piers https://sonny.re -->
 <component type="desktop-application">
   <id>re.sonny.Tangram</id>
-  <metadata_license>FSFAP</metadata_license>
-  <project_license>GPL-3.0+</project_license>
+  <launchable type="desktop-id">re.sonny.Tangram.desktop</launchable>
   <name>Tangram</name>
+  <developer_name>Sonny Piers</developer_name>
+  <update_contact>sonny@fastmail.net</update_contact>
+  <metadata_license>CC0-1.0</metadata_license>
+  <project_license>GPL-3.0</project_license>
   <summary>Browser for your pinned tabs</summary>
+  <translation type="gettext">re.sonny.Junction</translation>
   <description>
     <p>
       Tangram is a new kind of browser. It is designed to organize and run your Web applications.
@@ -22,18 +25,15 @@
       <li>One-stop for multiple sources of documentation or information</li>
     </ul>
   </description>
+  <url type="homepage">https://github.com/sonnyp/Tangram</url>
+  <url type="bugtracker">https://github.com/sonnyp/Tangram/issues</url>
+  <url type="donation">https://ko-fi.com/sonnyp</url>
   <screenshots>
     <screenshot type="default">
       <image
       >https://raw.githubusercontent.com/sonnyp/Tangram/main/data/appdata/screenshot.png</image>
     </screenshot>
   </screenshots>
-  <launchable type="desktop-id">re.sonny.Tangram.desktop</launchable>
-  <url type="homepage">https://github.com/sonnyp/Tangram</url>
-  <url type="bugtracker">https://github.com/sonnyp/Tangram/issues</url>
-  <url type="donation">https://ko-fi.com/sonnyp</url>
-  <update_contact>sonny@fastmail.net</update_contact>
-  <developer_name>Sonny Piers</developer_name>
   <content_rating type="oars-1.1" />
   <releases>
     <release version="1.4.0" date="2021-11-20">

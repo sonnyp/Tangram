@@ -4,14 +4,15 @@
 
 const { programInvocationName } = imports.system;
 
-// https://gitlab.gnome.org/GNOME/gjs/blob/master/doc/Package/Specification.md
-// https://gitlab.gnome.org/GNOME/gjs/-/blob/master/modules/script/package.js
 imports.package.init({
-  name: "re.sonny.Tangram",
-  version: "dev",
-  prefix: "", // Required but not used when running from source
+  name: "@PACKAGE_NAME@",
+  version: "@PACKAGE_VERSION@",
+  prefix: "@prefix@",
+  libdir: "@libdir@",
+  datadir: "@datadir@",
 });
 
-import main from "./main.js";
+// eslint-disable-next-line import/no-unresolved
+import main from "file://@datadir@/@PACKAGE_NAME@/main.js";
 
 main([programInvocationName, ...ARGV]);

@@ -1,5 +1,5 @@
 appstream_file = i18n.merge_file(
-  input: 're.sonny.Tangram.metainfo.xml.in',
+  input: 're.sonny.Tangram.metainfo.xml',
   output: 're.sonny.Tangram.metainfo.xml',
   po_dir: '../../po',
   install: true,

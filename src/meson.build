@@ -12,7 +12,7 @@ bin_conf.set('libdir', join_paths(get_option('prefix'), get_option('libdir')))
 bin_conf.set('datadir', join_paths(get_option('prefix'), get_option('datadir')))
 
 configure_file(
-  input: 're.sonny.Tangram.in',
+  input: 're.sonny.Tangram',
   output: 're.sonny.Tangram',
   configuration: bin_conf,
   install: true,

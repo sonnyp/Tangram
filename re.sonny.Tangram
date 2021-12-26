@@ -1,0 +1,17 @@
+#!/usr/bin/env -S gjs -m
+
+// -*- mode: js; -*-
+
+const { programInvocationName } = imports.system;
+
+// https://gitlab.gnome.org/GNOME/gjs/blob/master/doc/Package/Specification.md
+// https://gitlab.gnome.org/GNOME/gjs/-/blob/master/modules/script/package.js
+imports.package.init({
+  name: "re.sonny.Tangram",
+  version: "dev",
+  prefix: "", // Required but not used when running from source
+});
+
+import main from "./src/main.js";
+
+main([programInvocationName, ...ARGV]);

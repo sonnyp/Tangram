@@ -25,7 +25,7 @@ export default function AboutDialog({ window }) {
       `libsoup ${soupVersion}`,
     ].join("\n"),
     copyright: "Copyright 2019-2022 Sonny Piers",
-    license_type: Gtk.License.GPL_3_0,
+    license_type: Gtk.License.GPL_3_0_ONLY,
     version: pkg.version,
     website: "https://github.com/sonnyp/Tangram",
     transient_for: window,
