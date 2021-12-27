@@ -106,6 +106,16 @@ Chris Were Digital - Tangram a browser just for web apps [share.tube](https://sh
 
 [diolinux.com.br - Tangram, um app para gerenciar Webapps](https://diolinux.com.br/aplicativos/tangram-um-app-para-gerenciar-webapps.html) - 2019-09
 
+## Translation
+
+If you'd like to help translating Tangram into your language, please head over to [Weblate](https://hosted.weblate.org/engage/tangram/).
+
+<a href="https://hosted.weblate.org/engage/tangram/">
+  <img src="https://hosted.weblate.org/widgets/tangram/-/tangram/multi-auto.svg" alt="Translation status" />
+</a>
+
+Thank you for your help!
+
 ## Development
 
 ### Install packages
