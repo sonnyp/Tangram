@@ -2,6 +2,7 @@ import Gtk from "gi://Gtk";
 import WebKit2 from "gi://WebKit2";
 import Adw from "gi://Adw";
 
+const { Clamp } = Adw;
 const { Button, Stack, StackTransitionType, Box, MenuButton, Builder, Label } =
   Gtk;
 const { LoadEvent, uri_for_display } = WebKit2;
@@ -36,6 +37,7 @@ export default function Header({
 
   const left_stack = new Stack({
     transition_type: StackTransitionType.CROSSFADE,
+    hhomogeneous: false,
   });
 
   const navigationButtonBox = new Box({
@@ -103,10 +105,16 @@ export default function Header({
   title.get_style_context().add_class("title");
   center_stack.add_named(title, "title");
   const addressBar = AddressBar({ state });
-  center_stack.add_named(addressBar, "url");
+  const clamp = new Clamp({
+    child: addressBar,
+    maximum_size: 860,
+    tightening_threshold: 560,
+  });
+  center_stack.add_named(clamp, "url");
 
   const right_stack = new Stack({
     transition_type: StackTransitionType.CROSSFADE,
+    hhomogeneous: false,
   });
   titlebar.pack_end(right_stack);
 
