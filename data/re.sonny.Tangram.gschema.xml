@@ -38,7 +38,7 @@
     <key name="window-maximized" type="b">
       <default>false</default>
       <summary>Window maximized</summary>
-      <description>Weither the window is maximized</description>
+      <description>Whether the window is maximized</description>
     </key>
 
     <key name="instances" type="as">
