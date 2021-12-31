@@ -8,8 +8,8 @@ msgstr ""
 "Project-Id-Version: re.sonny.Tangram\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-12-27 00:55+0100\n"
-"PO-Revision-Date: 2021-12-31 07:05+0000\n"
-"Last-Translator: Michael Moroni <michaelmoroni@disroot.org>\n"
+"PO-Revision-Date: 2022-01-07 17:54+0000\n"
+"Last-Translator: J. Lavoie <j.lavoie@net-c.ca>\n"
 "Language-Team: Italian <https://hosted.weblate.org/projects/tangram/tangram/it/>\n"
 "Language: it\n"
 "MIME-Version: 1.0\n"
@@ -49,7 +49,7 @@ msgstr "Unisci tutte quelle app di messaggistica in una sola: Whatsapp, Messenge
 
 #: data/appdata/re.sonny.Tangram.metainfo.xml:24
 msgid "Group your organization tools under one application; EMail, Calendar, ..."
-msgstr "Raggruppa i tuoi strumenti organizzativi in un'applicazione: email, calendario, ..."
+msgstr "Raggruppa i tuoi strumenti organizzativi in un'applicazione: e-mail, calendario…"
 
 #: data/appdata/re.sonny.Tangram.metainfo.xml:25
 msgid "One-stop for multiple sources of documentation or information"
@@ -73,7 +73,7 @@ msgstr "Sistemato il bottone Annulla nel dialogo dell'impostazione per le schede
 
 #: data/appdata/re.sonny.Tangram.metainfo.xml:46
 msgid "Use middle-click or Ctrl+click to open links in the browser"
-msgstr "Usa il tasto centrale o Ctrl+tasto sinistro per aprire i link nel browser"
+msgstr "Usa il tasto centrale o Ctrl+tasto sinistro per aprire i collegamenti nel browser"
 
 #: data/appdata/re.sonny.Tangram.metainfo.xml:54
 msgid "Fix window title"
