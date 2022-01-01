@@ -9,7 +9,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-12-27 00:55+0100\n"
 "PO-Revision-Date: 2022-01-07 17:54+0000\n"
-"Last-Translator: J. Lavoie <j.lavoie@net-c.ca>\n"
+"Last-Translator: Andrea Brandi <git@andreabrandi.com>\n"
 "Language-Team: Italian <https://hosted.weblate.org/projects/tangram/tangram/it/>\n"
 "Language: it\n"
 "MIME-Version: 1.0\n"
@@ -53,7 +53,7 @@ msgstr "Raggruppa i tuoi strumenti organizzativi in un'applicazione: e-mail, cal
 
 #: data/appdata/re.sonny.Tangram.metainfo.xml:25
 msgid "One-stop for multiple sources of documentation or information"
-msgstr ""
+msgstr "Un centro per molteplici fonti di documentazione o informazioni"
 
 #: data/appdata/re.sonny.Tangram.metainfo.xml:42
 msgid "Notifications priority is normal instead of urgent by default"
@@ -297,12 +297,12 @@ msgstr "Vai alla pagina principale"
 #: data/shortcuts.ui:133
 msgctxt "shortcut window"
 msgid "Reload current page"
-msgstr "Ricarica attuale pagina"
+msgstr "Ricarica l'attuale pagina"
 
 #: data/shortcuts.ui:143
 msgctxt "shortcut window"
 msgid "Reload bypassing cache"
-msgstr ""
+msgstr "Ricarica aggirando la cache"
 
 #: data/shortcuts.ui:155
 msgctxt "shortcut window"
@@ -312,7 +312,7 @@ msgstr "Ferma il caricamento dell'attuale pagina"
 #: data/shortcuts.ui:165 data/shortcuts.ui:198
 msgctxt "shortcut window"
 msgid "Go back to the previous page"
-msgstr "Torna indietro alla pagina precedente"
+msgstr "Torna alla pagina precedente"
 
 #: data/shortcuts.ui:175 data/shortcuts.ui:210
 msgctxt "shortcut window"
@@ -322,9 +322,9 @@ msgstr "Vai avanti alla pagina successiva"
 #: data/shortcuts.ui:185
 msgctxt "shortcut window"
 msgid "Focus the address bar"
-msgstr ""
+msgstr "Focus sulla barra degli indirizzi"
 
 #. TRANSLATORS: eg. 'Translator Name <your.email@domain.com>' or 'Translator Name https://website.example'
 #: src/AboutDialog.js:35
 msgid "translator-credits"
-msgstr "Michael Moroni https://airon90.github.io"
+msgstr "Michael Moroni https://airon90.github.io, Andrea Brandi https://andreabrandi.com"
