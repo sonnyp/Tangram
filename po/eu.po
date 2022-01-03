@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: re.sonny.Tangram\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-12-27 00:55+0100\n"
-"PO-Revision-Date: 2021-12-31 07:05+0000\n"
+"PO-Revision-Date: 2022-01-07 17:54+0000\n"
 "Last-Translator: Sergio Varela <sergitroll9@gmail.com>\n"
 "Language-Team: Basque <https://hosted.weblate.org/projects/tangram/tangram/eu/>\n"
 "Language: eu\n"
@@ -24,7 +24,7 @@ msgstr "Tangram"
 
 #: data/appdata/re.sonny.Tangram.metainfo.xml:6
 msgid "Sonny Piers"
-msgstr ""
+msgstr "Sonny Piers"
 
 #: data/appdata/re.sonny.Tangram.metainfo.xml:10
 #: data/re.sonny.Tangram.desktop:4
@@ -33,47 +33,47 @@ msgstr "Nabigatzailea bere erlaitz ainguratuetarako"
 
 #: data/appdata/re.sonny.Tangram.metainfo.xml:13
 msgid "Tangram is a new kind of browser. It is designed to organize and run your Web applications. Each tab is persistent and independent. You can set multiple tabs with different accounts for the same application."
-msgstr ""
+msgstr "Tangram nabigatzaile mota berri bat da. Web-aplikazioak antolatzeko eta exekutatzeko diseinatuta dago. Erlaitz bakoitza iraunkorra eta independentea da. Aplikazio bererako hainbat kontu dituzten hainbat erlaitz ezar ditzakezu."
 
 #: data/appdata/re.sonny.Tangram.metainfo.xml:17
 msgid "Common use cases:"
-msgstr ""
+msgstr "Ohiko erabilera-kasuak:"
 
 #: data/appdata/re.sonny.Tangram.metainfo.xml:20
 msgid "Stay up to date with your favorite communities; Mastodon, Twitter, ..."
-msgstr ""
+msgstr "Egunean egon zure komunitate gustukoenekin: Mastodon, Twitter, …"
 
 #: data/appdata/re.sonny.Tangram.metainfo.xml:22
 msgid "Merge all these chat applications into one; WhatsApp, Messenger, Telegram, ..."
-msgstr ""
+msgstr "Konbinatu mezularitza-aplikazio guztiak bakar batean: WhatsApp, Messenger, Telegram, …"
 
 #: data/appdata/re.sonny.Tangram.metainfo.xml:24
 msgid "Group your organization tools under one application; EMail, Calendar, ..."
-msgstr ""
+msgstr "Bere antolaketa-tresnak aplikazio bakar batean biltzen ditu: posta elektronikoa, egutegia, …"
 
 #: data/appdata/re.sonny.Tangram.metainfo.xml:25
 msgid "One-stop for multiple sources of documentation or information"
-msgstr ""
+msgstr "Geldialdi bakarra dokumentazio edo informazio-iturri anitzentzat"
 
 #: data/appdata/re.sonny.Tangram.metainfo.xml:42
 msgid "Notifications priority is normal instead of urgent by default"
-msgstr ""
+msgstr "Jakinarazpenen lehentasuna normala da, urgentziaz egin beharrean"
 
 #: data/appdata/re.sonny.Tangram.metainfo.xml:43
 msgid "Add a per-tab setting to change notifications priority"
-msgstr ""
+msgstr "Gehitu erlaitz bakoitzeko konfigurazio bat, jakinarazpenen lehentasuna aldatzeko"
 
 #: data/appdata/re.sonny.Tangram.metainfo.xml:44
 msgid "Fix authentication on many popular websites"
-msgstr ""
+msgstr "Autentifikazioa zuzendu da herri-webgune askotan"
 
 #: data/appdata/re.sonny.Tangram.metainfo.xml:45
 msgid "Fix Cancel button in tab settings dialog"
-msgstr ""
+msgstr "Erlaitzen konfigurazio-elkarrizketan ezeztatzeko botoia zuzendu da"
 
 #: data/appdata/re.sonny.Tangram.metainfo.xml:46
 msgid "Use middle-click or Ctrl+click to open links in the browser"
-msgstr ""
+msgstr "Saguaren erdiko botoia edo Ctrl+klik erabili estekak nabigatzailean irekitzeko"
 
 #: data/appdata/re.sonny.Tangram.metainfo.xml:54
 msgid "Fix window title"
