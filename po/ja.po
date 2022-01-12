@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: re.sonny.Tangram\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-12-27 00:55+0100\n"
-"PO-Revision-Date: 2022-01-07 17:54+0000\n"
+"PO-Revision-Date: 2022-01-13 05:55+0000\n"
 "Last-Translator: Kaz Sibuya <sibuyakazokuu@gmail.com>\n"
 "Language-Team: Japanese <https://hosted.weblate.org/projects/tangram/tangram/ja/>\n"
 "Language: ja\n"
@@ -65,7 +65,7 @@ msgstr "タブごとに通知の優先度を変更する設定の追加"
 
 #: data/appdata/re.sonny.Tangram.metainfo.xml:44
 msgid "Fix authentication on many popular websites"
-msgstr "人気のウェブサイトあるでの認証を修正"
+msgstr "人気のウェブサイトでの認証を修正"
 
 #: data/appdata/re.sonny.Tangram.metainfo.xml:45
 msgid "Fix Cancel button in tab settings dialog"
@@ -152,6 +152,7 @@ msgid "Sets the position of the tabs"
 msgstr "タブの位置を設定する"
 
 #: data/re.sonny.Tangram.gschema.xml:28
+#, fuzzy
 msgid "Window width"
 msgstr "ウィンドウの幅"
 
@@ -160,6 +161,7 @@ msgid "Width of the window"
 msgstr "ウィンドウの幅"
 
 #: data/re.sonny.Tangram.gschema.xml:34
+#, fuzzy
 msgid "Window height"
 msgstr "ウィンドウの高さ"
 
