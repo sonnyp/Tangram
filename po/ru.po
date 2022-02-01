@@ -8,114 +8,116 @@ msgstr ""
 "Project-Id-Version: re.sonny.Tangram\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-12-27 00:55+0100\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: Automatically generated\n"
-"Language-Team: none\n"
+"PO-Revision-Date: 2022-02-02 11:55+0000\n"
+"Last-Translator: Mark Ohwell <leprinceofdarkness@yandex.com>\n"
+"Language-Team: Russian <https://hosted.weblate.org/projects/tangram/tangram/ru/>\n"
 "Language: ru\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
+"X-Generator: Weblate 4.11-dev\n"
 
 #: data/appdata/re.sonny.Tangram.metainfo.xml:5 data/re.sonny.Tangram.desktop:3
 msgid "Tangram"
-msgstr ""
+msgstr "Tangram"
 
 #: data/appdata/re.sonny.Tangram.metainfo.xml:6
 msgid "Sonny Piers"
-msgstr ""
+msgstr "Сонни Пайерс"
 
 #: data/appdata/re.sonny.Tangram.metainfo.xml:10
 #: data/re.sonny.Tangram.desktop:4
 msgid "Browser for your pinned tabs"
-msgstr ""
+msgstr "Браузер для закрепленных вкладок"
 
 #: data/appdata/re.sonny.Tangram.metainfo.xml:13
 msgid "Tangram is a new kind of browser. It is designed to organize and run your Web applications. Each tab is persistent and independent. You can set multiple tabs with different accounts for the same application."
-msgstr ""
+msgstr "Tangram — это новый вид браузера. Он предназначен для организации и запуска ваших веб-приложений. Каждая вкладка является постоянной и независимой. Вы можете установить несколько вкладок с разными учетными записями для одного и того же приложения."
 
 #: data/appdata/re.sonny.Tangram.metainfo.xml:17
 msgid "Common use cases:"
-msgstr ""
+msgstr "Общие случаи исползования:"
 
 #: data/appdata/re.sonny.Tangram.metainfo.xml:20
 msgid "Stay up to date with your favorite communities; Mastodon, Twitter, ..."
-msgstr ""
+msgstr "Будьте в курсе с вашими любимыми сообществами; Мастодон, Твиттер, ..."
 
 #: data/appdata/re.sonny.Tangram.metainfo.xml:22
 msgid "Merge all these chat applications into one; WhatsApp, Messenger, Telegram, ..."
-msgstr ""
+msgstr "Объедините все эти чат-приложения в одно; WhatsApp, Мессенджер, Telegram, ..."
 
 #: data/appdata/re.sonny.Tangram.metainfo.xml:24
 msgid "Group your organization tools under one application; EMail, Calendar, ..."
-msgstr ""
+msgstr "Сгруппируйте инструменты вашей организации в одном приложении; Электронная почта, Календарь, ..."
 
 #: data/appdata/re.sonny.Tangram.metainfo.xml:25
 msgid "One-stop for multiple sources of documentation or information"
-msgstr ""
+msgstr "Универсальное решение для нескольких источников документации или информации"
 
 #: data/appdata/re.sonny.Tangram.metainfo.xml:42
 msgid "Notifications priority is normal instead of urgent by default"
-msgstr ""
+msgstr "Приоритет уведомлений нормальный, а не срочный, по умолчанию"
 
 #: data/appdata/re.sonny.Tangram.metainfo.xml:43
 msgid "Add a per-tab setting to change notifications priority"
-msgstr ""
+msgstr "Добавьте настройку для каждой вкладки, чтобы изменить приоритет уведомлений"
 
 #: data/appdata/re.sonny.Tangram.metainfo.xml:44
 msgid "Fix authentication on many popular websites"
-msgstr ""
+msgstr "Исправить аутентификацию на многих популярных веб-сайтах"
 
 #: data/appdata/re.sonny.Tangram.metainfo.xml:45
 msgid "Fix Cancel button in tab settings dialog"
-msgstr ""
+msgstr "Исправить кнопку «Отмена» в диалоге настроек вкладки"
 
 #: data/appdata/re.sonny.Tangram.metainfo.xml:46
 msgid "Use middle-click or Ctrl+click to open links in the browser"
-msgstr ""
+msgstr "Используйте щелчок средней кнопкой мыши или Ctrl+щелчок, чтобы открывать ссылки в браузере"
 
 #: data/appdata/re.sonny.Tangram.metainfo.xml:54
 msgid "Fix window title"
-msgstr ""
+msgstr "Исправить заголовок окна"
 
 #: data/appdata/re.sonny.Tangram.metainfo.xml:55
 msgid "Update GNOME runtime to 41"
-msgstr ""
+msgstr "Обновить среду выполнения GNOME до версии 41"
 
 #: data/appdata/re.sonny.Tangram.metainfo.xml:64
 msgid "Fix an issue preventing some sites such as Twitter or Facebook from being added."
-msgstr ""
+msgstr "Исправить ошибку, из-за которой некоторые сайты, такие как Twitter или Facebook, не добавляются."
 
 #: data/appdata/re.sonny.Tangram.metainfo.xml:65
 msgid "Update GNOME runtime to 3.38"
-msgstr ""
+msgstr "Обновить среду выполнения GNOME до версии 3.38"
 
 #: data/appdata/re.sonny.Tangram.metainfo.xml:73
 msgid "Enable spell checking"
-msgstr ""
+msgstr "Включить проверку правописания"
 
 #: data/appdata/re.sonny.Tangram.metainfo.xml:74
 msgid "Customizable user-agent per instance"
-msgstr ""
+msgstr "Настраиваемый пользовательский агент для каждого процесса"
 
 #: data/appdata/re.sonny.Tangram.metainfo.xml:75
 msgid "New project icon/logo"
-msgstr ""
+msgstr "Новый значок/логотип проэкта"
 
 #: data/appdata/re.sonny.Tangram.metainfo.xml:76
 msgid "New tab background color respects dark mode"
-msgstr ""
+msgstr "Цвет фона новой вкладки соответствует темному режиму"
 
 #: data/appdata/re.sonny.Tangram.metainfo.xml:84
 msgid "Add support for downloading files"
-msgstr ""
+msgstr "Цвет фона новой вкладки соответствует темному режиму"
 
 #: data/appdata/re.sonny.Tangram.metainfo.xml:85
 msgid "Add home button"
-msgstr ""
+msgstr "Добавить кнопку \"Домой\""
 
 #: data/appdata/re.sonny.Tangram.metainfo.xml:86
 msgid "Better desktop integration"
-msgstr ""
+msgstr "Улучшенная интеграция с рабочим столом"
 
 #: data/appdata/re.sonny.Tangram.metainfo.xml:87
 msgid "Fix the main window becoming tiny when unmaximizing"
@@ -175,7 +177,7 @@ msgstr ""
 
 #: data/re.sonny.Tangram.gschema.xml:46
 msgid "Instances"
-msgstr ""
+msgstr "Процессы"
 
 #: data/re.sonny.Tangram.gschema.xml:48
 msgid "Identifiers of instances to be found in /re/sonny/Tangram/instances/"
@@ -191,66 +193,66 @@ msgstr ""
 
 #: data/re.sonny.Tangram.gschema.xml:60 src/instanceDialog.ui:43
 msgid "URL"
-msgstr ""
+msgstr "URL-адресс"
 
 #: data/re.sonny.Tangram.gschema.xml:61
 msgid "Start URL"
-msgstr ""
+msgstr "Стартовый URL"
 
 #: data/re.sonny.Tangram.gschema.xml:65 src/instanceDialog.ui:79
 msgid "User agent"
-msgstr ""
+msgstr "Пользовательский агент"
 
 #: data/re.sonny.Tangram.gschema.xml:67
 msgid "String that will be used as user agent, to identify the browser to the web servers."
-msgstr ""
+msgstr "Строка, которая будет использоваться в качестве пользовательского агента для идентификации браузера на веб-серверах."
 
 #: data/re.sonny.Tangram.gschema.xml:74 src/instanceDialog.ui:59
 msgid "Notifications priority"
-msgstr ""
+msgstr "Приоритет уведомлений"
 
 #: data/re.sonny.Tangram.gschema.xml:75
 msgid "Sets the priority of notifications"
-msgstr ""
+msgstr "Устанавливает приоритет уведомлений"
 
 #: data/menu.ui:11
 msgid "Top"
-msgstr ""
+msgstr "Сверху"
 
 #: data/menu.ui:16
 msgid "Left"
-msgstr ""
+msgstr "Слева"
 
 #: data/menu.ui:21
 msgid "Right"
-msgstr ""
+msgstr "Справа"
 
 #: data/menu.ui:26
 msgid "Bottom"
-msgstr ""
+msgstr "Снизу"
 
 #: data/menu.ui:37
 msgid "Keyboard Shortcuts"
-msgstr ""
+msgstr "Горячие Клавиши"
 
 #: data/menu.ui:41
 msgid "About Tangram"
-msgstr ""
+msgstr "Про Tangram"
 
 #: data/shortcuts.ui:17
 msgctxt "shortcut window"
 msgid "General"
-msgstr ""
+msgstr "Общие"
 
 #: data/shortcuts.ui:24
 msgctxt "shortcut window"
 msgid "Go to the next tab"
-msgstr ""
+msgstr "Перейти на следующую вкладку"
 
 #: data/shortcuts.ui:36
 msgctxt "shortcut window"
 msgid "Go to the previous tab"
-msgstr ""
+msgstr "Перейти на предыдущую вкладку"
 
 #: data/shortcuts.ui:48
 msgctxt "shortcut window"
