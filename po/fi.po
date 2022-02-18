@@ -8,23 +8,23 @@ msgstr ""
 "Project-Id-Version: re.sonny.Tangram\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-12-27 00:55+0100\n"
-"PO-Revision-Date: 2022-01-07 17:54+0000\n"
-"Last-Translator: 4903000 <4903000@chiru.no>\n"
+"PO-Revision-Date: 2022-02-19 06:58+0000\n"
+"Last-Translator: Jiri Grönroos <jiri.gronroos@iki.fi>\n"
 "Language-Team: Finnish <https://hosted.weblate.org/projects/tangram/tangram/fi/>\n"
 "Language: fi\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.10.1\n"
+"X-Generator: Weblate 4.11-dev\n"
 
 #: data/appdata/re.sonny.Tangram.metainfo.xml:5 data/re.sonny.Tangram.desktop:3
 msgid "Tangram"
-msgstr ""
+msgstr "Tangram"
 
 #: data/appdata/re.sonny.Tangram.metainfo.xml:6
 msgid "Sonny Piers"
-msgstr ""
+msgstr "Sonny Piers"
 
 #: data/appdata/re.sonny.Tangram.metainfo.xml:10
 #: data/re.sonny.Tangram.desktop:4
@@ -157,7 +157,7 @@ msgstr "Ikkunan leveys"
 
 #: data/re.sonny.Tangram.gschema.xml:29
 msgid "Width of the window"
-msgstr ""
+msgstr "Ikkunan leveys"
 
 #: data/re.sonny.Tangram.gschema.xml:34
 msgid "Window height"
@@ -165,7 +165,7 @@ msgstr "Ikkunan korkeus"
 
 #: data/re.sonny.Tangram.gschema.xml:35
 msgid "Height of the window"
-msgstr ""
+msgstr "Ikkunan korkeus"
 
 #: data/re.sonny.Tangram.gschema.xml:40
 msgid "Window maximized"
@@ -193,7 +193,7 @@ msgstr "Näytettävä nimi"
 
 #: data/re.sonny.Tangram.gschema.xml:60 src/instanceDialog.ui:43
 msgid "URL"
-msgstr ""
+msgstr "URL-osoite"
 
 #: data/re.sonny.Tangram.gschema.xml:61
 msgid "Start URL"
@@ -201,7 +201,7 @@ msgstr "Aloitus-URL"
 
 #: data/re.sonny.Tangram.gschema.xml:65 src/instanceDialog.ui:79
 msgid "User agent"
-msgstr ""
+msgstr "Käyttäjäagentti"
 
 #: data/re.sonny.Tangram.gschema.xml:67
 msgid "String that will be used as user agent, to identify the browser to the web servers."
@@ -237,92 +237,92 @@ msgstr "Pikanäppäimet"
 
 #: data/menu.ui:41
 msgid "About Tangram"
-msgstr ""
+msgstr "Tietoja - Tangram"
 
 #: data/shortcuts.ui:17
 msgctxt "shortcut window"
 msgid "General"
-msgstr ""
+msgstr "Yleiset"
 
 #: data/shortcuts.ui:24
 msgctxt "shortcut window"
 msgid "Go to the next tab"
-msgstr ""
+msgstr "Siirry seuraavaan välilehteen"
 
 #: data/shortcuts.ui:36
 msgctxt "shortcut window"
 msgid "Go to the previous tab"
-msgstr ""
+msgstr "Siirry edelliseen välilehteen"
 
 #: data/shortcuts.ui:48
 msgctxt "shortcut window"
 msgid "Move current tab to the left"
-msgstr ""
+msgstr "Siirrä nykyinen välilehti vasemmalle"
 
 #: data/shortcuts.ui:60
 msgctxt "shortcut window"
 msgid "Move current tab to the right"
-msgstr ""
+msgstr "Siirrä nykyinen välilehti oikealle"
 
 #: data/shortcuts.ui:72
 msgctxt "shortcut window"
 msgid "Quit"
-msgstr ""
+msgstr "Lopeta"
 
 #: data/shortcuts.ui:82
 msgctxt "shortcut window"
 msgid "Shortcuts"
-msgstr ""
+msgstr "Pikanäppäimet"
 
 #: data/shortcuts.ui:92
 msgctxt "shortcut window"
 msgid "Toggle inspector"
-msgstr ""
+msgstr "Tarkastaja päälle/pois"
 
 #: data/shortcuts.ui:104
 msgctxt "shortcut window"
 msgid "First – Ninth Tab"
-msgstr ""
+msgstr "1. - 9. välilehti"
 
 #: data/shortcuts.ui:116
 msgctxt "shortcut window"
 msgid "Navigation"
-msgstr ""
+msgstr "Liikkuminen"
 
 #: data/shortcuts.ui:123
 msgctxt "shortcut window"
 msgid "Go to homepage"
-msgstr ""
+msgstr "Siirry kotisivulle"
 
 #: data/shortcuts.ui:133
 msgctxt "shortcut window"
 msgid "Reload current page"
-msgstr ""
+msgstr "Lataa nykyinen sivu uudelleen"
 
 #: data/shortcuts.ui:143
 msgctxt "shortcut window"
 msgid "Reload bypassing cache"
-msgstr ""
+msgstr "Lataa sivu uudelleen ohittaen välimuisti"
 
 #: data/shortcuts.ui:155
 msgctxt "shortcut window"
 msgid "Stop loading current page"
-msgstr ""
+msgstr "Lopeta nykyisen sivun lataaminen"
 
 #: data/shortcuts.ui:165 data/shortcuts.ui:198
 msgctxt "shortcut window"
 msgid "Go back to the previous page"
-msgstr ""
+msgstr "Siirry edelliselle sivulle"
 
 #: data/shortcuts.ui:175 data/shortcuts.ui:210
 msgctxt "shortcut window"
 msgid "Go forward to the next page"
-msgstr ""
+msgstr "Siirry seuraavalle sivulle"
 
 #: data/shortcuts.ui:185
 msgctxt "shortcut window"
 msgid "Focus the address bar"
-msgstr ""
+msgstr "Kohdista osoiteriville"
 
 #. TRANSLATORS: eg. 'Translator Name <your.email@domain.com>' or 'Translator Name https://website.example'
 #: src/AboutDialog.js:35
