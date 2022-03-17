@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: re.sonny.Tangram\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-12-27 00:55+0100\n"
-"PO-Revision-Date: 2022-01-13 05:55+0000\n"
+"PO-Revision-Date: 2022-03-18 10:57+0000\n"
 "Last-Translator: Kaz Sibuya <sibuyakazokuu@gmail.com>\n"
 "Language-Team: Japanese <https://hosted.weblate.org/projects/tangram/tangram/ja/>\n"
 "Language: ja\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Weblate 4.10.1\n"
+"X-Generator: Weblate 4.12-dev\n"
 
 #: data/appdata/re.sonny.Tangram.metainfo.xml:5 data/re.sonny.Tangram.desktop:3
 msgid "Tangram"
@@ -29,7 +29,7 @@ msgstr "Sonny Piers"
 #: data/appdata/re.sonny.Tangram.metainfo.xml:10
 #: data/re.sonny.Tangram.desktop:4
 msgid "Browser for your pinned tabs"
-msgstr "ピン留めされたタブのためのブラウザ"
+msgstr "タブをピン留めできるブラウザ"
 
 #: data/appdata/re.sonny.Tangram.metainfo.xml:13
 msgid "Tangram is a new kind of browser. It is designed to organize and run your Web applications. Each tab is persistent and independent. You can set multiple tabs with different accounts for the same application."
@@ -41,7 +41,7 @@ msgstr "一般的な使用例："
 
 #: data/appdata/re.sonny.Tangram.metainfo.xml:20
 msgid "Stay up to date with your favorite communities; Mastodon, Twitter, ..."
-msgstr "Mastodon、Twitter、...など、お気に入りのコミュニティの最新情報をお届け"
+msgstr "Mastodon、Twitterなど、お気に入りのコミュニティの最新情報をお届け"
 
 #: data/appdata/re.sonny.Tangram.metainfo.xml:22
 msgid "Merge all these chat applications into one; WhatsApp, Messenger, Telegram, ..."
@@ -53,7 +53,7 @@ msgstr "Eメール、カレンダーなどの組織ツールを一つにまと�
 
 #: data/appdata/re.sonny.Tangram.metainfo.xml:25
 msgid "One-stop for multiple sources of documentation or information"
-msgstr ""
+msgstr "複数のドキュメントや情報のソースをワンストップで提供"
 
 #: data/appdata/re.sonny.Tangram.metainfo.xml:42
 msgid "Notifications priority is normal instead of urgent by default"
@@ -137,7 +137,7 @@ msgstr "Webの互換性とパフォーマンスの向上"
 
 #: data/appdata/re.sonny.Tangram.metainfo.xml:99
 msgid "Tangram now works properly on Flatpak 1.0 (Linux Mint, Ubuntu 18.04, ...)"
-msgstr "Flatpak 1.0でTangramが正常に動作するようになりました (Linux Mint, Ubuntu 18.04, ...)"
+msgstr "Flatpak 1.0のバージョンでTangramが正常に動作するようになりました (Linux Mint, Ubuntu 18.04, ...)"
 
 #: data/re.sonny.Tangram.desktop:13
 msgid "Franz;Ferdi;Rambox;Wavebox;Station;"
@@ -207,7 +207,7 @@ msgstr "ユーザーエージェント"
 
 #: data/re.sonny.Tangram.gschema.xml:67
 msgid "String that will be used as user agent, to identify the browser to the web servers."
-msgstr "ユーザーエージェントとして使用される文字列で、ウェブサーバに対してブラウザを識別するためのものです。"
+msgstr "ユーザーエージェントとして使用される文字列で、ウェブサーバに対してブラウザの種類を識別するためのものです。"
 
 #: data/re.sonny.Tangram.gschema.xml:74 src/instanceDialog.ui:59
 msgid "Notifications priority"
