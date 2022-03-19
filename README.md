@@ -20,13 +20,6 @@ Common use cases:
 - Group your organization tools under one application; EMail, Calendar, ...
 - One-stop for multiple sources of documentation or information
 
-## Installation
-
-|     Platform     |                            Package Name/Link                            |                   Maintainer                    |
-| :--------------: | :---------------------------------------------------------------------: | :---------------------------------------------: |
-|     Flatpak      | [`re.sonny.Tangram`](https://flathub.org/apps/details/re.sonny.Tangram) |    [Sonny Piers](https://github.com/sonnyp)     |
-| Arch Linux (aur) |        [`tangram`](https://aur.archlinux.org/packages/tangram/)         | [Mark Wagie](https://github.com/yochananmarqos) |
-
 ## Reporting an issue
 
 Before submitting a compatibility issue with a Website, please try to reproduce it with [GNOME Web](https://wiki.gnome.org/Apps/Web/). If you can, [report the issue to WebKitGTK](https://bugs.webkit.org/enter_bug.cgi?assigned_to=webkit-unassigned%40lists.webkit.org&attachurl=&blocked=&bug_file_loc=http://&bug_severity=Normal&bug_status=NEW&comment=&component=WebKit%20Gtk&contenttypeentry=&contenttypemethod=autodetect&contenttypeselection=text/plain&data=&dependson=&description=&flag_type-1=X&flag_type-3=X&flag_type-4=X&form_name=enter_bug&keywords=GTK&maketemplate=Remember%20values%20as%20bookmarkable%20template&op_sys=Linux&priority=P3&product=WebKit&rep_platform=PC&short_desc=%5BGTK%5D%20), the Web engine behind Tangram and GNOME Web.
@@ -80,6 +73,10 @@ You can create a custom application by
 
 ## In the media
 
+TechHut - 5 AWESOME LINUX APPS - GNOME Circle [odysee.com](https://odysee.com/@TechHut:1/5-awesome-linux-apps-gnome-circle:8) / [youtube.com](https://www.youtube.com/watch?v=aYlzSk7mB0Y) - 2022-02
+
+Tangram - Manage Social Media sites on #Linux and #GNOME (#shorts) [youtube.com](https://www.youtube.com/shorts/e7eY3Plroww) - 2021-11
+
 TechHut - NEW Kind of Web Browser on Linux [odysee.com](https://odysee.com/@TechHut:1/new-kind-of-web-browser-on-linux:b) / [youtube.com](https://www.youtube.com/watch?v=KmQRh-ekaYw) - 2021-10
 
 [techrepublic.com - Try this Linux web browser dedicated solely to web applications](https://www.techrepublic.com/article/try-this-linux-web-browser-dedicated-solely-to-web-applications/) - 2021-09
@@ -89,6 +86,8 @@ Conheça programas para profissionais que usam Linux - Diolinux App Showcase #9 
 [GNU/Linux.ch – Tangram - eine neue Art des Webbrowsers (Review)](https://gnulinux.ch/tangram-eine-neue-art-des-webbrowsers) - 2021-04
 
 Chris Were Digital - Tangram a browser just for web apps [share.tube](https://share.tube/videos/watch/684332bf-cf6a-415d-970b-fb6ca996996b) / [youtube.com](https://www.youtube.com/watch?v=M1NEZ6fVBQQ) - 2021-02
+
+How to run web apps with ease on Linux [youtube.com](https://www.addictivetips.com/ubuntu-linux-tips/run-web-apps-linux/) - 2020-11
 
 [addictivetips.com - How to run web apps with ease on Linux](https://www.addictivetips.com/ubuntu-linux-tips/run-web-apps-linux/) - 2020-09
 
