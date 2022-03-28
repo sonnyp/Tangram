@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: re.sonny.Tangram\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-12-27 00:55+0100\n"
-"PO-Revision-Date: 2022-01-07 17:54+0000\n"
+"PO-Revision-Date: 2022-03-29 22:06+0000\n"
 "Last-Translator: J. Lavoie <j.lavoie@net-c.ca>\n"
 "Language-Team: French <https://hosted.weblate.org/projects/tangram/tangram/fr/>\n"
 "Language: fr\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Generator: Weblate 4.10.1\n"
+"X-Generator: Weblate 4.12-dev\n"
 
 #: data/appdata/re.sonny.Tangram.metainfo.xml:5 data/re.sonny.Tangram.desktop:3
 msgid "Tangram"
@@ -89,15 +89,15 @@ msgstr "Correction d'un problème empêchant l'ajout de certains sites tels que 
 
 #: data/appdata/re.sonny.Tangram.metainfo.xml:65
 msgid "Update GNOME runtime to 3.38"
-msgstr ""
+msgstr "Mise à jour du runtime GNOME vers 3.38"
 
 #: data/appdata/re.sonny.Tangram.metainfo.xml:73
 msgid "Enable spell checking"
-msgstr ""
+msgstr "Activer le correcteur orthographique"
 
 #: data/appdata/re.sonny.Tangram.metainfo.xml:74
 msgid "Customizable user-agent per instance"
-msgstr ""
+msgstr "Agent utilisateur personnalisable par instance"
 
 #: data/appdata/re.sonny.Tangram.metainfo.xml:75
 msgid "New project icon/logo"
@@ -105,11 +105,11 @@ msgstr "Nouvelle icône/logo du projet"
 
 #: data/appdata/re.sonny.Tangram.metainfo.xml:76
 msgid "New tab background color respects dark mode"
-msgstr ""
+msgstr "La couleur de fond du nouvel onglet respecte le mode sombre"
 
 #: data/appdata/re.sonny.Tangram.metainfo.xml:84
 msgid "Add support for downloading files"
-msgstr ""
+msgstr "Ajout d'une prise en charge pour le téléchargement de fichiers"
 
 #: data/appdata/re.sonny.Tangram.metainfo.xml:85
 msgid "Add home button"
