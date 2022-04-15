@@ -67,11 +67,9 @@ export function buildWebView({
     build_filenamev([cache_dir, "icondatabase"]),
   );
   web_context.set_process_model(ProcessModel.MULTIPLE_SECONDARY_PROCESSES);
-  if (typeof web_context.set_sandbox_enabled === "function") {
-    web_context.set_sandbox_enabled(true);
-    web_context.add_path_to_sandbox(data_dir, true);
-    web_context.add_path_to_sandbox(cache_dir, true);
-  }
+  web_context.set_sandbox_enabled(true);
+  web_context.add_path_to_sandbox(data_dir, true);
+  web_context.add_path_to_sandbox(cache_dir, true);
 
   const security_manager = web_context.get_security_manager();
 

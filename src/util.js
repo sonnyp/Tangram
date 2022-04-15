@@ -101,3 +101,13 @@ export function loadStyleSheet(path) {
     Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION,
   );
 }
+
+export function ensureDirectory(path) {
+  try {
+    Gio.File.new_for_path(path).make_directory(null);
+  } catch (err) {
+    if (err.code !== Gio.IOErrorEnum.EXISTS) {
+      throw err;
+    }
+  }
+}
