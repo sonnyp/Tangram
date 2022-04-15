@@ -1,10 +1,6 @@
 import GLib from "gi://GLib";
-import Gio from "gi://Gio";
 
-const { build_filenamev } = GLib;
-const { File } = Gio;
-
-import { Settings } from "./util.js";
+import { Settings, ensureDirectory } from "./util.js";
 import { data_dir, cache_dir } from "./env.js";
 
 export const list = [];
@@ -12,8 +8,8 @@ export const list = [];
 export class Instance {
   constructor(id) {
     this.id = id;
-    this.data_dir = build_filenamev([data_dir, id]);
-    this.cache_dir = build_filenamev([cache_dir, id]);
+    this.data_dir = GLib.build_filenamev([data_dir, id]);
+    this.cache_dir = GLib.build_filenamev([cache_dir, id]);
 
     // https://gjs-docs.gnome.org/gio20~2.0_api/gio.settings
     this.settings = new Settings({
@@ -70,6 +66,10 @@ export function attach(settings, id) {
 
 export function create({ id, ...props }) {
   const instance = new Instance(id);
+
+  ensureDirectory(instance.data_dir);
+  ensureDirectory(instance.cache_dir);
+
   Object.assign(instance, props);
   list.push(instance);
   return instance;
@@ -88,14 +88,8 @@ export function destroy(instance) {
     // eslint-disable-next-line no-empty
   } catch {}
 
-  try {
-    File.new_for_path(instance.data_dir).trash(null);
-    File.new_for_path(instance.cache_dir).trash(null);
-  } catch (err) {
-    logError(err);
-  }
-
-  return idx;
+  GLib.rmdir(data_dir);
+  GLib.rmdir(cache_dir);
 }
 
 export function get(id) {
