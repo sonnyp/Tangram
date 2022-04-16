@@ -7,5 +7,8 @@
     "**/flatpak/**": true,
     "**/repo/**": true
   },
-  "stylelint.enable": false
+  "stylelint.enable": false,
+  "mesonbuild.configureOnOpen": false,
+  "mesonbuild.buildFolder": "_build",
+  "mesonbuild.mesonPath": "/home/sonny/Projects/Tangram/.flatpak/meson.sh"
 }

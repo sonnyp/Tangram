@@ -34,13 +34,16 @@ const {
   path_get_dirname,
   get_language_names,
 } = GLib;
-const { Notification, AppInfo, ResourceLookupFlags, resources_open_stream } =
-  Gio;
+const {
+  Notification,
+  AppInfo,
+  ResourceLookupFlags,
+  resources_open_stream,
+} = Gio;
 
 import { connect, getEnum } from "./util.js";
 import { env } from "./env.js";
 import { BLANK_URI, MODES } from "./constants.js";
-// import { isUrlAllowedForNavigation } from "./utils.js";
 
 export function buildWebView({
   instance,
