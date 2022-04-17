@@ -1,0 +1,10 @@
+{
+  "compilerOptions": {
+    "strict": true,
+    "typeRoots": ["./node_modules/@types", "./node_modules/@gi-types"],
+    "types": ["gjs-environment", "base-types", "gtk4-types"],
+    "lib": ["ES2019"],
+    "allowSyntheticDefaultImports": true
+  },
+  "include": ["src/**/*"]
+}

@@ -1,6 +1,12 @@
 {
   "private": true,
   "devDependencies": {
+    "@gi-types/base-types": "^1.0.0",
+    "@gi-types/gjs-environment": "^1.0.0",
+    "@gi-types/gtk4": "^4.2.0",
+    "@gi-types/gtk4-types": "^1.0.0",
+    "@gi-types/soup": "^2.72.7",
+    "@gi-types/webkit2": "^2.30.8",
     "@prettier/plugin-xml": "^1.1.0",
     "eslint": "^8.2.0",
     "eslint-plugin-import": "^2.25.3",
