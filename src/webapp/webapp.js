@@ -9,7 +9,7 @@ const { pixbuf_get_from_surface } = Gdk;
 const { get_tmp_dir, build_filenamev } = GLib;
 const { Pixbuf } = GdkPixbuf;
 
-import { promiseTask, once } from "../troll/util.js";
+import { promiseTask, once } from "../troll/src/util.js";
 
 import {
   getWebAppIcon,

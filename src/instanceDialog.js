@@ -1,6 +1,6 @@
 import Gtk from "gi://Gtk";
 
-import { once } from "./troll/util.js";
+import { once } from "./troll/src/util.js";
 
 import { relativePath } from "./util.js";
 
