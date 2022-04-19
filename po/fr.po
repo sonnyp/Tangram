@@ -8,8 +8,8 @@ msgstr ""
 "Project-Id-Version: re.sonny.Tangram\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-12-27 00:55+0100\n"
-"PO-Revision-Date: 2022-03-29 22:06+0000\n"
-"Last-Translator: J. Lavoie <j.lavoie@net-c.ca>\n"
+"PO-Revision-Date: 2022-04-19 06:10+0000\n"
+"Last-Translator: matb <perso@mathieu-bousquet.fr>\n"
 "Language-Team: French <https://hosted.weblate.org/projects/tangram/tangram/fr/>\n"
 "Language: fr\n"
 "MIME-Version: 1.0\n"
@@ -113,7 +113,7 @@ msgstr "Ajout d'une prise en charge pour le téléchargement de fichiers"
 
 #: data/appdata/re.sonny.Tangram.metainfo.xml:85
 msgid "Add home button"
-msgstr ""
+msgstr "Ajouter un bouton d'accueil"
 
 #: data/appdata/re.sonny.Tangram.metainfo.xml:86
 msgid "Better desktop integration"
