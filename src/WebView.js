@@ -29,12 +29,8 @@ const {
   path_get_dirname,
   get_language_names,
 } = GLib;
-const {
-  Notification,
-  AppInfo,
-  ResourceLookupFlags,
-  resources_open_stream,
-} = Gio;
+const { Notification, AppInfo, ResourceLookupFlags, resources_open_stream } =
+  Gio;
 
 import { connect, getEnum } from "./util.js";
 import { env } from "./env.js";
@@ -234,7 +230,7 @@ export function buildWebView({
     create(navigation_action) {
       const request_url = navigation_action.get_request().get_uri();
 
-      log(["create", request_url]);
+      console.debug("create", request_url);
 
       if (webView.mode === MODES.TEMPORARY) {
         webView.load_uri(request_url);
@@ -262,18 +258,21 @@ export function buildWebView({
 
     // https://webkitgtk.org/reference/webkit2gtk/stable/WebKitWebView.html#WebKitWebView-decide-policy
     ["decide-policy"](decision, decision_type) {
-      log(["decide-policy", getEnum(PolicyDecisionType, decision_type)]);
+      console.debug(
+        "decide-policy",
+        getEnum(PolicyDecisionType, decision_type),
+      );
 
       if (decision_type === PolicyDecisionType.NAVIGATION_ACTION) {
         const navigation_type = decision.get_navigation_type();
         // https://webkitgtk.org/reference/webkit2gtk/stable/WebKitNavigationAction.html
         const navigation_action = decision.get_navigation_action();
         const request_url = navigation_action.get_request().get_uri();
-        log([
+        console.debug(
           "navigation",
           getEnum(WebKit2.NavigationType, navigation_type),
           request_url,
-        ]);
+        );
 
         if (didUserRequestOpenInBrowser(navigation_action)) {
           decision.ignore();
@@ -285,7 +284,7 @@ export function buildWebView({
       return false;
     },
     // ["load-changed"](load_event) {
-    //   log(["load-changed", getEnum(WebKit2.LoadEvent, load_event)]);
+    //   console.debug("load-changed", getEnum(WebKit2.LoadEvent, load_event));
     // },
   });
 

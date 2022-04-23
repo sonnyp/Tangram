@@ -171,8 +171,7 @@ export default function Window({ application, state }) {
     instance.url = webview.uri;
 
     const info = await getWebAppInfo(webview);
-    log(`WebApp info for ${instance.url}`);
-    log(JSON.stringify(info, null, 2));
+    console.debug(`WebApp info for ${instance.url}`, info);
 
     instance.url = info.URL;
 

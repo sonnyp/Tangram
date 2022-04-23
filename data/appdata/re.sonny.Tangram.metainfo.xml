@@ -37,6 +37,15 @@
   </screenshots>
   <content_rating type="oars-1.1" />
   <releases>
+    <release version="1.4.2" date="2022-04-23" urgency="high">
+      <description>
+        <ul>
+          <li>Fix a bug preventing to start Tangram</li>
+          <li>Reduce the noisiness of logs</li>
+        </ul>
+      </description>
+    </release>
+
     <release version="1.4.1" date="2022-04-16" urgency="high">
       <description>
         <ul>

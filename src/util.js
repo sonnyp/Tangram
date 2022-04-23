@@ -104,7 +104,7 @@ export function loadStyleSheet(path) {
 
 export function ensureDirectory(path) {
   try {
-    Gio.File.new_for_path(path).make_directory(null);
+    Gio.File.new_for_path(path).make_directory_with_parents(null);
   } catch (err) {
     if (err.code !== Gio.IOErrorEnum.EXISTS) {
       throw err;
