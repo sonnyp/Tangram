@@ -29,7 +29,7 @@ import {
 } from "./instances.js";
 import { buildWebView } from "./WebView.js";
 import { BLANK_URI, MODES } from "./constants.js";
-import * as instances from './instances.js';
+import * as instances from "./instances.js";
 
 export default function Window({ application, state }) {
   const settings = new Settings({
@@ -128,7 +128,9 @@ export default function Window({ application, state }) {
   }
 
   function onNotification(webkit_notification, instance_id) {
-    const priority = instances.get(instance_id).settings.get_enum('notifications-priority')
+    const priority = instances
+      .get(instance_id)
+      .settings.get_enum("notifications-priority");
 
     // TODO
     // report gjs bug webkit_notification.body and webkit_notification.title return undefined
@@ -168,8 +170,7 @@ export default function Window({ application, state }) {
     instance.url = webview.uri;
 
     const info = await getWebAppInfo(webview);
-    log(`WebApp info for ${instance.url}`);
-    log(JSON.stringify(info, null, 2));
+    console.debug(`WebApp info for ${instance.url}`, info);
 
     instance.url = info.URL;
 

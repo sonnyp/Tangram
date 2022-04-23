@@ -194,7 +194,7 @@ export async function getWebAppInfo(webview) {
     return info;
   }
 
-  log(`manifestURL <${manifestURL}>`);
+  console.debug(`manifestURL <${manifestURL}>`);
 
   const manifest = await fetchManifest(manifestURL, webview);
   if (!manifest) {
