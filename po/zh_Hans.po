@@ -1,0 +1,330 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the re.sonny.Tangram package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: re.sonny.Tangram\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2021-12-27 00:55+0100\n"
+"PO-Revision-Date: 2022-03-18 10:57+0000\n"
+"Last-Translator: 微别累特 <1365143958@qq.com>\n"
+"Language-Team: Chinese (Simplified) <https://hosted.weblate.org/projects/tangram/tangram/zh_Hans/>\n"
+"Language: zh_Hans\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: Weblate 4.12-dev\n"
+
+#: data/appdata/re.sonny.Tangram.metainfo.xml:5 data/re.sonny.Tangram.desktop:3
+msgid "Tangram"
+msgstr "七巧板"
+
+#: data/appdata/re.sonny.Tangram.metainfo.xml:6
+msgid "Sonny Piers"
+msgstr ""
+
+#: data/appdata/re.sonny.Tangram.metainfo.xml:10
+#: data/re.sonny.Tangram.desktop:4
+msgid "Browser for your pinned tabs"
+msgstr "固定标签页的浏览器"
+
+#: data/appdata/re.sonny.Tangram.metainfo.xml:13
+msgid "Tangram is a new kind of browser. It is designed to organize and run your Web applications. Each tab is persistent and independent. You can set multiple tabs with different accounts for the same application."
+msgstr "七巧板是一种新型浏览器。它旨在组织和运行网页应用程序。每个标签页都是持久且独立的。可以为同一应用程序设置多个页面并使用不同的帐户。"
+
+#: data/appdata/re.sonny.Tangram.metainfo.xml:17
+msgid "Common use cases:"
+msgstr "常见用例："
+
+#: data/appdata/re.sonny.Tangram.metainfo.xml:20
+msgid "Stay up to date with your favorite communities; Mastodon, Twitter, ..."
+msgstr "与你最喜欢的网络社区平台保持同步：微博……"
+
+#: data/appdata/re.sonny.Tangram.metainfo.xml:22
+msgid "Merge all these chat applications into one; WhatsApp, Messenger, Telegram, ..."
+msgstr "将一些聊天应用程序合并为一个：……"
+
+#: data/appdata/re.sonny.Tangram.metainfo.xml:24
+msgid "Group your organization tools under one application; EMail, Calendar, ..."
+msgstr "工作和日常：邮件、日历日程……"
+
+#: data/appdata/re.sonny.Tangram.metainfo.xml:25
+msgid "One-stop for multiple sources of documentation or information"
+msgstr "多信息源的一站式服务"
+
+#: data/appdata/re.sonny.Tangram.metainfo.xml:42
+msgid "Notifications priority is normal instead of urgent by default"
+msgstr "默认情况下使用普通而非紧急优先级的通知"
+
+#: data/appdata/re.sonny.Tangram.metainfo.xml:43
+msgid "Add a per-tab setting to change notifications priority"
+msgstr ""
+
+#: data/appdata/re.sonny.Tangram.metainfo.xml:44
+msgid "Fix authentication on many popular websites"
+msgstr ""
+
+#: data/appdata/re.sonny.Tangram.metainfo.xml:45
+msgid "Fix Cancel button in tab settings dialog"
+msgstr ""
+
+#: data/appdata/re.sonny.Tangram.metainfo.xml:46
+msgid "Use middle-click or Ctrl+click to open links in the browser"
+msgstr ""
+
+#: data/appdata/re.sonny.Tangram.metainfo.xml:54
+msgid "Fix window title"
+msgstr ""
+
+#: data/appdata/re.sonny.Tangram.metainfo.xml:55
+msgid "Update GNOME runtime to 41"
+msgstr ""
+
+#: data/appdata/re.sonny.Tangram.metainfo.xml:64
+msgid "Fix an issue preventing some sites such as Twitter or Facebook from being added."
+msgstr ""
+
+#: data/appdata/re.sonny.Tangram.metainfo.xml:65
+msgid "Update GNOME runtime to 3.38"
+msgstr ""
+
+#: data/appdata/re.sonny.Tangram.metainfo.xml:73
+msgid "Enable spell checking"
+msgstr ""
+
+#: data/appdata/re.sonny.Tangram.metainfo.xml:74
+msgid "Customizable user-agent per instance"
+msgstr ""
+
+#: data/appdata/re.sonny.Tangram.metainfo.xml:75
+msgid "New project icon/logo"
+msgstr ""
+
+#: data/appdata/re.sonny.Tangram.metainfo.xml:76
+msgid "New tab background color respects dark mode"
+msgstr ""
+
+#: data/appdata/re.sonny.Tangram.metainfo.xml:84
+msgid "Add support for downloading files"
+msgstr ""
+
+#: data/appdata/re.sonny.Tangram.metainfo.xml:85
+msgid "Add home button"
+msgstr ""
+
+#: data/appdata/re.sonny.Tangram.metainfo.xml:86
+msgid "Better desktop integration"
+msgstr ""
+
+#: data/appdata/re.sonny.Tangram.metainfo.xml:87
+msgid "Fix the main window becoming tiny when unmaximizing"
+msgstr ""
+
+#: data/appdata/re.sonny.Tangram.metainfo.xml:88
+msgid "Enable touchpad/touchscreen swipe navigation gestures"
+msgstr ""
+
+#: data/appdata/re.sonny.Tangram.metainfo.xml:96
+msgid "Better notifications handling"
+msgstr ""
+
+#: data/appdata/re.sonny.Tangram.metainfo.xml:97
+msgid "Improved web compatibility and performances"
+msgstr ""
+
+#: data/appdata/re.sonny.Tangram.metainfo.xml:99
+msgid "Tangram now works properly on Flatpak 1.0 (Linux Mint, Ubuntu 18.04, ...)"
+msgstr ""
+
+#: data/re.sonny.Tangram.desktop:13
+msgid "Franz;Ferdi;Rambox;Wavebox;Station;"
+msgstr ""
+
+#: data/re.sonny.Tangram.gschema.xml:22 data/menu.ui:8
+msgid "Tabs position"
+msgstr "标签位置"
+
+#: data/re.sonny.Tangram.gschema.xml:23
+msgid "Sets the position of the tabs"
+msgstr "设置标签的位置"
+
+#: data/re.sonny.Tangram.gschema.xml:28
+msgid "Window width"
+msgstr "窗口宽度"
+
+#: data/re.sonny.Tangram.gschema.xml:29
+msgid "Width of the window"
+msgstr "窗口的宽度"
+
+#: data/re.sonny.Tangram.gschema.xml:34
+msgid "Window height"
+msgstr "窗口高度"
+
+#: data/re.sonny.Tangram.gschema.xml:35
+msgid "Height of the window"
+msgstr "窗口的高度"
+
+#: data/re.sonny.Tangram.gschema.xml:40
+msgid "Window maximized"
+msgstr "窗口最大化"
+
+#: data/re.sonny.Tangram.gschema.xml:41
+msgid "Weither the window is maximized"
+msgstr ""
+
+#: data/re.sonny.Tangram.gschema.xml:46
+msgid "Instances"
+msgstr "实例"
+
+#: data/re.sonny.Tangram.gschema.xml:48
+msgid "Identifiers of instances to be found in /re/sonny/Tangram/instances/"
+msgstr ""
+
+#: data/re.sonny.Tangram.gschema.xml:55 src/instanceDialog.ui:29
+msgid "Name"
+msgstr "标题"
+
+#: data/re.sonny.Tangram.gschema.xml:56
+msgid "Name to display"
+msgstr "要显示的标题"
+
+#: data/re.sonny.Tangram.gschema.xml:60 src/instanceDialog.ui:43
+msgid "URL"
+msgstr "统一资源定位器"
+
+#: data/re.sonny.Tangram.gschema.xml:61
+msgid "Start URL"
+msgstr "起始网址"
+
+#: data/re.sonny.Tangram.gschema.xml:65 src/instanceDialog.ui:79
+msgid "User agent"
+msgstr "用户代理"
+
+#: data/re.sonny.Tangram.gschema.xml:67
+msgid "String that will be used as user agent, to identify the browser to the web servers."
+msgstr "将用作用户代理的字符串，用于服务器标识浏览器。"
+
+#: data/re.sonny.Tangram.gschema.xml:74 src/instanceDialog.ui:59
+msgid "Notifications priority"
+msgstr "通知优先级"
+
+#: data/re.sonny.Tangram.gschema.xml:75
+msgid "Sets the priority of notifications"
+msgstr "设置通知的优先级"
+
+#: data/menu.ui:11
+msgid "Top"
+msgstr "上"
+
+#: data/menu.ui:16
+msgid "Left"
+msgstr "左"
+
+#: data/menu.ui:21
+msgid "Right"
+msgstr "右"
+
+#: data/menu.ui:26
+msgid "Bottom"
+msgstr "下"
+
+#: data/menu.ui:37
+msgid "Keyboard Shortcuts"
+msgstr "快捷键"
+
+#: data/menu.ui:41
+msgid "About Tangram"
+msgstr "关于七巧板"
+
+#: data/shortcuts.ui:17
+msgctxt "shortcut window"
+msgid "General"
+msgstr "常规"
+
+#: data/shortcuts.ui:24
+msgctxt "shortcut window"
+msgid "Go to the next tab"
+msgstr "转到下个标签页"
+
+#: data/shortcuts.ui:36
+msgctxt "shortcut window"
+msgid "Go to the previous tab"
+msgstr "转到上个标签页"
+
+#: data/shortcuts.ui:48
+msgctxt "shortcut window"
+msgid "Move current tab to the left"
+msgstr "向左移动当前标签页"
+
+#: data/shortcuts.ui:60
+msgctxt "shortcut window"
+msgid "Move current tab to the right"
+msgstr "向右移动当前标签页"
+
+#: data/shortcuts.ui:72
+msgctxt "shortcut window"
+msgid "Quit"
+msgstr "退出"
+
+#: data/shortcuts.ui:82
+msgctxt "shortcut window"
+msgid "Shortcuts"
+msgstr "快捷方式"
+
+#: data/shortcuts.ui:92
+msgctxt "shortcut window"
+msgid "Toggle inspector"
+msgstr "切换检查器"
+
+#: data/shortcuts.ui:104
+msgctxt "shortcut window"
+msgid "First – Ninth Tab"
+msgstr "第一个 — 第九个标签页"
+
+#: data/shortcuts.ui:116
+msgctxt "shortcut window"
+msgid "Navigation"
+msgstr "浏览"
+
+#: data/shortcuts.ui:123
+msgctxt "shortcut window"
+msgid "Go to homepage"
+msgstr "转到主页"
+
+#: data/shortcuts.ui:133
+msgctxt "shortcut window"
+msgid "Reload current page"
+msgstr "重新加载当前页面"
+
+#: data/shortcuts.ui:143
+msgctxt "shortcut window"
+msgid "Reload bypassing cache"
+msgstr "绕过缓存重新加载"
+
+#: data/shortcuts.ui:155
+msgctxt "shortcut window"
+msgid "Stop loading current page"
+msgstr "停止加载当前页面"
+
+#: data/shortcuts.ui:165 data/shortcuts.ui:198
+msgctxt "shortcut window"
+msgid "Go back to the previous page"
+msgstr "返回上一页"
+
+#: data/shortcuts.ui:175 data/shortcuts.ui:210
+msgctxt "shortcut window"
+msgid "Go forward to the next page"
+msgstr "前进到下一页"
+
+#: data/shortcuts.ui:185
+msgctxt "shortcut window"
+msgid "Focus the address bar"
+msgstr "聚焦到地址栏"
+
+#. TRANSLATORS: eg. 'Translator Name <your.email@domain.com>' or 'Translator Name https://website.example'
+#: src/AboutDialog.js:35
+msgid "translator-credits"
+msgstr ""
