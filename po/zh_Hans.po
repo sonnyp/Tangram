@@ -8,15 +8,15 @@ msgstr ""
 "Project-Id-Version: re.sonny.Tangram\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-12-27 00:55+0100\n"
-"PO-Revision-Date: 2022-03-18 10:57+0000\n"
-"Last-Translator: 微别累特 <1365143958@qq.com>\n"
+"PO-Revision-Date: 2022-04-29 03:12+0000\n"
+"Last-Translator: Fedor <fed777os@gmail.com>\n"
 "Language-Team: Chinese (Simplified) <https://hosted.weblate.org/projects/tangram/tangram/zh_Hans/>\n"
 "Language: zh_Hans\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Weblate 4.12-dev\n"
+"X-Generator: Weblate 4.12.1-dev\n"
 
 #: data/appdata/re.sonny.Tangram.metainfo.xml:5 data/re.sonny.Tangram.desktop:3
 msgid "Tangram"
@@ -24,7 +24,7 @@ msgstr "七巧板"
 
 #: data/appdata/re.sonny.Tangram.metainfo.xml:6
 msgid "Sonny Piers"
-msgstr ""
+msgstr "Sonny Piers"
 
 #: data/appdata/re.sonny.Tangram.metainfo.xml:10
 #: data/re.sonny.Tangram.desktop:4
@@ -61,87 +61,87 @@ msgstr "默认情况下使用普通而非紧急优先级的通知"
 
 #: data/appdata/re.sonny.Tangram.metainfo.xml:43
 msgid "Add a per-tab setting to change notifications priority"
-msgstr ""
+msgstr "添加每个选项卡设置以更改通知优先级"
 
 #: data/appdata/re.sonny.Tangram.metainfo.xml:44
 msgid "Fix authentication on many popular websites"
-msgstr ""
+msgstr "修复许多流行网站上的身份验证"
 
 #: data/appdata/re.sonny.Tangram.metainfo.xml:45
 msgid "Fix Cancel button in tab settings dialog"
-msgstr ""
+msgstr "修复选项卡设置对话框中的取消按钮"
 
 #: data/appdata/re.sonny.Tangram.metainfo.xml:46
 msgid "Use middle-click or Ctrl+click to open links in the browser"
-msgstr ""
+msgstr "使用中键单击或 Ctrl+单击在浏览器中打开链接"
 
 #: data/appdata/re.sonny.Tangram.metainfo.xml:54
 msgid "Fix window title"
-msgstr ""
+msgstr "修复窗口标题"
 
 #: data/appdata/re.sonny.Tangram.metainfo.xml:55
 msgid "Update GNOME runtime to 41"
-msgstr ""
+msgstr "将 GNOME 运行时更新为 41"
 
 #: data/appdata/re.sonny.Tangram.metainfo.xml:64
 msgid "Fix an issue preventing some sites such as Twitter or Facebook from being added."
-msgstr ""
+msgstr "修复了阻止添加某些网站（例如 Twitter 或 Facebook）的问题。"
 
 #: data/appdata/re.sonny.Tangram.metainfo.xml:65
 msgid "Update GNOME runtime to 3.38"
-msgstr ""
+msgstr "将 GNOME 运行时更新到 3.38"
 
 #: data/appdata/re.sonny.Tangram.metainfo.xml:73
 msgid "Enable spell checking"
-msgstr ""
+msgstr "开启拼写检查"
 
 #: data/appdata/re.sonny.Tangram.metainfo.xml:74
 msgid "Customizable user-agent per instance"
-msgstr ""
+msgstr "每个实例可定制的用户代理"
 
 #: data/appdata/re.sonny.Tangram.metainfo.xml:75
 msgid "New project icon/logo"
-msgstr ""
+msgstr "新项目图标/徽标"
 
 #: data/appdata/re.sonny.Tangram.metainfo.xml:76
 msgid "New tab background color respects dark mode"
-msgstr ""
+msgstr "新标签背景颜色尊重深色模式"
 
 #: data/appdata/re.sonny.Tangram.metainfo.xml:84
 msgid "Add support for downloading files"
-msgstr ""
+msgstr "添加对下载文件的支持"
 
 #: data/appdata/re.sonny.Tangram.metainfo.xml:85
 msgid "Add home button"
-msgstr ""
+msgstr "添加主页按钮"
 
 #: data/appdata/re.sonny.Tangram.metainfo.xml:86
 msgid "Better desktop integration"
-msgstr ""
+msgstr "更好的桌面集成"
 
 #: data/appdata/re.sonny.Tangram.metainfo.xml:87
 msgid "Fix the main window becoming tiny when unmaximizing"
-msgstr ""
+msgstr "修复取消最大化时主窗口变小的问题"
 
 #: data/appdata/re.sonny.Tangram.metainfo.xml:88
 msgid "Enable touchpad/touchscreen swipe navigation gestures"
-msgstr ""
+msgstr "启用触摸板/触摸屏滑动导航手势"
 
 #: data/appdata/re.sonny.Tangram.metainfo.xml:96
 msgid "Better notifications handling"
-msgstr ""
+msgstr "更好的通知处理"
 
 #: data/appdata/re.sonny.Tangram.metainfo.xml:97
 msgid "Improved web compatibility and performances"
-msgstr ""
+msgstr "改进的网络兼容性和性能"
 
 #: data/appdata/re.sonny.Tangram.metainfo.xml:99
 msgid "Tangram now works properly on Flatpak 1.0 (Linux Mint, Ubuntu 18.04, ...)"
-msgstr ""
+msgstr "Tangram 现在可以在 Flatpak 1.0（Linux Mint、Ubuntu 18.04、...）上正常工作"
 
 #: data/re.sonny.Tangram.desktop:13
 msgid "Franz;Ferdi;Rambox;Wavebox;Station;"
-msgstr ""
+msgstr "Franz;Ferdi;Rambox;Wavebox;Station;"
 
 #: data/re.sonny.Tangram.gschema.xml:22 data/menu.ui:8
 msgid "Tabs position"
@@ -173,7 +173,7 @@ msgstr "窗口最大化"
 
 #: data/re.sonny.Tangram.gschema.xml:41
 msgid "Weither the window is maximized"
-msgstr ""
+msgstr "窗口是否最大化"
 
 #: data/re.sonny.Tangram.gschema.xml:46
 msgid "Instances"
@@ -181,7 +181,7 @@ msgstr "实例"
 
 #: data/re.sonny.Tangram.gschema.xml:48
 msgid "Identifiers of instances to be found in /re/sonny/Tangram/instances/"
-msgstr ""
+msgstr "在 /re/sonny/Tangram/instances/ 中找到的实例标识符"
 
 #: data/re.sonny.Tangram.gschema.xml:55 src/instanceDialog.ui:29
 msgid "Name"
@@ -327,4 +327,4 @@ msgstr "聚焦到地址栏"
 #. TRANSLATORS: eg. 'Translator Name <your.email@domain.com>' or 'Translator Name https://website.example'
 #: src/AboutDialog.js:35
 msgid "translator-credits"
-msgstr ""
+msgstr "翻译学分"
