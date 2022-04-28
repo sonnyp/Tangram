@@ -9,7 +9,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-12-27 00:55+0100\n"
 "PO-Revision-Date: 2022-04-29 03:12+0000\n"
-"Last-Translator: Fedor <fed777os@gmail.com>\n"
+"Last-Translator: Kaz Sibuya <sibuyakazokuu@gmail.com>\n"
 "Language-Team: Japanese <https://hosted.weblate.org/projects/tangram/tangram/ja/>\n"
 "Language: ja\n"
 "MIME-Version: 1.0\n"
@@ -181,7 +181,7 @@ msgstr "インスタンス"
 
 #: data/re.sonny.Tangram.gschema.xml:48
 msgid "Identifiers of instances to be found in /re/sonny/Tangram/instances/"
-msgstr ""
+msgstr "/re/sonny/Tangram/instances/ にあるインスタンスの識別子です。"
 
 #: data/re.sonny.Tangram.gschema.xml:55 src/instanceDialog.ui:29
 msgid "Name"
@@ -257,7 +257,7 @@ msgstr "前のタブへ"
 #: data/shortcuts.ui:48
 msgctxt "shortcut window"
 msgid "Move current tab to the left"
-msgstr ""
+msgstr "現在のタブを左に移動"
 
 #: data/shortcuts.ui:60
 msgctxt "shortcut window"
