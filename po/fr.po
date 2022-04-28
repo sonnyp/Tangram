@@ -8,15 +8,15 @@ msgstr ""
 "Project-Id-Version: re.sonny.Tangram\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-12-27 00:55+0100\n"
-"PO-Revision-Date: 2022-04-20 07:11+0000\n"
-"Last-Translator: matb <perso@mathieu-bousquet.fr>\n"
+"PO-Revision-Date: 2022-04-29 03:12+0000\n"
+"Last-Translator: Fedor <fed777os@gmail.com>\n"
 "Language-Team: French <https://hosted.weblate.org/projects/tangram/tangram/fr/>\n"
 "Language: fr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Generator: Weblate 4.12-dev\n"
+"X-Generator: Weblate 4.12.1-dev\n"
 
 #: data/appdata/re.sonny.Tangram.metainfo.xml:5 data/re.sonny.Tangram.desktop:3
 msgid "Tangram"
@@ -116,7 +116,6 @@ msgid "Add home button"
 msgstr "Ajouter un bouton d'accueil"
 
 #: data/appdata/re.sonny.Tangram.metainfo.xml:86
-#, fuzzy
 msgid "Better desktop integration"
 msgstr "Meilleure intégration au bureau"
 
@@ -328,4 +327,4 @@ msgstr "Centrer la barre d'adresse"
 #. TRANSLATORS: eg. 'Translator Name <your.email@domain.com>' or 'Translator Name https://website.example'
 #: src/AboutDialog.js:35
 msgid "translator-credits"
-msgstr ""
+msgstr "crédits-traducteur"
