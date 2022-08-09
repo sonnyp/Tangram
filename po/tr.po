@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: re.sonny.Tangram\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-12-27 00:55+0100\n"
-"PO-Revision-Date: 2022-08-09 08:44+0000\n"
+"PO-Revision-Date: 2022-08-10 09:18+0000\n"
 "Last-Translator: Sabri Ünal <libreajans@gmail.com>\n"
 "Language-Team: Turkish <https://hosted.weblate.org/projects/tangram/tangram/tr/>\n"
 "Language: tr\n"
@@ -97,7 +97,7 @@ msgstr "Yazım denetimi etkinleştirildi"
 
 #: data/appdata/re.sonny.Tangram.metainfo.xml:74
 msgid "Customizable user-agent per instance"
-msgstr "Örnek başına özelleştirilebilir kullanıcı aracısı (user-agent)"
+msgstr "Örnek başına özelleştirilebilir kullanıcı aracısı"
 
 #: data/appdata/re.sonny.Tangram.metainfo.xml:75
 msgid "New project icon/logo"
@@ -149,182 +149,182 @@ msgstr "Sekme konumu"
 
 #: data/re.sonny.Tangram.gschema.xml:23
 msgid "Sets the position of the tabs"
-msgstr ""
+msgstr "Sekmelerin konumunu ayarlar"
 
 #: data/re.sonny.Tangram.gschema.xml:28
 msgid "Window width"
-msgstr ""
+msgstr "Pencere genişliği"
 
 #: data/re.sonny.Tangram.gschema.xml:29
 msgid "Width of the window"
-msgstr ""
+msgstr "Pencerenin genişliği"
 
 #: data/re.sonny.Tangram.gschema.xml:34
 msgid "Window height"
-msgstr ""
+msgstr "Pencere yüksekliği"
 
 #: data/re.sonny.Tangram.gschema.xml:35
 msgid "Height of the window"
-msgstr ""
+msgstr "Pencerenin yüksekliği"
 
 #: data/re.sonny.Tangram.gschema.xml:40
 msgid "Window maximized"
-msgstr ""
+msgstr "Pencere ekranı kapladı"
 
 #: data/re.sonny.Tangram.gschema.xml:41
 msgid "Weither the window is maximized"
-msgstr ""
+msgstr "Pencerenin ekranı kaplama durumu"
 
 #: data/re.sonny.Tangram.gschema.xml:46
 msgid "Instances"
-msgstr ""
+msgstr "Örnekler"
 
 #: data/re.sonny.Tangram.gschema.xml:48
 msgid "Identifiers of instances to be found in /re/sonny/Tangram/instances/"
-msgstr ""
+msgstr "/re/sonny/Tangram/instances/ içinde bulunacak örneklerin tanımlayıcıları"
 
 #: data/re.sonny.Tangram.gschema.xml:55 src/instanceDialog.ui:29
 msgid "Name"
-msgstr ""
+msgstr "Ad"
 
 #: data/re.sonny.Tangram.gschema.xml:56
 msgid "Name to display"
-msgstr ""
+msgstr "Görünecek ad"
 
 #: data/re.sonny.Tangram.gschema.xml:60 src/instanceDialog.ui:43
 msgid "URL"
-msgstr ""
+msgstr "Adres"
 
 #: data/re.sonny.Tangram.gschema.xml:61
 msgid "Start URL"
-msgstr ""
+msgstr "Başlangıç Adresi"
 
 #: data/re.sonny.Tangram.gschema.xml:65 src/instanceDialog.ui:79
 msgid "User agent"
-msgstr ""
+msgstr "Kullanıcı aracısı"
 
 #: data/re.sonny.Tangram.gschema.xml:67
 msgid "String that will be used as user agent, to identify the browser to the web servers."
-msgstr ""
+msgstr "Web tarayıcıyı sunuculara tanımlamaya yarayan, kullanıcı aracısı olarak kullanılacak dizge."
 
 #: data/re.sonny.Tangram.gschema.xml:74 src/instanceDialog.ui:59
 msgid "Notifications priority"
-msgstr ""
+msgstr "Bildirim önceliği"
 
 #: data/re.sonny.Tangram.gschema.xml:75
 msgid "Sets the priority of notifications"
-msgstr ""
+msgstr "Bildirimlerin önceliğini ayarlar"
 
 #: data/menu.ui:11
 msgid "Top"
-msgstr ""
+msgstr "Üst"
 
 #: data/menu.ui:16
 msgid "Left"
-msgstr ""
+msgstr "Sol"
 
 #: data/menu.ui:21
 msgid "Right"
-msgstr ""
+msgstr "Sağ"
 
 #: data/menu.ui:26
 msgid "Bottom"
-msgstr ""
+msgstr "Alt"
 
 #: data/menu.ui:37
 msgid "Keyboard Shortcuts"
-msgstr ""
+msgstr "Klavye Kısayolları"
 
 #: data/menu.ui:41
 msgid "About Tangram"
-msgstr ""
+msgstr "Tangram Hakkında"
 
 #: data/shortcuts.ui:17
 msgctxt "shortcut window"
 msgid "General"
-msgstr ""
+msgstr "Genel"
 
 #: data/shortcuts.ui:24
 msgctxt "shortcut window"
 msgid "Go to the next tab"
-msgstr ""
+msgstr "Sonraki sekmeye git"
 
 #: data/shortcuts.ui:36
 msgctxt "shortcut window"
 msgid "Go to the previous tab"
-msgstr ""
+msgstr "Önceki sekmeye git"
 
 #: data/shortcuts.ui:48
 msgctxt "shortcut window"
 msgid "Move current tab to the left"
-msgstr ""
+msgstr "Geçerli sekmeyi sola taşı"
 
 #: data/shortcuts.ui:60
 msgctxt "shortcut window"
 msgid "Move current tab to the right"
-msgstr ""
+msgstr "Geçerli sekmeyi sağa taşı"
 
 #: data/shortcuts.ui:72
 msgctxt "shortcut window"
 msgid "Quit"
-msgstr ""
+msgstr "Çık"
 
 #: data/shortcuts.ui:82
 msgctxt "shortcut window"
 msgid "Shortcuts"
-msgstr ""
+msgstr "Kısayollar"
 
 #: data/shortcuts.ui:92
 msgctxt "shortcut window"
 msgid "Toggle inspector"
-msgstr ""
+msgstr "İnceleyiciyi aç/kapat"
 
 #: data/shortcuts.ui:104
 msgctxt "shortcut window"
 msgid "First – Ninth Tab"
-msgstr ""
+msgstr "İlk – Dokuzuncu Sekme"
 
 #: data/shortcuts.ui:116
 msgctxt "shortcut window"
 msgid "Navigation"
-msgstr ""
+msgstr "Gezinme"
 
 #: data/shortcuts.ui:123
 msgctxt "shortcut window"
 msgid "Go to homepage"
-msgstr ""
+msgstr "Başlangıç sayfasına git"
 
 #: data/shortcuts.ui:133
 msgctxt "shortcut window"
 msgid "Reload current page"
-msgstr ""
+msgstr "Geçerli sayfayı yeniden yükle"
 
 #: data/shortcuts.ui:143
 msgctxt "shortcut window"
 msgid "Reload bypassing cache"
-msgstr ""
+msgstr "Önbelleği atlayarak yeniden yükle"
 
 #: data/shortcuts.ui:155
 msgctxt "shortcut window"
 msgid "Stop loading current page"
-msgstr ""
+msgstr "Geçerli sayfanın yüklenmesini durdur"
 
 #: data/shortcuts.ui:165 data/shortcuts.ui:198
 msgctxt "shortcut window"
 msgid "Go back to the previous page"
-msgstr ""
+msgstr "Önceki sayfaya git"
 
 #: data/shortcuts.ui:175 data/shortcuts.ui:210
 msgctxt "shortcut window"
 msgid "Go forward to the next page"
-msgstr ""
+msgstr "Sonraki sayfaya git"
 
 #: data/shortcuts.ui:185
 msgctxt "shortcut window"
 msgid "Focus the address bar"
-msgstr ""
+msgstr "Adres çubuğuna odaklan"
 
 #. TRANSLATORS: eg. 'Translator Name <your.email@domain.com>' or 'Translator Name https://website.example'
 #: src/AboutDialog.js:35
 msgid "translator-credits"
-msgstr ""
+msgstr "Sabri Ünal <libreajans@gmail.com>"
