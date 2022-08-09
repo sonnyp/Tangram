@@ -8,142 +8,144 @@ msgstr ""
 "Project-Id-Version: re.sonny.Tangram\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-12-27 00:55+0100\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: Automatically generated\n"
-"Language-Team: none\n"
+"PO-Revision-Date: 2022-08-09 08:44+0000\n"
+"Last-Translator: Sabri Ünal <libreajans@gmail.com>\n"
+"Language-Team: Turkish <https://hosted.weblate.org/projects/tangram/tangram/tr/>\n"
 "Language: tr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 4.14-dev\n"
 
 #: data/appdata/re.sonny.Tangram.metainfo.xml:5 data/re.sonny.Tangram.desktop:3
 msgid "Tangram"
-msgstr ""
+msgstr "Tangram"
 
 #: data/appdata/re.sonny.Tangram.metainfo.xml:6
 msgid "Sonny Piers"
-msgstr ""
+msgstr "Sonny Piers"
 
 #: data/appdata/re.sonny.Tangram.metainfo.xml:10
 #: data/re.sonny.Tangram.desktop:4
 msgid "Browser for your pinned tabs"
-msgstr ""
+msgstr "Sabitlenmiş sekmeleriniz için tarayıcı"
 
 #: data/appdata/re.sonny.Tangram.metainfo.xml:13
 msgid "Tangram is a new kind of browser. It is designed to organize and run your Web applications. Each tab is persistent and independent. You can set multiple tabs with different accounts for the same application."
-msgstr ""
+msgstr "Tangram yeni bir tarayıcı türüdür. Web uygulamalarınızı organize etmek ve çalıştırmak için tasarlanmıştır. Her sekme kalıcı ve bağımsızdır. Aynı uygulama için farklı hesaplara sahip birden fazla sekme ayarlayabilirsiniz."
 
 #: data/appdata/re.sonny.Tangram.metainfo.xml:17
 msgid "Common use cases:"
-msgstr ""
+msgstr "Yaygın kullanım durumları:"
 
 #: data/appdata/re.sonny.Tangram.metainfo.xml:20
 msgid "Stay up to date with your favorite communities; Mastodon, Twitter, ..."
-msgstr ""
+msgstr "Gözde topluluklarınızla güncel kalın; Mastodon, Twitter, ..."
 
 #: data/appdata/re.sonny.Tangram.metainfo.xml:22
 msgid "Merge all these chat applications into one; WhatsApp, Messenger, Telegram, ..."
-msgstr ""
+msgstr "Tüm sohbet uygulamalarını tek uygulamada birleştirin; WhatsApp, Messenger, Telegram, ..."
 
 #: data/appdata/re.sonny.Tangram.metainfo.xml:24
 msgid "Group your organization tools under one application; EMail, Calendar, ..."
-msgstr ""
+msgstr "Kurumsal araçlarınızı tek uygulama altında toplayın; E-posta, Takvim, ..."
 
 #: data/appdata/re.sonny.Tangram.metainfo.xml:25
 msgid "One-stop for multiple sources of documentation or information"
-msgstr ""
+msgstr "Birden fazla belge veya bilgi kaynağı için tek durak"
 
 #: data/appdata/re.sonny.Tangram.metainfo.xml:42
 msgid "Notifications priority is normal instead of urgent by default"
-msgstr ""
+msgstr "Bildirim önceliği varsayılan olarak acil yerine normaldir"
 
 #: data/appdata/re.sonny.Tangram.metainfo.xml:43
 msgid "Add a per-tab setting to change notifications priority"
-msgstr ""
+msgstr "Bildirim önceliğini değiştirmek için sekme başına ayar ekleme"
 
 #: data/appdata/re.sonny.Tangram.metainfo.xml:44
 msgid "Fix authentication on many popular websites"
-msgstr ""
+msgstr "Birçok yaygın web sitesinde kimlik doğrulaması için düzeltme"
 
 #: data/appdata/re.sonny.Tangram.metainfo.xml:45
 msgid "Fix Cancel button in tab settings dialog"
-msgstr ""
+msgstr "Sekme ayarları iletişim kutusundaki İptal düğmesi için düzeltme"
 
 #: data/appdata/re.sonny.Tangram.metainfo.xml:46
 msgid "Use middle-click or Ctrl+click to open links in the browser"
-msgstr ""
+msgstr "Bağlantıları tarayıcıda açmak için orta tıklama veya Ctrl+tıklama kullanımı"
 
 #: data/appdata/re.sonny.Tangram.metainfo.xml:54
 msgid "Fix window title"
-msgstr ""
+msgstr "Pencere başlığı için düzeltme"
 
 #: data/appdata/re.sonny.Tangram.metainfo.xml:55
 msgid "Update GNOME runtime to 41"
-msgstr ""
+msgstr "GNOME çalışma zaman 41'e güncellendi"
 
 #: data/appdata/re.sonny.Tangram.metainfo.xml:64
 msgid "Fix an issue preventing some sites such as Twitter or Facebook from being added."
-msgstr ""
+msgstr "Twitter veya Facebook gibi bazı sitelerin eklenmesini engelleyen bir sorun düzeltildi."
 
 #: data/appdata/re.sonny.Tangram.metainfo.xml:65
 msgid "Update GNOME runtime to 3.38"
-msgstr ""
+msgstr "GNOME çalışma zamanı 3.38'e güncellendi"
 
 #: data/appdata/re.sonny.Tangram.metainfo.xml:73
 msgid "Enable spell checking"
-msgstr ""
+msgstr "Yazım denetimi etkinleştirildi"
 
 #: data/appdata/re.sonny.Tangram.metainfo.xml:74
 msgid "Customizable user-agent per instance"
-msgstr ""
+msgstr "Örnek başına özelleştirilebilir kullanıcı aracısı (user-agent)"
 
 #: data/appdata/re.sonny.Tangram.metainfo.xml:75
 msgid "New project icon/logo"
-msgstr ""
+msgstr "Yeni proje simgesi/logosu"
 
 #: data/appdata/re.sonny.Tangram.metainfo.xml:76
 msgid "New tab background color respects dark mode"
-msgstr ""
+msgstr "Yeni sekme arka plan rengi karanlık kipe uyar"
 
 #: data/appdata/re.sonny.Tangram.metainfo.xml:84
 msgid "Add support for downloading files"
-msgstr ""
+msgstr "Dosya indirme desteği eklendi"
 
 #: data/appdata/re.sonny.Tangram.metainfo.xml:85
 msgid "Add home button"
-msgstr ""
+msgstr "Ev düğmesi eklendi"
 
 #: data/appdata/re.sonny.Tangram.metainfo.xml:86
 msgid "Better desktop integration"
-msgstr ""
+msgstr "Daha iyi masaüstü entegrasyonu"
 
 #: data/appdata/re.sonny.Tangram.metainfo.xml:87
 msgid "Fix the main window becoming tiny when unmaximizing"
-msgstr ""
+msgstr "Ana pencerenin Büyütme işleminden sonra küçücük olması hatası düzeltildi"
 
 #: data/appdata/re.sonny.Tangram.metainfo.xml:88
 msgid "Enable touchpad/touchscreen swipe navigation gestures"
-msgstr ""
+msgstr "Dokunmatik yüzey/dokunmatik ekran kaydırarak gezinme hareketleri etkinleştirildi"
 
 #: data/appdata/re.sonny.Tangram.metainfo.xml:96
 msgid "Better notifications handling"
-msgstr ""
+msgstr "Daha iyi bildirim yönetimi"
 
 #: data/appdata/re.sonny.Tangram.metainfo.xml:97
 msgid "Improved web compatibility and performances"
-msgstr ""
+msgstr "Web uyumluluğu ve performans iyileştirmeleri"
 
 #: data/appdata/re.sonny.Tangram.metainfo.xml:99
 msgid "Tangram now works properly on Flatpak 1.0 (Linux Mint, Ubuntu 18.04, ...)"
-msgstr ""
+msgstr "Tangram artık Flatpak 1.0 üzerinde düzgün çalışıyor (Linux Mint, Ubuntu 18.04, ...)"
 
 #: data/re.sonny.Tangram.desktop:13
 msgid "Franz;Ferdi;Rambox;Wavebox;Station;"
-msgstr ""
+msgstr "Franz;Ferdi;Rambox;Wavebox;Station;"
 
 #: data/re.sonny.Tangram.gschema.xml:22 data/menu.ui:8
 msgid "Tabs position"
-msgstr ""
+msgstr "Sekme konumu"
 
 #: data/re.sonny.Tangram.gschema.xml:23
 msgid "Sets the position of the tabs"
