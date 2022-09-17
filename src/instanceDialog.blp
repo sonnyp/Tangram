@@ -1,0 +1,63 @@
+using Gtk 4.0;
+using Adw 1;
+
+Dialog dialog {
+  modal: true;
+  use-header-bar: 1;
+
+  [action]
+  Button button_cancel {
+    label: "Cancel";
+  }
+
+  [action]
+  Button button_save {
+    label: "Save";
+  }
+
+  Adw.PreferencesPage {
+    vexpand: true;
+
+    Adw.PreferencesGroup {
+      Adw.PreferencesRow {
+        Adw.ActionRow {
+          title: _("Name");
+
+          Entry name {
+            valign: center;
+          }
+        }
+      }
+
+      Adw.PreferencesRow {
+        Adw.ActionRow {
+          title: _("URL");
+
+          Entry url {
+            valign: center;
+            hexpand: true;
+          }
+        }
+      }
+
+      Adw.ComboRow notifications-priority {
+        title: _("Notifications priority");
+        model: 
+        StringList {
+        }
+
+        ;
+      }
+
+      Adw.PreferencesRow {
+        Adw.ActionRow {
+          title: _("User agent");
+
+          Entry user-agent {
+            valign: center;
+          }
+        }
+      }
+    }
+  }
+}

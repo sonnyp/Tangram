@@ -1,0 +1,17 @@
+using Gtk 4.0;
+using Adw 1;
+
+Adw.ApplicationWindow window {
+  resizable: true;
+  default-width: 800;
+  default-height: 600;
+  title: "Tangram";
+
+  Box main {
+    orientation: vertical;
+
+    Stack stack {
+      transition-type: crossfade;
+    }
+  }
+}

@@ -11,6 +11,15 @@ configure_file(
   install_dir: join_paths(get_option('datadir'), 'dbus-1/services')
 )
 
+blueprints = custom_target('blueprints',
+  input: files(
+    'menu.blp',
+    'shortcuts.blp',
+  ),
+  output: '.',
+  command: [find_program('blueprint-compiler'), 'batch-compile', '@OUTPUT@', '@CURRENT_SOURCE_DIR@', '@INPUT@'],
+)
+
 desktop_file = i18n.merge_file(
   input: 're.sonny.Tangram.desktop',
   output: 're.sonny.Tangram.desktop',
@@ -32,6 +41,7 @@ data_res = gnome.compile_resources('re.sonny.Tangram.data',
   gresource_bundle: true,
   install: true,
   install_dir: pkgdatadir,
+  dependencies: blueprints,
 )
 
 install_data('re.sonny.Tangram.gschema.xml',

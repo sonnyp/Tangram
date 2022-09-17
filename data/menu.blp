@@ -1,0 +1,49 @@
+using Gtk 4.0;
+
+PopoverMenu menu_popover {
+  menu-model: menu_model;
+}
+
+menu menu_model {
+  submenu {
+    label: _("Tabs position");
+
+    section {
+      item {
+        label: _("Top");
+        action: "win.tabs-position";
+        target: "top";
+      }
+
+      item {
+        label: _("Left");
+        action: "win.tabs-position";
+        target: "left";
+      }
+
+      item {
+        label: _("Right");
+        action: "win.tabs-position";
+        target: "right";
+      }
+
+      item {
+        label: _("Bottom");
+        action: "win.tabs-position";
+        target: "bottom";
+      }
+    }
+  }
+
+  section {
+    item {
+      label: _("Keyboard Shortcuts");
+      action: "app.shortcuts";
+    }
+
+    item {
+      label: _("About Tangram");
+      action: "app.about";
+    }
+  }
+}
