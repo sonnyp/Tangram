@@ -3,10 +3,6 @@ import { programInvocationName } from "system";
 import GLib from "gi://GLib";
 import Gio from "gi://Gio";
 
-// FIXME: investigate pkg not being defined
-// for some reason globalThis appears to be different in re.sonny.Tangram / scripts
-// globalThis.pkg = imports.package;
-
 const { SimpleAction } = Gio;
 const {
   getenv,

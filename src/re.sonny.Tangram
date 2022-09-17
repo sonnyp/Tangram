@@ -2,23 +2,6 @@
 
 // -*- mode: js; -*-
 
-// const { programInvocationName } = imports.system;
-
-// imports.package.init({
-//   name: "@PACKAGE_NAME@",
-//   version: "@PACKAGE_VERSION@",
-//   prefix: "@prefix@",
-//   libdir: "@libdir@",
-//   datadir: "@datadir@",
-// });
-
-// // eslint-disable-next-line import/no-unresolved
-// import main from "file://@datadir@/@PACKAGE_NAME@/main.js";
-
-// main([programInvocationName, ...ARGV]);
-
-// #!/usr/bin/env -S gjs -m
-
 globalThis.__DEV__ = false;
 
 import Gio from "gi://Gio";
@@ -39,7 +22,6 @@ imports.package.init({
 });
 
 const loop = GLib.MainLoop.new(null, false);
-// eslint-disable-next-line import/no-unresolved
 import("resource:///re/sonny/Tangram/src/main.js")
   .then(({ default: main }) => {
     loop.quit();
