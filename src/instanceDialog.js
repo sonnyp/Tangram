@@ -1,6 +1,6 @@
 import Gtk from "gi://Gtk";
 
-import { once } from "./troll/src/util.js";
+import { once } from "../troll/src/util.js";
 import builder from "./instanceDialog.blp" assert { type: "builder" };
 
 export function editInstanceDialog(props) {

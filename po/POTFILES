@@ -29,3 +29,4 @@ src/menu.blp
 src/window.blp
 src/instanceDialog.blp
 src/shortcuts.blp
+troll/src/util.js

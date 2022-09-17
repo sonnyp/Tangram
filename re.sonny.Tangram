@@ -21,7 +21,7 @@ globalThis.__DEV__ = true;
 import { programInvocationName } from "system";
 import GLib from "gi://GLib";
 import Gio from "gi://Gio";
-import { build as gjspack } from "./src/troll/gjspack/src/gjspack.js";
+import { build as gjspack } from "./troll/gjspack/src/gjspack.js";
 
 const { gresource_path, prefix } = gjspack({
   appid: "re.sonny.Tangram",

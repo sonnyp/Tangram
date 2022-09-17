@@ -1,9 +1,7 @@
 pkgdatadir = join_paths(get_option('datadir'), meson.project_name())
 gnome = import('gnome')
 
-# install_subdir('.', install_dir : pkgdatadir, exclude_files: ['re.sonny.Tangram', 'meson.build'])
-
-gjspack = find_program('./troll/gjspack/bin/gjspack')
+gjspack = find_program('../troll/gjspack/bin/gjspack')
 gresource = custom_target(meson.project_name() + '.gresource',
   input: ['main.js', '../po/POTFILES'],
   output: meson.project_name() + '.gresource',

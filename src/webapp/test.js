@@ -7,7 +7,7 @@ import Soup from "gi://Soup";
 import { exit } from "system";
 
 import { getWebAppInfo } from "./webapp.js";
-import * as assert from "../troll/tst/assert.js";
+import * as assert from "../../troll/tst/assert.js";
 
 // Gtk needs to be initialized for WebKitGTK
 Gtk.init(null);

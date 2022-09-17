@@ -23,16 +23,16 @@
         {
           "type": "git",
           "url": "https://gitlab.gnome.org/jwestman/blueprint-compiler.git",
-          "tag": "v0.2.0",
-          "commit": "87cedc2c7e48b01dc1b07aef937e2fe02111b18c"
+          "tag": "v0.4.0",
+          "commit": "75a6d95988736ec0471d22ceb07579c0cedac2ad"
         }
       ]
     },
     {
       "name": "Tangram",
-      "builddir": true,
       "buildsystem": "meson",
-      "sources": [{ "type": "dir", "path": "./" }]
+      "builddir": true,
+      "sources": [{ "type": "dir", "path": "." }]
     }
   ]
 }
