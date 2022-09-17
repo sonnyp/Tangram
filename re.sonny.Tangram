@@ -2,16 +2,74 @@
 
 // -*- mode: js; -*-
 
-const { programInvocationName } = imports.system;
+// const { programInvocationName } = imports.system;
 
-// https://gitlab.gnome.org/GNOME/gjs/blob/master/doc/Package/Specification.md
-// https://gitlab.gnome.org/GNOME/gjs/-/blob/master/modules/script/package.js
+// // https://gitlab.gnome.org/GNOME/gjs/blob/master/doc/Package/Specification.md
+// // https://gitlab.gnome.org/GNOME/gjs/-/blob/master/modules/script/package.js
+// imports.package.init({
+//   name: "re.sonny.Tangram",
+//   version: "dev",
+//   prefix: "", // Required but not used when running from source
+// });
+
+// import main from "./src/main.js";
+
+// main([programInvocationName, ...ARGV]);
+
+globalThis.__DEV__ = true;
+
+import { programInvocationName } from "system";
+import GLib from "gi://GLib";
+import Gio from "gi://Gio";
+import { build as gjspack } from "./src/troll/gjspack/src/gjspack.js";
+
+const { gresource_path, prefix } = gjspack({
+  appid: "re.sonny.Tangram",
+  entry: Gio.File.new_for_path("./src/main.js"),
+  output: Gio.File.new_for_path("./src"),
+  potfiles: Gio.File.new_for_path("./po/POTFILES"),
+});
+const resource = Gio.resource_load(gresource_path);
+Gio.resources_register(resource);
+
+const [filename] = GLib.filename_from_uri(import.meta.url);
+const dirname = GLib.path_get_dirname(filename);
+
+const [, , stderr, status] = GLib.spawn_command_line_sync(
+  `glib-compile-schemas --strict ${GLib.canonicalize_filename(
+    "./data",
+    dirname,
+  )}`,
+);
+if (status !== 0) {
+  throw new Error(new TextDecoder().decode(stderr));
+}
+
+GLib.setenv(
+  "GSETTINGS_SCHEMA_DIR",
+  GLib.canonicalize_filename("./data", dirname),
+  true,
+);
+
 imports.package.init({
   name: "re.sonny.Tangram",
   version: "dev",
-  prefix: "", // Required but not used when running from source
+  prefix: "",
+  libdir: "",
+  datadir: "",
+  // prefix: "@prefix@",
+  // libdir: "@libdir@",
+  // datadir: "@datadir@",
 });
 
-import main from "./src/main.js";
-
-main([programInvocationName, ...ARGV]);
+const loop = GLib.MainLoop.new(null, false);
+import(`resource://${prefix}/src/main.js`)
+  .then(({ default: main }) => {
+    loop.quit();
+    main([programInvocationName, ...ARGV], {
+      version: "dev",
+      datadir: ".",
+    });
+  })
+  .catch(logError);
+loop.run();

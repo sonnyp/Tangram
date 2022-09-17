@@ -1,16 +1,12 @@
 import Gtk from "gi://Gtk";
-import Gio from "gi://Gio";
 import GObject from "gi://GObject";
-import { relativePath } from "./util.js";
 import Gdk from "gi://Gdk";
-
-const file = Gio.File.new_for_path(relativePath("TabWidget.ui"));
-const [, template] = file.load_contents(null);
+import Template from "./TabWidget.blp" assert { type: "uri" };
 
 export default GObject.registerClass(
   {
     GTypeName: "Tab",
-    Template: template,
+    Template,
     Children: ["popover", "image"],
     InternalChildren: ["label"],
     Properties: {

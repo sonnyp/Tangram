@@ -1,11 +1,12 @@
 import GLib from "gi://GLib";
 import Gio from "gi://Gio";
-import Gtk from "gi://Gtk";
 
 import AboutDialog from "./AboutDialog.js";
 
 import * as instances from "./instances.js";
 import { editInstanceDialog } from "./instanceDialog.js";
+
+import builder from "./shortcuts.blp" assert { type: "builder" };
 
 export default function Actions({
   window,
@@ -68,9 +69,6 @@ export default function Actions({
     parameter_type: null,
   });
   showShortcutsDialog.connect("activate", () => {
-    const builder = Gtk.Builder.new_from_resource(
-      "/re/sonny/Tangram/data/shortcuts.ui",
-    );
     const shortcutsWindow = builder.get_object("shortcuts-window");
     shortcutsWindow.set_transient_for(window);
     shortcutsWindow.present();

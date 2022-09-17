@@ -2,7 +2,33 @@
 
 // -*- mode: js; -*-
 
-const { programInvocationName } = imports.system;
+// const { programInvocationName } = imports.system;
+
+// imports.package.init({
+//   name: "@PACKAGE_NAME@",
+//   version: "@PACKAGE_VERSION@",
+//   prefix: "@prefix@",
+//   libdir: "@libdir@",
+//   datadir: "@datadir@",
+// });
+
+// // eslint-disable-next-line import/no-unresolved
+// import main from "file://@datadir@/@PACKAGE_NAME@/main.js";
+
+// main([programInvocationName, ...ARGV]);
+
+// #!/usr/bin/env -S gjs -m
+
+globalThis.__DEV__ = false;
+
+import Gio from "gi://Gio";
+import GLib from "gi://GLib";
+import { programInvocationName } from "system";
+
+const resource = Gio.resource_load(
+  "@datadir@/@PACKAGE_NAME@/re.sonny.Tangram.gresource",
+);
+Gio.resources_register(resource);
 
 imports.package.init({
   name: "@PACKAGE_NAME@",
@@ -12,7 +38,15 @@ imports.package.init({
   datadir: "@datadir@",
 });
 
+const loop = GLib.MainLoop.new(null, false);
 // eslint-disable-next-line import/no-unresolved
-import main from "file://@datadir@/@PACKAGE_NAME@/main.js";
-
-main([programInvocationName, ...ARGV]);
+import("resource:///re/sonny/Tangram/src/main.js")
+  .then(({ default: main }) => {
+    loop.quit();
+    main([programInvocationName, ...ARGV], {
+      version: "@PACKAGE_VERSION@",
+      datadir: "@datadir@",
+    });
+  })
+  .catch(logError);
+loop.run();

@@ -1,5 +1,5 @@
 {
-  "app-id": "re.sonny.Tangram",
+  "id": "re.sonny.Tangram",
   "runtime": "org.gnome.Platform",
   "runtime-version": "master",
   "sdk": "org.gnome.Sdk",
@@ -15,6 +15,19 @@
     "--require-version=1.1.2"
   ],
   "modules": [
+    {
+      "name": "blueprint",
+      "buildsystem": "meson",
+      "builddir": true,
+      "sources": [
+        {
+          "type": "git",
+          "url": "https://gitlab.gnome.org/jwestman/blueprint-compiler.git",
+          "tag": "v0.2.0",
+          "commit": "87cedc2c7e48b01dc1b07aef937e2fe02111b18c"
+        }
+      ]
+    },
     {
       "name": "Tangram",
       "builddir": true,

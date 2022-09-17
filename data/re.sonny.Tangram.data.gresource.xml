@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <gresources>
   <gresource prefix="/re/sonny/Tangram/data">
-    <file>menu.ui</file>
-    <file>shortcuts.ui</file>
     <file>blank.html</file>
     <file
       alias="icon.svg"

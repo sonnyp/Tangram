@@ -1,17 +1,16 @@
 import Gtk from "gi://Gtk";
 import WebKit2 from "gi://WebKit2";
 import Adw from "gi://Adw";
+import builder from "./menu.blp" assert { type: "builder" };
 
 const { Clamp } = Adw;
-const { Button, Stack, StackTransitionType, Box, MenuButton, Builder, Label } =
-  Gtk;
+const { Button, Stack, StackTransitionType, Box, MenuButton, Label } = Gtk;
 const { LoadEvent, uri_for_display } = WebKit2;
 
 import AddressBar from "./AddressBar.js";
 import { BLANK_URI } from "./constants.js";
 
 function Menu() {
-  const builder = Builder.new_from_resource("/re/sonny/Tangram/data/menu.ui");
   const popover = builder.get_object("menu_popover");
 
   const button = new MenuButton({

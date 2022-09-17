@@ -1,11 +1,10 @@
-import Gtk from "gi://Gtk";
 import GLib from "gi://GLib";
 import Gio from "gi://Gio";
 
 import Notebook from "./Notebook.js";
 import Shortcuts from "./Shortcuts.js";
 import Actions from "./Actions.js";
-import { Settings, observeSetting, relativePath } from "./util.js";
+import { Settings, observeSetting } from "./util.js";
 import {
   getWebAppInfo,
   // download,
@@ -26,6 +25,8 @@ import {
 import { buildWebView } from "./WebView.js";
 import { BLANK_URI, MODES } from "./constants.js";
 import * as instances from "./instances.js";
+
+import builder from "./window.blp" assert { type: "builder" };
 
 export default function Window({ application, state }) {
   const settings = new Settings({
@@ -89,8 +90,6 @@ export default function Window({ application, state }) {
       inspector.show();
     }
   }
-
-  const builder = Gtk.Builder.new_from_file(relativePath("./window.ui"));
 
   const window = builder.get_object("window");
   window.set_application(application);
