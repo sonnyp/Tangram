@@ -1,6 +1,12 @@
 env:
-  es6: true
-  es2020: true
+  es2022: true
+parser: "@babel/eslint-parser"
+parserOptions:
+  sourceType: module
+  requireConfigFile: false
+  babelOptions:
+    plugins:
+      - "@babel/plugin-syntax-import-assertions"
 extends:
   - "eslint:recommended"
   - "plugin:import/errors"
@@ -19,8 +25,6 @@ globals:
   window: readonly
   globalThis: readonly
   console: readonly
-parserOptions:
-  sourceType: module
 rules:
   # https://eslint.org/docs/rules/no-restricted-globals
   no-restricted-globals: [error, window, printerr, print, Intl, Debugger]
