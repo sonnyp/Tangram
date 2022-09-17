@@ -2,17 +2,17 @@
   "private": true,
   "devDependencies": {
     "@gi-types/base-types": "^1.0.0",
-    "@gi-types/gjs-environment": "^1.0.0",
-    "@gi-types/gtk4": "^4.2.0",
+    "@gi-types/gjs-environment": "^1.1.0",
+    "@gi-types/gtk4": "^4.6.1",
     "@gi-types/gtk4-types": "^1.0.0",
     "@gi-types/soup": "^2.72.7",
     "@gi-types/webkit2": "^2.30.8",
-    "@prettier/plugin-xml": "^1.1.0",
-    "eslint": "^8.2.0",
-    "eslint-plugin-import": "^2.25.3",
-    "husky": "^7.0.4",
-    "lint-staged": "^12.0.3",
-    "prettier": "^2.4.1"
+    "@prettier/plugin-xml": "^2.2.0",
+    "eslint": "^8.23.1",
+    "eslint-plugin-import": "^2.26.0",
+    "husky": "^8.0.1",
+    "lint-staged": "^13.0.3",
+    "prettier": "^2.7.1"
   },
   "lint-staged": {
     "*.{js,cjs,mjs}": "eslint --cache --fix",
