@@ -7,7 +7,6 @@ import Soup from "gi://Soup?version=3.0";
 import { exit } from "system";
 
 import { getWebAppInfo } from "./webapp.js";
-// import * as assert from "../../troll/tst/assert.js";
 
 const assert = {
   is(a, b) {

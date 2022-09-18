@@ -26,7 +26,6 @@ export function download(webview, url, destination) {
 }
 
 export function runJavaScript(webview, script) {
-  // return Promise.resolve(null);
   return promiseTask(
     webview,
     "run_javascript",
