@@ -2,6 +2,7 @@ data/appdata/re.sonny.Tangram.metainfo.xml
 data/re.sonny.Tangram.desktop
 data/re.sonny.Tangram.gschema.xml
 
+
 src/env.js
 src/util.js
 src/state.js
@@ -11,8 +12,10 @@ src/constants.js
 src/utils.js
 src/AboutDialog.js
 src/instances.js
-src/troll/src/util.js
+troll/src/util.js
+src/instanceDialog.blp
 src/instanceDialog.js
+src/shortcuts.blp
 src/Actions.js
 src/webapp/ephy.js
 src/webapp/webapp.js
@@ -20,13 +23,10 @@ src/WebView.js
 src/TabWidget.blp
 src/TabWidget.js
 src/tab.js
+src/menu.blp
 src/AddressBar.js
 src/Header.js
+src/window.blp
 src/window.js
 src/application.js
 src/main.js
-src/menu.blp
-src/window.blp
-src/instanceDialog.blp
-src/shortcuts.blp
-troll/src/util.js
