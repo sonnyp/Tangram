@@ -2,13 +2,13 @@
 
 // -*- mode: js; -*-
 
-globalThis.__DEV__ = false;
-
-import Gio from "gi://Gio";
 import GLib from "gi://GLib";
-import { programInvocationName } from "system";
+import Gio from "gi://Gio";
+import { exit } from "system";
 import Gtk from "gi://Gtk?version=4.0";
 import Adw from "gi://Adw";
+
+globalThis.__DEV__ = false;
 
 Gtk.init();
 Adw.init();
@@ -28,11 +28,12 @@ imports.package.init({
 
 const loop = GLib.MainLoop.new(null, false);
 import("resource:///re/sonny/Tangram/src/main.js")
-  .then(({ default: main }) => {
-    loop.quit();
-    main([programInvocationName, ...ARGV], {
-      version: "@PACKAGE_VERSION@",
-      datadir: "@datadir@",
+  .then((main) => {
+    GLib.idle_add(GLib.PRIORITY_DEFAULT_IDLE, () => {
+      loop.quit();
+      const exit_code = imports.package.run(main);
+      exit(exit_code);
+      return GLib.SOURCE_REMOVE;
     });
   })
   .catch(logError);

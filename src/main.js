@@ -36,7 +36,7 @@ for (const i in pkg) {
 //   log(`env ${name}: ${getenv(name)}`);
 // });
 
-export default function main(argv = []) {
+export function main(argv = []) {
   log("argv " + argv.join(" "));
 
   if (getenv("DEV")) {

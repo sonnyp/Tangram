@@ -2,14 +2,15 @@
 
 // -*- mode: js; -*-
 
-globalThis.__DEV__ = true;
-
-import { programInvocationName } from "system";
+import { exit } from "system";
 import GLib from "gi://GLib";
 import Gio from "gi://Gio";
-import { build as gjspack } from "./troll/gjspack/src/gjspack.js";
 import Gtk from "gi://Gtk?version=4.0";
 import Adw from "gi://Adw";
+
+import { build as gjspack } from "./troll/gjspack/src/gjspack.js";
+
+globalThis.__DEV__ = true;
 
 Gtk.init();
 Adw.init();
@@ -54,11 +55,12 @@ imports.package.init({
 
 const loop = GLib.MainLoop.new(null, false);
 import(`resource://${prefix}/src/main.js`)
-  .then(({ default: main }) => {
-    loop.quit();
-    main([programInvocationName, ...ARGV], {
-      version: "dev",
-      datadir: ".",
+  .then((main) => {
+    GLib.idle_add(GLib.PRIORITY_DEFAULT_IDLE, () => {
+      loop.quit();
+      const exit_code = imports.package.run(main);
+      exit(exit_code);
+      return GLib.SOURCE_REMOVE;
     });
   })
   .catch(logError);
