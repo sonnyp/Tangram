@@ -56,16 +56,16 @@ GLib.setenv(
   true,
 );
 
-imports.package.init({
-  name: "re.sonny.Tangram",
-  version: "dev",
-  prefix: "var",
-  libdir: "",
-  datadir: "data",
-  // prefix: "@prefix@",
-  // libdir: "@libdir@",
-  // datadir: "@datadir@",
-});
+// imports.package.init({
+//   name: "re.sonny.Tangram",
+//   version: "dev",
+//   prefix: "var",
+//   libdir: "",
+//   datadir: "data",
+//   // prefix: "@prefix@",
+//   // libdir: "@libdir@",
+//   // datadir: "@datadir@",
+// });
 
 const loop = GLib.MainLoop.new(null, false);
 import(`resource://${prefix}/src/main.js`)

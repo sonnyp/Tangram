@@ -26,16 +26,14 @@ export function download(webview, url, destination) {
 }
 
 export function runJavaScript(webview, script) {
+  // return Promise.resolve(null);
   return promiseTask(
     webview,
     "run_javascript",
     "run_javascript_finish",
     script,
     null,
-  ).then((javascriptResult) => {
-    if (!javascriptResult) return;
-    return javascriptResult.get_js_value();
-  });
+  ).then((javascriptResult) => javascriptResult?.get_js_value());
 }
 
 // FIXME: we should use troll fetch but it doesn't support reading an InputStream
@@ -47,12 +45,11 @@ export async function fetchManifest(url, webview) {
     method: "GET",
     uri: GLib.Uri.parse(url, GLib.UriFlags.NONE),
   });
-  message.request_headers.append("Cache-Control", "no-cache");
+  message.get_request_headers().append("Cache-Control", "no-cache");
   if (webview) {
-    message.request_headers.append(
-      "User-Agent",
-      webview.get_settings().get_user_agent(),
-    );
+    message
+      .get_request_headers()
+      .append("User-Agent", webview.get_settings().get_user_agent());
   }
 
   try {
@@ -71,32 +68,30 @@ export async function fetchManifest(url, webview) {
   }
 }
 
-function getTitle(webview) {
+async function getTitle(webview) {
   const script = `(${getWebAppTitle.toString()})()`;
 
-  return runJavaScript(webview, script)
-    .then((javascriptValue) => {
-      if (!javascriptValue.is_string()) return null;
-      return javascriptValue.to_string();
-    })
-    .catch((err) => {
-      logError(err);
-      return null;
-    });
+  let title = webview.get_title();
+  try {
+    title = (await runJavaScript(webview, script)).to_string();
+  } catch (err) {
+    logError(err);
+  }
+
+  return title;
 }
 
-function getURL(webview) {
+async function getURL(webview) {
   const script = `(${getWebAppURL.toString()})()`;
 
-  return runJavaScript(webview, script)
-    .then((javascriptValue) => {
-      if (!javascriptValue.is_string()) return null;
-      return javascriptValue.to_string();
-    })
-    .catch((err) => {
-      logError(err);
-      return null;
-    });
+  let url = webview.get_uri();
+  try {
+    url = (await runJavaScript(webview, script)).to_string();
+  } catch (err) {
+    logError(err);
+  }
+
+  return url;
 }
 
 // eslint-disable-next-line no-unused-vars
@@ -119,15 +114,13 @@ function getIcon(webview) {
 async function getManifestURL(webview) {
   const script = `(${getWebAppManifest.toString()})()`;
 
-  return runJavaScript(webview, script)
-    .then((javascriptValue) => {
-      if (!javascriptValue.is_string()) return null;
-      return javascriptValue.to_string();
-    })
-    .catch((err) => {
-      logError(err);
-      return null;
-    });
+  let manifestURL = null;
+  try {
+    manifestURL = (await runJavaScript(webview, script)).to_string();
+  } catch (err) {
+    logError(err);
+  }
+  return manifestURL;
 }
 
 const supported_formats = (() => {
@@ -175,12 +168,15 @@ function resolveURI(webview, URL) {
 }
 
 export async function getWebAppInfo(webview) {
+  log(webview);
+
   const title = await getTitle(webview);
   // const icon = await getIcon(webview);
   const URL = await getURL(webview);
+  console.log({ URL });
 
   const info = { title };
-  info.URL = resolveURI(webview, URL);
+  if (URL) info.URL = resolveURI(webview, URL);
   // if (icon) {
   // info.icon = resolveURI(webview, icon);
   // }
