@@ -6,7 +6,7 @@ glib-compile-resources --target=data/re.sonny.Tangram.data.gresource --sourcedir
 # settings
 glib-compile-schemas --strict data/
 # imports.package already do this when running from source
-# export GSETTINGS_SCHEMA_DIR=./data
+export GSETTINGS_SCHEMA_DIR=./data
 
 # desktop file (required for notifications)
 cp data/re.sonny.Tangram.desktop re.sonny.Tangram.desktop

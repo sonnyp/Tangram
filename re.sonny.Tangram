@@ -2,16 +2,66 @@
 
 // -*- mode: js; -*-
 
-const { programInvocationName } = imports.system;
+import { exit } from "system";
+import GLib from "gi://GLib";
+import Gio from "gi://Gio";
+import Gtk from "gi://Gtk?version=4.0";
+import Adw from "gi://Adw";
+
+import { build as gjspack } from "./troll/gjspack/src/gjspack.js";
+
+globalThis.__DEV__ = true;
+
+Gtk.init();
+Adw.init();
+
+const { gresource_path, prefix } = gjspack({
+  appid: "re.sonny.Tangram",
+  entry: Gio.File.new_for_path("./src/main.js"),
+  output: Gio.File.new_for_path("./src"),
+  potfiles: Gio.File.new_for_path("./po/POTFILES"),
+});
+const resource = Gio.resource_load(gresource_path);
+Gio.resources_register(resource);
+
+const [filename] = GLib.filename_from_uri(import.meta.url);
+const dirname = GLib.path_get_dirname(filename);
+
+const [, , stderr, status] = GLib.spawn_command_line_sync(
+  `glib-compile-schemas --strict ${GLib.canonicalize_filename(
+    "./data",
+    dirname,
+  )}`,
+);
+if (status !== 0) {
+  throw new Error(new TextDecoder().decode(stderr));
+}
+
+GLib.setenv(
+  "GSETTINGS_SCHEMA_DIR",
+  GLib.canonicalize_filename("./data", dirname),
+  true,
+);
 
 // https://gitlab.gnome.org/GNOME/gjs/blob/master/doc/Package/Specification.md
 // https://gitlab.gnome.org/GNOME/gjs/-/blob/master/modules/script/package.js
 imports.package.init({
   name: "re.sonny.Tangram",
   version: "dev",
-  prefix: "", // Required but not used when running from source
+  prefix: "var",
+  libdir: "",
+  datadir: "data",
 });
 
-import main from "./src/main.js";
-
-main([programInvocationName, ...ARGV]);
+const loop = GLib.MainLoop.new(null, false);
+import(`resource://${prefix}/src/main.js`)
+  .then((main) => {
+    GLib.idle_add(GLib.PRIORITY_DEFAULT_IDLE, () => {
+      loop.quit();
+      const exit_code = imports.package.run(main);
+      exit(exit_code);
+      return GLib.SOURCE_REMOVE;
+    });
+  })
+  .catch(logError);
+loop.run();

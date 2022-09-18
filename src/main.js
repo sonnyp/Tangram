@@ -3,9 +3,7 @@ import { programInvocationName } from "system";
 import GLib from "gi://GLib";
 import Gio from "gi://Gio";
 
-// FIXME: investigate pkg not being defined
-// for some reason globalThis appears to be different in re.sonny.Tangram / scripts
-globalThis.pkg = imports.package;
+import application from "./application.js";
 
 const { SimpleAction } = Gio;
 const {
@@ -19,8 +17,6 @@ const {
 
 GLib.set_prgname("re.sonny.Tangram");
 GLib.set_application_name("Tangram");
-
-import application from "./application.js";
 
 if (getenv("DEV")) {
   if (log_writer_is_journald(2)) {
@@ -40,7 +36,7 @@ for (const i in pkg) {
 //   log(`env ${name}: ${getenv(name)}`);
 // });
 
-export default function main(argv = []) {
+export function main(argv = []) {
   log("argv " + argv.join(" "));
 
   if (getenv("DEV")) {

@@ -1,4 +1,6 @@
-export const BLANK_URI = "tangram-resource:///re/sonny/Tangram/data/blank.html";
+import blank from "./blank.html";
+
+export const BLANK_URI = "tangram-resource://" + blank;
 export const MODES = {
   // Before clicking "Done"
   TEMPORARY: "TEMPORARY",

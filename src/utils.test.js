@@ -1,8 +1,13 @@
 import "gi://WebKit2?version=5.0";
 
 import { isSameSite, isUrlAllowedForNavigation } from "./utils.js";
-import * as assert from "./troll/assert.js";
 import { BLANK_URI } from "./constants.js";
+
+const assert = {
+  is(a, b) {
+    if (!Object.is(a, b)) throw new Error();
+  },
+};
 
 assert.is(isSameSite("https://github.com", "https://github.com"), true);
 assert.is(isSameSite("https://github.com", "http://github.com"), true);

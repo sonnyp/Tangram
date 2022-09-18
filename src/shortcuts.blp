@@ -1,0 +1,103 @@
+using Gtk 4.0;
+
+ShortcutsWindow shortcuts-window {
+  modal: true;
+
+  ShortcutsSection {
+    section-name: "shortcuts";
+    max-height: 10;
+
+    ShortcutsGroup {
+      title: C_("shortcut window", "General");
+
+      ShortcutsShortcut {
+        title: C_("shortcut window", "Go to the next tab");
+        accelerator: "<Primary>Page_Down <Primary>Tab";
+      }
+
+      ShortcutsShortcut {
+        title: C_("shortcut window", "Go to the previous tab");
+        accelerator: "<Primary>Page_Up <Shift><Primary>Tab";
+      }
+
+      ShortcutsShortcut {
+        title: C_("shortcut window", "Move current tab to the left");
+        accelerator: "<Primary><Shift>Page_Up";
+      }
+
+      ShortcutsShortcut {
+        title: C_("shortcut window", "Move current tab to the right");
+        accelerator: "<Primary><Shift>Page_Down";
+      }
+
+      ShortcutsShortcut {
+        title: C_("shortcut window", "Quit");
+        accelerator: "<Primary>Q";
+      }
+
+      ShortcutsShortcut {
+        title: C_("shortcut window", "Shortcuts");
+        accelerator: "<Primary>question";
+      }
+
+      ShortcutsShortcut {
+        title: C_("shortcut window", "Toggle inspector");
+        accelerator: "<Primary><Shift>I";
+      }
+
+      ShortcutsShortcut {
+        title: C_("shortcut window", "First – Ninth Tab");
+        accelerator: "<Alt>1...9";
+      }
+    }
+
+    ShortcutsGroup {
+      title: C_("shortcut window", "Navigation");
+
+      ShortcutsShortcut {
+        title: C_("shortcut window", "Go to homepage");
+        accelerator: "<Alt>Home";
+      }
+
+      ShortcutsShortcut {
+        title: C_("shortcut window", "Reload current page");
+        accelerator: "F5 <Primary>R";
+      }
+
+      ShortcutsShortcut {
+        title: C_("shortcut window", "Reload bypassing cache");
+        accelerator: "<Primary><Shift>R <Shift>F5";
+      }
+
+      ShortcutsShortcut {
+        title: C_("shortcut window", "Stop loading current page");
+        accelerator: "Escape";
+      }
+
+      ShortcutsShortcut {
+        title: C_("shortcut window", "Go back to the previous page");
+        accelerator: "<Alt>Left";
+      }
+
+      ShortcutsShortcut {
+        title: C_("shortcut window", "Go forward to the next page");
+        accelerator: "<Alt>Right";
+      }
+
+      ShortcutsShortcut {
+        title: C_("shortcut window", "Focus the address bar");
+        accelerator: "<Primary>L";
+      }
+
+      ShortcutsShortcut {
+        shortcut-type: gesture_two_finger_swipe_right;
+        title: C_("shortcut window", "Go back to the previous page");
+      }
+
+      ShortcutsShortcut {
+        shortcut-type: gesture_two_finger_swipe_left;
+        title: C_("shortcut window", "Go forward to the next page");
+      }
+    }
+  }
+}

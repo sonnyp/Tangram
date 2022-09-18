@@ -2,7 +2,7 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <!-- https://gitlab.gnome.org/GNOME/epiphany/-/blob/dce900bc732f3787984fe82eefae2a860df3142f/src/resources/about.css -->
+    <!-- https://gitlab.gnome.org/GNOME/epiphany/-/blob/10d6ea02208154e147b15d0adedbdcfde860abe6/src/resources/about.css -->
     <style>
       html {
         /* Adwaita colors */
@@ -11,11 +11,14 @@
         --base-color: #fff;
         --text-color: #000;
         --borders: #d3d7cf;
+        --icon-invert: 0.2; /* average(0x2e, 0x34, 0x36) / 0xff */
 
         /* Misc colors */
         --header-color: #999;
         --header-text-color: white;
         --row-hover-color: rgba(0, 0, 0, 0.1);
+
+        color-scheme: light dark;
       }
 
       @media (prefers-color-scheme: dark) {
@@ -26,6 +29,7 @@
           --base-color: #2d2d2d;
           --text-color: #fff;
           --borders: #1b1b1b;
+          --icon-invert: 0.93; /* average(0xee, 0xee, 0xec) / 0xff */
 
           /* Misc colors */
           --header-color: #666;

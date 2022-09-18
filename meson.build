@@ -1,10 +1,8 @@
-project('Tangram',
+project('re.sonny.Tangram',
   version: '1.4.2',
   meson_version: '>= 0.59.0',
   license: 'GPL-3.0-only'
 )
-
-application_id = 're.sonny.Tangram'
 
 conf = configuration_data()
 conf.set('BINDIR', join_paths([ get_option('prefix'), 'bin' ]))
