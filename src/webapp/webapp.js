@@ -73,7 +73,10 @@ async function getTitle(webview) {
 
   let title = webview.get_title();
   try {
-    title = (await runJavaScript(webview, script)).to_string();
+    const value = await runJavaScript(webview, script);
+    if (value.is_string()) {
+      title = value.to_string();
+    }
   } catch (err) {
     logError(err);
   }
@@ -86,7 +89,10 @@ async function getURL(webview) {
 
   let url = webview.get_uri();
   try {
-    url = (await runJavaScript(webview, script)).to_string();
+    const value = await runJavaScript(webview, script);
+    if (value.is_string()) {
+      url = value.to_string();
+    }
   } catch (err) {
     logError(err);
   }
@@ -116,7 +122,10 @@ async function getManifestURL(webview) {
 
   let manifestURL = null;
   try {
-    manifestURL = (await runJavaScript(webview, script)).to_string();
+    const value = await runJavaScript(webview, script);
+    if (value.is_string()) {
+      manifestURL = value.to_string();
+    }
   } catch (err) {
     logError(err);
   }
@@ -168,12 +177,9 @@ function resolveURI(webview, URL) {
 }
 
 export async function getWebAppInfo(webview) {
-  log(webview);
-
   const title = await getTitle(webview);
   // const icon = await getIcon(webview);
   const URL = await getURL(webview);
-  console.log({ URL });
 
   const info = { title };
   if (URL) info.URL = resolveURI(webview, URL);

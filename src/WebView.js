@@ -205,8 +205,7 @@ export function buildWebView({
     allow_top_navigation_to_data_urls: false,
   });
 
-  // settings.set_user_agent_with_application_details("Tangram", pkg.version);
-  settings.set_user_agent_with_application_details("Tangram", "cool");
+  settings.set_user_agent_with_application_details("Tangram", pkg.version);
 
   // user-agent
   const userAgent = instance.settings.get_string("user-agent");

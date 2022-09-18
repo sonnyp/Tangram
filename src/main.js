@@ -27,11 +27,11 @@ if (getenv("DEV")) {
 // Debug
 log(`programInvocationName: ${programInvocationName}`);
 log(`_: ${getenv("_")}`);
-// for (const i in pkg) {
-//   if (typeof pkg[i] === "string") {
-//     log(`pkg.${i}: ${pkg[i]}`);
-//   }
-// }
+for (const i in pkg) {
+  if (typeof pkg[i] === "string") {
+    log(`pkg.${i}: ${pkg[i]}`);
+  }
+}
 // listenv().forEach((name) => {
 //   log(`env ${name}: ${getenv(name)}`);
 // });

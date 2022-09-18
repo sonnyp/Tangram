@@ -40,4 +40,4 @@ rules:
   # https://github.com/benmosher/eslint-plugin-import/
   import/extensions: ["error", "ignorePackages"]
   import/no-unresolved:
-    [2, { ignore: ["gi://*", "cairo", "gettext", "system"] }]
+    [2, { ignore: ["gi://*", "resource://*", "cairo", "gettext", "system"] }]

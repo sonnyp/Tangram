@@ -2,20 +2,6 @@
 
 // -*- mode: js; -*-
 
-// const { programInvocationName } = imports.system;
-
-// // https://gitlab.gnome.org/GNOME/gjs/blob/master/doc/Package/Specification.md
-// // https://gitlab.gnome.org/GNOME/gjs/-/blob/master/modules/script/package.js
-// imports.package.init({
-//   name: "re.sonny.Tangram",
-//   version: "dev",
-//   prefix: "", // Required but not used when running from source
-// });
-
-// import main from "./src/main.js";
-
-// main([programInvocationName, ...ARGV]);
-
 globalThis.__DEV__ = true;
 
 import { programInvocationName } from "system";
@@ -56,16 +42,15 @@ GLib.setenv(
   true,
 );
 
-// imports.package.init({
-//   name: "re.sonny.Tangram",
-//   version: "dev",
-//   prefix: "var",
-//   libdir: "",
-//   datadir: "data",
-//   // prefix: "@prefix@",
-//   // libdir: "@libdir@",
-//   // datadir: "@datadir@",
-// });
+// https://gitlab.gnome.org/GNOME/gjs/blob/master/doc/Package/Specification.md
+// https://gitlab.gnome.org/GNOME/gjs/-/blob/master/modules/script/package.js
+imports.package.init({
+  name: "re.sonny.Tangram",
+  version: "dev",
+  prefix: "var",
+  libdir: "",
+  datadir: "data",
+});
 
 const loop = GLib.MainLoop.new(null, false);
 import(`resource://${prefix}/src/main.js`)
