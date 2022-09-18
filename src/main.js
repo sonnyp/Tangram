@@ -3,6 +3,8 @@ import { programInvocationName } from "system";
 import GLib from "gi://GLib";
 import Gio from "gi://Gio";
 
+import application from "./application.js";
+
 const { SimpleAction } = Gio;
 const {
   getenv,
@@ -15,8 +17,6 @@ const {
 
 GLib.set_prgname("re.sonny.Tangram");
 GLib.set_application_name("Tangram");
-
-import application from "./application.js";
 
 if (getenv("DEV")) {
   if (log_writer_is_journald(2)) {

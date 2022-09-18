@@ -4,18 +4,17 @@ import system from "system";
 
 const {
   tld_get_base_domain,
-  URI,
   TLDError: { IS_IP_ADDRESS, NOT_ENOUGH_DOMAINS, NO_BASE_DOMAIN },
 } = Soup;
-const { hostname_to_ascii } = GLib;
+const { hostname_to_ascii, Uri, UriFlags } = GLib;
 
 import { BLANK_URI, MODES } from "./constants.js";
 
 // Implements https://web.dev/same-site-same-origin/
 export function isSameSite(a, b) {
   // uris
-  a = new URI(a);
-  b = new URI(b);
+  a = Uri.parse(a, UriFlags.NONE);
+  b = Uri.parse(b, UriFlags.NONE);
   if (!a || !b) return false;
 
   // hostnames

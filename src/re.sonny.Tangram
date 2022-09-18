@@ -7,6 +7,11 @@ globalThis.__DEV__ = false;
 import Gio from "gi://Gio";
 import GLib from "gi://GLib";
 import { programInvocationName } from "system";
+import Gtk from "gi://Gtk?version=4.0";
+import Adw from "gi://Adw";
+
+Gtk.init();
+Adw.init();
 
 const resource = Gio.resource_load(
   "@datadir@/@PACKAGE_NAME@/re.sonny.Tangram.gresource",

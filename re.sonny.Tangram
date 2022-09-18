@@ -22,6 +22,11 @@ import { programInvocationName } from "system";
 import GLib from "gi://GLib";
 import Gio from "gi://Gio";
 import { build as gjspack } from "./troll/gjspack/src/gjspack.js";
+import Gtk from "gi://Gtk?version=4.0";
+import Adw from "gi://Adw";
+
+Gtk.init();
+Adw.init();
 
 const { gresource_path, prefix } = gjspack({
   appid: "re.sonny.Tangram",
@@ -54,9 +59,9 @@ GLib.setenv(
 imports.package.init({
   name: "re.sonny.Tangram",
   version: "dev",
-  prefix: "",
+  prefix: "var",
   libdir: "",
-  datadir: "",
+  datadir: "data",
   // prefix: "@prefix@",
   // libdir: "@libdir@",
   // datadir: "@datadir@",

@@ -10,7 +10,7 @@ import { getWebAppInfo } from "./webapp.js";
 import * as assert from "../../troll/tst/assert.js";
 
 // Gtk needs to be initialized for WebKitGTK
-Gtk.init(null);
+Gtk.init();
 const loop = GLib.MainLoop.new(null, false);
 
 async function setup(webview, html, manifest) {
