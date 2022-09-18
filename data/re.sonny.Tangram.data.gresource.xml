@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <gresources>
   <gresource prefix="/re/sonny/Tangram/data">
-    <file>blank.html</file>
     <file
       alias="icon.svg"
     >icons/hicolor/scalable/apps/re.sonny.Tangram.svg</file>
