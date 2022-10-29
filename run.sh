@@ -1,7 +1,7 @@
 #!/bin/sh
 
 # data
-glib-compile-resources --target=data/re.sonny.Tangram.data.gresource --sourcedir=data/ data/re.sonny.Tangram.data.gresource.xml
+# glib-compile-resources --target=data/re.sonny.Tangram.data.gresource --sourcedir=data/ data/re.sonny.Tangram.data.gresource.xml
 
 # settings
 glib-compile-schemas --strict data/

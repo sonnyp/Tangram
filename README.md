@@ -117,44 +117,9 @@ Thank you for your help!
 
 ## Development
 
-### Install packages
+Use [GNOME Builder](https://apps.gnome.org/app/org.gnome.Builder/).
 
-<details>
- <summary>Ubuntu</summary>
- <code>
- sudo apt install npm libglib2.0-dev-bin flatpak-builder git
- </code>
-</details>
-
-<details>
- <summary>Arch Linux</summary>
- <code>
- sudo pacman -S npm glib2 flatpak-builder git
- </code>
-</details>
-
-<details>
-  <summary>Fedora</summary>
-  <code>
-  sudo dnf install npm glib2-devel flatpak-builder git
-  </code>
-</details>
-
-### Install dependencies
-
-```sh
-cd Tangram
-git submodule init
-git submodule update
-npm install
-```
-
-### Run
-
-```sh
-cd Tangram
-./run.sh
-```
+If you knwo what you are doing - you can run from source locally instead:
 
 `./run.sh` runs the application in `development` mode. Hit `<Ctrl><Shift>Q` to restart the application.
 
