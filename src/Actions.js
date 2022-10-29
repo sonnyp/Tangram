@@ -12,33 +12,33 @@ export default function Actions({
   window,
   application,
   settings,
-  notebook,
-  showTab,
+  // notebook,
+  // showTab,
 }) {
-  function showPage(page) {
-    showTab(notebook.page_num(page));
-  }
+  // function showPage(page) {
+  //   showTab(notebook.page_num(page));
+  // }
 
   const tabsPosition = settings.create_action("tabs-position");
   window.add_action(tabsPosition);
 
-  const removeInstanceAction = new Gio.SimpleAction({
-    name: "removeInstance",
-    parameter_type: GLib.VariantType.new("s"),
-  });
-  removeInstanceAction.connect("activate", (self, parameters) => {
-    const id = parameters.deep_unpack();
-    const instance = instances.get(id);
+  // const removeInstanceAction = new Gio.SimpleAction({
+  //   name: "removeInstance",
+  //   parameter_type: GLib.VariantType.new("s"),
+  // });
+  // removeInstanceAction.connect("activate", (self, parameters) => {
+  //   const id = parameters.deep_unpack();
+  //   const instance = instances.get(id);
 
-    const idx = instances.detach(settings, instance.id);
+  //   const idx = instances.detach(settings, instance.id);
 
-    if (idx >= 0) {
-      notebook.remove_page(idx);
-    }
+  //   if (idx >= 0) {
+  //     notebook.remove_page(idx);
+  //   }
 
-    instances.destroy(instance);
-  });
-  window.add_action(removeInstanceAction);
+  //   instances.destroy(instance);
+  // });
+  // window.add_action(removeInstanceAction);
 
   const editInstanceAction = new Gio.SimpleAction({
     name: "editInstance",
@@ -49,7 +49,7 @@ export default function Actions({
     const instance = instances.get(id);
     if (!instance) return;
     if (instance.page) {
-      showPage(instance.page);
+      // showPage(instance.page);
     }
     editInstanceDialog({ window, instance }).catch(logError);
   });
@@ -84,7 +84,7 @@ export default function Actions({
 
     const instance = instances.get(id);
     if (instance && instance.page) {
-      showTab(notebook.page_num(instance.page));
+      // showTab(notebook.page_num(instance.page));
     }
 
     window.present();

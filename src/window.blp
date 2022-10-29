@@ -12,6 +12,29 @@ Adw.ApplicationWindow window {
 
     Stack stack {
       transition-type: crossfade;
+
+      StackPage {
+        name: "tabs";
+
+        child: Box {
+          orientation: vertical;
+          Adw.TabBar {
+            view: tabview;
+          }
+
+          Adw.TabOverview  {
+            open: true;
+            view: tabview;
+            hexpand: true;
+            vexpand: true;
+
+            child: Adw.TabView tabview {
+              hexpand: true;
+              vexpand: true;
+            };
+          }
+        };
+      }
     }
   }
 }

@@ -119,13 +119,12 @@ export default function Window({ application, state }) {
   const stack = builder.get_object("stack");
   state.bind("view", stack, "visible_child_name");
 
-  const notebook = Notebook({ settings, application });
-  stack.add_named(notebook, "tabs");
+  const tabview = Notebook({ settings, application, builder });
 
-  function showTab(idx) {
-    notebook.set_current_page(idx);
-    state.set({ view: "tabs", webview: notebook.get_nth_page(idx) });
-  }
+  // function showTab(idx) {
+  //   tabview.set_selected_page(tabview.).set_current_page(idx);
+  //   state.set({ view: "tabs", webview: notebook.get_nth_page(idx) });
+  // }
 
   function onNotification(webkit_notification, instance_id) {
     const priority = instances
@@ -156,11 +155,16 @@ export default function Window({ application, state }) {
     return buildInstanceFromPage({ instance, page });
   }
 
-  function buildInstanceFromPage({ instance, page }) {
-    const label = TabLabel({ instance, settings, page });
-    const idx = notebook.append_page(page, label);
-    notebook.set_tab_reorderable(page, true);
-    return idx;
+  function buildInstanceFromPage({ instance, page: child }) {
+    // const label = TabLabel({ instance, settings, page });
+    // const idx = tabview.append_page(page, label);
+    const page = tabview.append(child);
+
+    page.get_live_thumbnail(true);
+
+    return tabview.get_page_position(page);
+    // notebook.set_tab_reorderable(page, true);
+    // return idx;
   }
 
   async function onAddTab() {
@@ -205,13 +209,13 @@ export default function Window({ application, state }) {
       page: webview,
       instance,
     });
-    showTab(idx);
+    // showTab(idx);
   }
 
   function onCancelNewTab() {
     // FIXME set webview!!
     // state.set({ view: "tabs", webview: notebook.get_nth_child(notebook.page) });
-    showTab(notebook.page || 0);
+    // showTab(notebook.page || 0);
     const webView = stack.get_child_by_name("new-tab");
     if (!webView) return;
     stack.remove(webView);
@@ -254,18 +258,18 @@ export default function Window({ application, state }) {
     if (instances.length === 0) {
       onNewTab();
     } else {
-      const page = notebook.get_nth_page(notebook.page);
-      state.set({
-        view: "tabs",
-        webview: page,
-      });
+      // const page = tabview.get_page_position(notebook.page);
+      // state.set({
+      //   view: "tabs",
+      //   webview: page,
+      // });
     }
   });
 
   Shortcuts({
     window,
     application,
-    notebook,
+    // notebook,
     addressBar: header.addressBar,
     onStopLoading,
     onReload,
@@ -279,8 +283,8 @@ export default function Window({ application, state }) {
     window,
     application,
     settings,
-    notebook,
-    showTab,
+    // notebook,
+    // showTab,
   });
 
   window.present();
