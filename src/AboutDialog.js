@@ -1,49 +1,55 @@
 import Gtk from "gi://Gtk";
 import WebKit from "gi://WebKit2";
 import Soup from "gi://Soup";
+import Adw from "gi://Adw";
 import { gettext as _ } from "gettext";
 
-import { getGIRepositoryVersion, getGjsVersion } from "./utils.js";
+import {
+  getGIRepositoryVersion,
+  getGjsVersion,
+  getGLibVersion,
+} from "../troll/src/util.js";
 
-const WebKitGTKVersion = getGIRepositoryVersion(WebKit);
-const gjsVersion = getGjsVersion();
-const soupVersion = getGIRepositoryVersion(Soup);
+const debug_info = `
+WebKitGTK ${getGIRepositoryVersion(WebKit)}
+GJS ${getGjsVersion()}
+Adw ${getGIRepositoryVersion(Adw)}
+GTK ${getGIRepositoryVersion(Gtk)}
+GLib ${getGLibVersion()}
+libsoup ${getGIRepositoryVersion(Soup)}
+`.trim();
 
-log(`gjs ${gjsVersion}`);
-log(`WebKitGTK ${WebKitGTKVersion}`);
-log(`libsoup ${soupVersion}`);
-
-export default function AboutDialog({ window }) {
-  const aboutDialog = new Gtk.AboutDialog({
-    authors: ["Sonny Piers https://sonny.re"],
-    artists: ["Tobias Bernard <tbernard@gnome.org>"],
-    comments: [
-      "Browser for your pinned tabs",
-      "Powered by",
-      `WebKitGTK ${WebKitGTKVersion}`,
-      `gjs ${gjsVersion}`,
-      `libsoup ${soupVersion}`,
-    ].join("\n"),
-    copyright: "Copyright 2019-2022 Sonny Piers",
+export default function AboutDialog({ application }) {
+  const dialog = new Adw.AboutWindow({
+    transient_for: application.get_active_window(),
+    application_name: "Tangram",
+    developer_name: "Sonny Piers",
+    copyright: "© 2019-2023 Sonny Piers",
     license_type: Gtk.License.GPL_3_0_ONLY,
     version: pkg.version,
-    website: "https://github.com/sonnyp/Tangram",
-    transient_for: window,
-    modal: true,
-    logo_icon_name: "re.sonny.Tangram",
+    website: "https://tangram.sonny.re",
+    application_icon: pkg.name,
+    issue_url: "https://github.com/sonnyp/Workbench/issues",
     // TRANSLATORS: eg. 'Translator Name <your.email@domain.com>' or 'Translator Name https://website.example'
     translator_credits: _("translator-credits"),
+    debug_info,
+    developers: ["Sonny Piers https://sonny.re"],
+    designers: [
+      "Sonny Piers https://sonny.re",
+      "Tobias Bernard <tbernard@gnome.org>",
+    ],
+    artists: ["Tobias Bernard <tbernard@gnome.org>"],
   });
-  aboutDialog.add_credit_section("Contributors", [
+  dialog.add_credit_section(_("Contributors"), [
+    "codyfish https://github.com/codyfish",
     // Add yourself as
     // "John Doe",
     // or
     // "John Doe <john@example.com>",
     // or
     // "John Doe https://john.com",
-    "codyfish https://github.com/codyfish",
   ]);
-  aboutDialog.present();
+  dialog.present();
 
-  return aboutDialog;
+  return dialog;
 }
