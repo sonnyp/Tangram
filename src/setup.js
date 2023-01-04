@@ -8,6 +8,6 @@
 // import "gi://Soup?version=2.4";
 // import "gi://Gtk?version=3.0";
 
-import "gi://WebKit2?version=4.0";
+import "gi://WebKit2?version=4.1";
 import "gi://Gdk?version=3.0";
 import "gi://GdkPixbuf?version=2.0";

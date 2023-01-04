@@ -32,73 +32,71 @@ export function runJavaScript(webview, script) {
     "run_javascript_finish",
     script,
     null,
-  ).then((javascriptResult) => {
-    if (!javascriptResult) return;
-    return javascriptResult.get_js_value();
-  });
+  ).then((javascriptResult) => javascriptResult?.get_js_value());
 }
 
 // FIXME: we should use troll fetch but it doesn't support reading an InputStream
 // without a `content-length` header
 // import fetch from "../troll/std/fetch";
 export async function fetchManifest(url, webview) {
-  return new Promise((resolve) => {
-    const session = new Soup.Session();
-    const message = new Soup.Message({
-      method: "GET",
-      uri: Soup.URI.new(url),
-    });
-    message.request_headers.append("Cache-Control", "no-cache");
-    if (webview) {
-      message.request_headers.append(
-        "User-Agent",
-        webview.get_settings().get_user_agent(),
-      );
-    }
-
-    session.queue_message(message, () => {
-      try {
-        resolve(
-          JSON.parse(
-            byteArray.toString(
-              byteArray.fromGBytes(message.response_body_data),
-            ),
-          ),
-        );
-      } catch (err) {
-        logError(err);
-        resolve(null);
-      }
-    });
+  const session = new Soup.Session();
+  const message = new Soup.Message({
+    method: "GET",
+    uri: GLib.Uri.parse(url, GLib.UriFlags.NONE),
   });
+  message.get_request_headers().append("Cache-Control", "no-cache");
+  if (webview) {
+    message
+      .get_request_headers()
+      .append("User-Agent", webview.get_settings().get_user_agent());
+  }
+
+  try {
+    const body = await promiseTask(
+      session,
+      "send_and_read_async",
+      "send_and_read_finish",
+      message,
+      GLib.PRIORITY_DEFAULT,
+      null,
+    );
+    return JSON.parse(byteArray.toString(byteArray.fromGBytes(body)));
+  } catch (err) {
+    logError(err);
+    return null;
+  }
 }
 
-function getTitle(webview) {
+async function getTitle(webview) {
   const script = `(${getWebAppTitle.toString()})()`;
 
-  return runJavaScript(webview, script)
-    .then((javascriptValue) => {
-      if (!javascriptValue.is_string()) return null;
-      return javascriptValue.to_string();
-    })
-    .catch((err) => {
-      logError(err);
-      return null;
-    });
+  let title = webview.get_title();
+  try {
+    const value = await runJavaScript(webview, script);
+    if (value.is_string()) {
+      title = value.to_string();
+    }
+  } catch (err) {
+    logError(err);
+  }
+
+  return title;
 }
 
-function getURL(webview) {
+async function getURL(webview) {
   const script = `(${getWebAppURL.toString()})()`;
 
-  return runJavaScript(webview, script)
-    .then((javascriptValue) => {
-      if (!javascriptValue.is_string()) return null;
-      return javascriptValue.to_string();
-    })
-    .catch((err) => {
-      logError(err);
-      return null;
-    });
+  let url = webview.get_uri();
+  try {
+    const value = await runJavaScript(webview, script);
+    if (value.is_string()) {
+      url = value.to_string();
+    }
+  } catch (err) {
+    logError(err);
+  }
+
+  return url;
 }
 
 // eslint-disable-next-line no-unused-vars
@@ -121,15 +119,16 @@ function getIcon(webview) {
 async function getManifestURL(webview) {
   const script = `(${getWebAppManifest.toString()})()`;
 
-  return runJavaScript(webview, script)
-    .then((javascriptValue) => {
-      if (!javascriptValue.is_string()) return null;
-      return javascriptValue.to_string();
-    })
-    .catch((err) => {
-      logError(err);
-      return null;
-    });
+  let manifestURL = null;
+  try {
+    const value = await runJavaScript(webview, script);
+    if (value.is_string()) {
+      manifestURL = value.to_string();
+    }
+  } catch (err) {
+    logError(err);
+  }
+  return manifestURL;
 }
 
 const supported_formats = (() => {
@@ -173,9 +172,7 @@ function findBestIcon(icons) {
 }
 
 function resolveURI(webview, URL) {
-  return Soup.URI.new_with_base(new Soup.URI(webview.get_uri()), URL).to_string(
-    false,
-  );
+  return GLib.Uri.resolve_relative(webview.get_uri(), URL, GLib.UriFlags.NONE);
 }
 
 export async function getWebAppInfo(webview) {
@@ -184,7 +181,7 @@ export async function getWebAppInfo(webview) {
   const URL = await getURL(webview);
 
   const info = { title };
-  info.URL = resolveURI(webview, URL);
+  if (URL) info.URL = resolveURI(webview, URL);
   // if (icon) {
   // info.icon = resolveURI(webview, icon);
   // }

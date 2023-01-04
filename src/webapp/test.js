@@ -1,16 +1,21 @@
-import "../setup.js";
+import "gi://WebKit2?version=5.0";
 
 import GLib from "gi://GLib";
 import WebKit from "gi://WebKit2";
 import Gtk from "gi://Gtk";
-import Soup from "gi://Soup";
+import Soup from "gi://Soup?version=3.0";
 import { exit } from "system";
 
 import { getWebAppInfo } from "./webapp.js";
-import * as assert from "../troll/assert.js";
+
+const assert = {
+  is(a, b) {
+    if (!Object.is(a, b)) throw new Error();
+  },
+};
 
 // Gtk needs to be initialized for WebKitGTK
-Gtk.init(null);
+Gtk.init();
 const loop = GLib.MainLoop.new(null, false);
 
 async function setup(webview, html, manifest) {
@@ -35,23 +40,25 @@ function serve(html, manifest) {
 
   if (manifest) {
     server.add_handler("/manifest.json", (self, msg) => {
-      msg.set_status(200);
-      msg.response_headers.set_content_type("application/manifest+json", {
+      msg.set_status(200, null);
+      msg.get_response_headers().set_content_type("application/manifest+json", {
         charset: "UTF-8",
       });
-      msg.response_body.append(JSON.stringify(manifest));
+      msg.get_response_body().append(JSON.stringify(manifest));
     });
   }
 
   server.add_handler("/", (self, msg) => {
-    msg.set_status(200);
-    msg.response_headers.set_content_type("text/html", { charset: "UTF-8" });
-    msg.response_body.append(html);
+    msg.set_status(200, null);
+    msg
+      .get_response_headers()
+      .set_content_type("text/html", { charset: "UTF-8" });
+    msg.get_response_body().append(html);
   });
 
   server.listen_local(0, Soup.ServerListenOptions.IPV4_ONLY);
 
-  const url = server.get_uris()[0].to_string(false);
+  const url = server.get_uris()[0].to_string();
   return {
     server,
     url,
@@ -88,7 +95,7 @@ let exit_code = 0;
     `,
     );
 
-    assert.is(info.URL, "https://msapplication.starturl/");
+    assert.is(info.URL, "https://msapplication.starturl");
   })();
 
   await (async () => {
@@ -121,7 +128,7 @@ let exit_code = 0;
     `,
     );
 
-    assert.is(info.URL, "https://opengraph.url/");
+    assert.is(info.URL, "https://opengraph.url");
   })();
 
   await (async () => {

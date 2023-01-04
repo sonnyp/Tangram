@@ -1,8 +1,7 @@
 import Gtk from "gi://Gtk";
-import Soup from "gi://Soup";
+import GLib from "gi://GLib";
 
 const { Entry } = Gtk;
-const { URI } = Soup;
 
 function normalizeURL(str) {
   if (!str) return null;
@@ -11,16 +10,14 @@ function normalizeURL(str) {
     str = "http://" + str;
   }
 
-  const uri = new URI(str);
+  const uri = GLib.Uri.parse(str, GLib.UriFlags.NONE);
   if (!uri) return null;
 
-  // FIXME
-  // no is_valid or valid_for_http in soup gjs?
-  if (!["http", "https"].includes(uri.scheme)) {
+  if (!["http", "https"].includes(uri.get_scheme())) {
     return null;
   }
 
-  return uri.to_string(false);
+  return uri.to_string();
 }
 
 export default function AddressBar({ state }) {
