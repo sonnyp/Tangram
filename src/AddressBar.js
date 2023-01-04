@@ -24,6 +24,7 @@ export default function AddressBar({ state }) {
   const URLBar = new Entry({
     hexpand: true,
     placeholder_text: "Enter address",
+    input_purpose: Gtk.InputPurpose.URL,
   });
 
   state.notify("view", (view) => {

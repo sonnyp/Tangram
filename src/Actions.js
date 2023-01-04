@@ -60,7 +60,7 @@ export default function Actions({
     parameter_type: null,
   });
   showAboutDialog.connect("activate", () => {
-    AboutDialog({ window });
+    AboutDialog({ application });
   });
   application.add_action(showAboutDialog);
 

@@ -1,6 +1,5 @@
 import Soup from "gi://Soup";
 import GLib from "gi://GLib";
-import system from "system";
 
 const {
   tld_get_base_domain,
@@ -50,14 +49,4 @@ export function isUrlAllowedForNavigation(webView, request_url) {
   if (request_url === BLANK_URI) return true;
 
   return isSameSite(current_url, request_url);
-}
-
-export function getGIRepositoryVersion(repo) {
-  const { get_major_version, get_minor_version, get_micro_version } = repo;
-  return `${get_major_version()}.${get_minor_version()}.${get_micro_version()}`;
-}
-
-export function getGjsVersion() {
-  const v = system.version.toString();
-  return `${v[0]}.${+(v[1] + v[2])}.${+(v[3] + v[4])}`;
 }

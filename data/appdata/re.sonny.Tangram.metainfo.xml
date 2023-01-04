@@ -4,7 +4,7 @@
   <launchable type="desktop-id">re.sonny.Tangram.desktop</launchable>
   <name>Tangram</name>
   <developer_name>Sonny Piers</developer_name>
-  <update_contact>sonny@fastmail.net</update_contact>
+  <update_contact>sonnyp@gnome.org</update_contact>
   <metadata_license>CC0-1.0</metadata_license>
   <project_license>GPL-3.0</project_license>
   <summary>Browser for your pinned tabs</summary>
@@ -25,7 +25,7 @@
       <li>One-stop for multiple sources of documentation or information</li>
     </ul>
   </description>
-  <url type="homepage">https://github.com/sonnyp/Tangram</url>
+  <url type="homepage">https://tangram.sonny.re</url>
   <url type="bugtracker">https://github.com/sonnyp/Tangram/issues</url>
   <url type="donation">https://ko-fi.com/sonnyp</url>
   <url type="translate">https://hosted.weblate.org/engage/tangram/</url>
@@ -37,6 +37,23 @@
   </screenshots>
   <content_rating type="oars-1.1" />
   <releases>
+    <release version="2.0" type="development" date="2023-01-04">
+      <description>
+        <ul>
+          <li>Port to GTK4</li>
+          <li>Use Libadwaita</li>
+        </ul>
+      </description>
+    </release>
+
+    <release version="1.5.0" date="2023-01-04" urgency="high">
+      <description>
+        <ul>
+          <li>Update GNOME runtime to 43</li>
+        </ul>
+      </description>
+    </release>
+
     <release version="1.4.2" date="2022-04-23" urgency="high">
       <description>
         <ul>

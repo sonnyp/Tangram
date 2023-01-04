@@ -3,7 +3,6 @@
 // -*- mode: js; -*-
 
 import GLib from "gi://GLib";
-import Gio from "gi://Gio";
 import { exit } from "system";
 import Gtk from "gi://Gtk?version=4.0";
 import Adw from "gi://Adw";
@@ -12,11 +11,6 @@ globalThis.__DEV__ = false;
 
 Gtk.init();
 Adw.init();
-
-const resource = Gio.resource_load(
-  "@datadir@/@PACKAGE_NAME@/re.sonny.Tangram.gresource",
-);
-Gio.resources_register(resource);
 
 imports.package.init({
   name: "@PACKAGE_NAME@",

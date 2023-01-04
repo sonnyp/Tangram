@@ -27,13 +27,6 @@ if desktop_utils.found()
   )
 endif
 
-data_res = gnome.compile_resources('re.sonny.Tangram.data',
-  're.sonny.Tangram.data.gresource.xml',
-  gresource_bundle: true,
-  install: true,
-  install_dir: pkgdatadir,
-)
-
 install_data('re.sonny.Tangram.gschema.xml',
   install_dir: join_paths(get_option('datadir'), 'glib-2.0/schemas')
 )
