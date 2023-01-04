@@ -11,14 +11,14 @@
   <description
   >Tangram is a new kind of browser. It is designed to organize and run your Web applications. Each tab is persistent and independent. You can set multiple tabs with different accounts for the same application.</description>
 
-  <homepage rdf:resource="https://github.com/sonnyp/Tangram/" />
+  <homepage rdf:resource="https://tangram.sonny.re" />
   <bug-database rdf:resource="https://github.com/sonnyp/Tangram/issues" />
   <programming-language>JavaScript</programming-language>
 
   <maintainer>
     <foaf:Person>
       <foaf:name>Sonny Piers</foaf:name>
-      <foaf:mbox rdf:resource="mailto:sonny@fastmail.net" />
+      <foaf:mbox rdf:resource="mailto:sonnyp@gnome.org" />
       <foaf:account>
         <foaf:OnlineAccount>
             <foaf:accountServiceHomepage rdf:resource="https://github.com/" />
