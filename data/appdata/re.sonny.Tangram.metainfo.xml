@@ -37,11 +37,19 @@
   </screenshots>
   <content_rating type="oars-1.1" />
   <releases>
-    <release version="1.5.0" date="2023-01-02">
+    <release version="2.0" type="development" date="2023-01-04">
       <description>
         <ul>
-          <li>Use Libadwaita about window </li>
-          <li>Use GNOME 43 runtime</li>
+          <li>Port to GTK4</li>
+          <li>Use Libadwaita</li>
+        </ul>
+      </description>
+    </release>
+
+    <release version="1.5.0" date="2023-01-04" urgency="high">
+      <description>
+        <ul>
+          <li>Update GNOME runtime to 43</li>
         </ul>
       </description>
     </release>
