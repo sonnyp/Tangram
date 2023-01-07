@@ -283,7 +283,5 @@ export default function Window({ application, state }) {
     showTab,
   });
 
-  window.present();
-
   return window;
 }
