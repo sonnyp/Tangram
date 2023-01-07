@@ -1,4 +1,5 @@
 import Gtk from "gi://Gtk";
+import { gettext as _ } from "gettext";
 
 import { once } from "../troll/src/util.js";
 import instance_dialog from "./instanceDialog.blp" assert { type: "string" };
@@ -14,11 +15,11 @@ export function addInstanceDialog(props) {
 async function instanceDialog({ window, instance, mode }) {
   const builder = Gtk.Builder.new_from_string(instance_dialog, -1);
   const dialog = builder.get_object("dialog");
-  dialog.title =
-    mode === "add" ? `Add ${instance.name}` : `Edit ${instance.name}`;
+  dialog.title = instance.name;
   dialog.set_transient_for(window);
 
   const button_save = builder.get_object("button_save");
+  button_save.label = mode === "add" ? _("Add") : _("Update");
 
   const nameEntry = builder.get_object("name");
   nameEntry.text = instance.settings.get_string("name");
