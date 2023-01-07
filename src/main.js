@@ -36,6 +36,9 @@ for (const i in pkg) {
 //   log(`env ${name}: ${getenv(name)}`);
 // });
 
+setenv("PULSE_PROP_application.icon_name", "re.sonny.Tangram-symbolic", true);
+setenv("PULSE_PROP_media.role", "video", true);
+
 export function main(argv = []) {
   log("argv " + argv.join(" "));
 
