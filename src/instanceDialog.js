@@ -1,7 +1,7 @@
 import Gtk from "gi://Gtk";
 
 import { once } from "../troll/src/util.js";
-import builder from "./instanceDialog.blp" assert { type: "builder" };
+import instance_dialog from "./instanceDialog.blp" assert { type: "string" };
 
 export function editInstanceDialog(props) {
   return instanceDialog({ ...props, mode: "edit" });
@@ -12,6 +12,7 @@ export function addInstanceDialog(props) {
 }
 
 async function instanceDialog({ window, instance, mode }) {
+  const builder = Gtk.Builder.new_from_string(instance_dialog, -1);
   const dialog = builder.get_object("dialog");
   dialog.title =
     mode === "add" ? `Add ${instance.name}` : `Edit ${instance.name}`;
