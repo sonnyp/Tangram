@@ -4,6 +4,8 @@ using Adw 1;
 Dialog dialog {
   modal: true;
   use-header-bar: 1;
+  // default-height: 580;
+  default-width: 640;
 
   [action response=cancel]
   Button button_cancel {
@@ -20,23 +22,15 @@ Dialog dialog {
 
     Adw.PreferencesGroup {
       Adw.PreferencesRow {
-        Adw.ActionRow {
+        Adw.EntryRow name {
           title: _("Name");
-
-          Entry name {
-            valign: center;
-          }
         }
       }
 
       Adw.PreferencesRow {
-        Adw.ActionRow {
+        Adw.EntryRow url {
           title: _("URL");
-
-          Entry url {
-            valign: center;
-            hexpand: true;
-          }
+          input-purpose: url;
         }
       }
 
@@ -48,12 +42,8 @@ Dialog dialog {
       }
 
       Adw.PreferencesRow {
-        Adw.ActionRow {
+        Adw.EntryRow user-agent {
           title: _("User agent");
-
-          Entry user-agent {
-            valign: center;
-          }
         }
       }
     }
