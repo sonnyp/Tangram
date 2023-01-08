@@ -72,6 +72,7 @@ export function TabPage({ instance, window, onNotification, application }) {
     onNotification,
     application,
   });
+  instance.webview = webView;
   instance.page = webView;
   webView.mode = MODES.PERMANENT;
   return webView;

@@ -46,6 +46,13 @@ Dialog dialog {
           title: _("User agent");
         }
       }
+
+      Adw.PreferencesRow advanced_row {
+        visible: false;
+        Adw.ExpanderRow advanced {
+          title: "Advanced settings";
+        }
+      }
     }
   }
 }
