@@ -2,13 +2,13 @@ import Gtk from "gi://Gtk";
 import WebKit2 from "gi://WebKit2";
 import Adw from "gi://Adw";
 import builder from "./menu.blp" assert { type: "builder" };
+import { gettext as _ } from "gettext";
 
 const { Clamp } = Adw;
 const { Button, Stack, StackTransitionType, Box, MenuButton, Label } = Gtk;
 const { LoadEvent, uri_for_display } = WebKit2;
 
 import AddressBar from "./AddressBar.js";
-import { BLANK_URI } from "./constants.js";
 
 function Menu() {
   const popover = builder.get_object("menu_popover");
@@ -30,7 +30,7 @@ export default function Header({
   onAddTab,
   onCancelNewTab,
   state,
-  onNewTab,
+  onPlaceholder,
 }) {
   const titlebar = new Adw.HeaderBar();
 
@@ -78,16 +78,9 @@ export default function Header({
   homeButton.connect("clicked", onGoHome);
 
   const cancelBox = new Box();
-  // https://github.com/sonnyp/Tangram/issues/64
   const cancelButton = new Button({
-    label: "Cancel",
+    label: _("Cancel"),
   });
-  state.bind(
-    "instances",
-    cancelButton,
-    "visible",
-    (instances) => instances.length > 0,
-  );
   cancelBox.append(cancelButton);
   cancelButton.connect("clicked", onCancelNewTab);
   left_stack.add_named(cancelBox, "cancel");
@@ -122,7 +115,7 @@ export default function Header({
   });
   const newTabButton = Button.new_from_icon_name("tab-new-symbolic");
   newTabButton.set_tooltip_text("Add new tab");
-  newTabButton.connect("clicked", () => onNewTab());
+  newTabButton.connect("clicked", () => onPlaceholder());
   menuButtonBox.append(newTabButton);
   menuButtonBox.append(Menu());
   right_stack.add_named(menuButtonBox, "menu");
@@ -147,11 +140,7 @@ export default function Header({
 
   function setAddress(webview) {
     const url = webview.get_uri();
-    if (!url || url === BLANK_URI) {
-      addressBar.text = "";
-      return;
-    }
-    addressBar.text = uri_for_display(url);
+    addressBar.text = url ? uri_for_display(url) : "";
   }
 
   function setSecurity(webview) {
@@ -176,14 +165,35 @@ export default function Header({
 
   state.notify("view", (view) => {
     addTabButton.sensitive = false;
+
+    const first_tab = state.get("instances").length === 0;
+
+    cancelButton.visible = !first_tab;
+    left_stack.visible = true;
+    center_stack.visible = true;
+    right_stack.visible = true;
+    titlebar.get_style_context().remove_class("flat");
+
     if (view === "tabs") {
       left_stack.visible_child_name = "navigation";
       center_stack.visible_child_name = "title";
       right_stack.visible_child_name = "menu";
+    } else if (view === "placeholder") {
+      left_stack.visible_child_name = "cancel";
+      center_stack.visible_child_name = "title";
+      right_stack.visible_child_name = "empty";
+
+      if (first_tab) {
+        titlebar.get_style_context().add_class("flat");
+        left_stack.visible = false;
+        center_stack.visible = false;
+        right_stack.visible = false;
+      }
     } else if (view === "new-tab") {
       left_stack.visible_child_name = "cancel";
       center_stack.visible_child_name = "url";
       right_stack.visible_child_name = "new-tab";
+      titlebar.get_style_context().remove_class("flat");
     }
   });
 
@@ -232,10 +242,8 @@ export default function Header({
         // updateButtons(webview);
 
         if (loadEvent === LoadEvent.COMMITTED) {
-          if (webview.uri !== BLANK_URI) {
-            reloadButton.icon_name = "view-refresh-symbolic";
-            addTabButton.sensitive = true;
-          }
+          reloadButton.icon_name = "view-refresh-symbolic";
+          addTabButton.sensitive = true;
         } else if (loadEvent !== LoadEvent.FINISHED) {
           addTabButton.sensitive = false;
         }
@@ -253,5 +261,5 @@ export default function Header({
     );
   });
 
-  return { titlebar, addressBar };
+  return { titlebar, addressBar, right_stack, center_stack };
 }

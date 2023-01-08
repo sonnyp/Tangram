@@ -1,36 +1,13 @@
 import Gtk from "gi://Gtk";
-import GLib from "gi://GLib";
 
-const { Entry } = Gtk;
-
-function normalizeURL(str) {
-  if (!str) return null;
-
-  if (!str.startsWith("http")) {
-    str = "http://" + str;
-  }
-
-  const uri = GLib.Uri.parse(str, GLib.UriFlags.NONE);
-  if (!uri) return null;
-
-  if (!["http", "https"].includes(uri.get_scheme())) {
-    return null;
-  }
-
-  return uri.to_string();
-}
+import { normalizeURL } from "./utils.js";
 
 export default function AddressBar({ state }) {
-  const URLBar = new Entry({
+  const URLBar = new Gtk.Entry({
     hexpand: true,
     placeholder_text: "Enter address",
     input_purpose: Gtk.InputPurpose.URL,
-  });
-
-  state.notify("view", (view) => {
-    if (view === "new-tab") {
-      URLBar.grab_focus_without_selecting();
-    }
+    activates_default: true,
   });
 
   URLBar.connect("activate", () => {
@@ -39,6 +16,7 @@ export default function AddressBar({ state }) {
 
     const webview = state.get("webview");
     if (!webview) return;
+
     webview.load_uri(url);
     webview.grab_focus();
   });

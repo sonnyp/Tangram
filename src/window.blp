@@ -12,6 +12,29 @@ Adw.ApplicationWindow window {
 
     Stack stack {
       transition-type: crossfade;
+
+      StackPage {
+        name: "placeholder";
+        child: Adw.StatusPage {
+          Box {
+            hexpand: true;
+            halign: center;
+            Entry entry_go {
+              input-purpose: url;
+              placeholder-text: "example.org";
+              hexpand: true;
+              max-width-chars: 30;
+              activates-default: true;
+            }
+            Button button_go {
+              label: "Go";
+              margin-start: 8;
+              sensitive: false;
+              styles ["suggested-action"]
+            }
+          }
+        };
+      }
     }
   }
 }

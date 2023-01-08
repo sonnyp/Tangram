@@ -1,7 +1,6 @@
 import "gi://WebKit2?version=5.0";
 
-import { isSameSite, isUrlAllowedForNavigation } from "./utils.js";
-import { BLANK_URI } from "./constants.js";
+import { isSameSite } from "./utils.js";
 
 const assert = {
   is(a, b) {
@@ -44,17 +43,5 @@ assert.is(
 // кто.рф is not public suffix
 assert.is(
   isSameSite("https://foo.кто.рф", "https://bar.xn--j1ail.xn--p1ai"),
-  true,
-);
-
-assert.is(
-  isUrlAllowedForNavigation(
-    {
-      get_uri() {
-        return "foo";
-      },
-    },
-    BLANK_URI,
-  ),
   true,
 );

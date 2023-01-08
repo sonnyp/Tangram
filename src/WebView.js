@@ -34,7 +34,7 @@ const { Notification, AppInfo, ResourceLookupFlags, resources_open_stream } =
 
 import { connect, getEnum } from "./util.js";
 import { env } from "./env.js";
-import { BLANK_URI, MODES } from "./constants.js";
+import { MODES } from "./constants.js";
 
 export function buildWebView({
   instance,
@@ -290,7 +290,7 @@ export function buildWebView({
 
   webView.instance_id = id;
 
-  webView.load_uri(url || BLANK_URI);
+  webView.load_uri(url);
 
   return webView;
 }
