@@ -1,25 +1,6 @@
-import Gtk from "gi://Gtk";
 import WebKit2 from "gi://WebKit2";
-import Adw from "gi://Adw";
-import builder from "./menu.blp" assert { type: "builder" };
-import { gettext as _ } from "gettext";
 
-const { Clamp } = Adw;
-const { Button, Stack, StackTransitionType, Box, MenuButton, Label } = Gtk;
-const { LoadEvent, uri_for_display } = WebKit2;
-
-import AddressBar from "./AddressBar.js";
-
-function Menu() {
-  const popover = builder.get_object("menu_popover");
-
-  const button = new MenuButton({
-    popover,
-    icon_name: "open-menu-symbolic",
-  });
-
-  return button;
-}
+import { normalizeURL } from "./utils.js";
 
 export default function Header({
   onReload,
@@ -31,39 +12,19 @@ export default function Header({
   onCancelNewTab,
   state,
   onPlaceholder,
+  builder,
 }) {
-  const titlebar = new Adw.HeaderBar();
+  const header_bar = builder.get_object("header_bar");
+  const stack_start = builder.get_object("stack_start");
+  const stack_center = builder.get_object("stack_center");
+  const stack_end = builder.get_object("stack_end");
 
-  const left_stack = new Stack({
-    transition_type: StackTransitionType.CROSSFADE,
-    hhomogeneous: false,
-  });
-
-  const navigationButtonBox = new Box({
-    spacing: 6,
-  });
-  left_stack.add_named(navigationButtonBox, "navigation");
-
-  const navigationButtons = new Box({ spacing: 0 });
-  navigationButtons.add_css_class("linked");
-  navigationButtonBox.append(navigationButtons);
-
-  const backButton = Button.new_from_icon_name("go-previous-symbolic");
-  backButton.set_tooltip_text("Go back to the previous page");
-  backButton.sensitive = false;
-  navigationButtons.append(backButton);
-  backButton.connect("clicked", onGoBack);
-
-  const forwardButton = Button.new_from_icon_name("go-next-symbolic");
-  forwardButton.set_tooltip_text("Go forward to the next page");
-  forwardButton.sensitive = false;
-  navigationButtons.append(forwardButton);
-  forwardButton.connect("clicked", onGoForward);
-
-  const reloadButton = new Gtk.Button({ icon_name: "view-refresh-symbolic" });
-  reloadButton.set_tooltip_text("Reload the current page");
-  navigationButtonBox.append(reloadButton);
-  reloadButton.connect("clicked", () => {
+  const button_back = builder.get_object("button_back");
+  button_back.connect("clicked", onGoBack);
+  const button_forward = builder.get_object("button_forward");
+  button_forward.connect("clicked", onGoForward);
+  const button_reload = builder.get_object("button_reload");
+  button_reload.connect("clicked", () => {
     const webview = state.get("webview");
     if (webview.is_loading) {
       onStopLoading();
@@ -71,129 +32,93 @@ export default function Header({
       onReload();
     }
   });
+  const button_home = builder.get_object("button_home");
+  button_home.connect("clicked", onGoHome);
 
-  const homeButton = new Gtk.Button({ icon_name: "go-home-symbolic" });
-  homeButton.set_tooltip_text("Go to homepage");
-  navigationButtonBox.append(homeButton);
-  homeButton.connect("clicked", onGoHome);
+  const button_cancel = builder.get_object("button_cancel");
+  button_cancel.connect("clicked", onCancelNewTab);
 
-  const cancelBox = new Box();
-  const cancelButton = new Button({
-    label: _("Cancel"),
-  });
-  cancelBox.append(cancelButton);
-  cancelButton.connect("clicked", onCancelNewTab);
-  left_stack.add_named(cancelBox, "cancel");
+  const entry_url = builder.get_object("entry_url");
+  entry_url.connect("activate", () => {
+    const url = normalizeURL(entry_url.text);
+    if (!url) return;
 
-  titlebar.pack_start(left_stack);
+    const webview = state.get("webview");
+    if (!webview) return;
 
-  const center_stack = new Stack({
-    transition_type: StackTransitionType.CROSSFADE,
+    webview.load_uri(url);
+    webview.grab_focus();
   });
-  titlebar.set_title_widget(center_stack);
-  const title = new Label({
-    label: "Tangram",
-  });
-  title.get_style_context().add_class("title");
-  center_stack.add_named(title, "title");
-  const addressBar = AddressBar({ state });
-  const clamp = new Clamp({
-    child: addressBar,
-    maximum_size: 860,
-    tightening_threshold: 560,
-  });
-  center_stack.add_named(clamp, "url");
 
-  const right_stack = new Stack({
-    transition_type: StackTransitionType.CROSSFADE,
-    hhomogeneous: false,
-  });
-  titlebar.pack_end(right_stack);
+  const button_new_tab = builder.get_object("button_new_tab");
+  button_new_tab.connect("clicked", onPlaceholder);
 
-  const menuButtonBox = new Box({
-    spacing: 6,
-  });
-  const newTabButton = Button.new_from_icon_name("tab-new-symbolic");
-  newTabButton.set_tooltip_text("Add new tab");
-  newTabButton.connect("clicked", () => onPlaceholder());
-  menuButtonBox.append(newTabButton);
-  menuButtonBox.append(Menu());
-  right_stack.add_named(menuButtonBox, "menu");
-  right_stack.add_named(new Box(), "empty");
-
-  const servicesLayer = new Box();
-  const addTabButton = new Button({
-    label: "Done",
-    sensitive: false,
-  });
-  addTabButton.connect("clicked", () => {
+  const button_done = builder.get_object("button_done");
+  button_done.connect("clicked", () => {
     onAddTab().catch(logError);
   });
-  addTabButton.get_style_context().add_class("suggested-action");
-  servicesLayer.append(addTabButton);
-  right_stack.add_named(servicesLayer, "new-tab");
 
   function updateButtons(webview) {
-    backButton.sensitive = webview.can_go_back();
-    forwardButton.sensitive = webview.can_go_forward();
+    button_back.sensitive = webview.can_go_back();
+    button_forward.sensitive = webview.can_go_forward();
   }
 
   function setAddress(webview) {
     const url = webview.get_uri();
-    addressBar.text = url ? uri_for_display(url) : "";
+    entry_url.text = url ? WebKit2.uri_for_display(url) : "";
   }
 
   function setSecurity(webview) {
-    if (!addressBar.text) {
-      addressBar.primary_icon_name = null;
+    if (!entry_url.text) {
+      entry_url.primary_icon_name = null;
       return;
     }
 
     const [ok, , errors] = webview.get_tls_info();
     if (!ok) {
-      addressBar.primary_icon_name = "channel-insecure-symbolic";
+      entry_url.primary_icon_name = "channel-insecure-symbolic";
       return;
     }
 
     if (errors !== 0) {
-      addressBar.primary_icon_name = "channel-insecure-symbolic";
+      entry_url.primary_icon_name = "channel-insecure-symbolic";
       return;
     }
 
-    addressBar.primary_icon_name = null;
+    entry_url.primary_icon_name = null;
   }
 
   state.notify("view", (view) => {
-    addTabButton.sensitive = false;
+    button_done.sensitive = false;
 
     const first_tab = state.get("instances").length === 0;
 
-    cancelButton.visible = !first_tab;
-    left_stack.visible = true;
-    center_stack.visible = true;
-    right_stack.visible = true;
-    titlebar.get_style_context().remove_class("flat");
+    button_cancel.visible = !first_tab;
+    stack_start.visible = true;
+    stack_center.visible = true;
+    stack_end.visible = true;
+    header_bar.get_style_context().remove_class("flat");
 
     if (view === "tabs") {
-      left_stack.visible_child_name = "navigation";
-      center_stack.visible_child_name = "title";
-      right_stack.visible_child_name = "menu";
+      stack_start.visible_child_name = "navigation";
+      stack_center.visible_child_name = "title";
+      stack_end.visible_child_name = "menu";
     } else if (view === "placeholder") {
-      left_stack.visible_child_name = "cancel";
-      center_stack.visible_child_name = "title";
-      right_stack.visible_child_name = "empty";
+      stack_start.visible_child_name = "cancel";
+      stack_center.visible_child_name = "title";
+      stack_end.visible_child_name = "empty";
 
       if (first_tab) {
-        titlebar.get_style_context().add_class("flat");
-        left_stack.visible = false;
-        center_stack.visible = false;
-        right_stack.visible = false;
+        header_bar.get_style_context().add_class("flat");
+        stack_start.visible = false;
+        stack_center.visible = false;
+        stack_end.visible = false;
       }
     } else if (view === "new-tab") {
-      left_stack.visible_child_name = "cancel";
-      center_stack.visible_child_name = "url";
-      right_stack.visible_child_name = "new-tab";
-      titlebar.get_style_context().remove_class("flat");
+      stack_start.visible_child_name = "cancel";
+      stack_center.visible_child_name = "url";
+      stack_end.visible_child_name = "new-tab";
+      header_bar.get_style_context().remove_class("flat");
     }
   });
 
@@ -214,8 +139,8 @@ export default function Header({
     }
 
     if (!webview) {
-      addressBar.primary_icon_name = null;
-      addressBar.text = "";
+      entry_url.primary_icon_name = null;
+      entry_url.text = "";
       return;
     }
 
@@ -224,7 +149,7 @@ export default function Header({
     if (!webview.is_loading) {
       setSecurity(webview);
     }
-    reloadButton.icon_name = webview.is_loading
+    button_reload.icon_name = webview.is_loading
       ? "process-stop-symbolic"
       : "view-refresh-symbolic";
 
@@ -241,25 +166,25 @@ export default function Header({
       (self, loadEvent) => {
         // updateButtons(webview);
 
-        if (loadEvent === LoadEvent.COMMITTED) {
-          reloadButton.icon_name = "view-refresh-symbolic";
-          addTabButton.sensitive = true;
-        } else if (loadEvent !== LoadEvent.FINISHED) {
-          addTabButton.sensitive = false;
+        if (loadEvent === WebKit2.LoadEvent.COMMITTED) {
+          button_reload.icon_name = "view-refresh-symbolic";
+          button_done.sensitive = true;
+        } else if (loadEvent !== WebKit2.LoadEvent.FINISHED) {
+          button_done.sensitive = false;
         }
 
-        if (loadEvent === LoadEvent.STARTED) {
-          reloadButton.icon_name = "process-stop-symbolic";
+        if (loadEvent === WebKit2.LoadEvent.STARTED) {
+          button_reload.icon_name = "process-stop-symbolic";
           setAddress(webview);
-          addressBar.primary_icon_name = null;
-        } else if (loadEvent === LoadEvent.REDIRECTED) {
+          entry_url.primary_icon_name = null;
+        } else if (loadEvent === WebKit2.LoadEvent.REDIRECTED) {
           setAddress(webview);
-        } else if (loadEvent === LoadEvent.COMMITTED) {
+        } else if (loadEvent === WebKit2.LoadEvent.COMMITTED) {
           setSecurity(webview);
         }
       },
     );
   });
 
-  return { titlebar, addressBar, right_stack, center_stack };
+  return { entry_url };
 }

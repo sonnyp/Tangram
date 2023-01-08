@@ -73,6 +73,7 @@ export default function Window({ application, state }) {
     onCancelNewTab,
     state,
     onPlaceholder,
+    builder,
   });
 
   function onStopLoading() {
@@ -142,8 +143,6 @@ export default function Window({ application, state }) {
     "maximized",
     Gio.SettingsBindFlags.DEFAULT,
   );
-
-  builder.get_object("main").prepend(header.titlebar);
 
   const stack = builder.get_object("stack");
   state.bind("view", stack, "visible_child_name");
@@ -315,7 +314,7 @@ export default function Window({ application, state }) {
     window,
     application,
     notebook,
-    addressBar: header.addressBar,
+    entry_url: header.entry_url,
     onStopLoading,
     onReload,
     onGoBack,
