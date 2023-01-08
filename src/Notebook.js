@@ -1,4 +1,3 @@
-import Gtk from "gi://Gtk";
 import Gio from "gi://Gio";
 
 const { SettingsBindFlags } = Gio;
@@ -6,18 +5,12 @@ const { SettingsBindFlags } = Gio;
 import { connect } from "./util.js";
 import state from "./state.js";
 
-export default function Notebook({ settings, application }) {
-  // https://gjs-docs.gnome.org/gtk30~3.24.8/gtk.notebook
-  const notebook = new Gtk.Notebook({
-    scrollable: true,
-    hexpand: true,
-    vexpand: true,
-  });
+export default function Notebook({ builder, settings, application }) {
+  const notebook = builder.get_object("notebook");
   notebook.connect("switch-page", (self, webview) => {
     application.withdraw_notification(webview.instance_id);
     state.set({ webview });
   });
-  notebook.set_group_name("tabs");
   connect(notebook, {
     ["page-reordered"]() {
       const number_of_pages = notebook.get_n_pages();

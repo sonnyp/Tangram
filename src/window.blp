@@ -151,6 +151,15 @@ Adw.ApplicationWindow window {
           }
         };
       }
+
+      StackPage {
+        name: "tabs";
+        child: Notebook notebook {
+          scrollable: true;
+          hexpand: true;
+          vexpand: true;
+        };
+      }
     }
   }
 }

@@ -147,8 +147,7 @@ export default function Window({ application, state }) {
   const stack = builder.get_object("stack");
   state.bind("view", stack, "visible_child_name");
 
-  const notebook = Notebook({ settings, application });
-  stack.add_named(notebook, "tabs");
+  const notebook = Notebook({ builder, settings, application });
 
   function showTab(idx) {
     notebook.set_current_page(idx);
