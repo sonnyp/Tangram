@@ -1,5 +1,6 @@
 import GLib from "gi://GLib";
 import Gio from "gi://Gio";
+import GObject from "gi://GObject";
 
 import Notebook from "./Notebook.js";
 import Shortcuts from "./Shortcuts.js";
@@ -23,16 +24,44 @@ import {
   create as createInstance,
 } from "./instances.js";
 import { buildWebView } from "./WebView.js";
-import { BLANK_URI, MODES } from "./constants.js";
+import { MODES } from "./constants.js";
 import * as instances from "./instances.js";
 
 import builder from "./window.blp" assert { type: "builder" };
+import { normalizeURL } from "./utils.js";
+import { gettext as _ } from "gettext";
 
 export default function Window({ application, state }) {
   const settings = new Settings({
     schema_id: "re.sonny.Tangram",
     path: "/re/sonny/Tangram/",
   });
+
+  // const button_go = builder.get_object("button_go");
+  // const entry_go = builder.get_object("entry_go");
+  // button_go.connect("clicked", () => {
+  //   entry_go.emit("activate");
+  // });
+  // entry_go.connect("activate", () => {
+  //   const url = normalizeURL(entry_go.text);
+  //   if (!url) return;
+
+  //   onNewTab();
+
+  //   const webview = state.get("webview");
+  //   if (!webview) return;
+
+  //   webview.load_uri(url);
+  //   webview.grab_focus();
+  // });
+  // entry_go.bind_property_full(
+  //   "text",
+  //   button_go,
+  //   "sensitive",
+  //   GObject.BindingFlags.DEFAULT,
+  //   (binding, value) => [true, !!value],
+  //   null,
+  // );
 
   const header = Header({
     onReload,
@@ -43,7 +72,8 @@ export default function Window({ application, state }) {
     onAddTab,
     onCancelNewTab,
     state,
-    onNewTab,
+    onPlaceholder,
+    builder,
   });
 
   function onStopLoading() {
@@ -113,8 +143,6 @@ export default function Window({ application, state }) {
     "maximized",
     Gio.SettingsBindFlags.DEFAULT,
   );
-
-  builder.get_object("main").prepend(header.titlebar);
 
   const stack = builder.get_object("stack");
   state.bind("view", stack, "visible_child_name");
@@ -225,11 +253,31 @@ export default function Window({ application, state }) {
     destroyInstance(instance);
   }
 
+  function onPlaceholder() {
+    state.set({ view: "placeholder" });
+    entry_go.text = "";
+    entry_go.grab_focus();
+
+    const status_page = builder
+      .get_object("stack")
+      .get_child_by_name("placeholder");
+    const first_tab = state.get("instances").length === 0;
+
+    if (first_tab) {
+      status_page.icon_name = "re.sonny.Tangram";
+      status_page.title = _("Welcome to Tangram");
+      status_page.description = _("Let's add your first web application.");
+    } else {
+      status_page.icon_name = "";
+      status_page.title = "";
+      status_page.description = "";
+    }
+  }
+
   function onNewTab() {
     const id = GLib.uuid_string_random().replace(/-/g, "");
 
     const instance = createInstance({
-      url: BLANK_URI,
       id,
       name: "",
     });
@@ -256,7 +304,7 @@ export default function Window({ application, state }) {
   observeSetting(settings, "instances", (instances) => {
     state.set({ instances });
     if (instances.length === 0) {
-      onNewTab();
+      onPlaceholder();
     } else {
       // const page = tabview.get_page_position(notebook.page);
       // state.set({
@@ -269,8 +317,7 @@ export default function Window({ application, state }) {
   Shortcuts({
     window,
     application,
-    // notebook,
-    addressBar: header.addressBar,
+    entry_url: header.entry_url,
     onStopLoading,
     onReload,
     onGoBack,
@@ -286,8 +333,6 @@ export default function Window({ application, state }) {
     // notebook,
     // showTab,
   });
-
-  window.present();
 
   return window;
 }

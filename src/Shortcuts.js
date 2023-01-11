@@ -12,7 +12,7 @@ export default function Shortcuts({
   onGoForward,
   onGoHome,
   onToggleWebInspector,
-  addressBar,
+  entry_url,
 }) {
   function getTabIndexForKeyval(keyval) {
     const keyname = Gdk.keyval_name(keyval);
@@ -66,7 +66,7 @@ export default function Shortcuts({
     [["<Alt>Left"], onGoBack],
     [["<Alt>Right"], onGoForward],
     [["<Primary><Shift>I"], onToggleWebInspector],
-    [["<Primary>L"], () => addressBar.grab_focus()],
+    [["<Primary>L"], () => entry_url.grab_focus()],
     [
       [
         "<Primary>Page_Up",

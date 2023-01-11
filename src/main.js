@@ -1,4 +1,4 @@
-import "gi://WebKit2?version=5.0";
+import "gi://WebKit?version=6.0";
 import { programInvocationName } from "system";
 import GLib from "gi://GLib";
 import Gio from "gi://Gio";
@@ -35,6 +35,9 @@ for (const i in pkg) {
 // listenv().forEach((name) => {
 //   log(`env ${name}: ${getenv(name)}`);
 // });
+
+setenv("PULSE_PROP_application.icon_name", "re.sonny.Tangram-symbolic", true);
+setenv("PULSE_PROP_media.role", "video", true);
 
 export function main(argv = []) {
   log("argv " + argv.join(" "));

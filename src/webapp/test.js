@@ -1,7 +1,7 @@
-import "gi://WebKit2?version=5.0";
+import "gi://WebKit?version=5.0";
 
 import GLib from "gi://GLib";
-import WebKit from "gi://WebKit2";
+import WebKit from "gi://WebKit";
 import Gtk from "gi://Gtk";
 import Soup from "gi://Soup?version=3.0";
 import { exit } from "system";

@@ -7,7 +7,7 @@ const {
 } = Soup;
 const { hostname_to_ascii, Uri, UriFlags } = GLib;
 
-import { BLANK_URI, MODES } from "./constants.js";
+import { MODES } from "./constants.js";
 
 // Implements https://web.dev/same-site-same-origin/
 export function isSameSite(a, b) {
@@ -46,7 +46,22 @@ export function isUrlAllowedForNavigation(webView, request_url) {
 
   if (webView.mode === MODES.TEMPORARY) return true;
 
-  if (request_url === BLANK_URI) return true;
-
   return isSameSite(current_url, request_url);
+}
+
+export function normalizeURL(str) {
+  if (!str) return null;
+
+  if (!str.startsWith("http")) {
+    str = "http://" + str;
+  }
+
+  const uri = GLib.Uri.parse(str, GLib.UriFlags.NONE);
+  if (!uri) return null;
+
+  if (!["http", "https"].includes(uri.get_scheme())) {
+    return null;
+  }
+
+  return uri.to_string();
 }
