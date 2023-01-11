@@ -196,6 +196,8 @@ export default function Window({ application, state }) {
   }
 
   async function onAddTab() {
+    builder.get_object("tab_overview").open = true;
+    return;
     const webview = stack.get_child_by_name("new-tab");
     const { instance_id } = webview;
     const instance = getInstance(instance_id);
@@ -254,6 +256,8 @@ export default function Window({ application, state }) {
   }
 
   function onPlaceholder() {
+    builder.get_object("tab_overview").open = true;
+    return;
     state.set({ view: "placeholder" });
     entry_go.text = "";
     entry_go.grab_focus();

@@ -22,6 +22,7 @@ Adw.ApplicationWindow window {
           child: Box {
             Button button_cancel {
               label: _("Cancel");
+              visible: false;
             }
           };
         }
@@ -136,9 +137,10 @@ Adw.ApplicationWindow window {
           orientation: vertical;
           Adw.TabBar {
             view: tabview;
+            visible: false;
           }
 
-          Adw.TabOverview  {
+          Adw.TabOverview tab_overview {
             open: true;
             view: tabview;
             hexpand: true;
