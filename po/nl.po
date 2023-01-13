@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: re.sonny.Tangram\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-09-18 16:27+0200\n"
-"PO-Revision-Date: 2021-12-29 16:52+0000\n"
+"PO-Revision-Date: 2023-01-14 23:57+0000\n"
 "Last-Translator: Heimen Stoffels <vistausss@fastmail.com>\n"
 "Language-Team: Dutch <https://hosted.weblate.org/projects/tangram/tangram/nl/>\n"
 "Language: nl\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.10.1\n"
+"X-Generator: Weblate 4.15.1-dev\n"
 
 #: data/appdata/re.sonny.Tangram.metainfo.xml:5 data/re.sonny.Tangram.desktop:3
 msgid "Tangram"
@@ -57,15 +57,15 @@ msgstr "Eén venster met allerlei documentatie of informatie"
 
 #: data/appdata/re.sonny.Tangram.metainfo.xml:43
 msgid "Fix a bug preventing to start Tangram"
-msgstr ""
+msgstr "Opgelost: bug die het starten van Tangram verhinderde"
 
 #: data/appdata/re.sonny.Tangram.metainfo.xml:44
 msgid "Reduce the noisiness of logs"
-msgstr ""
+msgstr "Verbeterd: geen onnodige regels meer in logboeken"
 
 #: data/appdata/re.sonny.Tangram.metainfo.xml:52
 msgid "Fix a bug preventing to add new tabs"
-msgstr ""
+msgstr "Opgelost: bug die nieuwe tabbladen verhinderde"
 
 #: data/appdata/re.sonny.Tangram.metainfo.xml:60
 msgid "Notifications priority is normal instead of urgent by default"
@@ -184,8 +184,6 @@ msgid "Window maximized"
 msgstr "Maximaliseren"
 
 #: data/re.sonny.Tangram.gschema.xml:41
-#, fuzzy
-#| msgid "Weither the window is maximized"
 msgid "Whether the window is maximized"
 msgstr "Of het venster gemaximaliseerd moet worden"
 
@@ -236,21 +234,19 @@ msgstr "Heimen Stoffels <vistausss@fastmail.com>"
 
 #: src/instanceDialog.blp:46
 msgid "Normal"
-msgstr ""
+msgstr "Normaal"
 
 #: src/instanceDialog.blp:46
 msgid "Low"
-msgstr ""
+msgstr "Laag"
 
 #: src/instanceDialog.blp:46
 msgid "High"
-msgstr ""
+msgstr "Hoog"
 
 #: src/instanceDialog.blp:46
-#, fuzzy
-#| msgid "User agent"
 msgid "Urgent"
-msgstr "Gebruikersagent"
+msgstr "Urgent"
 
 #: src/shortcuts.blp:11
 msgctxt "shortcut window"
