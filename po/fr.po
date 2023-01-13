@@ -8,15 +8,15 @@ msgstr ""
 "Project-Id-Version: re.sonny.Tangram\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-09-18 16:27+0200\n"
-"PO-Revision-Date: 2022-04-29 03:12+0000\n"
-"Last-Translator: Fedor <fed777os@gmail.com>\n"
+"PO-Revision-Date: 2023-01-14 23:57+0000\n"
+"Last-Translator: J. Lavoie <j.lavoie@net-c.ca>\n"
 "Language-Team: French <https://hosted.weblate.org/projects/tangram/tangram/fr/>\n"
 "Language: fr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Generator: Weblate 4.12.1-dev\n"
+"X-Generator: Weblate 4.15.1-dev\n"
 
 #: data/appdata/re.sonny.Tangram.metainfo.xml:5 data/re.sonny.Tangram.desktop:3
 msgid "Tangram"
@@ -57,7 +57,7 @@ msgstr "Un guichet unique pour de multiples sources de documentation ou d'inform
 
 #: data/appdata/re.sonny.Tangram.metainfo.xml:43
 msgid "Fix a bug preventing to start Tangram"
-msgstr ""
+msgstr "Correction d'un bogue empêchant de lancer Tangram"
 
 #: data/appdata/re.sonny.Tangram.metainfo.xml:44
 msgid "Reduce the noisiness of logs"
@@ -184,8 +184,6 @@ msgid "Window maximized"
 msgstr "Fenêtre maximisée"
 
 #: data/re.sonny.Tangram.gschema.xml:41
-#, fuzzy
-#| msgid "Weither the window is maximized"
 msgid "Whether the window is maximized"
 msgstr "Si la fenêtre est maximisée ou non"
 
@@ -236,21 +234,19 @@ msgstr "crédits-traducteur"
 
 #: src/instanceDialog.blp:46
 msgid "Normal"
-msgstr ""
+msgstr "Normal"
 
 #: src/instanceDialog.blp:46
 msgid "Low"
-msgstr ""
+msgstr "Bas"
 
 #: src/instanceDialog.blp:46
 msgid "High"
-msgstr ""
+msgstr "Élevé"
 
 #: src/instanceDialog.blp:46
-#, fuzzy
-#| msgid "User agent"
 msgid "Urgent"
-msgstr "Agent utilisateur"
+msgstr "Urgent"
 
 #: src/shortcuts.blp:11
 msgctxt "shortcut window"
