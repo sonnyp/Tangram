@@ -10,12 +10,14 @@ msgstr ""
 "POT-Creation-Date: 2021-12-27 00:55+0100\n"
 "PO-Revision-Date: 2022-02-16 02:54+0000\n"
 "Last-Translator: paluszkiewiczB <bomblozaurus@gmail.com>\n"
-"Language-Team: Polish <https://hosted.weblate.org/projects/tangram/tangram/pl/>\n"
+"Language-Team: Polish <https://hosted.weblate.org/projects/tangram/tangram/"
+"pl/>\n"
 "Language: pl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
+"Plural-Forms: nplurals=3; plural=n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
+"|| n%100>=20) ? 1 : 2;\n"
 "X-Generator: Weblate 4.11-dev\n"
 
 #: data/appdata/re.sonny.Tangram.metainfo.xml:5 data/re.sonny.Tangram.desktop:3
@@ -32,8 +34,14 @@ msgid "Browser for your pinned tabs"
 msgstr "Przeglądarka dla twoich przypiętych kart"
 
 #: data/appdata/re.sonny.Tangram.metainfo.xml:13
-msgid "Tangram is a new kind of browser. It is designed to organize and run your Web applications. Each tab is persistent and independent. You can set multiple tabs with different accounts for the same application."
-msgstr "Tangram to nowy rodzaj przeglądarki. Została zaprojektowana, aby organizować i uruchamiać Twoje aplikacje webowe. Każda karta jest trwała i niezależna. Możesz stworzyć kilka kart z różnymi kontami dla tej samej aplikacji."
+msgid ""
+"Tangram is a new kind of browser. It is designed to organize and run your "
+"Web applications. Each tab is persistent and independent. You can set "
+"multiple tabs with different accounts for the same application."
+msgstr ""
+"Tangram to nowy rodzaj przeglądarki. Została zaprojektowana, aby organizować "
+"i uruchamiać Twoje aplikacje webowe. Każda karta jest trwała i niezależna. "
+"Możesz stworzyć kilka kart z różnymi kontami dla tej samej aplikacji."
 
 #: data/appdata/re.sonny.Tangram.metainfo.xml:17
 msgid "Common use cases:"
@@ -44,12 +52,16 @@ msgid "Stay up to date with your favorite communities; Mastodon, Twitter, ..."
 msgstr "Bądź na bieżąco z twoją ulubioną społecznością: Mastodon, Twitter, ..."
 
 #: data/appdata/re.sonny.Tangram.metainfo.xml:22
-msgid "Merge all these chat applications into one; WhatsApp, Messenger, Telegram, ..."
+msgid ""
+"Merge all these chat applications into one; WhatsApp, Messenger, "
+"Telegram, ..."
 msgstr "Połącz te aplikacje w jedną; WhatsApp, Messenger, Telegram, ..."
 
 #: data/appdata/re.sonny.Tangram.metainfo.xml:24
-msgid "Group your organization tools under one application; EMail, Calendar, ..."
-msgstr "Zbierz narzędzia organizacyjne w jednej aplikacji: EMail, Kalendarz, ..."
+msgid ""
+"Group your organization tools under one application; EMail, Calendar, ..."
+msgstr ""
+"Zbierz narzędzia organizacyjne w jednej aplikacji: EMail, Kalendarz, ..."
 
 #: data/appdata/re.sonny.Tangram.metainfo.xml:25
 msgid "One-stop for multiple sources of documentation or information"
@@ -61,7 +73,8 @@ msgstr "Powiadomienia mają zwykły priorytet, zamiast domyślnego wysokiego"
 
 #: data/appdata/re.sonny.Tangram.metainfo.xml:43
 msgid "Add a per-tab setting to change notifications priority"
-msgstr "Dodaj ustawienia dla konkretnej karty, żeby zmienić priorytet powiadomień"
+msgstr ""
+"Dodaj ustawienia dla konkretnej karty, żeby zmienić priorytet powiadomień"
 
 #: data/appdata/re.sonny.Tangram.metainfo.xml:44
 msgid "Fix authentication on many popular websites"
@@ -73,7 +86,9 @@ msgstr "Napraw przycisk \"Anuluj\" w dialogu ustawień karty"
 
 #: data/appdata/re.sonny.Tangram.metainfo.xml:46
 msgid "Use middle-click or Ctrl+click to open links in the browser"
-msgstr "Użyj środkowego przycisku myszy lub kombinacji ctrl+lewy przycisk, żeby otworzyć link w przeglądarce"
+msgstr ""
+"Użyj środkowego przycisku myszy lub kombinacji ctrl+lewy przycisk, żeby "
+"otworzyć link w przeglądarce"
 
 #: data/appdata/re.sonny.Tangram.metainfo.xml:54
 msgid "Fix window title"
@@ -84,8 +99,12 @@ msgid "Update GNOME runtime to 41"
 msgstr "Zaktualizuj środowisko uruchomieniowe GNOME do 41"
 
 #: data/appdata/re.sonny.Tangram.metainfo.xml:64
-msgid "Fix an issue preventing some sites such as Twitter or Facebook from being added."
-msgstr "Napraw błąd uniemożliwiający dodanie niektórych stron jak Twitter czy Facebook"
+msgid ""
+"Fix an issue preventing some sites such as Twitter or Facebook from being "
+"added."
+msgstr ""
+"Napraw błąd uniemożliwiający dodanie niektórych stron jak Twitter czy "
+"Facebook"
 
 #: data/appdata/re.sonny.Tangram.metainfo.xml:65
 msgid "Update GNOME runtime to 3.38"
@@ -121,7 +140,9 @@ msgstr "Lepsza integracja z pulpitem"
 
 #: data/appdata/re.sonny.Tangram.metainfo.xml:87
 msgid "Fix the main window becoming tiny when unmaximizing"
-msgstr "Napraw błąd powodujący bardzo mały rozmiar głównego okna po zdemaksymalizowaniu"
+msgstr ""
+"Napraw błąd powodujący bardzo mały rozmiar głównego okna po "
+"zdemaksymalizowaniu"
 
 #: data/appdata/re.sonny.Tangram.metainfo.xml:88
 msgid "Enable touchpad/touchscreen swipe navigation gestures"
@@ -136,7 +157,8 @@ msgid "Improved web compatibility and performances"
 msgstr "Poprawiona kompatybilność web i wydajność"
 
 #: data/appdata/re.sonny.Tangram.metainfo.xml:99
-msgid "Tangram now works properly on Flatpak 1.0 (Linux Mint, Ubuntu 18.04, ...)"
+msgid ""
+"Tangram now works properly on Flatpak 1.0 (Linux Mint, Ubuntu 18.04, ...)"
 msgstr "Tangram działa teraz na Flatpak 1.0 (Linux Mint, Ubuntu 18.04, ...)"
 
 #: data/re.sonny.Tangram.desktop:13
@@ -193,23 +215,27 @@ msgstr ""
 
 #: data/re.sonny.Tangram.gschema.xml:60 src/instanceDialog.ui:43
 msgid "URL"
-msgstr ""
+msgstr "Adres URL"
 
 #: data/re.sonny.Tangram.gschema.xml:61
 msgid "Start URL"
-msgstr ""
+msgstr "Startowy adres URL"
 
 #: data/re.sonny.Tangram.gschema.xml:65 src/instanceDialog.ui:79
 msgid "User agent"
 msgstr ""
 
 #: data/re.sonny.Tangram.gschema.xml:67
-msgid "String that will be used as user agent, to identify the browser to the web servers."
+msgid ""
+"String that will be used as user agent, to identify the browser to the web "
+"servers."
 msgstr ""
+"Ciąg znaków, który będzie używany jako klient użytkownika w celu "
+"identyfikacji przeglądarki na serwerach WWW."
 
 #: data/re.sonny.Tangram.gschema.xml:74 src/instanceDialog.ui:59
 msgid "Notifications priority"
-msgstr ""
+msgstr "Priorytet powiadomień"
 
 #: data/re.sonny.Tangram.gschema.xml:75
 msgid "Sets the priority of notifications"
@@ -217,7 +243,7 @@ msgstr ""
 
 #: data/menu.ui:11
 msgid "Top"
-msgstr ""
+msgstr "Do góry"
 
 #: data/menu.ui:16
 msgid "Left"
