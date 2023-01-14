@@ -100,7 +100,7 @@ Adw.ApplicationWindow window {
             spacing: 6;
 
             Button button_new_tab {
-              icon-name: "tab-new-symbolic";
+              icon-name: "view-grid-symbolic";
               tooltip-text: _("Add new tab");
             }
 
@@ -135,16 +135,21 @@ Adw.ApplicationWindow window {
 
         child: Box {
           orientation: vertical;
-          Adw.TabBar {
-            view: tabview;
-            visible: false;
-          }
+          // Adw.TabBar {
+          //   view: tabview;
+          //   visible: false;
+          // }
 
           Adw.TabOverview tab_overview {
             open: true;
             view: tabview;
             hexpand: true;
             vexpand: true;
+            enable-new-tab: true;
+            enable-search: false;
+            show-end-title-buttons: false;
+            show-start-title-buttons: false;
+            // open: true;
 
             child: Adw.TabView tabview {
               hexpand: true;

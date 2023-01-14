@@ -188,7 +188,8 @@ export default function Window({ application, state }) {
     // const idx = tabview.append_page(page, label);
     const page = tabview.append(child);
 
-    page.get_live_thumbnail(true);
+    page.set_live_thumbnail(true);
+    page.title = instance.name;
 
     return tabview.get_page_position(page);
     // notebook.set_tab_reorderable(page, true);
@@ -304,6 +305,7 @@ export default function Window({ application, state }) {
   instanceList.forEach((instance) => {
     buildInstance(instance);
   });
+  builder.get_object("tab_overview").open = true;
 
   observeSetting(settings, "instances", (instances) => {
     state.set({ instances });
