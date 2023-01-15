@@ -18,61 +18,48 @@ function getFaviconScaled(webview) {
   );
 }
 
-export function TabLabel({ instance, settings, page }) {
-  const { id } = instance;
+export function TabLabel({ instance }) {
+  const { id, webview } = instance;
 
-  // FIXME: Replace with padding
-  // so that right click on the space works
-  // const box = new Gtk.Box({
-  //   margin_top: 6,
-  //   margin_bottom: 6,
-  // });
-  const widget = new TabWidget();
+  const list_box_row = new TabWidget();
 
   function connectFavicon() {
-    page.connect("notify::favicon", () => {
-      const new_favicon = getFaviconScaled(page);
+    webview.connect("notify::favicon", () => {
+      const new_favicon = getFaviconScaled(webview);
       if (!new_favicon) {
         return;
       }
-      widget.image.set_from_pixbuf(new_favicon);
+      list_box_row.image.set_from_pixbuf(new_favicon);
     });
   }
 
-  const favicon = getFaviconScaled(page);
+  const favicon = getFaviconScaled(webview);
   if (favicon) {
-    widget.image.set_from_pixbuf(favicon);
+    list_box_row.image.set_from_pixbuf(favicon);
   }
   connectFavicon();
 
-  instance.bind("name", widget, "label", Gio.SettingsBindFlags.GET);
+  instance.bind("name", list_box_row, "label", Gio.SettingsBindFlags.GET);
 
   const menu = new Gio.Menu();
-  menu.append("Edit", `win.editInstance("${id}")`);
-  menu.append("Remove", `win.removeInstance("${id}")`);
-  widget.popover.set_menu_model(menu);
+  menu.append("Edit", `win.editTab("${id}")`);
+  menu.append("Remove", `win.removeTab("${id}")`);
+  list_box_row.menu_button.set_menu_model(menu);
 
-  // FIXME: we should invert for better placement
-  // top <-> bottom
-  // left <-> right
-  settings.bind(
-    "tabs-position",
-    widget.popover,
-    "position",
-    Gio.SettingsBindFlags.GET,
-  );
+  list_box_row.instance_id = instance.id;
 
-  return widget;
+  return list_box_row;
 }
 
 export function TabPage({ instance, window, onNotification, application }) {
-  const webView = buildWebView({
+  const webview = buildWebView({
     instance,
     window,
     onNotification,
     application,
   });
-  instance.page = webView;
-  webView.mode = MODES.PERMANENT;
-  return webView;
+  instance.webview = webview;
+  webview.mode = MODES.PERMANENT;
+  webview.instance_id = instance.id;
+  return webview;
 }

@@ -4,12 +4,8 @@ import { gettext as _ } from "gettext";
 import { once } from "../troll/src/util.js";
 import instance_dialog from "./instanceDialog.blp" assert { type: "string" };
 
-export function editInstanceDialog(props) {
+export function editTabDialog(props) {
   return instanceDialog({ ...props, mode: "edit" });
-}
-
-export function addInstanceDialog(props) {
-  return instanceDialog({ ...props, mode: "add" });
 }
 
 async function instanceDialog({ window, instance, mode }) {

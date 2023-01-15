@@ -40,6 +40,7 @@
     <release version="2.0" type="development" date="2023-01-04">
       <description>
         <ul>
+          <li>New responsive and mobile UI</li>
           <li>Port to GTK4</li>
           <li>Use Libadwaita</li>
         </ul>

@@ -1,16 +1,26 @@
 using Gtk 4.0;
 
-template Tab : Box {
-  Image image {
-    pixel-size: 16;
-  }
+template Tab : ListBoxRow {
+  selectable: true;
+  Box {
+    height-request: 58;
 
-  Label label {
-    margin-start: 4;
-  }
+    Box {
+      hexpand: true;
+      Image image {
+        pixel-size: 16;
+      }
 
-  PopoverMenu popover {
-    position: right;
-    autohide: true;
+      Label label {
+        margin-start: 6;
+        ellipsize: end;
+      }
+    }
+
+    MenuButton menu_button {
+      icon-name: "view-more-symbolic";
+      valign: center;
+      styles ["flat"]
+    }
   }
 }

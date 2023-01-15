@@ -1,8 +1,5 @@
-import GLib from "gi://GLib";
 import Gio from "gi://Gio";
-import GObject from "gi://GObject";
 
-import Notebook from "./Notebook.js";
 import Shortcuts from "./Shortcuts.js";
 import Actions from "./Actions.js";
 import { Settings, observeSetting } from "./util.js";
@@ -12,24 +9,26 @@ import {
   // saveFavicon
 } from "./webapp/webapp.js";
 
-import { TabLabel, TabPage } from "./tab.js";
-import { addInstanceDialog } from "./instanceDialog.js";
-import Header from "./Header.js";
 import {
   get as getInstance,
   attach as attachInstance,
   destroy as destroyInstance,
   list as instanceList,
   load as loadInstances,
-  create as createInstance,
 } from "./instances.js";
-import { buildWebView } from "./WebView.js";
+
 import { MODES } from "./constants.js";
 import * as instances from "./instances.js";
 
-import builder from "./window.blp" assert { type: "builder" };
-import { normalizeURL } from "./utils.js";
-import { gettext as _ } from "gettext";
+import builder_window from "./window.blp" assert { type: "builder" };
+import builder_view_tabs from "./ViewTabs.blp" assert { type: "builder" };
+import builder_view_new from "./ViewNew.blp" assert { type: "builder" };
+
+import { Tabs } from "./tabs.js";
+
+import "./icons/tabs-stack-symbolic.svg" assert { type: "icon" };
+import { ViewTabs } from "./ViewTabs.js";
+import { ViewNew } from "./ViewNew.js";
 
 export default function Window({ application, state }) {
   const settings = new Settings({
@@ -37,33 +36,18 @@ export default function Window({ application, state }) {
     path: "/re/sonny/Tangram/",
   });
 
-  const button_go = builder.get_object("button_go");
-  const entry_go = builder.get_object("entry_go");
-  button_go.connect("clicked", () => {
-    entry_go.emit("activate");
+  const window = builder_window.get_object("window");
+
+  const view_new = builder_view_new.get_object("view_new");
+  const { focusAddressBar, onNewTab } = ViewNew({
+    onAddTab,
+    onCancelNewTab,
+    state,
+    builder: builder_view_new,
   });
-  entry_go.connect("activate", () => {
-    const url = normalizeURL(entry_go.text);
-    if (!url) return;
 
-    onNewTab();
-
-    const webview = state.get("webview");
-    if (!webview) return;
-
-    webview.load_uri(url);
-    webview.grab_focus();
-  });
-  entry_go.bind_property_full(
-    "text",
-    button_go,
-    "sensitive",
-    GObject.BindingFlags.DEFAULT,
-    (binding, value) => [true, !!value],
-    null,
-  );
-
-  const header = Header({
+  const view_tabs = builder_view_tabs.get_object("view_tabs");
+  ViewTabs({
     onReload,
     onStopLoading,
     onGoBack,
@@ -72,13 +56,19 @@ export default function Window({ application, state }) {
     onAddTab,
     onCancelNewTab,
     state,
-    onPlaceholder,
-    builder,
+    onNewTab,
+    builder: builder_view_tabs,
+    window,
   });
+
+  const stack_views = builder_window.get_object("stack_views");
+  state.bind("view", stack_views, "visible_child_name");
+  stack_views.add_named(view_tabs, "tabs");
+  stack_views.add_named(view_new, "new");
 
   function onStopLoading() {
     const tab = state.get("webview");
-    tab && tab.stop_loading();
+    tab?.stop_loading();
   }
 
   function onReload(bypass_cache) {
@@ -93,17 +83,17 @@ export default function Window({ application, state }) {
 
   function onGoBack() {
     const tab = state.get("webview");
-    tab && tab.go_back();
+    tab?.go_back();
   }
 
   function onGoForward() {
     const tab = state.get("webview");
-    tab && tab.go_forward();
+    tab?.go_forward();
   }
 
   function onGoHome() {
     const tab = state.get("webview");
-    if (!tab || !tab.instance_id) return;
+    if (!tab?.instance_id) return;
     const instance = getInstance(tab.instance_id);
     if (!instance) return;
     tab.load_uri(instance.url);
@@ -121,10 +111,11 @@ export default function Window({ application, state }) {
     }
   }
 
-  const window = builder.get_object("window");
   window.set_application(application);
 
-  // https://wiki.gnome.org/HowDoI/SaveWindowState
+  // https://developer.gnome.org/documentation/tutorials/save-state.html
+  // FIXME: choppy
+  // https://github.com/sonnyp/Tangram/issues/192#issuecomment-1382729140
   settings.bind(
     "window-width",
     window,
@@ -144,15 +135,13 @@ export default function Window({ application, state }) {
     Gio.SettingsBindFlags.DEFAULT,
   );
 
-  const stack = builder.get_object("stack");
-  state.bind("view", stack, "visible_child_name");
-
-  const notebook = Notebook({ builder, settings, application });
-
-  function showTab(idx) {
-    notebook.set_current_page(idx);
-    state.set({ view: "tabs", webview: notebook.get_nth_page(idx) });
-  }
+  const tabs = Tabs({
+    state,
+    application,
+    builder: builder_view_tabs,
+    window,
+    onNotification,
+  });
 
   function onNotification(webkit_notification, instance_id) {
     const priority = instances
@@ -173,25 +162,9 @@ export default function Window({ application, state }) {
     application.send_notification(instance_id, notification);
   }
 
-  function buildInstance(instance) {
-    const page = TabPage({
-      application,
-      instance,
-      window,
-      onNotification,
-    });
-    return buildInstanceFromPage({ instance, page });
-  }
-
-  function buildInstanceFromPage({ instance, page }) {
-    const label = TabLabel({ instance, settings, page });
-    const idx = notebook.append_page(page, label);
-    notebook.set_tab_reorderable(page, true);
-    return idx;
-  }
-
+  const stack_new = builder_view_new.get_object("stack_new");
   async function onAddTab() {
-    const webview = stack.get_child_by_name("new-tab");
+    const webview = stack_new.get_child_by_name("new-tab");
     const { instance_id } = webview;
     const instance = getInstance(instance_id);
     instance.url = webview.uri;
@@ -205,106 +178,39 @@ export default function Window({ application, state }) {
       instance.name = info.title || webview.title || "";
     }
 
-    let canceled;
-    try {
-      canceled = await addInstanceDialog({
-        instance,
-        window,
-      });
-    } catch (err) {
-      logError(err);
-      destroyInstance(instance);
-      // TODO display error
-      return;
-    }
-
-    if (canceled) {
-      return;
-    }
-
     webview.load_uri(instance.url);
     webview.mode = MODES.PERMANENT;
 
     attachInstance(settings, instance.id);
-    stack.remove(webview);
+    stack_new.remove(webview);
 
-    const idx = buildInstanceFromPage({
-      page: webview,
-      instance,
-    });
-    showTab(idx);
+    tabs.addTab(instance);
+    tabs.selectTab(instance);
   }
 
   function onCancelNewTab() {
-    // FIXME set webview!!
-    // state.set({ view: "tabs", webview: notebook.get_nth_child(notebook.page) });
-    showTab(notebook.page || 0);
-    const webView = stack.get_child_by_name("new-tab");
+    state.set({ view: "tabs" });
+    const webView = stack_new.get_child_by_name("new-tab");
     if (!webView) return;
-    stack.remove(webView);
+    stack_new.remove(webView);
     const { instance_id } = webView;
     const instance = getInstance(instance_id);
     if (!instance) return;
     destroyInstance(instance);
   }
 
-  function onPlaceholder() {
-    state.set({ view: "placeholder" });
-    entry_go.text = "";
-    entry_go.grab_focus();
-
-    const status_page = builder
-      .get_object("stack")
-      .get_child_by_name("placeholder");
-    const first_tab = state.get("instances").length === 0;
-
-    if (first_tab) {
-      status_page.icon_name = "re.sonny.Tangram";
-      status_page.title = _("Welcome to Tangram");
-      status_page.description = _("Let's add your first web application.");
-    } else {
-      status_page.icon_name = "";
-      status_page.title = "";
-      status_page.description = "";
-    }
-  }
-
-  function onNewTab() {
-    const id = GLib.uuid_string_random().replace(/-/g, "");
-
-    const instance = createInstance({
-      id,
-      name: "",
-    });
-
-    const webview = buildWebView({
-      application,
-      onNotification,
-      window,
-      instance,
-    });
-    webview.mode = MODES.TEMPORARY;
-
-    const previous = stack.get_child_by_name("new-tab");
-    if (previous) stack.remove(previous);
-    stack.add_named(webview, "new-tab");
-    state.set({ webview, view: "new-tab" });
-  }
-
   loadInstances(settings);
   instanceList.forEach((instance) => {
-    buildInstance(instance);
+    tabs.addTab(instance);
   });
 
   observeSetting(settings, "instances", (instances) => {
     state.set({ instances });
     if (instances.length === 0) {
-      onPlaceholder();
+      onNewTab();
     } else {
-      const page = notebook.get_nth_page(notebook.page);
       state.set({
         view: "tabs",
-        webview: page,
       });
     }
   });
@@ -312,22 +218,21 @@ export default function Window({ application, state }) {
   Shortcuts({
     window,
     application,
-    notebook,
-    entry_url: header.entry_url,
     onStopLoading,
     onReload,
     onGoBack,
     onGoForward,
     onGoHome,
     onToggleWebInspector,
+    onFocusAddressBar: focusAddressBar,
   });
 
   Actions({
     window,
     application,
     settings,
-    notebook,
-    showTab,
+    selectTab: tabs.selectTab,
+    removeTab: tabs.removeTab,
   });
 
   return window;
