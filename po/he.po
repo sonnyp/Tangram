@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: re.sonny.Tangram\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-09-18 16:27+0200\n"
-"PO-Revision-Date: 2022-06-01 08:16+0000\n"
+"PO-Revision-Date: 2023-01-16 14:47+0000\n"
 "Last-Translator: Yaron Shahrabani <sh.yaron@gmail.com>\n"
 "Language-Team: Hebrew <https://hosted.weblate.org/projects/tangram/tangram/he/>\n"
 "Language: he\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=4; plural=(n == 1) ? 0 : ((n == 2) ? 1 : ((n > 10 && n % 10 == 0) ? 2 : 3));\n"
-"X-Generator: Weblate 4.13-dev\n"
+"X-Generator: Weblate 4.15.1-dev\n"
 
 #: data/appdata/re.sonny.Tangram.metainfo.xml:5 data/re.sonny.Tangram.desktop:3
 msgid "Tangram"
@@ -57,15 +57,15 @@ msgstr "נקודת המוקד למגוון מקורות לתיעוד או מיד
 
 #: data/appdata/re.sonny.Tangram.metainfo.xml:43
 msgid "Fix a bug preventing to start Tangram"
-msgstr ""
+msgstr "תוקנה תקלה שמנעה את הפעלת Tangram"
 
 #: data/appdata/re.sonny.Tangram.metainfo.xml:44
 msgid "Reduce the noisiness of logs"
-msgstr ""
+msgstr "הופחת הרעש ביומנים"
 
 #: data/appdata/re.sonny.Tangram.metainfo.xml:52
 msgid "Fix a bug preventing to add new tabs"
-msgstr ""
+msgstr "תוקנה תקלה שמנעה הוספת לשוניות חדשות"
 
 #: data/appdata/re.sonny.Tangram.metainfo.xml:60
 msgid "Notifications priority is normal instead of urgent by default"
@@ -184,8 +184,6 @@ msgid "Window maximized"
 msgstr "חלון מוגדל"
 
 #: data/re.sonny.Tangram.gschema.xml:41
-#, fuzzy
-#| msgid "Weither the window is maximized"
 msgid "Whether the window is maximized"
 msgstr "האם החלון מוגדל"
 
@@ -236,21 +234,19 @@ msgstr "ירון שהרבני <sh.yaron@gmail.com>"
 
 #: src/instanceDialog.blp:46
 msgid "Normal"
-msgstr ""
+msgstr "רגילה"
 
 #: src/instanceDialog.blp:46
 msgid "Low"
-msgstr ""
+msgstr "נמוכה"
 
 #: src/instanceDialog.blp:46
 msgid "High"
-msgstr ""
+msgstr "גבוהה"
 
 #: src/instanceDialog.blp:46
-#, fuzzy
-#| msgid "User agent"
 msgid "Urgent"
-msgstr "סוכן משתמש"
+msgstr "דחופה"
 
 #: src/shortcuts.blp:11
 msgctxt "shortcut window"
