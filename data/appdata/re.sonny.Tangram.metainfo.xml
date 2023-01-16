@@ -37,10 +37,11 @@
   </screenshots>
   <content_rating type="oars-1.1" />
   <releases>
-    <release version="2.0" type="development" date="2023-01-04">
+    <release version="2.0" date="2023-01-18">
       <description>
         <ul>
           <li>New responsive and mobile UI</li>
+          <li>Improve onboardng experience</li>
           <li>Port to GTK4</li>
           <li>Use Libadwaita</li>
         </ul>

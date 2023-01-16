@@ -4,45 +4,10 @@ import Gio from "gi://Gio";
 import AboutDialog from "./AboutDialog.js";
 
 import * as instances from "./instances.js";
-import { editTabDialog } from "./instanceDialog.js";
 
 import builder from "./shortcuts.blp" assert { type: "builder" };
 
-export default function Actions({
-  window,
-  application,
-  settings,
-  selectTab,
-  removeTab,
-}) {
-  const action_remove_tab = new Gio.SimpleAction({
-    name: "removeTab",
-    parameter_type: GLib.VariantType.new("s"),
-  });
-  action_remove_tab.connect("activate", (self, parameters) => {
-    const id = parameters.deep_unpack();
-    const instance = instances.get(id);
-
-    instances.detach(settings, instance.id);
-    removeTab(instance);
-
-    instances.destroy(instance);
-  });
-  window.add_action(action_remove_tab);
-
-  const action_edit_tab = new Gio.SimpleAction({
-    name: "editTab",
-    parameter_type: GLib.VariantType.new("s"),
-  });
-  action_edit_tab.connect("activate", (self, parameters) => {
-    const id = parameters.deep_unpack();
-    const instance = instances.get(id);
-    if (!instance) return;
-    selectTab(instance, false);
-    editTabDialog({ window, instance }).catch(logError);
-  });
-  window.add_action(action_edit_tab);
-
+export default function Actions({ window, application, selectTab }) {
   const showAboutDialog = new Gio.SimpleAction({
     name: "about",
     parameter_type: null,

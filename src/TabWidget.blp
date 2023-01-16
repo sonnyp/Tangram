@@ -3,7 +3,7 @@ using Gtk 4.0;
 template Tab : ListBoxRow {
   selectable: true;
   Box {
-    height-request: 58;
+    height-request: 48;
 
     Box {
       hexpand: true;
@@ -17,10 +17,11 @@ template Tab : ListBoxRow {
       }
     }
 
-    MenuButton menu_button {
-      icon-name: "view-more-symbolic";
+    Button button {
+      icon-name: "settings-symbolic";
       valign: center;
       styles ["flat"]
+      tooltip-text: _("Tab Settings");
     }
   }
 }

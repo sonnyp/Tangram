@@ -2,14 +2,25 @@ import { TabLabel, TabPage } from "./tab.js";
 
 import * as instances from "./instances.js";
 
-export function Tabs({ state, builder, application, window, onNotification }) {
+export function Tabs({
+  state,
+  builder,
+  application,
+  window,
+  onNotification,
+  editTab,
+}) {
   const leaflet = builder.get_object("leaflet");
   const list_box = builder.get_object("list_box");
   const tab_view = builder.get_object("tab_view");
 
   list_box.bind_model(tab_view.pages, (tab_page) => {
     const instance = instances.get(tab_page.child.instance_id);
-    const list_box_row = TabLabel({ instance });
+    const list_box_row = TabLabel({
+      instance,
+      leaflet,
+      editTab,
+    });
     instance.list_box_row = list_box_row;
     return list_box_row;
   });
@@ -59,7 +70,7 @@ export function Tabs({ state, builder, application, window, onNotification }) {
 
   function selectTab(instance, change_view = true) {
     tab_view.set_selected_page(tab_view.get_page(instance.webview));
-    if (change_view) {
+    if (change_view && leaflet.visible_child_name !== "content") {
       leaflet.visible_child_name = "content";
     }
   }

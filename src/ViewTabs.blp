@@ -27,12 +27,13 @@ Box view_tabs {
           MenuButton {
             icon-name: "open-menu-symbolic";
             menu-model: menu_app;
+            tooltip-text: _("Menu");
           }
         }
 
         Gtk.ScrolledWindow {
           styles ["sidebar"]
-          width-request: 270;
+          width-request: 200;
           Gtk.ListBox list_box {
             styles ["navigation-sidebar"]
             vexpand: true;
@@ -55,6 +56,14 @@ Box view_tabs {
           visible: false;
           [title]
           Box {}
+
+          [end]
+          Button button_tab_settings {
+            icon-name: "settings-symbolic";
+            styles ["flat"]
+            tooltip-text: _("Tab Settings");
+            visible: bind leaflet.folded inverted;
+          }
         }
 
         Adw.TabView tab_view {
@@ -74,21 +83,17 @@ Box view_tabs {
 
 Box navigation_buttons {
   spacing: 6;
-  Box {
-    spacing: 0;
-    styles ["linked"]
 
-    Button button_back {
-      sensitive: false;
-      icon-name: "go-previous-symbolic";
-      tooltip-text: _("Go back to the previous page");
-    }
+  Button button_back {
+    sensitive: false;
+    icon-name: "go-previous-symbolic";
+    tooltip-text: _("Go back to the previous page");
+  }
 
-    Button button_forward {
-      sensitive: false;
-      icon-name: "go-next-symbolic";
-      tooltip-text: _("Go forward to the next page");
-    }
+  Button button_forward {
+    sensitive: false;
+    icon-name: "go-next-symbolic";
+    tooltip-text: _("Go forward to the next page");
   }
 
   Button button_reload {
@@ -104,7 +109,7 @@ Box navigation_buttons {
 
 Button button_open_main_sidebar {
   icon-name: "tabs-stack-symbolic";
-  tooltip-text: _("View tabs");
+  tooltip-text: _("View Tabs");
   visible: bind leaflet.folded;
 }
 

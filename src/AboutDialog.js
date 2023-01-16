@@ -3,6 +3,7 @@ import WebKit from "gi://WebKit2";
 import Soup from "gi://Soup";
 import Adw from "gi://Adw";
 import { gettext as _ } from "gettext";
+import Gst from "gi://Gst";
 
 import {
   getGIRepositoryVersion,
@@ -15,12 +16,13 @@ let dialog;
 export default function AboutDialog({ application }) {
   if (!dialog) {
     const debug_info = `
-    WebKitGTK ${getGIRepositoryVersion(WebKit)}
-    GJS ${getGjsVersion()}
-    Adw ${getGIRepositoryVersion(Adw)}
-    GTK ${getGIRepositoryVersion(Gtk)}
-    GLib ${getGLibVersion()}
-    libsoup ${getGIRepositoryVersion(Soup)}
+WebKitGTK ${getGIRepositoryVersion(WebKit)}
+GJS ${getGjsVersion()}
+Adw ${getGIRepositoryVersion(Adw)}
+GTK ${getGIRepositoryVersion(Gtk)}
+GLib ${getGLibVersion()}
+libsoup ${getGIRepositoryVersion(Soup)}
+${Gst.version_string()}
     `.trim();
     dialog = new Adw.AboutWindow({
       application_name: "Tangram",

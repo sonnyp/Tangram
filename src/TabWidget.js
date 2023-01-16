@@ -2,11 +2,13 @@ import Gtk from "gi://Gtk";
 import GObject from "gi://GObject";
 import Template from "./TabWidget.blp" assert { type: "uri" };
 
+import "./icons/settings-symbolic.svg" assert { type: "icon" };
+
 export default GObject.registerClass(
   {
     GTypeName: "Tab",
     Template,
-    Children: ["image", "menu_button"],
+    Children: ["image", "button"],
     InternalChildren: ["label"],
     Properties: {
       label: GObject.ParamSpec.string(

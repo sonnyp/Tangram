@@ -1,5 +1,6 @@
 import Gio from "gi://Gio";
 import GdkPixbuf from "gi://GdkPixbuf";
+import GObject from "gi://GObject";
 
 import { MODES } from "./constants.js";
 import { getFaviconAsPixbuf } from "./webapp/webapp.js";
@@ -18,8 +19,8 @@ function getFaviconScaled(webview) {
   );
 }
 
-export function TabLabel({ instance }) {
-  const { id, webview } = instance;
+export function TabLabel({ instance, leaflet, editTab }) {
+  const { webview } = instance;
 
   const list_box_row = new TabWidget();
 
@@ -41,10 +42,16 @@ export function TabLabel({ instance }) {
 
   instance.bind("name", list_box_row, "label", Gio.SettingsBindFlags.GET);
 
-  const menu = new Gio.Menu();
-  menu.append("Edit", `win.editTab("${id}")`);
-  menu.append("Remove", `win.removeTab("${id}")`);
-  list_box_row.menu_button.set_menu_model(menu);
+  list_box_row.button.connect("clicked", () => {
+    editTab(instance, false);
+  });
+
+  leaflet.bind_property(
+    "folded",
+    list_box_row.button,
+    "visible",
+    GObject.BindingFlags.SYNC_CREATE,
+  );
 
   list_box_row.instance_id = instance.id;
 

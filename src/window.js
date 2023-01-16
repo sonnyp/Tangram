@@ -24,8 +24,6 @@ import builder_window from "./window.blp" assert { type: "builder" };
 import builder_view_tabs from "./ViewTabs.blp" assert { type: "builder" };
 import builder_view_new from "./ViewNew.blp" assert { type: "builder" };
 
-import { Tabs } from "./tabs.js";
-
 import "./icons/tabs-stack-symbolic.svg" assert { type: "icon" };
 import { ViewTabs } from "./ViewTabs.js";
 import { ViewNew } from "./ViewNew.js";
@@ -46,19 +44,27 @@ export default function Window({ application, state }) {
     builder: builder_view_new,
   });
 
+  function deleteInstance(id) {
+    const instance = instances.get(id);
+    instances.detach(settings, instance.id);
+    tabs.removeTab(instance);
+    instances.destroy(instance);
+  }
+
   const view_tabs = builder_view_tabs.get_object("view_tabs");
-  ViewTabs({
+  const { tabs } = ViewTabs({
+    application,
     onReload,
     onStopLoading,
     onGoBack,
     onGoForward,
     onGoHome,
-    onAddTab,
-    onCancelNewTab,
     state,
     onNewTab,
     builder: builder_view_tabs,
     window,
+    onNotification,
+    deleteInstance,
   });
 
   const stack_views = builder_window.get_object("stack_views");
@@ -134,14 +140,6 @@ export default function Window({ application, state }) {
     "maximized",
     Gio.SettingsBindFlags.DEFAULT,
   );
-
-  const tabs = Tabs({
-    state,
-    application,
-    builder: builder_view_tabs,
-    window,
-    onNotification,
-  });
 
   function onNotification(webkit_notification, instance_id) {
     const priority = instances
@@ -230,9 +228,7 @@ export default function Window({ application, state }) {
   Actions({
     window,
     application,
-    settings,
     selectTab: tabs.selectTab,
-    removeTab: tabs.removeTab,
   });
 
   return window;

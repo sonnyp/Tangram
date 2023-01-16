@@ -1,4 +1,10 @@
+import { Tabs } from "./tabs.js";
+import * as instances from "./instances.js";
+
+import { instanceDialog } from "./instanceDialog.js";
+
 export function ViewTabs({
+  application,
   onReload,
   onStopLoading,
   onGoBack,
@@ -8,6 +14,8 @@ export function ViewTabs({
   onNewTab,
   builder,
   window,
+  onNotification,
+  deleteInstance,
 }) {
   const button_back = builder.get_object("button_back");
   button_back.connect("clicked", onGoBack);
@@ -23,6 +31,34 @@ export function ViewTabs({
     } else {
       onReload();
     }
+  });
+
+  function editTab(instance, change_view) {
+    tabs.selectTab(instance, change_view);
+    instanceDialog({
+      window,
+      instance,
+      onDeleteInstance: deleteInstance,
+    }).catch(logError);
+  }
+
+  const tabs = Tabs({
+    state,
+    application,
+    builder,
+    window,
+    onNotification,
+    deleteInstance,
+    editTab,
+  });
+
+  const button_tab_settings = builder.get_object("button_tab_settings");
+  button_tab_settings.connect("clicked", () => {
+    const instance_id = state.get("webview")?.instance_id;
+    if (!instance_id) return;
+    const instance = instances.get(instance_id);
+    if (!instance) return;
+    editTab(instance);
   });
 
   const leaflet = builder.get_object("leaflet");
@@ -107,4 +143,6 @@ export function ViewTabs({
       updateButtons(webview);
     });
   });
+
+  return { tabs };
 }
