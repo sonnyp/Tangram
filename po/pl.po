@@ -8,15 +8,15 @@ msgstr ""
 "Project-Id-Version: re.sonny.Tangram\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-09-18 16:27+0200\n"
-"PO-Revision-Date: 2022-02-16 02:54+0000\n"
-"Last-Translator: paluszkiewiczB <bomblozaurus@gmail.com>\n"
+"PO-Revision-Date: 2023-01-24 12:52+0000\n"
+"Last-Translator: WaldiS <sto@tutanota.de>\n"
 "Language-Team: Polish <https://hosted.weblate.org/projects/tangram/tangram/pl/>\n"
 "Language: pl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
-"X-Generator: Weblate 4.11-dev\n"
+"X-Generator: Weblate 4.16-dev\n"
 
 #: data/appdata/re.sonny.Tangram.metainfo.xml:5 data/re.sonny.Tangram.desktop:3
 msgid "Tangram"
@@ -57,7 +57,7 @@ msgstr "Jeden przystanek od wielu źródeł dokumentacji lub informacji"
 
 #: data/appdata/re.sonny.Tangram.metainfo.xml:43
 msgid "Fix a bug preventing to start Tangram"
-msgstr ""
+msgstr "Naprawiono błąd uniemożliwiający uruchomienie Tangramu"
 
 #: data/appdata/re.sonny.Tangram.metainfo.xml:44
 msgid "Reduce the noisiness of logs"
@@ -65,7 +65,7 @@ msgstr ""
 
 #: data/appdata/re.sonny.Tangram.metainfo.xml:52
 msgid "Fix a bug preventing to add new tabs"
-msgstr ""
+msgstr "Naprawiono błąd uniemożliwiający dodawanie nowych zakładek"
 
 #: data/appdata/re.sonny.Tangram.metainfo.xml:60
 msgid "Notifications priority is normal instead of urgent by default"
@@ -184,10 +184,8 @@ msgid "Window maximized"
 msgstr "Okna zmaksymalizowane"
 
 #: data/re.sonny.Tangram.gschema.xml:41
-#, fuzzy
-#| msgid "Weither the window is maximized"
 msgid "Whether the window is maximized"
-msgstr "Czy okno jest zmaksymalizowane"
+msgstr "Jeśli okno jest maksymalizowane"
 
 #: data/re.sonny.Tangram.gschema.xml:46
 msgid "Instances"
@@ -195,15 +193,15 @@ msgstr "Instancje"
 
 #: data/re.sonny.Tangram.gschema.xml:48
 msgid "Identifiers of instances to be found in /re/sonny/Tangram/instances/"
-msgstr ""
+msgstr "Identyfikatory instancji można znaleźć w/re/sonny/Tangram/instances/instances/"
 
 #: data/re.sonny.Tangram.gschema.xml:55 src/instanceDialog.blp:24
 msgid "Name"
-msgstr ""
+msgstr "Nazwa"
 
 #: data/re.sonny.Tangram.gschema.xml:56
 msgid "Name to display"
-msgstr ""
+msgstr "Nazwa wyświetlana"
 
 #: data/re.sonny.Tangram.gschema.xml:60 src/instanceDialog.blp:34
 msgid "URL"
@@ -227,7 +225,7 @@ msgstr "Priorytet powiadomień"
 
 #: data/re.sonny.Tangram.gschema.xml:75
 msgid "Sets the priority of notifications"
-msgstr ""
+msgstr "Ustawia priorytet powiadomień"
 
 #. TRANSLATORS: eg. 'Translator Name <your.email@domain.com>' or 'Translator Name https://website.example'
 #: src/AboutDialog.js:35
@@ -236,15 +234,15 @@ msgstr ""
 
 #: src/instanceDialog.blp:46
 msgid "Normal"
-msgstr ""
+msgstr "Normalny"
 
 #: src/instanceDialog.blp:46
 msgid "Low"
-msgstr ""
+msgstr "Niski"
 
 #: src/instanceDialog.blp:46
 msgid "High"
-msgstr ""
+msgstr "Wysoki"
 
 #: src/instanceDialog.blp:46
 msgid "Urgent"
@@ -253,37 +251,37 @@ msgstr ""
 #: src/shortcuts.blp:11
 msgctxt "shortcut window"
 msgid "General"
-msgstr ""
+msgstr "Ogólny"
 
 #: src/shortcuts.blp:14
 msgctxt "shortcut window"
 msgid "Go to the next tab"
-msgstr ""
+msgstr "Przejdź do następnej zakładki"
 
 #: src/shortcuts.blp:19
 msgctxt "shortcut window"
 msgid "Go to the previous tab"
-msgstr ""
+msgstr "Przejdź do poprzedniej zakładki"
 
 #: src/shortcuts.blp:24
 msgctxt "shortcut window"
 msgid "Move current tab to the left"
-msgstr ""
+msgstr "Przesuń bieżącą zakładkę w lewo"
 
 #: src/shortcuts.blp:29
 msgctxt "shortcut window"
 msgid "Move current tab to the right"
-msgstr ""
+msgstr "Przesuń bieżącą zakładkę w prawo"
 
 #: src/shortcuts.blp:34
 msgctxt "shortcut window"
 msgid "Quit"
-msgstr ""
+msgstr "Zakończ"
 
 #: src/shortcuts.blp:39
 msgctxt "shortcut window"
 msgid "Shortcuts"
-msgstr ""
+msgstr "Skróty"
 
 #: src/shortcuts.blp:44
 msgctxt "shortcut window"
@@ -293,68 +291,73 @@ msgstr ""
 #: src/shortcuts.blp:49
 msgctxt "shortcut window"
 msgid "First – Ninth Tab"
-msgstr ""
+msgstr "Pierwsza – Dziewiąta zakładka"
 
 #: src/shortcuts.blp:55
 msgctxt "shortcut window"
 msgid "Navigation"
-msgstr ""
+msgstr "Nawigacja"
 
 #: src/shortcuts.blp:58
 msgctxt "shortcut window"
 msgid "Go to homepage"
-msgstr ""
+msgstr "Wróć do strony głównej"
 
 #: src/shortcuts.blp:63
 msgctxt "shortcut window"
 msgid "Reload current page"
-msgstr ""
+msgstr "Odśwież bieżącą stronę"
 
 #: src/shortcuts.blp:68
 msgctxt "shortcut window"
 msgid "Reload bypassing cache"
-msgstr ""
+msgstr "Przeładuj z pominięciem pamięci podręcznej"
 
 #: src/shortcuts.blp:73
 msgctxt "shortcut window"
 msgid "Stop loading current page"
-msgstr ""
+msgstr "Zatrzymaj ładowanie bieżącej strony"
 
 #: src/shortcuts.blp:78 src/shortcuts.blp:94
 msgctxt "shortcut window"
 msgid "Go back to the previous page"
-msgstr ""
+msgstr "Wróć do poprzedniej strony"
 
 #: src/shortcuts.blp:83 src/shortcuts.blp:99
 msgctxt "shortcut window"
 msgid "Go forward to the next page"
-msgstr ""
+msgstr "Przejdź do następnej strony"
 
 #: src/shortcuts.blp:88
+#, fuzzy
 msgctxt "shortcut window"
 msgid "Focus the address bar"
-msgstr ""
+msgstr "Zaznacz pasek adresu"
 
 #: src/menu.blp:13
 msgid "Top"
 msgstr "Do góry"
 
 #: src/menu.blp:19
+#, fuzzy
 msgid "Left"
-msgstr ""
+msgstr "Lewy"
 
 #: src/menu.blp:25
+#, fuzzy
 msgid "Right"
-msgstr ""
+msgstr "Prawy"
 
 #: src/menu.blp:31
+#, fuzzy
 msgid "Bottom"
-msgstr ""
+msgstr "Dół"
 
 #: src/menu.blp:40
 msgid "Keyboard Shortcuts"
-msgstr ""
+msgstr "Skróty klawiszowe"
 
 #: src/menu.blp:45
+#, fuzzy
 msgid "About Tangram"
-msgstr ""
+msgstr "O Tangramie"
