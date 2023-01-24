@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: re.sonny.Tangram\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-09-18 16:27+0200\n"
-"PO-Revision-Date: 2022-01-07 17:54+0000\n"
+"PO-Revision-Date: 2023-01-27 13:36+0000\n"
 "Last-Translator: Andrea Brandi <git@andreabrandi.com>\n"
 "Language-Team: Italian <https://hosted.weblate.org/projects/tangram/tangram/it/>\n"
 "Language: it\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.10.1\n"
+"X-Generator: Weblate 4.16-dev\n"
 
 #: data/appdata/re.sonny.Tangram.metainfo.xml:5 data/re.sonny.Tangram.desktop:3
 msgid "Tangram"
@@ -57,15 +57,15 @@ msgstr "Un centro per molteplici fonti di documentazione o informazioni"
 
 #: data/appdata/re.sonny.Tangram.metainfo.xml:43
 msgid "Fix a bug preventing to start Tangram"
-msgstr ""
+msgstr "Risolto un bug che impediva di avviare Tangram"
 
 #: data/appdata/re.sonny.Tangram.metainfo.xml:44
 msgid "Reduce the noisiness of logs"
-msgstr ""
+msgstr "Ridotta la verbosità dei log"
 
 #: data/appdata/re.sonny.Tangram.metainfo.xml:52
 msgid "Fix a bug preventing to add new tabs"
-msgstr ""
+msgstr "Risolto bug che impediva di aggiungere nuove schede"
 
 #: data/appdata/re.sonny.Tangram.metainfo.xml:60
 msgid "Notifications priority is normal instead of urgent by default"
@@ -184,8 +184,6 @@ msgid "Window maximized"
 msgstr "Finestra massimizzata"
 
 #: data/re.sonny.Tangram.gschema.xml:41
-#, fuzzy
-#| msgid "Weither the window is maximized"
 msgid "Whether the window is maximized"
 msgstr "Se la finestra è massimizzata"
 
@@ -236,19 +234,17 @@ msgstr "Michael Moroni https://airon90.github.io, Andrea Brandi https://andreabr
 
 #: src/instanceDialog.blp:46
 msgid "Normal"
-msgstr ""
+msgstr "Normale"
 
 #: src/instanceDialog.blp:46
 msgid "Low"
-msgstr ""
+msgstr "Basso"
 
 #: src/instanceDialog.blp:46
 msgid "High"
-msgstr ""
+msgstr "Alto"
 
 #: src/instanceDialog.blp:46
-#, fuzzy
-#| msgid "User agent"
 msgid "Urgent"
 msgstr "User agent"
 
