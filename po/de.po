@@ -8,15 +8,15 @@ msgstr ""
 "Project-Id-Version: re.sonny.Tangram\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-09-18 16:27+0200\n"
-"PO-Revision-Date: 2022-04-26 17:50+0000\n"
-"Last-Translator: Stefan Schönberger <github@sniner.dev>\n"
+"PO-Revision-Date: 2023-01-27 13:36+0000\n"
+"Last-Translator: karohi <weblate@karoshi.xyz>\n"
 "Language-Team: German <https://hosted.weblate.org/projects/tangram/tangram/de/>\n"
 "Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.12.1-dev\n"
+"X-Generator: Weblate 4.16-dev\n"
 
 #: data/appdata/re.sonny.Tangram.metainfo.xml:5 data/re.sonny.Tangram.desktop:3
 msgid "Tangram"
@@ -33,7 +33,7 @@ msgstr "Browser für angepinnte Tabs"
 
 #: data/appdata/re.sonny.Tangram.metainfo.xml:13
 msgid "Tangram is a new kind of browser. It is designed to organize and run your Web applications. Each tab is persistent and independent. You can set multiple tabs with different accounts for the same application."
-msgstr "Tangram ist eine neue Art von Browser. Er wurde entwickelt, um Ihre Web-Anwendungen zu organisieren und auszuführen. Jeder Tab ist beständig und unabhängig. Sie können mehrere Tabs mit verschiedenen Konten für dieselbe Anwendung einrichten."
+msgstr "Tangram ist eine neue Art von Browser. Tangram ist designed für Web-Anwendungen. Jeder Tab ist konsistent und unabhängig von den Anderen. Du kannst mehrere Tabs mit unterschiedlichen Accounts des gleichen Dienstes verwenden."
 
 #: data/appdata/re.sonny.Tangram.metainfo.xml:17
 msgid "Common use cases:"
@@ -45,11 +45,11 @@ msgstr "Bleib auf dem Laufenden mit deinen Lieblings-Communities: Mastodon, Twit
 
 #: data/appdata/re.sonny.Tangram.metainfo.xml:22
 msgid "Merge all these chat applications into one; WhatsApp, Messenger, Telegram, ..."
-msgstr "Führen Sie all diese Chat-Anwendungen in einer einzigen zusammen: WhatsApp, Messenger, Telegram, ..."
+msgstr "Vereine alle deine Chat-Anwendungen in einer: WhatsApp, Messenger, Telegram, ..."
 
 #: data/appdata/re.sonny.Tangram.metainfo.xml:24
 msgid "Group your organization tools under one application; EMail, Calendar, ..."
-msgstr "Gruppieren Sie Ihre Organisationstools in einer einzigen Anwendung: EMail, Kalender, ..."
+msgstr "Gruppiere deine Dienste in einer Anwendung: E-Mail, Kalender, ..."
 
 #: data/appdata/re.sonny.Tangram.metainfo.xml:25
 msgid "One-stop for multiple sources of documentation or information"
@@ -57,35 +57,35 @@ msgstr "Eine zentrale Anlaufstelle für mehrere Dokumentations- und Informations
 
 #: data/appdata/re.sonny.Tangram.metainfo.xml:43
 msgid "Fix a bug preventing to start Tangram"
-msgstr ""
+msgstr "Fehler behoben, der Tangram am Starten gehindert hat"
 
 #: data/appdata/re.sonny.Tangram.metainfo.xml:44
 msgid "Reduce the noisiness of logs"
-msgstr ""
+msgstr "Rauschen in den Logs reduziert"
 
 #: data/appdata/re.sonny.Tangram.metainfo.xml:52
 msgid "Fix a bug preventing to add new tabs"
-msgstr ""
+msgstr "Fehler beim Hinzufügen neuer Tabs behoben"
 
 #: data/appdata/re.sonny.Tangram.metainfo.xml:60
 msgid "Notifications priority is normal instead of urgent by default"
-msgstr "Die Standardpriorität für Benachrichtigungen ist nicht dringend, sondern normal"
+msgstr "Die Standardpriorität für Benachrichtigungen ist normal, nicht dringend"
 
 #: data/appdata/re.sonny.Tangram.metainfo.xml:61
 msgid "Add a per-tab setting to change notifications priority"
-msgstr "Hinzufügen einer Einstellung pro Tab, um die Priorität von Benachrichtigungen zu ändern"
+msgstr "Prorität der Benachrichtigungen pro Tab einstellen"
 
 #: data/appdata/re.sonny.Tangram.metainfo.xml:62
 msgid "Fix authentication on many popular websites"
-msgstr "Behebung der Probleme bei der Authentifizierung auf vielen beliebten Websites"
+msgstr "Anmeldeprobleme bei zahlreichen Diensten behoben"
 
 #: data/appdata/re.sonny.Tangram.metainfo.xml:63
 msgid "Fix Cancel button in tab settings dialog"
-msgstr "Abbrechen-Knopf im Tab-Einstellungsdialog repariert"
+msgstr "Problem mit Abbrechen-Button in Einstellungen behoben"
 
 #: data/appdata/re.sonny.Tangram.metainfo.xml:64
 msgid "Use middle-click or Ctrl+click to open links in the browser"
-msgstr "Klicken Sie mit der mittleren Maustaste oder mit Strg+Klick, um Links im Browser zu öffnen"
+msgstr "Mit mittlerer Maustaste oder STRG+Linke-Maustaste klicken, um Links im Browser zu öffnen"
 
 #: data/appdata/re.sonny.Tangram.metainfo.xml:72
 msgid "Fix window title"
@@ -97,7 +97,7 @@ msgstr "GNOME-Laufzeitumgebung auf Version 41 aktualisiert"
 
 #: data/appdata/re.sonny.Tangram.metainfo.xml:82
 msgid "Fix an issue preventing some sites such as Twitter or Facebook from being added."
-msgstr "Behebung eines Fehlers, der verhinderte, dass einige Websites wie Twitter oder Facebook hinzugefügt werden konnten."
+msgstr "Fehler beim Hinzufügen von Twitter und Facebook behoben."
 
 #: data/appdata/re.sonny.Tangram.metainfo.xml:83
 msgid "Update GNOME runtime to 3.38"
@@ -113,7 +113,7 @@ msgstr "Anpassbarer User-Agent pro Instanz"
 
 #: data/appdata/re.sonny.Tangram.metainfo.xml:93
 msgid "New project icon/logo"
-msgstr "Neues Projektsymbol/Logo"
+msgstr "Neues Logo/Icon"
 
 #: data/appdata/re.sonny.Tangram.metainfo.xml:94
 msgid "New tab background color respects dark mode"
@@ -184,8 +184,6 @@ msgid "Window maximized"
 msgstr "Fenster maximiert"
 
 #: data/re.sonny.Tangram.gschema.xml:41
-#, fuzzy
-#| msgid "Weither the window is maximized"
 msgid "Whether the window is maximized"
 msgstr "Ob das Fenster maximiert ist"
 
@@ -236,21 +234,19 @@ msgstr "Stefan Schönberger <mail@sniner.dev>"
 
 #: src/instanceDialog.blp:46
 msgid "Normal"
-msgstr ""
+msgstr "Normal"
 
 #: src/instanceDialog.blp:46
 msgid "Low"
-msgstr ""
+msgstr "Niedrig"
 
 #: src/instanceDialog.blp:46
 msgid "High"
-msgstr ""
+msgstr "Hoch"
 
 #: src/instanceDialog.blp:46
-#, fuzzy
-#| msgid "User agent"
 msgid "Urgent"
-msgstr "User-Agent"
+msgstr "Dringend"
 
 #: src/shortcuts.blp:11
 msgctxt "shortcut window"
