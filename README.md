@@ -73,6 +73,8 @@ You can create a custom application by
 
 ## In the media
 
+[omglinux.com - Tangram for Linux is a Browser Built for Web Apps](https://www.omglinux.com/tangram-web-app-browser-for-linux/) - 2023-01
+
 TechHut - 5 AWESOME LINUX APPS - GNOME Circle [odysee.com](https://odysee.com/@TechHut:1/5-awesome-linux-apps-gnome-circle:8) / [youtube.com](https://www.youtube.com/watch?v=aYlzSk7mB0Y) - 2022-02
 
 Tangram - Manage Social Media sites on #Linux and #GNOME (#shorts) [youtube.com](https://www.youtube.com/shorts/e7eY3Plroww) - 2021-11
