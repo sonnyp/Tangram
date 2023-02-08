@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: re.sonny.Tangram\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-09-18 16:27+0200\n"
-"PO-Revision-Date: 2023-01-27 13:36+0000\n"
+"PO-Revision-Date: 2023-02-10 00:57+0000\n"
 "Last-Translator: gallegonovato <fran-carro@hotmail.es>\n"
 "Language-Team: Spanish <https://hosted.weblate.org/projects/tangram/tangram/es/>\n"
 "Language: es\n"
@@ -57,7 +57,7 @@ msgstr "Una sola parada para múltiples fuentes de documentación o información
 
 #: data/appdata/re.sonny.Tangram.metainfo.xml:43
 msgid "Fix a bug preventing to start Tangram"
-msgstr "Corregido un error que impedía iniciar Tangram"
+msgstr "Corregido un error que impedía iniciar a Tangram"
 
 #: data/appdata/re.sonny.Tangram.metainfo.xml:44
 msgid "Reduce the noisiness of logs"
