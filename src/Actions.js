@@ -40,6 +40,9 @@ export default function Actions({ window, application, selectTab }) {
       selectTab(instance);
     }
 
+    // FIXME: temporary workaround
+    // Calling this twice to work around: https://gitlab.gnome.org/GNOME/gtk/-/issues/5239
+    window.present();
     window.present();
   });
   application.add_action(showInstanceAction);
