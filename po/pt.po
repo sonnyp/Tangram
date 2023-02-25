@@ -8,8 +8,8 @@ msgstr ""
 "Project-Id-Version: re.sonny.Tangram\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-09-18 16:27+0200\n"
-"PO-Revision-Date: 2023-01-30 08:39+0000\n"
-"Last-Translator: gitbobbed <bobbed@gmail.com>\n"
+"PO-Revision-Date: 2023-02-26 11:39+0000\n"
+"Last-Translator: ssantos <ssantos@web.de>\n"
 "Language-Team: Portuguese <https://hosted.weblate.org/projects/tangram/tangram/pt/>\n"
 "Language: pt\n"
 "MIME-Version: 1.0\n"
@@ -236,15 +236,15 @@ msgstr "Xico Maia https://xico26.github.io/"
 
 #: src/instanceDialog.blp:46
 msgid "Normal"
-msgstr ""
+msgstr "Normal"
 
 #: src/instanceDialog.blp:46
 msgid "Low"
-msgstr ""
+msgstr "Baixo"
 
 #: src/instanceDialog.blp:46
 msgid "High"
-msgstr ""
+msgstr "Alto"
 
 #: src/instanceDialog.blp:46
 #, fuzzy
