@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: re.sonny.Tangram\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-09-18 16:27+0200\n"
-"PO-Revision-Date: 2023-02-18 15:35+0000\n"
+"PO-Revision-Date: 2023-03-24 12:38+0000\n"
 "Last-Translator: Philip Goto <philip.goto@gmail.com>\n"
 "Language-Team: Dutch <https://hosted.weblate.org/projects/tangram/tangram/nl/>\n"
 "Language: nl\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.16-dev\n"
+"X-Generator: Weblate 4.17-dev\n"
 
 #: data/appdata/re.sonny.Tangram.metainfo.xml:5 data/re.sonny.Tangram.desktop:3
 msgid "Tangram"
@@ -209,11 +209,11 @@ msgstr "URL"
 
 #: data/re.sonny.Tangram.gschema.xml:61
 msgid "Start URL"
-msgstr "De starturl"
+msgstr "Start-URL"
 
 #: data/re.sonny.Tangram.gschema.xml:65 src/instanceDialog.blp:52
 msgid "User agent"
-msgstr "Gebruikersagent"
+msgstr "User agent"
 
 #: data/re.sonny.Tangram.gschema.xml:67
 msgid "String that will be used as user agent, to identify the browser to the web servers."
@@ -230,7 +230,9 @@ msgstr "Stel de prioriteit van meldingen in"
 #. TRANSLATORS: eg. 'Translator Name <your.email@domain.com>' or 'Translator Name https://website.example'
 #: src/AboutDialog.js:35
 msgid "translator-credits"
-msgstr "Heimen Stoffels <vistausss@fastmail.com>"
+msgstr ""
+"Heimen Stoffels <vistausss@fastmail.com>\n"
+"Philip Goto <philip.goto@gmail.com>"
 
 #: src/instanceDialog.blp:46
 msgid "Normal"
@@ -256,12 +258,12 @@ msgstr "Algemeen"
 #: src/shortcuts.blp:14
 msgctxt "shortcut window"
 msgid "Go to the next tab"
-msgstr "Ga naar volgend tabblad"
+msgstr "Naar volgend tabblad gaan"
 
 #: src/shortcuts.blp:19
 msgctxt "shortcut window"
 msgid "Go to the previous tab"
-msgstr "Ga naar vorig tabblad"
+msgstr "Naar vorig tabblad gaan"
 
 #: src/shortcuts.blp:24
 msgctxt "shortcut window"
@@ -321,12 +323,12 @@ msgstr "Laden afbreken"
 #: src/shortcuts.blp:78 src/shortcuts.blp:94
 msgctxt "shortcut window"
 msgid "Go back to the previous page"
-msgstr "Ga naar de vorige pagina"
+msgstr "Naar vorige pagina gaan"
 
 #: src/shortcuts.blp:83 src/shortcuts.blp:99
 msgctxt "shortcut window"
 msgid "Go forward to the next page"
-msgstr "Ga naar de volgende pagina"
+msgstr "Naar volgende pagina gaan"
 
 #: src/shortcuts.blp:88
 msgctxt "shortcut window"
