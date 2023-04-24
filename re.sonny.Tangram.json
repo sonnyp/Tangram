@@ -1,7 +1,7 @@
 {
   "id": "re.sonny.Tangram",
   "runtime": "org.gnome.Platform",
-  "runtime-version": "43",
+  "runtime-version": "44",
   "sdk": "org.gnome.Sdk",
   "command": "re.sonny.Tangram",
   "finish-args": [
@@ -31,7 +31,12 @@
       "name": "Tangram",
       "buildsystem": "meson",
       "builddir": true,
-      "sources": [{ "type": "dir", "path": "." }]
+      "sources": [
+        {
+          "type": "dir",
+          "path": "."
+        }
+      ]
     }
   ]
 }

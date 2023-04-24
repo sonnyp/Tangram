@@ -1,4 +1,4 @@
-import "gi://WebKit2?version=5.0";
+import "gi://WebKit?version=6.0";
 import { programInvocationName } from "system";
 import GLib from "gi://GLib";
 import Gio from "gi://Gio";

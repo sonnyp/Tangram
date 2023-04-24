@@ -3,13 +3,9 @@ import Gdk from "gi://Gdk";
 import Soup from "gi://Soup";
 import GdkPixbuf from "gi://GdkPixbuf";
 
+import { promiseTask } from "../../troll/src/util.js";
+
 const { byteArray } = imports;
-
-const { pixbuf_get_from_surface } = Gdk;
-const { get_tmp_dir, build_filenamev } = GLib;
-const { Pixbuf } = GdkPixbuf;
-
-import { promiseTask, once } from "../../troll/src/util.js";
 
 import {
   getWebAppIcon,
@@ -18,21 +14,17 @@ import {
   getWebAppURL,
 } from "./ephy.js";
 
-export function download(webview, url, destination) {
-  const download = webview.download_uri(url);
-  download.set_allow_overwrite(true);
-  download.set_destination(destination);
-  return once(download, "finished", "failed");
-}
-
 export function runJavaScript(webview, script) {
   return promiseTask(
     webview,
-    "run_javascript",
-    "run_javascript_finish",
-    script,
-    null,
-  ).then((javascriptResult) => javascriptResult?.get_js_value());
+    "evaluate_javascript",
+    "evaluate_javascript_finish",
+    script, // script
+    -1, // length
+    null, // world_name
+    null, // source_uri
+    null, // cancellable
+  );
 }
 
 // FIXME: we should use troll fetch but it doesn't support reading an InputStream
@@ -132,7 +124,7 @@ async function getManifestURL(webview) {
 }
 
 const supported_formats = (() => {
-  const formats = Pixbuf.get_formats();
+  const formats = GdkPixbuf.Pixbuf.get_formats();
   return [].concat(...formats.map((format) => format.get_mime_types()));
 })();
 
@@ -247,21 +239,14 @@ export function getFaviconAsPixbuf(webview) {
   const favicon = getFavicon(webview);
   if (!favicon) return;
 
-  const pixbuf = pixbuf_get_from_surface(
-    favicon,
-    0,
-    0,
-    favicon.getWidth(),
-    favicon.getHeight(),
-  );
-  return pixbuf;
+  return Gdk.pixbuf_get_from_texture(favicon);
 }
 
 export function saveFavicon(webview, instance) {
   const favicon = getFaviconAsPixbuf(webview);
   if (!favicon) return null;
 
-  const path = build_filenamev([get_tmp_dir(), instance.id]);
+  const path = GLib.build_filenamev([GLib.get_tmp_dir(), instance.id]);
   if (!favicon.savev(path, "png", [], [])) return null;
 
   return path;

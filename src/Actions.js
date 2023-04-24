@@ -44,16 +44,6 @@ export default function Actions({ window, application, selectTab }) {
   });
   application.add_action(showInstanceAction);
 
-  const openURIAction = new Gio.SimpleAction({
-    name: "openURI",
-    parameter_type: GLib.VariantType.new("s"),
-  });
-  openURIAction.connect("activate", (self, parameters) => {
-    const path = parameters.unpack();
-    Gio.AppInfo.launch_default_for_uri(path, null);
-  });
-  application.add_action(openURIAction);
-
   const quit = new Gio.SimpleAction({
     name: "quit",
     parameter_type: null,

@@ -1,4 +1,4 @@
-import WebKit2 from "gi://WebKit2";
+import WebKit2 from "gi://WebKit";
 import GLib from "gi://GLib";
 import GObject from "gi://GObject";
 import { gettext as _ } from "gettext";
