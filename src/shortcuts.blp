@@ -8,47 +8,53 @@ ShortcutsWindow shortcuts-window {
     section-name: "shortcuts";
     max-height: 10;
 
+
     ShortcutsGroup {
-      title: C_("shortcut window", "General");
+      title: C_("shortcut window", "Tabs");
 
       ShortcutsShortcut {
         title: C_("shortcut window", "Go to the next tab");
-        accelerator: "<Primary>Page_Down <Primary>Tab";
+        accelerator: "<Control>Page_Down <Control>Tab";
       }
 
       ShortcutsShortcut {
         title: C_("shortcut window", "Go to the previous tab");
-        accelerator: "<Primary>Page_Up <Shift><Primary>Tab";
+        accelerator: "<Control>Page_Up <Shift><Control>Tab";
       }
 
       ShortcutsShortcut {
-        title: C_("shortcut window", "Move current tab to the left");
-        accelerator: "<Primary><Shift>Page_Up";
+        title: C_("shortcut window", "Go to the first tab");
+        accelerator: "<Ctrl>Home";
       }
 
       ShortcutsShortcut {
-        title: C_("shortcut window", "Move current tab to the right");
-        accelerator: "<Primary><Shift>Page_Down";
+        title: C_("shortcut window", "Go to the last tab");
+        accelerator: "<Control>End";
       }
 
       ShortcutsShortcut {
-        title: C_("shortcut window", "Quit");
-        accelerator: "<Primary>Q";
+        title: C_("shortcut window", "Move current tab backward");
+        accelerator: "<Control><Shift>Page_Up";
       }
 
       ShortcutsShortcut {
-        title: C_("shortcut window", "Shortcuts");
-        accelerator: "<Primary>question";
+        title: C_("shortcut window", "Move current tab forward");
+        accelerator: "<Control><Shift>Page_Down";
       }
 
       ShortcutsShortcut {
-        title: C_("shortcut window", "Toggle inspector");
-        accelerator: "<Primary><Shift>I";
+        title: C_("shortcut window", "Move current tab at the start");
+        accelerator: "<Control><Shift>Home";
       }
 
       ShortcutsShortcut {
-        title: C_("shortcut window", "First – Ninth Tab");
-        accelerator: "<Alt>1...9";
+        title: C_("shortcut window", "Move current tab at the end");
+        accelerator: "<Control><Shift>End";
+      }
+
+      ShortcutsShortcut {
+        title: C_("shortcut window", "First – Tenth Tab");
+        accelerator: "<Alt>1...0";
       }
     }
 
@@ -62,12 +68,12 @@ ShortcutsWindow shortcuts-window {
 
       ShortcutsShortcut {
         title: C_("shortcut window", "Reload current page");
-        accelerator: "F5 <Primary>R";
+        accelerator: "F5 <Control>R";
       }
 
       ShortcutsShortcut {
         title: C_("shortcut window", "Reload bypassing cache");
-        accelerator: "<Primary><Shift>R <Shift>F5";
+        accelerator: "<Control><Shift>R <Shift>F5";
       }
 
       ShortcutsShortcut {
@@ -87,7 +93,7 @@ ShortcutsWindow shortcuts-window {
 
       ShortcutsShortcut {
         title: C_("shortcut window", "Focus the address bar");
-        accelerator: "<Primary>L";
+        accelerator: "<Control>L";
       }
 
       ShortcutsShortcut {
@@ -98,6 +104,25 @@ ShortcutsWindow shortcuts-window {
       ShortcutsShortcut {
         shortcut-type: gesture_two_finger_swipe_left;
         title: C_("shortcut window", "Go forward to the next page");
+      }
+    }
+
+    ShortcutsGroup {
+      title: C_("shortcut window", "General");
+
+      ShortcutsShortcut {
+        title: C_("shortcut window", "Quit");
+        accelerator: "<Control>Q";
+      }
+
+      ShortcutsShortcut {
+        title: C_("shortcut window", "Shortcuts");
+        accelerator: "<Control>question";
+      }
+
+      ShortcutsShortcut {
+        title: C_("shortcut window", "Toggle inspector");
+        accelerator: "<Control><Shift>I";
       }
     }
   }

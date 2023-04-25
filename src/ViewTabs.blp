@@ -1,0 +1,127 @@
+using Gtk 4.0;
+using Adw 1;
+
+Box view_tabs {
+  orientation: vertical;
+
+  Adw.Leaflet leaflet {
+    fold-threshold-policy: minimum;
+    transition-type: over;
+
+    Adw.LeafletPage {
+      name: "sidebar";
+      child: Box {
+        orientation: vertical;
+        vexpand: true;
+
+        Adw.HeaderBar {
+          show-end-title-buttons: bind leaflet.folded;
+
+          [start]
+          Button button_new_tab {
+            icon-name: "tab-new-symbolic";
+            tooltip-text: _("New Tab");
+          }
+
+          [end]
+          MenuButton {
+            icon-name: "open-menu-symbolic";
+            menu-model: menu_app;
+            tooltip-text: _("Main Menu");
+          }
+        }
+
+        Gtk.ScrolledWindow {
+          styles ["sidebar"]
+          width-request: 200;
+          Gtk.ListBox list_box {
+            styles ["navigation-sidebar"]
+            vexpand: true;
+            selection-mode: browse;
+          }
+        }
+      };
+    }
+
+    Separator {}
+
+    Adw.LeafletPage {
+      name: "content";
+      child: Box {
+        orientation: vertical;
+        hexpand: true;
+
+        Adw.HeaderBar header_bar_content_top {
+          visible: false;
+          [title]
+          Box {}
+
+          [end]
+          Button button_tab_settings {
+            icon-name: "settings-symbolic";
+            styles ["flat"]
+            tooltip-text: _("Tab Settings");
+            visible: bind leaflet.folded inverted;
+          }
+        }
+
+        Adw.TabView tab_view {
+          vexpand: true;
+          shortcuts: all_shortcuts;
+        }
+
+        Adw.HeaderBar header_bar_content_bottom {
+          visible: false;
+          [title]
+          Box {}
+        }
+      };
+    }
+  }
+}
+
+Box navigation_buttons {
+  spacing: 6;
+
+  Button button_back {
+    sensitive: false;
+    icon-name: "go-previous-symbolic";
+    tooltip-text: _("Back");
+  }
+
+  Button button_forward {
+    sensitive: false;
+    icon-name: "go-next-symbolic";
+    tooltip-text: _("Forward");
+  }
+
+  Button button_reload {
+    icon-name: "view-refresh-symbolic";
+    tooltip-text: _("Reload");
+  }
+
+  Button button_home {
+    icon-name: "go-home-symbolic";
+    tooltip-text: _("Homepage");
+  }
+}
+
+Button button_open_main_sidebar {
+  icon-name: "tabs-stack-symbolic";
+  tooltip-text: _("View Tabs");
+  visible: bind leaflet.folded;
+}
+
+menu menu_app {
+  section {
+    item {
+      label: _("Keyboard Shortcuts");
+      action: "app.shortcuts";
+    }
+
+    item {
+      label: _("About Tangram");
+      action: "app.about";
+    }
+  }
+}

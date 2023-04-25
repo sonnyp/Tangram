@@ -6,20 +6,24 @@ labels: ""
 assignees: ""
 ---
 
+⚠️ Before submitting a compatibility issue with a Website, try to reproduce it with [GNOME Web](https://flathub.org/apps/details/org.gnome.Epiphany) first. If you can, [report the issue to WebKitGTK](https://bugs.webkit.org/enter_bug.cgi?product=WebKit&component=WebKitGTK&version=Other&op_sys=Linux), the Web engine behind Tangram and GNOME Web.
+
+---
+
 Please include (to the best of your knowledge) the following information:
 
-**Tangram version**
+**Debugging Information**
 
-See `About Tangram` in the application.
-
-**Linux distribution**
-
-Example `Fedora 31`
+You can find it via Tangram -> Menu -> About Tangram -> Troubleshooting.
 
 **Flatpak version**
 
 `flatpak --version`
 
-**Desktop environment**
+**Operating System**
 
-Example `GNOME Shell 3.24 Wayland`
+Example `Fedora 38`
+
+**Desktop Environment**
+
+Example `GNOME Shell 44 Wayland`

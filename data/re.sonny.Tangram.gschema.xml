@@ -1,13 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <schemalist gettext-domain="re.sonny.Tangram">
-  <!-- https://docs.gtk.org/gtk3/enum.PositionType.html -->
-  <enum id="re.sonny.Tangram.PositionType">
-    <value nick="left" value="0" />
-    <value nick="right" value="1" />
-    <value nick="top" value="2" />
-    <value nick="bottom" value="3" />
-  </enum>
-
   <!-- https://docs.gtk.org/gio/enum.NotificationPriority.html -->
   <enum id="re.sonny.Tangram.NotificationPriority">
     <value nick="normal" value="0" />
@@ -17,12 +9,6 @@
   </enum>
 
   <schema id="re.sonny.Tangram">
-    <key name="tabs-position" enum="re.sonny.Tangram.PositionType">
-      <default>"left"</default>
-      <summary>Tabs position</summary>
-      <description>Sets the position of the tabs</description>
-    </key>
-
     <key name="window-width" type="i">
       <default>800</default>
       <summary>Window width</summary>

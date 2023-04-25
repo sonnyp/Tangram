@@ -30,3 +30,8 @@ src/window.blp
 src/window.js
 src/application.js
 src/main.js
+src/tabs.js
+src/ViewTabs.blp
+src/ViewNew.blp
+src/ViewTabs.js
+src/ViewNew.js

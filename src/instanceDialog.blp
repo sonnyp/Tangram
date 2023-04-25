@@ -14,25 +14,28 @@ Dialog dialog {
 
   [action response=apply default]
   Button button_save {
-    label: _("Save");
+    label: _("Update");
   }
 
   Adw.PreferencesPage {
     vexpand: true;
 
     Adw.PreferencesGroup {
-      Adw.PreferencesRow {
-        Adw.EntryRow name {
-          title: _("Name");
-        }
+      vexpand: true;
+
+      Adw.EntryRow name {
+        title: _("Name");
       }
 
-      Adw.PreferencesRow {
-        Adw.EntryRow url {
-          title: _("URL");
-          input-purpose: url;
-        }
+      Adw.EntryRow url {
+        title: _("Homepage");
+        input-purpose: url;
       }
+    }
+
+    Adw.PreferencesGroup {
+      vexpand: true;
+
 
       Adw.ComboRow notifications-priority {
         title: _("Notifications priority");
@@ -41,10 +44,16 @@ Dialog dialog {
         };
       }
 
-      Adw.PreferencesRow {
-        Adw.EntryRow user-agent {
-          title: _("User agent");
-        }
+      Adw.EntryRow user-agent {
+        title: _("User agent");
+      }
+    }
+
+    Adw.PreferencesGroup {
+      Button button_delete {
+        label: "Delete Tab";
+        styles ["destructive-action", "pill"]
+        halign: center;
       }
     }
   }

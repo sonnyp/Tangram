@@ -1,0 +1,75 @@
+using Gtk 4.0;
+using Adw 1;
+
+Box view_new {
+  orientation: vertical;
+
+  Adw.HeaderBar header_bar {
+    centering-policy: strict;
+
+    [start]
+     Box {
+      Button button_cancel {
+        label: _("Cancel");
+      }
+    }
+
+    [title]
+    Adw.Clamp {
+      maximum-size: 860;
+      tightening-threshold: 560;
+
+      Entry entry_url {
+        hexpand: true;
+        placeholder-text: _("Enter address");
+        input-purpose: url;
+        activates-default: true;
+      }
+    }
+
+    [end]
+    Button button_done {
+      label: _("Add");
+      sensitive: false;
+      styles ["suggested-action"]
+    }
+  }
+
+  Stack stack_new {
+    StackPage {
+      name: "statuspage";
+      child: Adw.StatusPage status_page {
+        vexpand: true;
+        Box {
+          hexpand: true;
+          halign: center;
+          orientation: vertical;
+          Gtk.Entry entry_go {
+            input-purpose: url;
+            placeholder-text: "example.org";
+            hexpand: true;
+            max-width-chars: 30;
+            activates-default: true;
+          }
+          // ListBox {
+          //   styles ["boxed-list"]
+          //   Adw.EntryRow entry_go {
+          //     input-purpose: url;
+          //     title: "example.org";
+          //     hexpand: true;
+          //     max-width-chars: 30;
+          //     activates-default: true;
+          //   }
+          // }
+          Button button_go {
+            label: "Go";
+            margin-top: 20;
+            sensitive: false;
+            styles ["suggested-action", "pill"]
+            halign: center;
+          }
+        }
+      };
+    }
+  }
+}

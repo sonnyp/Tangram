@@ -17,3 +17,5 @@ var/
 .eslintcache
 
 /subprojects/blueprint-compiler
+
+.fenv

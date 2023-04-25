@@ -3,10 +3,14 @@ import WebKit2 from "gi://WebKit";
 import GLib from "gi://GLib";
 import Gio from "gi://Gio";
 import Gdk from "gi://Gdk";
+import { gettext as _ } from "gettext";
 
-const { FileChooserNative, FileChooserAction, ResponseType } = Gtk;
+import { connect, getEnum } from "./util.js";
+import { MODES } from "./constants.js";
+
+Gio._promisify(Gtk.FileDialog.prototype, "save", "save_finish");
+
 const {
-  WebsiteDataManager,
   WebContext,
   CookiePersistentStorage,
   CookieAcceptPolicy,
@@ -16,54 +20,73 @@ const {
   UserContentManager,
   TLSErrorsPolicy,
   WebView,
-  ProcessModel,
-  DownloadError,
   PolicyDecisionType,
 } = WebKit2;
 const {
   build_filenamev,
-  DIR_SEPARATOR_S,
   get_user_special_dir,
   UserDirectory,
-  path_get_basename,
-  path_get_dirname,
   get_language_names,
 } = GLib;
-const { Notification, AppInfo, ResourceLookupFlags, resources_open_stream } =
-  Gio;
+const { AppInfo, ResourceLookupFlags, resources_open_stream } = Gio;
 
-import { connect, getEnum } from "./util.js";
-import { env } from "./env.js";
-import { MODES } from "./constants.js";
+export function buildWebView({ instance, onNotification, window }) {
+  const { data_dir, cache_dir, url, id } = instance;
 
-export function buildWebView({
-  instance,
-  onNotification,
-  application,
-  window,
-}) {
-  const { data_dir, cache_dir, url, id, name } = instance;
+  const network_session = WebKit2.NetworkSession.new(data_dir, cache_dir);
+  network_session.set_tls_errors_policy(TLSErrorsPolicy.FAIL);
 
-  // https://gjs-docs.gnome.org/webkit240~4.0_api/webkit2.websitedatamanager
-  const website_data_manager = new WebsiteDataManager({
-    base_data_directory: data_dir,
-    disk_cache_directory: cache_dir,
+  // https://gjs-docs.gnome.org/webkit240~4.0_api/webkit2.webcontext#signal-download-started
+  network_session.connect("download-started", (self, download) => {
+    // Beware of https://bugs.webkit.org/show_bug.cgi?id=201868
+    download.set_allow_overwrite(false);
+
+    const request = download.get_request();
+    const uri = request.get_uri();
+    if (uri.startsWith("http")) {
+      download.cancel();
+      AppInfo.launch_default_for_uri(uri, null);
+      return;
+    }
+
+    // We cannot open blob: and file: uris in an other application
+    // so we download them ourselves, it's okay because they are very
+    // quick to download so we don't need a progress UI for them
+
+    download.connect("failed", (self, err) => {
+      logError(err);
+    });
+
+    // https://webkitgtk.org/reference/webkit2gtk/stable/signal.Download.decide-destination.html
+    download.connect("decide-destination", (self, suggested_filename) => {
+      if (!suggested_filename || suggested_filename === "unknown.asc") {
+        suggested_filename = "";
+      }
+
+      const dest_dir = Gio.File.new_for_path(
+        get_user_special_dir(UserDirectory.DIRECTORY_DOWNLOAD),
+      );
+      const dialog = new Gtk.FileDialog({
+        title: _("Save File"),
+        initial_folder: dest_dir,
+        initial_name: suggested_filename,
+      });
+
+      dialog
+        .save(window, null)
+        .then((file) => {
+          download.set_destination(file.get_path());
+        })
+        .catch(logError);
+
+      return true;
+    });
   });
 
   // https://gjs-docs.gnome.org/webkit240~4.0_api/webkit2.webcontext
-  const web_context = new WebContext({
-    website_data_manager,
-  });
+  const web_context = new WebContext();
   web_context.set_spell_checking_enabled(true);
   web_context.set_spell_checking_languages(get_language_names());
-  web_context.set_tls_errors_policy(TLSErrorsPolicy.FAIL);
-  web_context.set_favicon_database_directory(
-    build_filenamev([cache_dir, "icondatabase"]),
-  );
-  web_context.set_process_model(ProcessModel.MULTIPLE_SECONDARY_PROCESSES);
-  web_context.set_sandbox_enabled(true);
-  web_context.add_path_to_sandbox(data_dir, true);
-  web_context.add_path_to_sandbox(cache_dir, true);
 
   const security_manager = web_context.get_security_manager();
 
@@ -75,9 +98,6 @@ export function buildWebView({
     );
     schemeRequest.finish(stream, -1, null);
   });
-
-  // https://gjs-docs.gnome.org/webkit240~4.0_api/webkit2.favicondatabase
-  // const favicon_database = web_context.get_favicon_database();
 
   /*
    * Notifications
@@ -93,95 +113,11 @@ export function buildWebView({
     });
   }
 
-  // https://gjs-docs.gnome.org/webkit240~4.0_api/webkit2.webcontext#signal-download-started
-  web_context.connect("download-started", (self, download) => {
-    // https://bugs.webkit.org/show_bug.cgi?id=201868
-    // We do this because the destination is decided by the user in 'decide-destination' handler
-    download.set_allow_overwrite(true);
-
-    const request = download.get_request();
-    const uri = request.get_uri();
-    if (uri.startsWith("http")) {
-      download.cancel();
-      AppInfo.launch_default_for_uri(uri, null);
-      return;
-    }
-
-    // We cannot open blob: and file: uris in an other application
-    // so we download them ourselves, it's okay because they are very
-    // quick to download so we don't need a progress UI for them
-
-    let error;
-    download.connect("failed", (self, err) => {
-      error = err;
-    });
-    download.connect("finished", () => {
-      if (error && error.code === DownloadError.CANCELLED_BY_USER) return;
-
-      const path = download.get_destination();
-      const filename = path_get_basename(path);
-
-      const notification = new Notification();
-      notification.set_title(name);
-
-      if (error) {
-        notification.set_body(`“${filename}” ${error.message}`);
-      } else {
-        notification.set_body(`“${filename}”`);
-        if (env !== "flatpak") {
-          notification.set_default_action(`app.openURI('${path}')`);
-          notification.add_button("Open file", `app.openURI('${path}')`);
-          const dirname = path_get_dirname(path);
-          notification.add_button("Open folder", `app.openURI('${dirname}')`);
-        }
-      }
-
-      application.send_notification(null, notification);
-    });
-
-    // https://gjs-docs.gnome.org/webkit240~4.0_api/webkit2.download#signal-decide-destination
-    download.connect("decide-destination", (self, suggested_filename) => {
-      if (!suggested_filename || suggested_filename === "unknown.asc") {
-        suggested_filename = "";
-      }
-
-      const dest_dir = get_user_special_dir(UserDirectory.DIRECTORY_DOWNLOAD);
-      const dest_name = suggested_filename.replace(
-        new RegExp(DIR_SEPARATOR_S, "g"),
-        "_",
-      );
-
-      const dialog = new FileChooserNative({
-        action: FileChooserAction.SAVE,
-        transient_for: window,
-        do_overwrite_confirmation: true,
-        create_folders: true,
-      });
-      // On Linux Mint XFCE 19.2 the default label is 'Open'
-      dialog.set_accept_label("Save");
-      // dest_dir is null in sandbox
-      if (dest_dir) {
-        dialog.set_current_folder(dest_dir);
-      }
-      dialog.set_current_name(dest_name);
-
-      if (dialog.run() !== ResponseType.ACCEPT) {
-        download.cancel();
-        dialog.destroy();
-        // TODO open issue
-        // return true segfaults
-        return;
-      }
-
-      download.set_destination(dialog.get_uri());
-      dialog.destroy();
-
-      return false;
-    });
-  });
+  const website_data_manager = network_session.get_website_data_manager();
+  website_data_manager.set_favicons_enabled(true);
 
   // https://gjs-docs.gnome.org/webkit240~4.0_api/webkit2.cookiemanager
-  const cookieManager = website_data_manager.get_cookie_manager();
+  const cookieManager = network_session.get_cookie_manager();
   cookieManager.set_accept_policy(CookieAcceptPolicy.NO_THIRD_PARTY);
   cookieManager.set_persistent_storage(
     build_filenamev([data_dir, "cookies.sqlite"]),
@@ -200,7 +136,6 @@ export function buildWebView({
     enable_back_forward_navigation_gestures: true,
     enable_developer_extras: true,
     enable_dns_prefetching: true,
-    enable_plugins: false,
     javascript_can_open_windows_automatically: true,
     allow_top_navigation_to_data_urls: false,
   });
@@ -219,6 +154,7 @@ export function buildWebView({
     web_context,
     user_content_manager,
     settings,
+    network_session,
   });
 
   // https://gjs-docs.gnome.org/webkit240~4.0_api/webkit2.webinspector
@@ -264,13 +200,12 @@ export function buildWebView({
       );
 
       if (decision_type === PolicyDecisionType.NAVIGATION_ACTION) {
-        const navigation_type = decision.get_navigation_type();
         // https://webkitgtk.org/reference/webkit2gtk/stable/WebKitNavigationAction.html
         const navigation_action = decision.get_navigation_action();
         const request_url = navigation_action.get_request().get_uri();
         console.debug(
           "navigation",
-          getEnum(WebKit2.NavigationType, navigation_type),
+          getEnum(WebKit2.NavigationType),
           request_url,
         );
 
@@ -283,6 +218,7 @@ export function buildWebView({
 
       return false;
     },
+    // https://webkitgtk.org/reference/webkit2gtk/stable/signal.WebView.load-changed.html
     // ["load-changed"](load_event) {
     //   console.debug("load-changed", getEnum(WebKit2.LoadEvent, load_event));
     // },

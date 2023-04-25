@@ -1,13 +1,14 @@
 import Gtk from "gi://Gtk";
 import GObject from "gi://GObject";
-import Gdk from "gi://Gdk";
 import Template from "./TabWidget.blp" assert { type: "uri" };
+
+import "./icons/settings-symbolic.svg" assert { type: "icon" };
 
 export default GObject.registerClass(
   {
     GTypeName: "Tab",
     Template,
-    Children: ["popover", "image"],
+    Children: ["image", "button"],
     InternalChildren: ["label"],
     Properties: {
       label: GObject.ParamSpec.string(
@@ -19,19 +20,10 @@ export default GObject.registerClass(
       ),
     },
   },
-  class Tab extends Gtk.Box {
+  class Tab extends Gtk.ListBoxRow {
     _init({ label = "", ...params } = {}) {
       super._init(params);
       Object.assign(this, { label });
-
-      const eventController = new Gtk.GestureSingle({
-        button: Gdk.BUTTON_SECONDARY,
-        exclusive: true,
-      });
-      this.add_controller(eventController);
-      eventController.connect("end", () => {
-        this.popover.popup();
-      });
     }
 
     set label(label) {

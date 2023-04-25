@@ -1,7 +1,5 @@
-import "gi://WebKit?version=5.0";
-
+import WebKit from "gi://WebKit?version=6.0";
 import GLib from "gi://GLib";
-import WebKit from "gi://WebKit";
 import Gtk from "gi://Gtk";
 import Soup from "gi://Soup?version=3.0";
 import { exit } from "system";
@@ -66,8 +64,9 @@ function serve(html, manifest) {
 }
 
 async function test(html, manifest) {
+  const network_session = WebKit.NetworkSession.new_ephemeral();
   const webview = new WebKit.WebView({
-    is_ephemeral: true,
+    network_session,
   });
 
   const server = await setup(webview, html, manifest);
