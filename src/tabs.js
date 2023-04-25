@@ -69,15 +69,14 @@ export function Tabs({
     // }
   }
 
+  let removing_tab = false;
   tab_view.connect("close-page", (_self, tab_page) => {
-    log("youpi");
-    tab_view.close_page_finish(tab_page, false);
-
-    const instance = instances.get(tab_page.child.instance_id);
-    if (instance) {
-      editTab(instance);
+    if (removing_tab) {
+      const instance = instances.get(tab_page.child.instance_id);
+      tab_view.close_page_finish(tab_page, true);
+      instances.destroy(instance);
     }
-
+    removing_tab = false;
     return Gdk.EVENT_STOP;
   });
 
@@ -95,6 +94,7 @@ export function Tabs({
       instance.bind("name", tab_page, "title", Gio.SettingsBindFlags.GET);
     },
     removeTab(instance) {
+      removing_tab = true;
       tab_view.close_page(tab_view.get_page(instance.webview));
     },
     selectTab,

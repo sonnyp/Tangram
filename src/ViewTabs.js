@@ -104,10 +104,6 @@ export function ViewTabs({
   button_home.connect("clicked", onGoHome);
 
   tab_overview.connect("create-tab", onNewTab);
-  const button_overview = builder.get_object("button_overview");
-  button_overview.connect("clicked", () => {
-    tab_overview.open = true;
-  });
 
   function updateButtons(webview) {
     button_back.sensitive = webview && webview.can_go_back();

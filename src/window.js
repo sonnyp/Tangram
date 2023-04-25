@@ -201,7 +201,7 @@ export default function Window({ application, state }) {
   instanceList.forEach((instance) => {
     tabs.addTab(instance);
   });
-  builder_view_tabs.get_object("tab_overview").open = true;
+  builder_view_tabs.get_object("tab_overview").open = instanceList.length > 1;
 
   observeSetting(settings, "instances", (instances) => {
     state.set({ instances });
