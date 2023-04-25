@@ -17,6 +17,8 @@ export function ViewTabs({
   onNotification,
   deleteInstance,
 }) {
+  const tab_overview = builder.get_object("tab_overview");
+
   const button_back = builder.get_object("button_back");
   button_back.connect("clicked", onGoBack);
 
@@ -61,47 +63,51 @@ export function ViewTabs({
     editTab(instance);
   });
 
-  const leaflet = builder.get_object("leaflet");
+  // const leaflet = builder.get_object("leaflet");
 
   // Workaround for a libadwaita issue
   // https://matrix.to/#/!tTlHhqEAGkmuagmvAr:gnome.org/$nX8zpvV1V-WNY8klp8rQuE0lLXPMkcWceDVFS2ben0o
-  leaflet.mode_transition_duration = 0;
-  setTimeout(() => {
-    leaflet.mode_transition_duration = 250; // default
-  }, 500);
+  // leaflet.mode_transition_duration = 0;
+  // setTimeout(() => {
+  //   leaflet.mode_transition_duration = 250; // default
+  // }, 500);
 
   const navigation_buttons = builder.get_object("navigation_buttons");
-  const button_open_main_sidebar = builder.get_object(
-    "button_open_main_sidebar",
-  );
-  button_open_main_sidebar.connect("clicked", () => {
-    leaflet.visible_child_name = "sidebar";
-  });
+  // const button_open_main_sidebar = builder.get_object(
+  //   "button_open_main_sidebar",
+  // );
+  // button_open_main_sidebar.connect("clicked", () => {
+  //   leaflet.visible_child_name = "sidebar";
+  // });
 
   let is_mobile;
   const header_bar_bottom = builder.get_object("header_bar_content_bottom");
   const header_bar_top = builder.get_object("header_bar_content_top");
   function setupHeaderbar() {
-    is_mobile = leaflet.folded && window.maximized;
+    // is_mobile = leaflet.folded && window.maximized;
+    is_mobile = false;
 
     navigation_buttons.parent?.remove(navigation_buttons);
-    button_open_main_sidebar.parent?.remove(button_open_main_sidebar);
+    // button_open_main_sidebar.parent?.remove(button_open_main_sidebar);
 
     header_bar_bottom.visible = is_mobile;
     header_bar_top.visible = !is_mobile;
 
     const header_bar = is_mobile ? header_bar_bottom : header_bar_top;
     header_bar.pack_start(navigation_buttons);
-    header_bar.pack_end(button_open_main_sidebar);
+    // header_bar.pack_end(button_open_main_sidebar);
   }
-  leaflet.connect("notify::folded", setupHeaderbar);
+  // leaflet.connect("notify::folded", setupHeaderbar);
   setupHeaderbar();
 
   const button_home = builder.get_object("button_home");
   button_home.connect("clicked", onGoHome);
 
-  const button_new_tab = builder.get_object("button_new_tab");
-  button_new_tab.connect("clicked", onNewTab);
+  tab_overview.connect("create-tab", onNewTab);
+  const button_overview = builder.get_object("button_overview");
+  button_overview.connect("clicked", () => {
+    tab_overview.open = true;
+  });
 
   function updateButtons(webview) {
     button_back.sensitive = webview && webview.can_go_back();

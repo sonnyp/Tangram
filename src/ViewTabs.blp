@@ -4,84 +4,69 @@ using Adw 1;
 Box view_tabs {
   orientation: vertical;
 
-  Adw.Leaflet leaflet {
-    fold-threshold-policy: minimum;
-    transition-type: over;
-
-    Adw.LeafletPage {
-      name: "sidebar";
-      child: Box {
-        orientation: vertical;
-        vexpand: true;
-
-        Adw.HeaderBar {
-          show-end-title-buttons: bind leaflet.folded;
-
-          [start]
-          Button button_new_tab {
-            icon-name: "tab-new-symbolic";
-            tooltip-text: _("New Tab");
-          }
-
-          [end]
-          MenuButton {
-            icon-name: "open-menu-symbolic";
-            menu-model: menu_app;
-            tooltip-text: _("Main Menu");
-          }
-        }
-
-        Gtk.ScrolledWindow {
-          styles ["sidebar"]
-          width-request: 200;
-          Gtk.ListBox list_box {
-            styles ["navigation-sidebar"]
-            vexpand: true;
-            selection-mode: browse;
-          }
-        }
-      };
+  Adw.HeaderBar header_bar_content_top {
+    [title]
+    Label {
+      label: "Tangram";
+      styles ["title"]
     }
 
-    Separator {}
+    [end]
+    MenuButton {
+      visible: bind tab_overview.open;
+      icon-name: "open-menu-symbolic";
+      menu-model: menu_app;
+      tooltip-text: _("Main Menu");
+    }
 
-    Adw.LeafletPage {
-      name: "content";
-      child: Box {
-        orientation: vertical;
+    [end]
+    Button button_tab_settings {
+      visible: bind tab_overview.open;
+      icon-name: "settings-symbolic";
+      tooltip-text: _("Tab Settings");
+    }
+
+    [end]
+    Button button_overview {
+      visible: bind tab_overview.open inverted;
+      icon-name: "tabs-stack-symbolic";
+      tooltip-text: _("Tabs Overview");
+    }
+  }
+
+  Adw.TabOverview tab_overview {
+    view: tab_view;
+    hexpand: true;
+    vexpand: true;
+    enable-new-tab: true;
+
+    // Disables the header bar
+    enable-search: false;
+    show-start-title-buttons: false;
+    show-end-title-buttons: false;
+
+    child: Box {
+      orientation: vertical;
+
+      Adw.TabView tab_view {
         hexpand: true;
+        vexpand: true;
+        shortcuts: all_shortcuts;
+      }
+    };
+  }
 
-        Adw.HeaderBar header_bar_content_top {
-          visible: false;
-          [title]
-          Box {}
-
-          [end]
-          Button button_tab_settings {
-            icon-name: "settings-symbolic";
-            styles ["flat"]
-            tooltip-text: _("Tab Settings");
-            visible: bind leaflet.folded inverted;
-          }
-        }
-
-        Adw.TabView tab_view {
-          vexpand: true;
-          shortcuts: all_shortcuts;
-        }
-
-        Adw.HeaderBar header_bar_content_bottom {
-          visible: false;
-          [title]
-          Box {}
-        }
-      };
-    }
+  Adw.HeaderBar header_bar_content_bottom {
+    visible: false;
+    [title]
+    Box {}
   }
 }
 
 Box navigation_buttons {
   spacing: 6;
+
+  visible: bind tab_overview.open inverted;
 
   Button button_back {
     sensitive: false;
@@ -104,12 +89,6 @@ Box navigation_buttons {
     icon-name: "go-home-symbolic";
     tooltip-text: _("Homepage");
   }
-}
-
-Button button_open_main_sidebar {
-  icon-name: "tabs-stack-symbolic";
-  tooltip-text: _("View Tabs");
-  visible: bind leaflet.folded;
 }
 
 menu menu_app {
