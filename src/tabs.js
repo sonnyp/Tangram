@@ -1,7 +1,7 @@
 import Gio from "gi://Gio";
 import Gdk from "gi://Gdk";
 
-import { TabLabel, TabPage } from "./tab.js";
+import { TabPage } from "./tab.js";
 
 import * as instances from "./instances.js";
 
@@ -62,21 +62,24 @@ export function Tabs({
   //   list_box.select_row(null);
   // });
 
-  // tab_view.connect("page-reordered", (self, tab_page) => {
-  //   const instance = instances.get(tab_page.child.instance_id);
-  //   if (!instance) return;
-  //   // Not nice but the row is deleted after page-reordered
-  //   // Promise.resolve().then(() => {
-  //   //   list_box.select_row(instance.list_box_row);
-  //   // });
-  // });
-
   function selectTab(instance, change_view = true) {
     tab_view.set_selected_page(tab_view.get_page(instance.webview));
     // if (change_view && leaflet.visible_child_name !== "content") {
     // leaflet.visible_child_name = "content";
     // }
   }
+
+  tab_view.connect("close-page", (_self, tab_page) => {
+    log("youpi");
+    tab_view.close_page_finish(tab_page, false);
+
+    const instance = instances.get(tab_page.child.instance_id);
+    if (instance) {
+      editTab(instance);
+    }
+
+    return Gdk.EVENT_STOP;
+  });
 
   return {
     addTab(instance) {
@@ -88,7 +91,7 @@ export function Tabs({
       });
       webview.instance_id = instance.id;
       const tab_page = tab_view.append(webview);
-      tab_page.set_live_thumbnail(true);
+      // tab_page.set_live_thumbnail(true);
       instance.bind("name", tab_page, "title", Gio.SettingsBindFlags.GET);
     },
     removeTab(instance) {

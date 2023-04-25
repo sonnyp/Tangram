@@ -6,6 +6,13 @@ Box view_tabs {
 
   Adw.HeaderBar header_bar_content_top {
     [title]
+    Button {
+      Adw.ButtonContent {
+        icon-name: "tabs-stack-symbolic";
+        label: "_Tangram";
+        use-underline: true;
+      }
+    }
     Label {
       label: "Tangram";
       styles ["title"]
@@ -21,7 +28,8 @@ Box view_tabs {
 
     [end]
     Button button_tab_settings {
-      visible: bind tab_overview.open;
+      visible: false;
+      // visible: bind tab_overview.open inverted;
       icon-name: "settings-symbolic";
       tooltip-text: _("Tab Settings");
     }
@@ -30,6 +38,7 @@ Box view_tabs {
     Button button_overview {
       visible: bind tab_overview.open inverted;
       icon-name: "tabs-stack-symbolic";
+      // icon-name: "re.sonny.Tangram-symbolic";
       tooltip-text: _("Tabs Overview");
     }
   }

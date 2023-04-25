@@ -1,0 +1,8 @@
+/*
+  Workaround
+  TabOverview thumbnail close buttons
+  cannot be disabled
+  */
+.tab-close-button {
+  opacity: 0;
+}
