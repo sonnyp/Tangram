@@ -1,5 +1,5 @@
 import Gtk from "gi://Gtk";
-import WebKit from "gi://WebKit2";
+import WebKit from "gi://WebKit";
 import Soup from "gi://Soup";
 import Adw from "gi://Adw";
 import { gettext as _ } from "gettext";
