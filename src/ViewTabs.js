@@ -1,5 +1,7 @@
 import { Tabs } from "./tabs.js";
 import * as instances from "./instances.js";
+import Gtk from "gi://Gtk";
+import Gdk from "gi://Gdk";
 
 import { instanceDialog } from "./instanceDialog.js";
 
@@ -26,12 +28,22 @@ export function ViewTabs({
   button_forward.connect("clicked", onGoForward);
 
   const button_reload = builder.get_object("button_reload");
-  button_reload.connect("clicked", () => {
+  const event_controller_click = new Gtk.GestureClick({ button: 0 });
+  button_reload.add_controller(event_controller_click);
+  event_controller_click.connect("pressed", () => {
+    const event = event_controller_click.get_current_event();
+    const button = event.get_button();
+    if (button !== Gdk.BUTTON_PRIMARY) {
+      event_controller_click.set_state(Gtk.EventSequenceState.DENIED);
+      return;
+    }
+
     const webview = state.get("webview");
     if (webview.is_loading) {
       onStopLoading();
     } else {
-      onReload();
+      const modifier_state = event.get_modifier_state();
+      onReload(modifier_state & Gdk.ModifierType.CONTROL_MASK);
     }
   });
 
