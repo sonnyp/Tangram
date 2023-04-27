@@ -13,22 +13,27 @@ ShortcutsWindow shortcuts-window {
       title: C_("shortcut window", "Tabs");
 
       ShortcutsShortcut {
-        title: C_("shortcut window", "Go to the next tab");
+        title: C_("shortcut window", "Open tabs overview");
+        accelerator: "<Alt>T";
+      }
+
+      ShortcutsShortcut {
+        title: C_("shortcut window", "Switch to the next tab");
         accelerator: "<Control>Page_Down <Control>Tab";
       }
 
       ShortcutsShortcut {
-        title: C_("shortcut window", "Go to the previous tab");
+        title: C_("shortcut window", "Switch to the previous tab");
         accelerator: "<Control>Page_Up <Shift><Control>Tab";
       }
 
       ShortcutsShortcut {
-        title: C_("shortcut window", "Go to the first tab");
+        title: C_("shortcut window", "Switch to the first tab");
         accelerator: "<Ctrl>Home";
       }
 
       ShortcutsShortcut {
-        title: C_("shortcut window", "Go to the last tab");
+        title: C_("shortcut window", "Switch to the last tab");
         accelerator: "<Control>End";
       }
 
@@ -53,8 +58,8 @@ ShortcutsWindow shortcuts-window {
       }
 
       ShortcutsShortcut {
-        title: C_("shortcut window", "First – Tenth Tab");
-        accelerator: "<Alt>1...0";
+        title: C_("shortcut window", "Switch to tabs 1⋯10");
+        accelerator: "<Alt>1⋯0";
       }
     }
 

@@ -81,7 +81,6 @@ export function ViewNew({
     webview.grab_focus();
   });
   function focusAddressBar() {
-    log("wow");
     entry_url.grab_focus();
   }
 

@@ -17,6 +17,8 @@ export function ViewTabs({
   onNotification,
   deleteInstance,
 }) {
+  const tab_overview = builder.get_object("tab_overview");
+
   const button_back = builder.get_object("button_back");
   button_back.connect("clicked", onGoBack);
 
@@ -49,7 +51,7 @@ export function ViewTabs({
     window,
     onNotification,
     deleteInstance,
-    editTab,
+    tab_overview,
   });
 
   const button_tab_settings = builder.get_object("button_tab_settings");
@@ -61,47 +63,42 @@ export function ViewTabs({
     editTab(instance);
   });
 
-  const leaflet = builder.get_object("leaflet");
-
-  // Workaround for a libadwaita issue
-  // https://matrix.to/#/!tTlHhqEAGkmuagmvAr:gnome.org/$nX8zpvV1V-WNY8klp8rQuE0lLXPMkcWceDVFS2ben0o
-  leaflet.mode_transition_duration = 0;
-  setTimeout(() => {
-    leaflet.mode_transition_duration = 250; // default
-  }, 500);
-
   const navigation_buttons = builder.get_object("navigation_buttons");
-  const button_open_main_sidebar = builder.get_object(
-    "button_open_main_sidebar",
-  );
-  button_open_main_sidebar.connect("clicked", () => {
-    leaflet.visible_child_name = "sidebar";
-  });
+  const button_main_menu = builder.get_object("button_main_menu");
 
-  let is_mobile;
+  let is_handheld_state = null;
   const header_bar_bottom = builder.get_object("header_bar_content_bottom");
   const header_bar_top = builder.get_object("header_bar_content_top");
   function setupHeaderbar() {
-    is_mobile = leaflet.folded && window.maximized;
+    const is_handheld = window.default_height > window.default_width;
 
-    navigation_buttons.parent?.remove(navigation_buttons);
-    button_open_main_sidebar.parent?.remove(button_open_main_sidebar);
+    if (is_handheld === is_handheld_state) return;
+    is_handheld_state = is_handheld;
 
-    header_bar_bottom.visible = is_mobile;
-    header_bar_top.visible = !is_mobile;
+    for (const item of [
+      navigation_buttons,
+      button_main_menu,
+      button_tab_settings,
+    ]) {
+      item.parent?.remove(item);
+    }
 
-    const header_bar = is_mobile ? header_bar_bottom : header_bar_top;
+    header_bar_bottom.visible = is_handheld;
+    header_bar_top.visible = !is_handheld;
+
+    const header_bar = is_handheld ? header_bar_bottom : header_bar_top;
     header_bar.pack_start(navigation_buttons);
-    header_bar.pack_end(button_open_main_sidebar);
+    header_bar.pack_end(button_tab_settings);
+    header_bar.pack_end(button_main_menu);
   }
-  leaflet.connect("notify::folded", setupHeaderbar);
+  window.connect("notify::default-width", setupHeaderbar);
+  window.connect("notify::default-heigh", setupHeaderbar);
   setupHeaderbar();
 
   const button_home = builder.get_object("button_home");
   button_home.connect("clicked", onGoHome);
 
-  const button_new_tab = builder.get_object("button_new_tab");
-  button_new_tab.connect("clicked", onNewTab);
+  tab_overview.connect("create-tab", onNewTab);
 
   function updateButtons(webview) {
     button_back.sensitive = webview && webview.can_go_back();

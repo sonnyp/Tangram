@@ -1,0 +1,9 @@
+/*
+  Workaround
+  TabOverview thumbnail close buttons cannot be disabled
+  cannot use scale(0,0) as it disables events on the thumbnail
+  */
+.tab-close-button {
+  transform: translate(64px, -64px);
+  opacity: 0;
+}

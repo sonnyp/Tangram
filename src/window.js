@@ -4,11 +4,7 @@ import Gio from "gi://Gio";
 import Shortcuts from "./Shortcuts.js";
 import Actions from "./Actions.js";
 import { Settings, observeSetting } from "./util.js";
-import {
-  getWebAppInfo,
-  // download,
-  // saveFavicon
-} from "./webapp/webapp.js";
+import { getWebAppInfo } from "./webapp/webapp.js";
 
 import {
   get as getInstance,
@@ -206,6 +202,7 @@ export default function Window({ application, state }) {
   instanceList.forEach((instance) => {
     tabs.addTab(instance);
   });
+  builder_view_tabs.get_object("tab_overview").open = instanceList.length > 1;
 
   observeSetting(settings, "instances", (instances) => {
     state.set({ instances });

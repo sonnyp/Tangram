@@ -41,7 +41,7 @@
       <description>
         <ul>
           <li>New responsive and mobile UI</li>
-          <li>Improve onboardng experience</li>
+          <li>Improve onboarding experience</li>
           <li>Port to GTK4</li>
           <li>Use Libadwaita</li>
         </ul>
