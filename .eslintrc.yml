@@ -29,6 +29,7 @@ globals:
   TextEncoder: readonly
   setTimeout: readonly
   setInterval: readonly
+  __DEV__: readonly
 rules:
   # https://eslint.org/docs/rules/no-restricted-globals
   no-restricted-globals: [error, window, printerr, print, Intl, Debugger]

@@ -1,3 +1,4 @@
+import Gtk from "gi://Gtk";
 import GLib from "gi://GLib";
 import Gio from "gi://Gio";
 
@@ -5,9 +6,11 @@ import AboutDialog from "./AboutDialog.js";
 
 import * as instances from "./instances.js";
 
-import builder from "./shortcuts.blp" assert { type: "builder" };
+import InterfaceShortcuts from "./shortcuts.blp";
 
 export default function Actions({ window, application, selectTab }) {
+  const builder = Gtk.Builder.new_from_resource(InterfaceShortcuts);
+
   const showAboutDialog = new Gio.SimpleAction({
     name: "about",
     parameter_type: null,

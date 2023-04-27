@@ -1,13 +1,12 @@
 subdir('icons')
 subdir('appdata')
 
-pkgdatadir = join_paths(get_option('datadir'), meson.project_name())
-gnome = import('gnome')
-
+service_conf = configuration_data()
+service_conf.set('bindir', bindir)
 configure_file(
   input: 're.sonny.Tangram.service',
   output: 're.sonny.Tangram.service',
-  configuration: conf,
+  configuration: service_conf,
   install_dir: join_paths(get_option('datadir'), 'dbus-1/services')
 )
 

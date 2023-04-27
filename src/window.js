@@ -1,3 +1,4 @@
+import Gtk from "gi://Gtk";
 import Gio from "gi://Gio";
 
 import Shortcuts from "./Shortcuts.js";
@@ -20,9 +21,9 @@ import {
 import { MODES } from "./constants.js";
 import * as instances from "./instances.js";
 
-import builder_window from "./window.blp" assert { type: "builder" };
-import builder_view_tabs from "./ViewTabs.blp" assert { type: "builder" };
-import builder_view_new from "./ViewNew.blp" assert { type: "builder" };
+import WindowInterface from "./window.blp";
+import ViewTabsInterface from "./ViewTabs.blp";
+import ViewNewInterface from "./ViewNew.blp";
 
 import "./icons/tabs-stack-symbolic.svg" assert { type: "icon" };
 import { ViewTabs } from "./ViewTabs.js";
@@ -33,6 +34,10 @@ export default function Window({ application, state }) {
     schema_id: "re.sonny.Tangram",
     path: "/re/sonny/Tangram/",
   });
+
+  const builder_window = Gtk.Builder.new_from_resource(WindowInterface);
+  const builder_view_tabs = Gtk.Builder.new_from_resource(ViewTabsInterface);
+  const builder_view_new = Gtk.Builder.new_from_resource(ViewNewInterface);
 
   const window = builder_window.get_object("window");
 
