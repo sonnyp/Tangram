@@ -81,8 +81,12 @@ export function ViewTabs({
   let is_handheld_state = null;
   const header_bar_bottom = builder.get_object("header_bar_content_bottom");
   const header_bar_top = builder.get_object("header_bar_content_top");
+
   function setupHeaderbar() {
-    const is_handheld = window.default_height > window.default_width;
+    const width = window.get_width() || window.default_width;
+    const height = window.get_height() || window.default_height;
+    const is_handheld =
+      height > width && (window.maximized || window.fullscreened);
 
     if (is_handheld === is_handheld_state) return;
     is_handheld_state = is_handheld;
@@ -103,9 +107,17 @@ export function ViewTabs({
     header_bar.pack_end(button_tab_settings);
     header_bar.pack_end(button_main_menu);
   }
+
+  // Ugly but does the work until we get Libadwaita 1.4 and breakpoints
   window.connect("notify::default-width", setupHeaderbar);
   window.connect("notify::default-heigh", setupHeaderbar);
-  setupHeaderbar();
+  window.connect("notify::maximized", () => {
+    setTimeout(setupHeaderbar);
+  });
+  window.connect("notify::fullscreened", () => {
+    setTimeout(setupHeaderbar);
+  });
+  window.connect("show", setupHeaderbar);
 
   const button_home = builder.get_object("button_home");
   button_home.connect("clicked", onGoHome);

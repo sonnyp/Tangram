@@ -87,6 +87,8 @@ export function buildWebView({ instance, onNotification, window }) {
   const web_context = new WebContext();
   web_context.set_spell_checking_enabled(true);
   web_context.set_spell_checking_languages(get_language_names());
+  web_context.add_path_to_sandbox(data_dir, true);
+  web_context.add_path_to_sandbox(cache_dir, true);
 
   const security_manager = web_context.get_security_manager();
 
