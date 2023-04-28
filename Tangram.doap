@@ -15,6 +15,9 @@
   <bug-database rdf:resource="https://github.com/sonnyp/Tangram/issues" />
   <programming-language>JavaScript</programming-language>
 
+  <platform>GTK 4</platform>
+  <platform>Libadwaita</platform>
+
   <maintainer>
     <foaf:Person>
       <foaf:name>Sonny Piers</foaf:name>

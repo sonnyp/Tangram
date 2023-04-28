@@ -32,11 +32,29 @@
   <screenshots>
     <screenshot type="default">
       <image
-      >https://raw.githubusercontent.com/sonnyp/Tangram/main/data/appdata/screenshot.png</image>
+      >https://raw.githubusercontent.com/sonnyp/Tangram/main/data/appdata/desktop.png</image>
+    </screenshot>
+    <screenshot>
+      <image
+      >https://raw.githubusercontent.com/sonnyp/Tangram/main/data/appdata/mobile.png</image>
     </screenshot>
   </screenshots>
   <content_rating type="oars-1.1" />
   <releases>
+    <release version="3.0" date="2023-04-29">
+      <description>
+        <ul>
+          <li>Replace sidebar with an overview</li>
+          <li>Show an indicator in overview for tabs playing audio</li>
+          <li>Fit correctly on handheld devices</li>
+          <li
+          >Pressing Ctrl while pressing the reload button will bypass the cache</li>
+          <li>Switch to Tangram when tapping notifications</li>
+          <li>Fix files download</li>
+        </ul>
+      </description>
+    </release>
+
     <release version="2.0" date="2023-01-18">
       <description>
         <ul>
@@ -145,4 +163,8 @@
     <kudo>ModernToolkit</kudo>
     <kudo>Notifications</kudo>
   </kudos>
+  <custom>
+    <value key="Purism::form_factor">workstation</value>
+    <value key="Purism::form_factor">mobile</value>
+  </custom>
 </component>
