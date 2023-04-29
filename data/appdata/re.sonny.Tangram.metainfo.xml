@@ -51,6 +51,7 @@
           >Pressing Ctrl while pressing the reload button will bypass the cache</li>
           <li>Switch to Tangram when tapping notifications</li>
           <li>Fix files download</li>
+          <li>Use GNOME 44</li>
         </ul>
       </description>
     </release>
