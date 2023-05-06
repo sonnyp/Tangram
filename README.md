@@ -4,7 +4,7 @@
 
 Browser for your pinned tabs
 
-![screenshot](data/appdata/screenshot.png)
+![screenshot](data/appdata/desktop.png)
 
 <a href='https://flathub.org/apps/details/re.sonny.Tangram'><img width='200' alt='Download on Flathub' width='180' height='60' src='https://flathub.org/assets/badges/flathub-badge-en.svg'/></a>
 
