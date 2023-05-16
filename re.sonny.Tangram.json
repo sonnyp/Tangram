@@ -1,7 +1,7 @@
 {
   "id": "re.sonny.Tangram",
   "runtime": "org.gnome.Platform",
-  "runtime-version": "44",
+  "runtime-version": "45",
   "sdk": "org.gnome.Sdk",
   "command": "re.sonny.Tangram",
   "finish-args": [
@@ -14,24 +14,35 @@
     "--system-talk-name=org.freedesktop.GeoClue2",
     "--require-version=1.1.2"
   ],
+  "cleanup": [
+    "/include",
+    "/lib/pkgconfig",
+    "/man",
+    "/share/doc",
+    "/share/gtk-doc",
+    "/share/man",
+    "/share/pkgconfig",
+    "/share/installed-tests",
+    "*.la",
+    "*.a"
+  ],
   "modules": [
     {
-      "name": "blueprint",
+      "name": "blueprint-compiler",
       "buildsystem": "meson",
-      "builddir": true,
+      "cleanup": ["*"],
       "sources": [
         {
           "type": "git",
           "url": "https://gitlab.gnome.org/jwestman/blueprint-compiler.git",
-          "tag": "v0.6.0",
-          "commit": "9adcab2d225fd6435edc85c72a0b67e33880e00b"
+          "tag": "v0.10.0",
+          "commit": "2a39a16391122af2f3d812e478c1c1398c98b972"
         }
       ]
     },
     {
       "name": "Tangram",
       "buildsystem": "meson",
-      "builddir": true,
       "sources": [
         {
           "type": "dir",
