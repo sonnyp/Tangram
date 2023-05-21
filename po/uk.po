@@ -8,15 +8,15 @@ msgstr ""
 "Project-Id-Version: re.sonny.Tangram\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-09-18 16:27+0200\n"
-"PO-Revision-Date: 2023-01-27 13:36+0000\n"
-"Last-Translator: Volodymyr Oliinyk <volodymyr.oliinyk.name@gmail.com>\n"
+"PO-Revision-Date: 2023-05-22 09:49+0000\n"
+"Last-Translator: Dan <denqwerta@gmail.com>\n"
 "Language-Team: Ukrainian <https://hosted.weblate.org/projects/tangram/tangram/uk/>\n"
 "Language: uk\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
-"X-Generator: Weblate 4.16-dev\n"
+"X-Generator: Weblate 4.18-dev\n"
 
 #: data/appdata/re.sonny.Tangram.metainfo.xml:5 data/re.sonny.Tangram.desktop:3
 msgid "Tangram"
@@ -33,7 +33,7 @@ msgstr "Браузер для ваших закріплених вкладок"
 
 #: data/appdata/re.sonny.Tangram.metainfo.xml:13
 msgid "Tangram is a new kind of browser. It is designed to organize and run your Web applications. Each tab is persistent and independent. You can set multiple tabs with different accounts for the same application."
-msgstr "Tangram — це новий вид браузера. Він призначений для організації та запуску ваших веб-додатків. Кожна вкладка є постійною та незалежною. Ви можете встановити кілька вкладок з різними обліковими записами для однієї програми."
+msgstr "Tangram — це новий вид браузера. Він призначений для організації та запуску ваших вебзастосунків. Кожна вкладка є постійною та незалежною. Ви можете встановити кілька вкладок з різними обліковими записами для одного застосунку."
 
 #: data/appdata/re.sonny.Tangram.metainfo.xml:17
 msgid "Common use cases:"
@@ -45,11 +45,11 @@ msgstr "Будьте в курсі улюблених спільнот; Mastodon
 
 #: data/appdata/re.sonny.Tangram.metainfo.xml:22
 msgid "Merge all these chat applications into one; WhatsApp, Messenger, Telegram, ..."
-msgstr "Об’єднайте всі ці чат програми в одну; WhatsApp, Messenger, Telegram, ..."
+msgstr "Об’єднати всі ці чати застосунків в один; WhatsApp, Messenger, Telegram, ..."
 
 #: data/appdata/re.sonny.Tangram.metainfo.xml:24
 msgid "Group your organization tools under one application; EMail, Calendar, ..."
-msgstr "Згрупуйте інструменти організації в одній програмі; Електронна пошта, Календар, ..."
+msgstr "Згрупуйте інструменти організації в одному застосунку; Електронна пошта, Календар, ..."
 
 #: data/appdata/re.sonny.Tangram.metainfo.xml:25
 msgid "One-stop for multiple sources of documentation or information"
@@ -60,7 +60,6 @@ msgid "Fix a bug preventing to start Tangram"
 msgstr "Виправте помилку, яка заважає запуску Tangram"
 
 #: data/appdata/re.sonny.Tangram.metainfo.xml:44
-#, fuzzy
 msgid "Reduce the noisiness of logs"
 msgstr "Зменшити шум логів"
 
@@ -78,7 +77,7 @@ msgstr "Додайте налаштування для кожної вкладк
 
 #: data/appdata/re.sonny.Tangram.metainfo.xml:62
 msgid "Fix authentication on many popular websites"
-msgstr "Виправте автентифікацію на багатьох популярних веб-сайтах"
+msgstr "Виправте автентифікацію на багатьох популярних вебсайтах"
 
 #: data/appdata/re.sonny.Tangram.metainfo.xml:63
 msgid "Fix Cancel button in tab settings dialog"
@@ -146,14 +145,13 @@ msgstr "Покращена обробка сповіщень"
 
 #: data/appdata/re.sonny.Tangram.metainfo.xml:115
 msgid "Improved web compatibility and performances"
-msgstr "Покращена веб-сумісність і продуктивність"
+msgstr "Покращена вебсумісність і продуктивність"
 
 #: data/appdata/re.sonny.Tangram.metainfo.xml:117
 msgid "Tangram now works properly on Flatpak 1.0 (Linux Mint, Ubuntu 18.04, ...)"
 msgstr "Tangram тепер працює належним чином на Flatpak 1.0 (Linux Mint, Ubuntu 18.04, ...)"
 
 #: data/re.sonny.Tangram.desktop:13
-#, fuzzy
 msgid "Franz;Ferdi;Rambox;Wavebox;Station;"
 msgstr "Franz;Ferdi;Rambox;Wavebox;Station;"
 
@@ -194,12 +192,10 @@ msgid "Instances"
 msgstr "Екземпляри"
 
 #: data/re.sonny.Tangram.gschema.xml:48
-#, fuzzy
 msgid "Identifiers of instances to be found in /re/sonny/Tangram/instances/"
 msgstr "Ідентифікатори екземплярів, які можна знайти в /re/sonny/Tangram/instances/"
 
 #: data/re.sonny.Tangram.gschema.xml:55 src/instanceDialog.blp:24
-#, fuzzy
 msgid "Name"
 msgstr "Назва"
 
@@ -221,7 +217,7 @@ msgstr "User agent"
 
 #: data/re.sonny.Tangram.gschema.xml:67
 msgid "String that will be used as user agent, to identify the browser to the web servers."
-msgstr "Рядок, який використовуватиметься як user agent для ідентифікації браузера веб-серверами."
+msgstr "Рядок, який використовуватиметься як user agent для ідентифікації браузера вебсерверами."
 
 #: data/re.sonny.Tangram.gschema.xml:74 src/instanceDialog.blp:44
 msgid "Notifications priority"
@@ -234,7 +230,10 @@ msgstr "Встановлює пріоритет сповіщень"
 #. TRANSLATORS: eg. 'Translator Name <your.email@domain.com>' or 'Translator Name https://website.example'
 #: src/AboutDialog.js:35
 msgid "translator-credits"
-msgstr "Volodymyr Oliinyk <volodymyr.oliinyk.name@gmail.com>"
+msgstr ""
+"Volodymyr Oliinyk <volodymyr.oliinyk.name@gmail.com>\n"
+"Kefir2105\n"
+"<denqwerta@gmail.com>"
 
 #: src/instanceDialog.blp:46
 msgid "Normal"
@@ -338,7 +337,6 @@ msgid "Focus the address bar"
 msgstr "Фокус адресного рядка"
 
 #: src/menu.blp:13
-#, fuzzy
 msgid "Top"
 msgstr "Зверху"
 
@@ -351,7 +349,6 @@ msgid "Right"
 msgstr "Праворуч"
 
 #: src/menu.blp:31
-#, fuzzy
 msgid "Bottom"
 msgstr "Знизу"
 
