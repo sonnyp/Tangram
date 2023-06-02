@@ -1,0 +1,330 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the re.sonny.Tangram package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: re.sonny.Tangram\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-06-02 19:50+0530\n"
+"PO-Revision-Date: 2023-06-02 19:50+0530\n"
+"Last-Translator: Pyhon Plumber <mario.yellow.bea@proton.me>\n"
+"Language-Team: Sinhala <https://hosted.weblate.org/projects/tangram/tangram/si/>\n"
+"Language: si\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 4.12.1-dev\n"
+
+#: data/appdata/re.sonny.Tangram.metainfo.xml:5 data/re.sonny.Tangram.desktop:3
+msgid "Tangram"
+msgstr "Tangram"
+
+#: data/appdata/re.sonny.Tangram.metainfo.xml:6
+msgid "Sonny Piers"
+msgstr "Sonny Piers"
+
+#: data/appdata/re.sonny.Tangram.metainfo.xml:10
+#: data/re.sonny.Tangram.desktop:4
+msgid "Browser for your pinned tabs"
+msgstr "ඔබගේ ඇමුණුම් ටැබ් සඳහා බ්‍රවුසරය"
+
+#: data/appdata/re.sonny.Tangram.metainfo.xml:13
+msgid "Tangram is a new kind of browser. It is designed to organize and run your Web applications. Each tab is persistent and independent. You can set multiple tabs with different accounts for the same application."
+msgstr "ටැන්ග්‍රම් යනු නව බ්‍රවුසරයකි. එය ඔබගේ වෙබ් යෙදුම් සංවිධානය කිරීමට සහ ධාවනය කිරීමට සැලසුම් කර ඇත. සෑම ටැබයක්ම ස්ථීර සහ ස්වාධීන වේ. ඔබට එකම යෙදුම සඳහා විවිධ ගිණුම් සහිත ටැබ් කිහිපයක් සැකසිය හැක."
+
+#: data/appdata/re.sonny.Tangram.metainfo.xml:17
+msgid "Common use cases:"
+msgstr "පොදු භාවිත අවස්ථා:"
+
+#: data/appdata/re.sonny.Tangram.metainfo.xml:20
+msgid "Stay up to date with your favorite communities; Mastodon, Twitter, ..."
+msgstr "ඔබේ ප්‍රියතම ප්‍රජාවන් සමඟ යාවත්කාලීනව සිටින්න; Mastodon, Twitter, ..."
+
+#: data/appdata/re.sonny.Tangram.metainfo.xml:22
+msgid "Merge all these chat applications into one; WhatsApp, Messenger, Telegram, ..."
+msgstr "මෙම සියලු කතාබස් යෙදුම් එකකට ඒකාබද්ධ කරන්න; WhatsApp, Messenger, Telegram, ..."
+
+#: data/appdata/re.sonny.Tangram.metainfo.xml:24
+msgid "Group your organization tools under one application; EMail, Calendar, ..."
+msgstr "එක් යෙදුමක් යටතේ ඔබේ ආයතනික මෙවලම් කණ්ඩායම් කරන්න; ඊමේල්, දින දර්ශනය, ..."
+
+#: data/appdata/re.sonny.Tangram.metainfo.xml:25
+msgid "One-stop for multiple sources of documentation or information"
+msgstr "ලේඛන හෝ තොරතුරු බහුවිධ මූලාශ්‍ර සඳහා එක්-නැවතුම්"
+
+#: data/appdata/re.sonny.Tangram.metainfo.xml:42
+msgid "Notifications priority is normal instead of urgent by default"
+msgstr "පෙරනිමියෙන් හදිසි වෙනුවට දැනුම්දීම් ප්‍රමුඛතාවය සාමාන්‍ය වේ"
+
+#: data/appdata/re.sonny.Tangram.metainfo.xml:43
+msgid "Add a per-tab setting to change notifications priority"
+msgstr "දැනුම්දීම් ප්‍රමුඛතාව වෙනස් කිරීමට ටැබ් එකකට සැකසීමක් එක් කරන්න"
+
+#: data/appdata/re.sonny.Tangram.metainfo.xml:44
+msgid "Fix authentication on many popular websites"
+msgstr "බොහෝ ජනප්‍රිය වෙබ් අඩවි වල සත්‍යාපනය නිවැරදි කරන්න"
+
+#: data/appdata/re.sonny.Tangram.metainfo.xml:45
+msgid "Fix Cancel button in tab settings dialog"
+msgstr "ටැබ් සැකසුම් සංවාදයේ අවලංගු බොත්තම සවි කරන්න"
+
+#: data/appdata/re.sonny.Tangram.metainfo.xml:46
+msgid "Use middle-click or Ctrl+click to open links in the browser"
+msgstr "බ්‍රවුසරයේ සබැඳි විවෘත කිරීමට මැද ක්ලික් හෝ Ctrl+click භාවිතා කරන්න"
+
+#: data/appdata/re.sonny.Tangram.metainfo.xml:54
+msgid "Fix window title"
+msgstr "කවුළු මාතෘකාව නිවැරදි කරන්න"
+
+#: data/appdata/re.sonny.Tangram.metainfo.xml:55
+msgid "Update GNOME runtime to 41"
+msgstr "GNOME ධාවන කාලය 41 දක්වා යාවත්කාලීන කරන්න"
+
+#: data/appdata/re.sonny.Tangram.metainfo.xml:64
+msgid "Fix an issue preventing some sites such as Twitter or Facebook from being added."
+msgstr "Twitter හෝ Facebook වැනි සමහර වෙබ් අඩවි එකතු කිරීම වැළැක්වීමේ ගැටලුවක් නිරාකරණය කරන්න."
+
+#: data/appdata/re.sonny.Tangram.metainfo.xml:65
+msgid "Update GNOME runtime to 3.38"
+msgstr "GNOME ධාවන කාලය 3.38 වෙත යාවත්කාලීන කරන්න"
+
+#: data/appdata/re.sonny.Tangram.metainfo.xml:73
+msgid "Enable spell checking"
+msgstr "අක්ෂර වින්යාස පරීක්ෂාව සක්රීය කරන්න"
+
+#: data/appdata/re.sonny.Tangram.metainfo.xml:74
+msgid "Customizable user-agent per instance"
+msgstr "එක් අවස්ථාවක අභිරුචිකරණය කළ හැකි පරිශීලක නියෝජිතයා"
+
+#: data/appdata/re.sonny.Tangram.metainfo.xml:75
+msgid "New project icon/logo"
+msgstr "නව ව්‍යාපෘති නිරූපකය/ලාංඡනය"
+
+#: data/appdata/re.sonny.Tangram.metainfo.xml:76
+msgid "New tab background color respects dark mode"
+msgstr "නව ටැබ් පසුබිම් වර්ණය අඳුරු මාදිලියට ගරු කරයි"
+
+#: data/appdata/re.sonny.Tangram.metainfo.xml:84
+msgid "Add support for downloading files"
+msgstr "ගොනු බාගත කිරීම සඳහා සහය එක් කරන්න"
+
+#: data/appdata/re.sonny.Tangram.metainfo.xml:85
+msgid "Add home button"
+msgstr "මුල් පිටුව බොත්තම එක් කරන්න"
+
+#: data/appdata/re.sonny.Tangram.metainfo.xml:86
+msgid "Better desktop integration"
+msgstr "වඩා හොඳ ඩෙස්ක්ටොප් ඒකාබද්ධ කිරීම"
+
+#: data/appdata/re.sonny.Tangram.metainfo.xml:87
+msgid "Fix the main window becoming tiny when unmaximizing"
+msgstr "උපරිමය ඉවත් කිරීමේදී ප්‍රධාන කවුළුව කුඩා වීම නිවැරදි කරන්න"
+
+#: data/appdata/re.sonny.Tangram.metainfo.xml:88
+msgid "Enable touchpad/touchscreen swipe navigation gestures"
+msgstr "touchpad/touchscreen ස්වයිප් සංචාලන අභිනයන් සබල කරන්න"
+
+#: data/appdata/re.sonny.Tangram.metainfo.xml:96
+msgid "Better notifications handling"
+msgstr "වඩා හොඳ දැනුම්දීම් හැසිරවීම"
+
+#: data/appdata/re.sonny.Tangram.metainfo.xml:97
+msgid "Improved web compatibility and performances"
+msgstr "වැඩිදියුණු කළ වෙබ් ගැළපුම සහ කාර්ය සාධනය"
+
+#: data/appdata/re.sonny.Tangram.metainfo.xml:99
+msgid "Tangram now works properly on Flatpak 1.0 (Linux Mint, Ubuntu 18.04, ...)."
+msgstr "Tangram දැන් Flatpak 1.0 (Linux Mint, Ubuntu 18.04, ...) මත නිසි ලෙස ක්‍රියා කරයි."
+
+#: data/re.sonny.Tangram.desktop:13
+msgid "Franz;Ferdi;Rambox;Wavebox;Station;"
+msgstr "Franz;Ferdi;Rambox;Wavebox;Station;"
+
+#: data/re.sonny.Tangram.gschema.xml:22 data/menu.ui:8
+msgid "Tabs position"
+msgstr "ටැබ් පිහිටීම"
+
+#: data/re.sonny.Tangram.gschema.xml:23
+msgid "Sets the position of the tabs"
+msgstr "ටැබ් වල පිහිටීම සකසයි"
+
+#: data/re.sonny.Tangram.gschema.xml:28
+msgid "Window width"
+msgstr "කවුළුව පළල"
+
+#: data/re.sonny.Tangram.gschema.xml:29
+msgid "Width of the window"
+msgstr "කවුළුවේ පළල"
+
+#: data/re.sonny.Tangram.gschema.xml:34
+msgid "Window height"
+msgstr "කවුළුව උස"
+
+#: data/re.sonny.Tangram.gschema.xml:35
+msgid "Height of the window"
+msgstr "කවුළුවේ උස"
+
+#: data/re.sonny.Tangram.gschema.xml:40
+msgid "Window maximized"
+msgstr ""
+
+#: data/re.sonny.Tangram.gschema.xml:41
+msgid "Weither the window is maximized"
+msgstr "කවුළුව උපරිම කරන ලදී"
+
+#: data/re.sonny.Tangram.gschema.xml:46
+msgid "Instances"
+msgstr "අවස්ථා"
+
+#: data/re.sonny.Tangram.gschema.xml:48
+msgid "Identifiers of instances to be found in /re/sonny/Tangram/instances/"
+msgstr "/re/sonny/Tangram/instances/ හි සොයා ගත යුතු අවස්ථා හඳුනාගැනීම්"
+
+#: data/re.sonny.Tangram.gschema.xml:55 src/instanceDialog.ui:29
+msgid "Name"
+msgstr "නම"
+
+#: data/re.sonny.Tangram.gschema.xml:56
+msgid "Name to display"
+msgstr "ප්රදර්ශනය කිරීමට නම"
+
+#: data/re.sonny.Tangram.gschema.xml:60 src/instanceDialog.ui:43
+msgid "URL"
+msgstr "URL"
+
+#: data/re.sonny.Tangram.gschema.xml:61
+msgid "Start URL"
+msgstr "URL ආරම්භ කරන්න"
+
+#: data/re.sonny.Tangram.gschema.xml:65 src/instanceDialog.ui:79
+msgid "User agent"
+msgstr "User-Agent"
+
+#: data/re.sonny.Tangram.gschema.xml:67
+msgid "String that will be used as user agent, to identify the browser to the web servers."
+msgstr "වෙබ් සේවාදායකයන් වෙත බ්‍රවුසරය හඳුනා ගැනීමට, පරිශීලක නියෝජිතයා ලෙස භාවිත කෙරෙන තන්තුව."
+
+#: data/re.sonny.Tangram.gschema.xml:74 src/instanceDialog.ui:59
+msgid "Notifications priority"
+msgstr "දැනුම්දීම් ප්‍රමුඛතාවය"
+
+#: data/re.sonny.Tangram.gschema.xml:75
+msgid "Sets the priority of notifications"
+msgstr "දැනුම්දීම් වල ප්‍රමුඛතාවය සකසයි"
+
+#: data/menu.ui:11
+msgid "Top"
+msgstr "ඉහල"
+
+#: data/menu.ui:16
+msgid "Left"
+msgstr "වම"
+
+#: data/menu.ui:21
+msgid "Right"
+msgstr "දකුණ"
+
+#: data/menu.ui:26
+msgid "Bottom"
+msgstr "පහළ"
+
+#: data/menu.ui:37
+msgid "Keyboard Shortcuts"
+msgstr "යතුරුපුවරු කෙටිමං"
+
+#: data/menu.ui:41
+msgid "About Tangram"
+msgstr "Tangram ගැන"
+
+#: data/shortcuts.ui:17
+msgctxt "shortcut window"
+msgid "General"
+msgstr "General"
+
+#: data/shortcuts.ui:24
+msgctxt "shortcut window"
+msgid "Go to the next tab"
+msgstr "ඊළඟ ටැබ් එකට යන්න"
+
+#: data/shortcuts.ui:36
+msgctxt "shortcut window"
+msgid "Go to the previous tab"
+msgstr "පෙර පටිත්ත වෙත යන්න"
+
+#: data/shortcuts.ui:48
+msgctxt "shortcut window"
+msgid "Move current tab to the left"
+msgstr "වත්මන් ටැබය වමට ගෙන යන්න"
+
+#: data/shortcuts.ui:60
+msgctxt "shortcut window"
+msgid "Move current tab to the right"
+msgstr "වත්මන් ටැබය දකුණට ගෙන යන්න"
+
+#: data/shortcuts.ui:72
+msgctxt "shortcut window"
+msgid "Quit"
+msgstr "ඉවත්"
+
+#: data/shortcuts.ui:82
+msgctxt "shortcut window"
+msgid "Shortcuts"
+msgstr "කෙටිමං"
+
+#: data/shortcuts.ui:92
+msgctxt "shortcut window"
+msgid "Toggle inspector"
+msgstr "ටොගල් පරීක්ෂක"
+
+#: data/shortcuts.ui:104
+msgctxt "shortcut window"
+msgid "First – Ninth Tab"
+msgstr "පළමු - නවවන ටැබය"
+
+#: data/shortcuts.ui:116
+msgctxt "shortcut window"
+msgid "Navigation"
+msgstr "සංචලනය"
+
+#: data/shortcuts.ui:123
+msgctxt "shortcut window"
+msgid "Go to homepage"
+msgstr "මුල් පිටුවට යන්න"
+
+#: data/shortcuts.ui:133
+msgctxt "shortcut window"
+msgid "Reload current page"
+msgstr "වත්මන් පිටුව නැවත පූරණය කරන්න"
+
+#: data/shortcuts.ui:143
+msgctxt "shortcut window"
+msgid "Reload bypassing cache"
+msgstr "හැඹිලි මඟහැර නැවත පූරණය කරන්න"
+
+#: data/shortcuts.ui:155
+msgctxt "shortcut window"
+msgid "Stop loading current page"
+msgstr "Stop loading current page"
+
+#: data/shortcuts.ui:165 data/shortcuts.ui:198
+msgctxt "shortcut window"
+msgid "Go back to the previous page"
+msgstr "පෙර පිටුවට ආපසු යන්න"
+
+#: data/shortcuts.ui:175 data/shortcuts.ui:210
+msgctxt "shortcut window"
+msgid "Go forward to the next page"
+msgstr "ඊළඟ පිටුවට යන්න"
+
+#: data/shortcuts.ui:185
+msgctxt "shortcut window"
+msgid "Focus the address bar"
+msgstr "ලිපින තීරුව වෙත අවධානය යොමු කරන්න"
+
+#. TRANSLATORS: eg. 'Translator Name <your.email@domain.com>' or 'Translator Name https://website.example'
+#: src/AboutDialog.js:35
+msgid "translator-credits"
+msgstr "Python Plumber <mario.yellow.bea@proton.me>"
