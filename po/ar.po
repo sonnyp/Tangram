@@ -9,7 +9,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-12-27 00:55+0100\n"
 "PO-Revision-Date: 2022-06-12 06:14+0000\n"
-"Last-Translator: fawaz006 <fawaz27000@hotmail.com>\n"
+"Last-Translator: PythonPlumber <mario.yellow.bea@proton.me>\n"
 "Language-Team: Arabic <https://hosted.weblate.org/projects/tangram/tangram/ar/>\n"
 "Language: ar\n"
 "MIME-Version: 1.0\n"
@@ -33,7 +33,7 @@ msgstr "متصفح لعلامات التبويب المثبتة الخاصة ب�
 
 #: data/appdata/re.sonny.Tangram.metainfo.xml:13
 msgid "Tangram is a new kind of browser. It is designed to organize and run your Web applications. Each tab is persistent and independent. You can set multiple tabs with different accounts for the same application."
-msgstr ""
+msgstr "Tangram هو نوع جديد من المتصفحات. إنه مصمم لتنظيم وتشغيل تطبيقات الويب الخاصة بك. كل علامة تبويب ثابتة ومستقلة. يمكنك تعيين عدة علامات تبويب بحسابات مختلفة لنفس التطبيق."
 
 #: data/appdata/re.sonny.Tangram.metainfo.xml:17
 msgid "Common use cases:"
