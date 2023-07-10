@@ -8,15 +8,15 @@ msgstr ""
 "Project-Id-Version: re.sonny.Tangram\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-09-18 16:27+0200\n"
-"PO-Revision-Date: 2023-06-22 19:41+0000\n"
-"Last-Translator: Juliano Dorneles dos Santos <juliano.dorneles@gmail.com>\n"
+"PO-Revision-Date: 2023-07-11 15:52+0000\n"
+"Last-Translator: Vítor Fernandes Almado <vfalmado@gmail.com>\n"
 "Language-Team: Portuguese (Brazil) <https://hosted.weblate.org/projects/tangram/tangram/pt_BR/>\n"
 "Language: pt_BR\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Generator: Weblate 4.18.1\n"
+"X-Generator: Weblate 5.0-dev\n"
 
 #: data/appdata/re.sonny.Tangram.metainfo.xml:5 data/re.sonny.Tangram.desktop:3
 msgid "Tangram"
@@ -247,10 +247,8 @@ msgid "High"
 msgstr "Alto"
 
 #: src/instanceDialog.blp:46
-#, fuzzy
-#| msgid "User agent"
 msgid "Urgent"
-msgstr "Usuário-agente"
+msgstr "Urgente"
 
 #: src/shortcuts.blp:11
 msgctxt "shortcut window"
