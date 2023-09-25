@@ -8,15 +8,15 @@ msgstr ""
 "Project-Id-Version: re.sonny.Tangram\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-09-18 16:27+0200\n"
-"PO-Revision-Date: 2023-01-27 13:36+0000\n"
-"Last-Translator: karohi <weblate@karoshi.xyz>\n"
+"PO-Revision-Date: 2023-09-26 08:02+0000\n"
+"Last-Translator: Vri 🌈 <weblate@vrifox.cc>\n"
 "Language-Team: German <https://hosted.weblate.org/projects/tangram/tangram/de/>\n"
 "Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.16-dev\n"
+"X-Generator: Weblate 5.1-dev\n"
 
 #: data/appdata/re.sonny.Tangram.metainfo.xml:5 data/re.sonny.Tangram.desktop:3
 msgid "Tangram"
@@ -33,7 +33,7 @@ msgstr "Browser für angepinnte Tabs"
 
 #: data/appdata/re.sonny.Tangram.metainfo.xml:13
 msgid "Tangram is a new kind of browser. It is designed to organize and run your Web applications. Each tab is persistent and independent. You can set multiple tabs with different accounts for the same application."
-msgstr "Tangram ist eine neue Art von Browser. Tangram ist designed für Web-Anwendungen. Jeder Tab ist konsistent und unabhängig von den Anderen. Du kannst mehrere Tabs mit unterschiedlichen Accounts des gleichen Dienstes verwenden."
+msgstr "Tangram ist eine neue Art von Browser. Tangram ist designt für Web-Anwendungen. Jeder Tab ist konsistent und unabhängig von den Anderen. Du kannst mehrere Tabs mit unterschiedlichen Accounts des gleichen Dienstes verwenden."
 
 #: data/appdata/re.sonny.Tangram.metainfo.xml:17
 msgid "Common use cases:"
@@ -41,15 +41,15 @@ msgstr "Anwendungsbeispiele:"
 
 #: data/appdata/re.sonny.Tangram.metainfo.xml:20
 msgid "Stay up to date with your favorite communities; Mastodon, Twitter, ..."
-msgstr "Bleib auf dem Laufenden mit deinen Lieblings-Communities: Mastodon, Twitter, ..."
+msgstr "Bleib auf dem Laufenden mit deinen Lieblings-Communitys: Mastodon, Twitter …"
 
 #: data/appdata/re.sonny.Tangram.metainfo.xml:22
 msgid "Merge all these chat applications into one; WhatsApp, Messenger, Telegram, ..."
-msgstr "Vereine alle deine Chat-Anwendungen in einer: WhatsApp, Messenger, Telegram, ..."
+msgstr "Vereine alle deine Chat-Anwendungen in einer: WhatsApp, Messenger, Telegram …"
 
 #: data/appdata/re.sonny.Tangram.metainfo.xml:24
 msgid "Group your organization tools under one application; EMail, Calendar, ..."
-msgstr "Gruppiere deine Dienste in einer Anwendung: E-Mail, Kalender, ..."
+msgstr "Gruppiere deine Dienste in einer Anwendung: E-Mail, Kalender …"
 
 #: data/appdata/re.sonny.Tangram.metainfo.xml:25
 msgid "One-stop for multiple sources of documentation or information"
@@ -73,7 +73,7 @@ msgstr "Die Standardpriorität für Benachrichtigungen ist normal, nicht dringen
 
 #: data/appdata/re.sonny.Tangram.metainfo.xml:61
 msgid "Add a per-tab setting to change notifications priority"
-msgstr "Prorität der Benachrichtigungen pro Tab einstellen"
+msgstr "Priorität der Benachrichtigungen pro Tab einstellen"
 
 #: data/appdata/re.sonny.Tangram.metainfo.xml:62
 msgid "Fix authentication on many popular websites"
@@ -149,7 +149,7 @@ msgstr "Web-Kompatibilität und Leistung verbessert"
 
 #: data/appdata/re.sonny.Tangram.metainfo.xml:117
 msgid "Tangram now works properly on Flatpak 1.0 (Linux Mint, Ubuntu 18.04, ...)"
-msgstr "Tangram funktioniert jetzt korrekt mit Flatpak 1.0 (Linux Mint, Ubuntu 18.04, ...)"
+msgstr "Tangram funktioniert jetzt korrekt mit Flatpak 1.0 (Linux Mint, Ubuntu 18.04 …)"
 
 #: data/re.sonny.Tangram.desktop:13
 msgid "Franz;Ferdi;Rambox;Wavebox;Station;"
