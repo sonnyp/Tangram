@@ -8,19 +8,19 @@ msgstr ""
 "Project-Id-Version: re.sonny.Tangram\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-09-18 16:27+0200\n"
-"PO-Revision-Date: 2023-01-27 13:36+0000\n"
-"Last-Translator: Artem Vorotnikov <artem@vorotnikov.me>\n"
+"PO-Revision-Date: 2023-09-30 15:04+0000\n"
+"Last-Translator: Сергей <asvmail.as@gmail.com>\n"
 "Language-Team: Russian <https://hosted.weblate.org/projects/tangram/tangram/ru/>\n"
 "Language: ru\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
-"X-Generator: Weblate 4.16-dev\n"
+"X-Generator: Weblate 5.1-dev\n"
 
 #: data/appdata/re.sonny.Tangram.metainfo.xml:5 data/re.sonny.Tangram.desktop:3
 msgid "Tangram"
-msgstr "Tangram"
+msgstr "Танграм"
 
 #: data/appdata/re.sonny.Tangram.metainfo.xml:6
 msgid "Sonny Piers"
@@ -121,7 +121,7 @@ msgstr "Цвет фона новой вкладки соответствует �
 
 #: data/appdata/re.sonny.Tangram.metainfo.xml:102
 msgid "Add support for downloading files"
-msgstr "Цвет фона новой вкладки соответствует темному режиму"
+msgstr "Добавить поддержку загрузки файлов"
 
 #: data/appdata/re.sonny.Tangram.metainfo.xml:103
 msgid "Add home button"
@@ -197,7 +197,7 @@ msgstr "Идентификаторы экземпляров можно найт�
 
 #: data/re.sonny.Tangram.gschema.xml:55 src/instanceDialog.blp:24
 msgid "Name"
-msgstr "Имя"
+msgstr "Название"
 
 #: data/re.sonny.Tangram.gschema.xml:56
 msgid "Name to display"
@@ -230,7 +230,9 @@ msgstr "Устанавливает приоритет уведомлений"
 #. TRANSLATORS: eg. 'Translator Name <your.email@domain.com>' or 'Translator Name https://website.example'
 #: src/AboutDialog.js:35
 msgid "translator-credits"
-msgstr "авторы перевода"
+msgstr ""
+"Fedor <fed777os@gmail.com>, 2022\n"
+"Artem Vorotnikov, 2023"
 
 #: src/instanceDialog.blp:46
 msgid "Normal"
@@ -351,8 +353,8 @@ msgstr "Снизу"
 
 #: src/menu.blp:40
 msgid "Keyboard Shortcuts"
-msgstr "Горячие Клавиши"
+msgstr "Комбинации клавиш"
 
 #: src/menu.blp:45
 msgid "About Tangram"
-msgstr "Про Tangram"
+msgstr "О приложении"
