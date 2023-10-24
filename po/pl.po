@@ -8,15 +8,15 @@ msgstr ""
 "Project-Id-Version: re.sonny.Tangram\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-09-18 16:27+0200\n"
-"PO-Revision-Date: 2023-01-24 12:52+0000\n"
-"Last-Translator: WaldiS <sto@tutanota.de>\n"
+"PO-Revision-Date: 2023-10-25 23:06+0000\n"
+"Last-Translator: Eryk Michalak <gnu.ewm@protonmail.com>\n"
 "Language-Team: Polish <https://hosted.weblate.org/projects/tangram/tangram/pl/>\n"
 "Language: pl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
-"X-Generator: Weblate 4.16-dev\n"
+"X-Generator: Weblate 5.1.1\n"
 
 #: data/appdata/re.sonny.Tangram.metainfo.xml:5 data/re.sonny.Tangram.desktop:3
 msgid "Tangram"
@@ -61,7 +61,7 @@ msgstr "Naprawiono błąd uniemożliwiający uruchomienie Tangramu"
 
 #: data/appdata/re.sonny.Tangram.metainfo.xml:44
 msgid "Reduce the noisiness of logs"
-msgstr ""
+msgstr "Redukuj szum w dzienniku"
 
 #: data/appdata/re.sonny.Tangram.metainfo.xml:52
 msgid "Fix a bug preventing to add new tabs"
@@ -213,7 +213,7 @@ msgstr "Startowy adres URL"
 
 #: data/re.sonny.Tangram.gschema.xml:65 src/instanceDialog.blp:52
 msgid "User agent"
-msgstr ""
+msgstr "User agent"
 
 #: data/re.sonny.Tangram.gschema.xml:67
 msgid "String that will be used as user agent, to identify the browser to the web servers."
@@ -230,7 +230,7 @@ msgstr "Ustawia priorytet powiadomień"
 #. TRANSLATORS: eg. 'Translator Name <your.email@domain.com>' or 'Translator Name https://website.example'
 #: src/AboutDialog.js:35
 msgid "translator-credits"
-msgstr ""
+msgstr "ewm https://ewm.codeberg.page"
 
 #: src/instanceDialog.blp:46
 msgid "Normal"
@@ -246,7 +246,7 @@ msgstr "Wysoki"
 
 #: src/instanceDialog.blp:46
 msgid "Urgent"
-msgstr ""
+msgstr "Pilne"
 
 #: src/shortcuts.blp:11
 msgctxt "shortcut window"
@@ -286,7 +286,7 @@ msgstr "Skróty"
 #: src/shortcuts.blp:44
 msgctxt "shortcut window"
 msgid "Toggle inspector"
-msgstr ""
+msgstr "Przełącz okno inspektora"
 
 #: src/shortcuts.blp:49
 msgctxt "shortcut window"
@@ -329,7 +329,6 @@ msgid "Go forward to the next page"
 msgstr "Przejdź do następnej strony"
 
 #: src/shortcuts.blp:88
-#, fuzzy
 msgctxt "shortcut window"
 msgid "Focus the address bar"
 msgstr "Zaznacz pasek adresu"
@@ -339,17 +338,14 @@ msgid "Top"
 msgstr "Do góry"
 
 #: src/menu.blp:19
-#, fuzzy
 msgid "Left"
 msgstr "Lewy"
 
 #: src/menu.blp:25
-#, fuzzy
 msgid "Right"
 msgstr "Prawy"
 
 #: src/menu.blp:31
-#, fuzzy
 msgid "Bottom"
 msgstr "Dół"
 
@@ -358,6 +354,5 @@ msgid "Keyboard Shortcuts"
 msgstr "Skróty klawiszowe"
 
 #: src/menu.blp:45
-#, fuzzy
 msgid "About Tangram"
 msgstr "O Tangramie"
