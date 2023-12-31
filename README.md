@@ -115,7 +115,7 @@ Thank you for your help!
 
 ## Development
 
-Use [GNOME Builder](https://apps.gnome.org/app/org.gnome.Builder/).
+Use [GNOME Builder](https://apps.gnome.org/Builder/).
 
 If you knwo what you are doing - you can run from source locally instead:
 
