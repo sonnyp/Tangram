@@ -8,15 +8,15 @@ msgstr ""
 "Project-Id-Version: re.sonny.Tangram\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-09-18 16:27+0200\n"
-"PO-Revision-Date: 2023-07-11 15:52+0000\n"
-"Last-Translator: Vítor Fernandes Almado <vfalmado@gmail.com>\n"
+"PO-Revision-Date: 2024-01-03 22:11+0000\n"
+"Last-Translator: Filipe Motta <luiz_filipe_motta@hotmail.com>\n"
 "Language-Team: Portuguese (Brazil) <https://hosted.weblate.org/projects/tangram/tangram/pt_BR/>\n"
 "Language: pt_BR\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Generator: Weblate 5.0-dev\n"
+"X-Generator: Weblate 5.4-dev\n"
 
 #: data/appdata/re.sonny.Tangram.metainfo.xml:5 data/re.sonny.Tangram.desktop:3
 msgid "Tangram"
@@ -41,15 +41,15 @@ msgstr "Casos de uso comuns:"
 
 #: data/appdata/re.sonny.Tangram.metainfo.xml:20
 msgid "Stay up to date with your favorite communities; Mastodon, Twitter, ..."
-msgstr "Fique em dia com suas comunidades favoritas; Mastodon, Twitter, ..."
+msgstr "Fique em dia com suas comunidades favoritas: Mastodon, Twitter..."
 
 #: data/appdata/re.sonny.Tangram.metainfo.xml:22
 msgid "Merge all these chat applications into one; WhatsApp, Messenger, Telegram, ..."
-msgstr "Mescle todas essas aplicações de chat em uma só; WhatsApp, Messenger, Telegram, ..."
+msgstr "Una todas estas aplicações de chat em uma só: WhatsApp, Messenger, Telegram..."
 
 #: data/appdata/re.sonny.Tangram.metainfo.xml:24
 msgid "Group your organization tools under one application; EMail, Calendar, ..."
-msgstr "Agrupe suas ferramentas de organização em uma aplicação; Email, Calendário, ..."
+msgstr "Agrupe suas ferramentas de organização em uma só aplicação: e-mail, calendário..."
 
 #: data/appdata/re.sonny.Tangram.metainfo.xml:25
 msgid "One-stop for multiple sources of documentation or information"
@@ -57,19 +57,19 @@ msgstr "Um só lugar para múltiplas fontes de documentação ou informação"
 
 #: data/appdata/re.sonny.Tangram.metainfo.xml:43
 msgid "Fix a bug preventing to start Tangram"
-msgstr "Corrigir um bug que impede a inicialização do Tangram"
+msgstr "Corrigido um bug que impedia a inicialização do Tangram"
 
 #: data/appdata/re.sonny.Tangram.metainfo.xml:44
 msgid "Reduce the noisiness of logs"
-msgstr "Reduzir o ruído dos logs"
+msgstr "Reduzido o ruído nos logs"
 
 #: data/appdata/re.sonny.Tangram.metainfo.xml:52
 msgid "Fix a bug preventing to add new tabs"
-msgstr "Corrigir um bug que impede a adição de novas guias"
+msgstr "Corrigido um bug que impedia a adição de novas abas"
 
 #: data/appdata/re.sonny.Tangram.metainfo.xml:60
 msgid "Notifications priority is normal instead of urgent by default"
-msgstr "A prioridade das notificações é normal ao invés de urgente por padrão"
+msgstr "A prioridade padrão das notificações agora é normal em vez de urgente"
 
 #: data/appdata/re.sonny.Tangram.metainfo.xml:61
 msgid "Add a per-tab setting to change notifications priority"
@@ -77,11 +77,11 @@ msgstr "Adicionada uma configuração por aba para alterar a prioridade das noti
 
 #: data/appdata/re.sonny.Tangram.metainfo.xml:62
 msgid "Fix authentication on many popular websites"
-msgstr "Autenticação em diversos sites populares consertada"
+msgstr "Consertada a autenticação em diversos sites populares"
 
 #: data/appdata/re.sonny.Tangram.metainfo.xml:63
 msgid "Fix Cancel button in tab settings dialog"
-msgstr "Diálogo do botão cancelar nas configurações de aba consertado"
+msgstr "Consertado o botão Cancelar no diálogo das configurações de aba"
 
 #: data/appdata/re.sonny.Tangram.metainfo.xml:64
 msgid "Use middle-click or Ctrl+click to open links in the browser"
@@ -97,7 +97,7 @@ msgstr "Runtime do GNOME atualizado para 41"
 
 #: data/appdata/re.sonny.Tangram.metainfo.xml:82
 msgid "Fix an issue preventing some sites such as Twitter or Facebook from being added."
-msgstr "Consertado um problema que prevenia que sites como o Twitter ou o Facebook fossem adicionados."
+msgstr "Consertado um problema que impedia que sites como o Twitter ou o Facebook fossem adicionados."
 
 #: data/appdata/re.sonny.Tangram.metainfo.xml:83
 msgid "Update GNOME runtime to 3.38"
@@ -105,11 +105,11 @@ msgstr "Runtime do GNOME atualizado para 3.38"
 
 #: data/appdata/re.sonny.Tangram.metainfo.xml:91
 msgid "Enable spell checking"
-msgstr "Habilitar correção ortográfica"
+msgstr "Habilitar verificação ortográfica"
 
 #: data/appdata/re.sonny.Tangram.metainfo.xml:92
 msgid "Customizable user-agent per instance"
-msgstr "Usuário-agente por instância customizável"
+msgstr "Agente de usuário personalizável por instância"
 
 #: data/appdata/re.sonny.Tangram.metainfo.xml:93
 msgid "New project icon/logo"
@@ -125,7 +125,7 @@ msgstr "Adicionado o suporte ao download de arquivos"
 
 #: data/appdata/re.sonny.Tangram.metainfo.xml:103
 msgid "Add home button"
-msgstr "Adicionado o botão home"
+msgstr "Adicionado o botão para a página principal"
 
 #: data/appdata/re.sonny.Tangram.metainfo.xml:104
 msgid "Better desktop integration"
@@ -133,11 +133,11 @@ msgstr "Melhor integração com o desktop"
 
 #: data/appdata/re.sonny.Tangram.metainfo.xml:105
 msgid "Fix the main window becoming tiny when unmaximizing"
-msgstr "Corrigido o erro onde a janela principal ficava minúscula quando desmaximizada"
+msgstr "Corrigido o erro que deixava a janela principal minúscula quando desmaximizada"
 
 #: data/appdata/re.sonny.Tangram.metainfo.xml:106
 msgid "Enable touchpad/touchscreen swipe navigation gestures"
-msgstr "Habilitar o gesto de navegação varrer no touchpad/touchscreen"
+msgstr "Habilitados os gestos de navegação para touchpad/touchscreen"
 
 #: data/appdata/re.sonny.Tangram.metainfo.xml:114
 msgid "Better notifications handling"
@@ -145,11 +145,11 @@ msgstr "Melhor gerenciamento de notificações"
 
 #: data/appdata/re.sonny.Tangram.metainfo.xml:115
 msgid "Improved web compatibility and performances"
-msgstr "Melhoradas a compatibilidade web e sua performance"
+msgstr "Melhoras na compatibilidade web e na performance"
 
 #: data/appdata/re.sonny.Tangram.metainfo.xml:117
 msgid "Tangram now works properly on Flatpak 1.0 (Linux Mint, Ubuntu 18.04, ...)"
-msgstr "Tangram agora funciona propriamente no Flatpak 1.0 (Linux Mint, Ubuntu 18.04, ...)"
+msgstr "Tangram agora funciona apropriadamente no Flatpak 1.0 (Linux Mint, Ubuntu 18.04...)"
 
 #: data/re.sonny.Tangram.desktop:13
 msgid "Franz;Ferdi;Rambox;Wavebox;Station;"
@@ -169,7 +169,7 @@ msgstr "Largura da janela"
 
 #: data/re.sonny.Tangram.gschema.xml:29
 msgid "Width of the window"
-msgstr "Largura da janela"
+msgstr "Qual deve ser a largura da janela"
 
 #: data/re.sonny.Tangram.gschema.xml:34
 msgid "Window height"
@@ -177,17 +177,15 @@ msgstr "Altura da janela"
 
 #: data/re.sonny.Tangram.gschema.xml:35
 msgid "Height of the window"
-msgstr "Altura da janela"
+msgstr "Qual deve ser a altura da janela"
 
 #: data/re.sonny.Tangram.gschema.xml:40
 msgid "Window maximized"
 msgstr "Janela maximizada"
 
 #: data/re.sonny.Tangram.gschema.xml:41
-#, fuzzy
-#| msgid "Weither the window is maximized"
 msgid "Whether the window is maximized"
-msgstr "Se a janela está maximizada"
+msgstr "Se a janela deve ficar maximizada ou não"
 
 #: data/re.sonny.Tangram.gschema.xml:46
 msgid "Instances"
@@ -203,7 +201,7 @@ msgstr "Nome"
 
 #: data/re.sonny.Tangram.gschema.xml:56
 msgid "Name to display"
-msgstr "Nome a exibir"
+msgstr "Nome a ser exibido"
 
 #: data/re.sonny.Tangram.gschema.xml:60 src/instanceDialog.blp:34
 msgid "URL"
@@ -211,15 +209,15 @@ msgstr "URL"
 
 #: data/re.sonny.Tangram.gschema.xml:61
 msgid "Start URL"
-msgstr "Iniciar URL"
+msgstr "URL inicial"
 
 #: data/re.sonny.Tangram.gschema.xml:65 src/instanceDialog.blp:52
 msgid "User agent"
-msgstr "Usuário-agente"
+msgstr "Agente de usuário"
 
 #: data/re.sonny.Tangram.gschema.xml:67
 msgid "String that will be used as user agent, to identify the browser to the web servers."
-msgstr "Texto que irá ser utilizado como usuário-agente para identificar o navegador aos servidores web."
+msgstr "Texto que será utilizado como agente de usuário, para identificar o navegador aos servidores web."
 
 #: data/re.sonny.Tangram.gschema.xml:74 src/instanceDialog.blp:44
 msgid "Notifications priority"
@@ -232,7 +230,9 @@ msgstr "Define a prioridade das notificações"
 #. TRANSLATORS: eg. 'Translator Name <your.email@domain.com>' or 'Translator Name https://website.example'
 #: src/AboutDialog.js:35
 msgid "translator-credits"
-msgstr "Gabriel Gian <gabrielgian@protonmail.com>"
+msgstr ""
+"Gabriel Gian <gabrielgian@protonmail.com>\n"
+"Filipe Motta <luizfilipemotta@gmail.com>"
 
 #: src/instanceDialog.blp:46
 msgid "Normal"
@@ -240,11 +240,11 @@ msgstr "Normal"
 
 #: src/instanceDialog.blp:46
 msgid "Low"
-msgstr "Baixo"
+msgstr "Baixa"
 
 #: src/instanceDialog.blp:46
 msgid "High"
-msgstr "Alto"
+msgstr "Alta"
 
 #: src/instanceDialog.blp:46
 msgid "Urgent"
@@ -258,22 +258,22 @@ msgstr "Geral"
 #: src/shortcuts.blp:14
 msgctxt "shortcut window"
 msgid "Go to the next tab"
-msgstr "Ir à próxima aba"
+msgstr "Ir para a próxima aba"
 
 #: src/shortcuts.blp:19
 msgctxt "shortcut window"
 msgid "Go to the previous tab"
-msgstr "Ir à aba anterior"
+msgstr "Ir para a aba anterior"
 
 #: src/shortcuts.blp:24
 msgctxt "shortcut window"
 msgid "Move current tab to the left"
-msgstr "Mover aba atual à esquerda"
+msgstr "Mover aba atual para a esquerda"
 
 #: src/shortcuts.blp:29
 msgctxt "shortcut window"
 msgid "Move current tab to the right"
-msgstr "Mover aba atual à direita"
+msgstr "Mover aba atual para a direita"
 
 #: src/shortcuts.blp:34
 msgctxt "shortcut window"
@@ -288,12 +288,12 @@ msgstr "Atalhos"
 #: src/shortcuts.blp:44
 msgctxt "shortcut window"
 msgid "Toggle inspector"
-msgstr "Ativar inspetor"
+msgstr "Ativar/Desativar inspetor"
 
 #: src/shortcuts.blp:49
 msgctxt "shortcut window"
 msgid "First – Ninth Tab"
-msgstr "Primeira – nona aba"
+msgstr "Abas de 1 a 9"
 
 #: src/shortcuts.blp:55
 msgctxt "shortcut window"
@@ -303,7 +303,7 @@ msgstr "Navegação"
 #: src/shortcuts.blp:58
 msgctxt "shortcut window"
 msgid "Go to homepage"
-msgstr "Ir à página inicial"
+msgstr "Ir para a página inicial"
 
 #: src/shortcuts.blp:63
 msgctxt "shortcut window"
@@ -318,7 +318,7 @@ msgstr "Recarregar ignorando o cache"
 #: src/shortcuts.blp:73
 msgctxt "shortcut window"
 msgid "Stop loading current page"
-msgstr "Parar de recarregar a página atual"
+msgstr "Parar de carregar a página atual"
 
 #: src/shortcuts.blp:78 src/shortcuts.blp:94
 msgctxt "shortcut window"
@@ -328,12 +328,12 @@ msgstr "Voltar à página anterior"
 #: src/shortcuts.blp:83 src/shortcuts.blp:99
 msgctxt "shortcut window"
 msgid "Go forward to the next page"
-msgstr "Ir à próxima página"
+msgstr "Avançar para a próxima página"
 
 #: src/shortcuts.blp:88
 msgctxt "shortcut window"
 msgid "Focus the address bar"
-msgstr "Focar na barra de endereços"
+msgstr "Focar a barra de endereços"
 
 #: src/menu.blp:13
 msgid "Top"
