@@ -8,15 +8,15 @@ msgstr ""
 "Project-Id-Version: re.sonny.Tangram\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-09-18 16:27+0200\n"
-"PO-Revision-Date: 2022-06-12 06:14+0000\n"
-"Last-Translator: fawaz006 <fawaz27000@hotmail.com>\n"
+"PO-Revision-Date: 2024-01-23 22:01+0000\n"
+"Last-Translator: Ghassan <ghassanelgendyy@gmail.com>\n"
 "Language-Team: Arabic <https://hosted.weblate.org/projects/tangram/tangram/ar/>\n"
 "Language: ar\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 && n%100<=10 ? 3 : n%100>=11 ? 4 : 5;\n"
-"X-Generator: Weblate 4.13-dev\n"
+"X-Generator: Weblate 5.4-dev\n"
 
 #: data/appdata/re.sonny.Tangram.metainfo.xml:5 data/re.sonny.Tangram.desktop:3
 msgid "Tangram"
@@ -33,39 +33,39 @@ msgstr "متصفح لعلامات التبويب المثبتة الخاصة ب�
 
 #: data/appdata/re.sonny.Tangram.metainfo.xml:13
 msgid "Tangram is a new kind of browser. It is designed to organize and run your Web applications. Each tab is persistent and independent. You can set multiple tabs with different accounts for the same application."
-msgstr ""
+msgstr "Tangram هو نوع جديد من المتصفحات. مصمم لتنظيم وتشغيل تطبيقات الويب الخاصة بك. كل علامة تبويب ثابتة ومستقلة. يمكنك تعيين علامات تبويب متعددة بحسابات مختلفة لنفس التطبيق."
 
 #: data/appdata/re.sonny.Tangram.metainfo.xml:17
 msgid "Common use cases:"
-msgstr ""
+msgstr "استخدامات شائعه:"
 
 #: data/appdata/re.sonny.Tangram.metainfo.xml:20
 msgid "Stay up to date with your favorite communities; Mastodon, Twitter, ..."
-msgstr ""
+msgstr "ابق على اطلاع دائم بتطبيقاتك المفضلة. ماستودون ، تويتر ، ..."
 
 #: data/appdata/re.sonny.Tangram.metainfo.xml:22
 msgid "Merge all these chat applications into one; WhatsApp, Messenger, Telegram, ..."
-msgstr ""
+msgstr "ادمج كل تطبيقات الدردشة في تطبيق واحد ؛ واتساب، ماسنجر، تليجرام، ..."
 
 #: data/appdata/re.sonny.Tangram.metainfo.xml:24
 msgid "Group your organization tools under one application; EMail, Calendar, ..."
-msgstr ""
+msgstr "قم بتجميع أدوات مؤسستك تحت تطبيق واحد ؛ البريد الإلكتروني ، التقويم ، ..."
 
 #: data/appdata/re.sonny.Tangram.metainfo.xml:25
 msgid "One-stop for multiple sources of documentation or information"
-msgstr ""
+msgstr "مكان واحد لمصادر متعددة للوثائق أو المعلومات"
 
 #: data/appdata/re.sonny.Tangram.metainfo.xml:43
 msgid "Fix a bug preventing to start Tangram"
-msgstr ""
+msgstr "إصلاح خطأ في بدء Tangram"
 
 #: data/appdata/re.sonny.Tangram.metainfo.xml:44
 msgid "Reduce the noisiness of logs"
-msgstr ""
+msgstr "تقليل ضوضاء الlogs"
 
 #: data/appdata/re.sonny.Tangram.metainfo.xml:52
 msgid "Fix a bug preventing to add new tabs"
-msgstr ""
+msgstr "إصلاح خطأ منع إضافة علامات تبويب جديدة"
 
 #: data/appdata/re.sonny.Tangram.metainfo.xml:60
 msgid "Notifications priority is normal instead of urgent by default"
