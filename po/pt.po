@@ -8,15 +8,15 @@ msgstr ""
 "Project-Id-Version: re.sonny.Tangram\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-09-18 16:27+0200\n"
-"PO-Revision-Date: 2023-02-26 11:39+0000\n"
-"Last-Translator: ssantos <ssantos@web.de>\n"
+"PO-Revision-Date: 2024-03-02 16:29+0000\n"
+"Last-Translator: VirtualLusamine <beatrizloveuwu@gmail.com>\n"
 "Language-Team: Portuguese <https://hosted.weblate.org/projects/tangram/tangram/pt/>\n"
 "Language: pt\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Generator: Weblate 4.16-dev\n"
+"X-Generator: Weblate 5.5-dev\n"
 
 #: data/appdata/re.sonny.Tangram.metainfo.xml:5 data/re.sonny.Tangram.desktop:3
 msgid "Tangram"
@@ -184,10 +184,8 @@ msgid "Window maximized"
 msgstr "Janela maximizada"
 
 #: data/re.sonny.Tangram.gschema.xml:41
-#, fuzzy
-#| msgid "Weither the window is maximized"
 msgid "Whether the window is maximized"
-msgstr "Se a janela está maximizada"
+msgstr "Caso a janela está maximizada"
 
 #: data/re.sonny.Tangram.gschema.xml:46
 msgid "Instances"
@@ -247,10 +245,8 @@ msgid "High"
 msgstr "Alto"
 
 #: src/instanceDialog.blp:46
-#, fuzzy
-#| msgid "User agent"
 msgid "Urgent"
-msgstr "Agente de utilizador"
+msgstr "Urgente"
 
 #: src/shortcuts.blp:11
 msgctxt "shortcut window"
