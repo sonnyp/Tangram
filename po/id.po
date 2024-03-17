@@ -8,15 +8,15 @@ msgstr ""
 "Project-Id-Version: re.sonny.Tangram\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-09-18 16:27+0200\n"
-"PO-Revision-Date: 2022-02-26 11:58+0000\n"
-"Last-Translator: yanuz93 <yanuzpurnomo@gmail.com>\n"
+"PO-Revision-Date: 2024-03-18 02:01+0000\n"
+"Last-Translator: Reza Almanda <rezaalmanda27@gmail.com>\n"
 "Language-Team: Indonesian <https://hosted.weblate.org/projects/tangram/tangram/id/>\n"
 "Language: id\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Weblate 4.11.1-dev\n"
+"X-Generator: Weblate 5.5-dev\n"
 
 #: data/appdata/re.sonny.Tangram.metainfo.xml:5 data/re.sonny.Tangram.desktop:3
 msgid "Tangram"
@@ -45,35 +45,35 @@ msgstr "Dapatkan kabar terkini dari komunitas kesukaanmu; Mastodon, Twitter, ...
 
 #: data/appdata/re.sonny.Tangram.metainfo.xml:22
 msgid "Merge all these chat applications into one; WhatsApp, Messenger, Telegram, ..."
-msgstr ""
+msgstr "Gabungkan semua aplikasi chatting ini menjadi satu; WhatsApp, Messenger, Telegram, ..."
 
 #: data/appdata/re.sonny.Tangram.metainfo.xml:24
 msgid "Group your organization tools under one application; EMail, Calendar, ..."
-msgstr ""
+msgstr "Kelompokkan alat organisasi Anda dalam satu aplikasi; Email, Kalender, ..."
 
 #: data/appdata/re.sonny.Tangram.metainfo.xml:25
 msgid "One-stop for multiple sources of documentation or information"
-msgstr ""
+msgstr "Satu atap untuk berbagai sumber dokumentasi atau informasi"
 
 #: data/appdata/re.sonny.Tangram.metainfo.xml:43
 msgid "Fix a bug preventing to start Tangram"
-msgstr ""
+msgstr "Perbaikan bug yang mencegah untuk memulai Tangram"
 
 #: data/appdata/re.sonny.Tangram.metainfo.xml:44
 msgid "Reduce the noisiness of logs"
-msgstr ""
+msgstr "Mengurangi suara bising logs"
 
 #: data/appdata/re.sonny.Tangram.metainfo.xml:52
 msgid "Fix a bug preventing to add new tabs"
-msgstr ""
+msgstr "Perbaikan bug yang mencegah penambahan tab baru"
 
 #: data/appdata/re.sonny.Tangram.metainfo.xml:60
 msgid "Notifications priority is normal instead of urgent by default"
-msgstr ""
+msgstr "Prioritas notifikasi adalah normal, bukan mendesak secara default"
 
 #: data/appdata/re.sonny.Tangram.metainfo.xml:61
 msgid "Add a per-tab setting to change notifications priority"
-msgstr ""
+msgstr "Menambahkan pengaturan per tab untuk mengubah prioritas notifikasi"
 
 #: data/appdata/re.sonny.Tangram.metainfo.xml:62
 msgid "Fix authentication on many popular websites"
@@ -81,11 +81,11 @@ msgstr "Memperbaiki otentikasi pada banyak situs web populer"
 
 #: data/appdata/re.sonny.Tangram.metainfo.xml:63
 msgid "Fix Cancel button in tab settings dialog"
-msgstr ""
+msgstr "Perbaikan tombol Batal dalam dialog pengaturan tab"
 
 #: data/appdata/re.sonny.Tangram.metainfo.xml:64
 msgid "Use middle-click or Ctrl+click to open links in the browser"
-msgstr ""
+msgstr "Gunakan klik tengah atau Ctrl+klik untuk membuka tautan di browser"
 
 #: data/appdata/re.sonny.Tangram.metainfo.xml:72
 msgid "Fix window title"
@@ -109,7 +109,7 @@ msgstr "Mengaktifkan pemeriksaan ejaan"
 
 #: data/appdata/re.sonny.Tangram.metainfo.xml:92
 msgid "Customizable user-agent per instance"
-msgstr ""
+msgstr "user-agent yang dapat disesuaikan per instance"
 
 #: data/appdata/re.sonny.Tangram.metainfo.xml:93
 msgid "New project icon/logo"
