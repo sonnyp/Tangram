@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: re.sonny.Tangram\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-09-18 16:27+0200\n"
-"PO-Revision-Date: 2024-03-02 16:29+0000\n"
+"PO-Revision-Date: 2024-03-28 20:01+0000\n"
 "Last-Translator: Scrambled777 <weblate.scrambled777@simplelogin.com>\n"
 "Language-Team: Hindi <https://hosted.weblate.org/projects/tangram/tangram/hi/>\n"
 "Language: hi\n"
@@ -49,7 +49,7 @@ msgstr "इन सभी चैट एप्लिकेशन को एक म
 
 #: data/appdata/re.sonny.Tangram.metainfo.xml:24
 msgid "Group your organization tools under one application; EMail, Calendar, ..."
-msgstr "अपने संगठन के टूल को एक एप्लिकेशन के अंतर्गत समूहित करें; EMail, Calendar, …"
+msgstr "अपने संगठन के टूल को एक एप्लिकेशन के अंतर्गत समूहित करें; ईमेल, कैलेंडर, …"
 
 #: data/appdata/re.sonny.Tangram.metainfo.xml:25
 msgid "One-stop for multiple sources of documentation or information"
@@ -73,7 +73,7 @@ msgstr "अधिसूचना प्राथमिकता डिफ़ॉ�
 
 #: data/appdata/re.sonny.Tangram.metainfo.xml:61
 msgid "Add a per-tab setting to change notifications priority"
-msgstr "अधिसूचना प्राथमिकता बदलने के लिए प्रति-टैब सेटिंग जोड़ता है"
+msgstr "अधिसूचना प्राथमिकता बदलने के लिए प्रति-टैब सेटिंग जोड़ा गया"
 
 #: data/appdata/re.sonny.Tangram.metainfo.xml:62
 msgid "Fix authentication on many popular websites"
@@ -121,11 +121,11 @@ msgstr "नए टैब का पृष्ठभूमि रंग डार�
 
 #: data/appdata/re.sonny.Tangram.metainfo.xml:102
 msgid "Add support for downloading files"
-msgstr "फ़ाइलें डाउनलोड करने के लिए समर्थन जोड़ता है"
+msgstr "फ़ाइलें डाउनलोड करने के लिए समर्थन जोड़ा गया"
 
 #: data/appdata/re.sonny.Tangram.metainfo.xml:103
 msgid "Add home button"
-msgstr "होम बटन जोड़ता है"
+msgstr "होम बटन जोड़ा गया"
 
 #: data/appdata/re.sonny.Tangram.metainfo.xml:104
 msgid "Better desktop integration"
@@ -137,7 +137,7 @@ msgstr "अनमैक्सिमाइज़ करने पर मुख्
 
 #: data/appdata/re.sonny.Tangram.metainfo.xml:106
 msgid "Enable touchpad/touchscreen swipe navigation gestures"
-msgstr "टचपैड/टचस्क्रीन स्वाइप नेविगेशन जेस्चर सक्षम करता है"
+msgstr "टचपैड/टचस्क्रीन स्वाइप नेविगेशन जेस्चर सक्षम किया गया"
 
 #: data/appdata/re.sonny.Tangram.metainfo.xml:114
 msgid "Better notifications handling"
@@ -173,7 +173,7 @@ msgstr "विंडो की चौड़ाई"
 
 #: data/re.sonny.Tangram.gschema.xml:34
 msgid "Window height"
-msgstr "विंडो की ऊंचाई"
+msgstr "विंडो ऊंचाई"
 
 #: data/re.sonny.Tangram.gschema.xml:35
 msgid "Height of the window"
@@ -189,7 +189,7 @@ msgstr "क्या विंडो अधिकतम है"
 
 #: data/re.sonny.Tangram.gschema.xml:46
 msgid "Instances"
-msgstr "उदाहरण"
+msgstr "इंस्टेंस"
 
 #: data/re.sonny.Tangram.gschema.xml:48
 msgid "Identifiers of instances to be found in /re/sonny/Tangram/instances/"
@@ -266,12 +266,12 @@ msgstr "पिछले टैब पर जाएँ"
 #: src/shortcuts.blp:24
 msgctxt "shortcut window"
 msgid "Move current tab to the left"
-msgstr "वर्तमान टैब को बाईं ओर ले जाएं"
+msgstr "वर्तमान टैब को बाएं ले जाएं"
 
 #: src/shortcuts.blp:29
 msgctxt "shortcut window"
 msgid "Move current tab to the right"
-msgstr "वर्तमान टैब को दाईं ओर ले जाएं"
+msgstr "वर्तमान टैब को दाएं ले जाएं"
 
 #: src/shortcuts.blp:34
 msgctxt "shortcut window"
@@ -286,7 +286,7 @@ msgstr "शॉर्टकट"
 #: src/shortcuts.blp:44
 msgctxt "shortcut window"
 msgid "Toggle inspector"
-msgstr "निरीक्षक को टॉगल करें"
+msgstr "निरीक्षक टॉगल करें"
 
 #: src/shortcuts.blp:49
 msgctxt "shortcut window"
