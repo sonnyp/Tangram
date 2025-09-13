@@ -25,7 +25,7 @@
     </ul>
   </description>
   <url type="homepage">https://tangram.sonny.re</url>
-  <url type="bugtracker">https://tangram.sonny.re/feedback</url>
+  <url type="bugtracker">https://github.com/sonnyp/Tangram/issues</url>
   <url type="donation">https://tangram.sonny.re/donate</url>
   <url type="translate">https://hosted.weblate.org/engage/tangram/</url>
   <url type="vcs-browser">https://tangram.sonny.re/source</url>
