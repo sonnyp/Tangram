@@ -8,350 +8,351 @@ msgstr ""
 "Project-Id-Version: re.sonny.Tangram\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-09-18 16:27+0200\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: Automatically generated\n"
-"Language-Team: none\n"
+"PO-Revision-Date: 2026-01-31 18:01+0000\n"
+"Last-Translator: Baurzhan Muftakhidinov <baurthefirst@gmail.com>\n"
+"Language-Team: Kazakh <https://hosted.weblate.org/projects/tangram/tangram/kk/>\n"
 "Language: kk\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 5.16-dev\n"
 
 #: data/appdata/re.sonny.Tangram.metainfo.xml:5 data/re.sonny.Tangram.desktop:3
 msgid "Tangram"
-msgstr ""
+msgstr "Tangram"
 
 #: data/appdata/re.sonny.Tangram.metainfo.xml:6
 msgid "Sonny Piers"
-msgstr ""
+msgstr "Sonny Piers"
 
 #: data/appdata/re.sonny.Tangram.metainfo.xml:10
 #: data/re.sonny.Tangram.desktop:4
 msgid "Browser for your pinned tabs"
-msgstr ""
+msgstr "Бекітілген беттеріңізге арналған браузер"
 
 #: data/appdata/re.sonny.Tangram.metainfo.xml:13
 msgid "Tangram is a new kind of browser. It is designed to organize and run your Web applications. Each tab is persistent and independent. You can set multiple tabs with different accounts for the same application."
-msgstr ""
+msgstr "Tangram — браузердің жаңа түрі. Ол веб-қолданбаларыңызды реттеуге және іске қосуға арналған. Әрбір бет тұрақты және тәуелсіз. Бір қолданба үшін әртүрлі тіркелгілері бар бірнеше бетті баптауға болады."
 
 #: data/appdata/re.sonny.Tangram.metainfo.xml:17
 msgid "Common use cases:"
-msgstr ""
+msgstr "Жиі қолданылатын жағдайлар:"
 
 #: data/appdata/re.sonny.Tangram.metainfo.xml:20
 msgid "Stay up to date with your favorite communities; Mastodon, Twitter, ..."
-msgstr ""
+msgstr "Таңдаулы қауымдастықтарыңыздан хабардар болыңыз; Mastodon, Twitter, ..."
 
 #: data/appdata/re.sonny.Tangram.metainfo.xml:22
 msgid "Merge all these chat applications into one; WhatsApp, Messenger, Telegram, ..."
-msgstr ""
+msgstr "Осы чат қолданбаларының барлығын біреуге біріктіріңіз; WhatsApp, Messenger, Telegram, ..."
 
 #: data/appdata/re.sonny.Tangram.metainfo.xml:24
 msgid "Group your organization tools under one application; EMail, Calendar, ..."
-msgstr ""
+msgstr "Ұйымдастыру саймандарын бір қолданбаға топтастырыңыз; Эл. пошта, Күнтізбе, ..."
 
 #: data/appdata/re.sonny.Tangram.metainfo.xml:25
 msgid "One-stop for multiple sources of documentation or information"
-msgstr ""
+msgstr "Бірнеше құжаттама немесе ақпарат көздеріне арналған бірыңғай орын"
 
 #: data/appdata/re.sonny.Tangram.metainfo.xml:43
 msgid "Fix a bug preventing to start Tangram"
-msgstr ""
+msgstr "Tangram іске қосылуына кедергі болатын қатені түзету"
 
 #: data/appdata/re.sonny.Tangram.metainfo.xml:44
 msgid "Reduce the noisiness of logs"
-msgstr ""
+msgstr "Журналдардың артық хабарламаларын азайту"
 
 #: data/appdata/re.sonny.Tangram.metainfo.xml:52
 msgid "Fix a bug preventing to add new tabs"
-msgstr ""
+msgstr "Жаңа беттерді қосуға кедергі болатын қатені түзету"
 
 #: data/appdata/re.sonny.Tangram.metainfo.xml:60
 msgid "Notifications priority is normal instead of urgent by default"
-msgstr ""
+msgstr "Хабарламалар басымдылығы әдепкі бойынша жедел емес, қалыпты болып табылады"
 
 #: data/appdata/re.sonny.Tangram.metainfo.xml:61
 msgid "Add a per-tab setting to change notifications priority"
-msgstr ""
+msgstr "Хабарламалар басымдылығын өзгерту үшін әр бетке арналған баптауды қосу"
 
 #: data/appdata/re.sonny.Tangram.metainfo.xml:62
 msgid "Fix authentication on many popular websites"
-msgstr ""
+msgstr "Көптеген танымал веб-сайттардағы аутентификацияны түзету"
 
 #: data/appdata/re.sonny.Tangram.metainfo.xml:63
 msgid "Fix Cancel button in tab settings dialog"
-msgstr ""
+msgstr "Бет баптаулары сұхбат терезесіндегі \"Бас тарту\" батырмасын түзету"
 
 #: data/appdata/re.sonny.Tangram.metainfo.xml:64
 msgid "Use middle-click or Ctrl+click to open links in the browser"
-msgstr ""
+msgstr "Браузерде сілтемелерді ашу үшін ортаңғы шертуді немесе Ctrl+шертуді пайдаланыңыз"
 
 #: data/appdata/re.sonny.Tangram.metainfo.xml:72
 msgid "Fix window title"
-msgstr ""
+msgstr "Терезе тақырыбын түзету"
 
 #: data/appdata/re.sonny.Tangram.metainfo.xml:73
 msgid "Update GNOME runtime to 41"
-msgstr ""
+msgstr "GNOME орындалу ортасын 41 нұсқасына жаңарту"
 
 #: data/appdata/re.sonny.Tangram.metainfo.xml:82
 msgid "Fix an issue preventing some sites such as Twitter or Facebook from being added."
-msgstr ""
+msgstr "Twitter немесе Facebook сияқты кейбір сайттардың қосылуына кедергі болатын мәселені түзету."
 
 #: data/appdata/re.sonny.Tangram.metainfo.xml:83
 msgid "Update GNOME runtime to 3.38"
-msgstr ""
+msgstr "GNOME орындалу ортасын 3.38 нұсқасына жаңарту"
 
 #: data/appdata/re.sonny.Tangram.metainfo.xml:91
 msgid "Enable spell checking"
-msgstr ""
+msgstr "Емлені тексеруді іске қосу"
 
 #: data/appdata/re.sonny.Tangram.metainfo.xml:92
 msgid "Customizable user-agent per instance"
-msgstr ""
+msgstr "Әр дана үшін теңшелетін user-agent"
 
 #: data/appdata/re.sonny.Tangram.metainfo.xml:93
 msgid "New project icon/logo"
-msgstr ""
+msgstr "Жобаның жаңа таңбашасы/логотипі"
 
 #: data/appdata/re.sonny.Tangram.metainfo.xml:94
 msgid "New tab background color respects dark mode"
-msgstr ""
+msgstr "Жаңа беттің фон түсі қараңғы режимге сәйкес келеді"
 
 #: data/appdata/re.sonny.Tangram.metainfo.xml:102
 msgid "Add support for downloading files"
-msgstr ""
+msgstr "Файлдарды жүктеп алу қолдауын қосу"
 
 #: data/appdata/re.sonny.Tangram.metainfo.xml:103
 msgid "Add home button"
-msgstr ""
+msgstr "Үй батырмасын қосу"
 
 #: data/appdata/re.sonny.Tangram.metainfo.xml:104
 msgid "Better desktop integration"
-msgstr ""
+msgstr "Жұмыс үстелімен жақсырақ интеграция"
 
 #: data/appdata/re.sonny.Tangram.metainfo.xml:105
 msgid "Fix the main window becoming tiny when unmaximizing"
-msgstr ""
+msgstr "Терезені жаймалауды тоқтатқан кезде негізгі терезенің тым кішірейіп кетуін түзету"
 
 #: data/appdata/re.sonny.Tangram.metainfo.xml:106
 msgid "Enable touchpad/touchscreen swipe navigation gestures"
-msgstr ""
+msgstr "Тачпад/сенсорлы экранның сырғыту навигациялық ишараларын іске қосу"
 
 #: data/appdata/re.sonny.Tangram.metainfo.xml:114
 msgid "Better notifications handling"
-msgstr ""
+msgstr "Хабарламаларды жақсырақ өңдеу"
 
 #: data/appdata/re.sonny.Tangram.metainfo.xml:115
 msgid "Improved web compatibility and performances"
-msgstr ""
+msgstr "Жақсартылған веб-үйлесімділік пен өнімділік"
 
 #: data/appdata/re.sonny.Tangram.metainfo.xml:117
 msgid "Tangram now works properly on Flatpak 1.0 (Linux Mint, Ubuntu 18.04, ...)"
-msgstr ""
+msgstr "Tangram енді Flatpak 1.0 нұсқасында (Linux Mint, Ubuntu 18.04, ...) дұрыс жұмыс істейді"
 
 #: data/re.sonny.Tangram.desktop:13
 msgid "Franz;Ferdi;Rambox;Wavebox;Station;"
-msgstr ""
+msgstr "Franz;Ferdi;Rambox;Wavebox;Station;"
 
 #: data/re.sonny.Tangram.gschema.xml:22 src/menu.blp:9
 msgid "Tabs position"
-msgstr ""
+msgstr "Беттердің орналасуы"
 
 #: data/re.sonny.Tangram.gschema.xml:23
 msgid "Sets the position of the tabs"
-msgstr ""
+msgstr "Беттердің орнын орнатады"
 
 #: data/re.sonny.Tangram.gschema.xml:28
 msgid "Window width"
-msgstr ""
+msgstr "Терезе ені"
 
 #: data/re.sonny.Tangram.gschema.xml:29
 msgid "Width of the window"
-msgstr ""
+msgstr "Терезенің ені"
 
 #: data/re.sonny.Tangram.gschema.xml:34
 msgid "Window height"
-msgstr ""
+msgstr "Терезе биіктігі"
 
 #: data/re.sonny.Tangram.gschema.xml:35
 msgid "Height of the window"
-msgstr ""
+msgstr "Терезенің биіктігі"
 
 #: data/re.sonny.Tangram.gschema.xml:40
 msgid "Window maximized"
-msgstr ""
+msgstr "Терезе жаймаланған"
 
 #: data/re.sonny.Tangram.gschema.xml:41
 msgid "Whether the window is maximized"
-msgstr ""
+msgstr "Терезе жаймаланған ба, жоқ па"
 
 #: data/re.sonny.Tangram.gschema.xml:46
 msgid "Instances"
-msgstr ""
+msgstr "Даналар"
 
 #: data/re.sonny.Tangram.gschema.xml:48
 msgid "Identifiers of instances to be found in /re/sonny/Tangram/instances/"
-msgstr ""
+msgstr "/re/sonny/Tangram/instances/ ішінде табылатын даналардың идентификаторлары"
 
 #: data/re.sonny.Tangram.gschema.xml:55 src/instanceDialog.blp:24
 msgid "Name"
-msgstr ""
+msgstr "Аты"
 
 #: data/re.sonny.Tangram.gschema.xml:56
 msgid "Name to display"
-msgstr ""
+msgstr "Көрсетілетін ат"
 
 #: data/re.sonny.Tangram.gschema.xml:60 src/instanceDialog.blp:34
 msgid "URL"
-msgstr ""
+msgstr "URL"
 
 #: data/re.sonny.Tangram.gschema.xml:61
 msgid "Start URL"
-msgstr ""
+msgstr "Бастапқы URL"
 
 #: data/re.sonny.Tangram.gschema.xml:65 src/instanceDialog.blp:52
 msgid "User agent"
-msgstr ""
+msgstr "User agent"
 
 #: data/re.sonny.Tangram.gschema.xml:67
 msgid "String that will be used as user agent, to identify the browser to the web servers."
-msgstr ""
+msgstr "Веб-серверлерге браузерді анықтау үшін қолданылатын user agent жолы."
 
 #: data/re.sonny.Tangram.gschema.xml:74 src/instanceDialog.blp:44
 msgid "Notifications priority"
-msgstr ""
+msgstr "Хабарламалар басымдылығы"
 
 #: data/re.sonny.Tangram.gschema.xml:75
 msgid "Sets the priority of notifications"
-msgstr ""
+msgstr "Хабарламалардың басымдылығын орнатады"
 
 #. TRANSLATORS: eg. 'Translator Name <your.email@domain.com>' or 'Translator Name https://website.example'
 #: src/AboutDialog.js:35
 msgid "translator-credits"
-msgstr ""
+msgstr "Baurzhan Muftakhidinov <baurthefirst@gmail.com>"
 
 #: src/instanceDialog.blp:46
 msgid "Normal"
-msgstr ""
+msgstr "Қалыпты"
 
 #: src/instanceDialog.blp:46
 msgid "Low"
-msgstr ""
+msgstr "Төмен"
 
 #: src/instanceDialog.blp:46
 msgid "High"
-msgstr ""
+msgstr "Жоғары"
 
 #: src/instanceDialog.blp:46
 msgid "Urgent"
-msgstr ""
+msgstr "Шұғыл"
 
 #: src/shortcuts.blp:11
 msgctxt "shortcut window"
 msgid "General"
-msgstr ""
+msgstr "Жалпы"
 
 #: src/shortcuts.blp:14
 msgctxt "shortcut window"
 msgid "Go to the next tab"
-msgstr ""
+msgstr "Келесі бетке өту"
 
 #: src/shortcuts.blp:19
 msgctxt "shortcut window"
 msgid "Go to the previous tab"
-msgstr ""
+msgstr "Алдыңғы бетке өту"
 
 #: src/shortcuts.blp:24
 msgctxt "shortcut window"
 msgid "Move current tab to the left"
-msgstr ""
+msgstr "Ағымдағы бетті солға жылжыту"
 
 #: src/shortcuts.blp:29
 msgctxt "shortcut window"
 msgid "Move current tab to the right"
-msgstr ""
+msgstr "Ағымдағы бетті оңға жылжыту"
 
 #: src/shortcuts.blp:34
 msgctxt "shortcut window"
 msgid "Quit"
-msgstr ""
+msgstr "Шығу"
 
 #: src/shortcuts.blp:39
 msgctxt "shortcut window"
 msgid "Shortcuts"
-msgstr ""
+msgstr "Жарлықтар"
 
 #: src/shortcuts.blp:44
 msgctxt "shortcut window"
 msgid "Toggle inspector"
-msgstr ""
+msgstr "Инспекторды қосу/сөндіру"
 
 #: src/shortcuts.blp:49
 msgctxt "shortcut window"
 msgid "First – Ninth Tab"
-msgstr ""
+msgstr "Бірінші – Тоғызыншы бет"
 
 #: src/shortcuts.blp:55
 msgctxt "shortcut window"
 msgid "Navigation"
-msgstr ""
+msgstr "Навигация"
 
 #: src/shortcuts.blp:58
 msgctxt "shortcut window"
 msgid "Go to homepage"
-msgstr ""
+msgstr "Үй бетіне өту"
 
 #: src/shortcuts.blp:63
 msgctxt "shortcut window"
 msgid "Reload current page"
-msgstr ""
+msgstr "Ағымдағы бетті қайта жүктеу"
 
 #: src/shortcuts.blp:68
 msgctxt "shortcut window"
 msgid "Reload bypassing cache"
-msgstr ""
+msgstr "Кэшті айналып өтіп, қайта жүктеу"
 
 #: src/shortcuts.blp:73
 msgctxt "shortcut window"
 msgid "Stop loading current page"
-msgstr ""
+msgstr "Ағымдағы бетті жүктеуді тоқтату"
 
 #: src/shortcuts.blp:78 src/shortcuts.blp:94
 msgctxt "shortcut window"
 msgid "Go back to the previous page"
-msgstr ""
+msgstr "Алдыңғы бетке қайту"
 
 #: src/shortcuts.blp:83 src/shortcuts.blp:99
 msgctxt "shortcut window"
 msgid "Go forward to the next page"
-msgstr ""
+msgstr "Келесі бетке алға өту"
 
 #: src/shortcuts.blp:88
 msgctxt "shortcut window"
 msgid "Focus the address bar"
-msgstr ""
+msgstr "Адрес жолағына фокустау"
 
 #: src/menu.blp:13
 msgid "Top"
-msgstr ""
+msgstr "Жоғарыда"
 
 #: src/menu.blp:19
 msgid "Left"
-msgstr ""
+msgstr "Сол жақта"
 
 #: src/menu.blp:25
 msgid "Right"
-msgstr ""
+msgstr "Оң жақта"
 
 #: src/menu.blp:31
 msgid "Bottom"
-msgstr ""
+msgstr "Төменде"
 
 #: src/menu.blp:40
 msgid "Keyboard Shortcuts"
-msgstr ""
+msgstr "Пернетақта жарлықтары"
 
 #: src/menu.blp:45
 msgid "About Tangram"
-msgstr ""
+msgstr "Tangram туралы"
