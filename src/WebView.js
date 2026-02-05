@@ -136,7 +136,6 @@ export function buildWebView({ instance, onNotification, window }) {
     // https://gitlab.gnome.org/GNOME/epiphany/-/blob/master/embed/ephy-embed-prefs.c
     enable_back_forward_navigation_gestures: true,
     enable_developer_extras: true,
-    enable_dns_prefetching: true,
     javascript_can_open_windows_automatically: true,
     allow_top_navigation_to_data_urls: false,
   });
