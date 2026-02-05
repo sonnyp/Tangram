@@ -63,8 +63,12 @@ export function buildWebView({ instance, onNotification, window }) {
         suggested_filename = "";
       }
 
-      let download_dir = get_user_special_dir(UserDirectory.DIRECTORY_DOWNLOAD);
-      const dest_dir = download_dir ? Gio.File.new_for_path(download_dir) : null;
+      const download_dir = get_user_special_dir(
+        UserDirectory.DIRECTORY_DOWNLOAD,
+      );
+      const dest_dir = download_dir
+        ? Gio.File.new_for_path(download_dir)
+        : null;
       const dialog = new Gtk.FileDialog({
         title: _("Save File"),
         initial_folder: dest_dir,
