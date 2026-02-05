@@ -15,7 +15,3 @@ node_modules
 gschemas.compiled
 var/
 .eslintcache
-
-/subprojects/blueprint-compiler
-
-.fenv

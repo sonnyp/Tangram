@@ -115,19 +115,9 @@ Thank you for your help!
 
 ## Development
 
-Use [GNOME Builder](https://apps.gnome.org/app/org.gnome.Builder/).
+Use [Builder](https://apps.gnome.org/app/org.gnome.Builder/) or [Foundry](https://gitlab.gnome.org/GNOME/foundry).
 
-If you knwo what you are doing - you can run from source locally instead:
-
-`./run.sh` runs the application in `development` mode. Hit `<Ctrl><Shift>Q` to restart the application.
-
-- data files are stored in `./var/data/` instead of `$XDG_DATA_HOME/Tangram/`
-- cache files are stored in `./var/cache/` instead of `XDG_CACHE_HOME/Tangram/`
-  <!-- TODO application -->
-  <!-- - desktop files are stored in `./var/applications/` instead of `$XDG_DATA_HOME/applications/` -->
-  <!-- "--filesystem=xdg-data/applications:create" -->
-
-To test desktop notifications you can add `https://jhmux.codesandbox.io/`.
+To test desktop notifications you can use `https://jhmux.codesandbox.io/`.
 
 ### Test
 
@@ -135,34 +125,11 @@ To test desktop notifications you can add `https://jhmux.codesandbox.io/`.
 make test
 ```
 
-### Meson
-
-```sh
-meson --reconfigure --prefix $PWD/install build
-ninja -C build install
-GSETTINGS_SCHEMA_DIR=./install/share/glib-2.0/schemas/ ./install/bin/re.sonny.Tangram
-```
-
-### Flatpak
-
-```sh
-flatpak-builder --user --force-clean --install-deps-from=flathub flatpak re.sonny.Tangram.json
-flatpak-builder --run flatpak re.sonny.Tangram.json re.sonny.Tangram
-```
-
-### Flatpak sandboxed
-
-```sh
-flatpak-builder --user  --force-clean --repo=repo --install-deps-from=flathub flatpak re.sonny.Tangram.json
-flatpak --user remote-add --no-gpg-verify --if-not-exists Tangram repo
-flatpak --user install --reinstall --assumeyes Tangram re.sonny.Tangram
-```
-
 ### Inspect
 
 ```sh
 gsettings set org.gtk.Settings.Debug enable-inspector-keybinding true
-GTK_DEBUG=interactive ./run.sh
+GTK_DEBUG=interactive
 ```
 
 ### Release
