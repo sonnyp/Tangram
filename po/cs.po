@@ -8,15 +8,15 @@ msgstr ""
 "Project-Id-Version: re.sonny.Tangram\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-09-18 16:27+0200\n"
-"PO-Revision-Date: 2024-08-01 17:09+0000\n"
-"Last-Translator: FM <filipmikulik@atlas.cz>\n"
+"PO-Revision-Date: 2026-03-13 21:09+0000\n"
+"Last-Translator: Pavel Borecki <pavel.borecki@gmail.com>\n"
 "Language-Team: Czech <https://hosted.weblate.org/projects/tangram/tangram/cs/>\n"
 "Language: cs\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
-"X-Generator: Weblate 5.7-dev\n"
+"X-Generator: Weblate 5.17-dev\n"
 
 #: data/appdata/re.sonny.Tangram.metainfo.xml:5 data/re.sonny.Tangram.desktop:3
 msgid "Tangram"
@@ -190,7 +190,7 @@ msgstr ""
 
 #: data/re.sonny.Tangram.gschema.xml:46
 msgid "Instances"
-msgstr ""
+msgstr "Instance"
 
 #: data/re.sonny.Tangram.gschema.xml:48
 msgid "Identifiers of instances to be found in /re/sonny/Tangram/instances/"
@@ -198,7 +198,7 @@ msgstr ""
 
 #: data/re.sonny.Tangram.gschema.xml:55 src/instanceDialog.blp:24
 msgid "Name"
-msgstr ""
+msgstr "Název"
 
 #: data/re.sonny.Tangram.gschema.xml:56
 msgid "Name to display"
@@ -206,7 +206,7 @@ msgstr ""
 
 #: data/re.sonny.Tangram.gschema.xml:60 src/instanceDialog.blp:34
 msgid "URL"
-msgstr ""
+msgstr "URL"
 
 #: data/re.sonny.Tangram.gschema.xml:61
 msgid "Start URL"
@@ -252,7 +252,7 @@ msgstr ""
 #: src/shortcuts.blp:11
 msgctxt "shortcut window"
 msgid "General"
-msgstr ""
+msgstr "Obecné"
 
 #: src/shortcuts.blp:14
 msgctxt "shortcut window"
@@ -277,7 +277,7 @@ msgstr ""
 #: src/shortcuts.blp:34
 msgctxt "shortcut window"
 msgid "Quit"
-msgstr ""
+msgstr "Ukončit"
 
 #: src/shortcuts.blp:39
 msgctxt "shortcut window"
@@ -336,19 +336,19 @@ msgstr ""
 
 #: src/menu.blp:13
 msgid "Top"
-msgstr ""
+msgstr "Nahoře"
 
 #: src/menu.blp:19
 msgid "Left"
-msgstr ""
+msgstr "Vlevo"
 
 #: src/menu.blp:25
 msgid "Right"
-msgstr ""
+msgstr "Vpravo"
 
 #: src/menu.blp:31
 msgid "Bottom"
-msgstr ""
+msgstr "Dole"
 
 #: src/menu.blp:40
 msgid "Keyboard Shortcuts"
