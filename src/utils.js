@@ -52,11 +52,13 @@ export function isUrlAllowedForNavigation(webView, request_url) {
 export function normalizeURL(str) {
   if (!str) return null;
 
-  if (!str.startsWith("http")) {
-    str = "http://" + str;
+  let uri = GLib.Uri.parse(str, GLib.UriFlags.NONE);
+
+  // If parsing failed or no scheme, try prepending "http://"
+  if (!uri || !uri.get_scheme()) {
+    uri = GLib.Uri.parse("http://" + str, GLib.UriFlags.NONE);
   }
 
-  const uri = GLib.Uri.parse(str, GLib.UriFlags.NONE);
   if (!uri) return null;
 
   if (!["http", "https"].includes(uri.get_scheme())) {
