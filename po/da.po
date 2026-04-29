@@ -8,15 +8,15 @@ msgstr ""
 "Project-Id-Version: re.sonny.Tangram\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-09-18 16:27+0200\n"
-"PO-Revision-Date: 2023-05-22 09:49+0000\n"
-"Last-Translator: HighKingofMelons <highkingomelons@gmail.com>\n"
+"PO-Revision-Date: 2026-04-30 20:09+0000\n"
+"Last-Translator: Nikolaj Lübker <lybkern@gmail.com>\n"
 "Language-Team: Danish <https://hosted.weblate.org/projects/tangram/tangram/da/>\n"
 "Language: da\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.18-dev\n"
+"X-Generator: Weblate 5.17.1\n"
 
 #: data/appdata/re.sonny.Tangram.metainfo.xml:5 data/re.sonny.Tangram.desktop:3
 msgid "Tangram"
@@ -80,8 +80,9 @@ msgid "Fix authentication on many popular websites"
 msgstr ""
 
 #: data/appdata/re.sonny.Tangram.metainfo.xml:63
+#, fuzzy
 msgid "Fix Cancel button in tab settings dialog"
-msgstr ""
+msgstr "Fix Annuller knap i dialogboksen Indstillinger"
 
 #: data/appdata/re.sonny.Tangram.metainfo.xml:64
 msgid "Use middle-click or Ctrl+click to open links in the browser"
@@ -89,11 +90,11 @@ msgstr ""
 
 #: data/appdata/re.sonny.Tangram.metainfo.xml:72
 msgid "Fix window title"
-msgstr ""
+msgstr "Fix vindue titel"
 
 #: data/appdata/re.sonny.Tangram.metainfo.xml:73
 msgid "Update GNOME runtime to 41"
-msgstr ""
+msgstr "Opdateret GNOME runtime til 41"
 
 #: data/appdata/re.sonny.Tangram.metainfo.xml:82
 msgid "Fix an issue preventing some sites such as Twitter or Facebook from being added."
@@ -101,19 +102,20 @@ msgstr ""
 
 #: data/appdata/re.sonny.Tangram.metainfo.xml:83
 msgid "Update GNOME runtime to 3.38"
-msgstr ""
+msgstr "Opdateret GNOME runtime til 3.38"
 
 #: data/appdata/re.sonny.Tangram.metainfo.xml:91
 msgid "Enable spell checking"
-msgstr ""
+msgstr "Aktivér stavekontrol"
 
 #: data/appdata/re.sonny.Tangram.metainfo.xml:92
 msgid "Customizable user-agent per instance"
 msgstr ""
 
 #: data/appdata/re.sonny.Tangram.metainfo.xml:93
+#, fuzzy
 msgid "New project icon/logo"
-msgstr ""
+msgstr "Nyt projektikon/logo"
 
 #: data/appdata/re.sonny.Tangram.metainfo.xml:94
 msgid "New tab background color respects dark mode"
@@ -125,7 +127,7 @@ msgstr ""
 
 #: data/appdata/re.sonny.Tangram.metainfo.xml:103
 msgid "Add home button"
-msgstr ""
+msgstr "Tilføj hjem knap"
 
 #: data/appdata/re.sonny.Tangram.metainfo.xml:104
 msgid "Better desktop integration"
@@ -145,7 +147,7 @@ msgstr ""
 
 #: data/appdata/re.sonny.Tangram.metainfo.xml:115
 msgid "Improved web compatibility and performances"
-msgstr ""
+msgstr "Forbedret webkompatibilitet og ydevner"
 
 #: data/appdata/re.sonny.Tangram.metainfo.xml:117
 msgid "Tangram now works properly on Flatpak 1.0 (Linux Mint, Ubuntu 18.04, ...)"
@@ -153,11 +155,11 @@ msgstr ""
 
 #: data/re.sonny.Tangram.desktop:13
 msgid "Franz;Ferdi;Rambox;Wavebox;Station;"
-msgstr ""
+msgstr "Franz;Ferdi;Rambox;Wavebox;Station;"
 
 #: data/re.sonny.Tangram.gschema.xml:22 src/menu.blp:9
 msgid "Tabs position"
-msgstr ""
+msgstr "Fane position"
 
 #: data/re.sonny.Tangram.gschema.xml:23
 msgid "Sets the position of the tabs"
@@ -165,7 +167,7 @@ msgstr ""
 
 #: data/re.sonny.Tangram.gschema.xml:28
 msgid "Window width"
-msgstr ""
+msgstr "Vinduesbredde"
 
 #: data/re.sonny.Tangram.gschema.xml:29
 msgid "Width of the window"
@@ -173,7 +175,7 @@ msgstr ""
 
 #: data/re.sonny.Tangram.gschema.xml:34
 msgid "Window height"
-msgstr ""
+msgstr "Vindueshøjde"
 
 #: data/re.sonny.Tangram.gschema.xml:35
 msgid "Height of the window"
@@ -205,11 +207,11 @@ msgstr ""
 
 #: data/re.sonny.Tangram.gschema.xml:60 src/instanceDialog.blp:34
 msgid "URL"
-msgstr ""
+msgstr "URL"
 
 #: data/re.sonny.Tangram.gschema.xml:61
 msgid "Start URL"
-msgstr ""
+msgstr "Start URL"
 
 #: data/re.sonny.Tangram.gschema.xml:65 src/instanceDialog.blp:52
 msgid "User agent"
@@ -234,15 +236,15 @@ msgstr ""
 
 #: src/instanceDialog.blp:46
 msgid "Normal"
-msgstr ""
+msgstr "Normal"
 
 #: src/instanceDialog.blp:46
 msgid "Low"
-msgstr ""
+msgstr "Lav"
 
 #: src/instanceDialog.blp:46
 msgid "High"
-msgstr ""
+msgstr "Høj"
 
 #: src/instanceDialog.blp:46
 msgid "Urgent"
@@ -291,7 +293,7 @@ msgstr ""
 #: src/shortcuts.blp:49
 msgctxt "shortcut window"
 msgid "First – Ninth Tab"
-msgstr ""
+msgstr "Første – Niende Fane"
 
 #: src/shortcuts.blp:55
 msgctxt "shortcut window"
@@ -301,7 +303,7 @@ msgstr ""
 #: src/shortcuts.blp:58
 msgctxt "shortcut window"
 msgid "Go to homepage"
-msgstr ""
+msgstr "Gå til hjemsiden"
 
 #: src/shortcuts.blp:63
 msgctxt "shortcut window"
@@ -311,48 +313,48 @@ msgstr ""
 #: src/shortcuts.blp:68
 msgctxt "shortcut window"
 msgid "Reload bypassing cache"
-msgstr ""
+msgstr "Genindlæs bypass cache"
 
 #: src/shortcuts.blp:73
 msgctxt "shortcut window"
 msgid "Stop loading current page"
-msgstr ""
+msgstr "Stop indlæsningen af den aktuelle side"
 
 #: src/shortcuts.blp:78 src/shortcuts.blp:94
 msgctxt "shortcut window"
 msgid "Go back to the previous page"
-msgstr ""
+msgstr "Gå tilbage til den forrige side"
 
 #: src/shortcuts.blp:83 src/shortcuts.blp:99
 msgctxt "shortcut window"
 msgid "Go forward to the next page"
-msgstr ""
+msgstr "Gå videre til den næste side"
 
 #: src/shortcuts.blp:88
 msgctxt "shortcut window"
 msgid "Focus the address bar"
-msgstr ""
+msgstr "Fokusér adresselinjen"
 
 #: src/menu.blp:13
 msgid "Top"
-msgstr ""
+msgstr "Top"
 
 #: src/menu.blp:19
 msgid "Left"
-msgstr ""
+msgstr "Venstre"
 
 #: src/menu.blp:25
 msgid "Right"
-msgstr ""
+msgstr "Højre"
 
 #: src/menu.blp:31
 msgid "Bottom"
-msgstr ""
+msgstr "Bund"
 
 #: src/menu.blp:40
 msgid "Keyboard Shortcuts"
-msgstr ""
+msgstr "Tastaturgenveje"
 
 #: src/menu.blp:45
 msgid "About Tangram"
-msgstr ""
+msgstr "Om Tangram"
