@@ -8,27 +8,28 @@ msgstr ""
 "Project-Id-Version: re.sonny.Tangram\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-09-18 16:27+0200\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: Automatically generated\n"
-"Language-Team: none\n"
+"PO-Revision-Date: 2026-07-10 15:01+0000\n"
+"Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
+"Language-Team: Georgian <https://hosted.weblate.org/projects/tangram/tangram/ka/>\n"
 "Language: ka\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 2026.7.1.dev0\n"
 
 #: data/appdata/re.sonny.Tangram.metainfo.xml:5 data/re.sonny.Tangram.desktop:3
 msgid "Tangram"
-msgstr ""
+msgstr "Tangram"
 
 #: data/appdata/re.sonny.Tangram.metainfo.xml:6
 msgid "Sonny Piers"
-msgstr ""
+msgstr "სონი პირსი"
 
 #: data/appdata/re.sonny.Tangram.metainfo.xml:10
 #: data/re.sonny.Tangram.desktop:4
 msgid "Browser for your pinned tabs"
-msgstr ""
+msgstr "ბრაუზერი თქვენი ამაგრებული ჩანართებისთვის"
 
 #: data/appdata/re.sonny.Tangram.metainfo.xml:13
 msgid "Tangram is a new kind of browser. It is designed to organize and run your Web applications. Each tab is persistent and independent. You can set multiple tabs with different accounts for the same application."
@@ -36,7 +37,7 @@ msgstr ""
 
 #: data/appdata/re.sonny.Tangram.metainfo.xml:17
 msgid "Common use cases:"
-msgstr ""
+msgstr "წესით, გამოიყენება:"
 
 #: data/appdata/re.sonny.Tangram.metainfo.xml:20
 msgid "Stay up to date with your favorite communities; Mastodon, Twitter, ..."
@@ -60,7 +61,7 @@ msgstr ""
 
 #: data/appdata/re.sonny.Tangram.metainfo.xml:44
 msgid "Reduce the noisiness of logs"
-msgstr ""
+msgstr "ჟურნალის ხმაურის შემცირება"
 
 #: data/appdata/re.sonny.Tangram.metainfo.xml:52
 msgid "Fix a bug preventing to add new tabs"
@@ -88,11 +89,11 @@ msgstr ""
 
 #: data/appdata/re.sonny.Tangram.metainfo.xml:72
 msgid "Fix window title"
-msgstr ""
+msgstr "ფანჯრის სათაურის გასწორება"
 
 #: data/appdata/re.sonny.Tangram.metainfo.xml:73
 msgid "Update GNOME runtime to 41"
-msgstr ""
+msgstr "GNOME-ის გაშვების გარემოს განახლება ვერსიამდე 41"
 
 #: data/appdata/re.sonny.Tangram.metainfo.xml:82
 msgid "Fix an issue preventing some sites such as Twitter or Facebook from being added."
@@ -100,19 +101,19 @@ msgstr ""
 
 #: data/appdata/re.sonny.Tangram.metainfo.xml:83
 msgid "Update GNOME runtime to 3.38"
-msgstr ""
+msgstr "GNOME-ის გაშვების გარემოს განახლება ვერსიამდე 3.38"
 
 #: data/appdata/re.sonny.Tangram.metainfo.xml:91
 msgid "Enable spell checking"
-msgstr ""
+msgstr "მართლწერის შემოწმების ჩართვა"
 
 #: data/appdata/re.sonny.Tangram.metainfo.xml:92
 msgid "Customizable user-agent per instance"
-msgstr ""
+msgstr "მორგებადი მომხმარებლის აგენტი თითოეული გაშვებული ასლისთვის"
 
 #: data/appdata/re.sonny.Tangram.metainfo.xml:93
 msgid "New project icon/logo"
-msgstr ""
+msgstr "ახალი პროექტის ხატულა/ლოგო"
 
 #: data/appdata/re.sonny.Tangram.metainfo.xml:94
 msgid "New tab background color respects dark mode"
@@ -124,11 +125,11 @@ msgstr ""
 
 #: data/appdata/re.sonny.Tangram.metainfo.xml:103
 msgid "Add home button"
-msgstr ""
+msgstr "საწყის გვერდზე გადასვლის ღილაკის დამატება"
 
 #: data/appdata/re.sonny.Tangram.metainfo.xml:104
 msgid "Better desktop integration"
-msgstr ""
+msgstr "უკეთესი ინტეგრაცია სამუშაო მაგიდასთან"
 
 #: data/appdata/re.sonny.Tangram.metainfo.xml:105
 msgid "Fix the main window becoming tiny when unmaximizing"
@@ -140,7 +141,7 @@ msgstr ""
 
 #: data/appdata/re.sonny.Tangram.metainfo.xml:114
 msgid "Better notifications handling"
-msgstr ""
+msgstr "გაფრთხილებების უკეთესი დამუშავება"
 
 #: data/appdata/re.sonny.Tangram.metainfo.xml:115
 msgid "Improved web compatibility and performances"
@@ -152,11 +153,11 @@ msgstr ""
 
 #: data/re.sonny.Tangram.desktop:13
 msgid "Franz;Ferdi;Rambox;Wavebox;Station;"
-msgstr ""
+msgstr "Franz;Ferdi;Rambox;Wavebox;Station;სადგური;"
 
 #: data/re.sonny.Tangram.gschema.xml:22 src/menu.blp:9
 msgid "Tabs position"
-msgstr ""
+msgstr "ჩანართების მდებარეობა"
 
 #: data/re.sonny.Tangram.gschema.xml:23
 msgid "Sets the position of the tabs"
@@ -164,31 +165,31 @@ msgstr ""
 
 #: data/re.sonny.Tangram.gschema.xml:28
 msgid "Window width"
-msgstr ""
+msgstr "ფანჯრის სიგანე"
 
 #: data/re.sonny.Tangram.gschema.xml:29
 msgid "Width of the window"
-msgstr ""
+msgstr "ფანჯრის სიგანე"
 
 #: data/re.sonny.Tangram.gschema.xml:34
 msgid "Window height"
-msgstr ""
+msgstr "ფანჯრის სიმაღლე"
 
 #: data/re.sonny.Tangram.gschema.xml:35
 msgid "Height of the window"
-msgstr ""
+msgstr "ფანჯრის სიმაღლე"
 
 #: data/re.sonny.Tangram.gschema.xml:40
 msgid "Window maximized"
-msgstr ""
+msgstr "ფანჯარა გაშლილია"
 
 #: data/re.sonny.Tangram.gschema.xml:41
 msgid "Whether the window is maximized"
-msgstr ""
+msgstr "გაშლილია, თუ არა ფანჯარა"
 
 #: data/re.sonny.Tangram.gschema.xml:46
 msgid "Instances"
-msgstr ""
+msgstr "გაშვებული ასლები"
 
 #: data/re.sonny.Tangram.gschema.xml:48
 msgid "Identifiers of instances to be found in /re/sonny/Tangram/instances/"
@@ -196,23 +197,23 @@ msgstr ""
 
 #: data/re.sonny.Tangram.gschema.xml:55 src/instanceDialog.blp:24
 msgid "Name"
-msgstr ""
+msgstr "სახელი"
 
 #: data/re.sonny.Tangram.gschema.xml:56
 msgid "Name to display"
-msgstr ""
+msgstr "საჩვენებელი სახელი"
 
 #: data/re.sonny.Tangram.gschema.xml:60 src/instanceDialog.blp:34
 msgid "URL"
-msgstr ""
+msgstr "URL"
 
 #: data/re.sonny.Tangram.gschema.xml:61
 msgid "Start URL"
-msgstr ""
+msgstr "საწყისი URL"
 
 #: data/re.sonny.Tangram.gschema.xml:65 src/instanceDialog.blp:52
 msgid "User agent"
-msgstr ""
+msgstr "მომხმარებლის აგენტი"
 
 #: data/re.sonny.Tangram.gschema.xml:67
 msgid "String that will be used as user agent, to identify the browser to the web servers."
@@ -220,47 +221,47 @@ msgstr ""
 
 #: data/re.sonny.Tangram.gschema.xml:74 src/instanceDialog.blp:44
 msgid "Notifications priority"
-msgstr ""
+msgstr "გაფრთხილებების პრიორიტეტი"
 
 #: data/re.sonny.Tangram.gschema.xml:75
 msgid "Sets the priority of notifications"
-msgstr ""
+msgstr "დააყენებს გაფრთხილებების პრიორიტეტს"
 
 #. TRANSLATORS: eg. 'Translator Name <your.email@domain.com>' or 'Translator Name https://website.example'
 #: src/AboutDialog.js:35
 msgid "translator-credits"
-msgstr ""
+msgstr "თემური დოღონაძე <temuri.doghonadze@gmail.com>"
 
 #: src/instanceDialog.blp:46
 msgid "Normal"
-msgstr ""
+msgstr "ნორმალური"
 
 #: src/instanceDialog.blp:46
 msgid "Low"
-msgstr ""
+msgstr "დაბალი"
 
 #: src/instanceDialog.blp:46
 msgid "High"
-msgstr ""
+msgstr "მაღალი"
 
 #: src/instanceDialog.blp:46
 msgid "Urgent"
-msgstr ""
+msgstr "სასწრაფო"
 
 #: src/shortcuts.blp:11
 msgctxt "shortcut window"
 msgid "General"
-msgstr ""
+msgstr "ზოგადი"
 
 #: src/shortcuts.blp:14
 msgctxt "shortcut window"
 msgid "Go to the next tab"
-msgstr ""
+msgstr "გადასვლა შემდეგ ჩანართზე"
 
 #: src/shortcuts.blp:19
 msgctxt "shortcut window"
 msgid "Go to the previous tab"
-msgstr ""
+msgstr "წინა ჩანართზე დაბრუნება"
 
 #: src/shortcuts.blp:24
 msgctxt "shortcut window"
@@ -275,47 +276,47 @@ msgstr ""
 #: src/shortcuts.blp:34
 msgctxt "shortcut window"
 msgid "Quit"
-msgstr ""
+msgstr "გასვლა"
 
 #: src/shortcuts.blp:39
 msgctxt "shortcut window"
 msgid "Shortcuts"
-msgstr ""
+msgstr "მალსახმობები"
 
 #: src/shortcuts.blp:44
 msgctxt "shortcut window"
 msgid "Toggle inspector"
-msgstr ""
+msgstr "ინსპექტორის გადართვა"
 
 #: src/shortcuts.blp:49
 msgctxt "shortcut window"
 msgid "First – Ninth Tab"
-msgstr ""
+msgstr "პირველი - მეცხრე ჩანართი"
 
 #: src/shortcuts.blp:55
 msgctxt "shortcut window"
 msgid "Navigation"
-msgstr ""
+msgstr "ნავიგაცია"
 
 #: src/shortcuts.blp:58
 msgctxt "shortcut window"
 msgid "Go to homepage"
-msgstr ""
+msgstr "გადასვლა საწყის გვერდზე"
 
 #: src/shortcuts.blp:63
 msgctxt "shortcut window"
 msgid "Reload current page"
-msgstr ""
+msgstr "მიმდინარე გვერდის თავიდან ჩატვირთვა"
 
 #: src/shortcuts.blp:68
 msgctxt "shortcut window"
 msgid "Reload bypassing cache"
-msgstr ""
+msgstr "თავიდან ჩატვირთვა კეშის გამოტოვებით"
 
 #: src/shortcuts.blp:73
 msgctxt "shortcut window"
 msgid "Stop loading current page"
-msgstr ""
+msgstr "მიმდინარე გვერდის ჩატვირთვის გაჩერება"
 
 #: src/shortcuts.blp:78 src/shortcuts.blp:94
 msgctxt "shortcut window"
@@ -330,28 +331,28 @@ msgstr ""
 #: src/shortcuts.blp:88
 msgctxt "shortcut window"
 msgid "Focus the address bar"
-msgstr ""
+msgstr "ფოკუსი მისამართის ზოლზე"
 
 #: src/menu.blp:13
 msgid "Top"
-msgstr ""
+msgstr "ზედა"
 
 #: src/menu.blp:19
 msgid "Left"
-msgstr ""
+msgstr "მარცხნივ"
 
 #: src/menu.blp:25
 msgid "Right"
-msgstr ""
+msgstr "მარჯვნივ"
 
 #: src/menu.blp:31
 msgid "Bottom"
-msgstr ""
+msgstr "ქვედა"
 
 #: src/menu.blp:40
 msgid "Keyboard Shortcuts"
-msgstr ""
+msgstr "კლავიატურის მალსახმობები"
 
 #: src/menu.blp:45
 msgid "About Tangram"
-msgstr ""
+msgstr "Tangram-ის შესახებ"
