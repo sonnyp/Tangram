@@ -16,6 +16,7 @@ const {
   CookieAcceptPolicy,
   Settings,
   NotificationPermissionRequest,
+  UserMediaPermissionRequest,
   SecurityOrigin,
   UserContentManager,
   TLSErrorsPolicy,
@@ -135,6 +136,7 @@ export function buildWebView({ instance, onNotification, window }) {
   // https://gjs-docs.gnome.org/webkit240~4.0_api/webkit2.settings
   const settings = new Settings({
     enable_smooth_scrolling: true,
+    enable_media_stream: true,
     media_playback_requires_user_gesture: true,
 
     // https://gitlab.gnome.org/GNOME/epiphany/-/blob/master/embed/ephy-embed-prefs.c
@@ -184,6 +186,10 @@ export function buildWebView({ instance, onNotification, window }) {
     // https://gjs-docs.gnome.org/webkit240~4.0_api/webkit2.webview#signal-permission-request
     ["permission-request"](request) {
       if (request instanceof NotificationPermissionRequest) {
+        request.allow();
+        return;
+      }
+      if (request instanceof UserMediaPermissionRequest) {
         request.allow();
         return;
       }
