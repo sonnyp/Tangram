@@ -1,6 +1,7 @@
 import Gio from "gi://Gio";
 import Gdk from "gi://Gdk";
 import GObject from "gi://GObject";
+import WebKit2 from "gi://WebKit";
 
 import { MODES } from "./constants.js";
 import { buildWebView } from "./WebView.js";
@@ -67,12 +68,19 @@ export function Tabs({
       const tab_page = tab_view.append(webview);
       tab_page.set_live_thumbnail(true);
 
-      webview.bind_property(
-        "favicon",
-        tab_page,
-        "icon",
-        GObject.BindingFlags.SYNC_CREATE,
-      );
+      webview.connect("notify::favicon", () => {
+        if (webview.favicon) {
+          tab_page.set_icon(webview.favicon);
+        }
+      });
+      webview.connect("load-changed", (_self, loadEvent) => {
+        if (loadEvent === WebKit2.LoadEvent.COMMITTED) {
+          tab_page.set_icon(null);
+        }
+      });
+      if (webview.favicon) {
+        tab_page.set_icon(webview.favicon);
+      }
       instance.bind("name", tab_page, "title", Gio.SettingsBindFlags.GET);
 
       webview.bind_property(
