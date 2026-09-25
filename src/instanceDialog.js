@@ -5,7 +5,7 @@ import { gettext as _ } from "gettext";
 
 Gio._promisify(Adw.AlertDialog.prototype, "choose", "choose_finish");
 
-import instance_dialog from "./instanceDialog.blp" assert { type: "string" };
+import instance_dialog from "./instanceDialog.blp" with { type: "string" };
 
 export function instanceDialog({ window, instance, onDeleteInstance }) {
   const builder = Gtk.Builder.new_from_string(instance_dialog, -1);

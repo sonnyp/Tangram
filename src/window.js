@@ -20,7 +20,7 @@ import WindowInterface from "./window.blp";
 import ViewTabsInterface from "./ViewTabs.blp";
 import ViewNewInterface from "./ViewNew.blp";
 
-import "./icons/tabs-stack-symbolic.svg" assert { type: "icon" };
+import "./icons/tabs-stack-symbolic.svg" with { type: "icon" };
 import { ViewTabs } from "./ViewTabs.js";
 import { ViewNew } from "./ViewNew.js";
 import { persistWindowState } from "../troll/src/util.js";
