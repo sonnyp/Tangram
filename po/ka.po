@@ -1,0 +1,386 @@
+# Georgian translation for re.sonny.Tangram.
+# Copyright (C) 2026 re.sonny.Tangram authors.
+# This file is distributed under the same license as the re.sonny.Tangram package.
+# Ekaterine Papava <papava.e@gtu.ge>, 2026.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: re.sonny.Tangram\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2022-09-18 16:27+0200\n"
+"PO-Revision-Date: 2026-02-02 21:20+0100\n"
+"Last-Translator: Ekaterine Papava <papava.e@gtu.ge>\n"
+"Language-Team: Georgian <(nothing)>\n"
+"Language: ka\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.8\n"
+
+#: data/appdata/re.sonny.Tangram.metainfo.xml:5 data/re.sonny.Tangram.desktop:3
+msgid "Tangram"
+msgstr "Tangram"
+
+#: data/appdata/re.sonny.Tangram.metainfo.xml:6
+msgid "Sonny Piers"
+msgstr "სონი პირსი"
+
+#: data/appdata/re.sonny.Tangram.metainfo.xml:10
+#: data/re.sonny.Tangram.desktop:4
+msgid "Browser for your pinned tabs"
+msgstr "ბრაუზერი თქვენი მიმაგრებული ჩანართებისთვის"
+
+#: data/appdata/re.sonny.Tangram.metainfo.xml:13
+msgid ""
+"Tangram is a new kind of browser. It is designed to organize and run your "
+"Web applications. Each tab is persistent and independent. You can set "
+"multiple tabs with different accounts for the same application."
+msgstr ""
+"Tangram ბრაუზერის ახალი ტიპია. ის აგებია, რომ დაგეხმაროთ, დაალაგოთ და "
+"გაუშვათ თქვენი ვებაპლიკაციები. ყველა ჩანართი მუდმივი და დამოუკიდებელია. "
+"შეგიძლიათ, დააყენოთ ერთზე მეტი ჩანართი სხვადასხვა ანგარიშისთვის იგივე "
+"აპლიკაციისთვის."
+
+#: data/appdata/re.sonny.Tangram.metainfo.xml:17
+msgid "Common use cases:"
+msgstr "ზოგადი გამოყენების შემთხვევები:"
+
+#: data/appdata/re.sonny.Tangram.metainfo.xml:20
+msgid "Stay up to date with your favorite communities; Mastodon, Twitter, ..."
+msgstr ""
+"გაიგეთ ახალი ამბები თქვენი რჩეული საზოგადოებებიდან: Mastodon, Twitter, ..."
+
+#: data/appdata/re.sonny.Tangram.metainfo.xml:22
+msgid ""
+"Merge all these chat applications into one; WhatsApp, Messenger, "
+"Telegram, ..."
+msgstr ""
+"მოახდინეთ ამ ჩატის აპლიკაციების შერწყმა ერთში: WhatsApp, Messenger, "
+"Telegram, ..."
+
+#: data/appdata/re.sonny.Tangram.metainfo.xml:24
+msgid ""
+"Group your organization tools under one application; EMail, Calendar, ..."
+msgstr ""
+"დააჯგუფეთ თქვენი ორგანიზაციის ხელსაწყოები ერთ აპლიკაციაში: EMail, "
+"Calendar, ..."
+
+#: data/appdata/re.sonny.Tangram.metainfo.xml:25
+msgid "One-stop for multiple sources of documentation or information"
+msgstr "ერთი გაჩერება დოკუმენტაციის ან ინფორმაციის მრავალი წყაროსთვის"
+
+#: data/appdata/re.sonny.Tangram.metainfo.xml:43
+msgid "Fix a bug preventing to start Tangram"
+msgstr "გასწორდა შეცდომა, რომლის გამოც Tangram არ ეშვებოდა"
+
+#: data/appdata/re.sonny.Tangram.metainfo.xml:44
+msgid "Reduce the noisiness of logs"
+msgstr "შემცირდა ჟურნალების ხმაურიანობა"
+
+#: data/appdata/re.sonny.Tangram.metainfo.xml:52
+msgid "Fix a bug preventing to add new tabs"
+msgstr "გასწორდა შეცდომა, რის გამოც ახალი ჩანართები აღარ იხსნებოდა"
+
+#: data/appdata/re.sonny.Tangram.metainfo.xml:60
+msgid "Notifications priority is normal instead of urgent by default"
+msgstr ""
+"გაფრთხილების პრიორიტეტი ნორმალურია სასწრაფოს გარდა, რომელიც ნაგულისხმევია"
+
+#: data/appdata/re.sonny.Tangram.metainfo.xml:61
+msgid "Add a per-tab setting to change notifications priority"
+msgstr ""
+"დაემატა პარამეტრი თითოეული ჩანართისთვის გაფრთხილებების პრიორიტეტის "
+"შესაცვლელად"
+
+#: data/appdata/re.sonny.Tangram.metainfo.xml:62
+msgid "Fix authentication on many popular websites"
+msgstr "გასწორდა ავთენტიკაცია ბევრ პოპულარულ საიტზე"
+
+#: data/appdata/re.sonny.Tangram.metainfo.xml:63
+msgid "Fix Cancel button in tab settings dialog"
+msgstr "გასწორდა გაუქმების ღილაკი ჩანართების მორგების დიალოგში"
+
+#: data/appdata/re.sonny.Tangram.metainfo.xml:64
+msgid "Use middle-click or Ctrl+click to open links in the browser"
+msgstr "გამოიყენეთ შუა-წკაპი, ან Ctrl+წკაპი ბმულების ბრაუზერში გასახსნელად"
+
+#: data/appdata/re.sonny.Tangram.metainfo.xml:72
+msgid "Fix window title"
+msgstr "გასწორდა ფანჯრის სათაური"
+
+#: data/appdata/re.sonny.Tangram.metainfo.xml:73
+msgid "Update GNOME runtime to 41"
+msgstr "განახლდა GNOME-ის სამუშაო გარემო 41-მდე"
+
+#: data/appdata/re.sonny.Tangram.metainfo.xml:82
+msgid ""
+"Fix an issue preventing some sites such as Twitter or Facebook from being "
+"added."
+msgstr ""
+"გასწორდა შეცდომა, რომელიც ხელს უშლიდა ზოგიერთ საიტს, როგორიცაა Twitter, ან "
+"Facebook, დამატებულიყო."
+
+#: data/appdata/re.sonny.Tangram.metainfo.xml:83
+msgid "Update GNOME runtime to 3.38"
+msgstr "განახლდა GNOME-ის სამუშაო გარემო 38-მდე"
+
+#: data/appdata/re.sonny.Tangram.metainfo.xml:91
+msgid "Enable spell checking"
+msgstr "მართლწერის შემოწმების ჩართვა"
+
+#: data/appdata/re.sonny.Tangram.metainfo.xml:92
+msgid "Customizable user-agent per instance"
+msgstr "მორგებადი user-agent თითოეული გაშვებული ასლისთვის"
+
+#: data/appdata/re.sonny.Tangram.metainfo.xml:93
+msgid "New project icon/logo"
+msgstr "ახალი პროექტის ხატულა/ლოგო"
+
+#: data/appdata/re.sonny.Tangram.metainfo.xml:94
+msgid "New tab background color respects dark mode"
+msgstr "ახალი ჩანართის ფონის ფერი ითვალისწინებს მუქ რეჟიმს"
+
+#: data/appdata/re.sonny.Tangram.metainfo.xml:102
+msgid "Add support for downloading files"
+msgstr "დაემატა ფაილების გადმოწერის მხარდაჭერა"
+
+#: data/appdata/re.sonny.Tangram.metainfo.xml:103
+msgid "Add home button"
+msgstr "საწყისზე დაბრუნების ღილაკის დამატება"
+
+#: data/appdata/re.sonny.Tangram.metainfo.xml:104
+msgid "Better desktop integration"
+msgstr "უკეთესი ინტეგრაცია სამუშაო მაგიდასთან"
+
+#: data/appdata/re.sonny.Tangram.metainfo.xml:105
+msgid "Fix the main window becoming tiny when unmaximizing"
+msgstr "გასწორდა მთავარი ფანჯრის პაწაწინად გახდომა გაშლილი ეკრანის გაუქმებისას"
+
+#: data/appdata/re.sonny.Tangram.metainfo.xml:106
+msgid "Enable touchpad/touchscreen swipe navigation gestures"
+msgstr "სენსორული დაფის/სენსორული ეკრანის გასმის ჟესტებით ნავიგაციის ჩართვა"
+
+#: data/appdata/re.sonny.Tangram.metainfo.xml:114
+msgid "Better notifications handling"
+msgstr "უკეთესი დამუშავება გაფრთხილებებისთვის"
+
+#: data/appdata/re.sonny.Tangram.metainfo.xml:115
+msgid "Improved web compatibility and performances"
+msgstr "გაუმჯობესდა ვებთან თავსებადობა და წარმადობა"
+
+#: data/appdata/re.sonny.Tangram.metainfo.xml:117
+msgid ""
+"Tangram now works properly on Flatpak 1.0 (Linux Mint, Ubuntu 18.04, ...)"
+msgstr "Tangram ახლა მუშაობს Flatpak 1.0-ზე (Linux Mint, Ubuntu 18.04, ...)"
+
+#: data/re.sonny.Tangram.desktop:13
+msgid "Franz;Ferdi;Rambox;Wavebox;Station;"
+msgstr "Franz;Ferdi;Rambox;Wavebox;Station;"
+
+#: data/re.sonny.Tangram.gschema.xml:22 src/menu.blp:9
+msgid "Tabs position"
+msgstr "ჩანართების პოზიცია"
+
+#: data/re.sonny.Tangram.gschema.xml:23
+msgid "Sets the position of the tabs"
+msgstr "აყენებს ჩანართების მდებარეობას"
+
+#: data/re.sonny.Tangram.gschema.xml:28
+msgid "Window width"
+msgstr "ფანჯრის სიგანე"
+
+#: data/re.sonny.Tangram.gschema.xml:29
+msgid "Width of the window"
+msgstr "ფანჯრის სიგანე"
+
+#: data/re.sonny.Tangram.gschema.xml:34
+msgid "Window height"
+msgstr "ფანჯრის სიმაღლე"
+
+#: data/re.sonny.Tangram.gschema.xml:35
+msgid "Height of the window"
+msgstr "ფანჯრის სიმაღლე"
+
+#: data/re.sonny.Tangram.gschema.xml:40
+msgid "Window maximized"
+msgstr "გადიდებული ფანჯარა"
+
+#: data/re.sonny.Tangram.gschema.xml:41
+msgid "Whether the window is maximized"
+msgstr "როცა ფანჯარა მთელ ეკრანზეა გაშლილი"
+
+#: data/re.sonny.Tangram.gschema.xml:46
+msgid "Instances"
+msgstr "გაშვებული ასლები"
+
+#: data/re.sonny.Tangram.gschema.xml:48
+msgid "Identifiers of instances to be found in /re/sonny/Tangram/instances/"
+msgstr ""
+"გაშვებული ასლის იდენტიფიკატორები შეგიძლია, იპოვოთ მისამართზე /re/sonny/"
+"Tangram/instances/"
+
+#: data/re.sonny.Tangram.gschema.xml:55 src/instanceDialog.blp:24
+msgid "Name"
+msgstr "სახელი"
+
+#: data/re.sonny.Tangram.gschema.xml:56
+msgid "Name to display"
+msgstr "საჩვენებელი სახელი"
+
+#: data/re.sonny.Tangram.gschema.xml:60 src/instanceDialog.blp:34
+msgid "URL"
+msgstr "URL"
+
+#: data/re.sonny.Tangram.gschema.xml:61
+msgid "Start URL"
+msgstr "საწყისი URL"
+
+#: data/re.sonny.Tangram.gschema.xml:65 src/instanceDialog.blp:52
+msgid "User agent"
+msgstr "მომხმარებლის აგენტი"
+
+#: data/re.sonny.Tangram.gschema.xml:67
+msgid ""
+"String that will be used as user agent, to identify the browser to the web "
+"servers."
+msgstr ""
+"სტრიქონი, რომელიც გამოყენებული იქნება მომხმარებლის აგენტად, ბრაუზერის "
+"იდენტიფიკაციისთვის ვებსერვერებზე."
+
+#: data/re.sonny.Tangram.gschema.xml:74 src/instanceDialog.blp:44
+msgid "Notifications priority"
+msgstr "გაფრთხილებების პრიორიტეტი"
+
+#: data/re.sonny.Tangram.gschema.xml:75
+msgid "Sets the priority of notifications"
+msgstr "აყენებს გაფრთხილებების პრიორიტეტს"
+
+#. TRANSLATORS: eg. 'Translator Name <your.email@domain.com>' or 'Translator Name https://website.example'
+#: src/AboutDialog.js:35
+msgid "translator-credits"
+msgstr "ეკატერინე პაპავა"
+
+#: src/instanceDialog.blp:46
+msgid "Normal"
+msgstr "ნორმალური"
+
+#: src/instanceDialog.blp:46
+msgid "Low"
+msgstr "დაბალი"
+
+#: src/instanceDialog.blp:46
+msgid "High"
+msgstr "მაღალი"
+
+#: src/instanceDialog.blp:46
+msgid "Urgent"
+msgstr "გადაუდებელი"
+
+#: src/shortcuts.blp:11
+msgctxt "shortcut window"
+msgid "General"
+msgstr "ზოგადი"
+
+#: src/shortcuts.blp:14
+msgctxt "shortcut window"
+msgid "Go to the next tab"
+msgstr "შემდეგი ჩანართზე გადასვლა"
+
+#: src/shortcuts.blp:19
+msgctxt "shortcut window"
+msgid "Go to the previous tab"
+msgstr "წინა ჩანართზე გადასვლა"
+
+#: src/shortcuts.blp:24
+msgctxt "shortcut window"
+msgid "Move current tab to the left"
+msgstr "მიმდინარე ჩანართის მარცხნივ გაწევა"
+
+#: src/shortcuts.blp:29
+msgctxt "shortcut window"
+msgid "Move current tab to the right"
+msgstr "მიმდინარე ჩანართის მარჯვნივ გაწევა"
+
+#: src/shortcuts.blp:34
+msgctxt "shortcut window"
+msgid "Quit"
+msgstr "გასვლა"
+
+#: src/shortcuts.blp:39
+msgctxt "shortcut window"
+msgid "Shortcuts"
+msgstr "მალსახმობები"
+
+#: src/shortcuts.blp:44
+msgctxt "shortcut window"
+msgid "Toggle inspector"
+msgstr "ინსპექტორის გადართვა"
+
+#: src/shortcuts.blp:49
+msgctxt "shortcut window"
+msgid "First – Ninth Tab"
+msgstr "პირველი – მეცხრე ჩანართი"
+
+#: src/shortcuts.blp:55
+msgctxt "shortcut window"
+msgid "Navigation"
+msgstr "ნავიგაცია"
+
+#: src/shortcuts.blp:58
+msgctxt "shortcut window"
+msgid "Go to homepage"
+msgstr "საწყის გვერდზე გადასვლა"
+
+#: src/shortcuts.blp:63
+msgctxt "shortcut window"
+msgid "Reload current page"
+msgstr "მიმდინარე გვერდის თავიდან ჩატვირთვა"
+
+#: src/shortcuts.blp:68
+msgctxt "shortcut window"
+msgid "Reload bypassing cache"
+msgstr "თავიდან ჩატვირთვა ქეშის გვერდის ავლით"
+
+#: src/shortcuts.blp:73
+msgctxt "shortcut window"
+msgid "Stop loading current page"
+msgstr "მიმდინარე გვერდის ჩატვირთვის შეწყვეტა"
+
+#: src/shortcuts.blp:78 src/shortcuts.blp:94
+msgctxt "shortcut window"
+msgid "Go back to the previous page"
+msgstr "წინა გვერდზე დაბრუნება"
+
+#: src/shortcuts.blp:83 src/shortcuts.blp:99
+msgctxt "shortcut window"
+msgid "Go forward to the next page"
+msgstr "შემდეგ გვერდზე გადასვლა"
+
+#: src/shortcuts.blp:88
+msgctxt "shortcut window"
+msgid "Focus the address bar"
+msgstr "ფოკუსი მისამართის ზოლზე"
+
+#: src/menu.blp:13
+msgid "Top"
+msgstr "ზედა"
+
+#: src/menu.blp:19
+msgid "Left"
+msgstr "მარცხენა"
+
+#: src/menu.blp:25
+msgid "Right"
+msgstr "მარჯვენა"
+
+#: src/menu.blp:31
+msgid "Bottom"
+msgstr "ქვემო"
+
+#: src/menu.blp:40
+msgid "Keyboard Shortcuts"
+msgstr "კლავიატურის მალსახმობები"
+
+#: src/menu.blp:45
+msgid "About Tangram"
+msgstr "Tangram-ის შესახებ"
