@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: re.sonny.Tangram\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-09-18 16:27+0200\n"
-"PO-Revision-Date: 2026-10-01 16:31+0000\n"
+"PO-Revision-Date: 2026-10-02 16:51+0000\n"
 "Last-Translator: Hazel L <hazeltwink@gmail.com>\n"
 "Language-Team: Greek <https://hosted.weblate.org/projects/tangram/tangram/el/>\n"
 "Language: el\n"
@@ -29,27 +29,28 @@ msgstr "Sonny Piers"
 #: data/appdata/re.sonny.Tangram.metainfo.xml:10
 #: data/re.sonny.Tangram.desktop:4
 msgid "Browser for your pinned tabs"
-msgstr ""
+msgstr "Περιηγητής για τις καρφιτσωμένες καρτέλες σας"
 
 #: data/appdata/re.sonny.Tangram.metainfo.xml:13
+#, fuzzy
 msgid "Tangram is a new kind of browser. It is designed to organize and run your Web applications. Each tab is persistent and independent. You can set multiple tabs with different accounts for the same application."
-msgstr ""
+msgstr "Το Tangram είναι ένα νέο είδος περιηγητή. Έχει σχεδιαστεί ώστε να οργανώνει και να τρέχει τις εφαρμογές Web σας. Κάθε καρτέλα είναι σταθερή και ανεξάρτητη. Έχετε την δυνατότητα να δημιουργήσετε πολλαπλές καρτέλες με διαφορετικούς λογαριασμούς για την ίδια εφαρμογή."
 
 #: data/appdata/re.sonny.Tangram.metainfo.xml:17
 msgid "Common use cases:"
-msgstr ""
+msgstr "Συνηθισμένες περιπτώσεις χρήσης:"
 
 #: data/appdata/re.sonny.Tangram.metainfo.xml:20
 msgid "Stay up to date with your favorite communities; Mastodon, Twitter, ..."
-msgstr ""
+msgstr "Μείνετε ενήμεροι με τις αγαπημένες σας κοινότητες: Mastodon, Twitter, …"
 
 #: data/appdata/re.sonny.Tangram.metainfo.xml:22
 msgid "Merge all these chat applications into one; WhatsApp, Messenger, Telegram, ..."
-msgstr ""
+msgstr "Συγχωνεύστε όλες τις εφαρμογές συνομιλίας σας σε μία: WhatsApp, Messenger, Telegram, …"
 
 #: data/appdata/re.sonny.Tangram.metainfo.xml:24
 msgid "Group your organization tools under one application; EMail, Calendar, ..."
-msgstr ""
+msgstr "Ομαδοποιήστε τα εργαλεία της εργασίας σας σε μία εφαρμογή: e-mail, ημερολόγιο, …"
 
 #: data/appdata/re.sonny.Tangram.metainfo.xml:25
 msgid "One-stop for multiple sources of documentation or information"
@@ -57,7 +58,7 @@ msgstr ""
 
 #: data/appdata/re.sonny.Tangram.metainfo.xml:43
 msgid "Fix a bug preventing to start Tangram"
-msgstr ""
+msgstr "Διόρθωση ενός bug που εμπόδιζε την εκκίνηση του Tangram"
 
 #: data/appdata/re.sonny.Tangram.metainfo.xml:44
 msgid "Reduce the noisiness of logs"
@@ -65,7 +66,7 @@ msgstr ""
 
 #: data/appdata/re.sonny.Tangram.metainfo.xml:52
 msgid "Fix a bug preventing to add new tabs"
-msgstr ""
+msgstr "Διόρθωση ενός bug που εμπόδιζε την προσθήκη νέων καρτελών"
 
 #: data/appdata/re.sonny.Tangram.metainfo.xml:60
 msgid "Notifications priority is normal instead of urgent by default"
@@ -89,19 +90,21 @@ msgstr ""
 
 #: data/appdata/re.sonny.Tangram.metainfo.xml:72
 msgid "Fix window title"
-msgstr ""
+msgstr "Διόρθωση τίτλου παραθύρου"
 
 #: data/appdata/re.sonny.Tangram.metainfo.xml:73
+#, fuzzy
 msgid "Update GNOME runtime to 41"
-msgstr ""
+msgstr "Ενημέρωση GNOME runtime στην έκδοση 41"
 
 #: data/appdata/re.sonny.Tangram.metainfo.xml:82
 msgid "Fix an issue preventing some sites such as Twitter or Facebook from being added."
 msgstr ""
 
 #: data/appdata/re.sonny.Tangram.metainfo.xml:83
+#, fuzzy
 msgid "Update GNOME runtime to 3.38"
-msgstr ""
+msgstr "Ενημέρωση GNOME runtime στην έκδοση 3.38"
 
 #: data/appdata/re.sonny.Tangram.metainfo.xml:91
 msgid "Enable spell checking"
@@ -113,7 +116,7 @@ msgstr ""
 
 #: data/appdata/re.sonny.Tangram.metainfo.xml:93
 msgid "New project icon/logo"
-msgstr ""
+msgstr "Νέο εικονίδιο/λογότυπο έργου"
 
 #: data/appdata/re.sonny.Tangram.metainfo.xml:94
 msgid "New tab background color respects dark mode"
@@ -197,15 +200,15 @@ msgstr ""
 
 #: data/re.sonny.Tangram.gschema.xml:55 src/instanceDialog.blp:24
 msgid "Name"
-msgstr ""
+msgstr "Όνομα"
 
 #: data/re.sonny.Tangram.gschema.xml:56
 msgid "Name to display"
-msgstr ""
+msgstr "Όνομα προς εμφάνιση"
 
 #: data/re.sonny.Tangram.gschema.xml:60 src/instanceDialog.blp:34
 msgid "URL"
-msgstr ""
+msgstr "Διεύθυνση URL"
 
 #: data/re.sonny.Tangram.gschema.xml:61
 msgid "Start URL"
@@ -213,19 +216,19 @@ msgstr ""
 
 #: data/re.sonny.Tangram.gschema.xml:65 src/instanceDialog.blp:52
 msgid "User agent"
-msgstr ""
+msgstr "Πράκτορας χρήστη"
 
 #: data/re.sonny.Tangram.gschema.xml:67
 msgid "String that will be used as user agent, to identify the browser to the web servers."
-msgstr ""
+msgstr "Συμβολοσειρά που θα χρησιμοποιηθεί ως πράκτορας χρήστη, με την οποία θα παρουσιάζεται ο περιηγητής σε διακομιστές του διαδικτύου."
 
 #: data/re.sonny.Tangram.gschema.xml:74 src/instanceDialog.blp:44
 msgid "Notifications priority"
-msgstr ""
+msgstr "Προτεραιότητα ειδοποιήσεων"
 
 #: data/re.sonny.Tangram.gschema.xml:75
 msgid "Sets the priority of notifications"
-msgstr ""
+msgstr "Ορίζει την προτεραιότητα των ειδοποιήσεων"
 
 #. TRANSLATORS: eg. 'Translator Name <your.email@domain.com>' or 'Translator Name https://website.example'
 #: src/AboutDialog.js:35
@@ -234,104 +237,105 @@ msgstr ""
 
 #: src/instanceDialog.blp:46
 msgid "Normal"
-msgstr ""
+msgstr "Κανονική"
 
 #: src/instanceDialog.blp:46
 msgid "Low"
-msgstr ""
+msgstr "Χαμηλή"
 
 #: src/instanceDialog.blp:46
 msgid "High"
-msgstr ""
+msgstr "Υψηλή"
 
 #: src/instanceDialog.blp:46
 msgid "Urgent"
-msgstr ""
+msgstr "Επείγουσα"
 
 #: src/shortcuts.blp:11
+#, fuzzy
 msgctxt "shortcut window"
 msgid "General"
-msgstr ""
+msgstr "Γενικά"
 
 #: src/shortcuts.blp:14
 msgctxt "shortcut window"
 msgid "Go to the next tab"
-msgstr ""
+msgstr "Μετάβαση στην επόμενη καρτέλα"
 
 #: src/shortcuts.blp:19
 msgctxt "shortcut window"
 msgid "Go to the previous tab"
-msgstr ""
+msgstr "Μετάβαση στην προηγούμενη καρτέλα"
 
 #: src/shortcuts.blp:24
 msgctxt "shortcut window"
 msgid "Move current tab to the left"
-msgstr ""
+msgstr "Μετακίνηση της τρέχουσας καρτέλας στα αριστερά"
 
 #: src/shortcuts.blp:29
 msgctxt "shortcut window"
 msgid "Move current tab to the right"
-msgstr ""
+msgstr "Μετακίνηση της τρέχουσας καρτέλας στα δεξιά"
 
 #: src/shortcuts.blp:34
 msgctxt "shortcut window"
 msgid "Quit"
-msgstr ""
+msgstr "Έξοδος"
 
 #: src/shortcuts.blp:39
 msgctxt "shortcut window"
 msgid "Shortcuts"
-msgstr ""
+msgstr "Συντομεύσεις"
 
 #: src/shortcuts.blp:44
 msgctxt "shortcut window"
 msgid "Toggle inspector"
-msgstr ""
+msgstr "Εναλλαγή επιθεώρησης"
 
 #: src/shortcuts.blp:49
 msgctxt "shortcut window"
 msgid "First – Ninth Tab"
-msgstr ""
+msgstr "Πρώτη έως ένατη καρτέλα"
 
 #: src/shortcuts.blp:55
 msgctxt "shortcut window"
 msgid "Navigation"
-msgstr ""
+msgstr "Πλοήγηση"
 
 #: src/shortcuts.blp:58
 msgctxt "shortcut window"
 msgid "Go to homepage"
-msgstr ""
+msgstr "Μετάβαση στην αρχική σελίδα"
 
 #: src/shortcuts.blp:63
 msgctxt "shortcut window"
 msgid "Reload current page"
-msgstr ""
+msgstr "Ανανέωση τρέχουσας σελίδας"
 
 #: src/shortcuts.blp:68
 msgctxt "shortcut window"
 msgid "Reload bypassing cache"
-msgstr ""
+msgstr "Ανανέωση με παράλειψη της κρυφής μνήμης"
 
 #: src/shortcuts.blp:73
 msgctxt "shortcut window"
 msgid "Stop loading current page"
-msgstr ""
+msgstr "Διακοπή φόρτωσης τρέχουσας σελίδας"
 
 #: src/shortcuts.blp:78 src/shortcuts.blp:94
 msgctxt "shortcut window"
 msgid "Go back to the previous page"
-msgstr ""
+msgstr "Μετάβαση μία σελίδα πίσω"
 
 #: src/shortcuts.blp:83 src/shortcuts.blp:99
 msgctxt "shortcut window"
 msgid "Go forward to the next page"
-msgstr ""
+msgstr "Μετάβαση μία σελίδα μπροστά"
 
 #: src/shortcuts.blp:88
 msgctxt "shortcut window"
 msgid "Focus the address bar"
-msgstr ""
+msgstr "Εστίαση στη γραμμή διευθύνσεων"
 
 #: src/menu.blp:13
 msgid "Top"
@@ -339,11 +343,11 @@ msgstr ""
 
 #: src/menu.blp:19
 msgid "Left"
-msgstr ""
+msgstr "Αριστερά"
 
 #: src/menu.blp:25
 msgid "Right"
-msgstr ""
+msgstr "Δεξιά"
 
 #: src/menu.blp:31
 msgid "Bottom"
@@ -351,8 +355,8 @@ msgstr ""
 
 #: src/menu.blp:40
 msgid "Keyboard Shortcuts"
-msgstr ""
+msgstr "Συντομεύσεις πληκτρολογίου"
 
 #: src/menu.blp:45
 msgid "About Tangram"
-msgstr ""
+msgstr "Σχετικά με το Tangram"
