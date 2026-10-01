@@ -8,15 +8,15 @@ msgstr ""
 "Project-Id-Version: re.sonny.Tangram\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-09-18 16:27+0200\n"
-"PO-Revision-Date: 2023-02-05 18:39+0000\n"
-"Last-Translator: Sabri Ünal <libreajans@gmail.com>\n"
-"Language-Team: Turkish <https://hosted.weblate.org/projects/tangram/tangram/tr/>\n"
-"Language: tr\n"
+"PO-Revision-Date: 2024-07-09 22:09+0000\n"
+"Last-Translator: Milo Ivir <mail@milotype.de>\n"
+"Language-Team: Croatian <https://hosted.weblate.org/projects/tangram/tangram/hr/>\n"
+"Language: hr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.16-dev\n"
+"Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
+"X-Generator: Weblate 5.7-dev\n"
 
 #: data/appdata/re.sonny.Tangram.metainfo.xml:5 data/re.sonny.Tangram.desktop:3
 msgid "Tangram"
@@ -29,127 +29,127 @@ msgstr "Sonny Piers"
 #: data/appdata/re.sonny.Tangram.metainfo.xml:10
 #: data/re.sonny.Tangram.desktop:4
 msgid "Browser for your pinned tabs"
-msgstr "Sabitlenmiş sekmeleriniz için tarayıcı"
+msgstr "Preglednik za prikvačene kartice"
 
 #: data/appdata/re.sonny.Tangram.metainfo.xml:13
 msgid "Tangram is a new kind of browser. It is designed to organize and run your Web applications. Each tab is persistent and independent. You can set multiple tabs with different accounts for the same application."
-msgstr "Tangram yeni bir tarayıcı türüdür. Web uygulamalarınızı organize etmek ve çalıştırmak için tasarlanmıştır. Her sekme kalıcı ve bağımsızdır. Aynı uygulama için farklı hesaplara sahip birden fazla sekme ayarlayabilirsiniz."
+msgstr "Tangram je nova vrsta preglednika. Dizajniran je za organiziranje i pokretanje web aplikacija. Svaka je kartica fiksna i neovisna. Omogućuje postavljanje više kartica s različitim računima za istu aplikaciju."
 
 #: data/appdata/re.sonny.Tangram.metainfo.xml:17
 msgid "Common use cases:"
-msgstr "Yaygın kullanım durumları:"
+msgstr "Uobičajeni slučajevi upotrebe:"
 
 #: data/appdata/re.sonny.Tangram.metainfo.xml:20
 msgid "Stay up to date with your favorite communities; Mastodon, Twitter, ..."
-msgstr "Gözde topluluklarınızla güncel kalın; Mastodon, Twitter, ..."
+msgstr "Budi u toku sa svojim omiljenim zajednicama; Mastodon, Twitter, …"
 
 #: data/appdata/re.sonny.Tangram.metainfo.xml:22
 msgid "Merge all these chat applications into one; WhatsApp, Messenger, Telegram, ..."
-msgstr "Tüm sohbet uygulamalarını tek uygulamada birleştirin; WhatsApp, Messenger, Telegram, ..."
+msgstr "Spoji sve chat aplikacije u jednu; WhatsApp, Messenger, Telegram, …"
 
 #: data/appdata/re.sonny.Tangram.metainfo.xml:24
 msgid "Group your organization tools under one application; EMail, Calendar, ..."
-msgstr "Kurumsal araçlarınızı tek uygulama altında toplayın; E-posta, Takvim, ..."
+msgstr "Grupiraj alate tvoje tvrtke ili ustanove u jednu aplikaciju; EMail, Kalendar, …"
 
 #: data/appdata/re.sonny.Tangram.metainfo.xml:25
 msgid "One-stop for multiple sources of documentation or information"
-msgstr "Birden fazla belge veya bilgi kaynağı için tek durak"
+msgstr "Centralno mjesto za izvore dokumentacija ili informacija"
 
 #: data/appdata/re.sonny.Tangram.metainfo.xml:43
 msgid "Fix a bug preventing to start Tangram"
-msgstr "Tangram'ı başlatmayı engelleyen bir hata düzeltildi"
+msgstr "Ispravak greške koja je sprečavala pokretanje Tangrama"
 
 #: data/appdata/re.sonny.Tangram.metainfo.xml:44
 msgid "Reduce the noisiness of logs"
-msgstr "Günlüklerin gürültüsü azaltıldı"
+msgstr "Kraćenje sadržaja dnevnika na bitne informacije"
 
 #: data/appdata/re.sonny.Tangram.metainfo.xml:52
 msgid "Fix a bug preventing to add new tabs"
-msgstr "Yeni sekme eklemeyi engelleyen bir hata düzeltildi"
+msgstr "Ispravak greške koja je sprečavala dodavanje kartica"
 
 #: data/appdata/re.sonny.Tangram.metainfo.xml:60
 msgid "Notifications priority is normal instead of urgent by default"
-msgstr "Bildirim önceliği varsayılan olarak acil yerine normaldir"
+msgstr "Za prioritet obavijesti se standardno koristi „Normalno” umjesto „Hitno”"
 
 #: data/appdata/re.sonny.Tangram.metainfo.xml:61
 msgid "Add a per-tab setting to change notifications priority"
-msgstr "Bildirim önceliğini değiştirmek için sekme başına ayar ekleme"
+msgstr "Dodana postavka za pojedinačne kartice za mijenjanje prioriteta obavijesti"
 
 #: data/appdata/re.sonny.Tangram.metainfo.xml:62
 msgid "Fix authentication on many popular websites"
-msgstr "Birçok yaygın web sitesinde kimlik doğrulaması için düzeltme"
+msgstr "Ispravak autenitifikacije na mnogim popularnim web stranicama"
 
 #: data/appdata/re.sonny.Tangram.metainfo.xml:63
 msgid "Fix Cancel button in tab settings dialog"
-msgstr "Sekme ayarları iletişim kutusundaki İptal düğmesi için düzeltme"
+msgstr "Ispravak greške s gumbom „Odustani” u dijalogu postavki kartica"
 
 #: data/appdata/re.sonny.Tangram.metainfo.xml:64
 msgid "Use middle-click or Ctrl+click to open links in the browser"
-msgstr "Bağlantıları tarayıcıda açmak için orta tıklama veya Ctrl+tıklama kullanımı"
+msgstr "Koristi srednji klik ili Ctrl+klik za otvaranje poveznica u pregledniku"
 
 #: data/appdata/re.sonny.Tangram.metainfo.xml:72
 msgid "Fix window title"
-msgstr "Pencere başlığı için düzeltme"
+msgstr "Ispravak za naslov prozora"
 
 #: data/appdata/re.sonny.Tangram.metainfo.xml:73
 msgid "Update GNOME runtime to 41"
-msgstr "GNOME çalışma zaman 41'e güncellendi"
+msgstr "Ažurirano vrijeme izvođenja GNOME-a na 41"
 
 #: data/appdata/re.sonny.Tangram.metainfo.xml:82
 msgid "Fix an issue preventing some sites such as Twitter or Facebook from being added."
-msgstr "Twitter veya Facebook gibi bazı sitelerin eklenmesini engelleyen bir sorun düzeltildi."
+msgstr "Ispravak problema koji sprečava dodavanje nekih web stranica kao što su Twitter ili Facebook."
 
 #: data/appdata/re.sonny.Tangram.metainfo.xml:83
 msgid "Update GNOME runtime to 3.38"
-msgstr "GNOME çalışma zamanı 3.38'e güncellendi"
+msgstr "Ažurirano vrijeme izvođenja GNOME-a na 3.38"
 
 #: data/appdata/re.sonny.Tangram.metainfo.xml:91
 msgid "Enable spell checking"
-msgstr "Yazım denetimi etkinleştirildi"
+msgstr "Omogućena provjera pravopisa"
 
 #: data/appdata/re.sonny.Tangram.metainfo.xml:92
 msgid "Customizable user-agent per instance"
-msgstr "Örnek başına özelleştirilebilir kullanıcı aracısı"
+msgstr "Prilagodljiv korisnički agent po instanci"
 
 #: data/appdata/re.sonny.Tangram.metainfo.xml:93
 msgid "New project icon/logo"
-msgstr "Yeni proje simgesi/logosu"
+msgstr "Nova ikona/logotip projekta"
 
 #: data/appdata/re.sonny.Tangram.metainfo.xml:94
 msgid "New tab background color respects dark mode"
-msgstr "Yeni sekme arka plan rengi karanlık kipe uyar"
+msgstr "Boja pozadine nove kartice uzima u obzir tamni način rada"
 
 #: data/appdata/re.sonny.Tangram.metainfo.xml:102
 msgid "Add support for downloading files"
-msgstr "Dosya indirme desteği eklendi"
+msgstr "Dodana podrška za preuzimanje datoteka"
 
 #: data/appdata/re.sonny.Tangram.metainfo.xml:103
 msgid "Add home button"
-msgstr "Ev düğmesi eklendi"
+msgstr "Dodan gumb za početnu stranicu"
 
 #: data/appdata/re.sonny.Tangram.metainfo.xml:104
 msgid "Better desktop integration"
-msgstr "Daha iyi masaüstü entegrasyonu"
+msgstr "Bolja integracija s radnom površinom"
 
 #: data/appdata/re.sonny.Tangram.metainfo.xml:105
 msgid "Fix the main window becoming tiny when unmaximizing"
-msgstr "Ana pencerenin Büyütme işleminden sonra küçücük olması hatası düzeltildi"
+msgstr "Ispravak glavnog prozora koji postaje malen kada se smanjuje"
 
 #: data/appdata/re.sonny.Tangram.metainfo.xml:106
 msgid "Enable touchpad/touchscreen swipe navigation gestures"
-msgstr "Dokunmatik yüzey/dokunmatik ekran kaydırarak gezinme hareketleri etkinleştirildi"
+msgstr "Omogući geste navigacije prstima na dodirnoj ploči/ekranu osjetljivom na dodir"
 
 #: data/appdata/re.sonny.Tangram.metainfo.xml:114
 msgid "Better notifications handling"
-msgstr "Daha iyi bildirim yönetimi"
+msgstr "Bolje rukovanje obavijestima"
 
 #: data/appdata/re.sonny.Tangram.metainfo.xml:115
 msgid "Improved web compatibility and performances"
-msgstr "Web uyumluluğu ve performans iyileştirmeleri"
+msgstr "Poboljšana web kompatibilnost i performanse"
 
 #: data/appdata/re.sonny.Tangram.metainfo.xml:117
 msgid "Tangram now works properly on Flatpak 1.0 (Linux Mint, Ubuntu 18.04, ...)"
-msgstr "Tangram artık Flatpak 1.0 üzerinde düzgün çalışıyor (Linux Mint, Ubuntu 18.04, ...)"
+msgstr "Tangram sada ispravno radi na Flatpak 1.0 (Linux Mint, Ubuntu 18.04, …)"
 
 #: data/re.sonny.Tangram.desktop:13
 msgid "Franz;Ferdi;Rambox;Wavebox;Station;"
@@ -157,202 +157,202 @@ msgstr "Franz;Ferdi;Rambox;Wavebox;Station;"
 
 #: data/re.sonny.Tangram.gschema.xml:22 src/menu.blp:9
 msgid "Tabs position"
-msgstr "Sekme konumu"
+msgstr "Položaj kartica"
 
 #: data/re.sonny.Tangram.gschema.xml:23
 msgid "Sets the position of the tabs"
-msgstr "Sekmelerin konumunu ayarlar"
+msgstr "Postavlja položaj kartica"
 
 #: data/re.sonny.Tangram.gschema.xml:28
 msgid "Window width"
-msgstr "Pencere genişliği"
+msgstr "Širina prozora"
 
 #: data/re.sonny.Tangram.gschema.xml:29
 msgid "Width of the window"
-msgstr "Pencerenin genişliği"
+msgstr "Širina prozora"
 
 #: data/re.sonny.Tangram.gschema.xml:34
 msgid "Window height"
-msgstr "Pencere yüksekliği"
+msgstr "Visina prozora"
 
 #: data/re.sonny.Tangram.gschema.xml:35
 msgid "Height of the window"
-msgstr "Pencerenin yüksekliği"
+msgstr "Visina prozora"
 
 #: data/re.sonny.Tangram.gschema.xml:40
 msgid "Window maximized"
-msgstr "Pencere ekranı kapladı"
+msgstr "Prozor rasklopljen"
 
 #: data/re.sonny.Tangram.gschema.xml:41
 msgid "Whether the window is maximized"
-msgstr "Pencerenin ekranı kaplama durumu"
+msgstr "Veličina prozora"
 
 #: data/re.sonny.Tangram.gschema.xml:46
 msgid "Instances"
-msgstr "Örnekler"
+msgstr "Instance"
 
 #: data/re.sonny.Tangram.gschema.xml:48
 msgid "Identifiers of instances to be found in /re/sonny/Tangram/instances/"
-msgstr "/re/sonny/Tangram/instances/ içinde bulunacak örneklerin tanımlayıcıları"
+msgstr "Identifikatori instanci se nalaze u /re/sonny/Tangram/instances/"
 
 #: data/re.sonny.Tangram.gschema.xml:55 src/instanceDialog.blp:24
 msgid "Name"
-msgstr "Ad"
+msgstr "Ime"
 
 #: data/re.sonny.Tangram.gschema.xml:56
 msgid "Name to display"
-msgstr "Görünecek ad"
+msgstr "Ime za prikaz"
 
 #: data/re.sonny.Tangram.gschema.xml:60 src/instanceDialog.blp:34
 msgid "URL"
-msgstr "Adres"
+msgstr "URL"
 
 #: data/re.sonny.Tangram.gschema.xml:61
 msgid "Start URL"
-msgstr "Başlangıç Adresi"
+msgstr "URL početne stranice"
 
 #: data/re.sonny.Tangram.gschema.xml:65 src/instanceDialog.blp:52
 msgid "User agent"
-msgstr "Kullanıcı aracısı"
+msgstr "Korisnički agent"
 
 #: data/re.sonny.Tangram.gschema.xml:67
 msgid "String that will be used as user agent, to identify the browser to the web servers."
-msgstr "Web tarayıcıyı sunuculara tanımlamaya yarayan, kullanıcı aracısı olarak kullanılacak dizge."
+msgstr "Znakovni niz koji će se koristiti kao korisnički agent za identifikaciju preglednika na web serverima."
 
 #: data/re.sonny.Tangram.gschema.xml:74 src/instanceDialog.blp:44
 msgid "Notifications priority"
-msgstr "Bildirim önceliği"
+msgstr "Prioritet obavijesti"
 
 #: data/re.sonny.Tangram.gschema.xml:75
 msgid "Sets the priority of notifications"
-msgstr "Bildirimlerin önceliğini ayarlar"
+msgstr "Postavlja prioritet obavijesti"
 
 #. TRANSLATORS: eg. 'Translator Name <your.email@domain.com>' or 'Translator Name https://website.example'
 #: src/AboutDialog.js:35
 msgid "translator-credits"
-msgstr "Sabri Ünal <libreajans@gmail.com>"
+msgstr "Milo Ivir <mail@milotype.de>"
 
 #: src/instanceDialog.blp:46
 msgid "Normal"
-msgstr "Normal"
+msgstr "Normalno"
 
 #: src/instanceDialog.blp:46
 msgid "Low"
-msgstr "Düşük"
+msgstr "Nisko"
 
 #: src/instanceDialog.blp:46
 msgid "High"
-msgstr "Yüksek"
+msgstr "Visoko"
 
 #: src/instanceDialog.blp:46
 msgid "Urgent"
-msgstr "Acil"
+msgstr "Hitno"
 
 #: src/shortcuts.blp:11
 msgctxt "shortcut window"
 msgid "General"
-msgstr "Genel"
+msgstr "Općenito"
 
 #: src/shortcuts.blp:14
 msgctxt "shortcut window"
 msgid "Go to the next tab"
-msgstr "Sonraki sekmeye git"
+msgstr "Prijeđi na sljedeću karticu"
 
 #: src/shortcuts.blp:19
 msgctxt "shortcut window"
 msgid "Go to the previous tab"
-msgstr "Önceki sekmeye git"
+msgstr "Prijeđi na prethodnu karticu"
 
 #: src/shortcuts.blp:24
 msgctxt "shortcut window"
 msgid "Move current tab to the left"
-msgstr "Geçerli sekmeyi sola taşı"
+msgstr "Premjesti trenutačnu karticu ulijevo"
 
 #: src/shortcuts.blp:29
 msgctxt "shortcut window"
 msgid "Move current tab to the right"
-msgstr "Geçerli sekmeyi sağa taşı"
+msgstr "Premjesti trenutačnu karticu udesno"
 
 #: src/shortcuts.blp:34
 msgctxt "shortcut window"
 msgid "Quit"
-msgstr "Çık"
+msgstr "Zatvori aplikaciju"
 
 #: src/shortcuts.blp:39
 msgctxt "shortcut window"
 msgid "Shortcuts"
-msgstr "Kısayollar"
+msgstr "Prečaci"
 
 #: src/shortcuts.blp:44
 msgctxt "shortcut window"
 msgid "Toggle inspector"
-msgstr "İnceleyiciyi aç/kapat"
+msgstr "Uključi/isključi inspektora"
 
 #: src/shortcuts.blp:49
 msgctxt "shortcut window"
 msgid "First – Ninth Tab"
-msgstr "İlk – Dokuzuncu Sekme"
+msgstr "Prva do deveta kartica"
 
 #: src/shortcuts.blp:55
 msgctxt "shortcut window"
 msgid "Navigation"
-msgstr "Gezinme"
+msgstr "Navigacija"
 
 #: src/shortcuts.blp:58
 msgctxt "shortcut window"
 msgid "Go to homepage"
-msgstr "Başlangıç sayfasına git"
+msgstr "Prijeđi na web stranicu"
 
 #: src/shortcuts.blp:63
 msgctxt "shortcut window"
 msgid "Reload current page"
-msgstr "Geçerli sayfayı yeniden yükle"
+msgstr "Ponovo učitaj trenutačnu stranicu"
 
 #: src/shortcuts.blp:68
 msgctxt "shortcut window"
 msgid "Reload bypassing cache"
-msgstr "Önbelleği atlayarak yeniden yükle"
+msgstr "Ponovno učitavanje stranice"
 
 #: src/shortcuts.blp:73
 msgctxt "shortcut window"
 msgid "Stop loading current page"
-msgstr "Geçerli sayfanın yüklenmesini durdur"
+msgstr "Prekini učitavanje trenutačne stranice"
 
 #: src/shortcuts.blp:78 src/shortcuts.blp:94
 msgctxt "shortcut window"
 msgid "Go back to the previous page"
-msgstr "Önceki sayfaya git"
+msgstr "Vrati se na prethodnu stranicu"
 
 #: src/shortcuts.blp:83 src/shortcuts.blp:99
 msgctxt "shortcut window"
 msgid "Go forward to the next page"
-msgstr "Sonraki sayfaya git"
+msgstr "Prijeđi na sljedeću stranicu"
 
 #: src/shortcuts.blp:88
 msgctxt "shortcut window"
 msgid "Focus the address bar"
-msgstr "Adres çubuğuna odaklan"
+msgstr "Fokusiraj adresnu traku"
 
 #: src/menu.blp:13
 msgid "Top"
-msgstr "Üst"
+msgstr "Gore"
 
 #: src/menu.blp:19
 msgid "Left"
-msgstr "Sol"
+msgstr "Lijevo"
 
 #: src/menu.blp:25
 msgid "Right"
-msgstr "Sağ"
+msgstr "Desno"
 
 #: src/menu.blp:31
 msgid "Bottom"
-msgstr "Alt"
+msgstr "Dolje"
 
 #: src/menu.blp:40
 msgid "Keyboard Shortcuts"
-msgstr "Klavye Kısayolları"
+msgstr "Tipkovnički prečaci"
 
 #: src/menu.blp:45
 msgid "About Tangram"
-msgstr "Tangram Hakkında"
+msgstr "O aplikaciji Tangram"

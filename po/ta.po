@@ -1,0 +1,358 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the re.sonny.Tangram package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: re.sonny.Tangram\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2022-09-18 16:27+0200\n"
+"PO-Revision-Date: 2025-03-12 18:55+0000\n"
+"Last-Translator: தமிழ்நேரம் <anishprabu.t@gmail.com>\n"
+"Language-Team: Tamil <https://hosted.weblate.org/projects/tangram/tangram/ta/>\n"
+"Language: ta\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 5.10.3-dev\n"
+
+#: data/appdata/re.sonny.Tangram.metainfo.xml:5 data/re.sonny.Tangram.desktop:3
+msgid "Tangram"
+msgstr "டாங்கிராம்"
+
+#: data/appdata/re.sonny.Tangram.metainfo.xml:6
+msgid "Sonny Piers"
+msgstr "சோனி பியர்ச்"
+
+#: data/appdata/re.sonny.Tangram.metainfo.xml:10
+#: data/re.sonny.Tangram.desktop:4
+msgid "Browser for your pinned tabs"
+msgstr "உங்கள் பின் செய்யப்பட்ட தாவல்களுக்கான உலாவி"
+
+#: data/appdata/re.sonny.Tangram.metainfo.xml:13
+msgid "Tangram is a new kind of browser. It is designed to organize and run your Web applications. Each tab is persistent and independent. You can set multiple tabs with different accounts for the same application."
+msgstr "டாங்கிராம் ஒரு புதிய வகையான உலாவி. இது உங்கள் வலை பயன்பாடுகளை ஒழுங்கமைக்கவும் இயக்கவும் வடிவமைக்கப்பட்டுள்ளது. ஒவ்வொரு தாவலும் தொடர்ச்சியான மற்றும் சுயாதீனமானவை. ஒரே பயன்பாட்டிற்கு வெவ்வேறு கணக்குகளுடன் பல தாவல்களை அமைக்கலாம்."
+
+#: data/appdata/re.sonny.Tangram.metainfo.xml:17
+msgid "Common use cases:"
+msgstr "பொதுவான பயன்பாட்டு வழக்குகள்:"
+
+#: data/appdata/re.sonny.Tangram.metainfo.xml:20
+msgid "Stay up to date with your favorite communities; Mastodon, Twitter, ..."
+msgstr "உங்களுக்கு பிடித்த சமூகங்களுடன் புதுப்பித்த நிலையில் இருங்கள்; மாச்டோடன், ட்விட்டர், ..."
+
+#: data/appdata/re.sonny.Tangram.metainfo.xml:22
+msgid "Merge all these chat applications into one; WhatsApp, Messenger, Telegram, ..."
+msgstr "இந்த அரட்டை பயன்பாடுகள் அனைத்தையும் ஒன்றில் ஒன்றிணைக்கவும்; வாட்ச்அப், மெசஞ்சர், தந்தி, ..."
+
+#: data/appdata/re.sonny.Tangram.metainfo.xml:24
+msgid "Group your organization tools under one application; EMail, Calendar, ..."
+msgstr "உங்கள் நிறுவன கருவிகளை ஒரு பயன்பாட்டின் கீழ் தொகுக்கவும்; மின்னஞ்சல், காலண்டர், ..."
+
+#: data/appdata/re.sonny.Tangram.metainfo.xml:25
+msgid "One-stop for multiple sources of documentation or information"
+msgstr "ஆவணங்கள் அல்லது தகவல்களின் பல ஆதாரங்களுக்கான ஒரு நிறுத்தம்"
+
+#: data/appdata/re.sonny.Tangram.metainfo.xml:43
+msgid "Fix a bug preventing to start Tangram"
+msgstr "டாங்கிராம் தொடங்குவதைத் தடுக்கும் பிழையை சரிசெய்யவும்"
+
+#: data/appdata/re.sonny.Tangram.metainfo.xml:44
+msgid "Reduce the noisiness of logs"
+msgstr "பதிவுகளின் சத்தத்தை குறைக்கவும்"
+
+#: data/appdata/re.sonny.Tangram.metainfo.xml:52
+msgid "Fix a bug preventing to add new tabs"
+msgstr "புதிய தாவல்களைச் சேர்க்கத் தடுக்கும் பிழையை சரிசெய்யவும்"
+
+#: data/appdata/re.sonny.Tangram.metainfo.xml:60
+msgid "Notifications priority is normal instead of urgent by default"
+msgstr "அறிவிப்புகள் முன்னிருப்பாக அவசரத்திற்கு பதிலாக முன்னுரிமை இயல்பானது"
+
+#: data/appdata/re.sonny.Tangram.metainfo.xml:61
+msgid "Add a per-tab setting to change notifications priority"
+msgstr "அறிவிப்புகளின் முன்னுரிமையை மாற்ற ஒரு தாவல் அமைப்பைச் சேர்க்கவும்"
+
+#: data/appdata/re.sonny.Tangram.metainfo.xml:62
+msgid "Fix authentication on many popular websites"
+msgstr "பல பிரபலமான வலைத்தளங்களில் அங்கீகாரத்தை சரிசெய்யவும்"
+
+#: data/appdata/re.sonny.Tangram.metainfo.xml:63
+msgid "Fix Cancel button in tab settings dialog"
+msgstr "தாவல் அமைப்புகள் உரையாடலில் ரத்துசெய் பொத்தானை சரிசெய்யவும்"
+
+#: data/appdata/re.sonny.Tangram.metainfo.xml:64
+msgid "Use middle-click or Ctrl+click to open links in the browser"
+msgstr "உலாவியில் இணைப்புகளைத் திறக்க நடுத்தர சொடுக்கு அல்லது Ctrl+ஐப் பயன்படுத்தவும்"
+
+#: data/appdata/re.sonny.Tangram.metainfo.xml:72
+msgid "Fix window title"
+msgstr "சாளர தலைப்பை சரிசெய்யவும்"
+
+#: data/appdata/re.sonny.Tangram.metainfo.xml:73
+msgid "Update GNOME runtime to 41"
+msgstr "க்னோம் இயக்க நேரத்தை 41 ஆக புதுப்பிக்கவும்"
+
+#: data/appdata/re.sonny.Tangram.metainfo.xml:82
+msgid "Fix an issue preventing some sites such as Twitter or Facebook from being added."
+msgstr "ட்விட்டர் அல்லது பேச்புக் போன்ற சில தளங்கள் சேர்க்கப்படுவதைத் தடுக்கும் சிக்கலை சரிசெய்யவும்."
+
+#: data/appdata/re.sonny.Tangram.metainfo.xml:83
+msgid "Update GNOME runtime to 3.38"
+msgstr "க்னோம் இயக்க நேரத்தை 3.38 ஆக புதுப்பிக்கவும்"
+
+#: data/appdata/re.sonny.Tangram.metainfo.xml:91
+msgid "Enable spell checking"
+msgstr "எழுத்துப்பிழை சோதனையை இயக்கவும்"
+
+#: data/appdata/re.sonny.Tangram.metainfo.xml:92
+msgid "Customizable user-agent per instance"
+msgstr "ஒரு உதாரணமாக தனிப்பயனாக்கக்கூடிய பயனர் முகவர்"
+
+#: data/appdata/re.sonny.Tangram.metainfo.xml:93
+msgid "New project icon/logo"
+msgstr "புதிய திட்ட ஐகான்/லோகோ"
+
+#: data/appdata/re.sonny.Tangram.metainfo.xml:94
+msgid "New tab background color respects dark mode"
+msgstr "புதிய தாவல் பின்னணி வண்ணம் இருண்ட பயன்முறையை மதிக்கிறது"
+
+#: data/appdata/re.sonny.Tangram.metainfo.xml:102
+msgid "Add support for downloading files"
+msgstr "கோப்புகளைப் பதிவிறக்குவதற்கான ஆதரவைச் சேர்க்கவும்"
+
+#: data/appdata/re.sonny.Tangram.metainfo.xml:103
+msgid "Add home button"
+msgstr "முகப்பு பொத்தானைச் சேர்க்கவும்"
+
+#: data/appdata/re.sonny.Tangram.metainfo.xml:104
+msgid "Better desktop integration"
+msgstr "சிறந்த டெச்க்டாப் ஒருங்கிணைப்பு"
+
+#: data/appdata/re.sonny.Tangram.metainfo.xml:105
+msgid "Fix the main window becoming tiny when unmaximizing"
+msgstr "முதன்மையான சாளரத்தை உமிழ்ந்து பார்க்கும்போது சிறியதாக மாற்றுவதை சரிசெய்யவும்"
+
+#: data/appdata/re.sonny.Tangram.metainfo.xml:106
+msgid "Enable touchpad/touchscreen swipe navigation gestures"
+msgstr "டச்பேட்/தொடுதிரை ச்வைப் வழிசெலுத்தல் சைகைகளை இயக்கவும்"
+
+#: data/appdata/re.sonny.Tangram.metainfo.xml:114
+msgid "Better notifications handling"
+msgstr "சிறந்த அறிவிப்புகள் கையாளுதல்"
+
+#: data/appdata/re.sonny.Tangram.metainfo.xml:115
+msgid "Improved web compatibility and performances"
+msgstr "மேம்படுத்தப்பட்ட வலை பொருந்தக்கூடிய தன்மை மற்றும் செயல்திறன்"
+
+#: data/appdata/re.sonny.Tangram.metainfo.xml:117
+msgid "Tangram now works properly on Flatpak 1.0 (Linux Mint, Ubuntu 18.04, ...)"
+msgstr "டாங்கிராம் இப்போது பிளாட்பாக் 1.0 இல் சரியாக வேலை செய்கிறது (லினக்ச் புதினா, உபுண்டு 18.04, ...)"
+
+#: data/re.sonny.Tangram.desktop:13
+msgid "Franz;Ferdi;Rambox;Wavebox;Station;"
+msgstr "ஃபிரான்ச்; ஃபெர்டி; ராம்பாக்ச்; அலைவரிசை; நிலையம்;"
+
+#: data/re.sonny.Tangram.gschema.xml:22 src/menu.blp:9
+msgid "Tabs position"
+msgstr "தாவல்கள் நிலை"
+
+#: data/re.sonny.Tangram.gschema.xml:23
+msgid "Sets the position of the tabs"
+msgstr "தாவல்களின் நிலையை அமைக்கிறது"
+
+#: data/re.sonny.Tangram.gschema.xml:28
+msgid "Window width"
+msgstr "சாளர அகலம்"
+
+#: data/re.sonny.Tangram.gschema.xml:29
+msgid "Width of the window"
+msgstr "சாளரத்தின் அகலம்"
+
+#: data/re.sonny.Tangram.gschema.xml:34
+msgid "Window height"
+msgstr "விண்டர் உயரம்"
+
+#: data/re.sonny.Tangram.gschema.xml:35
+msgid "Height of the window"
+msgstr "சாளரத்தின் உயரம்"
+
+#: data/re.sonny.Tangram.gschema.xml:40
+msgid "Window maximized"
+msgstr "சாளரம் அதிகரிக்கப்பட்டது"
+
+#: data/re.sonny.Tangram.gschema.xml:41
+msgid "Whether the window is maximized"
+msgstr "சாளரம் அதிகரிக்கப்பட்டுள்ளதா"
+
+#: data/re.sonny.Tangram.gschema.xml:46
+msgid "Instances"
+msgstr "நிகழ்வுகள்"
+
+#: data/re.sonny.Tangram.gschema.xml:48
+msgid "Identifiers of instances to be found in /re/sonny/Tangram/instances/"
+msgstr "/மறு/சோனி/டாங்கிராம்/நிகழ்வுகளில் காணப்பட வேண்டிய நிகழ்வுகளின் அடையாளங்காட்டிகள்/"
+
+#: data/re.sonny.Tangram.gschema.xml:55 src/instanceDialog.blp:24
+msgid "Name"
+msgstr "பெயர்"
+
+#: data/re.sonny.Tangram.gschema.xml:56
+msgid "Name to display"
+msgstr "காண்பிக்க பெயர்"
+
+#: data/re.sonny.Tangram.gschema.xml:60 src/instanceDialog.blp:34
+msgid "URL"
+msgstr "முகவரி"
+
+#: data/re.sonny.Tangram.gschema.xml:61
+msgid "Start URL"
+msgstr "முகவரி ஐத் தொடங்கவும்"
+
+#: data/re.sonny.Tangram.gschema.xml:65 src/instanceDialog.blp:52
+msgid "User agent"
+msgstr "பயனர் முகவர்"
+
+#: data/re.sonny.Tangram.gschema.xml:67
+msgid "String that will be used as user agent, to identify the browser to the web servers."
+msgstr "வலை சேவையகங்களுக்கு உலாவியை அடையாளம் காண, பயனர் முகவராகப் பயன்படுத்தப்படும் சரம்."
+
+#: data/re.sonny.Tangram.gschema.xml:74 src/instanceDialog.blp:44
+msgid "Notifications priority"
+msgstr "அறிவிப்புகள் முன்னுரிமை"
+
+#: data/re.sonny.Tangram.gschema.xml:75
+msgid "Sets the priority of notifications"
+msgstr "அறிவிப்புகளின் முன்னுரிமையை அமைக்கிறது"
+
+#. TRANSLATORS: eg. 'Translator Name <your.email@domain.com>' or 'Translator Name https://website.example'
+#: src/AboutDialog.js:35
+msgid "translator-credits"
+msgstr "மொழிபெயர்ப்பாளர்-வரவு"
+
+#: src/instanceDialog.blp:46
+msgid "Normal"
+msgstr "சாதாரண"
+
+#: src/instanceDialog.blp:46
+msgid "Low"
+msgstr "குறைந்த"
+
+#: src/instanceDialog.blp:46
+msgid "High"
+msgstr "உயர்ந்த"
+
+#: src/instanceDialog.blp:46
+msgid "Urgent"
+msgstr "விரைவு"
+
+#: src/shortcuts.blp:11
+msgctxt "shortcut window"
+msgid "General"
+msgstr "பொது"
+
+#: src/shortcuts.blp:14
+msgctxt "shortcut window"
+msgid "Go to the next tab"
+msgstr "அடுத்த தாவலுக்குச் செல்லவும்"
+
+#: src/shortcuts.blp:19
+msgctxt "shortcut window"
+msgid "Go to the previous tab"
+msgstr "முந்தைய தாவலுக்குச் செல்லவும்"
+
+#: src/shortcuts.blp:24
+msgctxt "shortcut window"
+msgid "Move current tab to the left"
+msgstr "தற்போதைய தாவலை இடதுபுறமாக நகர்த்தவும்"
+
+#: src/shortcuts.blp:29
+msgctxt "shortcut window"
+msgid "Move current tab to the right"
+msgstr "தற்போதைய தாவலை வலதுபுறமாக நகர்த்தவும்"
+
+#: src/shortcuts.blp:34
+msgctxt "shortcut window"
+msgid "Quit"
+msgstr "வெளியேறு"
+
+#: src/shortcuts.blp:39
+msgctxt "shortcut window"
+msgid "Shortcuts"
+msgstr "குறுக்குவழிகள்"
+
+#: src/shortcuts.blp:44
+msgctxt "shortcut window"
+msgid "Toggle inspector"
+msgstr "இன்ச்பெக்டரை மாற்றவும்"
+
+#: src/shortcuts.blp:49
+msgctxt "shortcut window"
+msgid "First – Ninth Tab"
+msgstr "முதல் - ஒன்பதாவது தாவல்"
+
+#: src/shortcuts.blp:55
+msgctxt "shortcut window"
+msgid "Navigation"
+msgstr "வானோடல்"
+
+#: src/shortcuts.blp:58
+msgctxt "shortcut window"
+msgid "Go to homepage"
+msgstr "முகப்புப்பக்கத்திற்குச் செல்லுங்கள்"
+
+#: src/shortcuts.blp:63
+msgctxt "shortcut window"
+msgid "Reload current page"
+msgstr "தற்போதைய பக்கத்தை மீண்டும் ஏற்றவும்"
+
+#: src/shortcuts.blp:68
+msgctxt "shortcut window"
+msgid "Reload bypassing cache"
+msgstr "கேச் பைபாசிங் மீண்டும் ஏற்றவும்"
+
+#: src/shortcuts.blp:73
+msgctxt "shortcut window"
+msgid "Stop loading current page"
+msgstr "தற்போதைய பக்கத்தை ஏற்றுவதை நிறுத்துங்கள்"
+
+#: src/shortcuts.blp:78 src/shortcuts.blp:94
+msgctxt "shortcut window"
+msgid "Go back to the previous page"
+msgstr "முந்தைய பக்கத்திற்குச் செல்லவும்"
+
+#: src/shortcuts.blp:83 src/shortcuts.blp:99
+msgctxt "shortcut window"
+msgid "Go forward to the next page"
+msgstr "அடுத்த பக்கத்திற்கு முன்னேறவும்"
+
+#: src/shortcuts.blp:88
+msgctxt "shortcut window"
+msgid "Focus the address bar"
+msgstr "முகவரி பட்டியில் கவனம் செலுத்துங்கள்"
+
+#: src/menu.blp:13
+msgid "Top"
+msgstr "மேலே"
+
+#: src/menu.blp:19
+msgid "Left"
+msgstr "இடது"
+
+#: src/menu.blp:25
+msgid "Right"
+msgstr "வலது"
+
+#: src/menu.blp:31
+msgid "Bottom"
+msgstr "கீழே"
+
+#: src/menu.blp:40
+msgid "Keyboard Shortcuts"
+msgstr "விசைப்பலகை குறுக்குவழிகள்"
+
+#: src/menu.blp:45
+msgid "About Tangram"
+msgstr "டாங்கிராம் பற்றி"
