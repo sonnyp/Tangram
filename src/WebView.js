@@ -1,5 +1,6 @@
 import Gtk from "gi://Gtk";
 import WebKit2 from "gi://WebKit";
+import Adw from "gi://Adw";
 import GLib from "gi://GLib";
 import Gio from "gi://Gio";
 import Gdk from "gi://Gdk";
@@ -9,6 +10,7 @@ import { connect, getEnum } from "./util.js";
 import { MODES } from "./constants.js";
 
 Gio._promisify(Gtk.FileDialog.prototype, "save", "save_finish");
+Gio._promisify(Adw.AlertDialog.prototype, "choose", "choose_finish");
 
 const {
   WebContext,
@@ -16,6 +18,9 @@ const {
   CookieAcceptPolicy,
   Settings,
   NotificationPermissionRequest,
+  UserMediaPermissionRequest,
+  DeviceInfoPermissionRequest,
+  PermissionState,
   SecurityOrigin,
   UserContentManager,
   TLSErrorsPolicy,
@@ -183,11 +188,77 @@ export function buildWebView({ instance, onNotification, window }) {
 
     // https://gjs-docs.gnome.org/webkit240~4.0_api/webkit2.webview#signal-permission-request
     ["permission-request"](request) {
+      console.debug("permission-request", request.constructor.$gtype.name);
+
       if (request instanceof NotificationPermissionRequest) {
         request.allow();
+        return true;
+      }
+
+      // https://gjs-docs.gnome.org/webkit600~6.0_api/webkit2.deviceinfopermissionrequest
+      // Fired by navigator.mediaDevices.enumerateDevices() — needed by
+      // call UIs to list device names; same-origin only.
+      if (request instanceof DeviceInfoPermissionRequest) {
+        if (isSameHostAsInstance(webView.get_page_uri(), instance)) {
+          request.allow();
+        } else {
+          request.deny();
+        }
+        return true;
+      }
+
+      // https://gjs-docs.gnome.org/webkit600~6.0_api/webkit2.usermediapermissionrequest
+      // Camera and microphone access, used by WebRTC calls.
+      if (request instanceof UserMediaPermissionRequest) {
+        // WebKitGTK ≥ 2.54 exposes is_for_audio_device/is_for_video_device
+        // as GObject properties; older versions as methods. Screen sharing
+        // (getDisplayMedia) has no flag on either — requests with neither
+        // are display capture and cannot be granted.
+        const flag = (accessor) =>
+          typeof accessor === "function" ? accessor() : Boolean(accessor);
+        const audio = flag(request.is_for_audio_device);
+        const video = flag(request.is_for_video_device);
+
+        const kinds = [
+          ...(audio ? ["microphone"] : []),
+          ...(video ? ["camera"] : []),
+        ];
+
+        if (!audio && !video) {
+          request.deny();
+          return true;
+        }
+
+        requestUserMediaPermission({ request, webView, window, kinds });
+        return true;
+      }
+
+      request.deny();
+      return true;
+    },
+
+    // https://gjs-docs.gnome.org/webkit600~6.0_api/webkit2.webview#signal-query-permission-state
+    // navigator.permissions.query() — call UIs use it to update their state
+    ["query-permission-state"](query) {
+      const name = query.get_name();
+      if (name !== "microphone" && name !== "camera") {
+        query.finish(PermissionState.PROMPT);
         return;
       }
-      request.deny();
+
+      try {
+        const origin = query.get_security_origin();
+        const uri =
+          origin instanceof SecurityOrigin ? origin.to_string() : origin;
+        const permissions = webView.media_permissions.get(new URL(uri).host);
+        query.finish(
+          permissions?.has(name)
+            ? PermissionState.GRANTED
+            : PermissionState.PROMPT,
+        );
+      } catch {
+        query.finish(PermissionState.PROMPT);
+      }
     },
 
     // https://gjs-docs.gnome.org/webkit240~4.0_api/webkit2.webview#signal-show-notification
@@ -230,6 +301,10 @@ export function buildWebView({ instance, onNotification, window }) {
 
   webView.instance_id = id;
 
+  // host -> Set of granted media kinds ("microphone" | "camera") for
+  // this session, so users don't re-confirm on every call
+  webView.media_permissions = new Map();
+
   webView.load_uri(url);
 
   return webView;
@@ -246,4 +321,68 @@ function didUserRequestOpenInBrowser(navigation_action) {
   }
 
   return false;
+}
+
+function isSameHostAsInstance(page_uri, instance) {
+  try {
+    return new URL(page_uri).host === new URL(instance.url).host;
+  } catch {
+    return false;
+  }
+}
+
+async function requestUserMediaPermission({
+  request,
+  webView,
+  window,
+  kinds,
+}) {
+  let host = null;
+  try {
+    host = new URL(webView.get_page_uri()).host;
+  } catch {
+    // fall through, never remember for unknown origins
+  }
+
+  // Already granted for this origin during this session
+  const granted = host ? webView.media_permissions.get(host) : null;
+  if (granted && kinds.every((kind) => granted.has(kind))) {
+    request.allow();
+    return;
+  }
+
+  const heading = kinds
+    .map((kind) => (kind === "camera" ? _("Camera") : _("Microphone")))
+    .sort()
+    .join(` ${_("and")} `);
+
+  const message =
+    kinds.length === 2
+      ? _("wants to use your camera and microphone for calls")
+      : kinds[0] === "camera"
+        ? _("wants to use your camera for calls")
+        : _("wants to use your microphone for calls");
+
+  const dialog = new Adw.AlertDialog({
+    heading,
+    body: `${host ?? _("This website")} ${message}.`,
+    close_response: "deny",
+  });
+
+  dialog.add_response("deny", _("Deny"));
+  dialog.add_response("allow", _("Allow"));
+  dialog.set_response_appearance("allow", Adw.ResponseAppearance.SUGGESTED);
+
+  const response = await dialog.choose(window, null).catch(logError);
+
+  if (response === "allow") {
+    if (host) {
+      const permissions = webView.media_permissions.get(host) ?? new Set();
+      kinds.forEach((kind) => permissions.add(kind));
+      webView.media_permissions.set(host, permissions);
+    }
+    request.allow();
+  } else {
+    request.deny();
+  }
 }
