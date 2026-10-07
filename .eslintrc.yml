@@ -7,6 +7,7 @@ parserOptions:
   babelOptions:
     plugins:
       - "@babel/plugin-syntax-import-assertions"
+      - "@babel/plugin-syntax-import-attributes"
 extends:
   - "eslint:recommended"
   - "plugin:import/errors"
@@ -14,6 +15,7 @@ extends:
 globals:
   Debugger: readonly
   GIRepositoryGType: readonly
+  URL: readonly
   Intl: readonly
   imports: readonly
   pkg: readonly

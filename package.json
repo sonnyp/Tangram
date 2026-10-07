@@ -3,6 +3,7 @@
   "devDependencies": {
     "@babel/eslint-parser": "^7.19.1",
     "@babel/plugin-syntax-import-assertions": "^7.18.6",
+    "@babel/plugin-syntax-import-attributes": "^7.29.7",
     "@gi-types/base-types": "^1.0.0",
     "@gi-types/gjs-environment": "^1.1.0",
     "@gi-types/gtk4": "^4.6.1",
